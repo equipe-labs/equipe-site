@@ -1,0 +1,15 @@
+---
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+---
+
+<JsonLd
+  data={{
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    url: SITE.url,
+    logo: `${SITE.url}/favicon.svg`,
+    sameAs: [SITE.repo],
+  }}
+/>

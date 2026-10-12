@@ -1,0 +1,36 @@
+---
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  lang: string;
+  url: string;
+  description: string;
+  applicationCategory?: string;
+  operatingSystem?: string;
+}
+const {
+  lang,
+  url,
+  description,
+  applicationCategory = 'DeveloperApplication',
+  operatingSystem = 'macOS, Linux',
+} = Astro.props;
+---
+
+<JsonLd
+  data={{
+    '@type': 'SoftwareApplication',
+    '@id': `${url}#software`,
+    name: SITE.name,
+    url,
+    inLanguage: lang,
+    description,
+    applicationCategory,
+    operatingSystem,
+    codeRepository: SITE.repo,
+    license: 'https://opensource.org/licenses/MIT',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@id': `${SITE.url}/#organization` },
+  }}
+/>

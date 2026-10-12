@@ -1,0 +1,16 @@
+---
+// The 2×2 dot mark; `single` renders one dot (solid or faded) for card markers.
+interface Props { size?: number; single?: 'solid' | 'faded' }
+const { size = 32, single } = Astro.props;
+---
+
+{single ? (
+  <svg viewBox="0 0 16 16" width={size} height={size} fill="var(--accent)" aria-hidden="true">
+    <circle cx="8" cy="8" r="6" opacity={single === 'faded' ? 0.55 : 1} />
+  </svg>
+) : (
+  <svg viewBox="0 0 64 64" width={size} height={size} fill="var(--accent)" aria-hidden="true">
+    <circle cx="21" cy="21" r="7" opacity=".55" /><circle cx="43" cy="21" r="7" opacity=".55" />
+    <circle cx="21" cy="43" r="7" opacity=".55" /><circle cx="43" cy="43" r="7" />
+  </svg>
+)}

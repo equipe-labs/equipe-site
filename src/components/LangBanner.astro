@@ -1,0 +1,68 @@
+---
+// "View this page in <language>" suggestion. Never redirects: it only offers a link,
+// and remembers a dismissal (or an explicit language choice) in localStorage.
+import { available, getLocale, getMessages, localePath, type LocaleCode } from '../i18n';
+
+interface Props {
+  locale: LocaleCode;
+}
+const { locale } = Astro.props;
+// What to show for each *other* language, written in that language.
+const targets = available
+  .filter((l) => l.code !== locale)
+  .map((l) => {
+    const ui = getMessages(l.code).ui;
+    return { lang: l.lang, href: localePath(l), text: ui.bannerText.replace('{language}', l.name), close: ui.bannerClose };
+  });
+const data = JSON.stringify({ current: getLocale(locale).lang, all: available.map((l) => l.lang), targets }).replace(/</g, '\\u003c');
+---
+
+{
+  targets.length > 0 && (
+    <>
+      <div class="lang-banner" id="lang-banner" hidden>
+        <a id="lang-banner-link" href="/" />
+        <button type="button" id="lang-banner-close" aria-label="Dismiss">
+          ×
+        </button>
+      </div>
+      <script is:inline type="application/json" id="lang-banner-data" set:html={data} />
+      <script is:inline>
+        (function () {
+          var KEY = 'equipe-lang-dismissed';
+          var store = null;
+          try { store = window.localStorage; } catch (e) {}
+          function dismissed() { try { return !!store && store.getItem(KEY) === '1'; } catch (e) { return false; } }
+          function remember() { try { store && store.setItem(KEY, '1'); } catch (e) {} }
+          document.querySelectorAll('[data-lang-choice]').forEach(function (a) { a.addEventListener('click', remember); });
+          if (dismissed()) return;
+          var d = JSON.parse(document.getElementById('lang-banner-data').textContent);
+          // Map a browser language tag to one of our hreflang values (or null).
+          function match(tag) {
+            tag = String(tag).toLowerCase();
+            for (var i = 0; i < d.all.length; i++) if (d.all[i].toLowerCase() === tag) return d.all[i];
+            var base = tag.split('-')[0];
+            if (base === 'zh') return /^zh-(hant|tw|hk|mo)/.test(tag) ? null : 'zh-CN';
+            if (base === 'pt') return 'pt-BR';
+            for (var j = 0; j < d.all.length; j++) if (d.all[j].toLowerCase() === base) return d.all[j];
+            return null;
+          }
+          var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          var want = null;
+          for (var k = 0; k < prefs.length && !want; k++) want = match(prefs[k]);
+          if (!want || want === d.current) return;
+          var t = d.targets.filter(function (x) { return x.lang === want; })[0];
+          if (!t) return;
+          var box = document.getElementById('lang-banner');
+          var link = document.getElementById('lang-banner-link');
+          var close = document.getElementById('lang-banner-close');
+          link.textContent = t.text; link.href = t.href; link.setAttribute('hreflang', t.lang);
+          box.setAttribute('lang', t.lang); close.setAttribute('aria-label', t.close);
+          link.addEventListener('click', remember);
+          close.addEventListener('click', function () { remember(); box.hidden = true; });
+          box.hidden = false;
+        })();
+      </script>
+    </>
+  )
+}
