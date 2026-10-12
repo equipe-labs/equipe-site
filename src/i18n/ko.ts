@@ -99,7 +99,7 @@ equipe           # 스쿼드 콘솔 열기`,
       {
         question: 'equipe는 무료 오픈소스인가요?',
         answer:
-          '네. equipe는 MIT 라이선스로 공개돼 있고, 첫 커밋부터 오픈소스였어요. Claude나 Codex 엔진을 쓰는 비용은 각 제공사의 본인 계정으로 청구돼요.',
+          '네. equipe는 MIT 라이선스로 공개돼 있고, 첫 커밋부터 오픈소스였어요. equipe 자체는 무료예요. Claude Code와 Codex는 본인의 Anthropic, OpenAI(ChatGPT) 구독이나 계정으로 실행돼요.',
       },
       {
         question: 'equipe를 프로덕션에서 쓸 수 있나요?',

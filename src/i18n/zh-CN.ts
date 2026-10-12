@@ -99,7 +99,7 @@ equipe           # 打开小队控制台`,
       {
         question: 'equipe 免费并且开源吗？',
         answer:
-          '是的。equipe 以 MIT 许可发布，从第一次提交起就是开源的。使用 Claude 或 Codex 引擎的费用，由这些服务商计入你自己的账户。',
+          '是的。equipe 以 MIT 许可发布，从第一次提交起就是开源的。equipe 本身是免费的。Claude Code 和 Codex 使用你自己的 Anthropic 和 OpenAI（ChatGPT）订阅或账户运行。',
       },
       {
         question: 'equipe 可以用于生产环境吗？',

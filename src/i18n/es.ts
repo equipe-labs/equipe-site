@@ -99,7 +99,7 @@ equipe           # abre la consola del squad`,
       {
         question: '¿Es equipe gratuito y de código abierto?',
         answer:
-          'Sí. equipe se publica bajo la licencia MIT y es de código abierto desde su primer commit. Usar los motores de Claude o de Codex se factura a tu propia cuenta en esos proveedores.',
+          'Sí. equipe se publica bajo la licencia MIT y es de código abierto desde su primer commit. equipe en sí es gratuito. Claude Code y Codex funcionan con tus propias suscripciones o cuentas de Anthropic y OpenAI (ChatGPT).',
       },
       {
         question: '¿Está equipe listo para usarse en producción?',
