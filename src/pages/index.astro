@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
+import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
+import SoftwareApplicationJsonLd from '../components/SoftwareApplicationJsonLd.astro';
+import FaqJsonLd from '../components/FaqJsonLd.astro';
+import { SITE } from '../data/site';
+import { FAQS } from '../data/faqs';
+---
+
+<Base title="equipe — placeholder">
+  <Fragment slot="head">
+    <OrganizationJsonLd />
+    <WebSiteJsonLd />
+    <SoftwareApplicationJsonLd />
+    <FaqJsonLd faqs={FAQS} />
+  </Fragment>
+  <main>
+    <h1>equipe</h1>
+    <p>Placeholder landing. The real page is a separate ticket.</p>
+    <p><a href={SITE.repo}>equipe on GitHub</a></p>
+    <h2>FAQ</h2>
+    {FAQS.map((f) => (
+      <section>
+        <h3>{f.question}</h3>
+        <p>{f.answer}</p>
+      </section>
+    ))}
+  </main>
+</Base>

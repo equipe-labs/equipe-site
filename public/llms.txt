@@ -1,0 +1,8 @@
+# equipe
+
+> Placeholder summary. equipe runs a squad of AI agents on a software project for one person. Real copy lands with the landing-page ticket.
+
+## Links
+
+- [Website](https://equipe.im): Home page
+- [GitHub](https://github.com/equipe-labs/equipe): Source code

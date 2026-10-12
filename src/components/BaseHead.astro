@@ -1,0 +1,56 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path or absolute URL of the social image. */
+  image?: string;
+  imageAlt?: string;
+  /** Override canonical; defaults to the current page URL on SITE. */
+  canonical?: string;
+  themeColor?: string;
+  /** Favicon slot: href + optional type, e.g. { href: '/favicon.svg', type: 'image/svg+xml' }. */
+  favicon?: { href: string; type?: string };
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title,
+  description = SITE.description,
+  image,
+  imageAlt,
+  themeColor = SITE.themeColor,
+  favicon = { href: '/favicon.svg', type: 'image/svg+xml' },
+  noindex = false,
+  ogType = 'website',
+} = Astro.props;
+
+const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = image ? new URL(image, Astro.site).href : undefined;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="theme-color" content={themeColor} />
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="icon" href={favicon.href} type={favicon.type} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content="en_US" />
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}
