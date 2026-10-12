@@ -13,6 +13,7 @@ Caveat: term choices come from the wording used by each language's developer too
 
 | Item | Rule |
 |---|---|
+| OAuth | Stays "OAuth" in every language. |
 | **equipe** | Always lowercase, even at the start of a sentence or in a heading. Never "Equipe", "EQUIPE", "Équipe". In **pt-BR** and **fr** the word *equipe/équipe* also means "team": always follow the brand with a descriptor on first mention ("equipe, um squad de software com IA…") and never use it as a common noun. |
 | Product, tool and company names | Codex, Claude Code, Claude, ChatGPT, OpenAI, Anthropic, GitHub, Rust, Cargo, git, Agent Client Protocol (ACP) — written as-is, in Latin script, in every language (including ja/zh/ko). |
 | CLI commands, flags, binaries | `equipe`, `equipe login`, `equipe status`, `equipe try --edit "…"`, `claude`, `cargo install --locked --path crates/cli`. Never translate, never add spaces or full-width forms. |
@@ -65,6 +66,8 @@ Typography around untranslated terms: in ja/zh/ko put a half-width space between
 | sign in | 로그인 | ログイン | 登录 | iniciar sesión | entrar / fazer login | anmelden | se connecter |
 | credentials | 자격 증명 | 認証情報 | 凭据 | credenciales | credenciais | Zugangsdaten | identifiants |
 | billed to your own account | 본인 계정으로 청구됩니다 | ご自身のアカウントに請求されます | 费用计入你自己的账户 | se factura a tu propia cuenta | cobrado na sua própria conta | wird über dein eigenes Konto abgerechnet | facturé sur votre propre compte |
+| binary (the `claude` binary) | 바이너리 | バイナリ | 二进制文件 | binario | binário | Binary | binaire |
+| production ("ready for production use") | 프로덕션 | 本番環境 | 生产环境 | producción | produção | Produktivbetrieb | production |
 | main line (of the repo) | 메인 브랜치 | メインライン (= main ブランチ) | 主线 (main 分支) | rama principal | branch principal | Hauptzweig → "main-Branch" | branche principale |
 
 Notes that matter:
@@ -90,6 +93,24 @@ PM and QA stay as abbreviations. Role names are always capitalized in en; in oth
 | Data | 데이터 | データ | 数据 | datos | dados | Daten | données |
 
 Rules: (1) in es/pt-BR/fr/de roles are used as proper role labels ("el rol Designer", "a função Designer", "le rôle Designer", "die Rolle Designer"), so no gender inflection is needed; (2) in headings and chips write the label alone, in running text write "the X role" form above; (3) never translate "PM" as "project manager" in running text; if a gloss is needed use it once ("PM (gestión del proyecto)").
+
+### 2.3 Fixed UI strings (headings, CTAs, chip)
+
+These recur on every page: translate them once, identically everywhere. Quoted text is the en source from `design/copy.md`.
+
+| en | ko | ja | zh-Hans | es | pt-BR | de | fr |
+|---|---|---|---|---|---|---|---|
+| How it works | 작동 방식 | 仕組み | 工作方式 | Cómo funciona | Como funciona | So funktioniert's | Comment ça marche |
+| Who equipe is for | equipe는 이런 분께 맞아요 | equipeが向いている人 | equipe 适合谁 | Para quién es equipe | Para quem é o equipe | Für wen equipe gedacht ist | À qui s'adresse equipe |
+| Get started | 시작하기 | はじめる | 开始使用 | Empezar | Começar | Loslegen | Commencer |
+| Frequently asked questions | 자주 묻는 질문 | よくある質問 | 常见问题 | Preguntas frecuentes | Perguntas frequentes | Häufige Fragen | Questions fréquentes |
+| Your approval | 당신의 승인 | あなたの承認 | 你的批准 | Tu aprobación | Sua aprovação | Deine Freigabe | Votre approbation |
+| View on GitHub | GitHub에서 보기 | GitHubで見る | 在 GitHub 上查看 | Ver en GitHub | Ver no GitHub | Auf GitHub ansehen | Voir sur GitHub |
+| Read the docs on GitHub | GitHub에서 문서 읽기 | GitHubでドキュメントを読む | 在 GitHub 上阅读文档 | Lee la documentación en GitHub | Leia a documentação no GitHub | Doku auf GitHub lesen | Lire la documentation sur GitHub |
+| Early-stage · MIT licensed | 초기 단계 · MIT 라이선스 | 開発初期 · MITライセンス | 早期阶段 · MIT 许可 | En fase temprana · Licencia MIT | Em estágio inicial · Licença MIT | Frühe Phase · MIT-Lizenz | Stade précoce · Licence MIT |
+| Built by an equipe squad, in public. | equipe 스쿼드가 공개적으로 만들었어요. | equipeのスクワッドが公開の場で作りました。 | 由 equipe 小队公开构建。 | Construido en público por un squad de equipe. | Construído em público por um squad do equipe. | Öffentlich von einem equipe-Squad gebaut. | Construit en public par un squad equipe. |
+
+Note: "Your approval" uses the possessive on purpose (it is the person's gate); "Who equipe is for" is rewritten naturally in each language rather than word for word. In ko, the possessive 당신의 is allowed here as an H3 (see §3 ko).
 
 ---
 
@@ -186,5 +207,5 @@ Other SEO rules:
 
 ## 5 · Coverage check against `design/copy.md`
 
-Every concept in the v1 copy is in §1 or §2: squad, AI software squad, agent, agent loop, engine, role (+ PM, Designer, Frontend, Backend, QA, Data), member, ticket, board, single source of truth, event / immutable, branch, git worktree, isolated, sandbox, approve / approval / approval gate, accept, merge, handoff, roadmap, squad console, daemon, repository, open source, early-stage, sign in, credentials, billing, main line, MIT license, Agent Client Protocol, Codex, Claude Code, `equipe` commands.
+Verified by grep against the merged `design/copy.md`. Every concept in the v1 copy is in §1 or §2: squad, AI software squad, agent, agent loop, engine, role (+ PM, Designer, Frontend, Backend, QA, Data), member, ticket, board, single source of truth, event / immutable, branch, git worktree, isolated, sandbox, approve / approval / approval gate, accept, merge, handoff, roadmap, squad console, daemon, binary, production, OAuth, section headings and CTAs (§2.3), repository, open source, early-stage, sign in, credentials, billing, main line, MIT license, Agent Client Protocol, Codex, Claude Code, `equipe` commands.
 New terms in future copy get a row in §2 in the same change.
