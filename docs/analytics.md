@@ -45,11 +45,16 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 |---|---|
 | `locale` | 현재 페이지 언어(`<html lang>`, 예 `ko`, `pt-BR`) |
 | `browser_language` | `navigator.language` |
+| `browser_language_base` | 브라우저 언어의 앞부분(`pt-PT` → `pt`) |
+| `browser_language_supported` | 브라우저 언어에 맞는 페이지가 있으면 `true`. 기본 언어가 같으면 지원으로 본다(`pt-PT` → `pt-BR`). 중국어는 간체만(`zh-TW`는 미지원) |
+| `channel` | 유입 채널: `ai` / `search` / `social` / `github` / `direct` / `referral` / `internal`. 아래 **유입 채널** 참고 |
 | `environment` | `production` / `preview` / `local` |
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | 방문 URL에 있을 때만 |
 | `ai_source` | AI 유입일 때만. `chatgpt`, `perplexity`, `claude`, `gemini`, `copilot`, … |
 
 **AI 유입 분류**: 방문 시 `document.referrer`의 호스트를 `ai-sources.ts`의 목록과 비교한다. 서브도메인도 맞는다. referrer가 없으면 `utm_source`(ChatGPT는 링크에 `utm_source=chatgpt.com`을 붙인다)로 한 번 더 본다. 새 AI 서비스는 `AI_SOURCES`에 한 줄 추가하면 된다.
+
+**유입 채널**(`src/analytics/channels.ts`): `ai_source`가 있으면 `ai`. 아니면 referrer 호스트로 `github`(github.com), `search`(Google, Bing, Naver, DuckDuckGo 등), `social`(X, Hacker News, Reddit, LinkedIn 등), 같은 사이트면 `internal`(언어 전환 등 사이트 안 이동), 그 밖은 `referral`. referrer가 없으면 `utm_source`로 한 번 더 보고, 그래도 없으면 `direct`. 목록은 그 파일 한 곳에서 고친다. 이 속성은 T-11 배포 이후 이벤트부터 붙는다.
 
 ## 이벤트 사전
 
@@ -85,3 +90,63 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 - **광고 차단기**: uBlock Origin을 켠 채로 같은 Preview를 열어도 `/ingest/...` 요청이 200으로 나가고 Live events에 보이는지 본다.
 - **쿠키 없음**: 개발자 도구 → Application → Cookies / Local Storage / Session Storage에 `ph_*` 항목이 없어야 한다.
 - **로컬에서 보기**: `PUBLIC_POSTHOG_KEY=phc_… npm run build && npm run preview`. `/ingest`는 Vercel 규칙이라 로컬에서는 404다. 이벤트 전송 자체는 Preview 배포에서 확인한다.
+
+## KPI 대시보드: equipe.im KPI
+
+**링크**: <!-- 대시보드를 만든 뒤 아래 주소를 실제 링크로 바꾼다 --> `https://us.posthog.com/project/<PROJECT_ID>/dashboard/<ID>` (아직 생성 전)
+
+사이트 방문이 GitHub 성과(star, 리포 방문, clone)로 이어지는지 한 곳에서 본다. 패널 정의는 `scripts/posthog-dashboard.mjs`에 코드로 있고, Actions → **PostHog KPI dashboard** → Run workflow로 만들거나 갱신한다(같은 이름의 패널은 덮어쓴다). PostHog 화면에서 직접 고친 내용은 다음 실행 때 덮어써지므로 패널은 스크립트에서 고친다.
+
+### GitHub 트래픽 수집
+
+GitHub 트래픽 API는 최근 14일치만 준다. `.github/workflows/github-traffic.yml`이 매일 03:17 UTC에 `scripts/github-traffic.mjs`를 돌려 `equipe-labs/equipe`의 값을 PostHog로 보낸다. 실패하면 GitHub가 Actions 실패 메일을 보낸다. **14일 넘게 멈추면 그 기간 데이터는 복구할 수 없다.**
+
+| 이벤트 | 주기 | 속성 |
+|---|---|---|
+| `github_traffic_day` | 매 실행, 14일 창의 하루마다 1개(그날 12:00 UTC 시각) | `date`, `views`, `views_uniques`, `clones`, `clones_uniques` |
+| `github_repo_snapshot` | 매 실행 1개 | `stars`, `forks`, `watchers`, `open_issues`, 14일 합계 `views_14d`·`clones_14d`(+`_uniques`), `referrer_views_14d`, `site_referrer_views_14d`, `site_referrer_share_pct`, `site_referrer_uniques_share_pct` |
+| `github_referrer` | 매 실행, 상위 referrer마다(최대 10) | `date`, `referrer`, `count`, `uniques`, `is_site` |
+| `github_popular_path` | 매 실행, 인기 경로마다(최대 10) | `date`, `path`, `title`, `count`, `uniques` |
+
+모두 `distinct_id = github-traffic-bot`, `environment = production`, 사람 프로필은 만들지 않는다. 매일 14일 창 전체를 다시 보내므로 같은 날이 여러 번 들어간다. 이벤트 id는 날짜로 고정되고, 대시보드는 하루 단위 **최댓값**(max)으로 읽어서 중복 집계되지 않는다. 이 이벤트를 합계(total)로 집계하지 않는다.
+
+### 지표 정의
+
+| 지표 | 정의 | 패널 |
+|---|---|---|
+| 방문 | `$pageview` 수(`environment = production`). 쿠키 없는 수집이라 방문자 ≈ 페이지 로드다 | 방문: 일별·주별·언어별·국가별·채널별 |
+| 국가 | PostHog GeoIP의 `$geoip_country_name` | 방문: 국가별 |
+| AI 유입 | `ai_source`가 있는 방문 | AI 유입 |
+| 전환 | 같은 페이지 로드 안에서 `cta_github_click` 또는 `install_command_copy`가 한 번 이상 일어남. PostHog Action "GitHub 전환"으로 묶었다 | 전환 퍼널, 성과표 |
+| 전환율 | 전환한 방문 ÷ 방문 | 성과표 ①②, 전환 퍼널 |
+| star | 수집 시점의 `stargazers_count` | ③ GitHub star 추이 |
+| 리포 views / clones | GitHub 트래픽 API의 일별 값(고유 값은 GitHub가 센 고유 방문자) | 리포 views / clones |
+| equipe.im 비중 | GitHub 상위 10개 referrer의 최근 14일 views 합계 중 equipe.im의 비율. 상위 10개 밖 referrer는 GitHub가 주지 않아 분모에 없다 | 리포 유입 중 equipe.im 비중 |
+| 2차 언어 후보 | `browser_language_supported = false`인 방문을 `browser_language_base`별로 센 것과 전체 방문 대비 비중 | 언어 확장 두 패널 |
+
+### 매주 볼 것과 결정 (월요일, 10분)
+
+1. **성과표 ①②**(맨 위): 지난 30일 채널별·언어별 방문과 전환율. "어느 언어/채널이 성과를 내는가"는 여기서 답한다. 방문 100 미만인 행은 비율이 흔들리니 방향만 본다.
+2. **star 추이, 리포 views, equipe.im 비중**: 사이트가 리포 유입을 실제로 만드는지. 비중이 오르는데 star가 평평하면 README 첫 화면을 개선할 차례다.
+3. **AI 유입**: 늘고 있는 AI 서비스가 있으면 `llms.txt`와 FAQ를 그 질문에 맞춰 보강한다.
+4. **언어 확장**: 미지원 언어 하나가 4주 연속 전체 방문의 5% 이상이면 번역 티켓을 만든다.
+
+| 이런 걸 보면 | 이렇게 결정한다 |
+|---|---|
+| 한 언어의 방문은 많은데 전환율이 다른 언어의 절반 이하 | 그 언어의 히어로·CTA 번역을 다시 본다(디자이너 티켓) |
+| 한 채널의 전환율이 가장 높다 | 그 채널에 콘텐츠를 더 낸다(예: `search`면 SEO 글, `social`이면 발표 글) |
+| 방문은 느는데 전체 전환율이 떨어진다 | 유입 질이 바뀐 것. 채널 성과표에서 어느 채널이 끌어내렸는지 본다 |
+| equipe.im 비중이 낮고 리포 views는 높다 | 리포 유입은 다른 곳이 만든다. 리포 referrer 표에서 1위 출처를 확인하고 그쪽과 연결한다 |
+| 수집 패널이 비었다 | Actions의 "GitHub traffic to PostHog" 실행 기록을 본다. 14일 안에 고쳐야 데이터가 안 빈다 |
+
+### 처음 설정 체크리스트 (사람이 할 일)
+
+- [ ] **GitHub 토큰**: `equipe-labs/equipe`에 대한 fine-grained PAT. Repository access = `equipe-labs/equipe`만, 권한 = **Administration: Read-only**(트래픽 API에 필요) + Metadata: Read-only. 조직 정책상 승인이 필요하면 조직 관리자가 승인한다. 만료일을 정하면 캘린더에 갱신 알림을 둔다
+- [ ] `equipe-labs/equipe-site` → Settings → Secrets and variables → Actions → **Secrets**
+  - `GH_TRAFFIC_TOKEN`: 위 토큰
+  - `POSTHOG_PROJECT_KEY`: 사이트와 같은 `phc_…` 키(Vercel의 `PUBLIC_POSTHOG_KEY` 값)
+  - `POSTHOG_PERSONAL_API_KEY`: PostHog → Settings → Personal API keys에서 발급(`phx_…`). 범위: 이 프로젝트, scopes = `dashboard:write`, `insight:write`, `action:write`, `project:read`
+- [ ] 같은 화면 **Variables**: `POSTHOG_PROJECT_ID`(PostHog URL의 `/project/<숫자>`). EU 리전이면 `POSTHOG_HOST = https://eu.i.posthog.com`, `POSTHOG_APP_HOST = https://eu.posthog.com`도 넣는다
+- [ ] 이 브랜치를 main에 머지(예약 실행은 기본 브랜치에서만 돈다) → Actions → **GitHub traffic to PostHog** → Run workflow로 첫 수집
+- [ ] Actions → **PostHog KPI dashboard** → Run workflow. 로그 마지막 줄의 대시보드 링크를 위 **링크**에 넣는다
+- [ ] 다른 사람에게 보여줄 때: 대시보드 → Share → 팀원 초대 또는 공개 링크(공개 링크는 누구나 볼 수 있으니 필요할 때만)

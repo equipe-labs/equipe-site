@@ -1,4 +1,5 @@
 ---
+import { available } from '../i18n';
 // PostHog, cookieless and lazy. Renders nothing at all unless PUBLIC_POSTHOG_KEY is set at
 // build time (local builds, forks). Details and event list: docs/analytics.md.
 const key = import.meta.env.PUBLIC_POSTHOG_KEY;
@@ -7,7 +8,9 @@ const uiHost = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.posthog.com';
 // Vercel sets VERCEL_ENV to production | preview | development during the build.
 // Every event carries it as `environment`, so Preview data never mixes into Production views.
 const environment = process.env.VERCEL_ENV ?? 'local';
-const config = JSON.stringify({ key, uiHost, environment }).replace(/</g, '\\u003c');
+// Languages that have pages, for the `browser_language_supported` property.
+const locales = available.map((l) => l.lang);
+const config = JSON.stringify({ key, uiHost, environment, locales }).replace(/</g, '\\u003c');
 ---
 
 {

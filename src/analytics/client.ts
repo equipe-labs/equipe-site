@@ -1,6 +1,7 @@
 // Browser side of the PostHog integration. Loaded only when Analytics.astro rendered
 // a config (i.e. PUBLIC_POSTHOG_KEY was set at build time). See docs/analytics.md.
 import { aiSource } from './ai-sources';
+import { channelOf, languageSupported } from './channels';
 
 type Props = Record<string, string | number | boolean | undefined>;
 type Queue = Array<[string, Props?]> & { push(...e: Array<[string, Props?]>): number };
@@ -8,6 +9,7 @@ interface Config {
   key: string;
   uiHost: string;
   environment: string;
+  locales: string[];
 }
 
 const w = window as unknown as { eqTrack?: (name: string, props?: Props) => void; __eqq?: Queue };
@@ -35,6 +37,9 @@ if (cfg) {
   const common: Props = {
     locale: document.documentElement.lang,
     browser_language: navigator.language,
+    browser_language_base: navigator.language.split('-')[0].toLowerCase(),
+    browser_language_supported: languageSupported(navigator.language, cfg.locales ?? []),
+    channel: channelOf(document.referrer, location.hostname, params.get('utm_source'), ai),
     environment: cfg.environment,
     ...utm,
     ...(ai ? { ai_source: ai } : {}),

@@ -1,0 +1,33 @@
+# Collects equipe-labs/equipe traffic (views, clones, referrers, popular paths) and stars into PostHog.
+# GitHub keeps only 14 days of traffic, so this must run daily. See docs/analytics.md.
+name: GitHub traffic to PostHog
+
+on:
+  schedule:
+    - cron: '17 3 * * *' # 03:17 UTC daily (12:17 KST); off the hour to avoid the cron rush
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-traffic
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test 'scripts/*.test.mjs'
+      - run: node scripts/github-traffic.mjs
+        env:
+          GH_TRAFFIC_TOKEN: ${{ secrets.GH_TRAFFIC_TOKEN }}
+          POSTHOG_PROJECT_KEY: ${{ secrets.POSTHOG_PROJECT_KEY }}
+          POSTHOG_HOST: ${{ vars.POSTHOG_HOST || 'https://us.i.posthog.com' }}
+          REPO: equipe-labs/equipe
+          SITE_HOST: equipe.im
