@@ -1,8 +1,27 @@
 # equipe
 
-> Placeholder summary. equipe runs a squad of AI agents on a software project for one person. Real copy lands with the landing-page ticket.
+> equipe is an open-source AI software squad: a team of role-based agents (PM, Designer, Frontend, Backend, QA and Data) that works on your repository through a shared board, in isolated git worktrees, and waits for a person's approval before anything merges. It is the team layer on top of existing agent engines (Codex and Claude Code today), not another agent loop. Early-stage, MIT licensed.
+
+## How it works
+
+- Roles: each member has a role with a model suited to it and its own memory.
+- Tickets: the board is the single source of truth; members coordinate through tickets and immutable events, not chat.
+- Branches: each member works in its own git worktree on its own branch, so several can work at once without touching your checkout.
+- Your approval: nothing merges until the person leading the squad says so.
+
+## Get started
+
+Install from source (Rust 1.88+ and git; the Claude engine also needs the `claude` binary):
+
+    git clone https://github.com/equipe-labs/equipe && cd equipe
+    cargo install --locked --path crates/cli
+    equipe login     # sign in to Codex or Claude Code
+    equipe status    # check engine readiness and model availability
+    equipe           # open the squad console
 
 ## Links
 
-- [Website](https://equipe.im): Home page
-- [GitHub](https://github.com/equipe-labs/equipe): Source code
+- [Website](https://equipe.im): landing page with the overview and FAQ
+- [GitHub](https://github.com/equipe-labs/equipe): source code, MIT License
+- [Roadmap](https://github.com/equipe-labs/equipe/blob/main/docs/ROADMAP.md): what is coming next
+- [Architecture](https://github.com/equipe-labs/equipe/blob/main/docs/ARCHITECTURE.md): how the squad is built

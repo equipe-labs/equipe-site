@@ -1,5 +1,6 @@
 ---
 import JsonLd from './JsonLd.astro';
+import { plain } from '../data/faqs';
 
 interface Props {
   faqs: { question: string; answer: string }[];
@@ -13,7 +14,7 @@ const { faqs } = Astro.props;
     mainEntity: faqs.map((f) => ({
       '@type': 'Question',
       name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      acceptedAnswer: { '@type': 'Answer', text: plain(f.answer) },
     })),
   }}
 />
