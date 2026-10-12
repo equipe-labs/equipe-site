@@ -1,16 +1,23 @@
 ---
 import JsonLd from './JsonLd.astro';
 import { SITE } from '../data/site';
+
+interface Props {
+  lang: string;
+  url: string;
+  description: string;
+}
+const { lang, url, description } = Astro.props;
 ---
 
 <JsonLd
   data={{
     '@type': 'WebSite',
-    '@id': `${SITE.url}/#website`,
+    '@id': `${url}#website`,
     name: SITE.name,
-    url: SITE.url,
-    inLanguage: 'en',
-    description: SITE.description,
+    url,
+    inLanguage: lang,
+    description,
     publisher: { '@id': `${SITE.url}/#organization` },
   }}
 />

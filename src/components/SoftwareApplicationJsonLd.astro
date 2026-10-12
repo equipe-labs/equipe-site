@@ -3,12 +3,16 @@ import JsonLd from './JsonLd.astro';
 import { SITE } from '../data/site';
 
 interface Props {
-  description?: string;
+  lang: string;
+  url: string;
+  description: string;
   applicationCategory?: string;
   operatingSystem?: string;
 }
 const {
-  description = SITE.description,
+  lang,
+  url,
+  description,
   applicationCategory = 'DeveloperApplication',
   operatingSystem = 'macOS, Linux',
 } = Astro.props;
@@ -17,9 +21,10 @@ const {
 <JsonLd
   data={{
     '@type': 'SoftwareApplication',
-    '@id': `${SITE.url}/#software`,
+    '@id': `${url}#software`,
     name: SITE.name,
-    url: SITE.url,
+    url,
+    inLanguage: lang,
     description,
     applicationCategory,
     operatingSystem,

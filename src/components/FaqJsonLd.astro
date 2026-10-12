@@ -1,16 +1,18 @@
 ---
 import JsonLd from './JsonLd.astro';
-import { plain } from '../data/faqs';
+import { plain } from '../i18n';
 
 interface Props {
+  lang: string;
   faqs: { question: string; answer: string }[];
 }
-const { faqs } = Astro.props;
+const { faqs, lang } = Astro.props;
 ---
 
 <JsonLd
   data={{
     '@type': 'FAQPage',
+    inLanguage: lang,
     mainEntity: faqs.map((f) => ({
       '@type': 'Question',
       name: f.question,
