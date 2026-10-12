@@ -22,7 +22,12 @@ const current = getLocale(locale);
       <ul>
         {available.map((l) => (
           <li>
-            <a href={localePath(l)} lang={l.lang} hreflang={l.lang} aria-current={l.code === locale ? 'true' : undefined} data-lang-choice>
+            <a href={localePath(l)} lang={l.lang} hreflang={l.lang} aria-current={l.code === locale ? 'true' : undefined} data-lang-choice
+              data-ph={l.code === locale ? undefined : 'language_switch'}
+              data-ph-from={current.lang}
+              data-ph-to={l.lang}
+              data-ph-source="menu"
+            >
               {l.name}
             </a>
           </li>
