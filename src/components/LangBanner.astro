@@ -29,6 +29,7 @@ const data = JSON.stringify({ current: getLocale(locale).lang, all: available.ma
       <script is:inline type="application/json" id="lang-banner-data" set:html={data} />
       <script is:inline>
         (function () {
+          function track(n, p) { if (window.eqTrack) window.eqTrack(n, p); }
           var KEY = 'equipe-lang-dismissed';
           var store = null;
           try { store = window.localStorage; } catch (e) {}
@@ -58,9 +59,10 @@ const data = JSON.stringify({ current: getLocale(locale).lang, all: available.ma
           var close = document.getElementById('lang-banner-close');
           link.textContent = t.text; link.href = t.href; link.setAttribute('hreflang', t.lang);
           box.setAttribute('lang', t.lang); close.setAttribute('aria-label', t.close);
-          link.addEventListener('click', remember);
-          close.addEventListener('click', function () { remember(); box.hidden = true; });
+          link.addEventListener('click', function () { remember(); track('language_switch', { from: d.current, to: t.lang, source: 'banner' }); });
+          close.addEventListener('click', function () { remember(); box.hidden = true; track('language_banner_dismissed', { from: d.current, suggested: t.lang }); });
           box.hidden = false;
+          track('language_banner_shown', { from: d.current, suggested: t.lang });
         })();
       </script>
     </>

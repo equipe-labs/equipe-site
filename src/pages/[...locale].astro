@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Mark from '../components/Mark.astro';
 import LangMenu from '../components/LangMenu.astro';
 import Rich from '../components/Rich.astro';
+import Analytics from '../components/Analytics.astro';
 import LangBanner from '../components/LangBanner.astro';
 import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
 import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
@@ -45,7 +46,7 @@ const tryIt = 'equipe try --edit "…"';
           <li class="opt"><a href="#how-it-works">{t.nav.howItWorks}</a></li>
           <li class="opt"><a href="#get-started">{t.nav.getStarted}</a></li>
           <li class="opt"><a href="#faq">{t.nav.faq}</a></li>
-          <li><a href={SITE.repo}>{t.nav.github}</a></li>
+          <li><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="header">{t.nav.github}</a></li>
           <li><LangMenu locale={code} label={t.ui.language} /></li>
         </ul>
       </nav>
@@ -60,7 +61,7 @@ const tryIt = 'equipe try --edit "…"';
           <p class="lead">{t.hero.lead}</p>
           <p class="muted">{t.hero.note}</p>
           <div class="ctas">
-            <a class="btn primary" href={SITE.repo}>{t.hero.ctaPrimary}</a>
+            <a class="btn primary" href={SITE.repo} data-ph="cta_github_click" data-ph-location="hero">{t.hero.ctaPrimary}</a>
             <a class="btn secondary" href="#get-started">{t.hero.ctaSecondary}</a>
           </div>
           <span class="chip">{t.hero.chip}</span>
@@ -102,11 +103,11 @@ const tryIt = 'equipe try --edit "…"';
       <div class="wrap">
         <h2>{t.start.title}</h2>
         <p class="col"><Rich s={t.start.install} /></p>
-        <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <p class="col">{t.start.run}</p>
-        <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <p class="col">{t.start.tryIntro}</p>
-        <div class="codeblock"><pre tabindex="0"><code>{tryIt}</code></pre><button class="copy" type="button" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <div class="codeblock"><pre tabindex="0"><code>{tryIt}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="try" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <p class="links">{t.start.docs} <a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a></p>
       </div>
     </section>
@@ -114,8 +115,8 @@ const tryIt = 'equipe try --edit "…"';
     <section id="faq">
       <div class="wrap col">
         <h2>{t.faq.title}</h2>
-        {t.faq.items.map((f) => (
-          <details>
+        {t.faq.items.map((f, i) => (
+          <details data-faq-id={`faq-${i + 1}`}>
             <summary><h3>{f.question}</h3></summary>
             <p><Rich s={f.answer} /></p>
           </details>
@@ -126,12 +127,13 @@ const tryIt = 'equipe try --edit "…"';
 
   <footer>
     <div class="wrap">
-      <span><a href={SITE.repo}>{t.nav.github}</a> · <a href={SITE.roadmap}>{t.start.roadmap}</a> · <a href={SITE.architecture}>{t.start.architecture}</a></span>
+      <span><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a> · <a href={SITE.roadmap}>{t.start.roadmap}</a> · <a href={SITE.architecture}>{t.start.architecture}</a></span>
       <span>{t.footer.license}</span>
       <span>{t.footer.built}</span>
     </div>
   </footer>
 
+  <Analytics />
   <LangBanner locale={code} />
 
   <script is:inline>

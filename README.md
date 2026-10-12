@@ -19,3 +19,5 @@ npm run preview   # serve dist/ locally
 The build emits `dist/index.html`, `sitemap-index.xml`, `robots.txt` and `llms.txt`.
 Site-wide constants live in `src/data/site.ts`; head tags in `src/components/BaseHead.astro`;
 JSON-LD in `src/components/*JsonLd.astro`.
+
+Deployed on Vercel: `main` → https://equipe.im, every PR gets a preview URL. See `docs/deploy.md`.

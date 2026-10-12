@@ -1,0 +1,25 @@
+---
+// PostHog, cookieless and lazy. Renders nothing at all unless PUBLIC_POSTHOG_KEY is set at
+// build time (local builds, forks). Details and event list: docs/analytics.md.
+const key = import.meta.env.PUBLIC_POSTHOG_KEY;
+// The PostHog app host (only used for toolbar/UI links); events go through /ingest regardless.
+const uiHost = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.posthog.com';
+// Vercel sets VERCEL_ENV to production | preview | development during the build.
+// Every event carries it as `environment`, so Preview data never mixes into Production views.
+const environment = process.env.VERCEL_ENV ?? 'local';
+const config = JSON.stringify({ key, uiHost, environment }).replace(/</g, '\\u003c');
+---
+
+{
+  key && (
+    <>
+      <script is:inline type="application/json" id="analytics-config" set:html={config} />
+      <script is:inline>
+        window.eqTrack = function (n, p) { (window.__eqq = window.__eqq || []).push([n, p]); };
+      </script>
+      <script>
+        import '../analytics/client';
+      </script>
+    </>
+  )
+}
