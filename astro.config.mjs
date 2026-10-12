@@ -2,10 +2,11 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  // The one canonical host. www.equipe.im redirects here (docs/deploy.md).
+  // The one canonical host. www.equipe.im redirects here (vercel.json).
   site: 'https://equipe.im',
-  // Set by CI only while Pages serves from <org>.github.io/equipe-site/ (before the custom domain).
-  base: process.env.SITE_BASE || undefined,
+  // Static build for now. To add server routes, switch to @astrojs/vercel (docs/deploy.md).
   output: 'static',
+  // Pages live at /path/ — canonical URLs, the sitemap and vercel.json's redirect all agree.
+  trailingSlash: 'always',
   integrations: [sitemap()],
 });
