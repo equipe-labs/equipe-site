@@ -1,0 +1,31 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { getLocale, type LocaleCode } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: LocaleCode;
+  ogTitle?: string;
+  ogDescription?: string;
+  image?: string;
+  imageAlt?: string;
+}
+const { lang } = getLocale(Astro.props.locale);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead {...Astro.props} />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <slot name="head" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

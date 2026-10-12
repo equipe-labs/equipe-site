@@ -1,0 +1,70 @@
+---
+import { SITE } from '../data/site';
+import { available, getLocale, localePath, type LocaleCode } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: LocaleCode;
+  ogTitle?: string;
+  ogDescription?: string;
+  /** Path or absolute URL of the social image. */
+  image?: string;
+  imageAlt?: string;
+  /** Override canonical; defaults to the current page URL on SITE. */
+  canonical?: string;
+  themeColor?: string;
+  /** Favicon slot: href + optional type, e.g. { href: '/favicon.svg', type: 'image/svg+xml' }. */
+  favicon?: { href: string; type?: string };
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  locale,
+  ogTitle = title,
+  ogDescription = description,
+  image,
+  imageAlt,
+  themeColor = SITE.themeColor,
+  favicon = { href: '/favicon.svg', type: 'image/svg+xml' },
+  noindex = false,
+  ogType = 'website',
+} = Astro.props;
+
+const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const current = getLocale(locale);
+const alternates = available.map((l) => ({ lang: l.lang, href: new URL(localePath(l), Astro.site).href }));
+const xDefault = alternates.find((a) => a.lang === getLocale('en').lang)!.href;
+const others = available.filter((l) => l.code !== locale);
+const imageUrl = image ? new URL(image, Astro.site).href : undefined;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+{alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+<meta name="theme-color" content={themeColor} />
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="icon" href={favicon.href} type={favicon.type} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={current.og} />
+{others.map((l) => <meta property="og:locale:alternate" content={l.og} />)}
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}

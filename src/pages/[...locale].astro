@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import LangMenu from '../components/LangMenu.astro';
+import Rich from '../components/Rich.astro';
+import LangBanner from '../components/LangBanner.astro';
+import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
+import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
+import SoftwareApplicationJsonLd from '../components/SoftwareApplicationJsonLd.astro';
+import FaqJsonLd from '../components/FaqJsonLd.astro';
+import { SITE } from '../data/site';
+import { available, getLocale, getMessages, localePath, type LocaleCode } from '../i18n';
+
+// One page per language that has a src/i18n/<code>.ts file. English lives at `/`, the rest at `/<slug>/`.
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const t = getMessages(code);
+const pageUrl = new URL(localePath(info), Astro.site).href;
+
+const dots = ['faded', 'faded', 'faded', 'solid'] as const;
+const install = `git clone https://github.com/equipe-labs/equipe && cd equipe
+cargo install --locked --path crates/cli`;
+const tryIt = 'equipe try --edit "…"';
+---
+
+<Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={SITE.ogImage} imageAlt={t.meta.ogImageAlt}>
+  <Fragment slot="head">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <OrganizationJsonLd />
+    <WebSiteJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} />
+    <SoftwareApplicationJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} />
+    <FaqJsonLd lang={info.lang} faqs={t.faq.items} />
+  </Fragment>
+
+  <a class="skip" href="#main">{t.ui.skip}</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href={localePath(info)}><Mark size={28} /> equipe</a>
+      <nav aria-label={t.ui.primaryNav}>
+        <ul>
+          <li class="opt"><a href="#how-it-works">{t.nav.howItWorks}</a></li>
+          <li class="opt"><a href="#get-started">{t.nav.getStarted}</a></li>
+          <li class="opt"><a href="#faq">{t.nav.faq}</a></li>
+          <li><a href={SITE.repo}>{t.nav.github}</a></li>
+          <li><LangMenu locale={code} label={t.ui.language} /></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <div class="col">
+          <h1>{t.hero.title}</h1>
+          <p class="lead">{t.hero.lead}</p>
+          <p class="muted">{t.hero.note}</p>
+          <div class="ctas">
+            <a class="btn primary" href={SITE.repo}>{t.hero.ctaPrimary}</a>
+            <a class="btn secondary" href="#get-started">{t.hero.ctaSecondary}</a>
+          </div>
+          <span class="chip">{t.hero.chip}</span>
+        </div>
+        <div class="hero-mark"><Mark size={200} /></div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="wrap">
+        <h2>{t.how.title}</h2>
+        <p class="col">{t.how.intro}</p>
+        <div class="cards">
+          {t.how.cards.map((c, i) => (
+            <div class="card">
+              <Mark size={20} single={dots[i]} />
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="who-for">
+      <div class="wrap col">
+        <h2>{t.who.title}</h2>
+        <p>{t.who.intro}</p>
+        <ul class="points">
+          {t.who.points.map((p) => (
+            <li><strong>{p.lead}</strong> {p.text}</li>
+          ))}
+        </ul>
+        <p class="proof">{t.who.proof}</p>
+      </div>
+    </section>
+
+    <section id="get-started">
+      <div class="wrap">
+        <h2>{t.start.title}</h2>
+        <p class="col"><Rich s={t.start.install} /></p>
+        <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <p class="col">{t.start.run}</p>
+        <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <p class="col">{t.start.tryIntro}</p>
+        <div class="codeblock"><pre tabindex="0"><code>{tryIt}</code></pre><button class="copy" type="button" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <p class="links">{t.start.docs} <a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a></p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap col">
+        <h2>{t.faq.title}</h2>
+        {t.faq.items.map((f) => (
+          <details>
+            <summary><h3>{f.question}</h3></summary>
+            <p><Rich s={f.answer} /></p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><a href={SITE.repo}>{t.nav.github}</a> · <a href={SITE.roadmap}>{t.start.roadmap}</a> · <a href={SITE.architecture}>{t.start.architecture}</a></span>
+      <span>{t.footer.license}</span>
+      <span>{t.footer.built}</span>
+    </div>
+  </footer>
+
+  <LangBanner locale={code} />
+
+  <script is:inline>
+    document.querySelectorAll('.copy').forEach((b) =>
+      b.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(b.previousElementSibling.textContent);
+          b.textContent = b.dataset.done;
+          setTimeout(() => (b.textContent = b.dataset.label), 1500);
+        } catch {}
+      }),
+    );
+  </script>
+</Base>
