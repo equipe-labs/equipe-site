@@ -1,5 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -13,7 +16,9 @@ interface Props {
 <html lang="en">
   <head>
     <BaseHead {...Astro.props} />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <slot name="head" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <slot />
