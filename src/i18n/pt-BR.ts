@@ -99,7 +99,7 @@ equipe           # abre o console do squad`,
       {
         question: 'O equipe é gratuito e de código aberto?',
         answer:
-          'Sim. O equipe é distribuído sob a Licença MIT e é código aberto desde o primeiro commit. O uso dos engines do Claude ou do Codex é cobrado na sua própria conta nesses provedores.',
+          'Sim. O equipe é distribuído sob a Licença MIT e é código aberto desde o primeiro commit. O próprio equipe é gratuito. O Claude Code e o Codex funcionam com as suas próprias assinaturas ou contas da Anthropic e da OpenAI (ChatGPT).',
       },
       {
         question: 'O equipe está pronto para uso em produção?',

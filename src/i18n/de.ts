@@ -99,7 +99,7 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Ist equipe kostenlos und Open Source?',
         answer:
-          'Ja. equipe steht unter der MIT-Lizenz und ist seit dem ersten Commit Open Source. Die Nutzung der Claude- oder Codex-Engines wird dir bei diesen Anbietern über dein eigenes Konto abgerechnet.',
+          'Ja. equipe steht unter der MIT-Lizenz und ist seit dem ersten Commit Open Source. equipe selbst ist kostenlos. Claude Code und Codex laufen über deine eigenen Abos oder Konten bei Anthropic und OpenAI (ChatGPT).',
       },
       {
         question: 'Ist equipe für den Produktivbetrieb geeignet?',

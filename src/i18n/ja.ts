@@ -99,7 +99,7 @@ equipe           # スクワッドコンソールを開く`,
       {
         question: 'equipeは無料のオープンソースですか？',
         answer:
-          'はい。equipeはMITライセンスで公開されており、最初のコミットからオープンソースです。ClaudeやCodexのエンジンを使う費用は、各提供元のご自身のアカウントに請求されます。',
+          'はい。equipeはMITライセンスで公開されており、最初のコミットからオープンソースです。equipe自体は無料です。Claude CodeとCodexは、ご自身のAnthropicおよびOpenAI（ChatGPT）のサブスクリプションまたはアカウントで動作します。',
       },
       {
         question: 'equipeは本番環境で使えますか？',
