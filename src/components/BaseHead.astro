@@ -11,6 +11,9 @@ interface Props {
   /** Path or absolute URL of the social image. */
   image?: string;
   imageAlt?: string;
+  /** Pixel size of the social image; defaults match public/og.png. */
+  imageWidth?: number;
+  imageHeight?: number;
   /** Override canonical; defaults to the current page URL on SITE. */
   canonical?: string;
   themeColor?: string;
@@ -28,6 +31,8 @@ const {
   ogDescription = description,
   image,
   imageAlt,
+  imageWidth = 1200,
+  imageHeight = 630,
   themeColor = SITE.themeColor,
   favicon = { href: '/favicon.svg', type: 'image/svg+xml' },
   noindex = false,
@@ -40,6 +45,11 @@ const alternates = available.map((l) => ({ lang: l.lang, href: new URL(localePat
 const xDefault = alternates.find((a) => a.lang === getLocale('en').lang)!.href;
 const others = available.filter((l) => l.code !== locale);
 const imageUrl = image ? new URL(image, Astro.site).href : undefined;
+const imageType = imageUrl
+  ? ({ png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif' } as Record<string, string>)[
+      new URL(imageUrl).pathname.split('.').pop()!.toLowerCase()
+    ]
+  : undefined;
 ---
 
 <meta charset="utf-8" />
@@ -62,6 +72,9 @@ const imageUrl = image ? new URL(image, Astro.site).href : undefined;
 <meta property="og:locale" content={current.og} />
 {others.map((l) => <meta property="og:locale:alternate" content={l.og} />)}
 {imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && <meta property="og:image:width" content={String(imageWidth)} />}
+{imageUrl && <meta property="og:image:height" content={String(imageHeight)} />}
+{imageType && <meta property="og:image:type" content={imageType} />}
 {imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 
 <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
