@@ -92,7 +92,7 @@ for (const { lang, path } of LOCALES) {
   );
   check(alts['x-default'] === `${CANONICAL}/`, `${path} x-default -> /`);
 
-  for (const key of ['og:title', 'og:description', 'og:url', 'og:image', 'og:locale', 'twitter:card']) {
+  for (const key of ['og:title', 'og:description', 'og:url', 'og:image', 'og:image:width', 'og:image:height', 'og:image:type', 'og:locale', 'twitter:card']) {
     check(meta(html, key).length === 1 && meta(html, key)[0], `${path} ${key}`);
   }
   check(meta(html, 'og:url')[0] === url, `${path} og:url matches canonical`);
@@ -104,6 +104,7 @@ for (const { lang, path } of LOCALES) {
     try {
       const data = JSON.parse(b.replace(/^<script[^>]*>|<\/script>$/g, ''));
       types.push(data['@type']);
+      if (data['@type'] === 'Organization') check(/\.png$/.test(data.logo ?? ''), `${path} Organization logo is PNG`);
       if (data['@type'] === 'FAQPage') {
         const qs = data.mainEntity ?? [];
         check(
