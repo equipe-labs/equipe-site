@@ -1,0 +1,24 @@
+# Creates or updates the "equipe.im KPI" dashboard from scripts/posthog-dashboard.mjs. Run by hand
+# (Actions → "PostHog KPI dashboard" → Run workflow) after changing a panel. See docs/analytics.md.
+name: PostHog KPI dashboard
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/posthog-dashboard.mjs
+        env:
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          POSTHOG_PROJECT_ID: ${{ vars.POSTHOG_PROJECT_ID }}
+          POSTHOG_APP_HOST: ${{ vars.POSTHOG_APP_HOST || 'https://us.posthog.com' }}
