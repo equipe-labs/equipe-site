@@ -128,7 +128,7 @@ Install it from source with Rust 1.88+ and git: clone `github.com/equipe-labs/eq
 You do. Each member works on its own branch in an isolated worktree, and equipe asks for human approval before a branch merges. The PM accepts work onto the board; the person leading the squad decides what lands.
 
 **Is equipe free and open source?**
-Yes. equipe is released under the MIT License and has been open source since its first commit. Using the Claude or Codex engines is billed to your own account with those providers.
+Yes. equipe is released under the MIT License and has been open source since its first commit. equipe itself is free. Claude Code and Codex run on your own Anthropic and OpenAI (ChatGPT) subscriptions or accounts.
 
 **Is equipe ready for production use?**
 equipe is early-stage. The squad daemon runs in the background, the PM accepts work, agents work on branches in sandboxes, and you approve before merge. Handoffs and communication channels are coming next, as listed on the roadmap.
@@ -147,4 +147,5 @@ equipe is early-stage. The squad daemon runs in the background, the PM accepts w
 
 - The FAQ is plain visible text (use `<details>` only if the answer stays in the DOM, which it does); mirror it exactly in the `FAQPage` JSON-LD.
 - Each FAQ answer is written to stand alone: it names "equipe" and does not rely on "it" from a prior answer.
-- Open questions for the person: confirm the "billed to your own account" wording for Codex (README says it uses the ChatGPT plan), and whether equipe.im should link a docs page later.
+- Open questions for the person: whether equipe.im should link a docs page later.
+- Resolved (T-13): Codex cost wording. The person confirmed that Codex runs on a ChatGPT subscription, so the FAQ no longer says it is "billed to your own account".
