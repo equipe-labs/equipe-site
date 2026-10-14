@@ -66,7 +66,9 @@ const ja: Messages = {
   start: {
     title: 'はじめる',
     install: 'macOSとLinuxでは1行で済みます。ビルド済みの`equipe`を`~/.local/bin`に置き(SHA-256を検証)、PATHにも追加します:',
-    brew: 'Homebrewを使う場合:',
+    brew: 'Homebrew tapからビルド済みの`equipe`をインストールします。更新は`brew upgrade equipe`です:',
+    tabsLabel: 'インストール方法',
+    sourceTitle: 'ソースからビルド(上級者向け)',
     source: '自分でビルドしたい場合は、ソースからもインストールできます。Rust 1.88+とgitが必要です。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、`claude`バイナリも必要です。',
     run: 'エンジンにログインし、準備できているか確認してから、スクワッドコンソールを開きます。',
     runCode: `equipe login     # CodexまたはClaude Codeにログイン
@@ -103,7 +105,7 @@ equipe           # スクワッドコンソールを開く`,
       {
         question: 'equipeはどうやってインストールしますか？',
         answer:
-          'macOSとLinuxでは、`curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh`の1行で済みます。ビルド済みの`equipe`を`~/.local/bin`に置き(SHA-256を検証)、PATHにも追加します。Homebrewなら`brew install equipe-labs/tap/equipe`を実行してください。ソースからビルドする場合は、Rust 1.88+とgitが必要です。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、Claude Codeのバイナリも必要です。',
+          'macOSとLinuxでは`brew install equipe-labs/tap/equipe`の1行で済みます。install.shの1行や、ソースからのビルド(Rust 1.88+)も使えます。方法はすべて「はじめる」にあります。',
       },
       {
         question: '作業は誰が承認しますか？',
