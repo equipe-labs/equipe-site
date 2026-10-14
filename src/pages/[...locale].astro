@@ -104,18 +104,37 @@ const tryIt = 'equipe try --edit "…"';
         <h2>{t.apps.title}</h2>
         <p class="col">{t.apps.intro}</p>
         <div class="cards">
-          {t.apps.items.map((a) => (
+          {t.apps.items.map((a, i) => (
             <div class="card app">
-              <div class="app-head">
-                <h3>{a.title}</h3>
-                <span class="chip">{t.apps.soon}</span>
-              </div>
+              <h3>{a.title}</h3>
               <p class="platform">{a.platform}</p>
-              <ul>
-                {a.points.map((p) => <li>{p}</li>)}
-              </ul>
+              <p>{a.text}</p>
+              {i === 0 ? (
+                <figure class="shot">
+                  <img src="/apps/desktop-approval.webp" width="1400" height="887" loading="lazy" decoding="async" alt={a.alt} />
+                </figure>
+              ) : (
+                <div class="shot phone-wrap" role="img" aria-label={a.alt}>
+                  <div class="phone" aria-hidden="true">
+                    <small>{t.apps.phone.label}</small>
+                    <div class="pc"><b>BACKEND · T-52</b>{t.apps.phone.askCommand}<code>cargo test -p equipe-core</code><div class="pb"><i>{t.apps.phone.allow}</i><i>{t.apps.phone.decline}</i></div></div>
+                    <div class="pc"><b>MOBILE · T-37</b>{t.apps.phone.askMerge}<div class="pb"><i>{t.apps.phone.approve}</i><i>{t.apps.phone.changes}</i></div></div>
+                  </div>
+                </div>
+              )}
+              {/* Action slot: swap the chip for a download button (T-96) once the app ships. */}
+              <div class="app-action"><span class="chip">{t.apps.soon}</span></div>
             </div>
           ))}
+        </div>
+        <p class="caption">{t.apps.caption}</p>
+        <div class="notify">
+          <div>
+            <h3>{t.apps.notify.title}</h3>
+            <p>{t.apps.notify.text}</p>
+            <p class="muted">{t.apps.notify.how}</p>
+          </div>
+          <a class="btn primary" href={`${SITE.repo}`} data-ph="app_notify_click" data-ph-location="apps">{t.apps.notify.cta}</a>
         </div>
       </div>
     </section>

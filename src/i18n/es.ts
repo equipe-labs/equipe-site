@@ -52,13 +52,16 @@ const es: Messages = {
     proof: 'Este sitio lo construyó un squad de equipe, en público. Cada cambio empezó como un ticket y llegó como una rama que una persona aceptó.',
   },
   apps: {
-    title: 'Apps para escritorio y móvil',
-    intro: 'El squad llegará a tu Mac y a tu móvil, para que sigas el trabajo y tomes las decisiones desde donde estés.',
+    title: 'Míralo en tu Mac, aprueba desde el móvil.',
+    intro: 'El squad también se ve fuera de la terminal. Cuando un agente espera tu visto bueno, el móvil te avisa y apruebas con Face ID. Lo que envías va cifrado de extremo a extremo.',
     soon: 'Próximamente',
+    caption: 'Maqueta de la app · próximamente',
     items: [
-      { title: 'App de escritorio', platform: 'macOS', points: ['Ver tu squad y sus miembros', 'Hablar con el PM', 'Seguir los tickets en el tablero', 'Pegar capturas de pantalla en la conversación'] },
-      { title: 'App móvil', platform: 'iOS · Android', points: ['Aprobar desde el móvil con Face ID o con tu huella', 'Seguir los tickets en el tablero', 'Hablar con el PM', 'Vincularla con tu Mac escaneando un código QR; lo que envías va cifrado de extremo a extremo'] },
+      { title: 'App de escritorio', platform: 'macOS', text: 'Squad, tablero y chat con el PM en una sola ventana.', alt: 'Maqueta de la app de escritorio: un agente pide permiso para ejecutar un comando, con los botones Permitir una vez, Siempre y Rechazar.' },
+      { title: 'App móvil', platform: 'iOS · Android', text: 'Solo te avisa cuando algo necesita tu aprobación.', alt: 'Maqueta de la app móvil: dos solicitudes de aprobación en espera.' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: '¿Ejecutar el comando?', allow: 'Permitir una vez', decline: 'Rechazar', askMerge: '¿Fusionar la rama?', approve: 'Aprobar', changes: 'Pedir cambios' },
+    notify: { title: '¿Quieres saber cuándo salen las apps?', text: 'Suscríbete a las versiones en GitHub y recibirás un correo solo con cada nueva versión. Sin registro y sin recoger tu correo.', cta: 'Recibir aviso en GitHub', how: 'En el repositorio equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Empezar',

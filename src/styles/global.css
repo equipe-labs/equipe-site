@@ -72,10 +72,26 @@ h2 + p { margin-top: 16px; }
 .card { background: var(--surface); border-radius: 14px; padding: 24px; }
 .card svg { display: block; margin-bottom: 16px; }
 .card p { margin: 8px 0 0; }
+@media (min-width: 641px) { .cards:has(.shot) { grid-template-columns: 1.5fr 1fr; } }
+.app { display: flex; flex-direction: column; overflow: hidden; }
 .app-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
 .app .platform { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
-.app ul { padding-left: 20px; margin: 16px 0 0; }
-.app li { margin-bottom: 8px; }
+figure.shot { margin: 20px -24px 0; }
+.shot img { display: block; width: 100%; height: auto; border-top: 1px solid var(--line); }
+.phone-wrap { margin-top: 20px; display: flex; justify-content: center; }
+.phone { width: 220px; border: 6px solid #1a1a17; border-radius: 34px; background: #0a0a0c; color: #efede7; padding: 20px 12px; font: 13px/1.4 var(--sans); }
+.phone small { display: block; color: #9a9ca3; letter-spacing: 0.14em; font-size: 10px; margin-bottom: 8px; }
+.pc { background: #141417; border: 1px solid #26262b; border-radius: 12px; padding: 10px; margin-bottom: 8px; }
+.pc b { display: block; color: #b4cde6; font-size: 10px; letter-spacing: 0.08em; }
+.pc code { display: block; background: #0a0a0c; border-radius: 6px; padding: 5px 7px; margin: 6px 0; font-size: 10.5px; overflow-wrap: anywhere; }
+.pb { display: flex; gap: 6px; margin-top: 6px; }
+.pb i { font-style: normal; flex: 1; text-align: center; border-radius: 7px; padding: 6px 2px; font-size: 12px; font-weight: 600; border: 1px solid #3a3a40; }
+.pb i:first-child { background: #efede7; color: #0a0a0c; }
+.app-action { margin-top: auto; padding-top: 20px; }
+.caption { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+.notify { margin-top: 24px; border: 1.5px solid var(--text); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.notify p { margin: 8px 0 0; }
+@media (min-width: 641px) { .notify { flex-direction: row; justify-content: space-between; align-items: center; padding: 22px 28px; } }
 ul.points { padding-left: 20px; margin: 24px 0; }
 ul.points li { margin-bottom: 12px; }
 .proof { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; color: var(--muted); }

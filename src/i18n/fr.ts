@@ -53,13 +53,16 @@ const fr: Messages = {
     proof: 'Ce site a été construit en public par un squad equipe. Chaque changement a commencé comme un ticket et est arrivé sous forme de branche acceptée par une personne.',
   },
   apps: {
-    title: 'Applications de bureau et mobile',
-    intro: 'Le squad arrive sur votre Mac et votre téléphone, pour suivre le travail et décider où que vous soyez.',
+    title: 'Suivez sur votre Mac, approuvez sur votre téléphone.',
+    intro: 'Le squad se voit aussi hors du terminal. Quand un agent attend votre accord, le téléphone vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
     soon: 'Bientôt disponible',
+    caption: 'Maquette de l’appli · bientôt disponible',
     items: [
-      { title: 'Application de bureau', platform: 'macOS', points: ['Voir votre squad et ses membres', 'Discuter avec le PM', 'Suivre les tickets sur le tableau', 'Coller des captures d’écran dans la conversation'] },
-      { title: 'Application mobile', platform: 'iOS · Android', points: ['Approuver depuis le téléphone avec Face ID ou votre empreinte', 'Suivre les tickets sur le tableau', 'Discuter avec le PM', 'Associer l’appli à votre Mac en scannant un QR code ; ce que vous envoyez est chiffré de bout en bout'] },
+      { title: 'Application de bureau', platform: 'macOS', text: 'Squad, tableau et discussion avec le PM dans une seule fenêtre.', alt: 'Maquette de l’appli de bureau : un agent demande l’autorisation d’exécuter une commande, avec les boutons Autoriser une fois, Toujours et Refuser.' },
+      { title: 'Application mobile', platform: 'iOS · Android', text: 'Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile : deux demandes d’approbation en attente.' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: 'Exécuter la commande ?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche ?', approve: 'Approuver', changes: 'Demander des changements' },
+    notify: { title: 'Prévenu à la sortie des applis ?', text: 'Abonnez-vous aux releases sur GitHub : vous ne recevez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe : Watch → Custom → Releases.' },
   },
   start: {
     title: 'Commencer',
