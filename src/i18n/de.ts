@@ -54,7 +54,10 @@ const de: Messages = {
     title: 'Am Mac verfolgen, am Smartphone freigeben.',
     intro: 'Der Squad ist auch außerhalb des Terminals sichtbar. Wartet ein Agent auf dein OK, meldet sich das Smartphone und du gibst per Face ID frei. Die Inhalte sind Ende-zu-Ende-verschlüsselt.',
     soon: 'In Vorbereitung',
-    caption: 'App-Vorschau · in Vorbereitung',
+    download: "Für macOS herunterladen",
+    req: "macOS 12 oder neuer · Apple Silicon und Intel",
+    cliNote: "Benötigt die equipe-CLI – fehlt sie, führt die App durch die Installation.",
+    caption: "Screens sind Entwürfe · mobile Apps in Vorbereitung",
     items: [
       { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Board und PM-Chat in einem Fenster.', alt: 'Vorschau der Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen.' },
       { title: 'Mobile App', platform: 'iOS · Android', text: 'Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Vorschau der mobilen App: zwei Freigabeanfragen warten.' },

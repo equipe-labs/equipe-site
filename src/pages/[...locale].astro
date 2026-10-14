@@ -159,8 +159,15 @@ const tryIt = 'equipe try --edit "…"';
                   </div>
                 </div>
               )}
-              {/* Action slot: swap the chip for a download button (T-96) once the app ships. */}
-              <div class="app-action"><span class="chip">{t.apps.soon}</span></div>
+              {i === 0 ? (
+                <div class="app-action">
+                  <a class="btn primary" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="apps" download>{t.apps.download}</a>
+                  <p class="req">{t.apps.req}</p>
+                  <p class="req">{t.apps.cliNote}</p>
+                </div>
+              ) : (
+                <div class="app-action"><span class="chip">{t.apps.soon}</span></div>
+              )}
             </div>
           ))}
         </div>

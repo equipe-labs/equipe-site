@@ -3,6 +3,8 @@ export const SITE = {
   url: 'https://equipe.im',
   repo: 'https://github.com/equipe-labs/equipe',
   docs: 'https://github.com/equipe-labs/equipe/tree/main/docs',
+  /** Stable URL of the signed, notarized macOS DMG attached to every release. */
+  desktopDmg: 'https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg',
   roadmap: 'https://github.com/equipe-labs/equipe/blob/main/docs/ROADMAP.md',
   architecture: 'https://github.com/equipe-labs/equipe/blob/main/docs/ARCHITECTURE.md',
   /** Fallback social image; each language page uses /og/<slug>.png (scripts/og.mjs). */

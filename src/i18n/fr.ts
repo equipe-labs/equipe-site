@@ -55,7 +55,10 @@ const fr: Messages = {
     title: 'Suivez sur votre Mac, approuvez sur votre téléphone.',
     intro: 'Le squad reste visible hors du terminal. Quand un agent attend votre accord, votre téléphone vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
     soon: 'Bientôt disponible',
-    caption: 'Maquette de l’appli · bientôt disponible',
+    download: "Télécharger pour macOS",
+    req: "macOS 12 ou plus récent · Apple Silicon et Intel",
+    cliNote: "Nécessite la CLI equipe ; si elle manque, l’appli vous guide pour l’installer.",
+    caption: "Les écrans sont des maquettes · applis mobiles bientôt disponibles",
     items: [
       { title: 'Application de bureau', platform: 'macOS', text: 'Squad, tableau et discussion avec le PM dans une seule fenêtre.', alt: 'Maquette de l’appli de bureau\u202F: un agent demande l’autorisation d’exécuter une commande, avec les boutons «\u202FAutoriser une fois\u202F», «\u202FToujours\u202F» et «\u202FRefuser\u202F».' },
       { title: 'Application mobile', platform: 'iOS · Android', text: 'Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile\u202F: deux demandes d’approbation en attente.' },
