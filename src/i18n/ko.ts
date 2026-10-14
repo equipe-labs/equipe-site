@@ -24,12 +24,12 @@ const ko: Messages = {
   },
   nav: { howItWorks: '작동 방식', getStarted: '시작하기', faq: '자주 묻는 질문', github: 'GitHub' },
   hero: {
-    title: '당신이 이끄는 AI 소프트웨어 스쿼드.',
-    lead: 'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. PM, 디자이너, 프론트엔드, 백엔드, QA, 데이터 역할의 에이전트가 팀을 이뤄 공유 보드를 통해 당신의 저장소에서 일해요. 각자 격리된 git worktree에서 작업하고, 머지 전에는 반드시 사람의 승인을 기다려요.',
-    note: 'equipe는 또 하나의 에이전트 루프가 아니에요. 이미 있는 에이전트 위에 얹는 팀 계층이고, 지금은 Codex와 Claude Code를 지원해요.',
+    title: 'AI 에이전트 팀을 이끌고, 머지는 당신이 승인해요.',
+    lead: 'PM·디자이너·개발자 에이전트가 보드에서 일하고, 각자 당신 저장소의 자기 브랜치에서 작업해요. 당신 승인 없이는 아무것도 머지되지 않아요.',
     ctaPrimary: 'GitHub에서 보기',
-    ctaSecondary: '시작하기',
-    chip: '초기 단계 · MIT 라이선스',
+    chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
+    shotAlt: 'equipe 데스크톱 앱 시안: 에이전트가 명령 실행 허가를 요청하고, 한 번 허용·항상 허용·거절 버튼이 보인다',
+    shotCaption: '앱 시안 · 준비 중 — 에이전트가 “허가가 필요해요” 하고 멈춰 있고, 사람이 한 번에 승인해요.',
   },
   how: {
     title: '작동 방식',

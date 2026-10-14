@@ -26,12 +26,12 @@ export const en = {
   },
   nav: { howItWorks: 'How it works', getStarted: 'Get started', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Your AI software squad, led by you.',
-    lead: 'equipe is an open-source AI software squad: a team of role-based agents (PM, Designer, Frontend, Backend, QA and Data) that works on your repository through a shared board, in isolated git worktrees, and waits for a person\'s approval before anything merges.',
-    note: 'equipe isn\'t another agent loop. It\'s the team layer on top of the ones that already exist — Codex and Claude Code today.',
+    title: 'Lead a team of AI agents. You approve every merge.',
+    lead: 'PM, designer and developer agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
     ctaPrimary: 'View on GitHub',
-    ctaSecondary: 'Get started',
-    chip: 'Early-stage · MIT licensed',
+    chip: 'Early-stage · MIT licensed · Codex and Claude Code',
+    shotAlt: 'Preview of the equipe desktop app: an agent asks permission to run a command, with Allow once, Always and Decline buttons',
+    shotCaption: 'Desktop app preview — an agent pauses with “I need permission” and you approve in one click. (App coming soon)',
   },
   how: {
     title: 'How it works',

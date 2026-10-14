@@ -24,12 +24,12 @@ const de: Messages = {
   },
   nav: { howItWorks: 'So funktioniert’s', getStarted: 'Loslegen', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Dein KI-Software-Squad, von dir geleitet.',
-    lead: 'equipe ist ein Open-Source-KI-Software-Squad: ein Team aus Agenten mit festen Rollen (PM, Designer, Frontend, Backend, QA und Daten), das über ein gemeinsames Board an deinem Repository arbeitet, in isolierten git worktrees, und vor jedem Merge auf die Freigabe einer Person wartet.',
-    note: 'equipe ist kein weiterer Agent-Loop, sondern die Team-Ebene über denen, die es schon gibt – heute Codex und Claude Code.',
+    title: 'Führe ein Team aus KI-Agenten. Jeden Merge gibst du frei.',
+    lead: 'PM-, Design- und Entwickler-Agenten arbeiten an einem gemeinsamen Board, jeder auf einem eigenen Branch deines Repositorys. Ohne deine Freigabe wird nichts gemergt.',
     ctaPrimary: 'Auf GitHub ansehen',
-    ctaSecondary: 'Loslegen',
-    chip: 'Frühe Phase · MIT-Lizenz',
+    chip: 'Frühe Phase · MIT-Lizenz · Unterstützt Codex und Claude Code',
+    shotAlt: 'Entwurf der equipe-Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen',
+    shotCaption: 'App-Entwurf · in Vorbereitung — ein Agent hält mit „Ich brauche eine Erlaubnis“ an, und du gibst sie mit einem Klick frei.',
   },
   how: {
     title: 'So funktioniert’s',
