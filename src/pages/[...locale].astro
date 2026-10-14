@@ -12,7 +12,7 @@ import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 import SoftwareApplicationJsonLd from '../components/SoftwareApplicationJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
 import { SITE } from '../data/site';
-import { available, getLocale, getMessages, localePath, type LocaleCode } from '../i18n';
+import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 // One page per language that has a src/i18n/<code>.ts file. English lives at `/`, the rest at `/<slug>/`.
 export function getStaticPaths() {
@@ -229,7 +229,7 @@ const tryIt = 'equipe try --edit "…"';
 
   <footer>
     <div class="wrap">
-      <span><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a> · <a href={SITE.roadmap}>{t.start.roadmap}</a> · <a href={SITE.architecture}>{t.start.architecture}</a></span>
+      <span><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a> · <a href={SITE.roadmap}>{t.start.roadmap}</a> · <a href={SITE.architecture}>{t.start.architecture}</a> · <a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a> · <a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
       <span>{t.footer.license}</span>
       <span>{t.footer.built}</span>
     </div>

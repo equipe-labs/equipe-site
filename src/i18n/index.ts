@@ -43,6 +43,9 @@ export const getLocale = (code: LocaleCode): LocaleInfo => LOCALES.find((l) => l
 /** Path of a locale's landing page: `/` for English, `/ko/` for Korean, … */
 export const localePath = (l: LocaleInfo) => (l.slug ? `/${l.slug}/` : '/');
 
+/** Path of a sub-page in a locale: `/app/privacy/` for English, `/ko/app/privacy/` for Korean, … */
+export const subPath = (l: LocaleInfo, sub: string) => `${localePath(l)}${sub}/`;
+
 /** Split `backticks` / **bold** markers into renderable segments. */
 export type Seg = { t: string; kind: 'text' | 'code' | 'strong' };
 export function segments(s: string): Seg[] {

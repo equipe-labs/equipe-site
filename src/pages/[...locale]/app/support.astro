@@ -1,0 +1,45 @@
+---
+import AppPageShell from '../../../components/AppPageShell.astro';
+import Rich from '../../../components/Rich.astro';
+import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../../i18n';
+
+// /app/support/ in English, /<slug>/app/support/ in every other language that has a translation file.
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const s = getMessages(code).app.support;
+const privacy = subPath(getLocale(code), 'app/privacy');
+---
+
+<AppPageShell code={code} subpage="app/support" title={s.meta.title} description={s.meta.description}>
+  <h1>{s.title}</h1>
+  <p class="lead">{s.intro}</p>
+
+  <section class="doc-section">
+    <h2>{s.pairTitle}</h2>
+    <ol>
+      {s.pairSteps.map((step) => <li><Rich s={step} /></li>)}
+    </ol>
+    <div class="codeblock"><pre tabindex="0"><code>{s.pairCode}</code></pre></div>
+    <h3>{s.removeTitle}</h3>
+    <p><Rich s={s.removeText} /></p>
+  </section>
+
+  <section class="doc-section">
+    <h2>{s.faqTitle}</h2>
+    {s.faq.map((f) => (
+      <details>
+        <summary><h3>{f.question}</h3></summary>
+        <p><Rich s={f.answer} /></p>
+      </details>
+    ))}
+    <p class="small"><a href={privacy}>{getMessages(code).app.nav.privacy}</a></p>
+  </section>
+
+  <section class="doc-section">
+    <h2>{s.contactTitle}</h2>
+    <p>{s.contactText}</p>
+  </section>
+</AppPageShell>

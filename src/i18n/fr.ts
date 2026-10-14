@@ -134,6 +134,113 @@ equipe           # ouvrir la console du squad`,
   },
   notFound: { title: 'Page introuvable — equipe', description: 'Cette page n’existe pas.', heading: 'Page introuvable', text: 'Il n’y a rien à cette adresse. La page a peut-être été déplacée, ou le lien est erroné.', home: 'Aller à la page d’accueil' },
   footer: { license: 'Licence MIT', built: 'Construit en public par un squad equipe.' },
+  app: {
+    nav: { privacy: 'Confidentialité de l’app', support: 'Assistance de l’app', home: 'Accueil equipe' },
+    privacy: {
+      meta: {
+        title: 'Politique de confidentialité de l’app equipe',
+        description: 'Ce que l’app mobile equipe et son relais traitent : les clés d’appairage restent sur votre téléphone, le relais ne fait que transmettre des messages scellés, et il n’y a ni analyse ni suivi.',
+      },
+      title: 'Politique de confidentialité de l’app equipe',
+      updated: 'Dernière mise à jour : 2026-10-14',
+      intro: 'L’app equipe permet à votre téléphone de parler au daemon equipe de votre propre Mac. Cette page explique simplement ce que l’app et le relais equipe traitent.',
+      sections: [
+        {
+          title: 'En bref',
+          text: 'L’app n’a ni compte, ni publicité, ni analyse, ni rapport de plantage, et elle ne vous suit pas. Le travail de votre escouade circule entre votre téléphone et votre Mac, scellé de bout en bout.',
+          items: [],
+        },
+        {
+          title: 'Ce qui reste sur votre téléphone',
+          text: 'Ces éléments sont stockés uniquement sur votre appareil :',
+          items: [
+            '**Clés d’appairage.** La paire de clés du téléphone, le jeton de relais reçu lors de l’appairage, ainsi que la clé publique et le nom de votre Mac. Elles sont dans le Trousseau iOS ou, sous Android, dans un stockage protégé par l’Android Keystore. La clé privée ne quitte jamais le téléphone ; le jeton de relais est envoyé uniquement au relais, pour connecter le téléphone.',
+            '**Appareil photo.** Utilisé uniquement pour scanner le QR code d’appairage. Les images ne sont ni enregistrées ni envoyées.',
+            '**Face ID ou empreinte.** Votre téléphone la vérifie avant l’envoi d’une approbation. equipe ne reçoit jamais de données biométriques.',
+          ],
+        },
+        {
+          title: 'Ce que le relais equipe traite',
+          text: 'Votre téléphone et votre Mac se connectent tous deux à un relais exploité par equipe-labs à l’adresse `relay.equipe.im`. Tout ce qui circule entre eux est scellé de bout en bout avec des clés que seuls ces deux appareils détiennent ; le relais ne peut donc lire ni vos tickets, ni vos messages, ni vos approbations.',
+          items: [
+            'Le relais voit qu’une connexion existe, la taille et l’horaire des messages, et les identifiants aléatoires de votre Mac et de votre téléphone. Ils ne sont pas liés à votre nom. Il ne conserve qu’un hash de chaque jeton, pas le jeton lui-même.',
+            'Le relais tourne sur Cloudflare, qui, en tant que fournisseur réseau, traite l’adresse IP de chaque connexion.',
+            'Nous n’utilisons pas ces informations pour vous identifier ou vous profiler, et nous ne les vendons ni ne les partageons.',
+          ],
+        },
+        {
+          title: 'Notifications push',
+          text: 'Pour prévenir votre téléphone quand l’escouade a besoin de vous, le relais envoie une notification push.',
+          items: [
+            '**Jeton push.** Le relais conserve le jeton push de votre téléphone (APNs sur iOS, Firebase Cloud Messaging sur Android), lié à l’appairage et non à votre nom.',
+            'Le texte visible indique seulement qui a besoin de quoi. Les détails voyagent scellés et sont ouverts sur votre téléphone.',
+            'Apple et Google remettent la notification selon leurs propres politiques de confidentialité. Sous Android, Firebase Messaging crée aussi un identifiant d’installation pour votre téléphone.',
+          ],
+        },
+        {
+          title: 'Analyse et suivi',
+          text: 'L’app ne contient aucun outil d’analyse, de publicité ou de rapport de plantage, et ne vous suit pas à travers d’autres apps ou sites. Cette politique couvre l’app et le relais. Le site equipe.im compte les visites avec PostHog, sans cookies ni stockage local, et ne crée pas de profils de personnes.',
+          items: [],
+        },
+        {
+          title: 'Conservation et suppression',
+          text: 'Vous décidez de la durée d’un appairage :',
+          items: [
+            'Dans l’app, désappairez cet appareil. Cela supprime les clés du téléphone, ainsi que l’enregistrement d’appairage et le jeton push côté relais.',
+            'Sur votre Mac, exécutez `equipe devices remove <name>` pour révoquer un téléphone immédiatement.',
+            'Le relais ne conserve le jeton push et l’enregistrement d’appairage que tant que l’appairage existe.',
+            'Sous Android, désinstaller l’app supprime ses données. Sous iOS, des éléments du Trousseau peuvent subsister après la désinstallation ; désappairez donc d’abord.',
+          ],
+        },
+        {
+          title: 'Enfants',
+          text: 'L’app ne s’adresse pas aux enfants et nous ne collectons pas sciemment leurs informations personnelles.',
+          items: [],
+        },
+        {
+          title: 'Modifications',
+          text: 'Si cette politique change, nous mettrons à jour la date ci-dessus et cette page.',
+          items: [],
+        },
+        {
+          title: 'Contact',
+          text: 'Pour toute question ou demande de suppression de données, écrivez à l’adresse ci-dessous ou ouvrez une issue sur GitHub.',
+          items: [],
+        },
+      ],
+    },
+    support: {
+      meta: {
+        title: 'Assistance de l’app equipe — appairer votre téléphone',
+        description: 'Comment appairer l’app equipe à votre Mac avec `equipe pair`, réponses aux questions fréquentes et comment nous joindre.',
+      },
+      title: 'Assistance de l’app equipe',
+      intro: 'L’app equipe est une télécommande pour l’escouade sur votre Mac. Elle vous prévient quand l’escouade a besoin de vous et vous laisse autoriser ou refuser, relire le travail et parler au PM. Elle nécessite qu’equipe tourne sur votre Mac : installez donc equipe d’abord.',
+      pairTitle: 'Appairer votre téléphone',
+      pairSteps: [
+        'Vérifiez qu’equipe est installé sur votre Mac (voir « Démarrer » sur la page d’accueil).',
+        'Dans un terminal sur votre Mac, exécutez la commande ci-dessous. Un QR code apparaît, valable 5 minutes.',
+        'Ouvrez l’app equipe sur votre téléphone, lancez l’appairage et autorisez l’appareil photo.',
+        'Dirigez l’appareil photo vers le QR code.',
+        'Votre Mac demande « Pair <votre téléphone> ? y/n ». Répondez `y`. C’est appairé.',
+      ],
+      pairCode: 'equipe pair',
+      removeTitle: 'Voir ou retirer les téléphones appairés',
+      removeText: '`equipe devices` les liste et `equipe devices remove <name>` en révoque un immédiatement. Téléphone perdu : une seule commande.',
+      faqTitle: 'Questions fréquentes',
+      faq: [
+        { question: 'Ai-je besoin d’equipe sur un ordinateur ?', answer: 'Oui. L’app est une télécommande du daemon equipe de votre Mac ; sans lui, il n’y a rien à quoi se connecter. Installez equipe d’abord.' },
+        { question: 'Le QR code ne se scanne pas ou a expiré.', answer: 'Le code est valable 5 minutes. Relancez `equipe pair` pour en obtenir un nouveau, et affichez le QR en grand et bien lumineux à l’écran.' },
+        { question: 'Je ne reçois pas de notifications.', answer: 'Vérifiez que les notifications d’equipe sont autorisées dans les réglages du téléphone et que le daemon tourne sur votre Mac (`equipe status`).' },
+        { question: 'J’ai perdu ou changé de téléphone.', answer: 'Exécutez `equipe devices remove <name>` sur votre Mac, puis appairez le nouveau téléphone avec `equipe pair`.' },
+        { question: 'equipe peut-il lire mon travail via l’app ?', answer: 'Non. Les messages entre votre téléphone et votre Mac sont scellés de bout en bout ; le relais ne fait que les transmettre. Voir la politique de confidentialité pour le détail.' },
+        { question: 'Cela fonctionne-t-il hors de mon réseau domestique ?', answer: 'Oui. Le téléphone et le Mac se connectent tous deux au relais vers l’extérieur ; Wi-Fi, données mobiles et réseaux derrière un routeur fonctionnent.' },
+        { question: 'Quels téléphones sont pris en charge ?', answer: 'iPhone sous iOS 17 ou plus récent, et Android 8.0 ou plus récent.' },
+      ],
+      contactTitle: 'Contact',
+      contactText: 'Toujours bloqué ? Écrivez à l’adresse ci-dessous ou ouvrez une issue sur GitHub.',
+    },
+  },
 };
 
 export default fr;

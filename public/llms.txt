@@ -37,3 +37,5 @@ Then:
 - [GitHub](https://github.com/equipe-labs/equipe): source code, MIT License
 - [Roadmap](https://github.com/equipe-labs/equipe/blob/main/docs/ROADMAP.md): what is coming next
 - [Architecture](https://github.com/equipe-labs/equipe/blob/main/docs/ARCHITECTURE.md): how the squad is built
+- [App privacy policy](https://equipe.im/app/privacy/): what the equipe mobile app and relay handle
+- [App support](https://equipe.im/app/support/): pairing the app with `equipe pair`, FAQ, contact

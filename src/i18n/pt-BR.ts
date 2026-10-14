@@ -133,6 +133,113 @@ equipe           # abre o console do squad`,
   },
   notFound: { title: 'Página não encontrada — equipe', description: 'Esta página não existe.', heading: 'Página não encontrada', text: 'Não há nada neste endereço. Ela pode ter sido movida, ou o link pode estar errado.', home: 'Ir para a página inicial' },
   footer: { license: 'Licença MIT', built: 'Construído em público por um squad do equipe.' },
+  app: {
+    nav: { privacy: 'Política de privacidade do app', support: 'Suporte do app', home: 'Início do equipe' },
+    privacy: {
+      meta: {
+        title: 'Política de privacidade do app equipe',
+        description: 'O que o app móvel do equipe e o relay tratam: as chaves de pareamento ficam só no seu celular, o relay apenas repassa mensagens lacradas e não há análise nem rastreamento.',
+      },
+      title: 'Política de privacidade do app equipe',
+      updated: 'Última atualização: 2026-10-14',
+      intro: 'O app equipe permite que seu celular converse com o daemon do equipe no seu próprio Mac. Esta página explica, em palavras simples, o que o app e o relay do equipe tratam.',
+      sections: [
+        {
+          title: 'Em resumo',
+          text: 'O app não tem conta, anúncios, análise nem relatório de falhas, e não rastreia você. O trabalho do seu esquadrão viaja entre o celular e o Mac lacrado de ponta a ponta.',
+          items: [],
+        },
+        {
+          title: 'O que fica no seu celular',
+          text: 'Isto é guardado apenas no seu dispositivo:',
+          items: [
+            '**Chaves de pareamento.** O par de chaves do celular, o token de relay recebido no pareamento e a chave pública e o nome do seu Mac. Ficam no Keychain do iOS ou, no Android, em armazenamento protegido pelo Android Keystore. A chave privada nunca sai do celular; o token de relay só é enviado ao relay, para autenticar o celular.',
+            '**Câmera.** Usada apenas para ler o QR code de pareamento. As imagens não são salvas nem enviadas a lugar nenhum.',
+            '**Face ID ou impressão digital.** O celular verifica antes de enviar uma aprovação. O equipe nunca recebe dados biométricos.',
+          ],
+        },
+        {
+          title: 'O que o relay do equipe trata',
+          text: 'Seu celular e seu Mac se conectam a um relay operado pela equipe-labs em `relay.equipe.im`. Tudo entre eles é lacrado de ponta a ponta com chaves que só os dois têm, então o relay não consegue ler seus tickets, mensagens nem aprovações.',
+          items: [
+            'O relay vê que existe uma conexão, o tamanho e o momento das mensagens e os IDs aleatórios do seu Mac e do seu celular. Eles não estão ligados ao seu nome. Ele guarda apenas o hash de cada token, não o token.',
+            'O relay roda na Cloudflare, que, como provedora de rede, processa o endereço IP de cada conexão.',
+            'Não usamos essas informações para identificar ou traçar o perfil de você, e não as vendemos nem compartilhamos.',
+          ],
+        },
+        {
+          title: 'Notificações push',
+          text: 'Para avisar seu celular quando o esquadrão precisa de você, o relay envia uma notificação push.',
+          items: [
+            '**Token push.** O relay guarda o token push do seu celular (APNs no iOS, Firebase Cloud Messaging no Android), ligado ao pareamento e não ao seu nome.',
+            'O texto visível diz apenas quem precisa de quê. Os detalhes viajam lacrados e são abertos no seu celular.',
+            'Apple e Google entregam a notificação conforme suas próprias políticas de privacidade. No Android, o Firebase Messaging também cria um ID de instalação para o celular.',
+          ],
+        },
+        {
+          title: 'Análise e rastreamento',
+          text: 'O app não contém ferramentas de análise, publicidade nem relatório de falhas, e não rastreia você em outros apps ou sites. Esta política vale para o app e o relay. O site equipe.im conta visitas com o PostHog, sem cookies nem armazenamento local, e não cria perfis de pessoas.',
+          items: [],
+        },
+        {
+          title: 'Retenção e exclusão',
+          text: 'Você decide quanto tempo um pareamento dura:',
+          items: [
+            'No app, desfaça o pareamento deste dispositivo. Isso apaga as chaves do celular e o registro de pareamento e o token push do relay.',
+            'No Mac, execute `equipe devices remove <name>` para revogar um celular na hora.',
+            'O relay guarda o token push e o registro de pareamento apenas enquanto o pareamento existir.',
+            'No Android, desinstalar o app remove seus dados. No iOS, itens do Keychain podem continuar após desinstalar, então desfaça o pareamento antes.',
+          ],
+        },
+        {
+          title: 'Crianças',
+          text: 'O app não é direcionado a crianças e não coletamos intencionalmente informações pessoais delas.',
+          items: [],
+        },
+        {
+          title: 'Alterações',
+          text: 'Se esta política mudar, atualizaremos a data acima e esta página.',
+          items: [],
+        },
+        {
+          title: 'Contato',
+          text: 'Para dúvidas ou pedidos de exclusão de dados, escreva para o endereço abaixo ou abra uma issue no GitHub.',
+          items: [],
+        },
+      ],
+    },
+    support: {
+      meta: {
+        title: 'Suporte do app equipe — pareie seu celular',
+        description: 'Como parear o app equipe com seu Mac usando `equipe pair`, respostas para perguntas frequentes e como falar com a gente.',
+      },
+      title: 'Suporte do app equipe',
+      intro: 'O app equipe é um controle remoto do esquadrão no seu Mac. Ele avisa quando o esquadrão precisa de você e permite permitir ou recusar, revisar o trabalho e conversar com o PM. Ele precisa do equipe rodando no seu Mac, então instale o equipe primeiro.',
+      pairTitle: 'Pareie seu celular',
+      pairSteps: [
+        'Confirme que o equipe está instalado no seu Mac (veja «Primeiros passos» na página inicial).',
+        'Em um terminal no Mac, execute o comando abaixo. Aparece um QR code válido por 5 minutos.',
+        'Abra o app equipe no celular, inicie o pareamento e permita a câmera.',
+        'Aponte a câmera para o QR code.',
+        'O Mac pergunta «Pair <seu celular>? y/n». Responda `y`. Pronto, pareado.',
+      ],
+      pairCode: 'equipe pair',
+      removeTitle: 'Ver ou remover celulares pareados',
+      removeText: '`equipe devices` lista os celulares e `equipe devices remove <name>` revoga um na hora. Perdeu o celular? Um comando.',
+      faqTitle: 'Perguntas frequentes',
+      faq: [
+        { question: 'Preciso do equipe em um computador?', answer: 'Sim. O app é um controle remoto do daemon do equipe no seu Mac; sem ele não há a que se conectar. Instale o equipe primeiro.' },
+        { question: 'O QR code não lê ou diz que expirou.', answer: 'O código vale 5 minutos. Execute `equipe pair` de novo para gerar outro e deixe o QR grande e brilhante na tela.' },
+        { question: 'Não recebo notificações.', answer: 'Confira se as notificações do equipe estão permitidas nos ajustes do celular e se o daemon está rodando no Mac (`equipe status`).' },
+        { question: 'Perdi ou troquei de celular.', answer: 'Execute `equipe devices remove <name>` no Mac e pareie o novo celular com `equipe pair`.' },
+        { question: 'O equipe consegue ler meu trabalho pelo app?', answer: 'Não. As mensagens entre o celular e o Mac são lacradas de ponta a ponta; o relay só as repassa. Leia a política de privacidade para mais detalhes.' },
+        { question: 'Funciona fora da minha rede de casa?', answer: 'Sim. Celular e Mac se conectam de dentro para fora ao relay, então Wi-Fi, dados móveis e redes atrás de roteador funcionam.' },
+        { question: 'Quais celulares são compatíveis?', answer: 'iPhone com iOS 17 ou superior, e Android 8.0 ou superior.' },
+      ],
+      contactTitle: 'Contato',
+      contactText: 'Ainda travado? Escreva para o endereço abaixo ou abra uma issue no GitHub.',
+    },
+  },
 };
 
 export default ptBR;

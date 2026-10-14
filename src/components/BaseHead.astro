@@ -1,6 +1,6 @@
 ---
 import { SITE } from '../data/site';
-import { available, getLocale, localePath, type LocaleCode } from '../i18n';
+import { available, getLocale, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
   title: string;
@@ -21,6 +21,8 @@ interface Props {
   favicon?: { href: string; type?: string };
   noindex?: boolean;
   ogType?: 'website' | 'article';
+  /** Sub-page this head belongs to (e.g. `app/privacy`); hreflang alternates point to the same page in each language. */
+  subpage?: string;
 }
 
 const {
@@ -37,11 +39,12 @@ const {
   favicon = { href: '/favicon.svg', type: 'image/svg+xml' },
   noindex = false,
   ogType = 'website',
+  subpage,
 } = Astro.props;
 
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const current = getLocale(locale);
-const alternates = available.map((l) => ({ lang: l.lang, href: new URL(localePath(l), Astro.site).href }));
+const alternates = available.map((l) => ({ lang: l.lang, href: new URL(subpage ? subPath(l, subpage) : localePath(l), Astro.site).href }));
 const xDefault = alternates.find((a) => a.lang === getLocale('en').lang)!.href;
 const others = available.filter((l) => l.code !== locale);
 const imageUrl = image ? new URL(image, Astro.site).href : undefined;
