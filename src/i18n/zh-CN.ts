@@ -54,7 +54,10 @@ const zhCN: Messages = {
     title: '在 Mac 上关注，在手机上批准。',
     intro: '小队在终端之外也看得见。智能体等待你许可时，手机会提醒你，用 Face ID 即可批准。传输的内容经端到端加密。',
     soon: '即将推出',
-    caption: '应用示意图 · 即将推出',
+    download: "下载 macOS 版",
+    req: "macOS 12 及以上 · 支持 Apple Silicon 和 Intel",
+    cliNote: "需要 equipe CLI——没有的话，应用会引导你安装。",
+    caption: "界面为示意图 · 移动应用即将推出",
     items: [
       { title: '桌面应用', platform: 'macOS', text: '小队、看板和 PM 对话，一个窗口搞定。', alt: '桌面应用示意图：智能体请求运行命令，有“允许一次”“始终允许”“拒绝”按钮。' },
       { title: '移动应用', platform: 'iOS · Android', text: '只在需要你批准时提醒你。', alt: '移动应用示意图：有两条批准请求在等待。' },

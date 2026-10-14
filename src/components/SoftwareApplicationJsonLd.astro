@@ -14,7 +14,7 @@ const {
   url,
   description,
   applicationCategory = 'DeveloperApplication',
-  operatingSystem = 'macOS, Linux',
+  operatingSystem = 'macOS 12+, Linux',
 } = Astro.props;
 ---
 
@@ -28,6 +28,7 @@ const {
     description,
     applicationCategory,
     operatingSystem,
+    downloadUrl: SITE.desktopDmg,
     codeRepository: SITE.repo,
     license: 'https://opensource.org/licenses/MIT',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },

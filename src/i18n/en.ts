@@ -56,7 +56,10 @@ export const en = {
     title: 'Watch on your Mac, approve on your phone.',
     intro: 'The squad shows up outside the terminal too. When an agent waits for your OK, your phone tells you and you approve with Face ID. What you send is end-to-end encrypted.',
     soon: 'Coming soon',
-    caption: 'App mockup · coming soon',
+    download: "Download for macOS",
+    req: "macOS 12 or later · Apple Silicon and Intel",
+    cliNote: "Needs the equipe CLI — if it's missing, the app walks you through installing it.",
+    caption: "Screens are mockups · mobile apps coming soon",
     items: [
       { title: 'Desktop app', platform: 'macOS', text: 'Squad, board and PM chat in one window.', alt: 'Desktop app mockup: an agent asks to run a command, with Allow once, Always and Decline buttons.' },
       { title: 'Mobile app', platform: 'iOS · Android', text: 'Only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },

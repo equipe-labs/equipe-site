@@ -54,7 +54,10 @@ const ptBR: Messages = {
     title: 'Acompanhe no Mac, aprove no celular.',
     intro: 'O squad também aparece fora do terminal. Quando um agente espera sua aprovação, o celular avisa e você aprova com Face ID. O que você envia tem criptografia de ponta a ponta.',
     soon: 'Em breve',
-    caption: 'Protótipo do app · em breve',
+    download: "Baixar para macOS",
+    req: "macOS 12 ou superior · Apple Silicon e Intel",
+    cliNote: "Requer a CLI do equipe; se faltar, o app orienta a instalação.",
+    caption: "As telas são protótipos · apps móveis em breve",
     items: [
       { title: 'App para desktop', platform: 'macOS', text: 'Squad, quadro e conversa com o PM em uma só janela.', alt: 'Protótipo do app para desktop: um agente pede permissão para executar um comando, com os botões Permitir uma vez, Sempre e Recusar.' },
       { title: 'App para celular', platform: 'iOS · Android', text: 'Só avisa quando algo precisa da sua aprovação.', alt: 'Protótipo do app para celular: dois pedidos de aprovação aguardando.' },

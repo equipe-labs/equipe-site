@@ -54,7 +54,10 @@ const ko: Messages = {
     title: '맥에서 지켜보고, 폰에서 승인해요.',
     intro: '스쿼드는 터미널 밖에서도 보여요. 에이전트가 허가를 기다리면 폰이 알려주고, Face ID로 승인해요. 주고받는 내용은 종단 간 암호화돼요.',
     soon: '준비 중',
-    caption: '앱 시안 · 준비 중',
+    download: "macOS용 다운로드",
+    req: "macOS 12 이상 · Apple Silicon·Intel",
+    cliNote: "equipe CLI 필요 — 없으면 앱이 설치를 안내합니다.",
+    caption: "화면은 시안 · 모바일 앱은 준비 중",
     items: [
       { title: '데스크톱 앱', platform: 'macOS', text: '스쿼드, 보드, PM 대화를 한 창에서.', alt: '데스크톱 앱 시안: 에이전트가 명령 실행 허가를 요청하고, 한 번 허용·항상·거절 버튼이 있어요.' },
       { title: '모바일 앱', platform: 'iOS · Android', text: '승인이 필요할 때만 알려줘요.', alt: '모바일 앱 시안: 승인 요청 두 건이 기다리고 있어요.' },

@@ -117,6 +117,8 @@ figure.shot { margin: 20px -24px 0; }
 .pb i { font-style: normal; flex: 1; text-align: center; border-radius: 7px; padding: 6px 2px; font-size: 12px; font-weight: 600; border: 1px solid #3a3a40; }
 .pb i:first-child { background: #efede7; color: #0a0a0c; }
 .app-action { margin-top: auto; padding-top: 20px; }
+.app-action .req { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.app-action .btn + .req { margin-top: 12px; }
 .caption { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
 .notify { margin-top: 24px; border: 1.5px solid var(--text); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
 .notify p { margin: 8px 0 0; }

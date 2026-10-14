@@ -54,7 +54,10 @@ const es: Messages = {
     title: 'Míralo en tu Mac, aprueba desde el móvil.',
     intro: 'El squad también se ve fuera de la terminal. Cuando un agente espera tu visto bueno, el móvil te avisa y apruebas con Face ID. Lo que envías va cifrado de extremo a extremo.',
     soon: 'Próximamente',
-    caption: 'Maqueta de la app · próximamente',
+    download: "Descargar para macOS",
+    req: "macOS 12 o posterior · Apple Silicon e Intel",
+    cliNote: "Requiere la CLI de equipe; si falta, la app te guía en la instalación.",
+    caption: "Las pantallas son maquetas · apps móviles próximamente",
     items: [
       { title: 'App de escritorio', platform: 'macOS', text: 'Squad, tablero y chat con el PM en una sola ventana.', alt: 'Maqueta de la app de escritorio: un agente pide permiso para ejecutar un comando, con los botones Permitir una vez, Siempre y Rechazar.' },
       { title: 'App móvil', platform: 'iOS · Android', text: 'Solo te avisa cuando algo necesita tu aprobación.', alt: 'Maqueta de la app móvil: dos solicitudes de aprobación en espera.' },
