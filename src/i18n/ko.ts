@@ -63,7 +63,9 @@ const ko: Messages = {
   start: {
     title: '시작하기',
     install: 'macOS와 Linux에서는 한 줄이면 돼요. 미리 빌드된 `equipe`를 `~/.local/bin`에 설치하고(SHA-256 확인), PATH에도 추가해요:',
-    brew: 'Homebrew를 쓴다면:',
+    brew: 'Homebrew tap으로 미리 빌드된 `equipe`를 설치해요. 나중에 `brew upgrade equipe`로 업데이트해요:',
+    tabsLabel: '설치 방법',
+    sourceTitle: '소스에서 빌드 (고급)',
     source: '직접 빌드하고 싶다면 소스에서 설치할 수도 있어요. Rust 1.88+와 git이 필요하고, `github.com/equipe-labs/equipe`를 clone한 뒤 `cargo install --locked --path crates/cli`를 실행하세요. Claude 엔진을 쓰려면 `claude` 바이너리도 있어야 해요.',
     run: '엔진에 로그인하고 준비됐는지 확인한 다음, 스쿼드 콘솔을 열어요.',
     runCode: `equipe login     # Codex 또는 Claude Code에 로그인
@@ -100,7 +102,7 @@ equipe           # 스쿼드 콘솔 열기`,
       {
         question: 'equipe는 어떻게 설치하나요?',
         answer:
-          'macOS와 Linux에서는 `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh` 한 줄이면 돼요. 미리 빌드된 `equipe`를 `~/.local/bin`에 설치하고(SHA-256 확인) PATH에도 추가해요. Homebrew를 쓴다면 `brew install equipe-labs/tap/equipe`를 실행하세요. 소스에서 직접 빌드하려면 Rust 1.88+와 git이 필요해요. `github.com/equipe-labs/equipe`를 clone한 뒤 `cargo install --locked --path crates/cli`를 실행하세요. Claude 엔진을 쓰려면 Claude Code 바이너리도 필요해요.',
+          'macOS와 Linux에서는 `brew install equipe-labs/tap/equipe` 한 줄이면 돼요. install.sh 한 줄이나 소스 빌드(Rust 1.88+)도 쓸 수 있어요. 방법은 모두 시작하기에 있어요.',
       },
       {
         question: '작업은 누가 승인하나요?',

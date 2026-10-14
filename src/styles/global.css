@@ -108,6 +108,18 @@ footer a { color: var(--muted); }
 @media (min-width: 641px) { footer .wrap { flex-direction: row; justify-content: space-between; } }
 summary h3 { font-size: inherit; font-weight: 600; letter-spacing: 0; line-height: 1.4; }
 
+/* Install method tabs: radio inputs + labels, no JS */
+.tab-input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.tablist { display: inline-flex; gap: 4px; padding: 4px; margin: 16px 0 12px; background: var(--surface); border-radius: 10px; }
+.tablist label { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: 8px; cursor: pointer; font: 600 15px var(--sans); color: var(--muted); }
+#tab-brew:checked ~ .tablist label[for='tab-brew'], #tab-script:checked ~ .tablist label[for='tab-script'] { background: var(--bg); color: var(--text); box-shadow: 0 0 0 1px var(--line); }
+.tab-input:focus-visible ~ .tablist label[for] { outline-offset: 2px; }
+#tab-brew:focus-visible ~ .tablist label[for='tab-brew'], #tab-script:focus-visible ~ .tablist label[for='tab-script'] { outline: 2px solid var(--accent); }
+.tab-panel { display: none; }
+#tab-brew:checked ~ [data-panel='brew'], #tab-script:checked ~ [data-panel='script'] { display: block; }
+details.advanced { margin: 0 0 24px; }
+details.advanced p { max-width: none; }
+
 /* Language menu (plain links, works without JS) */
 nav li { position: relative; }
 details.lang { background: none; margin: 0; border-radius: 0; }

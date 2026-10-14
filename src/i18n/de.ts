@@ -63,7 +63,9 @@ const de: Messages = {
   start: {
     title: 'Loslegen',
     install: 'Unter macOS und Linux genügt eine Zeile. Sie legt ein vorkompiliertes `equipe` in `~/.local/bin` ab (per SHA-256 geprüft) und trägt es in deinen PATH ein:',
-    brew: 'Oder mit Homebrew:',
+    brew: 'Installiert ein vorkompiliertes `equipe` über den Homebrew-Tap. Später aktualisierst du mit `brew upgrade equipe`:',
+    tabsLabel: 'Installationsweg',
+    sourceTitle: 'Aus dem Quellcode bauen (für Fortgeschrittene)',
     source: 'Lieber selbst bauen? Dann installiere aus dem Quellcode mit Rust 1.88+ und git: Klone `github.com/equipe-labs/equipe` und führe `cargo install --locked --path crates/cli` aus. Die Claude-Engine braucht zusätzlich das `claude`-Binary.',
     run: 'Melde dich bei einer Engine an, prüfe, ob sie bereit ist, und öffne dann die Squad-Konsole:',
     runCode: `equipe login     # bei Codex oder Claude Code anmelden
@@ -100,7 +102,7 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Wie installiere ich equipe?',
         answer:
-          'Unter macOS und Linux führst du `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh` aus. Das legt ein vorkompiliertes `equipe` in `~/.local/bin` ab (per SHA-256 geprüft) und trägt es in deinen PATH ein. Alternativ mit Homebrew: `brew install equipe-labs/tap/equipe`. Wenn du lieber aus dem Quellcode baust, brauchst du Rust 1.88+ und git: Klone `github.com/equipe-labs/equipe` und führe `cargo install --locked --path crates/cli` aus. Die Claude-Engine braucht zusätzlich das Claude-Code-Binary.',
+          'Unter macOS und Linux genügt `brew install equipe-labs/tap/equipe`. Du kannst auch die install.sh-Zeile nutzen oder aus dem Quellcode bauen (Rust 1.88+); alle Wege stehen unter Loslegen.',
       },
       {
         question: 'Wer gibt die Arbeit frei?',
