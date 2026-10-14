@@ -25,7 +25,7 @@ const ko: Messages = {
   nav: { howItWorks: '작동 방식', getStarted: '시작하기', faq: '자주 묻는 질문', github: 'GitHub' },
   hero: {
     title: 'AI 에이전트 팀을 이끌고, 머지는 당신이 승인해요.',
-    lead: 'PM·디자이너·개발자 에이전트가 보드에서 일하고, 각자 당신 저장소의 자기 브랜치에서 작업해요. 당신 승인 없이는 아무것도 머지되지 않아요.',
+    lead: 'PM·디자이너·개발자·모바일 에이전트가 보드에서 일하고, 각자 당신 저장소의 자기 브랜치에서 작업해요. 당신 승인 없이는 아무것도 머지되지 않아요.',
     ctaPrimary: 'GitHub에서 보기',
     chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
     shotAlt: 'equipe 데스크톱 앱 시안: 에이전트가 명령 실행 허가를 요청하고, 한 번 허용·항상 허용·거절 버튼이 보인다',
@@ -84,7 +84,7 @@ equipe           # 스쿼드 콘솔 열기`,
       {
         question: 'equipe란?',
         answer:
-          'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. PM, 디자이너, 프론트엔드, 백엔드, QA, 데이터 같은 역할의 에이전트를 공유 보드 중심으로 조율해요. 에이전트는 격리된 git worktree에서 일하고, 변경은 사람이 승인한 뒤에 머지돼요.',
+          'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. PM, 디자이너, 프론트엔드, 백엔드, 모바일, QA, 데이터 같은 역할의 에이전트를 공유 보드 중심으로 조율해요. 에이전트는 격리된 git worktree에서 일하고, 변경은 사람이 승인한 뒤에 머지돼요.',
       },
       {
         question: 'equipe도 AI 코딩 에이전트인가요?',
@@ -128,6 +128,7 @@ equipe           # 스쿼드 콘솔 열기`,
       },
     ],
   },
+  notFound: { title: '페이지를 찾을 수 없어요 — equipe', description: '이 페이지는 없어요.', heading: '페이지를 찾을 수 없어요', text: '이 주소에는 아무것도 없어요. 페이지가 옮겨졌거나 링크가 잘못됐을 수 있어요.', home: '홈으로 가기' },
   footer: { license: 'MIT 라이선스', built: 'equipe 스쿼드가 공개적으로 만들었어요.' },
 };
 

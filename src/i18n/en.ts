@@ -27,7 +27,7 @@ export const en = {
   nav: { howItWorks: 'How it works', getStarted: 'Get started', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Lead a team of AI agents. You approve every merge.',
-    lead: 'PM, designer and developer agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
+    lead: 'PM, designer, developer and mobile agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
     ctaPrimary: 'View on GitHub',
     chip: 'Early-stage · MIT licensed · Codex and Claude Code',
     shotAlt: 'Preview of the equipe desktop app: an agent asks permission to run a command, with Allow once, Always and Decline buttons',
@@ -87,7 +87,7 @@ equipe           # open the squad console`,
       {
         question: 'What is equipe?',
         answer:
-          'equipe is an open-source AI software squad. It coordinates agents in roles such as PM, Designer, Frontend, Backend, QA and Data around a shared board. They work in isolated git worktrees, and a person approves before changes merge.',
+          'equipe is an open-source AI software squad. It coordinates agents in roles such as PM, Designer, Frontend, Backend, Mobile, QA and Data around a shared board. They work in isolated git worktrees, and a person approves before changes merge.',
       },
       {
         question: 'Is equipe another AI coding agent?',
@@ -131,6 +131,7 @@ equipe           # open the squad console`,
       },
     ],
   },
+  notFound: { title: 'Page not found — equipe', description: 'This page does not exist.', heading: 'Page not found', text: 'There is nothing at this address. It may have moved, or the link may be wrong.', home: 'Go to the home page' },
   footer: { license: 'MIT License', built: 'Built by an equipe squad, in public.' },
 };
 
