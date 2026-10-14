@@ -66,7 +66,9 @@ const ptBR: Messages = {
   start: {
     title: 'Começar',
     install: 'No macOS e no Linux, basta uma linha. Ela coloca um `equipe` pré-compilado em `~/.local/bin` (verificado por SHA-256) e o adiciona ao seu PATH:',
-    brew: 'Ou com Homebrew:',
+    brew: 'Instala um `equipe` pré-compilado pelo tap do Homebrew. Depois, atualize com `brew upgrade equipe`:',
+    tabsLabel: 'Forma de instalação',
+    sourceTitle: 'Compilar a partir do código-fonte (avançado)',
     source: 'Prefere compilar você mesmo? Instale a partir do código-fonte com Rust 1.88+ e git: clone `github.com/equipe-labs/equipe` e execute `cargo install --locked --path crates/cli`. O engine do Claude também precisa do binário `claude`.',
     run: 'Entre em um engine, confira se ele está pronto e abra o console do squad:',
     runCode: `equipe login     # entra no Codex ou no Claude Code
@@ -103,7 +105,7 @@ equipe           # abre o console do squad`,
       {
         question: 'Como instalo o equipe?',
         answer:
-          'No macOS e no Linux, execute `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh`: ele coloca um `equipe` pré-compilado em `~/.local/bin` (verificado por SHA-256) e o adiciona ao seu PATH. Ou use Homebrew: `brew install equipe-labs/tap/equipe`. Para compilar a partir do código-fonte, você precisa do Rust 1.88+ e do git: clone `github.com/equipe-labs/equipe` e execute `cargo install --locked --path crates/cli`. O engine do Claude também precisa do binário do Claude Code.',
+          'No macOS e no Linux, execute `brew install equipe-labs/tap/equipe`. Você também pode usar a linha do install.sh ou compilar a partir do código-fonte (Rust 1.88+); todos os métodos estão em Começar.',
       },
       {
         question: 'Quem aprova o trabalho?',

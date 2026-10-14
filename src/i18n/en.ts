@@ -68,7 +68,9 @@ export const en = {
   start: {
     title: 'Get started',
     install: 'One line on macOS and Linux. It puts a prebuilt `equipe` in `~/.local/bin`, checked against its SHA-256, and adds it to your PATH:',
-    brew: 'Or with Homebrew:',
+    brew: 'Installs a prebuilt `equipe` through the Homebrew tap. Update later with `brew upgrade equipe`:',
+    tabsLabel: 'Install method',
+    sourceTitle: 'Build from source (advanced)',
     source: 'Prefer to build it yourself? Install from source with Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the `claude` binary.',
     run: 'Sign in to an engine, check it\'s ready, then open the squad console:',
     // Shell comments inside the code block may be translated; the commands must not be.
@@ -106,7 +108,7 @@ equipe           # open the squad console`,
       {
         question: 'How do I install equipe?',
         answer:
-          'On macOS and Linux, run `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh`, which puts a prebuilt `equipe` in `~/.local/bin` (checked against its SHA-256) and adds it to your PATH. Or use Homebrew: `brew install equipe-labs/tap/equipe`. To build from source instead, you need Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the Claude Code binary.',
+          'On macOS and Linux, run `brew install equipe-labs/tap/equipe`. You can also use the install.sh one-liner or build from source (Rust 1.88+); every method is in Get started.',
       },
       {
         question: 'Who approves the work?',

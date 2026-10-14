@@ -27,6 +27,8 @@ const pageUrl = new URL(localePath(info), Astro.site).href;
 const dots = ['faded', 'faded', 'faded', 'solid'] as const;
 const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
 const brew = 'brew install equipe-labs/tap/equipe';
+// The FAQ answer about installing is short and links to Get started, so the commands live in one place.
+const installFaq = 4;
 const tryIt = 'equipe try --edit "…"';
 ---
 
@@ -146,11 +148,26 @@ const tryIt = 'equipe try --edit "…"';
     <section id="get-started">
       <div class="wrap">
         <h2>{t.start.title}</h2>
-        <p class="col"><Rich s={t.start.install} /></p>
-        <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
-        <p class="col">{t.start.brew}</p>
-        <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
-        <p class="col"><Rich s={t.start.source} /></p>
+        <div class="tabs">
+          <input type="radio" name="install-method" id="tab-brew" class="tab-input" checked />
+          <input type="radio" name="install-method" id="tab-script" class="tab-input" />
+          <div class="tablist" role="group" aria-label={t.start.tabsLabel}>
+            <label for="tab-brew">Homebrew</label>
+            <label for="tab-script">install.sh</label>
+          </div>
+          <div class="tab-panel" data-panel="brew">
+            <p class="col"><Rich s={t.start.brew} /></p>
+            <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+          </div>
+          <div class="tab-panel" data-panel="script">
+            <p class="col"><Rich s={t.start.install} /></p>
+            <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+          </div>
+        </div>
+        <details class="advanced">
+          <summary>{t.start.sourceTitle}</summary>
+          <p><Rich s={t.start.source} /></p>
+        </details>
         <p class="col">{t.start.run}</p>
         <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <p class="col">{t.start.tryIntro}</p>
@@ -165,7 +182,7 @@ const tryIt = 'equipe try --edit "…"';
         {t.faq.items.map((f, i) => (
           <details data-faq-id={`faq-${i + 1}`}>
             <summary><h3>{f.question}</h3></summary>
-            <p><Rich s={f.answer} /></p>
+            <p><Rich s={f.answer} />{i === installFaq && <> <a href="#get-started">{t.start.title} →</a></>}</p>
           </details>
         ))}
       </div>
