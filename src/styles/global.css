@@ -72,6 +72,10 @@ h2 + p { margin-top: 16px; }
 .card { background: var(--surface); border-radius: 14px; padding: 24px; }
 .card svg { display: block; margin-bottom: 16px; }
 .card p { margin: 8px 0 0; }
+.app-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.app .platform { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+.app ul { padding-left: 20px; margin: 16px 0 0; }
+.app li { margin-bottom: 8px; }
 ul.points { padding-left: 20px; margin: 24px 0; }
 ul.points li { margin-bottom: 12px; }
 .proof { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; color: var(--muted); }

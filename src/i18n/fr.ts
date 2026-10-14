@@ -52,6 +52,15 @@ const fr: Messages = {
     ],
     proof: 'Ce site a été construit en public par un squad equipe. Chaque changement a commencé comme un ticket et est arrivé sous forme de branche acceptée par une personne.',
   },
+  apps: {
+    title: 'Applications de bureau et mobile',
+    intro: 'Le squad arrive sur votre Mac et votre téléphone, pour suivre le travail et décider où que vous soyez.',
+    soon: 'Bientôt disponible',
+    items: [
+      { title: 'Application de bureau', platform: 'macOS', points: ['Voir votre squad et ses membres', 'Discuter avec le PM', 'Suivre les tickets sur le tableau', 'Coller des captures d’écran dans la conversation'] },
+      { title: 'Application mobile', platform: 'iOS · Android', points: ['Approuver depuis le téléphone avec Face ID ou votre empreinte', 'Suivre les tickets sur le tableau', 'Discuter avec le PM', 'Associer l’appli à votre Mac en scannant un QR code ; ce que vous envoyez est chiffré de bout en bout'] },
+    ],
+  },
   start: {
     title: 'Commencer',
     install: 'Aujourd’hui, equipe s’installe depuis les sources. Il vous faut Rust 1.88+ et git. Le moteur Claude requiert aussi le binaire `claude`.',

@@ -51,6 +51,15 @@ const ptBR: Messages = {
     ],
     proof: 'Este site foi construído em público por um squad do equipe. Cada mudança começou como um ticket e chegou como um branch que uma pessoa aceitou.',
   },
+  apps: {
+    title: 'Apps para desktop e celular',
+    intro: 'O squad vai chegar ao seu Mac e ao seu celular, para você acompanhar o trabalho e decidir de onde estiver.',
+    soon: 'Em breve',
+    items: [
+      { title: 'App para desktop', platform: 'macOS', points: ['Ver seu squad e os membros', 'Conversar com o PM', 'Acompanhar os tickets no quadro', 'Colar capturas de tela na conversa'] },
+      { title: 'App para celular', platform: 'iOS · Android', points: ['Aprovar pelo celular com Face ID ou impressão digital', 'Acompanhar os tickets no quadro', 'Conversar com o PM', 'Parear com o Mac lendo um QR code; o que você envia tem criptografia de ponta a ponta'] },
+    ],
+  },
   start: {
     title: 'Começar',
     install: 'Hoje o equipe é instalado a partir do código-fonte. Você precisa do Rust 1.88+ e do git. O engine do Claude também precisa do binário `claude`.',
