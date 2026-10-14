@@ -1,0 +1,59 @@
+---
+// Page chrome (header, footer, language menu) shared by the app privacy and support pages.
+import Base from '../layouts/Base.astro';
+import Mark from './Mark.astro';
+import LangMenu from './LangMenu.astro';
+import Analytics from './Analytics.astro';
+import LangBanner from './LangBanner.astro';
+import OrganizationJsonLd from './OrganizationJsonLd.astro';
+import { SITE } from '../data/site';
+import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+
+interface Props {
+  code: LocaleCode;
+  /** `app/privacy` or `app/support`. */
+  subpage: 'app/privacy' | 'app/support';
+  title: string;
+  description: string;
+}
+const { code, subpage, title, description } = Astro.props;
+const info = getLocale(code);
+const t = getMessages(code);
+---
+
+<Base locale={code} title={title} description={description} image={SITE.ogImage} imageAlt={t.meta.ogImageAlt} subpage={subpage}>
+  <Fragment slot="head">
+    <OrganizationJsonLd />
+  </Fragment>
+
+  <a class="skip" href="#main">{t.ui.skip}</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href={localePath(info)}><Mark size={28} /> equipe</a>
+      <nav aria-label={t.ui.primaryNav}>
+        <ul>
+          <li class="opt"><a href={subPath(info, 'app/privacy')} aria-current={subpage === 'app/privacy' ? 'page' : undefined}>{t.app.nav.privacy}</a></li>
+          <li class="opt"><a href={subPath(info, 'app/support')} aria-current={subpage === 'app/support' ? 'page' : undefined}>{t.app.nav.support}</a></li>
+          <li><LangMenu locale={code} label={t.ui.language} subpage={subpage} /></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="doc">
+    <div class="wrap col">
+      <slot />
+      <p class="contact"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a> · <a href={SITE.issues}>GitHub</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><a href={localePath(info)}>{t.app.nav.home}</a> · <a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a> · <a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
+      <span>{t.footer.license}</span>
+    </div>
+  </footer>
+
+  <Analytics />
+  <LangBanner locale={code} subpage={subpage} />
+</Base>

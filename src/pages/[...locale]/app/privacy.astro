@@ -1,0 +1,30 @@
+---
+import AppPageShell from '../../../components/AppPageShell.astro';
+import Rich from '../../../components/Rich.astro';
+import { available, getMessages, type LocaleCode } from '../../../i18n';
+
+// /app/privacy/ in English, /<slug>/app/privacy/ in every other language that has a translation file.
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const p = getMessages(code).app.privacy;
+---
+
+<AppPageShell code={code} subpage="app/privacy" title={p.meta.title} description={p.meta.description}>
+  <h1>{p.title}</h1>
+  <p class="muted small">{p.updated}</p>
+  <p class="lead">{p.intro}</p>
+  {p.sections.map((s) => (
+    <section class="doc-section">
+      <h2>{s.title}</h2>
+      <p><Rich s={s.text} /></p>
+      {s.items.length > 0 && (
+        <ul>
+          {s.items.map((i) => <li><Rich s={i} /></li>)}
+        </ul>
+      )}
+    </section>
+  ))}
+</AppPageShell>

@@ -1,11 +1,13 @@
 ---
-import { available, getLocale, localePath, type LocaleCode } from '../i18n';
+import { available, getLocale, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
   locale: LocaleCode;
   label: string;
+  /** Sub-page to link to in each language; the landing page when omitted. */
+  subpage?: string;
 }
-const { locale, label } = Astro.props;
+const { locale, label, subpage } = Astro.props;
 const current = getLocale(locale);
 ---
 
@@ -22,7 +24,7 @@ const current = getLocale(locale);
       <ul>
         {available.map((l) => (
           <li>
-            <a href={localePath(l)} lang={l.lang} hreflang={l.lang} aria-current={l.code === locale ? 'true' : undefined} data-lang-choice
+            <a href={subpage ? subPath(l, subpage) : localePath(l)} lang={l.lang} hreflang={l.lang} aria-current={l.code === locale ? 'true' : undefined} data-lang-choice
               data-ph={l.code === locale ? undefined : 'language_switch'}
               data-ph-from={current.lang}
               data-ph-to={l.lang}

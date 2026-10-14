@@ -112,6 +112,113 @@ equipe           # open the squad console`,
     ],
   },
   footer: { license: 'MIT License', built: 'Built by an equipe squad, in public.' },
+  app: {
+    nav: { privacy: 'App privacy policy', support: 'App support', home: 'equipe home' },
+    privacy: {
+      meta: {
+        title: 'equipe app privacy policy',
+        description: 'What the equipe mobile app and its relay handle: pairing keys stay on your phone, the relay only passes sealed messages, and there is no analytics or tracking.',
+      },
+      title: 'Privacy policy for the equipe app',
+      updated: 'Last updated: 2026-10-14',
+      intro: 'The equipe app lets your phone talk to the equipe daemon on your own Mac. This page says what the app and the equipe relay handle, in plain words.',
+      sections: [
+        {
+          title: 'In short',
+          text: 'The app has no account, no ads, no analytics, no crash reporting, and it does not track you. Your squad\'s work travels between your phone and your Mac, sealed end to end.',
+          items: [],
+        },
+        {
+          title: 'What stays on your phone',
+          text: 'These are stored only on your device:',
+          items: [
+            '**Pairing keys.** Your phone\'s key pair, the relay token it received when you paired, and your Mac\'s public key and name. They live in the iOS Keychain, or on Android in storage protected by the Android Keystore. The private key never leaves the phone; the relay token is sent only to the relay, to sign your phone in.',
+            '**Camera.** Used only to scan the pairing QR code. Images are not saved or sent anywhere.',
+            '**Face ID or fingerprint.** Your phone checks it before an approval is sent. equipe never receives biometric data.',
+          ],
+        },
+        {
+          title: 'What the equipe relay handles',
+          text: 'Your phone and your Mac both connect to a relay run by equipe-labs at `relay.equipe.im`. Everything between them is sealed end to end with keys only the two of them hold, so the relay cannot read your tickets, messages or approvals.',
+          items: [
+            'The relay can see that a connection exists, the size and timing of messages, and the random IDs of your Mac and your phone. These are not linked to your name. It keeps only a hash of each token, not the token itself.',
+            'The relay runs on Cloudflare, which as the network provider processes the IP address of each connection.',
+            'We do not use this information to identify or profile you, and we do not sell or share it.',
+          ],
+        },
+        {
+          title: 'Push notifications',
+          text: 'To wake your phone when the squad needs you, the relay sends a push notification.',
+          items: [
+            '**Push token.** The relay keeps your phone\'s push token (APNs on iOS, Firebase Cloud Messaging on Android), linked to the pairing and not to your name.',
+            'The visible text says only who needs what. The details travel sealed and are opened on your phone.',
+            'Apple and Google deliver the notification under their own privacy policies. On Android, Firebase Messaging also creates an installation ID for your phone.',
+          ],
+        },
+        {
+          title: 'Analytics and tracking',
+          text: 'The app contains no analytics, advertising or crash-reporting tools, and does not track you across other apps or websites. This policy covers the app and the relay. The website equipe.im counts visits with PostHog without cookies or local storage and builds no person profiles.',
+          items: [],
+        },
+        {
+          title: 'Keeping and deleting data',
+          text: 'You decide how long a pairing lasts:',
+          items: [
+            'In the app, unpair this device. This deletes the keys from your phone, and the pairing record and push token from the relay.',
+            'On your Mac, run `equipe devices remove <name>` to revoke a phone at once.',
+            'The relay keeps the push token and pairing record only while the pairing exists.',
+            'On Android, uninstalling the app removes its data. On iOS, Keychain items can remain after an uninstall, so unpair first.',
+          ],
+        },
+        {
+          title: 'Children',
+          text: 'The app is not directed at children, and we do not knowingly collect personal information from them.',
+          items: [],
+        },
+        {
+          title: 'Changes',
+          text: 'If this policy changes, we update the date above and this page.',
+          items: [],
+        },
+        {
+          title: 'Contact',
+          text: 'Questions, or a request to delete data: write to the address below or open an issue on GitHub.',
+          items: [],
+        },
+      ],
+    },
+    support: {
+      meta: {
+        title: 'equipe app support — pair your phone',
+        description: 'How to pair the equipe app with your Mac using `equipe pair`, answers to common questions, and how to reach us.',
+      },
+      title: 'equipe app support',
+      intro: 'The equipe app is a remote for the squad on your Mac. It notifies you when the squad needs you and lets you allow or decline, review work and talk to the PM. It needs equipe running on your Mac, so install equipe first.',
+      pairTitle: 'Pair your phone',
+      pairSteps: [
+        'Make sure equipe is installed on your Mac (see Get started on the home page).',
+        'In a terminal on your Mac, run the command below. A QR code appears; it is valid for 5 minutes.',
+        'Open the equipe app on your phone, start pairing, and allow the camera.',
+        'Point the camera at the QR code.',
+        'Your Mac asks "Pair <your phone>? y/n". Answer `y`. You are paired.',
+      ],
+      pairCode: 'equipe pair',
+      removeTitle: 'See or remove paired phones',
+      removeText: '`equipe devices` lists them, and `equipe devices remove <name>` revokes one at once. Lost phone: one command.',
+      faqTitle: 'Frequently asked questions',
+      faq: [
+        { question: 'Do I need equipe on a computer?', answer: 'Yes. The app is a remote for the equipe daemon on your Mac. Without it there is nothing to connect to. Install equipe first.' },
+        { question: 'The QR code does not scan or says it expired.', answer: 'The code is valid for 5 minutes. Run `equipe pair` again for a new one, and make the QR large and bright on your screen.' },
+        { question: 'I do not get notifications.', answer: 'Check that notifications are allowed for equipe in your phone settings, and that the daemon is running on your Mac (`equipe status`).' },
+        { question: 'I lost or replaced my phone.', answer: 'Run `equipe devices remove <name>` on your Mac, then pair the new phone with `equipe pair`.' },
+        { question: 'Can equipe read my work through the app?', answer: 'No. Messages between your phone and your Mac are sealed end to end; the relay only passes them on. Read the privacy policy for details.' },
+        { question: 'Does it work away from my home network?', answer: 'Yes. Both your phone and your Mac connect out to the relay, so Wi-Fi, mobile data and networks behind a router all work.' },
+        { question: 'Which phones are supported?', answer: 'iPhone with iOS 17 or later, and Android 8.0 or later.' },
+      ],
+      contactTitle: 'Contact',
+      contactText: 'Still stuck? Write to the address below, or open an issue on GitHub.',
+    },
+  },
 };
 
 export type Messages = typeof en;

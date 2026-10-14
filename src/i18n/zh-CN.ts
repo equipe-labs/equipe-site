@@ -109,6 +109,113 @@ equipe           # 打开小队控制台`,
     ],
   },
   footer: { license: 'MIT 许可', built: '由 equipe 小队公开构建。' },
+  app: {
+    nav: { privacy: '应用隐私政策', support: '应用支持', home: 'equipe 首页' },
+    privacy: {
+      meta: {
+        title: 'equipe 应用隐私政策',
+        description: 'equipe 移动应用及其中继处理哪些信息：配对密钥只保存在手机上，中继只转发已封装的消息，没有分析或跟踪。',
+      },
+      title: 'equipe 应用隐私政策',
+      updated: '最后更新：2026-10-14',
+      intro: 'equipe 应用让你的手机与自己 Mac 上的 equipe 守护进程通信。本页用平实的语言说明应用和 equipe 中继会处理哪些信息。',
+      sections: [
+        {
+          title: '简而言之',
+          text: '应用没有账号、广告、分析和崩溃报告，也不会跟踪你。小队的工作内容在手机与 Mac 之间以端到端加密的封装形式传输。',
+          items: [],
+        },
+        {
+          title: '只保存在手机上的内容',
+          text: '以下内容只保存在你的设备上：',
+          items: [
+            '**配对密钥。** 手机的密钥对、配对时收到的中继令牌，以及 Mac 的公钥和名称。它们保存在 iOS 钥匙串中，或在 Android 上由 Android Keystore 保护的存储中。私钥不会离开手机；中继令牌只会发给中继，用于让手机登录。',
+            '**相机。** 仅用于扫描配对二维码。图像不会被保存，也不会发送到任何地方。',
+            '**Face ID 或指纹。** 发送批准之前由手机进行验证。equipe 不会收到生物识别数据。',
+          ],
+        },
+        {
+          title: 'equipe 中继处理的内容',
+          text: '手机和 Mac 都连接到 equipe-labs 运营的中继（`relay.equipe.im`）。两者之间的所有内容都用只有这两台设备持有的密钥进行端到端封装，因此中继无法读取你的工单、消息或批准。',
+          items: [
+            '中继能看到的是：存在一个连接、消息的大小和时间，以及 Mac 与手机的随机 ID。这些 ID 与你的姓名无关。它只保存令牌的哈希，而不是令牌本身。',
+            '中继运行在 Cloudflare 上，Cloudflare 作为网络服务商会处理每个连接的 IP 地址。',
+            '我们不会用这些信息识别或画像你，也不会出售或共享。',
+          ],
+        },
+        {
+          title: '推送通知',
+          text: '当小队需要你时，中继会发送推送通知来唤醒手机。',
+          items: [
+            '**推送令牌。** 中继保存手机的推送令牌（iOS 为 APNs，Android 为 Firebase Cloud Messaging），并与配对关联，而不与你的姓名关联。',
+            '屏幕上可见的文字只说明谁需要什么。详细内容以封装形式传送，在手机上打开。',
+            '通知由 Apple 和 Google 按各自的隐私政策投递。在 Android 上，Firebase Messaging 还会为你的手机生成安装 ID。',
+          ],
+        },
+        {
+          title: '分析与跟踪',
+          text: '应用不含任何分析、广告或崩溃报告工具，也不会跨其他应用或网站跟踪你。本政策适用于应用和中继。网站 equipe.im 使用 PostHog 统计访问量，不使用 Cookie 或本地存储，也不建立个人档案。',
+          items: [],
+        },
+        {
+          title: '保留与删除',
+          text: '配对保留多久由你决定：',
+          items: [
+            '在应用中取消本设备的配对，会删除手机上的密钥，以及中继上的配对记录和推送令牌。',
+            '在 Mac 上运行 `equipe devices remove <name>`，可立即撤销某部手机。',
+            '中继只在配对存在期间保留推送令牌和配对记录。',
+            '在 Android 上，卸载应用会删除其数据。在 iOS 上，卸载后钥匙串项目可能仍然保留，所以请先取消配对。',
+          ],
+        },
+        {
+          title: '儿童',
+          text: '本应用不面向儿童，我们不会有意收集儿童的个人信息。',
+          items: [],
+        },
+        {
+          title: '变更',
+          text: '如果本政策有变更，我们会更新上面的日期和本页内容。',
+          items: [],
+        },
+        {
+          title: '联系方式',
+          text: '如有疑问或需要删除数据，请发信到下方地址，或在 GitHub 上提交 issue。',
+          items: [],
+        },
+      ],
+    },
+    support: {
+      meta: {
+        title: 'equipe 应用支持 — 配对你的手机',
+        description: '如何用 `equipe pair` 将 equipe 应用与 Mac 配对、常见问题解答，以及联系方式。',
+      },
+      title: 'equipe 应用支持',
+      intro: 'equipe 应用是 Mac 上小队的遥控器。小队需要你时会通知你，你可以允许或拒绝、审阅工作，并与 PM 对话。它需要 Mac 上正在运行 equipe，所以请先安装 equipe。',
+      pairTitle: '配对你的手机',
+      pairSteps: [
+        '确认 Mac 上已安装 equipe（见首页的“开始使用”）。',
+        '在 Mac 的终端中运行下面的命令。屏幕上会出现二维码，有效期 5 分钟。',
+        '在手机上打开 equipe 应用，开始配对，并允许使用相机。',
+        '把相机对准二维码。',
+        'Mac 询问“Pair <你的手机>? y/n”时，输入 `y`。配对完成。',
+      ],
+      pairCode: 'equipe pair',
+      removeTitle: '查看或移除已配对的手机',
+      removeText: '`equipe devices` 列出它们，`equipe devices remove <name>` 立即撤销其中一个。手机丢了，一条命令即可。',
+      faqTitle: '常见问题',
+      faq: [
+        { question: '电脑上也需要装 equipe 吗？', answer: '需要。应用是 Mac 上 equipe 守护进程的遥控器，没有它就没有可连接的对象。请先安装 equipe。' },
+        { question: '二维码扫不出来，或提示已过期。', answer: '二维码只有 5 分钟有效期。请重新运行 `equipe pair` 生成新的，并让二维码在屏幕上显示得大一些、亮一些。' },
+        { question: '收不到通知。', answer: '请在手机设置中确认已允许 equipe 的通知，并确认 Mac 上的守护进程在运行（`equipe status`）。' },
+        { question: '我的手机丢了或换了新手机。', answer: '在 Mac 上运行 `equipe devices remove <name>`，然后用 `equipe pair` 配对新手机。' },
+        { question: 'equipe 能通过应用读到我的工作内容吗？', answer: '不能。手机与 Mac 之间的消息是端到端封装的，中继只负责转发。详情请阅读隐私政策。' },
+        { question: '离开家里的网络还能用吗？', answer: '可以。手机和 Mac 都是主动连向中继，所以 Wi-Fi、移动数据以及路由器后面的网络都能使用。' },
+        { question: '支持哪些手机？', answer: 'iOS 17 或更高版本的 iPhone，以及 Android 8.0 或更高版本。' },
+      ],
+      contactTitle: '联系我们',
+      contactText: '仍然无法解决？请发信到下方地址，或在 GitHub 上提交 issue。',
+    },
+  },
 };
 
 export default zhCN;

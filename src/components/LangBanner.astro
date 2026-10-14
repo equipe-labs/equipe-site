@@ -1,18 +1,19 @@
 ---
 // "View this page in <language>" suggestion. Never redirects: it only offers a link,
 // and remembers a dismissal (or an explicit language choice) in localStorage.
-import { available, getLocale, getMessages, localePath, type LocaleCode } from '../i18n';
+import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
   locale: LocaleCode;
+  subpage?: string;
 }
-const { locale } = Astro.props;
+const { locale, subpage } = Astro.props;
 // What to show for each *other* language, written in that language.
 const targets = available
   .filter((l) => l.code !== locale)
   .map((l) => {
     const ui = getMessages(l.code).ui;
-    return { lang: l.lang, href: localePath(l), text: ui.bannerText.replace('{language}', l.name), close: ui.bannerClose };
+    return { lang: l.lang, href: subpage ? subPath(l, subpage) : localePath(l), text: ui.bannerText.replace('{language}', l.name), close: ui.bannerClose };
   });
 const data = JSON.stringify({ current: getLocale(locale).lang, all: available.map((l) => l.lang), targets }).replace(/</g, '\\u003c');
 ---
