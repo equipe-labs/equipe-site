@@ -136,3 +136,4 @@ details.lang ul a:hover { background: var(--surface); }
 code, pre { font-family: var(--mono); }
 pre:lang(ko), pre:lang(ja), pre:lang(zh-CN), code:lang(ko), code:lang(ja), code:lang(zh-CN) { font-family: var(--mono); }
 .hero-install pre { padding-right: 100px; }
+@media (max-width: 640px) { .js .hero-install .codeblock { display: flex; flex-direction: column; } .hero-install pre { padding-right: 16px; } .hero-install .copy { position: static; align-self: flex-end; } }

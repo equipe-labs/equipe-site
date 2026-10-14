@@ -64,7 +64,7 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 |---|---|---|
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` | GitHub로 가는 CTA·링크 클릭 |
-| `install_command_copy` | `command`: `install` / `run` / `try` | 시작하기 코드 블록의 복사 버튼 클릭 |
+| `install_command_copy` | `command`: `install` / `install_brew` / `run` / `try`, `location`: `hero`(히어로의 brew 명령에만) | 설치 명령 복사 버튼 클릭 |
 | `language_switch` | `from`, `to`(hreflang 값), `source`: `menu` / `banner` | 언어 메뉴 항목 또는 언어 배너 링크 클릭 |
 | `language_banner_shown` | `from`, `suggested` | 언어 제안 배너가 실제로 화면에 나타남 |
 | `language_banner_dismissed` | `from`, `suggested` | 배너의 닫기(×) 클릭 |
