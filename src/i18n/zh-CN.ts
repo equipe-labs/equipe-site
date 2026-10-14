@@ -62,7 +62,9 @@ const zhCN: Messages = {
   },
   start: {
     title: '开始使用',
-    install: 'equipe 目前需要从源码安装。你需要 Rust 1.88+ 和 git。使用 Claude 引擎还需要 `claude` 二进制文件。',
+    install: '在 macOS 和 Linux 上只需一行命令。它会把预编译的 `equipe` 放到 `~/.local/bin`(并校验 SHA-256),同时加入 PATH:',
+    brew: '或者用 Homebrew:',
+    source: '想自己编译的话，也可以从源码安装：需要 Rust 1.88+ 和 git，克隆 `github.com/equipe-labs/equipe`，然后运行 `cargo install --locked --path crates/cli`。使用 Claude 引擎还需要 `claude` 二进制文件。',
     run: '先登录引擎，确认它已就绪，再打开小队控制台：',
     runCode: `equipe login     # 登录 Codex 或 Claude Code
 equipe status    # 检查引擎是否就绪、模型是否可用
@@ -98,7 +100,7 @@ equipe           # 打开小队控制台`,
       {
         question: '怎么安装 equipe？',
         answer:
-          '用 Rust 1.88+ 和 git 从源码安装：克隆 `github.com/equipe-labs/equipe`，然后运行 `cargo install --locked --path crates/cli`。使用 Claude 引擎还需要 Claude Code 二进制文件。',
+          '在 macOS 和 Linux 上，运行 `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh` 一行命令即可，它会把预编译的 `equipe` 放到 `~/.local/bin`(并校验 SHA-256)，同时加入 PATH。也可以用 Homebrew：`brew install equipe-labs/tap/equipe`。如果想从源码编译，需要 Rust 1.88+ 和 git：克隆 `github.com/equipe-labs/equipe`，然后运行 `cargo install --locked --path crates/cli`。使用 Claude 引擎还需要 Claude Code 二进制文件。',
       },
       {
         question: '谁来批准这些工作？',

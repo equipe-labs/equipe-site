@@ -64,7 +64,9 @@ export const en = {
   },
   start: {
     title: 'Get started',
-    install: 'equipe is installed from source today. You need Rust 1.88+ and git. The Claude engine also needs the `claude` binary.',
+    install: 'One line on macOS and Linux. It puts a prebuilt `equipe` in `~/.local/bin`, checked against its SHA-256, and adds it to your PATH:',
+    brew: 'Or with Homebrew:',
+    source: 'Prefer to build it yourself? Install from source with Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the `claude` binary.',
     run: 'Sign in to an engine, check it\'s ready, then open the squad console:',
     // Shell comments inside the code block may be translated; the commands must not be.
     runCode: `equipe login     # sign in to Codex or Claude Code
@@ -101,7 +103,7 @@ equipe           # open the squad console`,
       {
         question: 'How do I install equipe?',
         answer:
-          'Install it from source with Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the Claude Code binary.',
+          'On macOS and Linux, run `curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh`, which puts a prebuilt `equipe` in `~/.local/bin` (checked against its SHA-256) and adds it to your PATH. Or use Homebrew: `brew install equipe-labs/tap/equipe`. To build from source instead, you need Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the Claude Code binary.',
       },
       {
         question: 'Who approves the work?',

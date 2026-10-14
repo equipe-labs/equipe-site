@@ -23,8 +23,8 @@ const t = getMessages(code);
 const pageUrl = new URL(localePath(info), Astro.site).href;
 
 const dots = ['faded', 'faded', 'faded', 'solid'] as const;
-const install = `git clone https://github.com/equipe-labs/equipe && cd equipe
-cargo install --locked --path crates/cli`;
+const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
+const brew = 'brew install equipe-labs/tap/equipe';
 const tryIt = 'equipe try --edit "…"';
 ---
 
@@ -125,6 +125,9 @@ const tryIt = 'equipe try --edit "…"';
         <h2>{t.start.title}</h2>
         <p class="col"><Rich s={t.start.install} /></p>
         <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <p class="col">{t.start.brew}</p>
+        <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+        <p class="col"><Rich s={t.start.source} /></p>
         <p class="col">{t.start.run}</p>
         <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <p class="col">{t.start.tryIntro}</p>
