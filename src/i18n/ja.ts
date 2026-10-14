@@ -62,7 +62,9 @@ const ja: Messages = {
   },
   start: {
     title: 'はじめる',
-    install: '現在のequipeは、ソースからインストールします。Rust 1.88+とgitが必要です。Claudeエンジンを使う場合は、`claude`バイナリも必要です。',
+    install: 'macOSとLinuxでは1行で済みます。ビルド済みの`equipe`を`~/.local/bin`に置き(SHA-256を検証)、PATHにも追加します:',
+    brew: 'Homebrewを使う場合:',
+    source: '自分でビルドしたい場合は、ソースからもインストールできます。Rust 1.88+とgitが必要です。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、`claude`バイナリも必要です。',
     run: 'エンジンにログインし、準備できているか確認してから、スクワッドコンソールを開きます。',
     runCode: `equipe login     # CodexまたはClaude Codeにログイン
 equipe status    # エンジンの準備状況とモデルの利用可否を確認
@@ -98,7 +100,7 @@ equipe           # スクワッドコンソールを開く`,
       {
         question: 'equipeはどうやってインストールしますか？',
         answer:
-          'Rust 1.88+とgitを使い、ソースからインストールします。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、Claude Codeのバイナリも必要です。',
+          'macOSとLinuxでは、`curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh`の1行で済みます。ビルド済みの`equipe`を`~/.local/bin`に置き(SHA-256を検証)、PATHにも追加します。Homebrewなら`brew install equipe-labs/tap/equipe`を実行してください。ソースからビルドする場合は、Rust 1.88+とgitが必要です。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、Claude Codeのバイナリも必要です。',
       },
       {
         question: '作業は誰が承認しますか？',
