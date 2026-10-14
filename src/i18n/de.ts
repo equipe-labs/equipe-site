@@ -51,6 +51,15 @@ const de: Messages = {
     ],
     proof: 'Diese Website hat ein equipe-Squad öffentlich gebaut. Jede Änderung begann als Ticket und kam als Branch an, den eine Person akzeptiert hat.',
   },
+  apps: {
+    title: 'Apps für Desktop und Mobilgerät',
+    intro: 'Der Squad kommt auf deinen Mac und dein Smartphone, damit du die Arbeit verfolgen und von überall entscheiden kannst.',
+    soon: 'In Vorbereitung',
+    items: [
+      { title: 'Desktop-App', platform: 'macOS', points: ['Deinen Squad und seine Mitglieder sehen', 'Mit dem PM sprechen', 'Tickets auf dem Board verfolgen', 'Screenshots in die Unterhaltung einfügen'] },
+      { title: 'Mobile App', platform: 'iOS · Android', points: ['Per Face ID oder Fingerabdruck auf dem Smartphone freigeben', 'Tickets auf dem Board verfolgen', 'Mit dem PM sprechen', 'Per QR-Code mit dem Mac koppeln; die Inhalte sind Ende-zu-Ende-verschlüsselt'] },
+    ],
+  },
   start: {
     title: 'Loslegen',
     install: 'equipe wird derzeit aus dem Quellcode installiert. Du brauchst Rust 1.88+ und git. Die Claude-Engine braucht zusätzlich das `claude`-Binary.',

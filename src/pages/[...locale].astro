@@ -99,6 +99,27 @@ const tryIt = 'equipe try --edit "…"';
       </div>
     </section>
 
+    <section id="apps">
+      <div class="wrap">
+        <h2>{t.apps.title}</h2>
+        <p class="col">{t.apps.intro}</p>
+        <div class="cards">
+          {t.apps.items.map((a) => (
+            <div class="card app">
+              <div class="app-head">
+                <h3>{a.title}</h3>
+                <span class="chip">{t.apps.soon}</span>
+              </div>
+              <p class="platform">{a.platform}</p>
+              <ul>
+                {a.points.map((p) => <li>{p}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section id="get-started">
       <div class="wrap">
         <h2>{t.start.title}</h2>

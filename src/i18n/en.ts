@@ -53,6 +53,15 @@ export const en = {
     ],
     proof: 'This site was built by an equipe squad, in public. Every change started as a ticket and landed as a branch a person accepted.',
   },
+  apps: {
+    title: 'Apps for desktop and mobile',
+    intro: 'The squad is coming to your Mac and your phone, so you can follow the work and make the calls from wherever you are.',
+    soon: 'Coming soon',
+    items: [
+      { title: 'Desktop app', platform: 'macOS', points: ['See your squad and its members', 'Talk to the PM', 'Follow tickets on the board', 'Paste screenshots into the conversation'] },
+      { title: 'Mobile app', platform: 'iOS · Android', points: ['Approve from your phone with Face ID or your fingerprint', 'Follow tickets on the board', 'Talk to the PM', 'Pair with your Mac by scanning a QR code; what you send is end-to-end encrypted'] },
+    ],
+  },
   start: {
     title: 'Get started',
     install: 'equipe is installed from source today. You need Rust 1.88+ and git. The Claude engine also needs the `claude` binary.',

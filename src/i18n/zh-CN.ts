@@ -51,6 +51,15 @@ const zhCN: Messages = {
     ],
     proof: '这个网站就是由一支 equipe 小队公开构建的。每个改动都从一张工单开始，以一个经人验收的分支落地。',
   },
+  apps: {
+    title: '桌面与移动应用',
+    intro: '小队即将来到你的 Mac 和手机，无论身在何处，都能关注进展并做出决定。',
+    soon: '即将推出',
+    items: [
+      { title: '桌面应用', platform: 'macOS', points: ['查看小队和成员', '与 PM 对话', '在看板上跟进工单', '把截图粘贴到对话中'] },
+      { title: '移动应用', platform: 'iOS · Android', points: ['用 Face ID 或指纹在手机上批准', '在看板上跟进工单', '与 PM 对话', '扫描二维码与 Mac 配对，传输的内容经端到端加密'] },
+    ],
+  },
   start: {
     title: '开始使用',
     install: 'equipe 目前需要从源码安装。你需要 Rust 1.88+ 和 git。使用 Claude 引擎还需要 `claude` 二进制文件。',
