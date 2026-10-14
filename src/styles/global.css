@@ -76,6 +76,28 @@ section + section { border-top: 1px solid var(--line); }
 h2 + p { margin-top: 16px; }
 .cards { display: grid; gap: 16px; margin-top: 48px; grid-template-columns: 1fr; }
 @media (min-width: 641px) { .cards { grid-template-columns: 1fr 1fr; } }
+.flow { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 32px; grid-template-columns: 1fr; counter-reset: step; }
+.step { position: relative; background: var(--surface); border-radius: 14px; padding: 24px; border: 2px solid transparent; }
+.step h3 { margin: 12px 0 0; }
+.step p { margin: 8px 0 0; }
+.step .num { position: absolute; top: 16px; left: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font: 600 14px var(--sans); color: var(--muted); }
+.step.key { border-color: var(--accent); }
+.step.key .num { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.step:not(:last-child)::after { content: ''; position: absolute; width: 12px; height: 12px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); left: calc(50% - 6px); bottom: -22px; transform: rotate(45deg); }
+.diagram { display: block; width: 100%; max-width: 240px; height: auto; margin: 0 auto; }
+.d-frame { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+.d-line { stroke: var(--line); stroke-width: 1.5; }
+.d-fill { fill: var(--accent); opacity: 0.55; }
+.d-soft { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.d-branch { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; opacity: 0.7; }
+.d-dot { fill: var(--accent); }
+.d-dot-solid { fill: var(--accent); }
+.d-gate { fill: var(--bg); stroke: var(--accent); stroke-width: 3; }
+.d-check { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 801px) {
+  .flow { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step:not(:last-child)::after { left: auto; right: -27px; bottom: auto; top: 70px; transform: rotate(-45deg); }
+}
 .card { background: var(--surface); border-radius: 14px; padding: 24px; }
 .card svg { display: block; margin-bottom: 16px; }
 .card p { margin: 8px 0 0; }

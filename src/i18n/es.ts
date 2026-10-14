@@ -34,11 +34,10 @@ const es: Messages = {
   how: {
     title: 'Cómo funciona',
     intro: 'Una persona lidera. El squad trabaja en paralelo. Todo pasa por el tablero.',
-    cards: [
-      { title: 'Roles', text: 'Cada miembro tiene un rol (PM, Designer, Frontend, Backend, QA o Datos), con un modelo adecuado para ese rol y su propia memoria.' },
-      { title: 'Tickets', text: 'El tablero es la única fuente de verdad. Los miembros se coordinan con tickets y eventos inmutables, no con chats, así que cada acción deja algo que puedes ver.' },
-      { title: 'Ramas', text: 'Cada miembro trabaja en su propio git worktree aislado, en su propia rama. Así, varios pueden trabajar a la vez en tu repositorio sin tocar tu copia de trabajo.' },
-      { title: 'Tu aprobación', text: 'Tú decides en los puntos de aprobación. Nada se fusiona hasta que tú lo digas.' },
+    steps: [
+      { title: 'Encárgalo', text: 'Dile al PM lo que quieres. Se convierte en tickets en un tablero compartido, cada uno con un rol que se encarga.' },
+      { title: 'Trabajo en paralelo', text: 'Los miembros trabajan a la vez, cada uno en su propia rama. Tu copia de trabajo queda intacta y cada acción se registra en el tablero.' },
+      { title: 'Tu aprobación', text: 'Antes de fusionar nada, equipe te pregunta. Nada se incorpora hasta que tú lo digas.' },
     ],
   },
   who: {
@@ -121,6 +120,11 @@ equipe           # abre la consola del squad`,
         question: '¿Está equipe listo para usarse en producción?',
         answer:
           'equipe está en fase temprana. El daemon del squad se ejecuta en segundo plano, el PM acepta el trabajo, los agentes trabajan en ramas dentro de sandboxes y tú apruebas antes de fusionar. Los traspasos y los canales de comunicación llegarán después, como indica la hoja de ruta.',
+      },
+      {
+        question: '¿Qué es un git worktree y por qué lo usa equipe?',
+        answer:
+          'Un git worktree es otra carpeta de trabajo del mismo repositorio, con su propia rama. equipe da uno a cada miembro, para que varios trabajen a la vez sin tocarse entre sí ni tocar tu copia de trabajo.',
       },
     ],
   },

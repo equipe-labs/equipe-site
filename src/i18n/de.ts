@@ -34,11 +34,10 @@ const de: Messages = {
   how: {
     title: 'So funktioniert’s',
     intro: 'Eine Person leitet. Der Squad arbeitet parallel. Alles läuft über das Board.',
-    cards: [
-      { title: 'Rollen', text: 'Jedes Mitglied hat eine Rolle (PM, Designer, Frontend, Backend, QA oder Daten), ein dazu passendes Modell und ein eigenes Gedächtnis.' },
-      { title: 'Tickets', text: 'Das Board ist die Single Source of Truth. Die Mitglieder stimmen sich über Tickets und unveränderliche Events ab, nicht über Chat. So hinterlässt jede Aktion etwas, das du sehen kannst.' },
-      { title: 'Branches', text: 'Jedes Mitglied arbeitet in einem eigenen isolierten git worktree auf einem eigenen Branch. So können mehrere gleichzeitig an deinem Repository arbeiten, ohne deinen Checkout anzufassen.' },
-      { title: 'Deine Freigabe', text: 'An den Freigabe-Schritten behältst du die Kontrolle. Nichts wird gemergt, bevor du es sagst.' },
+    steps: [
+      { title: 'Übergeben', text: 'Sag dem PM, was du willst. Daraus werden Tickets auf einem gemeinsamen Board, jedes mit einer Rolle, die es übernimmt.' },
+      { title: 'Parallel arbeiten', text: 'Die Mitglieder arbeiten gleichzeitig, jedes auf seinem eigenen Branch. Dein Checkout bleibt unberührt, und jede Aktion wird auf dem Board festgehalten.' },
+      { title: 'Deine Freigabe', text: 'Bevor etwas gemergt wird, fragt equipe dich. Nichts landet im Projekt, bevor du es sagst.' },
     ],
   },
   who: {
@@ -121,6 +120,11 @@ equipe           # Squad-Konsole öffnen`,
         question: 'Ist equipe für den Produktivbetrieb geeignet?',
         answer:
           'equipe befindet sich in einer frühen Phase. Der Squad-Daemon läuft im Hintergrund, der PM akzeptiert Arbeit, Agenten arbeiten in Sandboxes auf Branches, und du gibst vor dem Merge frei. Übergaben und Kommunikationskanäle folgen als Nächstes, wie auf der Roadmap steht.',
+      },
+      {
+        question: 'Was ist ein git worktree, und warum nutzt equipe ihn?',
+        answer:
+          'Ein git worktree ist ein weiterer Arbeitsordner desselben Repositorys mit eigenem Branch. equipe gibt jedem Mitglied einen, damit mehrere gleichzeitig arbeiten können, ohne sich gegenseitig oder deinen Checkout anzufassen.',
       },
     ],
   },

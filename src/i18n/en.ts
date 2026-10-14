@@ -36,11 +36,10 @@ export const en = {
   how: {
     title: 'How it works',
     intro: 'One person leads. The squad works in parallel. Everything passes through the board.',
-    cards: [
-      { title: 'Roles', text: 'Each member has a role — PM, Designer, Frontend, Backend, QA or Data — with a model suited to that role and its own memory.' },
-      { title: 'Tickets', text: 'The board is the single source of truth. Members coordinate through tickets and immutable events, not chat, so every action leaves something you can see.' },
-      { title: 'Branches', text: 'Each member works in its own isolated git worktree, on its own branch, so several can work on your repository at the same time without touching your checkout.' },
-      { title: 'Your approval', text: 'You stay in the loop at the approval gates. Nothing merges until you say so.' },
+    steps: [
+      { title: 'Hand it off', text: 'Tell the PM what you want. It becomes tickets on a shared board, each with a role to take it.' },
+      { title: 'Work in parallel', text: 'Members work at the same time, each on its own branch. Your checkout stays untouched, and every action is recorded on the board.' },
+      { title: 'Your approval', text: 'Before anything merges, equipe asks you. Nothing lands until you say so.' },
     ],
   },
   who: {
@@ -124,6 +123,11 @@ equipe           # open the squad console`,
         question: 'Is equipe ready for production use?',
         answer:
           'equipe is early-stage. The squad daemon runs in the background, the PM accepts work, agents work on branches in sandboxes, and you approve before merge. Handoffs and communication channels are coming next, as listed on the roadmap.',
+      },
+      {
+        question: 'What is a git worktree, and why does equipe use one?',
+        answer:
+          'A git worktree is another working folder for the same repository, with its own branch. equipe gives each member one, so several can work at once without touching each other or your checkout.',
       },
     ],
   },
