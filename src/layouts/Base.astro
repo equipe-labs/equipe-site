@@ -13,6 +13,7 @@ interface Props {
   ogDescription?: string;
   image?: string;
   imageAlt?: string;
+  noindex?: boolean;
 }
 const { lang } = getLocale(Astro.props.locale);
 ---
@@ -21,6 +22,7 @@ const { lang } = getLocale(Astro.props.locale);
 <html lang={lang}>
   <head>
     <BaseHead {...Astro.props} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add('js');</script>

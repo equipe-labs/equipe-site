@@ -28,7 +28,7 @@ const brew = 'brew install equipe-labs/tap/equipe';
 const tryIt = 'equipe try --edit "…"';
 ---
 
-<Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={SITE.ogImage} imageAlt={t.meta.ogImageAlt}>
+<Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
   <Fragment slot="head">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <OrganizationJsonLd />
