@@ -26,5 +26,9 @@ export default defineConfig({
   },
   // Pages live at /path/ — canonical URLs, the sitemap and vercel.json's redirect all agree.
   trailingSlash: 'always',
-  integrations: [sitemap({ i18n: { defaultLocale: 'en', locales } })],
+  integrations: [sitemap({
+      i18n: { defaultLocale: 'en', locales },
+      lastmod: new Date(), // build time
+      filter: (page) => !page.endsWith('/404/'),
+    })],
 });

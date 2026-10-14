@@ -140,17 +140,35 @@ for (const [url, html] of pages) {
   check(missing.length === 0, `${url.slice(CANONICAL.length)} <-> ${missing.length ? missing.join(', ') : 'all'}`);
 }
 
-// --- OG image ----------------------------------------------------------------
-section('OG image');
-{
-  const res = await get(`${CANONICAL}/og.png`);
+// --- OG images, favicon, 404 ---------------------------------------------------
+section('OG images (one per language), favicon, 404');
+for (const { lang, path } of LOCALES) {
+  const html = pages.get(CANONICAL + path);
+  const src = html && meta(html, 'og:image')[0];
+  const slug = path === '/' ? 'en' : path.replaceAll('/', '');
+  check(src === `${CANONICAL}/og/${slug}.png`, `${path} og:image is its own language image (${src})`);
+  if (!src) continue;
+  check(meta(html, 'og:image:width')[0] === '1200' && meta(html, 'og:image:height')[0] === '630', `${path} og:image size meta 1200x630`);
+  const res = await get(src);
   const buf = Buffer.from(await res.arrayBuffer());
-  check(res.status === 200 && /image\/png/.test(res.headers.get('content-type') ?? ''), `og.png ${res.status} ${res.headers.get('content-type')}`);
+  check(res.status === 200 && /image\/png/.test(res.headers.get('content-type') ?? ''), `${path} ${src.slice(CANONICAL.length)} ${res.status} ${res.headers.get('content-type')}`);
   // PNG IHDR: width at byte 16, height at byte 20.
   const w = buf.readUInt32BE(16);
   const h = buf.readUInt32BE(20);
-  check(w === 1200 && h === 630, `og.png ${w}x${h} (want 1200x630)`);
-  check(buf.length < 5_000_000, `og.png ${Math.round(buf.length / 1024)} KB (< 5 MB for X)`);
+  check(w === 1200 && h === 630, `${path} image ${w}x${h} (want 1200x630)`);
+  check(buf.length < 5_000_000, `${path} image ${Math.round(buf.length / 1024)} KB (< 5 MB for X)`);
+}
+{
+  const res = await get(`${CANONICAL}/favicon.ico`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  check(res.status === 200 && buf.readUInt16LE(2) === 1, `favicon.ico ${res.status}, ICO file`);
+  check(buf[6] === 32 && buf[7] === 32, 'favicon.ico 32x32');
+
+  const nf = await get(`${CANONICAL}/no-such-page-seo-check/`);
+  const body = await nf.text();
+  check(nf.status === 404, `unknown path -> ${nf.status} (want 404)`);
+  check(meta(body, 'robots').some((c) => /noindex/.test(c)), '404 page is noindex');
+  check(/href="\/"/.test(body), '404 page links home');
 }
 
 // --- robots.txt, sitemap, llms.txt ------------------------------------------
@@ -181,6 +199,13 @@ section('robots.txt, sitemap, llms.txt');
     LOCALES.every((l) => urls.has(CANONICAL + l.path)),
     `sitemap lists all ${LOCALES.length} locale URLs (${urls.size} total)`,
   );
+  check(
+    [...idxBody.matchAll(/<loc>/g)].length > 0 && !/\/404\//.test([...urls.keys()].join(' ')),
+    'sitemap does not list the 404 page',
+  );
+  const lastmods = [];
+  for (const loc of locs) lastmods.push(...(await (await get(loc)).text()).matchAll(/<lastmod>([^<]+)<\/lastmod>/g));
+  check(lastmods.length >= urls.size && lastmods.every((m) => !Number.isNaN(Date.parse(m[1]))), `sitemap: every URL has a valid <lastmod> (${lastmods.length})`);
   check(
     LOCALES.every((l) => (urls.get(CANONICAL + l.path) ?? []).length === LOCALES.length),
     'sitemap: every URL has xhtml:link alternates for all languages',
