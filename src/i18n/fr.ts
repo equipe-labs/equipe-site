@@ -5,10 +5,10 @@ const fr: Messages = {
   meta: {
     title: 'equipe — un squad d’agents de codage IA, dirigé par vous',
     description:
-      'equipe est un squad logiciel IA open source\u202F: des agents par rôle, un tableau partagé et des git worktrees isolés. Rien n’est fusionné sans vous.',
+      'equipe est un squad IA open source\u202F: des agents spécialisés par rôle travaillent depuis un tableau partagé, dans des git worktrees isolés. Rien n’est fusionné sans votre accord.',
     ogTitle: 'equipe — un squad d’agents de codage IA, dirigé par vous',
     ogDescription:
-      'equipe est un squad logiciel IA open source\u202F: des agents par rôle, un tableau partagé et des git worktrees isolés. Rien n’est fusionné sans vous.',
+      'equipe est un squad IA open source\u202F: des agents spécialisés par rôle travaillent depuis un tableau partagé, dans des git worktrees isolés. Rien n’est fusionné sans votre accord.',
     ogImageAlt: 'equipe — un squad d’agents de codage IA, dirigé par une seule personne',
   },
   ui: {
@@ -20,25 +20,25 @@ const fr: Messages = {
     copyCommands: 'Copier les commandes',
     copyCommand: 'Copier la commande',
     language: 'Langue',
-    bannerText: 'Voir cette page en {language}',
+    bannerText: 'Voir cette page en français',
     bannerClose: 'Fermer',
   },
   nav: { howItWorks: 'Comment ça marche', getStarted: 'Commencer', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Menez une équipe d’agents IA. Vous approuvez chaque merge.',
-    lead: 'Des agents PM, designer et développeur travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
+    title: 'Menez une équipe d’agents IA. Vous approuvez chaque fusion.',
+    lead: 'Des agents PM, designer, développeur et mobile travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
     ctaPrimary: 'Voir sur GitHub',
-    chip: 'Phase initiale · Licence MIT · Compatible Codex et Claude Code',
-    shotAlt: 'Maquette de l’app de bureau equipe : un agent demande l’autorisation d’exécuter une commande, avec les boutons Autoriser une fois, Toujours et Refuser',
-    shotCaption: 'Maquette de l’app · bientôt disponible — un agent s’arrête avec « j’ai besoin d’une autorisation » et vous approuvez d’un clic.',
+    chip: 'Phase initiale · Licence MIT · Codex et Claude Code',
+    shotAlt: 'Aperçu de l’appli de bureau equipe\u202F: un agent demande l’autorisation d’exécuter une commande, avec les boutons «\u202FAutoriser une fois\u202F», «\u202FToujours\u202F» et «\u202FRefuser\u202F»',
+    shotCaption: 'Aperçu de l’appli de bureau — un agent s’interrompt\u202F: «\u202FJ’ai besoin d’une autorisation\u202F», et vous approuvez d’un clic. (Appli bientôt disponible)',
   },
   how: {
     title: 'Comment ça marche',
     intro: 'Une personne dirige. Le squad travaille en parallèle. Tout passe par le tableau.',
     steps: [
-      { title: 'Confier', text: 'Dites au PM ce que vous voulez. Cela devient des tickets sur un tableau partagé, chacun avec un rôle pour le prendre en charge.' },
+      { title: 'Confier', text: 'Dites au PM ce que vous voulez. Il en fait des tickets sur un tableau partagé, chacun attribué à un rôle.' },
       { title: 'Travail en parallèle', text: 'Les membres travaillent en même temps, chacun sur sa propre branche. Votre copie de travail reste intacte, et chaque action est consignée sur le tableau.' },
-      { title: 'Votre approbation', text: 'Avant toute fusion, equipe vous demande. Rien n’est intégré tant que vous ne l’avez pas dit.' },
+      { title: 'Votre approbation', text: 'Avant toute fusion, equipe vous demande votre accord. Rien n’est intégré sans votre feu vert.' },
     ],
   },
   who: {
@@ -46,30 +46,30 @@ const fr: Messages = {
     intro: 'equipe s’adresse à celles et ceux qui veulent diriger une petite équipe logicielle d’agents IA plutôt que de piloter un agent à la fois par prompts. Vous fixez le cap et vous relisez le travail. Le squad le découpe en tickets et l’exécute sur des branches.',
     points: [
       { lead: 'Vous utilisez déjà Codex ou Claude Code.', text: 'equipe les pilote, et vous vous connectez comme vous le faites déjà.' },
-      { lead: 'Vous voulez un travail en parallèle que vous pouvez relire.', text: 'Chaque changement arrive sous forme de branche, jamais comme une surprise sur votre branche principale.' },
+      { lead: 'Vous voulez du travail en parallèle, facile à relire.', text: 'Chaque changement arrive sous forme de branche, jamais comme une surprise sur votre branche principale.' },
       { lead: 'Vous voulez garder les décisions.', text: 'Les étapes d’approbation sont placées là où cela compte, et la décision reste la vôtre.' },
     ],
-    proof: 'Ce site a été construit en public par un squad equipe. Chaque changement a commencé comme un ticket et est arrivé sous forme de branche acceptée par une personne.',
+    proof: 'Ce site a été construit en public par un squad equipe. Chaque changement a commencé comme un ticket et est arrivé sous forme de branche validée par une personne.',
   },
   apps: {
     title: 'Suivez sur votre Mac, approuvez sur votre téléphone.',
-    intro: 'Le squad se voit aussi hors du terminal. Quand un agent attend votre accord, le téléphone vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
+    intro: 'Le squad reste visible hors du terminal. Quand un agent attend votre accord, votre téléphone vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
     soon: 'Bientôt disponible',
     caption: 'Maquette de l’appli · bientôt disponible',
     items: [
-      { title: 'Application de bureau', platform: 'macOS', text: 'Squad, tableau et discussion avec le PM dans une seule fenêtre.', alt: 'Maquette de l’appli de bureau : un agent demande l’autorisation d’exécuter une commande, avec les boutons Autoriser une fois, Toujours et Refuser.' },
-      { title: 'Application mobile', platform: 'iOS · Android', text: 'Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile : deux demandes d’approbation en attente.' },
+      { title: 'Application de bureau', platform: 'macOS', text: 'Squad, tableau et discussion avec le PM dans une seule fenêtre.', alt: 'Maquette de l’appli de bureau\u202F: un agent demande l’autorisation d’exécuter une commande, avec les boutons «\u202FAutoriser une fois\u202F», «\u202FToujours\u202F» et «\u202FRefuser\u202F».' },
+      { title: 'Application mobile', platform: 'iOS · Android', text: 'Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile\u202F: deux demandes d’approbation en attente.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'Exécuter la commande ?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche ?', approve: 'Approuver', changes: 'Demander des changements' },
-    notify: { title: 'Prévenu à la sortie des applis ?', text: 'Abonnez-vous aux releases sur GitHub : vous ne recevez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe : Watch → Custom → Releases.' },
+    phone: { label: 'APPROVE · 3', askCommand: 'Exécuter la commande\u202F?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche\u202F?', approve: 'Approuver', changes: 'Demander des changements' },
+    notify: { title: 'Envie d’être prévenu à la sortie des applis\u202F?', text: 'Abonnez-vous aux releases sur GitHub\u202F: vous ne recevrez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe\u202F: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Commencer',
-    install: 'Sur macOS et Linux, une seule ligne suffit. Elle place un `equipe` précompilé dans `~/.local/bin` (vérifié par SHA-256) et l’ajoute à votre PATH :',
-    brew: 'Installe un `equipe` précompilé via le tap Homebrew. Pour mettre à jour ensuite : `brew upgrade equipe`.',
+    install: 'Sur macOS et Linux, une seule ligne suffit. Elle place un `equipe` précompilé dans `~/.local/bin` (vérifié par SHA-256) et l’ajoute à votre PATH\u202F:',
+    brew: 'Installe un `equipe` précompilé via le tap Homebrew. Pour mettre à jour ensuite\u202F: `brew upgrade equipe`.',
     tabsLabel: 'Méthode d’installation',
     sourceTitle: 'Compiler depuis les sources (avancé)',
-    source: 'Vous préférez compiler vous-même ? Installez depuis les sources avec Rust 1.88+ et git : clonez `github.com/equipe-labs/equipe`, puis lancez `cargo install --locked --path crates/cli`. Le moteur Claude requiert aussi le binaire `claude`.',
+    source: 'Vous préférez compiler vous-même\u202F? Installez depuis les sources avec Rust 1.88+ et git\u202F: clonez `github.com/equipe-labs/equipe`, puis lancez `cargo install --locked --path crates/cli`. Le moteur Claude requiert aussi le binaire `claude`.',
     run: 'Connectez-vous à un moteur, vérifiez qu’il est prêt, puis ouvrez la console du squad :',
     runCode: `equipe login     # se connecter à Codex ou à Claude Code
 equipe status    # vérifier l'état du moteur et les modèles disponibles
@@ -85,7 +85,7 @@ equipe           # ouvrir la console du squad`,
       {
         question: 'Qu’est-ce qu’equipe ?',
         answer:
-          'equipe est un squad logiciel IA open source. Il coordonne des agents ayant des rôles comme PM, Designer, Frontend, Backend, QA et Données autour d’un tableau partagé. Ils travaillent dans des git worktrees isolés, et une personne approuve avant la fusion des changements.',
+          'equipe est un squad logiciel IA open source. Il coordonne des agents aux rôles tels que PM, Designer, Frontend, Backend, Mobile, QA et Data autour d’un tableau partagé. Ils travaillent dans des git worktrees isolés, et une personne approuve les changements avant leur fusion.',
       },
       {
         question: 'equipe est-il un agent de codage IA de plus ?',
@@ -100,17 +100,17 @@ equipe           # ouvrir la console du squad`,
       {
         question: 'equipe gère-t-il mes identifiants ?',
         answer:
-          'Pour Claude Code, non. Vous exécutez le binaire `claude` non modifié et vous vous connectez vous-même, donc la facturation va sur votre propre compte. Pour Codex, equipe se connecte avec OAuth grâce à votre offre ChatGPT et s’identifie honnêtement comme `originator: equipe`.',
+          'Pour Claude Code, non. Vous exécutez le binaire `claude` non modifié et vous vous connectez vous-même, donc la facturation passe par votre propre compte. Pour Codex, equipe se connecte via OAuth avec votre abonnement ChatGPT et s’identifie honnêtement comme `originator: equipe`.',
       },
       {
         question: 'Comment installer equipe ?',
         answer:
-          'Sur macOS et Linux, lancez `brew install equipe-labs/tap/equipe`. Vous pouvez aussi utiliser la ligne install.sh ou compiler depuis les sources (Rust 1.88+) ; toutes les méthodes sont dans Commencer.',
+          'Sur macOS et Linux, lancez `brew install equipe-labs/tap/equipe`. Vous pouvez aussi utiliser la ligne install.sh ou compiler depuis les sources (Rust 1.88+)\u202F; toutes les méthodes sont décrites dans «\u202FCommencer\u202F».',
       },
       {
         question: 'Qui approuve le travail ?',
         answer:
-          'Vous. Chaque membre travaille sur sa propre branche dans un worktree isolé, et equipe demande une approbation humaine avant la fusion d’une branche. Le PM accepte le travail sur le tableau ; la personne qui dirige le squad décide de ce qui est intégré.',
+          'Vous. Chaque membre travaille sur sa propre branche dans un worktree isolé, et equipe demande une approbation humaine avant la fusion d’une branche. Le PM valide le travail sur le tableau ; la personne qui dirige le squad décide de ce qui est intégré.',
       },
       {
         question: 'equipe est-il gratuit et open source ?',
@@ -120,15 +120,16 @@ equipe           # ouvrir la console du squad`,
       {
         question: 'equipe est-il prêt pour la production ?',
         answer:
-          'equipe en est à un stade précoce. Le démon du squad tourne en arrière-plan, le PM accepte le travail, les agents travaillent sur des branches dans des sandboxes, et vous approuvez avant la fusion. Les passations et les canaux de communication arrivent ensuite, comme l’indique la feuille de route.',
+          'equipe est encore en phase initiale. Le démon du squad tourne en arrière-plan, le PM valide le travail, les agents travaillent sur des branches dans des sandboxes, et vous approuvez avant la fusion. Les passations et les canaux de communication sont les prochaines étapes, comme l’indique la feuille de route.',
       },
       {
-        question: 'Qu’est-ce qu’un git worktree, et pourquoi equipe l’utilise-t-il ?',
+        question: 'Qu’est-ce qu’un git worktree, et pourquoi equipe l’utilise-t-il\u202F?',
         answer:
-          'Un git worktree est un autre dossier de travail du même dépôt, avec sa propre branche. equipe en donne un à chaque membre, pour que plusieurs travaillent en même temps sans toucher ni aux autres ni à votre copie de travail.',
+          'Un git worktree est un autre dossier de travail du même dépôt, avec sa propre branche. equipe en donne un à chaque membre, pour que plusieurs membres travaillent en même temps sans se gêner entre eux ni toucher à votre copie de travail.',
       },
     ],
   },
+  notFound: { title: 'Page introuvable — equipe', description: 'Cette page n’existe pas.', heading: 'Page introuvable', text: 'Il n’y a rien à cette adresse. La page a peut-être été déplacée, ou le lien est erroné.', home: 'Aller à la page d’accueil' },
   footer: { license: 'Licence MIT', built: 'Construit en public par un squad equipe.' },
 };
 

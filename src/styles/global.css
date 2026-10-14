@@ -187,3 +187,10 @@ code, pre { font-family: var(--mono); }
 pre:lang(ko), pre:lang(ja), pre:lang(zh-CN), code:lang(ko), code:lang(ja), code:lang(zh-CN) { font-family: var(--mono); }
 .hero-install pre { padding-right: 100px; }
 @media (max-width: 640px) { .js .hero-install .codeblock { display: flex; flex-direction: column; } .hero-install pre { padding-right: 16px; } .hero-install .copy { position: static; align-self: flex-end; } }
+
+/* T-106: layout fixes from the translation review */
+.notify .btn { white-space: nowrap; }
+.pb i { font-size: 11px; }
+:lang(ja) :is(h1, h2, h3) { word-break: auto-phrase; text-wrap: balance; }
+:lang(zh-CN) :is(h1, h2, h3) { text-wrap: balance; }
+@media (min-width: 641px) and (max-width: 800px) { details.lang .lang-name { display: none; } details.lang summary { min-width: 44px; justify-content: center; } }

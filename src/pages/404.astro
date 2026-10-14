@@ -1,15 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import Mark from '../components/Mark.astro';
-import { getMessages } from '../i18n';
+import { available, getMessages, localePath } from '../i18n';
 
 // Served by the host for any unknown path, with a 404 status. Not language-specific, so it
 // carries no hreflang cluster of its own and is kept out of the index and the sitemap.
-const t = getMessages('en');
+// Every language is in the page; English shows without JavaScript, and a small script reveals
+// the one that matches the URL prefix (/ko/…) or, failing that, the browser's language.
+const en = getMessages('en');
+const versions = available.map((l) => ({ ...l, href: localePath(l), t: getMessages(l.code) }));
 ---
 
-<Base locale="en" title="Page not found — equipe" description="This page does not exist." noindex>
-  <a class="skip" href="#main">{t.ui.skip}</a>
+<Base locale="en" title={en.notFound.title} description={en.notFound.description} noindex>
+  <a class="skip" href="#main">{en.ui.skip}</a>
   <header class="site">
     <div class="wrap">
       <a class="brand" href="/"><Mark size={28} /> equipe</a>
@@ -21,14 +24,43 @@ const t = getMessages('en');
       <div class="wrap">
         <div class="col">
           <p class="chip">404</p>
-          <h1>Page not found</h1>
-          <p class="lead">There is nothing at this address. It may have moved, or the link may be wrong.</p>
-          <div class="ctas">
-            <a class="btn primary" href="/">Go to the home page</a>
-          </div>
+          {
+            versions.map((v) => (
+              <div class="nf" lang={v.lang} data-nf={v.lang} data-slug={v.slug} data-title={v.t.notFound.title} hidden={v.code !== 'en'}>
+                <h1>{v.t.notFound.heading}</h1>
+                <p class="lead">{v.t.notFound.text}</p>
+                <div class="ctas">
+                  <a class="btn primary" href={v.href}>{v.t.notFound.home}</a>
+                </div>
+              </div>
+            ))
+          }
         </div>
         <div class="hero-mark"><Mark size={200} /></div>
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    (function () {
+      var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-nf]'));
+      var pick = null;
+      var first = location.pathname.split('/')[1] || '';
+      blocks.forEach(function (b) { if (b.dataset.slug && b.dataset.slug === first.toLowerCase()) pick = b; });
+      if (!pick) {
+        var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+        for (var i = 0; i < prefs.length && !pick; i++) {
+          var p = String(prefs[i]).toLowerCase();
+          blocks.forEach(function (b) {
+            var l = b.dataset.nf.toLowerCase();
+            if (!pick && (p === l || p.split('-')[0] === l.split('-')[0])) pick = b;
+          });
+        }
+      }
+      if (!pick) return;
+      blocks.forEach(function (b) { b.hidden = b !== pick; });
+      document.documentElement.lang = pick.dataset.nf;
+      document.title = pick.dataset.title;
+    })();
+  </script>
 </Base>

@@ -4,10 +4,10 @@ const de: Messages = {
   meta: {
     title: 'equipe — KI-Coding-Agenten als Squad, geleitet von dir',
     description:
-      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit Rollen arbeiten per Board in isolierten git worktrees. Gemergt wird nur mit deiner Freigabe.',
+      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit festen Rollen arbeiten über ein gemeinsames Board in isolierten Git-Worktrees. Gemergt wird nur mit deiner Freigabe.',
     ogTitle: 'equipe — KI-Coding-Agenten als Squad, geleitet von dir',
     ogDescription:
-      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit Rollen arbeiten per Board in isolierten git worktrees. Gemergt wird nur mit deiner Freigabe.',
+      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit festen Rollen arbeiten über ein gemeinsames Board in isolierten Git-Worktrees. Gemergt wird nur mit deiner Freigabe.',
     ogImageAlt: 'equipe — KI-Coding-Agenten als Squad, geleitet von einer einzigen Person',
   },
   ui: {
@@ -25,11 +25,11 @@ const de: Messages = {
   nav: { howItWorks: 'So funktioniert’s', getStarted: 'Loslegen', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Führe ein Team aus KI-Agenten. Jeden Merge gibst du frei.',
-    lead: 'PM-, Design- und Entwickler-Agenten arbeiten an einem gemeinsamen Board, jeder auf einem eigenen Branch deines Repositorys. Ohne deine Freigabe wird nichts gemergt.',
+    lead: 'PM-, Design-, Entwickler- und Mobile-Agenten arbeiten über ein gemeinsames Board, jeder auf einem eigenen Branch deines Repositorys. Ohne deine Freigabe wird nichts gemergt.',
     ctaPrimary: 'Auf GitHub ansehen',
-    chip: 'Frühe Phase · MIT-Lizenz · Unterstützt Codex und Claude Code',
-    shotAlt: 'Entwurf der equipe-Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen',
-    shotCaption: 'App-Entwurf · in Vorbereitung — ein Agent hält mit „Ich brauche eine Erlaubnis“ an, und du gibst sie mit einem Klick frei.',
+    chip: 'Frühe Phase · MIT-Lizenz · Codex und Claude Code',
+    shotAlt: 'Vorschau der equipe-Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen; darunter die Schaltflächen „Einmal erlauben“, „Immer“ und „Ablehnen“',
+    shotCaption: 'Vorschau der Desktop-App — ein Agent hält an und meldet „Ich brauche eine Erlaubnis“; du gibst mit einem Klick frei. (App folgt in Kürze)',
   },
   how: {
     title: 'So funktioniert’s',
@@ -37,7 +37,7 @@ const de: Messages = {
     steps: [
       { title: 'Übergeben', text: 'Sag dem PM, was du willst. Daraus werden Tickets auf einem gemeinsamen Board, jedes mit einer Rolle, die es übernimmt.' },
       { title: 'Parallel arbeiten', text: 'Die Mitglieder arbeiten gleichzeitig, jedes auf seinem eigenen Branch. Dein Checkout bleibt unberührt, und jede Aktion wird auf dem Board festgehalten.' },
-      { title: 'Deine Freigabe', text: 'Bevor etwas gemergt wird, fragt equipe dich. Nichts landet im Projekt, bevor du es sagst.' },
+      { title: 'Deine Freigabe', text: 'Bevor etwas gemergt wird, fragt equipe dich. Ohne dein Okay landet nichts.' },
     ],
   },
   who: {
@@ -46,21 +46,21 @@ const de: Messages = {
     points: [
       { lead: 'Du nutzt schon Codex oder Claude Code.', text: 'equipe steuert beide, und du meldest dich so an wie bisher.' },
       { lead: 'Du willst parallele Arbeit, die du prüfen kannst.', text: 'Jede Änderung kommt als Branch bei dir an, nie als Überraschung im main-Branch.' },
-      { lead: 'Du willst die Entscheidungen behalten.', text: 'Die Freigabe-Schritte sitzen dort, wo es zählt. Das letzte Wort bleibt bei dir.' },
+      { lead: 'Du willst die Entscheidungen behalten.', text: 'Freigaben sind genau dort eingebaut, wo es darauf ankommt. Das letzte Wort hast du.' },
     ],
-    proof: 'Diese Website hat ein equipe-Squad öffentlich gebaut. Jede Änderung begann als Ticket und kam als Branch an, den eine Person akzeptiert hat.',
+    proof: 'Diese Website wurde öffentlich von einem equipe-Squad gebaut. Jede Änderung begann als Ticket und kam als Branch an, den eine Person abgenommen hat.',
   },
   apps: {
     title: 'Am Mac verfolgen, am Smartphone freigeben.',
     intro: 'Der Squad ist auch außerhalb des Terminals sichtbar. Wartet ein Agent auf dein OK, meldet sich das Smartphone und du gibst per Face ID frei. Die Inhalte sind Ende-zu-Ende-verschlüsselt.',
     soon: 'In Vorbereitung',
-    caption: 'App-Entwurf · in Vorbereitung',
+    caption: 'App-Vorschau · in Vorbereitung',
     items: [
-      { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Board und PM-Chat in einem Fenster.', alt: 'Entwurf der Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen.' },
-      { title: 'Mobile App', platform: 'iOS · Android', text: 'Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Entwurf der mobilen App: zwei Freigabeanfragen warten.' },
+      { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Board und PM-Chat in einem Fenster.', alt: 'Vorschau der Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen.' },
+      { title: 'Mobile App', platform: 'iOS · Android', text: 'Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Vorschau der mobilen App: zwei Freigabeanfragen warten.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: 'Befehl ausführen?', allow: 'Einmal erlauben', decline: 'Ablehnen', askMerge: 'Branch mergen?', approve: 'Freigeben', changes: 'Änderungen anfordern' },
-    notify: { title: 'Möchtest du wissen, wann die Apps erscheinen?', text: 'Abonniere die Releases auf GitHub und bekomme nur bei neuen Versionen eine E-Mail. Keine Anmeldung bei uns, keine E-Mail-Erfassung.', cta: 'Auf GitHub benachrichtigen lassen', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
+    notify: { title: 'Möchtest du wissen, wann die Apps erscheinen?', text: 'Abonniere die Releases auf GitHub – dann bekommst du nur bei neuen Versionen eine E-Mail. Keine Registrierung bei uns, wir sammeln keine E-Mail-Adressen.', cta: 'Auf GitHub abonnieren', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Loslegen',
@@ -84,12 +84,12 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Was ist equipe?',
         answer:
-          'equipe ist ein Open-Source-KI-Software-Squad. Es koordiniert Agenten mit Rollen wie PM, Designer, Frontend, Backend, QA und Daten rund um ein gemeinsames Board. Sie arbeiten in isolierten git worktrees, und eine Person gibt Änderungen frei, bevor sie gemergt werden.',
+          'equipe ist ein Open-Source-KI-Software-Squad. Es koordiniert Agenten in Rollen wie PM, Designer, Frontend, Backend, Mobile, QA und Data rund um ein gemeinsames Board. Sie arbeiten in isolierten Git-Worktrees, und eine Person gibt Änderungen frei, bevor sie gemergt werden.',
       },
       {
         question: 'Ist equipe ein weiterer KI-Coding-Agent?',
         answer:
-          'Nein. equipe ist die Team-Ebene über bestehenden Agent-Engines, kein neuer Agent-Loop. Es ergänzt Rollen, ein Board als Single Source of Truth, isolierte git worktrees für parallele Arbeit und Freigabe-Schritte durch Menschen.',
+          'Nein. equipe ist die Team-Ebene über bestehenden Agent-Engines, kein neuer Agent-Loop. Es ergänzt Rollen, ein Board als Single Source of Truth, isolierte Git-Worktrees für parallele Arbeit und menschliche Freigabeschritte.',
       },
       {
         question: 'Mit welchen KI-Engines funktioniert equipe?',
@@ -99,7 +99,7 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Verwaltet equipe meine Zugangsdaten?',
         answer:
-          'Bei Claude Code nicht. Du führst das unveränderte `claude`-Binary aus und meldest dich selbst an, die Abrechnung läuft also über dein eigenes Konto. Bei Codex meldet sich equipe per OAuth mit deinem ChatGPT-Tarif an und gibt sich ehrlich als `originator: equipe` zu erkennen.',
+          'Bei Claude Code nicht. Du führst das unveränderte `claude`-Binary aus und meldest dich selbst an, die Abrechnung läuft also über dein eigenes Konto. Bei Codex meldet sich equipe per OAuth mit deinem ChatGPT-Abo an und gibt sich ehrlich als `originator: equipe` zu erkennen.',
       },
       {
         question: 'Wie installiere ich equipe?',
@@ -109,7 +109,7 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Wer gibt die Arbeit frei?',
         answer:
-          'Du. Jedes Mitglied arbeitet auf einem eigenen Branch in einem isolierten Worktree, und equipe holt eine menschliche Freigabe ein, bevor ein Branch gemergt wird. Der PM akzeptiert Arbeit auf dem Board; wer den Squad leitet, entscheidet, was übernommen wird.',
+          'Du. Jedes Mitglied arbeitet auf einem eigenen Branch in einem isolierten Worktree, und equipe holt eine menschliche Freigabe ein, bevor ein Branch gemergt wird. Der PM nimmt die Arbeit auf dem Board ab; wer den Squad leitet, entscheidet, was übernommen wird.',
       },
       {
         question: 'Ist equipe kostenlos und Open Source?',
@@ -119,15 +119,16 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Ist equipe für den Produktivbetrieb geeignet?',
         answer:
-          'equipe befindet sich in einer frühen Phase. Der Squad-Daemon läuft im Hintergrund, der PM akzeptiert Arbeit, Agenten arbeiten in Sandboxes auf Branches, und du gibst vor dem Merge frei. Übergaben und Kommunikationskanäle folgen als Nächstes, wie auf der Roadmap steht.',
+          'equipe befindet sich in einer frühen Phase. Der Squad-Daemon läuft im Hintergrund, der PM nimmt Arbeit ab, Agenten arbeiten in Sandboxes auf Branches, und du gibst vor dem Merge frei. Als Nächstes folgen Übergaben und Kommunikationskanäle, wie in der Roadmap beschrieben.',
       },
       {
         question: 'Was ist ein git worktree, und warum nutzt equipe ihn?',
         answer:
-          'Ein git worktree ist ein weiterer Arbeitsordner desselben Repositorys mit eigenem Branch. equipe gibt jedem Mitglied einen, damit mehrere gleichzeitig arbeiten können, ohne sich gegenseitig oder deinen Checkout anzufassen.',
+          'Ein Git-Worktree ist ein weiterer Arbeitsordner desselben Repositorys mit eigenem Branch. equipe gibt jedem Mitglied einen, damit mehrere gleichzeitig arbeiten können, ohne sich gegenseitig oder deinem Checkout in die Quere zu kommen.',
       },
     ],
   },
+  notFound: { title: 'Seite nicht gefunden — equipe', description: 'Diese Seite gibt es nicht.', heading: 'Seite nicht gefunden', text: 'Unter dieser Adresse gibt es nichts. Vielleicht wurde die Seite verschoben, oder der Link ist falsch.', home: 'Zur Startseite' },
   footer: { license: 'MIT-Lizenz', built: 'Öffentlich von einem equipe-Squad gebaut.' },
 };
 
