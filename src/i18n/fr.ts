@@ -25,12 +25,12 @@ const fr: Messages = {
   },
   nav: { howItWorks: 'Comment ça marche', getStarted: 'Commencer', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Votre squad logiciel IA, dirigé par vous.',
-    lead: 'equipe est un squad logiciel IA open source : une équipe d’agents par rôle (PM, Designer, Frontend, Backend, QA et Données) qui travaille sur votre dépôt via un tableau partagé, dans des git worktrees isolés, et attend l’approbation d’une personne avant toute fusion.',
-    note: 'equipe n’est pas une boucle d’agent de plus. C’est la couche d’équipe au-dessus de celles qui existent déjà : Codex et Claude Code aujourd’hui.',
+    title: 'Menez une équipe d’agents IA. Vous approuvez chaque merge.',
+    lead: 'Des agents PM, designer et développeur travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
     ctaPrimary: 'Voir sur GitHub',
-    ctaSecondary: 'Commencer',
-    chip: 'Stade précoce · Licence MIT',
+    chip: 'Phase initiale · Licence MIT · Compatible Codex et Claude Code',
+    shotAlt: 'Maquette de l’app de bureau equipe : un agent demande l’autorisation d’exécuter une commande, avec les boutons Autoriser une fois, Toujours et Refuser',
+    shotCaption: 'Maquette de l’app · bientôt disponible — un agent s’arrête avec « j’ai besoin d’une autorisation » et vous approuvez d’un clic.',
   },
   how: {
     title: 'Comment ça marche',

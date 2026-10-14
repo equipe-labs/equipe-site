@@ -24,12 +24,12 @@ const zhCN: Messages = {
   },
   nav: { howItWorks: '工作方式', getStarted: '开始使用', faq: '常见问题', github: 'GitHub' },
   hero: {
-    title: '由你带领的 AI 软件小队。',
-    lead: 'equipe 是开源的 AI 软件小队：由 PM、设计师、前端、后端、QA 和数据等角色的智能体组成团队，通过共享看板在你的仓库里工作。每个成员都在隔离的 git worktree 中干活，合并之前一定会等待人的批准。',
-    note: 'equipe 不是又一个智能体循环。它是叠加在现有智能体之上的团队层，目前支持 Codex 和 Claude Code。',
+    title: '带领 AI 智能体团队，合并由你批准。',
+    lead: 'PM、设计师和开发者智能体在共享看板上工作，各自在你仓库的独立分支上开发。没有你的批准，什么都不会合并。',
     ctaPrimary: '在 GitHub 上查看',
-    ctaSecondary: '开始使用',
-    chip: '早期阶段 · MIT 许可',
+    chip: '早期阶段 · MIT 许可 · 支持 Codex 和 Claude Code',
+    shotAlt: 'equipe 桌面应用示意图：智能体请求运行命令的许可，并有“允许一次”“始终允许”“拒绝”按钮',
+    shotCaption: '应用示意图 · 筹备中 — 智能体停下来说“需要你的许可”，你一键即可批准。',
   },
   how: {
     title: '工作方式',
