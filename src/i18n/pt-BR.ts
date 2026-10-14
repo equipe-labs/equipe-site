@@ -34,11 +34,10 @@ const ptBR: Messages = {
   how: {
     title: 'Como funciona',
     intro: 'Uma pessoa lidera. O squad trabalha em paralelo. Tudo passa pelo quadro.',
-    cards: [
-      { title: 'Funções', text: 'Cada membro tem uma função (PM, Designer, Frontend, Backend, QA ou Dados), com um modelo adequado a ela e uma memória própria.' },
-      { title: 'Tickets', text: 'O quadro é a única fonte da verdade. Os membros se coordenam por tickets e eventos imutáveis, não por chat, então cada ação deixa algo que você pode ver.' },
-      { title: 'Branches', text: 'Cada membro trabalha no próprio git worktree isolado, em um branch próprio. Assim, vários podem trabalhar no seu repositório ao mesmo tempo sem mexer no seu checkout.' },
-      { title: 'Sua aprovação', text: 'Você decide nos pontos de aprovação. Nada sofre merge até você dizer que sim.' },
+    steps: [
+      { title: 'Delegue', text: 'Diga ao PM o que você quer. Isso vira tickets em um quadro compartilhado, cada um com uma função para assumi-lo.' },
+      { title: 'Trabalho em paralelo', text: 'Os membros trabalham ao mesmo tempo, cada um no próprio branch. Seu checkout fica intacto e cada ação fica registrada no quadro.' },
+      { title: 'Sua aprovação', text: 'Antes de qualquer merge, o equipe pergunta a você. Nada entra até você dizer que sim.' },
     ],
   },
   who: {
@@ -121,6 +120,11 @@ equipe           # abre o console do squad`,
         question: 'O equipe está pronto para uso em produção?',
         answer:
           'O equipe está em estágio inicial. O daemon do squad roda em segundo plano, o PM aceita o trabalho, os agentes trabalham em branches dentro de sandboxes e você aprova antes do merge. As transferências (handoffs) e os canais de comunicação vêm a seguir, como mostra o roadmap.',
+      },
+      {
+        question: 'O que é um git worktree e por que o equipe o usa?',
+        answer:
+          'Um git worktree é outra pasta de trabalho do mesmo repositório, com seu próprio branch. O equipe dá um a cada membro, para que vários trabalhem ao mesmo tempo sem mexer um no outro nem no seu checkout.',
       },
     ],
   },

@@ -35,11 +35,10 @@ const fr: Messages = {
   how: {
     title: 'Comment ça marche',
     intro: 'Une personne dirige. Le squad travaille en parallèle. Tout passe par le tableau.',
-    cards: [
-      { title: 'Rôles', text: 'Chaque membre a un rôle (PM, Designer, Frontend, Backend, QA ou Données), avec un modèle adapté à ce rôle et sa propre mémoire.' },
-      { title: 'Tickets', text: 'Le tableau est la source unique de vérité. Les membres se coordonnent par tickets et par événements immuables, pas par chat, si bien que chaque action laisse une trace que vous pouvez voir.' },
-      { title: 'Branches', text: 'Chaque membre travaille dans son propre git worktree isolé, sur sa propre branche. Plusieurs peuvent donc travailler en même temps sur votre dépôt sans toucher à votre copie de travail.' },
-      { title: 'Votre approbation', text: 'Vous gardez la main aux étapes d’approbation. Rien n’est fusionné tant que vous ne l’avez pas dit.' },
+    steps: [
+      { title: 'Confier', text: 'Dites au PM ce que vous voulez. Cela devient des tickets sur un tableau partagé, chacun avec un rôle pour le prendre en charge.' },
+      { title: 'Travail en parallèle', text: 'Les membres travaillent en même temps, chacun sur sa propre branche. Votre copie de travail reste intacte, et chaque action est consignée sur le tableau.' },
+      { title: 'Votre approbation', text: 'Avant toute fusion, equipe vous demande. Rien n’est intégré tant que vous ne l’avez pas dit.' },
     ],
   },
   who: {
@@ -122,6 +121,11 @@ equipe           # ouvrir la console du squad`,
         question: 'equipe est-il prêt pour la production ?',
         answer:
           'equipe en est à un stade précoce. Le démon du squad tourne en arrière-plan, le PM accepte le travail, les agents travaillent sur des branches dans des sandboxes, et vous approuvez avant la fusion. Les passations et les canaux de communication arrivent ensuite, comme l’indique la feuille de route.',
+      },
+      {
+        question: 'Qu’est-ce qu’un git worktree, et pourquoi equipe l’utilise-t-il ?',
+        answer:
+          'Un git worktree est un autre dossier de travail du même dépôt, avec sa propre branche. equipe en donne un à chaque membre, pour que plusieurs travaillent en même temps sans toucher ni aux autres ni à votre copie de travail.',
       },
     ],
   },
