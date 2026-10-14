@@ -52,13 +52,16 @@ const ko: Messages = {
     proof: '이 사이트도 equipe 스쿼드가 공개적으로 만들었어요. 모든 변경은 티켓에서 시작해, 사람이 수락한 브랜치로 반영됐어요.',
   },
   apps: {
-    title: '데스크톱·모바일 앱',
-    intro: '스쿼드가 맥과 폰으로 찾아와요. 어디에 있든 일을 지켜보고 결정할 수 있어요.',
+    title: '맥에서 지켜보고, 폰에서 승인해요.',
+    intro: '스쿼드는 터미널 밖에서도 보여요. 에이전트가 허가를 기다리면 폰이 알려주고, Face ID로 승인해요. 주고받는 내용은 종단 간 암호화돼요.',
     soon: '준비 중',
+    caption: '앱 시안 · 준비 중',
     items: [
-      { title: '데스크톱 앱', platform: 'macOS', points: ['스쿼드와 멤버를 한눈에 보기', 'PM과 대화하기', '보드에서 티켓 따라가기', '대화에 스크린샷 붙여넣기'] },
-      { title: '모바일 앱', platform: 'iOS · Android', points: ['Face ID나 지문으로 폰에서 바로 승인하기', '보드에서 티켓 따라가기', 'PM과 대화하기', '맥과 QR 코드로 페어링하고, 주고받는 내용은 종단 간 암호화돼요'] },
+      { title: '데스크톱 앱', platform: 'macOS', text: '스쿼드, 보드, PM 대화를 한 창에서.', alt: '데스크톱 앱 시안: 에이전트가 명령 실행 허가를 요청하고, 한 번 허용·항상·거절 버튼이 있어요.' },
+      { title: '모바일 앱', platform: 'iOS · Android', text: '승인이 필요할 때만 알려줘요.', alt: '모바일 앱 시안: 승인 요청 두 건이 기다리고 있어요.' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: '명령을 실행할까요?', allow: '한 번 허용', decline: '거절', askMerge: '브랜치를 머지할까요?', approve: '승인', changes: '변경 요청' },
+    notify: { title: '앱이 나오면 알려드릴까요?', text: 'GitHub 릴리스를 구독하면 새 릴리스 소식만 메일로 와요. 가입도, 이메일 수집도 없어요.', cta: 'GitHub에서 알림 받기', how: 'equipe-labs/equipe 저장소에서 Watch → Custom → Releases를 고르세요.' },
   },
   start: {
     title: '시작하기',

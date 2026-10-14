@@ -54,13 +54,16 @@ export const en = {
     proof: 'This site was built by an equipe squad, in public. Every change started as a ticket and landed as a branch a person accepted.',
   },
   apps: {
-    title: 'Apps for desktop and mobile',
-    intro: 'The squad is coming to your Mac and your phone, so you can follow the work and make the calls from wherever you are.',
+    title: 'Watch on your Mac, approve on your phone.',
+    intro: 'The squad shows up outside the terminal too. When an agent waits for your OK, your phone tells you and you approve with Face ID. What you send is end-to-end encrypted.',
     soon: 'Coming soon',
+    caption: 'App mockup · coming soon',
     items: [
-      { title: 'Desktop app', platform: 'macOS', points: ['See your squad and its members', 'Talk to the PM', 'Follow tickets on the board', 'Paste screenshots into the conversation'] },
-      { title: 'Mobile app', platform: 'iOS · Android', points: ['Approve from your phone with Face ID or your fingerprint', 'Follow tickets on the board', 'Talk to the PM', 'Pair with your Mac by scanning a QR code; what you send is end-to-end encrypted'] },
+      { title: 'Desktop app', platform: 'macOS', text: 'Squad, board and PM chat in one window.', alt: 'Desktop app mockup: an agent asks to run a command, with Allow once, Always and Decline buttons.' },
+      { title: 'Mobile app', platform: 'iOS · Android', text: 'Only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: 'Run the command?', allow: 'Allow once', decline: 'Decline', askMerge: 'Merge the branch?', approve: 'Approve', changes: 'Request changes' },
+    notify: { title: 'Want to know when the apps ship?', text: 'Subscribe to releases on GitHub and you get an email only for new releases. No sign-up with us, no email collected.', cta: 'Get notified on GitHub', how: 'On the equipe-labs/equipe repo: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Get started',

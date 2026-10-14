@@ -52,13 +52,16 @@ const de: Messages = {
     proof: 'Diese Website hat ein equipe-Squad öffentlich gebaut. Jede Änderung begann als Ticket und kam als Branch an, den eine Person akzeptiert hat.',
   },
   apps: {
-    title: 'Apps für Desktop und Mobilgerät',
-    intro: 'Der Squad kommt auf deinen Mac und dein Smartphone, damit du die Arbeit verfolgen und von überall entscheiden kannst.',
+    title: 'Am Mac verfolgen, am Smartphone freigeben.',
+    intro: 'Der Squad ist auch außerhalb des Terminals sichtbar. Wartet ein Agent auf dein OK, meldet sich das Smartphone und du gibst per Face ID frei. Die Inhalte sind Ende-zu-Ende-verschlüsselt.',
     soon: 'In Vorbereitung',
+    caption: 'App-Entwurf · in Vorbereitung',
     items: [
-      { title: 'Desktop-App', platform: 'macOS', points: ['Deinen Squad und seine Mitglieder sehen', 'Mit dem PM sprechen', 'Tickets auf dem Board verfolgen', 'Screenshots in die Unterhaltung einfügen'] },
-      { title: 'Mobile App', platform: 'iOS · Android', points: ['Per Face ID oder Fingerabdruck auf dem Smartphone freigeben', 'Tickets auf dem Board verfolgen', 'Mit dem PM sprechen', 'Per QR-Code mit dem Mac koppeln; die Inhalte sind Ende-zu-Ende-verschlüsselt'] },
+      { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Board und PM-Chat in einem Fenster.', alt: 'Entwurf der Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen.' },
+      { title: 'Mobile App', platform: 'iOS · Android', text: 'Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Entwurf der mobilen App: zwei Freigabeanfragen warten.' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: 'Befehl ausführen?', allow: 'Einmal erlauben', decline: 'Ablehnen', askMerge: 'Branch mergen?', approve: 'Freigeben', changes: 'Änderungen anfordern' },
+    notify: { title: 'Möchtest du wissen, wann die Apps erscheinen?', text: 'Abonniere die Releases auf GitHub und bekomme nur bei neuen Versionen eine E-Mail. Keine Anmeldung bei uns, keine E-Mail-Erfassung.', cta: 'Auf GitHub benachrichtigen lassen', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Loslegen',

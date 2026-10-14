@@ -52,13 +52,16 @@ const zhCN: Messages = {
     proof: '这个网站就是由一支 equipe 小队公开构建的。每个改动都从一张工单开始，以一个经人验收的分支落地。',
   },
   apps: {
-    title: '桌面与移动应用',
-    intro: '小队即将来到你的 Mac 和手机，无论身在何处，都能关注进展并做出决定。',
+    title: '在 Mac 上关注，在手机上批准。',
+    intro: '小队在终端之外也看得见。智能体等待你许可时，手机会提醒你，用 Face ID 即可批准。传输的内容经端到端加密。',
     soon: '即将推出',
+    caption: '应用示意图 · 即将推出',
     items: [
-      { title: '桌面应用', platform: 'macOS', points: ['查看小队和成员', '与 PM 对话', '在看板上跟进工单', '把截图粘贴到对话中'] },
-      { title: '移动应用', platform: 'iOS · Android', points: ['用 Face ID 或指纹在手机上批准', '在看板上跟进工单', '与 PM 对话', '扫描二维码与 Mac 配对，传输的内容经端到端加密'] },
+      { title: '桌面应用', platform: 'macOS', text: '小队、看板和 PM 对话，一个窗口搞定。', alt: '桌面应用示意图：智能体请求运行命令，有“允许一次”“始终允许”“拒绝”按钮。' },
+      { title: '移动应用', platform: 'iOS · Android', text: '只在需要你批准时提醒你。', alt: '移动应用示意图：有两条批准请求在等待。' },
     ],
+    phone: { label: 'APPROVE · 3', askCommand: '运行该命令？', allow: '允许一次', decline: '拒绝', askMerge: '合并该分支？', approve: '批准', changes: '请求修改' },
+    notify: { title: '应用上线时通知你？', text: '订阅 GitHub Releases，只会在有新版本时收到邮件。无需注册，我们也不收集邮箱。', cta: '在 GitHub 上订阅通知', how: '在 equipe-labs/equipe 仓库选择 Watch → Custom → Releases。' },
   },
   start: {
     title: '开始使用',
