@@ -28,6 +28,7 @@ const ko: Messages = {
     lead: 'PM·디자이너·개발자·모바일 에이전트가 보드에서 일하고, 각자 당신 저장소의 자기 브랜치에서 작업해요. 당신 승인 없이는 아무것도 머지되지 않아요.',
     ctaPrimary: 'GitHub에서 보기',
     chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
+    cliLink: '터미널로 설치하기 (CLI)',
     shotAlt: 'equipe 데스크톱 앱: 진행 중인 일 사이드바, “당신 차례”와 “검토”가 맨 위에 오는 상태별 티켓 목록, 그 옆에 열린 티켓',
     shotCaption: 'macOS용 equipe 데스크톱 앱 — 티켓을 목록이나 보드로 보고, 당신을 기다리는 일이 맨 위에 와요.',
   },
@@ -79,6 +80,14 @@ const ko: Messages = {
   },
   start: {
     title: '시작하기',
+    appSteps: [
+      { title: 'DMG 열기', text: '내려받은 `equipe.dmg`를 열어요. 서명·공증되어 있어서 macOS가 경고 없이 열어 줘요.' },
+      { title: 'Applications로 옮기기', text: '같은 창의 Applications 폴더로 equipe를 끌어다 놓고, 디스크 이미지는 꺼내요.' },
+      { title: 'equipe 실행', text: 'Applications에서 equipe를 열어요. 그다음부터는 앱이 스스로 업데이트를 확인해요.' },
+      { title: '첫 squad 시작', text: '앱은 `equipe` CLI가 있어야 해요. 찾지 못하면 설치 방법을 보여 주니 그 줄을 따라 하세요. 스쿼드가 꺼져 있다고 나오면 터미널에서 `equipe`를 실행하세요. 앱이 거기에 연결돼요.' },
+    ],
+    cliTitle: '터미널로 설치 (CLI)',
+    cliIntro: '데스크톱 앱은 `equipe` CLI가 있어야 하고, 터미널만으로 스쿼드를 쓸 수도 있어요. macOS와 Linux에서 아래 중 한 가지로 설치하세요.',
     install: 'macOS와 Linux에서는 한 줄이면 돼요. 미리 빌드된 `equipe`를 `~/.local/bin`에 설치하고(SHA-256 확인), PATH에도 추가해요:',
     brew: 'Homebrew tap으로 미리 빌드된 `equipe`를 설치해요. 나중에 `brew upgrade equipe`로 업데이트해요:',
     tabsLabel: '설치 방법',
@@ -119,7 +128,7 @@ equipe           # 스쿼드 콘솔 열기`,
       {
         question: 'equipe는 어떻게 설치하나요?',
         answer:
-          'macOS와 Linux에서는 `brew install equipe-labs/tap/equipe` 한 줄이면 돼요. install.sh 한 줄이나 소스 빌드(Rust 1.88+)도 쓸 수 있어요. 방법은 모두 시작하기에 있어요.',
+          '가장 쉬운 방법은 macOS 데스크톱 앱이에요. 최신 릴리스에서 `equipe.dmg`를 받아 Applications로 옮기면 돼요. 앱은 `equipe` CLI가 필요하고, 없으면 설치 방법을 보여 줘요. 터미널로 쓰거나 Linux라면 `brew install equipe-labs/tap/equipe`, install.sh 한 줄, 소스 빌드(Rust 1.88+) 중에서 고르세요. 방법은 모두 시작하기에 있어요.',
       },
       {
         question: '작업은 누가 승인하나요?',

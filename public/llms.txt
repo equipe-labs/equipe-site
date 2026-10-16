@@ -15,9 +15,11 @@
 
 ## Get started
 
-Desktop app: download https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg (it needs the CLI below).
+Desktop app (the easiest way, macOS 12+, Apple Silicon and Intel, signed and notarized): download https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg, open it and drag equipe to Applications. The app needs the `equipe` CLI and shows how to install it if it is missing; if it says the squad is off, run `equipe` in a terminal.
 
-Install a prebuilt `equipe` on macOS or Linux (it goes in `~/.local/bin`, checked against its SHA-256):
+CLI (macOS and Linux, for the terminal and for the app):
+
+Install a prebuilt `equipe` (it goes in `~/.local/bin`, checked against its SHA-256):
 
     curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh
 

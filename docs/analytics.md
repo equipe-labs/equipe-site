@@ -64,8 +64,10 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 |---|---|---|
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` | GitHub로 가는 CTA·링크 클릭 |
+| `desktop_download_click` | `location`: `hero` / `apps` | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137) |
+| `cli_install_link_click` | `location`: `hero` | 히어로의 "터미널로 설치하기" 링크 클릭 (설치 섹션의 CLI 블록으로 이동) |
 | `app_notify_click` | `location`: `apps` | 앱 섹션의 "GitHub에서 알림 받기" 클릭 (출시 알림 구독 유도) |
-| `install_command_copy` | `command`: `install` / `install_brew` / `run` / `try`, `location`: `hero`(히어로의 brew 명령에만) | 설치 명령 복사 버튼 클릭 |
+| `install_command_copy` | `command`: `install` / `install_brew` / `run` / `try`, (설치 섹션의 명령에만. T-137 전에는 히어로의 brew 명령에 `location=hero`가 붙었다) | 설치 명령 복사 버튼 클릭 |
 | `language_switch` | `from`, `to`(hreflang 값), `source`: `menu` / `banner` | 언어 메뉴 항목 또는 언어 배너 링크 클릭 |
 | `language_banner_shown` | `from`, `suggested` | 언어 제안 배너가 실제로 화면에 나타남 |
 | `language_banner_dismissed` | `from`, `suggested` | 배너의 닫기(×) 클릭 |
@@ -118,7 +120,7 @@ GitHub 트래픽 API는 최근 14일치만 준다. `.github/workflows/github-tra
 | 방문 | `$pageview` 수(`environment = production`). 쿠키 없는 수집이라 방문자 ≈ 페이지 로드다 | 방문: 일별·주별·언어별·국가별·채널별 |
 | 국가 | PostHog GeoIP의 `$geoip_country_name` | 방문: 국가별 |
 | AI 유입 | `ai_source`가 있는 방문 | AI 유입 |
-| 전환 | 같은 페이지 로드 안에서 `cta_github_click` 또는 `install_command_copy`가 한 번 이상 일어남. PostHog Action "GitHub 전환"으로 묶었다 | 전환 퍼널, 성과표 |
+| 전환 | 같은 페이지 로드 안에서 `cta_github_click`, `install_command_copy` 또는 `desktop_download_click`이 한 번 이상 일어남. PostHog Action "GitHub 전환"으로 묶었다 | 전환 퍼널, 성과표 |
 | 전환율 | 전환한 방문 ÷ 방문 | 성과표 ①②, 전환 퍼널 |
 | star | 수집 시점의 `stargazers_count` | ③ GitHub star 추이 |
 | 리포 views / clones | GitHub 트래픽 API의 일별 값(고유 값은 GitHub가 센 고유 방문자) | 리포 views / clones |

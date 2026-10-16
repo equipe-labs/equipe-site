@@ -30,6 +30,7 @@ export const en = {
     lead: 'PM, designer, developer and mobile agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
     ctaPrimary: 'View on GitHub',
     chip: 'Early-stage · MIT licensed · Codex and Claude Code',
+    cliLink: 'Prefer the terminal? Install the CLI',
     shotAlt: 'The equipe desktop app: a sidebar of live work, a ticket list grouped by status with “Your turn” and “Review” on top, and the open ticket beside it',
     shotCaption: 'The equipe desktop app for macOS — your tickets as a list or a board, with what waits for you on top.',
   },
@@ -81,6 +82,14 @@ export const en = {
   },
   start: {
     title: 'Get started',
+    appSteps: [
+      { title: 'Open the DMG', text: 'Open the downloaded `equipe.dmg`. It is signed and notarized, so macOS opens it without a warning.' },
+      { title: 'Move it to Applications', text: 'Drag equipe onto the Applications folder in the same window, then eject the disk image.' },
+      { title: 'Open equipe', text: 'Launch it from Applications. From then on the app checks for updates itself.' },
+      { title: 'Start your first squad', text: 'The app needs the `equipe` CLI. If it can’t find it, it shows how to install it; follow that line. If it says the squad is off, run `equipe` in a terminal and the app attaches to it.' },
+    ],
+    cliTitle: 'Install from the terminal (CLI)',
+    cliIntro: 'The desktop app needs the `equipe` CLI, and you can also run the squad entirely from a terminal. Pick one way to install it on macOS or Linux:',
     install: 'One line on macOS and Linux. It puts a prebuilt `equipe` in `~/.local/bin`, checked against its SHA-256, and adds it to your PATH:',
     brew: 'Installs a prebuilt `equipe` through the Homebrew tap. Update later with `brew upgrade equipe`:',
     tabsLabel: 'Install method',
@@ -122,7 +131,7 @@ equipe           # open the squad console`,
       {
         question: 'How do I install equipe?',
         answer:
-          'On macOS and Linux, run `brew install equipe-labs/tap/equipe`. You can also use the install.sh one-liner or build from source (Rust 1.88+); every method is in Get started.',
+          'The easiest way is the macOS desktop app: download `equipe.dmg` from the latest release and move it to Applications. The app needs the `equipe` CLI and shows how to install it if it is missing. For the terminal, or on Linux, run `brew install equipe-labs/tap/equipe`, use the install.sh one-liner, or build from source (Rust 1.88+); every method is in Get started.',
       },
       {
         question: 'Who approves the work?',

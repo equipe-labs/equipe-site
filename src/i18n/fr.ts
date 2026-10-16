@@ -29,6 +29,7 @@ const fr: Messages = {
     lead: 'Des agents PM, designer, développeur et mobile travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
     ctaPrimary: 'Voir sur GitHub',
     chip: 'Phase initiale · Licence MIT · Codex et Claude Code',
+    cliLink: 'Plutôt le terminal ? Installer la CLI',
     shotAlt: 'L’appli de bureau equipe : une barre latérale du travail en cours, une liste de tickets groupés par statut avec « Votre tour » et « À relire » en haut, et le ticket ouvert à côté',
     shotCaption: 'L’appli de bureau equipe pour macOS — vos tickets en liste ou en tableau, avec ce qui vous attend en haut.',
   },
@@ -80,6 +81,14 @@ const fr: Messages = {
   },
   start: {
     title: 'Commencer',
+    appSteps: [
+      { title: 'Ouvrir le DMG', text: 'Ouvrez le fichier `equipe.dmg` téléchargé. Il est signé et notarisé : macOS l’ouvre sans avertissement.' },
+      { title: 'Le glisser dans Applications', text: 'Glissez equipe sur le dossier Applications de la même fenêtre, puis éjectez l’image disque.' },
+      { title: 'Ouvrir equipe', text: 'Lancez-la depuis Applications. Ensuite, l’appli vérifie elle-même les mises à jour.' },
+      { title: 'Démarrer votre premier squad', text: 'L’appli a besoin de la CLI `equipe`. Si elle ne la trouve pas, elle montre comment l’installer : suivez cette ligne. Si elle indique que le squad est arrêté, lancez `equipe` dans un terminal et l’appli s’y connecte.' },
+    ],
+    cliTitle: 'Installer depuis le terminal (CLI)',
+    cliIntro: 'L’appli de bureau a besoin de la CLI `equipe`, et vous pouvez aussi utiliser le squad entièrement depuis un terminal. Sur macOS et Linux, choisissez une méthode :',
     install: 'Sur macOS et Linux, une seule ligne suffit. Elle place un `equipe` précompilé dans `~/.local/bin` (vérifié par SHA-256) et l’ajoute à votre PATH\u202F:',
     brew: 'Installe un `equipe` précompilé via le tap Homebrew. Pour mettre à jour ensuite\u202F: `brew upgrade equipe`.',
     tabsLabel: 'Méthode d’installation',
@@ -120,7 +129,7 @@ equipe           # ouvrir la console du squad`,
       {
         question: 'Comment installer equipe ?',
         answer:
-          'Sur macOS et Linux, lancez `brew install equipe-labs/tap/equipe`. Vous pouvez aussi utiliser la ligne install.sh ou compiler depuis les sources (Rust 1.88+)\u202F; toutes les méthodes sont décrites dans «\u202FCommencer\u202F».',
+          'Le plus simple est l’appli de bureau pour macOS : téléchargez `equipe.dmg` depuis la dernière version et glissez-la dans Applications. L’appli a besoin de la CLI `equipe` et montre comment l’installer si elle manque. Pour le terminal, ou sous Linux, lancez `brew install equipe-labs/tap/equipe`, utilisez la ligne install.sh ou compilez depuis les sources (Rust 1.88+) ; toutes les méthodes sont dans Démarrer.',
       },
       {
         question: 'Qui approuve le travail ?',

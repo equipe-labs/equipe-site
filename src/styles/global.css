@@ -67,9 +67,6 @@ section + section { border-top: var(--bw-1) solid var(--line); }
 @media (min-width: 641px) { .hero .lead { font-size: 22px; } }
 .hero-mark { display: none; flex: none; }
 @media (min-width: 900px) { .hero-mark { display: block; } }
-.hero-install { display: flex; flex-direction: column; gap: var(--s-3); margin-bottom: var(--s-5); }
-.hero-install .codeblock { margin: 0; }
-@media (min-width: 641px) { .hero-install { flex-direction: row; align-items: stretch; } .hero-install .codeblock { flex: 0 1 560px; min-width: 0; } .hero-install .btn { flex: none; white-space: nowrap; } }
 .hero-shot { margin: 0; }
 .hero-shot img { display: block; width: 100%; height: auto; border-radius: var(--r-2); border: var(--bw-1) solid var(--line); box-shadow: 0 24px 60px rgb(26 26 23 / 0.14); }
 .hero-shot figcaption { margin-top: var(--s-3); font-size: 14px; color: var(--muted); }
@@ -218,3 +215,18 @@ main.doc li { margin-bottom: var(--s-2); }
 main.doc p.small { margin-top: var(--s-5); }
 main.doc .contact { margin-top: var(--s-7); padding-top: var(--s-5); border-top: var(--bw-1) solid var(--line); }
 nav a[aria-current='page'] { font-weight: 700; }
+
+/* hero: the Mac download is the biggest thing above the fold; the terminal install is a small link */
+.hero-download { margin-bottom: var(--s-5); }
+.btn.lg { min-height: 56px; padding: 0 var(--s-6); font-size: 19px; }
+@media (max-width: 640px) { .hero-download .btn.lg { display: flex; } }
+.hero-download .req { margin: var(--s-3) 0 0; font-size: 14px; color: var(--muted); }
+.hero-download .alt { margin: var(--s-3) 0 0; font-size: 15px; color: var(--muted); }
+.hero-download .alt a { color: var(--accent); }
+/* get started: the app steps, then the CLI install below */
+.app-steps { list-style: none; margin: var(--s-6) 0 0; padding: 0; display: grid; gap: var(--s-4); max-width: 720px; }
+.app-steps li { display: flex; gap: var(--s-4); align-items: flex-start; }
+.app-steps .num { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-flex; align-items: center; justify-content: center; font: 600 14px/1 var(--sans); margin-top: 2px; }
+.app-steps h3 { margin: 0; }
+.app-steps p { margin: var(--s-1) 0 0; }
+.cli-title { margin: var(--s-7) 0 0; scroll-margin-top: var(--s-6); }
