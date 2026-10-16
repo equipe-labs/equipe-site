@@ -39,7 +39,7 @@ const funnel = (actionId, breakdown) => ({
 const table = (query) => ({ kind: 'DataTableNode', source: { kind: 'HogQLQuery', query: query.replace(/\s+/g, ' ').trim() } });
 
 const SITE_WHERE = "properties.environment = 'production' AND timestamp > now() - INTERVAL 30 DAY";
-const CONVERTED = "event IN ('cta_github_click', 'install_command_copy')";
+const CONVERTED = "event IN ('cta_github_click', 'install_command_copy', 'desktop_download_click')";
 // Per-visit conversion: with cookieless tracking one distinct_id = one page load (docs/analytics.md).
 const scorecard = (dim, label) =>
   table(`

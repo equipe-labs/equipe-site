@@ -28,6 +28,7 @@ const ja: Messages = {
     lead: 'PM・デザイナー・開発者・モバイルのエージェントが共有ボードから仕事を受け取り、あなたのリポジトリでそれぞれ専用のブランチを使って作業します。あなたが承認しない限り、何もマージされません。',
     ctaPrimary: 'GitHubで見る',
     chip: '初期段階 · MITライセンス · Codex・Claude Code対応',
+    cliLink: 'ターミナルで入れる（CLI）',
     shotAlt: 'equipeデスクトップアプリ：進行中の作業が並ぶサイドバー、「あなたの番」と「レビュー」が先頭に来るステータス別のチケット一覧、その横に開いたチケット',
     shotCaption: 'macOS向けのequipeデスクトップアプリ — チケットを一覧でもボードでも見られ、あなたを待っているものが先頭に来ます。',
   },
@@ -79,6 +80,14 @@ const ja: Messages = {
   },
   start: {
     title: 'はじめる',
+    appSteps: [
+      { title: 'DMGを開く', text: 'ダウンロードした`equipe.dmg`を開きます。署名・公証済みなので、macOSは警告なしで開きます。' },
+      { title: 'Applicationsへ移す', text: '同じウィンドウのApplicationsフォルダにequipeをドラッグし、ディスクイメージを取り出します。' },
+      { title: 'equipeを起動', text: 'Applicationsからequipeを開きます。以降の更新はアプリが自分で確認します。' },
+      { title: '最初のスクワッドを始める', text: 'アプリには`equipe` CLIが必要です。見つからない場合はインストール方法が表示されるので、その行に従ってください。スクワッドが停止中と表示されたら、ターミナルで`equipe`を実行すると、アプリがそれに接続します。' },
+    ],
+    cliTitle: 'ターミナルでインストール（CLI）',
+    cliIntro: 'デスクトップアプリには`equipe` CLIが必要で、スクワッドをターミナルだけで使うこともできます。macOSとLinuxでは次のいずれかでインストールします：',
     install: 'macOSとLinuxなら1行で済みます。ビルド済みの`equipe`をSHA-256で検証したうえで`~/.local/bin`に配置し、PATHにも追加します：',
     brew: 'Homebrew tapからビルド済みの`equipe`をインストールします。今後の更新は`brew upgrade equipe`で行えます：',
     tabsLabel: 'インストール方法',
@@ -119,7 +128,7 @@ equipe           # スクワッドコンソールを開く`,
       {
         question: 'equipeはどうやってインストールしますか？',
         answer:
-          'macOSとLinuxでは`brew install equipe-labs/tap/equipe`の1行で済みます。install.shの1行や、ソースからのビルド(Rust 1.88+)も使えます。方法はすべて「はじめる」にあります。',
+          '一番簡単なのはmacOSのデスクトップアプリです。最新リリースから`equipe.dmg`をダウンロードして、Applicationsに移します。アプリには`equipe` CLIが必要で、ない場合はインストール方法が表示されます。ターミナルで使う場合やLinuxでは、`brew install equipe-labs/tap/equipe`、install.shの1行、またはソースからのビルド(Rust 1.88+)を使えます。方法はすべて「はじめる」にあります。',
       },
       {
         question: '作業は誰が承認しますか？',
