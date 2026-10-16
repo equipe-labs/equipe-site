@@ -62,9 +62,10 @@ const tryIt = 'equipe try --edit "…"';
         <div class="col">
           <h1>{t.hero.title}</h1>
           <p class="lead">{t.hero.lead}</p>
-          <div class="hero-install">
-            <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" data-ph-location="hero" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
-            <a class="btn secondary" href={SITE.repo} data-ph="cta_github_click" data-ph-location="hero">{t.hero.ctaPrimary}</a>
+          <div class="hero-download">
+            <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="hero" download>{t.apps.download}</a>
+            <p class="req">{t.apps.req}</p>
+            <p class="alt"><a href="#cli-install" data-ph="cli_install_link_click" data-ph-location="hero">{t.hero.cliLink}</a> · <a href={SITE.repo} data-ph="cta_github_click" data-ph-location="hero">{t.hero.ctaPrimary}</a></p>
           </div>
           <span class="chip">{t.hero.chip}</span>
         </div>
@@ -200,6 +201,13 @@ const tryIt = 'equipe try --edit "…"';
     <section id="get-started">
       <div class="wrap">
         <h2>{t.start.title}</h2>
+        <ol class="app-steps">
+          {t.start.appSteps.map((c, i) => (
+            <li><span class="num" aria-hidden="true">{i + 1}</span><div><h3>{c.title}</h3><p><Rich s={c.text} /></p></div></li>
+          ))}
+        </ol>
+        <h3 id="cli-install" class="cli-title">{t.start.cliTitle}</h3>
+        <p class="col"><Rich s={t.start.cliIntro} /></p>
         <div class="tabs">
           <input type="radio" name="install-method" id="tab-brew" class="tab-input" checked />
           <input type="radio" name="install-method" id="tab-script" class="tab-input" />

@@ -28,6 +28,7 @@ const zhCN: Messages = {
     lead: 'PM、设计师、开发者和移动端智能体在共享看板上工作，各自在你仓库的独立分支上开发。未经你批准，任何改动都不会被合并。',
     ctaPrimary: '在 GitHub 上查看',
     chip: '早期阶段 · MIT 许可证 · 支持 Codex 和 Claude Code',
+    cliLink: '更喜欢终端？安装 CLI',
     shotAlt: 'equipe 桌面应用：进行中工作的侧边栏、按状态分组的工单列表，“轮到你”和“审查”排在最上面，旁边是打开的工单',
     shotCaption: 'macOS 版 equipe 桌面应用——工单可按列表或看板查看，等你处理的事排在最上面。',
   },
@@ -79,6 +80,14 @@ const zhCN: Messages = {
   },
   start: {
     title: '开始使用',
+    appSteps: [
+      { title: '打开 DMG', text: '打开下载的 `equipe.dmg`。它已签名并经过公证，macOS 会直接打开，不会弹出警告。' },
+      { title: '拖到“应用程序”', text: '在同一窗口里把 equipe 拖到“应用程序”（Applications）文件夹，然后推出磁盘映像。' },
+      { title: '打开 equipe', text: '从“应用程序”启动它。之后应用会自己检查更新。' },
+      { title: '开始第一个 squad', text: '应用需要 `equipe` CLI。找不到时它会显示安装方法，照着那一行做即可。如果提示 squad 未运行，请在终端运行 `equipe`，应用会连接上去。' },
+    ],
+    cliTitle: '在终端安装（CLI）',
+    cliIntro: '桌面应用需要 `equipe` CLI，你也可以只在终端里使用 squad。在 macOS 和 Linux 上，任选一种方式安装：',
     install: '在 macOS 和 Linux 上只需一行命令。它会把预编译的 `equipe` 放到 `~/.local/bin`（并校验 SHA-256），同时加入 PATH：',
     brew: '通过 Homebrew tap 安装预编译的 `equipe`。之后用 `brew upgrade equipe` 更新：',
     tabsLabel: '安装方式',
@@ -119,7 +128,7 @@ equipe           # 打开小队控制台`,
       {
         question: '怎么安装 equipe？',
         answer:
-          '在 macOS 和 Linux 上运行 `brew install equipe-labs/tap/equipe` 即可。也可以用 install.sh 一行命令，或从源码构建（Rust 1.88+）；所有方式都在“开始使用”里。',
+          '最简单的方式是 macOS 桌面应用：从最新发布下载 `equipe.dmg`，拖到“应用程序”即可。应用需要 `equipe` CLI，缺少时会显示安装方法。若在终端使用或使用 Linux，可运行 `brew install equipe-labs/tap/equipe`，或用 install.sh 一行命令，也可以从源码构建（Rust 1.88+）；所有方式都在“开始使用”中。',
       },
       {
         question: '谁来批准这些工作？',
