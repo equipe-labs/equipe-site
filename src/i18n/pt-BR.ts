@@ -28,8 +28,8 @@ const ptBR: Messages = {
     lead: 'Agentes de PM, design, desenvolvimento e mobile trabalham em um quadro compartilhado, cada um no seu próprio branch do repositório. Nada entra sem a sua aprovação.',
     ctaPrimary: 'Ver no GitHub',
     chip: 'Fase inicial · Licença MIT · Compatível com Codex e Claude Code',
-    shotAlt: 'Prévia do app para desktop do equipe: um agente pede permissão para executar um comando, com os botões Permitir uma vez, Sempre e Recusar',
-    shotCaption: 'Prévia do app para desktop: um agente pausa com “Preciso de permissão” e você aprova com um clique. (App em breve)',
+    shotAlt: 'O app para desktop do equipe: uma barra lateral com o trabalho ao vivo, uma lista de tickets agrupados por status com “Sua vez” e “Revisão” no topo, e o ticket aberto ao lado',
+    shotCaption: 'O app para desktop do equipe para macOS: seus tickets em lista ou em quadro, com o que espera por você no topo.',
   },
   how: {
     title: 'Como funciona',
@@ -38,6 +38,18 @@ const ptBR: Messages = {
       { title: 'Delegue', text: 'Diga ao PM o que você quer. Isso vira tickets em um quadro compartilhado, cada um com um papel responsável por ele.' },
       { title: 'Trabalho em paralelo', text: 'Os membros trabalham ao mesmo tempo, cada um no próprio branch. Seu checkout fica intacto e cada ação fica registrada no quadro.' },
       { title: 'Sua aprovação', text: 'Antes de qualquer merge, o equipe pergunta a você. Nada entra até você dizer que sim.' },
+    ],
+  },
+  features: {
+    title: 'O que você recebe',
+    intro: 'O squad roda em um daemon em segundo plano, então fechar o terminal nunca o interrompe. Todas as telas mostram o mesmo time.',
+    items: [
+      { title: 'Papéis em um só quadro', text: 'PM, Designer, Frontend, Backend, Mobile, QA e Data, cada um com um modelo adequado ao papel e a própria memória. O quadro é a única fonte da verdade.' },
+      { title: 'Branches isolados', text: 'Cada membro trabalha no próprio git worktree, dentro de um sandbox. O que vai além, como um push ou um deploy, espera a sua resposta.' },
+      { title: 'As decisões chegam até você', text: 'Pedidos de permissão e as perguntas dos membros chegam como cartões que você responde com uma tecla ou um clique.' },
+      { title: 'Vários projetos, um squad', text: 'A conversa acompanha o projeto que você escolher, e o trabalho de um ticket fica com o ticket.' },
+      { title: 'Um app para desktop no macOS', text: 'Barra lateral com o trabalho ao vivo, tela de tickets com lista e quadro, ⌘K para buscar todo o trabalho e um painel de navegador. Oito idiomas e atualização automática.' },
+      { title: 'Celular e outros Macs', text: 'Pareie um celular com um QR code e receba um push quando precisarem de você. Conecte o app a um squad em outro Mac por SSH.' },
     ],
   },
   who: {
@@ -52,18 +64,18 @@ const ptBR: Messages = {
   },
   apps: {
     title: 'Acompanhe no Mac, aprove no celular.',
-    intro: 'O squad também aparece fora do terminal. Quando um agente espera sua aprovação, o celular avisa e você aprova com Face ID. O que você envia tem criptografia de ponta a ponta.',
-    soon: 'Em breve',
+    intro: 'O squad também aparece fora do terminal. O app para desktop já está disponível. Quando um agente espera sua aprovação, o app para celular avisa e você aprova com Face ID. O que você envia tem criptografia de ponta a ponta.',
+    soon: 'Em preparação',
     download: "Baixar para macOS",
-    req: "macOS 12 ou superior · Apple Silicon e Intel",
+    req: "macOS 12 ou superior · Apple Silicon e Intel · assinado e notarizado",
     cliNote: "Requer a CLI do equipe; se faltar, o app orienta a instalação.",
-    caption: "As telas são protótipos · apps móveis em breve",
+    caption: "A tela do celular é um protótipo · o app para celular ainda está em preparação",
     items: [
-      { title: 'App para desktop', platform: 'macOS', text: 'Squad, quadro e conversa com o PM em uma só janela.', alt: 'Prévia do app para desktop: um agente pede permissão para executar um comando, com os botões Permitir uma vez, Sempre e Recusar.' },
-      { title: 'App para celular', platform: 'iOS · Android', text: 'Só avisa quando algo precisa da sua aprovação.', alt: 'Prévia do app para celular: dois pedidos de aprovação aguardando.' },
+      { title: 'App para desktop', platform: 'macOS', text: 'O squad, os tickets e a conversa com o PM em uma só janela.', alt: 'O app para desktop do equipe: na conversa com o PM, um pedido de permissão e uma pergunta de um membro aguardam resposta.' },
+      { title: 'App para celular', platform: 'iOS · Android', text: 'Pareie com um QR code. Só avisa quando algo precisa da sua aprovação.', alt: 'Prévia do app para celular: dois pedidos de aprovação aguardando.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: 'Executar o comando?', allow: 'Permitir uma vez', decline: 'Recusar', askMerge: 'Fazer merge do branch?', approve: 'Aprovar', changes: 'Pedir mudanças' },
-    notify: { title: 'Quer saber quando os apps saírem?', text: 'Inscreva-se nos releases no GitHub e receba um e-mail só quando sair uma nova versão. Sem cadastro com a gente e sem coleta do seu e-mail.', cta: 'Receber aviso no GitHub', how: 'No repositório equipe-labs/equipe: Watch → Custom → Releases.' },
+    notify: { title: 'Quer saber quando o app para celular sair?', text: 'Inscreva-se nos releases no GitHub e receba um e-mail só quando sair uma nova versão. Sem cadastro com a gente e sem coleta do seu e-mail.', cta: 'Receber aviso no GitHub', how: 'No repositório equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Começar',
@@ -122,12 +134,22 @@ equipe           # abre o console do squad`,
       {
         question: 'O equipe está pronto para uso em produção?',
         answer:
-          'O equipe está em fase inicial. O daemon do squad roda em segundo plano, o PM aceita o trabalho, os agentes trabalham em branches dentro de sandboxes e você aprova antes do merge. As transferências (handoffs) e os canais de comunicação vêm a seguir, como mostra o roadmap.',
+          'O equipe está em fase inicial. O daemon do squad roda em segundo plano, o PM aceita o trabalho, os agentes trabalham em branches dentro de sandboxes e você aprova antes do merge. Você pode acompanhar o squad pelo app para desktop, pelo celular ou pelo Telegram. As transferências (handoffs) entre membros vêm a seguir, como mostra o roadmap.',
       },
       {
         question: 'O que é um git worktree e por que o equipe o usa?',
         answer:
           'Um git worktree é outra pasta de trabalho do mesmo repositório, com seu próprio branch. O equipe dá um a cada membro, para que vários trabalhem ao mesmo tempo sem que um interfira no trabalho do outro nem no seu checkout.',
+      },
+      {
+        question: 'Existe um app para desktop?',
+        answer:
+          'Sim, para macOS 12 ou superior, em Apple Silicon e Intel. Baixe o equipe.dmg, assinado e notarizado, no release mais recente do GitHub; o app procura atualizações sozinho. É uma janela para o mesmo daemon do terminal: seu squad, tickets, decisões e um painel para o navegador que os membros usam. Ele precisa da CLI `equipe` e oferece ajuda para instalá-la. O app está em oito idiomas.',
+      },
+      {
+        question: 'Posso acompanhar o squad pelo celular?',
+        answer:
+          'Sim. Execute `equipe pair` e leia o QR code no app móvel do equipe, que ainda está em preparação. Você recebe um push quando algo precisa de você e pode responder, revisar o trabalho e conversar com o PM. As mensagens são lacradas de ponta a ponta. O Telegram também funciona, com `equipe telegram setup`.',
       },
     ],
   },

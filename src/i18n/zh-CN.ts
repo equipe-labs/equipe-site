@@ -28,8 +28,8 @@ const zhCN: Messages = {
     lead: 'PM、设计师、开发者和移动端智能体在共享看板上工作，各自在你仓库的独立分支上开发。未经你批准，任何改动都不会被合并。',
     ctaPrimary: '在 GitHub 上查看',
     chip: '早期阶段 · MIT 许可证 · 支持 Codex 和 Claude Code',
-    shotAlt: 'equipe 桌面应用示意图：智能体请求运行命令的许可，并有“允许一次”“始终允许”“拒绝”按钮',
-    shotCaption: '桌面应用预览——智能体停下来说“我需要许可”，你一键即可批准。（应用即将推出）',
+    shotAlt: 'equipe 桌面应用：进行中工作的侧边栏、按状态分组的工单列表，“轮到你”和“审查”排在最上面，旁边是打开的工单',
+    shotCaption: 'macOS 版 equipe 桌面应用——工单可按列表或看板查看，等你处理的事排在最上面。',
   },
   how: {
     title: '工作方式',
@@ -38,6 +38,18 @@ const zhCN: Messages = {
       { title: '交给小队', text: '告诉 PM 你想要什么，需求会被拆成共享看板上的工单，每张工单都有对应的角色来领取。' },
       { title: '并行工作', text: '成员同时开工，各用自己的分支。你的本地工作目录不受影响，每个动作都记录在看板上。' },
       { title: '你的批准', text: '合并之前，equipe 会先问你。你不点头，什么都不会被合并。' },
+    ],
+  },
+  features: {
+    title: '你能得到什么',
+    intro: '小队运行在后台守护进程中，关掉终端也不会停。每个界面看到的都是同一支团队。',
+    items: [
+      { title: '同一块看板上的角色', text: 'PM、设计师、前端、后端、移动端、QA 和数据，各有适合该角色的模型和自己的记忆。看板是唯一可信来源。' },
+      { title: '隔离的分支', text: '每个成员在沙箱内用自己的 git worktree 工作。超出沙箱的操作，例如推送或部署，要等你回答。' },
+      { title: '决定交给你', text: '许可请求和成员提出的问题，都以卡片形式送达，按一个键或点一下即可回答。' },
+      { title: '多个项目，一支小队', text: '对话跟随你选的项目，工单的工作始终留在该工单里。' },
+      { title: 'macOS 桌面应用', text: '实时工作侧边栏、含列表和看板的工单页面、⌘K 搜索所有工作，以及浏览器面板。支持八种语言，并会自行更新。' },
+      { title: '手机和其他 Mac', text: '用二维码配对手机，需要你时收到推送。也可通过 SSH 把桌面应用连到另一台 Mac 上的小队。' },
     ],
   },
   who: {
@@ -52,18 +64,18 @@ const zhCN: Messages = {
   },
   apps: {
     title: '在 Mac 上关注，在手机上批准。',
-    intro: '小队在终端之外也看得见。智能体等待你许可时，手机会提醒你，用 Face ID 即可批准。传输的内容经端到端加密。',
-    soon: '即将推出',
+    intro: '小队在终端之外也看得见。桌面应用已经推出。智能体等待你许可时，手机应用会提醒你，用 Face ID 即可批准。传输的内容经端到端加密。',
+    soon: '筹备中',
     download: "下载 macOS 版",
-    req: "macOS 12 及以上 · 支持 Apple Silicon 和 Intel",
+    req: "macOS 12 及以上 · 支持 Apple Silicon 和 Intel · 已签名并公证",
     cliNote: "需要 equipe CLI——没有的话，应用会引导你安装。",
-    caption: "界面为示意图 · 移动应用即将推出",
+    caption: "手机界面为示意图 · 移动应用仍在筹备中",
     items: [
-      { title: '桌面应用', platform: 'macOS', text: '小队、看板和 PM 对话，一个窗口搞定。', alt: '桌面应用示意图：智能体请求运行命令，有“允许一次”“始终允许”“拒绝”按钮。' },
-      { title: '移动应用', platform: 'iOS · Android', text: '只在需要你批准时提醒你。', alt: '移动应用示意图：有两条批准请求在等待。' },
+      { title: '桌面应用', platform: 'macOS', text: '小队、工单和 PM 对话，一个窗口搞定。', alt: 'equipe 桌面应用：在 PM 对话中，一条许可请求和一位成员的提问在等待回答。' },
+      { title: '移动应用', platform: 'iOS · Android', text: '用二维码配对。只在需要你批准时提醒你。', alt: '移动应用示意图：有两条批准请求在等待。' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: '运行该命令？', allow: '允许一次', decline: '拒绝', askMerge: '合并该分支？', approve: '批准', changes: '请求修改' },
-    notify: { title: '想在应用发布时第一时间知道？', text: '订阅 GitHub Releases，只会在有新版本时收到邮件。无需注册，我们也不收集邮箱。', cta: '在 GitHub 上订阅通知', how: '在 equipe-labs/equipe 仓库选择 Watch → Custom → Releases。' },
+    notify: { title: '想在移动应用发布时第一时间知道？', text: '订阅 GitHub Releases，只会在有新版本时收到邮件。无需注册，我们也不收集邮箱。', cta: '在 GitHub 上订阅通知', how: '在 equipe-labs/equipe 仓库选择 Watch → Custom → Releases。' },
   },
   start: {
     title: '开始使用',
@@ -122,12 +134,22 @@ equipe           # 打开小队控制台`,
       {
         question: 'equipe 可以用于生产环境吗？',
         answer:
-          'equipe 还处于早期阶段。小队守护进程在后台运行，PM 验收工作，智能体在沙箱里的分支上工作，合并前由你批准。交接和沟通渠道会在接下来推出，详见路线图。',
+          'equipe 还处于早期阶段。小队守护进程在后台运行，PM 验收工作，智能体在沙箱里的分支上工作，合并前由你批准。你可以通过桌面应用、手机或 Telegram 关注小队。成员之间的交接会在接下来推出，详见路线图。',
       },
       {
         question: '什么是 git worktree？equipe 为什么用它？',
         answer:
           'git worktree 是同一个仓库的另一个工作目录，各自有自己的分支。equipe 给每个成员一个，这样多个成员可以同时工作，既不会互相干扰，也不会碰到你本地的工作目录。',
+      },
+      {
+        question: '有桌面应用吗？',
+        answer:
+          '有，支持 macOS 12 及以上，Apple Silicon 和 Intel 均可。从最新的 GitHub release 下载已签名并公证的 equipe.dmg；它会自行检查更新。它是通往终端所用同一个守护进程的窗口：你的小队、工单、决定，以及成员所用浏览器的面板。它需要 `equipe` CLI，并可帮你安装。应用提供八种语言。',
+      },
+      {
+        question: '可以在手机上关注小队吗？',
+        answer:
+          '可以。运行 `equipe pair`，用 equipe 移动应用扫描二维码（该应用仍在筹备中）。需要你时会收到推送，你可以回答、审阅工作并与 PM 对话。消息端到端封装。也可以通过 `equipe telegram setup` 使用 Telegram。',
       },
     ],
   },

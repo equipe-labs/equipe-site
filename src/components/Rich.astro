@@ -4,4 +4,4 @@ import { segments } from '../i18n';
 const { s } = Astro.props as { s: string };
 ---
 
-{segments(s).map((x) => (x.kind === 'code' ? <code>{x.t}</code> : x.kind === 'strong' ? <strong>{x.t}</strong> : x.t))}
+{segments(s).map((x) => (x.kind === 'code' ? <code class={x.t.length <= 32 ? 'nw' : undefined}>{x.t}</code> : x.kind === 'strong' ? <strong>{x.t}</strong> : x.t))}

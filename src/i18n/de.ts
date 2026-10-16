@@ -28,8 +28,8 @@ const de: Messages = {
     lead: 'PM-, Design-, Entwickler- und Mobile-Agenten arbeiten über ein gemeinsames Board, jeder auf einem eigenen Branch deines Repositorys. Ohne deine Freigabe wird nichts gemergt.',
     ctaPrimary: 'Auf GitHub ansehen',
     chip: 'Frühe Phase · MIT-Lizenz · Codex und Claude Code',
-    shotAlt: 'Vorschau der equipe-Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen; darunter die Schaltflächen „Einmal erlauben“, „Immer“ und „Ablehnen“',
-    shotCaption: 'Vorschau der Desktop-App — ein Agent hält an und meldet „Ich brauche eine Erlaubnis“; du gibst mit einem Klick frei. (App folgt in Kürze)',
+    shotAlt: 'Die equipe-Desktop-App: eine Seitenleiste mit laufender Arbeit, eine nach Status gruppierte Ticket-Liste mit „Du bist dran“ und „Review“ ganz oben und daneben das geöffnete Ticket',
+    shotCaption: 'Die equipe-Desktop-App für macOS – deine Tickets als Liste oder Board, mit dem, was auf dich wartet, ganz oben.',
   },
   how: {
     title: 'So funktioniert’s',
@@ -38,6 +38,18 @@ const de: Messages = {
       { title: 'Übergeben', text: 'Sag dem PM, was du willst. Daraus werden Tickets auf einem gemeinsamen Board, jedes mit einer Rolle, die es übernimmt.' },
       { title: 'Parallel arbeiten', text: 'Die Mitglieder arbeiten gleichzeitig, jedes auf seinem eigenen Branch. Dein Checkout bleibt unberührt, und jede Aktion wird auf dem Board festgehalten.' },
       { title: 'Deine Freigabe', text: 'Bevor etwas gemergt wird, fragt equipe dich. Ohne dein Okay landet nichts.' },
+    ],
+  },
+  features: {
+    title: 'Das bekommst du',
+    intro: 'Der Squad läuft in einem Hintergrund-Daemon, das Schließen des Terminals stoppt ihn also nie. Jeder Bildschirm zeigt dasselbe Team.',
+    items: [
+      { title: 'Rollen auf einem Board', text: 'PM, Designer, Frontend, Backend, Mobile, QA und Daten, je mit einem zur Rolle passenden Modell und eigenem Gedächtnis. Das Board ist die einzige Wahrheit.' },
+      { title: 'Isolierte Branches', text: 'Jedes Mitglied arbeitet in einem eigenen git worktree, in einer Sandbox. Alles darüber hinaus, etwa ein Push oder Deploy, wartet auf deine Antwort.' },
+      { title: 'Entscheidungen kommen zu dir', text: 'Erlaubnisanfragen und Fragen der Mitglieder kommen als Karten, die du mit einer Taste oder einem Klick beantwortest.' },
+      { title: 'Mehrere Projekte, ein Squad', text: 'Das Gespräch folgt dem gewählten Projekt, und die Arbeit eines Tickets bleibt bei seinem Ticket.' },
+      { title: 'Eine Desktop-App für macOS', text: 'Seitenleiste mit laufender Arbeit, Ticket-Ansicht als Liste und Board, ⌘K zur Suche in allen Aufgaben und ein Browser-Panel. Acht Sprachen, aktualisiert sich selbst.' },
+      { title: 'Smartphone und andere Macs', text: 'Koppele ein Smartphone per QR-Code und bekomme einen Push, wenn du gebraucht wirst. Verbinde die Desktop-App per SSH mit einem Squad auf einem anderen Mac.' },
     ],
   },
   who: {
@@ -52,18 +64,18 @@ const de: Messages = {
   },
   apps: {
     title: 'Am Mac verfolgen, am Smartphone freigeben.',
-    intro: 'Der Squad ist auch außerhalb des Terminals sichtbar. Wartet ein Agent auf dein OK, meldet sich das Smartphone und du gibst per Face ID frei. Die Inhalte sind Ende-zu-Ende-verschlüsselt.',
+    intro: 'Der Squad ist auch außerhalb des Terminals sichtbar. Die Desktop-App ist jetzt verfügbar. Wartet ein Agent auf dein OK, meldet sich die Smartphone-App und du gibst per Face ID frei. Die Inhalte sind Ende-zu-Ende-verschlüsselt.',
     soon: 'In Vorbereitung',
     download: "Für macOS herunterladen",
-    req: "macOS 12 oder neuer · Apple Silicon und Intel",
+    req: "macOS 12 oder neuer · Apple Silicon und Intel · signiert und notarisiert",
     cliNote: "Benötigt die equipe-CLI – fehlt sie, führt die App durch die Installation.",
-    caption: "Screens sind Entwürfe · mobile Apps in Vorbereitung",
+    caption: "Der Smartphone-Screen ist ein Entwurf · die mobile App ist noch in Vorbereitung",
     items: [
-      { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Board und PM-Chat in einem Fenster.', alt: 'Vorschau der Desktop-App: Ein Agent bittet um Erlaubnis, einen Befehl auszuführen, mit den Schaltflächen Einmal erlauben, Immer und Ablehnen.' },
-      { title: 'Mobile App', platform: 'iOS · Android', text: 'Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Vorschau der mobilen App: zwei Freigabeanfragen warten.' },
+      { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Tickets und PM-Gespräch in einem Fenster.', alt: 'Die equipe-Desktop-App: Im PM-Gespräch warten eine Berechtigungsanfrage und eine Frage eines Mitglieds auf eine Antwort.' },
+      { title: 'Mobile App', platform: 'iOS · Android', text: 'Per QR-Code koppeln. Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Vorschau der mobilen App: zwei Freigabeanfragen warten.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: 'Befehl ausführen?', allow: 'Einmal erlauben', decline: 'Ablehnen', askMerge: 'Branch mergen?', approve: 'Freigeben', changes: 'Änderungen anfordern' },
-    notify: { title: 'Möchtest du wissen, wann die Apps erscheinen?', text: 'Abonniere die Releases auf GitHub – dann bekommst du nur bei neuen Versionen eine E-Mail. Keine Registrierung bei uns, wir sammeln keine E-Mail-Adressen.', cta: 'Auf GitHub abonnieren', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
+    notify: { title: 'Möchtest du wissen, wann die mobile App erscheint?', text: 'Abonniere die Releases auf GitHub – dann bekommst du nur bei neuen Versionen eine E-Mail. Keine Registrierung bei uns, wir sammeln keine E-Mail-Adressen.', cta: 'Auf GitHub abonnieren', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Loslegen',
@@ -122,12 +134,22 @@ equipe           # Squad-Konsole öffnen`,
       {
         question: 'Ist equipe für den Produktivbetrieb geeignet?',
         answer:
-          'equipe befindet sich in einer frühen Phase. Der Squad-Daemon läuft im Hintergrund, der PM nimmt Arbeit ab, Agenten arbeiten in Sandboxes auf Branches, und du gibst vor dem Merge frei. Als Nächstes folgen Übergaben und Kommunikationskanäle, wie in der Roadmap beschrieben.',
+          'equipe befindet sich in einer frühen Phase. Der Squad-Daemon läuft im Hintergrund, der PM nimmt Arbeit ab, Agenten arbeiten in Sandboxes auf Branches, und du gibst vor dem Merge frei. Den Squad kannst du in der Desktop-App, am Smartphone oder über Telegram verfolgen. Als Nächstes folgen Übergaben zwischen Mitgliedern, wie in der Roadmap beschrieben.',
       },
       {
         question: 'Was ist ein git worktree, und warum nutzt equipe ihn?',
         answer:
           'Ein Git-Worktree ist ein weiterer Arbeitsordner desselben Repositorys mit eigenem Branch. equipe gibt jedem Mitglied einen, damit mehrere gleichzeitig arbeiten können, ohne sich gegenseitig oder deinem Checkout in die Quere zu kommen.',
+      },
+      {
+        question: 'Gibt es eine Desktop-App?',
+        answer:
+          'Ja, für macOS 12 oder neuer auf Apple Silicon und Intel. Lade die signierte und notarisierte equipe.dmg aus dem neuesten GitHub-Release herunter; sie sucht selbst nach Updates. Sie ist ein Fenster auf denselben Daemon wie das Terminal: dein Squad, Tickets, Entscheidungen und ein Panel für den Browser der Mitglieder. Sie braucht die `equipe`-CLI und hilft bei der Installation. Die App gibt es in acht Sprachen.',
+      },
+      {
+        question: 'Kann ich den Squad am Smartphone verfolgen?',
+        answer:
+          'Ja. Führe `equipe pair` aus und scanne den QR-Code in der mobilen equipe-App, die noch in Vorbereitung ist. Du bekommst einen Push, wenn dich etwas braucht, und kannst antworten, Arbeit prüfen und mit dem PM sprechen. Nachrichten sind Ende-zu-Ende versiegelt. Auch Telegram funktioniert, mit `equipe telegram setup`.',
       },
     ],
   },

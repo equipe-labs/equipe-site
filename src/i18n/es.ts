@@ -28,8 +28,8 @@ const es: Messages = {
     lead: 'Agentes de PM, diseño, desarrollo y móvil trabajan desde un tablero compartido, cada uno en su propia rama de tu repositorio. Nada se fusiona sin tu aprobación.',
     ctaPrimary: 'Ver en GitHub',
     chip: 'Fase inicial · Licencia MIT · Compatible con Codex y Claude Code',
-    shotAlt: 'Vista previa de la app de escritorio de equipe: un agente pide permiso para ejecutar un comando, con los botones Permitir una vez, Siempre y Rechazar',
-    shotCaption: 'Vista previa de la app de escritorio: un agente se detiene con “Necesito permiso” y tú apruebas con un clic. (App próximamente)',
+    shotAlt: 'La app de escritorio de equipe: una barra lateral con el trabajo en curso, una lista de tickets agrupados por estado con «Tu turno» y «Revisión» arriba, y el ticket abierto al lado',
+    shotCaption: 'La app de escritorio de equipe para macOS: tus tickets como lista o como tablero, con lo que te espera arriba.',
   },
   how: {
     title: 'Cómo funciona',
@@ -38,6 +38,18 @@ const es: Messages = {
       { title: 'Delégalo', text: 'Dile al PM lo que quieres. Se convierte en tickets en un tablero compartido, cada uno con el rol que se hará cargo.' },
       { title: 'Trabajo en paralelo', text: 'Los miembros trabajan a la vez, cada uno en su propia rama. Tu copia de trabajo queda intacta y cada acción se registra en el tablero.' },
       { title: 'Tu aprobación', text: 'Antes de fusionar nada, equipe te pregunta. Nada se incorpora hasta que tú lo digas.' },
+    ],
+  },
+  features: {
+    title: 'Qué obtienes',
+    intro: 'El squad se ejecuta en un daemon en segundo plano, así que cerrar la terminal nunca lo detiene. Todas las pantallas muestran el mismo equipo.',
+    items: [
+      { title: 'Roles en un tablero', text: 'PM, diseño, frontend, backend, móvil, QA y datos, cada uno con un modelo adecuado a su rol y su propia memoria. El tablero es la única fuente de verdad.' },
+      { title: 'Ramas aisladas', text: 'Cada miembro trabaja en su propio git worktree, dentro de un sandbox. Lo que vaya más allá, como un push o un despliegue, espera tu respuesta.' },
+      { title: 'Las decisiones llegan a ti', text: 'Las solicitudes de permiso y las preguntas de los miembros llegan como tarjetas que respondes con una tecla o un clic.' },
+      { title: 'Varios proyectos, un squad', text: 'La conversación sigue al proyecto que elijas, y el trabajo de un ticket se queda con su ticket.' },
+      { title: 'App de escritorio para macOS', text: 'Una barra lateral con el trabajo en vivo, una pantalla de tickets con lista y tablero, ⌘K para buscar todo el trabajo y un panel de navegador. Ocho idiomas y se actualiza sola.' },
+      { title: 'Teléfono y otros Mac', text: 'Empareja un teléfono con un código QR y recibe un aviso push cuando te necesiten. Conecta la app de escritorio a un squad en otro Mac por SSH.' },
     ],
   },
   who: {
@@ -52,18 +64,18 @@ const es: Messages = {
   },
   apps: {
     title: 'Síguelo en tu Mac, aprueba desde el teléfono.',
-    intro: 'El squad también se ve fuera de la terminal. Cuando un agente espera tu visto bueno, el teléfono te avisa y apruebas con Face ID. Lo que envías va cifrado de extremo a extremo.',
-    soon: 'Próximamente',
+    intro: 'El squad también se ve fuera de la terminal. La app de escritorio ya está disponible. Cuando un agente espera tu visto bueno, la app del teléfono te avisa y apruebas con Face ID. Lo que envías va cifrado de extremo a extremo.',
+    soon: 'En preparación',
     download: "Descargar para macOS",
-    req: "macOS 12 o posterior · Apple Silicon e Intel",
+    req: "macOS 12 o posterior · Apple Silicon e Intel · firmada y notarizada",
     cliNote: "Requiere la CLI de equipe; si falta, la app te guía en la instalación.",
-    caption: "Las pantallas son maquetas · apps móviles próximamente",
+    caption: "La pantalla del teléfono es una maqueta · la app móvil sigue en preparación",
     items: [
-      { title: 'App de escritorio', platform: 'macOS', text: 'Squad, tablero y chat con el PM en una sola ventana.', alt: 'Maqueta de la app de escritorio: un agente pide permiso para ejecutar un comando, con los botones Permitir una vez, Siempre y Rechazar.' },
-      { title: 'App móvil', platform: 'iOS · Android', text: 'Solo te avisa cuando algo necesita tu aprobación.', alt: 'Maqueta de la app móvil: dos solicitudes de aprobación en espera.' },
+      { title: 'App de escritorio', platform: 'macOS', text: 'El squad, sus tickets y la conversación con el PM en una sola ventana.', alt: 'La app de escritorio de equipe: en la conversación con el PM, una solicitud de permiso y una pregunta de un miembro esperan respuesta.' },
+      { title: 'App móvil', platform: 'iOS · Android', text: 'Se empareja con un código QR. Solo te avisa cuando algo necesita tu aprobación.', alt: 'Maqueta de la app móvil: dos solicitudes de aprobación en espera.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: '¿Ejecutar el comando?', allow: 'Permitir una vez', decline: 'Rechazar', askMerge: '¿Fusionar la rama?', approve: 'Aprobar', changes: 'Pedir cambios' },
-    notify: { title: '¿Quieres saber cuándo salen las apps?', text: 'Suscríbete a las versiones en GitHub y solo recibirás un correo cuando salga una nueva. No hace falta registrarte con nosotros ni darnos tu correo.', cta: 'Recibir aviso en GitHub', how: 'En el repositorio equipe-labs/equipe: Watch → Custom → Releases.' },
+    notify: { title: '¿Quieres saber cuándo sale la app móvil?', text: 'Suscríbete a las versiones en GitHub y solo recibirás un correo cuando salga una nueva. No hace falta registrarte con nosotros ni darnos tu correo.', cta: 'Recibir aviso en GitHub', how: 'En el repositorio equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Empezar',
@@ -122,12 +134,22 @@ equipe           # abre la consola del squad`,
       {
         question: '¿Está equipe listo para usarse en producción?',
         answer:
-          'equipe está en fase inicial. El daemon del squad se ejecuta en segundo plano, el PM acepta el trabajo, los agentes trabajan en ramas dentro de sandboxes y tú apruebas antes de fusionar. Los traspasos y los canales de comunicación llegarán después, como indica la hoja de ruta.',
+          'equipe está en fase inicial. El daemon del squad se ejecuta en segundo plano, el PM acepta el trabajo, los agentes trabajan en ramas dentro de sandboxes y tú apruebas antes de fusionar. Puedes seguir al squad desde la app de escritorio, el teléfono o Telegram. Los traspasos entre miembros llegarán después, como indica la hoja de ruta.',
       },
       {
         question: '¿Qué es un git worktree y por qué lo usa equipe?',
         answer:
           'Un git worktree es otra carpeta de trabajo del mismo repositorio, con su propia rama. equipe da uno a cada miembro, para que varios trabajen a la vez sin pisarse entre sí ni tocar tu copia de trabajo.',
+      },
+      {
+        question: '¿Hay una app de escritorio?',
+        answer:
+          'Sí, para macOS 12 o posterior, en Apple Silicon e Intel. Descarga equipe.dmg, firmado y notarizado, desde la última versión en GitHub; se actualiza sola. Es una ventana al mismo daemon que usa la terminal: tu squad, los tickets, las decisiones y un panel para el navegador que usan los miembros. Requiere la CLI `equipe` y te ofrece ayuda para instalarla. La app está en ocho idiomas.',
+      },
+      {
+        question: '¿Puedo seguir al squad desde el teléfono?',
+        answer:
+          'Sí. Ejecuta `equipe pair` y escanea el código QR en la app móvil de equipe, que sigue en preparación. Recibes un aviso push cuando algo te necesita, y puedes responder, revisar el trabajo y hablar con el PM. Los mensajes van sellados de extremo a extremo. Telegram también funciona, con `equipe telegram setup`.',
       },
     ],
   },

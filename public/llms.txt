@@ -8,9 +8,14 @@
 - Tickets: the board is the single source of truth; members coordinate through tickets and immutable events, not chat.
 - Branches: each member works in its own git worktree on its own branch, so several can work at once without touching your checkout.
 - Your approval: nothing merges until the person leading the squad says so.
-- Apps: a desktop app (macOS) and a mobile app (iOS and Android) are coming soon; they are not released yet.
+- Projects: one squad works on several projects; the conversation follows the project you pick.
+- Decisions: permission requests and the questions members ask arrive as cards you answer with one key or click.
+- Desktop app (macOS 12+, Apple Silicon and Intel): released. A signed, notarized DMG from the latest GitHub release that updates itself, in eight languages: a sidebar of live work, a ticket screen (list and board), ⌘K search, a browser panel for the Chrome the members use, phone pairing, and connection to a squad on another Mac over SSH. It needs the `equipe` CLI.
+- Mobile app (iOS, Android): in preparation, not released yet. Pair with `equipe pair` (QR code); push notifications; messages sealed end to end through a relay. Telegram works today through `equipe telegram setup`.
 
 ## Get started
+
+Desktop app: download https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg (it needs the CLI below).
 
 Install a prebuilt `equipe` on macOS or Linux (it goes in `~/.local/bin`, checked against its SHA-256):
 

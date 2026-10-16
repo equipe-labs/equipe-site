@@ -30,8 +30,8 @@ export const en = {
     lead: 'PM, designer, developer and mobile agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
     ctaPrimary: 'View on GitHub',
     chip: 'Early-stage · MIT licensed · Codex and Claude Code',
-    shotAlt: 'Preview of the equipe desktop app: an agent asks permission to run a command, with Allow once, Always and Decline buttons',
-    shotCaption: 'Desktop app preview — an agent pauses with “I need permission” and you approve in one click. (App coming soon)',
+    shotAlt: 'The equipe desktop app: a sidebar of live work, a ticket list grouped by status with “Your turn” and “Review” on top, and the open ticket beside it',
+    shotCaption: 'The equipe desktop app for macOS — your tickets as a list or a board, with what waits for you on top.',
   },
   how: {
     title: 'How it works',
@@ -40,6 +40,18 @@ export const en = {
       { title: 'Hand it off', text: 'Tell the PM what you want. It becomes tickets on a shared board, each with a role to take it.' },
       { title: 'Work in parallel', text: 'Members work at the same time, each on its own branch. Your checkout stays untouched, and every action is recorded on the board.' },
       { title: 'Your approval', text: 'Before anything merges, equipe asks you. Nothing lands until you say so.' },
+    ],
+  },
+  features: {
+    title: 'What you get',
+    intro: 'The squad runs in a background daemon, so closing the terminal never stops it. Every screen shows the same team.',
+    items: [
+      { title: 'Roles on one board', text: 'PM, designer, frontend, backend, mobile, QA and data, each with a model suited to the role and its own memory. The board is the single source of truth.' },
+      { title: 'Isolated branches', text: 'Every member works in its own git worktree, inside a sandbox. Anything beyond it, such as a push or a deploy, waits for your answer.' },
+      { title: 'Decisions come to you', text: 'Permission requests, and the questions members ask, arrive as cards you answer with one key or click.' },
+      { title: 'Several projects, one squad', text: 'The conversation follows the project you pick, and a ticket’s work stays with its ticket.' },
+      { title: 'A desktop app for macOS', text: 'A sidebar of live work, a ticket screen with list and board, ⌘K to search all work, and a browser panel. Eight languages, and it updates itself.' },
+      { title: 'Phone and other Macs', text: 'Pair a phone with a QR code and get a push when you are needed. Connect the desktop app to a squad on another Mac over SSH.' },
     ],
   },
   who: {
@@ -54,18 +66,18 @@ export const en = {
   },
   apps: {
     title: 'Watch on your Mac, approve on your phone.',
-    intro: 'The squad shows up outside the terminal too. When an agent waits for your OK, your phone tells you and you approve with Face ID. What you send is end-to-end encrypted.',
-    soon: 'Coming soon',
+    intro: 'The squad shows up outside the terminal too. The desktop app is out now. When an agent waits for your OK, the phone app tells you and you approve with Face ID. What you send is end-to-end encrypted.',
+    soon: 'In preparation',
     download: "Download for macOS",
-    req: "macOS 12 or later · Apple Silicon and Intel",
+    req: "macOS 12 or later · Apple Silicon and Intel · signed and notarized",
     cliNote: "Needs the equipe CLI — if it's missing, the app walks you through installing it.",
-    caption: "Screens are mockups · mobile apps coming soon",
+    caption: "The phone screen is a mockup · the mobile app is still in preparation",
     items: [
-      { title: 'Desktop app', platform: 'macOS', text: 'Squad, board and PM chat in one window.', alt: 'Desktop app mockup: an agent asks to run a command, with Allow once, Always and Decline buttons.' },
-      { title: 'Mobile app', platform: 'iOS · Android', text: 'Only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },
+      { title: 'Desktop app', platform: 'macOS', text: 'The squad, its tickets and the PM conversation in one window.', alt: 'The equipe desktop app: in the PM conversation, a permission request and a question from a member wait for an answer.' },
+      { title: 'Mobile app', platform: 'iOS · Android', text: 'Pair with a QR code. It only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: 'Run the command?', allow: 'Allow once', decline: 'Decline', askMerge: 'Merge the branch?', approve: 'Approve', changes: 'Request changes' },
-    notify: { title: 'Want to know when the apps ship?', text: 'Subscribe to releases on GitHub and you get an email only for new releases. No sign-up with us, no email collected.', cta: 'Get notified on GitHub', how: 'On the equipe-labs/equipe repo: Watch → Custom → Releases.' },
+    notify: { title: 'Want to know when the mobile app ships?', text: 'Subscribe to releases on GitHub and you get an email only for new releases. No sign-up with us, no email collected.', cta: 'Get notified on GitHub', how: 'On the equipe-labs/equipe repo: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Get started',
@@ -125,12 +137,22 @@ equipe           # open the squad console`,
       {
         question: 'Is equipe ready for production use?',
         answer:
-          'equipe is early-stage. The squad daemon runs in the background, the PM accepts work, agents work on branches in sandboxes, and you approve before merge. Handoffs and communication channels are coming next, as listed on the roadmap.',
+          'equipe is early-stage. The squad daemon runs in the background, the PM accepts work, agents work on branches in sandboxes, and you approve before merge. You can follow the squad from the desktop app, your phone or Telegram. Handoffs between members are coming next, as listed on the roadmap.',
       },
       {
         question: 'What is a git worktree, and why does equipe use one?',
         answer:
           'A git worktree is another working folder for the same repository, with its own branch. equipe gives each member one, so several can work at once without touching each other or your checkout.',
+      },
+      {
+        question: 'Is there a desktop app?',
+        answer:
+          'Yes, for macOS 12 or later on Apple Silicon and Intel. Download the signed and notarized equipe.dmg from the latest GitHub release; it checks for updates itself. It is a window onto the same daemon as the terminal: your squad, tickets, decisions, and a panel for the browser the members use. It needs the `equipe` CLI and offers to help install it. The app is in eight languages.',
+      },
+      {
+        question: 'Can I follow the squad from my phone?',
+        answer:
+          'Yes. Run `equipe pair` and scan the QR code in the equipe mobile app, which is still in preparation. You get a push when something needs you, and you can answer, review work and talk to the PM. Messages are sealed end to end. Telegram works too, with `equipe telegram setup`.',
       },
     ],
   },

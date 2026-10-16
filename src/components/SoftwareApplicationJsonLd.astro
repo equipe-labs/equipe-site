@@ -8,6 +8,7 @@ interface Props {
   description: string;
   applicationCategory?: string;
   operatingSystem?: string;
+  featureList?: string[];
 }
 const {
   lang,
@@ -15,6 +16,7 @@ const {
   description,
   applicationCategory = 'DeveloperApplication',
   operatingSystem = 'macOS 12+, Linux',
+  featureList,
 } = Astro.props;
 ---
 
@@ -28,6 +30,7 @@ const {
     description,
     applicationCategory,
     operatingSystem,
+    ...(featureList ? { featureList } : {}),
     downloadUrl: SITE.desktopDmg,
     codeRepository: SITE.repo,
     license: 'https://opensource.org/licenses/MIT',

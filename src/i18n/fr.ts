@@ -29,8 +29,8 @@ const fr: Messages = {
     lead: 'Des agents PM, designer, développeur et mobile travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
     ctaPrimary: 'Voir sur GitHub',
     chip: 'Phase initiale · Licence MIT · Codex et Claude Code',
-    shotAlt: 'Aperçu de l’appli de bureau equipe\u202F: un agent demande l’autorisation d’exécuter une commande, avec les boutons «\u202FAutoriser une fois\u202F», «\u202FToujours\u202F» et «\u202FRefuser\u202F»',
-    shotCaption: 'Aperçu de l’appli de bureau — un agent s’interrompt\u202F: «\u202FJ’ai besoin d’une autorisation\u202F», et vous approuvez d’un clic. (Appli bientôt disponible)',
+    shotAlt: 'L’appli de bureau equipe : une barre latérale du travail en cours, une liste de tickets groupés par statut avec « Votre tour » et « À relire » en haut, et le ticket ouvert à côté',
+    shotCaption: 'L’appli de bureau equipe pour macOS — vos tickets en liste ou en tableau, avec ce qui vous attend en haut.',
   },
   how: {
     title: 'Comment ça marche',
@@ -39,6 +39,18 @@ const fr: Messages = {
       { title: 'Confier', text: 'Dites au PM ce que vous voulez. Il en fait des tickets sur un tableau partagé, chacun attribué à un rôle.' },
       { title: 'Travail en parallèle', text: 'Les membres travaillent en même temps, chacun sur sa propre branche. Votre copie de travail reste intacte, et chaque action est consignée sur le tableau.' },
       { title: 'Votre approbation', text: 'Avant toute fusion, equipe vous demande votre accord. Rien n’est intégré sans votre feu vert.' },
+    ],
+  },
+  features: {
+    title: 'Ce que vous obtenez',
+    intro: 'Le squad tourne dans un démon en arrière-plan : fermer le terminal ne l’arrête jamais. Tous les écrans montrent le même squad.',
+    items: [
+      { title: 'Des rôles sur un seul tableau', text: 'PM, designer, frontend, backend, mobile, QA et data, chacun avec un modèle adapté à son rôle et sa propre mémoire. Le tableau est la source unique de vérité.' },
+      { title: 'Des branches isolées', text: 'Chaque membre travaille dans son propre git worktree, dans une sandbox. Tout ce qui en sort, comme un push ou un déploiement, attend votre réponse.' },
+      { title: 'Les décisions viennent à vous', text: 'Les demandes d’autorisation et les questions des membres arrivent sous forme de cartes, à régler d’une touche ou d’un clic.' },
+      { title: 'Plusieurs projets, un squad', text: 'La discussion suit le projet choisi, et le travail d’un ticket reste avec son ticket.' },
+      { title: 'Une appli de bureau pour macOS', text: 'Barre latérale du travail en cours, écran des tickets en liste et en tableau, ⌘K pour chercher tout le travail, panneau navigateur. Huit langues, mise à jour automatique.' },
+      { title: 'Téléphone et autres Mac', text: 'Appairez un téléphone par QR code et recevez une notification quand on a besoin de vous. Connectez l’appli de bureau à un squad sur un autre Mac via SSH.' },
     ],
   },
   who: {
@@ -53,18 +65,18 @@ const fr: Messages = {
   },
   apps: {
     title: 'Suivez sur votre Mac, approuvez sur votre téléphone.',
-    intro: 'Le squad reste visible hors du terminal. Quand un agent attend votre accord, votre téléphone vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
-    soon: 'Bientôt disponible',
+    intro: 'Le squad reste visible hors du terminal. L’appli de bureau est disponible dès maintenant. Quand un agent attend votre accord, l’appli mobile vous prévient et vous approuvez avec Face ID. Ce que vous envoyez est chiffré de bout en bout.',
+    soon: 'En préparation',
     download: "Télécharger pour macOS",
-    req: "macOS 12 ou plus récent · Apple Silicon et Intel",
+    req: "macOS 12 ou plus récent · Apple Silicon et Intel · signée et notarisée",
     cliNote: "Nécessite la CLI equipe ; si elle manque, l’appli vous guide pour l’installer.",
-    caption: "Les écrans sont des maquettes · applis mobiles bientôt disponibles",
+    caption: "L’écran du téléphone est une maquette · l’appli mobile est encore en préparation",
     items: [
-      { title: 'Application de bureau', platform: 'macOS', text: 'Squad, tableau et discussion avec le PM dans une seule fenêtre.', alt: 'Maquette de l’appli de bureau\u202F: un agent demande l’autorisation d’exécuter une commande, avec les boutons «\u202FAutoriser une fois\u202F», «\u202FToujours\u202F» et «\u202FRefuser\u202F».' },
-      { title: 'Application mobile', platform: 'iOS · Android', text: 'Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile\u202F: deux demandes d’approbation en attente.' },
+      { title: 'Application de bureau', platform: 'macOS', text: 'Le squad, ses tickets et la discussion avec le PM dans une seule fenêtre.', alt: 'L’appli de bureau equipe : dans la conversation avec le PM, une demande d’autorisation et une question d’un membre attendent une réponse.' },
+      { title: 'Application mobile', platform: 'iOS · Android', text: 'Appairage par QR code. Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile : deux demandes d’approbation en attente.' },
     ],
     phone: { label: 'APPROVE · 3', askCommand: 'Exécuter la commande\u202F?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche\u202F?', approve: 'Approuver', changes: 'Demander des changements' },
-    notify: { title: 'Envie d’être prévenu à la sortie des applis\u202F?', text: 'Abonnez-vous aux releases sur GitHub\u202F: vous ne recevrez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe\u202F: Watch → Custom → Releases.' },
+    notify: { title: 'Envie d’être prévenu à la sortie de l’appli mobile\u202F?', text: 'Abonnez-vous aux releases sur GitHub\u202F: vous ne recevrez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe\u202F: Watch → Custom → Releases.' },
   },
   start: {
     title: 'Commencer',
@@ -123,12 +135,22 @@ equipe           # ouvrir la console du squad`,
       {
         question: 'equipe est-il prêt pour la production ?',
         answer:
-          'equipe est encore en phase initiale. Le démon du squad tourne en arrière-plan, le PM valide le travail, les agents travaillent sur des branches dans des sandboxes, et vous approuvez avant la fusion. Les passations et les canaux de communication sont les prochaines étapes, comme l’indique la feuille de route.',
+          'equipe est encore en phase initiale. Le démon du squad tourne en arrière-plan, le PM valide le travail, les agents travaillent sur des branches dans des sandboxes, et vous approuvez avant la fusion. Vous pouvez suivre le squad depuis l’appli de bureau, votre téléphone ou Telegram. Les passations entre membres sont les prochaines étapes, comme l’indique la feuille de route.',
       },
       {
         question: 'Qu’est-ce qu’un git worktree, et pourquoi equipe l’utilise-t-il\u202F?',
         answer:
           'Un git worktree est un autre dossier de travail du même dépôt, avec sa propre branche. equipe en donne un à chaque membre, pour que plusieurs membres travaillent en même temps sans se gêner entre eux ni toucher à votre copie de travail.',
+      },
+      {
+        question: 'Existe-t-il une appli de bureau ?',
+        answer:
+          'Oui, pour macOS 12 ou plus récent, sur Apple Silicon et Intel. Téléchargez equipe.dmg, signé et notarisé, depuis la dernière release GitHub ; l’appli vérifie elle-même les mises à jour. C’est une fenêtre sur le même démon que le terminal : votre squad, les tickets, les décisions, et un panneau pour le navigateur qu’utilisent les membres. Elle nécessite la CLI `equipe` et propose de vous aider à l’installer. L’appli existe en huit langues.',
+      },
+      {
+        question: 'Puis-je suivre le squad depuis mon téléphone ?',
+        answer:
+          'Oui. Lancez `equipe pair` et scannez le QR code dans l’appli mobile equipe, encore en préparation. Vous recevez une notification quand on a besoin de vous, et vous pouvez répondre, relire le travail et parler au PM. Les messages sont scellés de bout en bout. Telegram fonctionne aussi, avec `equipe telegram setup`.',
       },
     ],
   },
