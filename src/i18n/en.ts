@@ -77,7 +77,7 @@ export const en = {
       { title: 'Desktop app', platform: 'macOS', text: 'The squad, its tickets and the PM conversation in one window.', alt: 'The equipe desktop app: in the PM conversation, a permission request and a question from a member wait for an answer.' },
       { title: 'Mobile app', platform: 'iOS · Android', text: 'Pair with a QR code. It only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'Run the command?', allow: 'Allow once', decline: 'Decline', askMerge: 'Merge the branch?', approve: 'Approve', changes: 'Request changes' },
+    phone: { label: 'Waiting for you · 3', askCommand: 'Run the command?', allow: 'Allow once', decline: 'Decline', askMerge: 'Merge the branch?', approve: 'Approve', changes: 'Request changes' },
     notify: { title: 'Want to know when the mobile app ships?', text: 'Subscribe to releases on GitHub and you get an email only for new releases. No sign-up with us, no email collected.', cta: 'Get notified on GitHub', how: 'On the equipe-labs/equipe repo: Watch → Custom → Releases.' },
   },
   start: {

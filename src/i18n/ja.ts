@@ -75,7 +75,7 @@ const ja: Messages = {
       { title: 'デスクトップアプリ', platform: 'macOS', text: 'スクワッド、チケット、PMとの会話を1つのウィンドウで。', alt: 'equipeデスクトップアプリ：PMとの会話で、許可リクエストとメンバーからの質問が回答を待っています。' },
       { title: 'モバイルアプリ', platform: 'iOS · Android', text: 'QRコードで接続します。承認が必要なときだけ通知します。', alt: 'モバイルアプリのモックアップ：承認待ちのリクエストが2件あります。' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'コマンドを実行しますか？', allow: '1度だけ許可', decline: '拒否', askMerge: 'ブランチをマージしますか？', approve: '承認', changes: '変更を依頼' },
+    phone: { label: 'あなたを待っています · 3', askCommand: 'コマンドを実行しますか？', allow: '1度だけ許可', decline: '拒否', askMerge: 'ブランチをマージしますか？', approve: '承認', changes: '変更を依頼' },
     notify: { title: 'モバイルアプリの公開をお知らせしましょうか？', text: 'GitHubでリリースをWatchすると、新しいリリースが出たときだけメールが届きます。当サイトへの登録は不要で、メールアドレスも収集しません。', cta: 'GitHubで通知を受け取る', how: 'equipe-labs/equipeリポジトリで「Watch → Custom → Releases」を選んでください。' },
   },
   start: {

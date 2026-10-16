@@ -75,7 +75,7 @@ const ptBR: Messages = {
       { title: 'App para desktop', platform: 'macOS', text: 'O squad, os tickets e a conversa com o PM em uma só janela.', alt: 'O app para desktop do equipe: na conversa com o PM, um pedido de permissão e uma pergunta de um membro aguardam resposta.' },
       { title: 'App para celular', platform: 'iOS · Android', text: 'Pareie com um QR code. Só avisa quando algo precisa da sua aprovação.', alt: 'Prévia do app para celular: dois pedidos de aprovação aguardando.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'Executar o comando?', allow: 'Permitir uma vez', decline: 'Recusar', askMerge: 'Fazer merge do branch?', approve: 'Aprovar', changes: 'Pedir mudanças' },
+    phone: { label: 'Esperando você · 3', askCommand: 'Executar o comando?', allow: 'Permitir uma vez', decline: 'Recusar', askMerge: 'Fazer merge do branch?', approve: 'Aprovar', changes: 'Pedir mudanças' },
     notify: { title: 'Quer saber quando o app para celular sair?', text: 'Inscreva-se nos releases no GitHub e receba um e-mail só quando sair uma nova versão. Sem cadastro com a gente e sem coleta do seu e-mail.', cta: 'Receber aviso no GitHub', how: 'No repositório equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {

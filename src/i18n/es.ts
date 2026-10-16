@@ -75,7 +75,7 @@ const es: Messages = {
       { title: 'App de escritorio', platform: 'macOS', text: 'El squad, sus tickets y la conversación con el PM en una sola ventana.', alt: 'La app de escritorio de equipe: en la conversación con el PM, una solicitud de permiso y una pregunta de un miembro esperan respuesta.' },
       { title: 'App móvil', platform: 'iOS · Android', text: 'Se empareja con un código QR. Solo te avisa cuando algo necesita tu aprobación.', alt: 'Maqueta de la app móvil: dos solicitudes de aprobación en espera.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: '¿Ejecutar el comando?', allow: 'Permitir una vez', decline: 'Rechazar', askMerge: '¿Fusionar la rama?', approve: 'Aprobar', changes: 'Pedir cambios' },
+    phone: { label: 'Esperan por ti · 3', askCommand: '¿Ejecutar el comando?', allow: 'Permitir una vez', decline: 'Rechazar', askMerge: '¿Fusionar la rama?', approve: 'Aprobar', changes: 'Pedir cambios' },
     notify: { title: '¿Quieres saber cuándo sale la app móvil?', text: 'Suscríbete a las versiones en GitHub y solo recibirás un correo cuando salga una nueva. No hace falta registrarte con nosotros ni darnos tu correo.', cta: 'Recibir aviso en GitHub', how: 'En el repositorio equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {
