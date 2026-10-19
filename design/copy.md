@@ -8,7 +8,7 @@ Language: English. Tone: plain, concrete, a little dry. No hype words ("revoluti
 - **Title** (47 chars): `equipe — an AI software squad led by one person`
 - **Meta description** (151 chars): `equipe is an open-source AI software squad: role-based agents work from a shared board in isolated git worktrees, and you approve before anything merges.`
 - **Canonical:** `https://equipe.im/`
-- **OG title:** same as title · **OG description:** same as meta description · **OG image:** `design/og.png` (alt: "equipe — an AI software squad led by one person")
+- **OG title:** same as title · **OG description:** same as meta description · **OG image:** `design/assets/logo/og.png` (alt: "equipe — an AI software squad led by one person")
 - **Structured data:** `SoftwareApplication` (name equipe, license MIT, applicationCategory DeveloperApplication, codeRepository github.com/equipe-labs/equipe) and `FAQPage` generated from the FAQ below, verbatim.
 
 ## Heading outline

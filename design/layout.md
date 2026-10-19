@@ -10,4 +10,4 @@ Tokens: see `tokens.md`. Copy: see `copy.md`. Mobile = ≤640px, single column e
 6. **FAQ**: eight `<details>` rows on `--surface`, 680px column, question as `<summary>` (600 weight, 44px+ target, chevron right). All answers stay in the DOM; first row closed by default.
 7. **Footer**: hairline, three items on one line (stacked on mobile), `--muted` small text.
 
-Behaviour: no JS required for content; the theme follows the system with no toggle in v1. Respect `prefers-reduced-motion` (no motion beyond a 150ms colour transition). Links are underlined in body text. OG image: `og.svg` (1200×630) — export to `og.png` at build time; I could not render PNG here.
+Behaviour: no JS required for content; the theme follows the system with no toggle in v1. Respect `prefers-reduced-motion` (no motion beyond a 150ms colour transition). Links are underlined in body text. OG image: `assets/logo/og.svg` (1200×630) — export to `assets/logo/og.png` at build time; I could not render PNG here.
