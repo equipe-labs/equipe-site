@@ -75,7 +75,7 @@ const de: Messages = {
       { title: 'Desktop-App', platform: 'macOS', text: 'Squad, Tickets und PM-Gespräch in einem Fenster.', alt: 'Die equipe-Desktop-App: Im PM-Gespräch warten eine Berechtigungsanfrage und eine Frage eines Mitglieds auf eine Antwort.' },
       { title: 'Mobile App', platform: 'iOS · Android', text: 'Per QR-Code koppeln. Meldet sich nur, wenn etwas dein OK braucht.', alt: 'Vorschau der mobilen App: zwei Freigabeanfragen warten.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'Befehl ausführen?', allow: 'Einmal erlauben', decline: 'Ablehnen', askMerge: 'Branch mergen?', approve: 'Freigeben', changes: 'Änderungen anfordern' },
+    phone: { label: 'Warten auf dich · 3', askCommand: 'Befehl ausführen?', allow: 'Einmal erlauben', decline: 'Ablehnen', askMerge: 'Branch mergen?', approve: 'Freigeben', changes: 'Änderungen anfordern' },
     notify: { title: 'Möchtest du wissen, wann die mobile App erscheint?', text: 'Abonniere die Releases auf GitHub – dann bekommst du nur bei neuen Versionen eine E-Mail. Keine Registrierung bei uns, wir sammeln keine E-Mail-Adressen.', cta: 'Auf GitHub abonnieren', how: 'Im Repository equipe-labs/equipe: Watch → Custom → Releases.' },
   },
   start: {

@@ -75,7 +75,7 @@ const ko: Messages = {
       { title: '데스크톱 앱', platform: 'macOS', text: '스쿼드, 티켓, PM 대화를 한 창에서.', alt: 'equipe 데스크톱 앱: PM 대화에서 허가 요청과 멤버의 질문이 답을 기다리고 있어요.' },
       { title: '모바일 앱', platform: 'iOS · Android', text: 'QR 코드로 연결해요. 승인이 필요할 때만 알려줘요.', alt: '모바일 앱 시안: 승인 요청 두 건이 기다리고 있어요.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: '명령을 실행할까요?', allow: '한 번 허용', decline: '거절', askMerge: '브랜치를 머지할까요?', approve: '승인', changes: '변경 요청' },
+    phone: { label: '나를 기다리는 것 · 3', askCommand: '명령을 실행할까요?', allow: '한 번 허용', decline: '거절', askMerge: '브랜치를 머지할까요?', approve: '승인', changes: '변경 요청' },
     notify: { title: '모바일 앱이 나오면 알려드릴까요?', text: 'GitHub 릴리스를 구독하면 새 릴리스 소식만 메일로 와요. 가입도, 이메일 수집도 없어요.', cta: 'GitHub에서 알림 받기', how: 'equipe-labs/equipe 저장소에서 Watch → Custom → Releases를 고르세요.' },
   },
   start: {

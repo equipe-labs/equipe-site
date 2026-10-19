@@ -158,7 +158,10 @@ const tryIt = 'equipe try --edit "…"';
         <div class="cards">
           {t.apps.items.map((a, i) => (
             <div class="card app">
-              <h3>{a.title}</h3>
+              <div class="app-head">
+                <h3>{a.title}</h3>
+                {i > 0 && <span class="chip">{t.apps.soon}</span>}
+              </div>
               <p class="platform">{a.platform}</p>
               <p>{a.text}</p>
               {i === 0 ? (
@@ -168,20 +171,19 @@ const tryIt = 'equipe try --edit "…"';
               ) : (
                 <div class="shot phone-wrap" role="img" aria-label={a.alt}>
                   <div class="phone" aria-hidden="true">
+                    <i class="island"></i>
                     <small>{t.apps.phone.label}</small>
-                    <div class="pc"><b>BACKEND · T-52</b>{t.apps.phone.askCommand}<code>cargo test -p equipe-core</code><div class="pb"><i>{t.apps.phone.allow}</i><i>{t.apps.phone.decline}</i></div></div>
-                    <div class="pc"><b>MOBILE · T-37</b>{t.apps.phone.askMerge}<div class="pb"><i>{t.apps.phone.approve}</i><i>{t.apps.phone.changes}</i></div></div>
+                    <div class="pc"><b>backend · T-52</b><span class="ask">{t.apps.phone.askCommand}</span><code>cargo test -p equipe-core</code><div class="pb"><i>{t.apps.phone.decline}</i><i>{t.apps.phone.allow}</i></div></div>
+                    <div class="pc"><b>mobile · T-37</b><span class="ask">{t.apps.phone.askMerge}</span><div class="pb"><i>{t.apps.phone.changes}</i><i>{t.apps.phone.approve}</i></div></div>
                   </div>
                 </div>
               )}
-              {i === 0 ? (
+              {i === 0 && (
                 <div class="app-action">
                   <a class="btn primary" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="apps" download>{t.apps.download}</a>
                   <p class="req">{t.apps.req}</p>
                   <p class="req">{t.apps.cliNote}</p>
                 </div>
-              ) : (
-                <div class="app-action"><span class="chip">{t.apps.soon}</span></div>
               )}
             </div>
           ))}

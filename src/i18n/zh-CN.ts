@@ -75,7 +75,7 @@ const zhCN: Messages = {
       { title: '桌面应用', platform: 'macOS', text: '小队、工单和 PM 对话，一个窗口搞定。', alt: 'equipe 桌面应用：在 PM 对话中，一条许可请求和一位成员的提问在等待回答。' },
       { title: '移动应用', platform: 'iOS · Android', text: '用二维码配对。只在需要你批准时提醒你。', alt: '移动应用示意图：有两条批准请求在等待。' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: '运行该命令？', allow: '允许一次', decline: '拒绝', askMerge: '合并该分支？', approve: '批准', changes: '请求修改' },
+    phone: { label: '等你处理 · 3', askCommand: '运行该命令？', allow: '允许一次', decline: '拒绝', askMerge: '合并该分支？', approve: '批准', changes: '请求修改' },
     notify: { title: '想在移动应用发布时第一时间知道？', text: '订阅 GitHub Releases，只会在有新版本时收到邮件。无需注册，我们也不收集邮箱。', cta: '在 GitHub 上订阅通知', how: '在 equipe-labs/equipe 仓库选择 Watch → Custom → Releases。' },
   },
   start: {

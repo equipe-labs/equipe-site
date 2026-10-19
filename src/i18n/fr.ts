@@ -76,7 +76,7 @@ const fr: Messages = {
       { title: 'Application de bureau', platform: 'macOS', text: 'Le squad, ses tickets et la discussion avec le PM dans une seule fenêtre.', alt: 'L’appli de bureau equipe : dans la conversation avec le PM, une demande d’autorisation et une question d’un membre attendent une réponse.' },
       { title: 'Application mobile', platform: 'iOS · Android', text: 'Appairage par QR code. Ne vous prévient que lorsque votre accord est nécessaire.', alt: 'Maquette de l’appli mobile : deux demandes d’approbation en attente.' },
     ],
-    phone: { label: 'APPROVE · 3', askCommand: 'Exécuter la commande\u202F?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche\u202F?', approve: 'Approuver', changes: 'Demander des changements' },
+    phone: { label: 'Vous attendent · 3', askCommand: 'Exécuter la commande\u202F?', allow: 'Autoriser une fois', decline: 'Refuser', askMerge: 'Fusionner la branche\u202F?', approve: 'Approuver', changes: 'Demander des changements' },
     notify: { title: 'Envie d’être prévenu à la sortie de l’appli mobile\u202F?', text: 'Abonnez-vous aux releases sur GitHub\u202F: vous ne recevrez un e-mail que pour les nouvelles versions. Pas d’inscription chez nous, aucune adresse e-mail collectée.', cta: 'Être prévenu sur GitHub', how: 'Sur le dépôt equipe-labs/equipe\u202F: Watch → Custom → Releases.' },
   },
   start: {
