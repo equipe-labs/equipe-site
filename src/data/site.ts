@@ -11,5 +11,5 @@ export const SITE = {
   supportEmail: 'support@equipe.im',
   issues: 'https://github.com/equipe-labs/equipe/issues',
   ogImage: '/og.png',
-  themeColor: '#FAF8F4',
+  themeColor: '#F6F5F1',
 };
