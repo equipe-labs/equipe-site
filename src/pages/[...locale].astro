@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import Shot from '../components/Shot.astro';
+import AppUi from '../components/AppUi.astro';
+import HeroScene from '../components/HeroScene.astro';
+import '../styles/app.css';
+import { getAppText } from '../i18n/app';
 import State from '../components/State.astro';
 import '../styles/landing.css';
 import Mark from '../components/Mark.astro';
@@ -23,6 +26,7 @@ export function getStaticPaths() {
 const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const t = getMessages(code);
+const at = getAppText(code);
 const pageUrl = new URL(localePath(info), Astro.site).href;
 
 const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
@@ -78,9 +82,7 @@ const tryIt = 'equipe try --edit "…"';
         <p class="evline"><i></i><span>{t.hero.proof}</span></p>
       </div>
       <div class="wrap w heroshot">
-        <Shot k="hero" class="fade" eager alt={t.hero.shotAlt} pins={[[18.4, 20.3], [67.0, 22.2], [19.3, 72]]} />
-        <ol class="legend">{t.hero.pins.map((p, i) => <li><b aria-hidden="true">{i + 1}</b>{p}</li>)}</ol>
-        <p class="meta">{t.hero.demo}</p>
+        <HeroScene t={at} alt={t.hero.shotAlt} />
       </div>
     </section>
 
@@ -95,7 +97,7 @@ const tryIt = 'equipe try --edit "…"';
               <div class="ln"><span class="tagcol"><span class="soon">{t.ui.soon}</span></span><p>{t.launch.soon}</p></div>
             </div>
           </div>
-          <div><Shot k="launch" alt={t.launch.alt} /><p class="cap">{t.launch.caption}</p></div>
+          <div><AppUi k="launch" t={at} alt={t.launch.alt} /><p class="cap">{t.launch.caption}</p></div>
         </div>
       </div>
     </section>
@@ -103,7 +105,7 @@ const tryIt = 'equipe try --edit "…"';
     <section id="stage" class="alt">
       <div class="wrap w">
         <div class="row rev half">
-          <div><Shot k="stage" alt={t.stage.alt} /><p class="cap">{t.stage.caption}</p></div>
+          <div><AppUi k="stage" t={at} alt={t.stage.alt} /><p class="cap">{t.stage.caption}</p></div>
           <div>
             <h2>{t.stage.title} <span class="tone">{t.stage.text}</span></h2>
             <ol class="tl">
@@ -133,14 +135,14 @@ const tryIt = 'equipe try --edit "…"';
               ))}
             </ol>
             <div class="stack">
-              <div><Shot k="goal" alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
-              <div><Shot k="build" alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>
+              <div><AppUi k="goal" t={at} alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
+              <div><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>
             </div>
           </div>
 
           <div class="row rev appr">
             <div class="duo">
-              <div><Shot k="appr" alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
+              <div><AppUi k="appr" t={at} alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
               <div class="phonebox">
                 <div>
                   <div class="phone" role="img" aria-label={t.loop.phoneCaption}>
@@ -194,7 +196,7 @@ const tryIt = 'equipe try --edit "…"';
     <section id="who-for" class="alt">
       <div class="wrap w">
         <h2>{t.who.title} <span class="tone">{t.who.text}</span></h2>
-        <div class="whofig"><Shot k="who" alt={t.who.alt} /><p class="cap">{t.who.caption}</p></div>
+        <div class="whofig"><AppUi k="who" t={at} alt={t.who.alt} /><p class="cap">{t.who.caption}</p></div>
         <ul class="pts">
           {t.who.points.map((p) => <li class="pt"><h3>{p.lead}</h3><p>{p.text}</p></li>)}
         </ul>
@@ -207,7 +209,7 @@ const tryIt = 'equipe try --edit "…"';
         <div class="fr">
           {scenes.map((sc, i) => (
             <div class={`row${i % 2 ? ' rev' : ''}`}>
-              {i % 2 === 1 && <div><Shot k={sc.k} alt={t.feat.scenes[i].alt} /><p class="cap">{t.feat.scenes[i].caption}</p></div>}
+              {i % 2 === 1 && <div><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /><p class="cap">{t.feat.scenes[i].caption}</p></div>}
               <div>
                 <span class="now">{t.ui.now}</span>
                 <h3>{t.feat.now[sc.n].title}</h3>
@@ -215,7 +217,7 @@ const tryIt = 'equipe try --edit "…"';
               </div>
               {i % 2 === 0 && (
                 <div>
-                  {sc.tall ? <div class="tall"><Shot k={sc.k} alt={t.feat.scenes[i].alt} mobile={false} /></div> : <Shot k={sc.k} alt={t.feat.scenes[i].alt} />}
+                  {sc.tall ? <div class="tall"><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /></div> : <AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} />}
                   <p class="cap">{t.feat.scenes[i].caption}</p>
                 </div>
               )}
@@ -242,7 +244,7 @@ const tryIt = 'equipe try --edit "…"';
           <dl class="nums">
             {t.ev.nums.map((n) => <div class="num"><dt>{n.n}</dt><dd>{n.label}</dd></div>)}
           </dl>
-          <div><Shot k="ev" dark mobile={false} alt={t.ev.alt} /><p class="cap">{t.ev.caption}</p></div>
+          <div><AppUi k="ev" dark t={at} alt={t.ev.alt} /><p class="cap">{t.ev.caption}</p></div>
         </div>
         <p class="meta">{t.ev.small}</p>
       </div>
@@ -254,7 +256,7 @@ const tryIt = 'equipe try --edit "…"';
         <ol class="go">
           {t.start.steps.map((s, i) => (
             <li class="gs">
-              <div class="vis"><Shot k={`st${i + 1}`} mobile={false} alt={s.alt} /></div>
+              <div class="vis"><AppUi k={`st${i + 1}`} t={at} alt={s.alt} /></div>
               <span class="n" aria-hidden="true">{i + 1}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
