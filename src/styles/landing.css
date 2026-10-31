@@ -59,8 +59,10 @@ main.landing h2 .tone { display: block; margin-top: var(--s-4); color: var(--mut
 .acts { display: flex; align-items: center; gap: var(--s-4) var(--s-5); margin: var(--s-6) 0 var(--s-4); flex-wrap: wrap; }
 .acts .link { font-weight: 500; font-size: 16px; }
 .hero .acts + .meta { margin-top: var(--s-4); }
-.evline { margin-top: var(--s-5); display: flex; align-items: center; gap: var(--s-3); font: 600 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
-.evline i { width: 28px; height: 1px; background: var(--text); flex: none; }
+.evline { margin-top: var(--s-5); display: flex; align-items: flex-start; gap: var(--s-3); font: 600 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
+.evline i { width: 28px; height: 1px; background: var(--text); flex: none; margin-top: 0.7em; }
+/* Japanese headline: break only at the phrase marks (U+200B) written into the text, never inside a word */
+:lang(ja) .hero h1 { word-break: keep-all; overflow-wrap: anywhere; }
 .heroshot { margin-top: 40px; }
 @media (min-width: 701px) {
   .hero h1 { font-size: 68px; }
@@ -185,7 +187,7 @@ main.landing .cm h3 { font-size: 26px; letter-spacing: -0.025em; }
 /* 7 evidence */
 .evs { background: var(--void); color: var(--bone); }
 @media (prefers-color-scheme: dark) { .evs { background: #000; border-top: 1px solid var(--line) !important; } }
-.evs h2 .tone, .evs .meta, .evs .cap, .evs dd { color: #A3A5AB; }
+main.landing .evs h2 .tone, .evs .meta, .evs .cap, .evs dd { color: #A3A5AB; }
 .evg { display: grid; grid-template-columns: 1fr; gap: var(--s-7); align-items: center; margin-top: var(--s-7); }
 @media (min-width: 1100px) { .evg { grid-template-columns: 6fr 5fr; gap: 96px; margin-top: var(--s-8); } }
 .nums { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-4); margin: 0; }
