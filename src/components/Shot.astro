@@ -1,0 +1,22 @@
+---
+// A real screenshot of the Mac app, cropped for desktop (d) and mobile (m), in light and dark.
+// Files: public/shots/<k>-{d,m}-{light,dark}.webp; sizes: src/data/shots.json.
+import dims from '../data/shots.json';
+interface Props { k: string; alt: string; eager?: boolean; dark?: boolean; mobile?: boolean; class?: string; pins?: [number, number][] }
+const { k, alt, eager = false, dark = false, mobile = true, class: cls = '', pins = [] } = Astro.props;
+const size = dims as unknown as Record<string, [number, number]>;
+const src = (v: 'd' | 'm', t: 'light' | 'dark') => `/shots/${k}-${v}-${t}.webp`;
+const [w, h] = size[`${k}-d-${dark ? 'dark' : 'light'}`];
+const [mw, mh] = size[`${k}-${mobile ? 'm' : 'd'}-${dark ? 'dark' : 'light'}`];
+const t = dark ? 'dark' : 'light';
+---
+
+<figure class={`win ${cls}`.trim()} style={`--ar:${w}/${h};--arm:${mw}/${mh}`}>
+  <picture>
+    {mobile && !dark && <source media="(max-width: 700px) and (prefers-color-scheme: dark)" srcset={src('m', 'dark')} />}
+    {mobile && <source media="(max-width: 700px)" srcset={src('m', t)} />}
+    {!dark && <source media="(prefers-color-scheme: dark)" srcset={src('d', 'dark')} />}
+    <img src={src('d', t)} alt={alt} width={w} height={h} loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} fetchpriority={eager ? 'high' : undefined} />
+  </picture>
+  {pins.map((p, i) => <i class="pin" aria-hidden="true" style={`left:${p[0]}%;top:${p[1]}%`}>{i + 1}</i>)}
+</figure>

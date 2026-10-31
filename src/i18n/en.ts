@@ -23,73 +23,136 @@ export const en = {
     // {language} is replaced with the target language's own name, e.g. 한국어.
     bannerText: 'View this page in {language}',
     bannerClose: 'Dismiss',
+    now: 'Works today',
+    soon: 'Coming',
+    illu: 'An illustration of the Mac app, not a screenshot.',
   },
-  nav: { howItWorks: 'How it works', getStarted: 'Get started', faq: 'FAQ', github: 'GitHub' },
+  nav: { stage: 'Stage', howItWorks: 'How it works', features: 'Features', getStarted: 'Start', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Your whole startup team. You just approve.',
-    lead: 'A PM, designer and engineers that keep growing your product — from first idea to launch and beyond. They run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
-    ctaPrimary: 'View on GitHub',
-    chip: 'Early-stage · MIT licensed · Codex and Claude Code',
-    cliLink: 'Prefer the terminal? Install the CLI',
-    shotAlt: 'The equipe desktop app: a sidebar of live work, a ticket list grouped by status with “Your turn” and “Review” on top, and the open ticket beside it',
-    shotCaption: 'The equipe desktop app for macOS — your tickets as a list or a board, with what waits for you on top.',
+    lead: 'A PM, a designer and engineers who build your product, ship it and keep growing it. On your Mac, on the Claude or ChatGPT plan you already pay for.',
+    cta: 'Download for Mac',
+    req: 'Free and open source · macOS 12+ · Runs on your Claude or ChatGPT plan',
+    cliLink: 'On Linux, or live in the terminal? Get the CLI',
+    proof: '222 tickets · 20 days · 1 person approving',
+    shotAlt: 'The equipe Mac app: the inbox with a permission, two decisions and your turns, and an open decision card with options and a recommendation',
+    demo: 'A real screen from the Mac app, with demo data.',
+    pins: ['Everything waiting on you, in one place.', 'A decision comes with options and a recommendation.', 'Each member shows what it is working on.'],
   },
-  how: {
-    title: 'How it works',
-    intro: 'One person leads. The squad works in parallel. Everything passes through the board.',
-    steps: [
-      { title: 'Hand it off', text: 'Tell the PM what you want. It becomes tickets on a shared board, each with a role to take it.' },
-      { title: 'Work in parallel', text: 'Members work at the same time, each in its own workspace. Your own files stay untouched, and every action is recorded on the board.' },
-      { title: 'Your approval', text: 'Before anything ships or gets sent, equipe asks you. Nothing goes out until you say so.' },
-    ],
+  launch: {
+    title: "The code shipped. Who's watching the numbers?",
+    text: "Most AI tools stop at launch. That's exactly when a product needs someone reading the signups, testing what might move them and keeping what works. That's the job your squad is built for.",
+    now: 'Members spot follow-up work and propose it. The PM prioritizes it.',
+    soon: 'Give the squad a goal and it proposes the next step toward it.',
+    caption: 'The board after a launch day: finished work in Done, follow-ups already proposed.',
+    alt: 'The equipe board with Review and Done lanes',
   },
-  features: {
-    title: 'What you get',
-    intro: 'The squad runs in a background daemon, so closing the terminal never stops it. Every screen shows the same team.',
+  stage: {
+    title: 'Work that fits your stage.',
+    text: 'No polishing before anyone uses it. No rushing once people depend on it.',
     items: [
-      { title: 'Roles on one board', text: 'PM, designer, frontend, backend, mobile, QA and data, each with a model suited to the role and its own memory. The board is the single source of truth.' },
-      { title: 'Isolated branches', text: 'Every member works in its own git worktree, inside a sandbox. Anything beyond it, such as a push or a deploy, waits for your answer.' },
-      { title: 'Decisions come to you', text: 'Permission requests, and the questions members ask, arrive as cards you answer with one key or click.' },
-      { title: 'Several projects, one squad', text: 'The conversation follows the project you pick, and a ticket’s work stays with its ticket.' },
-      { title: 'A desktop app for macOS', text: 'A sidebar of live work, a ticket screen with list and board, ⌘K to search all work, and a browser panel. Eight languages, and it updates itself.' },
-      { title: 'Phone and other Macs', text: 'Pair a phone with a QR code and get a push when you are needed. Connect the desktop app to a squad on another Mac over SSH.' },
+      { title: 'Idea', text: "Find who it's for and what hurts. Size up competitors, plan interviews and a landing test." },
+      { title: 'First launch', text: 'Cut scope to what launch needs. Store review, signing, terms, analytics.' },
+      { title: 'Finding fit', text: 'Turn the numbers into hypotheses, run experiments and report what you learned each morning. Fast beats polished.' },
+      { title: 'Growing', text: 'Catch errors and expiring keys, refactor what slows you down, harden what users rely on.' },
     ],
+    partNote: 'Coming: then confirm the numbers are actually coming in.',
+    close: "See your stage and change it. The squad tells you when it's time to move on.",
+    caption: 'Tickets sorted by what needs you first.',
+    alt: 'A ticket list in the equipe Mac app, sorted by what needs you',
+  },
+  loop: {
+    title: 'Say it once. The team takes it from there.',
+    text: 'You set the goal. The PM splits it, the team builds it, and you approve what matters.',
+    steps: [
+      { title: 'Goal', text: 'Tell the PM what you want, in plain words.' },
+      { title: 'Build', text: 'The PM turns it into tickets. Members work at once — code, research, writing, even tasks in your browser — and the PM reviews everything before it reaches you.' },
+      { title: 'Measure', text: 'Show a change to some of your visitors and read the result in your analytics.' },
+      { title: 'Learn', text: "Keep what worked. Roll back what didn't. Propose the next bet." },
+      { title: 'Morning report', text: 'One page with your coffee: what moved, what was learned, which calls are yours.' },
+    ],
+    partNote: 'Coming: a North Star and quarterly goals the PM drafts and you confirm.',
+    back: 'next goal',
+    approveTitle: 'You approve what matters.',
+    approveText: 'Before anything ships, gets sent or costs money, the squad asks.',
+    goalCaption: 'Talk to the PM in plain words.',
+    goalAlt: 'The PM message box in the equipe Mac app',
+    buildCaption: 'Members work side by side, each on its own ticket.',
+    buildAlt: 'Several members working on their own tickets at the same time',
+    approveCaption: 'Options with a recommendation. Nothing goes live until you submit.',
+    approveAlt: 'A decision card with two options and a recommendation',
+    phoneCaption: 'An illustration of the phone app. It is not out yet.',
+    reportTitle: 'Morning report',
+    reportRows: ['What moved', 'What was learned', 'Your calls'],
+  },
+  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  demo: {
+    phone: { who: '● frontend · T-5', q: 'Publish the pricing page?', d: 'Goes live at equipe.im/pricing, for everyone', ok: 'Approve', no: 'Not yet' },
   },
   who: {
-    title: 'Who equipe is for',
-    intro: 'equipe is for people who want to lead a small software team of AI agents instead of prompting one agent at a time. You set the direction and review the work. The squad splits it into tickets and does it on branches.',
+    title: 'For founders with more ideas than hands.',
+    text: 'Code or not: if you can describe it, your squad can build it, ship it and keep improving it.',
     points: [
-      { lead: 'You already use Codex or Claude Code.', text: 'equipe drives them; you sign in the way you already do.' },
-      { lead: 'You want parallel work you can review.', text: 'Each change arrives as a branch, never as a surprise on your main line.' },
-      { lead: 'You want to keep the decisions.', text: 'Approval gates sit where they matter, so the call stays yours.' },
+      { lead: 'Many hands, one board.', text: 'A PM, a designer and engineers work side by side.' },
+      { lead: 'No babysitting.', text: 'The PM splits the work and checks it. You see only what needs you.' },
+      { lead: 'The calls stay yours.', text: 'Anything that ships, costs money or reaches people waits for your OK.' },
+      { lead: 'No second bill.', text: 'equipe is free and runs on the Claude or ChatGPT plan you already have.' },
     ],
-    proof: 'This site was built by an equipe squad, in public. Every change started as a ticket and landed as a branch a person accepted.',
+    caption: 'The inbox: permissions, decisions and your turns, in that order.',
+    alt: 'The equipe inbox: permissions first, then decisions, then your turns',
   },
-  apps: {
-    title: 'Watch on your Mac, approve on your phone.',
-    intro: 'The squad shows up outside the terminal too. The desktop app is out now. When an agent waits for your OK, the phone app tells you and you approve with Face ID. What you send is end-to-end encrypted.',
-    soon: 'In preparation',
-    download: "Download for macOS",
-    req: "macOS 12 or later · Apple Silicon and Intel · signed and notarized",
-    cliNote: 'The CLI is built in — nothing else to install.',
-    caption: "The phone screen is a mockup · the mobile app is still in preparation",
-    items: [
-      { title: 'Desktop app', platform: 'macOS', text: 'The squad, its tickets and the PM conversation in one window.', alt: 'The equipe desktop app: in the PM conversation, a permission request and a question from a member wait for an answer.' },
-      { title: 'Mobile app', platform: 'iOS · Android', text: 'Pair with a QR code. It only pings you when something needs your OK.', alt: 'Mobile app mockup: two approval requests waiting.' },
+  feat: {
+    title: "What works today. What's coming.",
+    comingTitle: 'Coming',
+    more: 'And also',
+    // The first four are shown as large scenes (order: 0, 4, 3, 2 of `now`); 1, 5, 6, 7 go in the short row.
+    now: [
+      { title: 'A whole team on one board', text: 'PM, designer, frontend, backend, mobile, QA, data — each remembers its own work.' },
+      { title: 'Not just code', text: 'Research, writing, numbers and paperwork sit on the same board.' },
+      { title: 'Works in your browser', text: "Signs up, configures and fills in forms, signed in as you — and asks before anything it can't undo." },
+      { title: 'All your products, one squad', text: 'One team across every project.' },
+      { title: 'Checked before it reaches you', text: 'The PM reviews all finished work; screen changes get a design check first.' },
+      { title: 'A Mac app', text: 'See work as it happens, tickets as a list or a board, and what waits for you on top.' },
+      { title: 'Your Mac, your plan', text: 'Files and sign-ins stay on your machine. Free, MIT licensed.' },
+      { title: 'Check-ins on a schedule', text: 'Ask for a weekly report once; the PM runs it every week.' },
     ],
-    phone: { label: 'Waiting for you · 3', askCommand: 'Run the command?', allow: 'Allow once', decline: 'Decline', askMerge: 'Merge the branch?', approve: 'Approve', changes: 'Request changes' },
-    notify: { title: 'Want to know when the mobile app ships?', text: 'Subscribe to releases on GitHub and you get an email only for new releases. No sign-up with us, no email collected.', cta: 'Get notified on GitHub', how: 'On the equipe-labs/equipe repo: Watch → Custom → Releases.' },
+    scenes: [
+      { caption: 'PM, designer, frontend, backend, mobile — one board.', alt: 'The board with six lanes' },
+      { caption: 'The PM splits the goal, owns each ticket and reports back.', alt: 'The PM splitting a goal into tickets' },
+      { caption: 'Every project and every member in one sidebar.', alt: 'The sidebar with projects and team members' },
+      { caption: "A command it can't undo waits for your answer.", alt: 'A permission card waiting for an answer' },
+    ],
+    coming: [
+      { title: 'Morning report', text: "What moved, what was learned, what's yours to decide — one page." },
+      { title: 'Experiments, not hunches', text: 'Ideas run as A/B tests and get judged by your analytics.' },
+      { title: 'Goals it works toward', text: 'A North Star and quarterly goals. Every proposal names the goal it serves.' },
+      { title: 'It notices first', text: 'A broken signup or a failing job lands on the board before you spot it.' },
+      { title: 'Code for your stage', text: 'Fast and light before fit. Refactoring and stability after.' },
+      { title: 'Approve from your phone', text: "A push when you're needed, Face ID to approve, end-to-end encrypted." },
+    ],
+  },
+  ev: {
+    title: '222 tickets. 20 days. One person approving.',
+    text: 'This site, the Mac app, the iOS app and the engine are all built by a single equipe squad.',
+    nums: [
+      { n: '222', label: 'tickets' },
+      { n: '20', label: 'days' },
+      { n: '4', label: 'projects' },
+      { n: '1', label: 'person approving' },
+    ],
+    small: 'Counted from our own board on Nov 1, 2026: 162 code · 54 research & writing · 6 in the browser.',
+    caption: 'Finished work from our own board.',
+    alt: 'The Done lane on our own board',
   },
   start: {
-    title: 'Get started',
-    appSteps: [
-      { title: 'Open the DMG', text: 'Open the downloaded `equipe.dmg`. It is signed and notarized, so macOS opens it without a warning.' },
-      { title: 'Drag it to Applications', text: 'Drag equipe onto the Applications folder in the same window, then eject the disk image. Don’t run it from inside the disk image: its command-line tool would point there and stop working after you eject.' },
-      { title: 'Open equipe', text: 'Launch it from Applications. The first time, the app sets up its built-in `equipe` command by itself — there is nothing to install. From then on it checks for updates itself.' },
-      { title: 'Connect your plan', text: 'equipe works through your own Claude or ChatGPT plan, so you need one of them (a paid plan; check the current monthly price with Anthropic or OpenAI). Sign in when the app asks. If it doesn’t, run `equipe login` in Terminal.' },
-      { title: 'Create your first squad', text: 'Create a squad in the app. If it says the squad is off, run `equipe` in Terminal and the app attaches to it.' },
-      { title: 'Talk to the PM', text: 'Tell the PM in plain words what you want built. The squad takes it from there and asks for your OK when it needs it.' },
+    title: 'Three steps to your first ticket.',
+    steps: [
+      { title: 'Download and open.', text: 'Drag equipe into Applications and open it. The command-line tool comes built in.', alt: 'The equipe sidebar right after opening the app' },
+      { title: 'Connect your plan.', text: 'equipe runs on your paid Claude or ChatGPT plan. Sign in when the app asks.', alt: 'Your plan shown in the equipe sidebar' },
+      { title: 'Tell the PM your goal.', text: 'Create your squad and say what you want. The PM takes it from there and asks when it needs you.', alt: 'A new squad, ready in the sidebar' },
     ],
+    note2: "App didn't ask? Run `equipe login` in Terminal.",
+    note3: 'App says the squad is off? Run `equipe` in Terminal.',
     cliTitle: 'Install from the terminal (CLI)',
     cliIntro: 'The desktop app already includes the `equipe` CLI. You only need this if you want to run the squad from a terminal, or you are on Linux. Pick one way to install it on macOS or Linux:',
     install: 'One line on macOS and Linux. It puts a prebuilt `equipe` in `~/.local/bin`, checked against its SHA-256, and adds it to your PATH:',
@@ -108,65 +171,24 @@ equipe           # open the squad console`,
     architecture: 'Architecture',
   },
   faq: {
-    title: 'Frequently asked questions',
+    title: 'Questions, answered',
+    devLabel: 'For developers',
+    // The last three items are for developers (the page tags them); keep that order in every language.
     items: [
-      {
-        question: 'What is equipe?',
-        answer:
-          'equipe is an open-source AI software squad. It coordinates agents in roles such as PM, Designer, Frontend, Backend, Mobile, QA and Data around a shared board. They work in isolated git worktrees, and a person approves before changes merge.',
-      },
-      {
-        question: 'Is equipe another AI coding agent?',
-        answer:
-          'No. equipe is the team layer on top of existing agent engines, not a new agent loop. It adds roles, a board as the single source of truth, isolated git worktrees for parallel work, and human approval gates.',
-      },
-      {
-        question: 'Which AI engines does equipe work with?',
-        answer:
-          'equipe drives Codex and Claude Code today. It is designed to support more engines through the Agent Client Protocol.',
-      },
-      {
-        question: 'Does equipe handle my credentials?',
-        answer:
-          'For Claude Code, no. You run the unmodified `claude` binary and sign in yourself, so billing goes to your own account. For Codex, equipe signs in with OAuth using your ChatGPT plan and identifies itself honestly as `originator: equipe`.',
-      },
-      {
-        question: 'How do I install equipe?',
-        answer:
-          'The easiest way is the macOS desktop app: download `equipe.dmg` from the latest release and move it to Applications. The app needs the `equipe` CLI and shows how to install it if it is missing. For the terminal, or on Linux, run `brew install equipe-labs/tap/equipe`, use the install.sh one-liner, or build from source (Rust 1.88+); every method is in Get started.',
-      },
-      {
-        question: 'Who approves the work?',
-        answer:
-          'You do. Each member works on its own branch in an isolated worktree, and equipe asks for human approval before a branch merges. The PM accepts work onto the board; the person leading the squad decides what lands.',
-      },
-      {
-        question: 'Is equipe free and open source?',
-        answer:
-          'Yes. equipe is released under the MIT License and has been open source since its first commit. equipe itself is free. Claude Code and Codex run on your own Anthropic and OpenAI (ChatGPT) subscriptions or accounts.',
-      },
-      {
-        question: 'Is equipe ready for production use?',
-        answer:
-          'equipe is early-stage. The squad daemon runs in the background, the PM accepts work, agents work on branches in sandboxes, and you approve before merge. You can follow the squad from the desktop app, your phone or Telegram. Handoffs between members are coming next, as listed on the roadmap.',
-      },
-      {
-        question: 'What is a git worktree, and why does equipe use one?',
-        answer:
-          'A git worktree is another working folder for the same repository, with its own branch. equipe gives each member one, so several can work at once without touching each other or your checkout.',
-      },
-      {
-        question: 'Is there a desktop app?',
-        answer:
-          'Yes, for macOS 12 or later on Apple Silicon and Intel. Download the signed and notarized equipe.dmg from the latest GitHub release; it checks for updates itself. It is a window onto the same daemon as the terminal: your squad, tickets, decisions, and a panel for the browser the members use. It needs the `equipe` CLI and offers to help install it. The app is in eight languages.',
-      },
-      {
-        question: 'Can I follow the squad from my phone?',
-        answer:
-          'Yes. Run `equipe pair` and scan the QR code in the equipe mobile app, which is still in preparation. You get a push when something needs you, and you can answer, review work and talk to the PM. Messages are sealed end to end. Telegram works too, with `equipe telegram setup`.',
-      },
+      { question: 'What is equipe?', answer: 'An AI startup team — PM, designer, engineers — that builds your product, ships it and keeps improving it, on your Mac. You decide; they do the work.' },
+      { question: 'Do I need to code?', answer: "No. You talk to the PM in plain words and approve what matters. Today the first setup still needs one line in Terminal — we're removing it." },
+      { question: 'What does it cost?', answer: 'equipe is free and open source (MIT). It runs on your own Claude or ChatGPT plan — you pay them, not us.' },
+      { question: 'Where do my code and data go?', answer: 'Your files stay on your Mac. The squad works on copies and leaves the originals alone until you accept. The AI models see what they work on through your own Claude or ChatGPT plan, as in any Claude Code or Codex session. Coming: a phone app that talks to your Mac end-to-end encrypted.' },
+      { question: "What works today, and what's coming?", answer: 'Today: the team and board, code and non-code work, the browser, PM review, the Mac app. Coming: morning reports, experiments, goals and stage-aware work, the phone apps. Anything marked "Coming" isn\'t shipped yet.' },
+      { question: 'How is this different from an AI coding agent?', answer: "It's not another agent. It's the team on top of Claude Code and Codex: roles, one board, a PM who checks the work, and you approving. It doesn't stop at code, or at launch." },
+      { question: 'Is it production-ready?', answer: "It's early, and built in public by its own squad. Expect fast changes." },
+      { question: 'Does it work while I sleep?', answer: 'Yes, as long as your Mac is awake — it runs in the background. Coming: an overnight budget and a morning report.' },
+      { question: 'How does work reach my repo?', answer: 'Each member works on its own branch in an isolated git worktree, in a sandbox. Nothing merges into main until you accept. Pushes and deploys ask first.' },
+      { question: 'Which engines, and how do they sign in?', answer: 'Claude Code and Codex. Claude Code runs as the unmodified `claude` binary on your sign-in; Codex signs in with OAuth on your ChatGPT plan and identifies as `originator: equipe`.' },
+      { question: 'Terminal, Linux, other Macs, Telegram?', answer: 'The CLI runs the whole squad on macOS and Linux (Homebrew, install.sh or source). The Mac app attaches to a squad on another Mac over SSH. Telegram: `equipe telegram setup`.' },
     ],
   },
+  close: { title: 'Your squad is ready when you are.' },
   notFound: { title: 'Page not found — equipe', description: 'This page does not exist.', heading: 'Page not found', text: 'There is nothing at this address. It may have moved, or the link may be wrong.', home: 'Go to the home page' },
   footer: { license: 'MIT License', built: 'Built by an equipe squad, in public.' },
   app: {
