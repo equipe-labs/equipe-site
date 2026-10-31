@@ -177,7 +177,7 @@ equipe           # open the squad console`,
         description: 'What the equipe mobile app and its relay handle: pairing keys stay on your phone, the relay only passes sealed messages, and there is no analytics or tracking.',
       },
       title: 'Privacy policy for the equipe app',
-      updated: 'Last updated: 2026-10-14',
+      updated: 'Last updated: 2026-11-01',
       intro: 'The equipe app lets your phone talk to the equipe daemon on your own Mac. This page says what the app and the equipe relay handle, in plain words.',
       sections: [
         {
@@ -216,6 +216,17 @@ equipe           # open the squad console`,
           title: 'Analytics and tracking',
           text: 'The app contains no analytics, advertising or crash-reporting tools, and does not track you across other apps or websites. This policy covers the app and the relay. The website equipe.im counts visits with PostHog without cookies or local storage and builds no person profiles.',
           items: [],
+        },
+        {
+          title: 'equipe desktop: anonymous usage data',
+          text: 'The equipe desktop app asks on its first run whether to share anonymous usage data. Until you say yes, nothing is sent. It is separate from the phone app, which sends none.',
+          items: [
+            '**What is sent.** Only these events: `first_run`, `squad_created`, `ticket_created`, `work_handed_in`, `work_accepted` and `daily_active`. They carry the equipe version, `macos` or `linux`, a random install ID and a random squad ID, and counts or kinds such as the ticket kind (`code`, `task`, `action`) or how many accepts a day had, as a range.',
+            '**What is never sent.** No conversation, prompt or reply. No ticket title, body, comment or image. No file, folder, repository or URL. No squad, member, project or person name. No email, phone or account. No hostname or other machine identifier.',
+            '**No profile.** Events are sent with person profiles and GeoIP lookup turned off. The random IDs are not derived from you or your Mac.',
+            '**Who receives it.** PostHog, in the United States (the same project that counts visits to equipe.im). PostHog sees the IP address of the request, as any server does.',
+            '**Turn it off.** Run `equipe telemetry off`, or set `EQUIPE_TELEMETRY=off`. It takes effect at once and the install\'s IDs are forgotten. `equipe telemetry status` shows the current answer. The full list is in `docs/TELEMETRY.md` in the equipe repository.',
+          ],
         },
         {
           title: 'Keeping and deleting data',

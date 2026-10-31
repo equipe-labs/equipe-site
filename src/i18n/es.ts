@@ -174,7 +174,7 @@ equipe           # abre la consola del squad`,
         description: 'Qué datos manejan la app móvil de equipe y su relay: las claves de emparejamiento se quedan en tu teléfono, el relay solo reenvía mensajes sellados y no hay analítica ni rastreo.',
       },
       title: 'Política de privacidad de la app de equipe',
-      updated: 'Última actualización: 2026-10-14',
+      updated: 'Última actualización: 2026-11-01',
       intro: 'La app de equipe permite que tu teléfono hable con el daemon de equipe de tu propio Mac. Esta página explica con palabras sencillas qué datos manejan la app y el relay de equipe.',
       sections: [
         {
@@ -213,6 +213,17 @@ equipe           # abre la consola del squad`,
           title: 'Analítica y rastreo',
           text: 'La app no contiene herramientas de analítica, publicidad ni informes de fallos, y no te rastrea en otras apps o sitios web. Esta política cubre la app y el relay. El sitio web equipe.im cuenta las visitas con PostHog sin cookies ni almacenamiento local y no crea perfiles de personas.',
           items: [],
+        },
+        {
+          title: 'equipe de escritorio: datos de uso anónimos',
+          text: 'La app de escritorio de equipe pregunta en su primer arranque si puede enviar datos de uso anónimos. Mientras no digas que sí, no se envía nada. La app del móvil no envía estos datos.',
+          items: [
+            '**Qué se envía.** Solo estos eventos: `first_run`, `squad_created`, `ticket_created`, `work_handed_in`, `work_accepted` y `daily_active`. Llevan la versión de equipe, `macos` o `linux`, un ID de instalación y un ID de squad aleatorios, y recuentos o tipos, como el tipo de ticket (`code`, `task`, `action`) o cuántas aprobaciones hubo en un día, en forma de rango.',
+            '**Qué nunca se envía.** Ninguna conversación, prompt o respuesta. Ningún título, texto, comentario o imagen de un ticket. Ningún archivo, carpeta, repositorio o URL. Ningún nombre de squad, miembro, proyecto o persona. Ningún correo, teléfono o cuenta. Ningún nombre de host ni otro identificador del equipo.',
+            '**Sin perfil.** Los eventos se envían sin perfil de persona y sin consulta GeoIP. Los ID aleatorios no se derivan de ti ni de tu Mac.',
+            '**Quién lo recibe.** PostHog, en Estados Unidos (el mismo proyecto que cuenta las visitas a equipe.im). PostHog ve la dirección IP de la petición, como cualquier servidor.',
+            '**Cómo desactivarlo.** Ejecuta `equipe telemetry off` o define `EQUIPE_TELEMETRY=off`. Surte efecto al instante y se olvidan los ID de la instalación. `equipe telemetry status` muestra el estado actual. La lista completa está en `docs/TELEMETRY.md` del repositorio de equipe.',
+          ],
         },
         {
           title: 'Conservación y eliminación',
