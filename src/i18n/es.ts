@@ -4,10 +4,10 @@ const es: Messages = {
   meta: {
     title: 'equipe — Todo tu equipo de startup. Tú solo apruebas.',
     description:
-      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
+      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que siguen haciendo crecer tu producto, desde la primera idea hasta el lanzamiento y más allá. Trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
     ogTitle: 'equipe — Todo tu equipo de startup. Tú solo apruebas.',
     ogDescription:
-      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
+      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que siguen haciendo crecer tu producto, desde la primera idea hasta el lanzamiento y más allá. Trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
     ogImageAlt: 'equipe — un squad de agentes de programación con IA, liderado por una sola persona',
   },
   ui: {
@@ -25,7 +25,7 @@ const es: Messages = {
   nav: { howItWorks: 'Cómo funciona', getStarted: 'Empezar', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Todo tu equipo de startup. Tú solo apruebas.',
-    lead: 'Un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT, y preguntan antes de que algo salga.',
+    lead: 'Un PM, un diseñador y ingenieros que siguen haciendo crecer tu producto, desde la primera idea hasta el lanzamiento y más allá. Trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
     ctaPrimary: 'Ver en GitHub',
     chip: 'Fase inicial · Licencia MIT · Compatible con Codex y Claude Code',
     cliLink: '¿Prefieres la terminal? Instala la CLI',

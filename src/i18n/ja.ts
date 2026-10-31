@@ -4,10 +4,10 @@ const ja: Messages = {
   meta: {
     title: 'equipe — スタートアップのチームまるごと。あなたは承認するだけ。',
     description:
-      'equipeはAIスクワッドです。PM、デザイナー、エンジニアがあなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
+      'equipeはAIスクワッドです。PM、デザイナー、エンジニアが、最初のアイデアから公開、そのあとの成長まで、プロダクトを育て続けます。あなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
     ogTitle: 'equipe — スタートアップのチームまるごと。あなたは承認するだけ。',
     ogDescription:
-      'equipeはAIスクワッドです。PM、デザイナー、エンジニアがあなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
+      'equipeはAIスクワッドです。PM、デザイナー、エンジニアが、最初のアイデアから公開、そのあとの成長まで、プロダクトを育て続けます。あなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
     ogImageAlt: 'equipe — 1人で率いるAIコーディングエージェントのスクワッド',
   },
   ui: {
@@ -25,7 +25,7 @@ const ja: Messages = {
   nav: { howItWorks: '仕組み', getStarted: 'はじめる', faq: 'よくある質問', github: 'GitHub' },
   hero: {
     title: 'スタートアップのチームまるごと。あなたは承認するだけ。',
-    lead: 'PM、デザイナー、エンジニアがあなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
+    lead: 'PM、デザイナー、エンジニアが、最初のアイデアから公開、そのあとの成長まで、プロダクトを育て続けます。あなたのMac上で、あなたのClaudeまたはChatGPTのプランで動き、何かを出す前に必ず確認します。',
     ctaPrimary: 'GitHubで見る',
     chip: '初期段階 · MITライセンス · Codex・Claude Code対応',
     cliLink: 'ターミナルで入れる（CLI）',

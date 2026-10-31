@@ -4,10 +4,10 @@ const zhCN: Messages = {
   meta: {
     title: 'equipe — 你的整个创业团队。你只需批准。',
     description:
-      'equipe 是一支 AI 小队：PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
+      'equipe 是一支 AI 小队：PM、设计师和工程师从最初的想法到上线，再到之后的增长，持续帮你把产品做大。他们在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
     ogTitle: 'equipe — 你的整个创业团队。你只需批准。',
     ogDescription:
-      'equipe 是一支 AI 小队：PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
+      'equipe 是一支 AI 小队：PM、设计师和工程师从最初的想法到上线，再到之后的增长，持续帮你把产品做大。他们在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
     ogImageAlt: 'equipe — 一个人带领的 AI 编程智能体小队',
   },
   ui: {
@@ -25,7 +25,7 @@ const zhCN: Messages = {
   nav: { howItWorks: '工作方式', getStarted: '开始使用', faq: '常见问题', github: 'GitHub' },
   hero: {
     title: '你的整个创业团队。你只需批准。',
-    lead: 'PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作——任何东西发出去之前，都会先问你。',
+    lead: 'PM、设计师和工程师从最初的想法到上线，再到之后的增长，持续帮你把产品做大。他们在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
     ctaPrimary: '在 GitHub 上查看',
     chip: '早期阶段 · MIT 许可证 · 支持 Codex 和 Claude Code',
     cliLink: '更喜欢终端？安装 CLI',

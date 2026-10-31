@@ -5,10 +5,10 @@ const fr: Messages = {
   meta: {
     title: 'equipe — Toute votre équipe de startup. Vous n’avez qu’à approuver.',
     description:
-      'equipe est une escouade d’IA\u202F: un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
+      'equipe est une escouade d’IA : un PM, un designer et des ingénieurs qui continuent de faire grandir votre produit, de la première idée au lancement et au-delà. Ils travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
     ogTitle: 'equipe — Toute votre équipe de startup. Vous n’avez qu’à approuver.',
     ogDescription:
-      'equipe est une escouade d’IA\u202F: un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
+      'equipe est une escouade d’IA : un PM, un designer et des ingénieurs qui continuent de faire grandir votre produit, de la première idée au lancement et au-delà. Ils travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
     ogImageAlt: 'equipe — un squad d’agents de codage IA, dirigé par une seule personne',
   },
   ui: {
@@ -26,7 +26,7 @@ const fr: Messages = {
   nav: { howItWorks: 'Comment ça marche', getStarted: 'Commencer', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Toute votre équipe de startup. Vous n’avez qu’à approuver.',
-    lead: 'Un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT — et vous demandent avant que quoi que ce soit parte.',
+    lead: 'Un PM, un designer et des ingénieurs qui continuent de faire grandir votre produit, de la première idée au lancement et au-delà. Ils travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
     ctaPrimary: 'Voir sur GitHub',
     chip: 'Phase initiale · Licence MIT · Codex et Claude Code',
     cliLink: 'Plutôt le terminal ? Installer la CLI',

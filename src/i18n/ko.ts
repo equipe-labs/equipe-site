@@ -4,10 +4,10 @@ const ko: Messages = {
   meta: {
     title: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
     description:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ogTitle: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
     ogDescription:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ogImageAlt: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
   },
   ui: {
@@ -25,7 +25,7 @@ const ko: Messages = {
   nav: { howItWorks: '작동 방식', getStarted: '시작하기', faq: '자주 묻는 질문', github: 'GitHub' },
   hero: {
     title: '창업팀 전체가 한 번에. 당신은 승인만 하세요.',
-    lead: 'PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
+    lead: 'PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ctaPrimary: 'GitHub에서 보기',
     chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
     cliLink: '터미널로 설치하기 (CLI)',

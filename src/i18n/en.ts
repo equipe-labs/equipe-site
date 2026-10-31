@@ -5,10 +5,10 @@ export const en = {
   meta: {
     title: 'equipe — Your whole startup team. You just approve.',
     description:
-      'equipe is an AI squad — a PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
+      'equipe is an AI squad — a PM, designer and engineers that keep growing your product — from first idea to launch and beyond. They run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
     ogTitle: 'equipe — Your whole startup team. You just approve.',
     ogDescription:
-      'equipe is an AI squad — a PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
+      'equipe is an AI squad — a PM, designer and engineers that keep growing your product — from first idea to launch and beyond. They run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
     ogImageAlt: 'equipe — an AI software squad led by one person',
   },
   ui: {
@@ -27,7 +27,7 @@ export const en = {
   nav: { howItWorks: 'How it works', getStarted: 'Get started', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Your whole startup team. You just approve.',
-    lead: 'A PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan — and ask before anything ships.',
+    lead: 'A PM, designer and engineers that keep growing your product — from first idea to launch and beyond. They run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
     ctaPrimary: 'View on GitHub',
     chip: 'Early-stage · MIT licensed · Codex and Claude Code',
     cliLink: 'Prefer the terminal? Install the CLI',
