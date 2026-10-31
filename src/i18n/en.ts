@@ -3,12 +3,12 @@
 // Markup: `backticks` render as <code>; **double asterisks** render as <strong>.
 export const en = {
   meta: {
-    title: 'equipe — an AI software squad led by one person',
+    title: 'equipe — Your whole startup team. You just approve.',
     description:
-      'equipe is an open-source AI software squad: role-based agents work from a shared board in isolated git worktrees, and you approve before anything merges.',
-    ogTitle: 'equipe — an AI software squad led by one person',
+      'equipe is an AI squad — a PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
+    ogTitle: 'equipe — Your whole startup team. You just approve.',
     ogDescription:
-      'equipe is an open-source AI software squad: role-based agents work from a shared board in isolated git worktrees, and you approve before anything merges.',
+      'equipe is an AI squad — a PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan, and ask before anything ships.',
     ogImageAlt: 'equipe — an AI software squad led by one person',
   },
   ui: {
@@ -26,8 +26,8 @@ export const en = {
   },
   nav: { howItWorks: 'How it works', getStarted: 'Get started', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Lead a team of AI agents. You approve every merge.',
-    lead: 'PM, designer, developer and mobile agents work from a shared board, each on its own branch of your repository. Nothing merges without your approval.',
+    title: 'Your whole startup team. You just approve.',
+    lead: 'A PM, designer and engineers that run on your Mac with your Claude or ChatGPT plan — and ask before anything ships.',
     ctaPrimary: 'View on GitHub',
     chip: 'Early-stage · MIT licensed · Codex and Claude Code',
     cliLink: 'Prefer the terminal? Install the CLI',
@@ -39,8 +39,8 @@ export const en = {
     intro: 'One person leads. The squad works in parallel. Everything passes through the board.',
     steps: [
       { title: 'Hand it off', text: 'Tell the PM what you want. It becomes tickets on a shared board, each with a role to take it.' },
-      { title: 'Work in parallel', text: 'Members work at the same time, each on its own branch. Your checkout stays untouched, and every action is recorded on the board.' },
-      { title: 'Your approval', text: 'Before anything merges, equipe asks you. Nothing lands until you say so.' },
+      { title: 'Work in parallel', text: 'Members work at the same time, each in its own workspace. Your own files stay untouched, and every action is recorded on the board.' },
+      { title: 'Your approval', text: 'Before anything ships or gets sent, equipe asks you. Nothing goes out until you say so.' },
     ],
   },
   features: {

@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const ptBR: Messages = {
   meta: {
-    title: 'equipe — um squad de agentes de programação com IA',
+    title: 'equipe — Todo o time da sua startup. Você só aprova.',
     description:
-      'O equipe é um squad de software com IA e de código aberto: agentes com papéis trabalham em um quadro compartilhado, em git worktrees isolados, e nenhum merge acontece sem a sua aprovação.',
-    ogTitle: 'equipe — um squad de agentes de programação com IA',
+      'O equipe é um esquadrão de IA: um PM, um designer e engenheiros que rodam no seu Mac com o seu plano do Claude ou do ChatGPT e perguntam antes de qualquer coisa sair.',
+    ogTitle: 'equipe — Todo o time da sua startup. Você só aprova.',
     ogDescription:
-      'O equipe é um squad de software com IA e de código aberto: agentes com papéis trabalham em um quadro compartilhado, em git worktrees isolados, e nenhum merge acontece sem a sua aprovação.',
+      'O equipe é um esquadrão de IA: um PM, um designer e engenheiros que rodam no seu Mac com o seu plano do Claude ou do ChatGPT e perguntam antes de qualquer coisa sair.',
     ogImageAlt: 'equipe — um squad de agentes de programação com IA, liderado por uma só pessoa',
   },
   ui: {
@@ -24,8 +24,8 @@ const ptBR: Messages = {
   },
   nav: { howItWorks: 'Como funciona', getStarted: 'Começar', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Lidere um time de agentes de IA. Você aprova cada merge.',
-    lead: 'Agentes de PM, design, desenvolvimento e mobile trabalham em um quadro compartilhado, cada um no seu próprio branch do repositório. Nada entra sem a sua aprovação.',
+    title: 'Todo o time da sua startup. Você só aprova.',
+    lead: 'Um PM, um designer e engenheiros que rodam no seu Mac com o seu plano do Claude ou do ChatGPT — e perguntam antes de qualquer coisa sair.',
     ctaPrimary: 'Ver no GitHub',
     chip: 'Fase inicial · Licença MIT · Compatível com Codex e Claude Code',
     cliLink: 'Prefere o terminal? Instale a CLI',
@@ -37,8 +37,8 @@ const ptBR: Messages = {
     intro: 'Uma pessoa lidera. O squad trabalha em paralelo. Tudo passa pelo quadro.',
     steps: [
       { title: 'Delegue', text: 'Diga ao PM o que você quer. Isso vira tickets em um quadro compartilhado, cada um com um papel responsável por ele.' },
-      { title: 'Trabalho em paralelo', text: 'Os membros trabalham ao mesmo tempo, cada um no próprio branch. Seu checkout fica intacto e cada ação fica registrada no quadro.' },
-      { title: 'Sua aprovação', text: 'Antes de qualquer merge, o equipe pergunta a você. Nada entra até você dizer que sim.' },
+      { title: 'Trabalho em paralelo', text: 'Os membros trabalham ao mesmo tempo, cada um no seu próprio espaço de trabalho. Seus arquivos ficam intocados e cada ação é registrada no quadro.' },
+      { title: 'Sua aprovação', text: 'Antes de qualquer coisa ser publicada ou enviada, o equipe pergunta a você. Nada sai até você dizer.' },
     ],
   },
   features: {

@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const de: Messages = {
   meta: {
-    title: 'equipe — KI-Coding-Agenten als Squad, geleitet von dir',
+    title: 'equipe — Dein ganzes Startup-Team. Du gibst nur frei.',
     description:
-      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit festen Rollen arbeiten über ein gemeinsames Board in isolierten Git-Worktrees. Gemergt wird nur mit deiner Freigabe.',
-    ogTitle: 'equipe — KI-Coding-Agenten als Squad, geleitet von dir',
+      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten und fragen, bevor etwas rausgeht.',
+    ogTitle: 'equipe — Dein ganzes Startup-Team. Du gibst nur frei.',
     ogDescription:
-      'equipe ist ein Open-Source-KI-Software-Squad: Agenten mit festen Rollen arbeiten über ein gemeinsames Board in isolierten Git-Worktrees. Gemergt wird nur mit deiner Freigabe.',
+      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten und fragen, bevor etwas rausgeht.',
     ogImageAlt: 'equipe — KI-Coding-Agenten als Squad, geleitet von einer einzigen Person',
   },
   ui: {
@@ -24,8 +24,8 @@ const de: Messages = {
   },
   nav: { howItWorks: 'So funktioniert’s', getStarted: 'Loslegen', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Führe ein Team aus KI-Agenten. Jeden Merge gibst du frei.',
-    lead: 'PM-, Design-, Entwickler- und Mobile-Agenten arbeiten über ein gemeinsames Board, jeder auf einem eigenen Branch deines Repositorys. Ohne deine Freigabe wird nichts gemergt.',
+    title: 'Dein ganzes Startup-Team. Du gibst nur frei.',
+    lead: 'Ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten – und fragen, bevor etwas rausgeht.',
     ctaPrimary: 'Auf GitHub ansehen',
     chip: 'Frühe Phase · MIT-Lizenz · Codex und Claude Code',
     cliLink: 'Lieber im Terminal? CLI installieren',
@@ -37,8 +37,8 @@ const de: Messages = {
     intro: 'Eine Person leitet. Der Squad arbeitet parallel. Alles läuft über das Board.',
     steps: [
       { title: 'Übergeben', text: 'Sag dem PM, was du willst. Daraus werden Tickets auf einem gemeinsamen Board, jedes mit einer Rolle, die es übernimmt.' },
-      { title: 'Parallel arbeiten', text: 'Die Mitglieder arbeiten gleichzeitig, jedes auf seinem eigenen Branch. Dein Checkout bleibt unberührt, und jede Aktion wird auf dem Board festgehalten.' },
-      { title: 'Deine Freigabe', text: 'Bevor etwas gemergt wird, fragt equipe dich. Ohne dein Okay landet nichts.' },
+      { title: 'Parallel arbeiten', text: 'Die Mitglieder arbeiten gleichzeitig, jedes in seinem eigenen Arbeitsbereich. Deine eigenen Dateien bleiben unberührt, und jede Aktion wird auf dem Board festgehalten.' },
+      { title: 'Deine Freigabe', text: 'Bevor etwas veröffentlicht oder verschickt wird, fragt equipe dich. Ohne dein Okay geht nichts raus.' },
     ],
   },
   features: {

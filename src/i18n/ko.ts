@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const ko: Messages = {
   meta: {
-    title: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
+    title: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
     description:
-      'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. 역할별 에이전트가 보드를 보며 격리된 git worktree에서 일하고, 머지는 당신이 승인한 뒤에만 해요.',
-    ogTitle: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
+    ogTitle: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
     ogDescription:
-      'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. 역할별 에이전트가 보드를 보며 격리된 git worktree에서 일하고, 머지는 당신이 승인한 뒤에만 해요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
     ogImageAlt: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
   },
   ui: {
@@ -24,8 +24,8 @@ const ko: Messages = {
   },
   nav: { howItWorks: '작동 방식', getStarted: '시작하기', faq: '자주 묻는 질문', github: 'GitHub' },
   hero: {
-    title: 'AI 에이전트 팀을 이끌고, 머지는 당신이 승인해요.',
-    lead: 'PM·디자이너·개발자·모바일 에이전트가 보드에서 일하고, 각자 당신 저장소의 자기 브랜치에서 작업해요. 당신 승인 없이는 아무것도 머지되지 않아요.',
+    title: '창업팀 전체가 한 번에. 당신은 승인만 하세요.',
+    lead: 'PM·디자이너·엔지니어가 당신의 Mac에서, 당신의 Claude나 ChatGPT 요금제로 일하고 — 나가기 전에 먼저 물어요.',
     ctaPrimary: 'GitHub에서 보기',
     chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
     cliLink: '터미널로 설치하기 (CLI)',
@@ -37,8 +37,8 @@ const ko: Messages = {
     intro: '이끄는 사람은 한 명이에요. 스쿼드는 병렬로 일하고, 모든 일은 보드를 거쳐요.',
     steps: [
       { title: '맡기기', text: 'PM에게 원하는 일을 말하면 공유 보드의 티켓으로 나눠요. 티켓마다 맡을 역할이 있어요.' },
-      { title: '병렬 작업', text: '멤버들이 동시에, 각자 자기 브랜치에서 일해요. 당신의 체크아웃은 건드리지 않고, 모든 행동은 보드에 기록돼요.' },
-      { title: '당신의 승인', text: '머지 전에 equipe가 당신에게 물어요. 당신이 말하기 전에는 아무것도 반영되지 않아요.' },
+      { title: '병렬 작업', text: '멤버들이 동시에, 각자 자기 작업 공간에서 일해요. 당신의 파일은 건드리지 않고, 모든 행동은 보드에 기록돼요.' },
+      { title: '당신의 승인', text: '나가거나 보내기 전에 equipe가 당신에게 물어요. 당신이 말하기 전에는 아무것도 나가지 않아요.' },
     ],
   },
   features: {
