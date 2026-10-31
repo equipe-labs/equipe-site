@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const ko: Messages = {
   meta: {
-    title: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
+    title: 'equipe — 창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     description:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
-    ogTitle: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
+    ogTitle: 'equipe — 창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     ogDescription:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ogImageAlt: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
   },
   ui: {
@@ -27,7 +27,7 @@ const ko: Messages = {
   },
   nav: { stage: '단계', howItWorks: '작동 방식', features: '기능', getStarted: '시작하기', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: '일은 팀이, 결정은 내가.',
+    title: '창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     lead: '기획·디자인·개발을 한 팀이 맡아요. 출시한 뒤에도 이어서 일하고, 공개나 결제 같은 일은 꼭 먼저 물어봐요.',
     cta: 'Mac용 다운로드',
     req: '무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로',
@@ -88,7 +88,7 @@ const ko: Messages = {
     phone: { who: '● 프론트엔드 · T-5', q: '대표님, 가격 페이지 지금 공개할까요?', d: '모두가 보는 equipe.im/pricing에 바로 올라가요', ok: '공개', no: '나중에' },
   },
   who: {
-    title: '손이 모자란 창업자에게.',
+    title: '손이 모자란 메이커에게.',
     text: '코드를 짜든 못 짜든 괜찮아요. 말로 설명할 수 있으면 스쿼드가 만들고 출시하고, 그다음 일도 이어서 해요.',
     points: [
       { lead: '할 일은 많은데 손이 둘뿐일 때.', text: 'PM, 디자이너, 개발자가 한 보드에서 같이 일해요.' },

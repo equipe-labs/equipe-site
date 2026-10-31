@@ -87,7 +87,7 @@ const zhCN: Messages = {
     phone: { who: '● frontend · T-5', q: '发布价格页？', d: '将上线到 equipe.im/pricing，所有人可见', ok: '批准', no: '先不' },
   },
   who: {
-    title: '写给点子比人手多的创始人。',
+    title: '写给点子比人手多的创客。',
     text: '会不会写代码都行：只要你说得清楚，小队就能做出来、发出去，并持续改进。',
     points: [
       { lead: '人多，一块看板。', text: 'PM、设计师和工程师并肩工作。' },

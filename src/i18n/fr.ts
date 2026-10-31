@@ -89,7 +89,7 @@ const fr: Messages = {
     phone: { who: '● frontend · T-5', q: 'Publier la page des tarifs ?', d: 'En ligne sur equipe.im/pricing, pour tout le monde', ok: 'Approuver', no: 'Pas encore' },
   },
   who: {
-    title: 'Pour les fondateurs qui ont plus d’idées que de bras.',
+    title: 'Pour les makers qui ont plus d’idées que de bras.',
     text: 'Codeur ou non : si vous savez le décrire, votre squad peut le construire, le lancer et continuer de l’améliorer.',
     points: [
       { lead: 'Beaucoup de bras, un tableau.', text: 'Un PM, un designer et des ingénieurs travaillent côte à côte.' },

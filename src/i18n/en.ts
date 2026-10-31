@@ -90,7 +90,7 @@ export const en = {
     phone: { who: '● frontend · T-5', q: 'Publish the pricing page?', d: 'Goes live at equipe.im/pricing, for everyone', ok: 'Approve', no: 'Not yet' },
   },
   who: {
-    title: 'For founders with more ideas than hands.',
+    title: 'For makers with more ideas than hands.',
     text: 'Code or not: if you can describe it, your squad can build it, ship it and keep improving it.',
     points: [
       { lead: 'Many hands, one board.', text: 'A PM, a designer and engineers work side by side.' },

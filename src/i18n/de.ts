@@ -88,7 +88,7 @@ const de: Messages = {
     phone: { who: '● frontend · T-5', q: 'Preisseite veröffentlichen?', d: 'Geht live auf equipe.im/pricing, für alle', ok: 'Freigeben', no: 'Noch nicht' },
   },
   who: {
-    title: 'Für Gründer mit mehr Ideen als Händen.',
+    title: 'Für Maker mit mehr Ideen als Händen.',
     text: 'Mit Code oder ohne: Wenn du es beschreiben kannst, baut dein Squad es, liefert es aus und verbessert es weiter.',
     points: [
       { lead: 'Viele Hände, ein Board.', text: 'PM, Designer und Engineers arbeiten nebeneinander.' },

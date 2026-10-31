@@ -88,7 +88,7 @@ const ptBR: Messages = {
     phone: { who: '● frontend · T-5', q: 'Publicar a página de preços?', d: 'Vai ao ar em equipe.im/pricing, para todos', ok: 'Aprovar', no: 'Ainda não' },
   },
   who: {
-    title: 'Para quem tem mais ideias que mãos.',
+    title: 'Para makers com mais ideias que mãos.',
     text: 'Programando ou não: se você consegue descrever, o seu squad constrói, lança e continua melhorando.',
     points: [
       { lead: 'Muitas mãos, um quadro.', text: 'Um PM, um designer e engenheiros trabalham lado a lado.' },
