@@ -149,3 +149,6 @@
 /* a scene that stays dark in a light page */
 .ap.dark { --bg: #0A0A0C; --surface: #16171A; --code-bg: #111114; --ap-sunken: #111114; --text: #EFEDE7; --muted: #A3A5AB; --accent: #8FB0FF; --on-accent: #0B1226; --line: #E9E6DF24; --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --strong: #7C7E85; --action: #EFEDE7; --on-action: #0A0A0C; }
 .win .ap .side { border-right: 0; }
+
+/* the composer scene: the site frame is the card, so the app card draws no border of its own */
+.ap .comp.bare { margin: 0; border: 0; border-radius: 0; background: none; padding: 16px; }

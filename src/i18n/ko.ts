@@ -87,7 +87,7 @@ const ko: Messages = {
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: '프론트엔드', verb: '확인을 요청합니다', age: '방금 요청됨', where: 'Loop · T-5 가격 페이지 공개 · Ask', tool: 'CONFIRM', action: '가격 페이지를 loop.app/pricing에 모두에게 공개', once: '휴대폰에서는 이번 한 번만 허용됩니다.', deny: '거부', allow: '이번만 허용', close: '닫기' },
+    phone: { name: '프론트엔드', verb: '확인을 요청합니다', age: '방금 요청됨', where: 'Loop · T-5 가격 페이지 공개 · 묻기', tool: '확인', action: '가격 페이지를 loop.app/pricing에 모두에게 공개', once: '휴대폰에서는 이번 한 번만 허용됩니다.', deny: '거부', allow: '이번만 허용', close: '닫기' },
   },
   who: {
     title: '손이 모자란 메이커에게.',

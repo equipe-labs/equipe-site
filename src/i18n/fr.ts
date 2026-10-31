@@ -88,7 +88,7 @@ const fr: Messages = {
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'vous demande de confirmer quelque chose', age: 'Demandé à l’instant', where: 'Loop · T-5 Publier la page des tarifs · Ask', tool: 'CONFIRM', action: 'Publier la page des tarifs sur loop.app/pricing, pour tout le monde', once: 'Depuis le téléphone, une demande n’est autorisée qu’une seule fois.', deny: 'Refuser', allow: 'Autoriser une fois', close: 'Fermer' },
+    phone: { name: 'frontend', verb: 'vous demande de confirmer quelque chose', age: 'Demandé à l’instant', where: 'Loop · T-5 Publier la page des tarifs · Demander', tool: 'CONFIRMER', action: 'Publier la page des tarifs sur loop.app/pricing, pour tout le monde', once: 'Depuis le téléphone, une demande n’est autorisée qu’une seule fois.', deny: 'Refuser', allow: 'Autoriser une fois', close: 'Fermer' },
   },
   who: {
     title: 'Pour les makers qui ont plus d’idées que de bras.',

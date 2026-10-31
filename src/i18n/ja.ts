@@ -86,7 +86,7 @@ const ja: Messages = {
     reportRows: ['動いたこと', '学んだこと', 'あなたの判断'],
   },
   demo: {
-    phone: { name: 'frontend', verb: 'が確認を求めています', age: 'たった今リクエスト', where: 'Loop · T-5 料金ページを公開 · Ask', tool: 'CONFIRM', action: '料金ページを loop.app/pricing に全員向けに公開', once: 'iPhoneからは、今回の1回だけ許可されます。', deny: '拒否', allow: '今回のみ許可', close: '閉じる' },
+    phone: { name: 'frontend', verb: 'が確認を求めています', age: 'たった今リクエスト', where: 'Loop · T-5 料金ページを公開 · 確認', tool: '確認', action: '料金ページを loop.app/pricing に全員向けに公開', once: 'iPhoneからは、今回の1回だけ許可されます。', deny: '拒否', allow: '今回のみ許可', close: '閉じる' },
   },
   who: {
     title: 'アイデアに、手が足りないメイカーへ。',

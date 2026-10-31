@@ -86,7 +86,7 @@ const zhCN: Messages = {
     reportRows: ['有进展的', '学到的', '你来定的'],
   },
   demo: {
-    phone: { name: 'frontend', verb: '请你确认一件事', age: '刚刚请求', where: 'Loop · T-5 发布价格页 · Ask', tool: 'CONFIRM', action: '把价格页发布到 loop.app/pricing，所有人可见', once: '在手机上，请求只允许这一次。', deny: '拒绝', allow: '仅允许一次', close: '关闭' },
+    phone: { name: 'frontend', verb: '请你确认一件事', age: '刚刚请求', where: 'Loop · T-5 发布价格页 · 询问', tool: '确认', action: '把价格页发布到 loop.app/pricing，所有人可见', once: '在手机上，请求只允许这一次。', deny: '拒绝', allow: '仅允许一次', close: '关闭' },
   },
   who: {
     title: '写给点子比人手多的创客。',

@@ -87,7 +87,7 @@ const de: Messages = {
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Ask', tool: 'CONFIRM', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
+    phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Fragen', tool: 'BESTÄTIGEN', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
   },
   who: {
     title: 'Für Maker mit mehr Ideen als Händen.',
