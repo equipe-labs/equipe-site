@@ -81,13 +81,15 @@ export const en = {
     buildAlt: 'Several members working on their own tickets at the same time',
     approveCaption: 'Options with a recommendation. Nothing goes live until you submit.',
     approveAlt: 'A decision card with two options and a recommendation',
-    phoneCaption: 'An illustration of the phone app. It is not out yet.',
+    phoneCaption: 'The iPhone app. Approve with Face ID.',
+    androidNote: 'Android: coming.',
+    appStore: 'App Store',
     reportTitle: 'Morning report',
     reportRows: ['What moved', 'What was learned', 'Your calls'],
   },
-  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { who: '● frontend · T-5', q: 'Publish the pricing page?', d: 'Goes live at equipe.im/pricing, for everyone', ok: 'Approve', no: 'Not yet' },
+    phone: { name: 'frontend', verb: 'asks you to confirm something', age: 'Asked just now', where: 'Loop · T-5 Publish the pricing page · Ask', tool: 'CONFIRM', action: 'Publish the pricing page at loop.app/pricing, for everyone', once: 'From your phone, a request is allowed once only.', deny: 'Deny', allow: 'Allow once', close: 'Close' },
   },
   who: {
     title: 'For makers with more ideas than hands.',
@@ -115,6 +117,7 @@ export const en = {
       { title: 'A Mac app', text: 'See work as it happens, tickets as a list or a board, and what waits for you on top.' },
       { title: 'Your Mac, your plan', text: 'Files and sign-ins stay on your machine. Free, MIT licensed.' },
       { title: 'Check-ins on a schedule', text: 'Ask for a weekly report once; the PM runs it every week.' },
+      { title: 'Approve from your iPhone', text: 'A push when you\'re needed, Face ID to approve, end-to-end encrypted. Android: coming.' },
     ],
     scenes: [
       { caption: 'PM, designer, frontend, backend, mobile — one board.', alt: 'The board with six lanes' },
@@ -128,7 +131,6 @@ export const en = {
       { title: 'Goals it works toward', text: 'A North Star and quarterly goals. Every proposal names the goal it serves.' },
       { title: 'It notices first', text: 'A broken signup or a failing job lands on the board before you spot it.' },
       { title: 'Code for your stage', text: 'Fast and light before fit. Refactoring and stability after.' },
-      { title: 'Approve from your phone', text: "A push when you're needed, Face ID to approve, end-to-end encrypted." },
     ],
   },
   ev: {
@@ -178,8 +180,8 @@ equipe           # open the squad console`,
       { question: 'What is equipe?', answer: 'An AI startup team — PM, designer, engineers — that builds your product, ships it and keeps improving it, on your Mac. You decide; they do the work.' },
       { question: 'Do I need to code?', answer: "No. You talk to the PM in plain words and approve what matters. Today the first setup still needs one line in Terminal — we're removing it." },
       { question: 'What does it cost?', answer: 'equipe is free and open source (MIT). It runs on your own Claude or ChatGPT plan — you pay them, not us.' },
-      { question: 'Where do my code and data go?', answer: 'Your files stay on your Mac. The squad works on copies and leaves the originals alone until you accept. The AI models see what they work on through your own Claude or ChatGPT plan, as in any Claude Code or Codex session. Coming: a phone app that talks to your Mac end-to-end encrypted.' },
-      { question: "What works today, and what's coming?", answer: 'Today: the team and board, code and non-code work, the browser, PM review, the Mac app. Coming: morning reports, experiments, goals and stage-aware work, the phone apps. Anything marked "Coming" isn\'t shipped yet.' },
+      { question: 'Where do my code and data go?', answer: 'Your files stay on your Mac. The squad works on copies and leaves the originals alone until you accept. The AI models see what they work on through your own Claude or ChatGPT plan, as in any Claude Code or Codex session. The iPhone app talks to your Mac end-to-end encrypted. Android is coming.' },
+      { question: "What works today, and what's coming?", answer: 'Today: the team and board, code and non-code work, the browser, PM review, the Mac app, the iPhone app. Coming: morning reports, experiments, goals and stage-aware work, the Android app. Anything marked "Coming" isn\'t shipped yet.' },
       { question: 'How is this different from an AI coding agent?', answer: "It's not another agent. It's the team on top of Claude Code and Codex: roles, one board, a PM who checks the work, and you approving. It doesn't stop at code, or at launch." },
       { question: 'Is it production-ready?', answer: "It's early, and built in public by its own squad. Expect fast changes." },
       { question: 'Does it work while I sleep?', answer: 'Yes, as long as your Mac is awake — it runs in the background. Coming: an overnight budget and a morning report.' },

@@ -11,7 +11,7 @@
 - Projects: one squad works on several projects; the conversation follows the project you pick.
 - Decisions: permission requests and the questions members ask arrive as cards you answer with one key or click.
 - Desktop app (macOS 12+, Apple Silicon and Intel): released. A signed, notarized DMG from the latest GitHub release that updates itself, in eight languages: a sidebar of live work, a ticket screen (list and board), ⌘K search, a browser panel for the Chrome the members use, phone pairing, and connection to a squad on another Mac over SSH. It needs the `equipe` CLI.
-- Mobile app (iOS, Android): in preparation, not released yet. Pair with `equipe pair` (QR code); push notifications; messages sealed end to end through a relay. Telegram works today through `equipe telegram setup`.
+- iPhone app "equipe — AI squad": released, https://apps.apple.com/us/app/equipe-ai-squad/id6822702958. Approve with Face ID. Android app: in preparation, not released yet. Pair with `equipe pair` (QR code); push notifications; messages sealed end to end through a relay. Telegram works today through `equipe telegram setup`.
 
 ## Get started
 
