@@ -87,7 +87,7 @@ const ptBR: Messages = {
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'pede que você confirme algo', age: 'Pedido agora há pouco', where: 'Loop · T-5 Publicar a página de preços · Ask', tool: 'CONFIRM', action: 'Publicar a página de preços em loop.app/pricing, para todos', once: 'Pelo celular, um pedido é permitido uma única vez.', deny: 'Negar', allow: 'Permitir uma vez', close: 'Fechar' },
+    phone: { name: 'frontend', verb: 'pede que você confirme algo', age: 'Pedido agora há pouco', where: 'Loop · T-5 Publicar a página de preços · Perguntar', tool: 'CONFIRMAR', action: 'Publicar a página de preços em loop.app/pricing, para todos', once: 'Pelo celular, um pedido é permitido uma única vez.', deny: 'Negar', allow: 'Permitir uma vez', close: 'Fechar' },
   },
   who: {
     title: 'Para makers com mais ideias que mãos.',
