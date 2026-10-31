@@ -79,13 +79,15 @@ const es: Messages = {
     buildAlt: 'Varios miembros trabajando a la vez en sus propios tickets',
     approveCaption: 'Opciones con una recomendación. Nada sale hasta que lo envías.',
     approveAlt: 'Una tarjeta de decisión con dos opciones y una recomendación',
-    phoneCaption: 'Una ilustración de la app del teléfono. Todavía no está disponible.',
+    phoneCaption: 'La app para iPhone. Aprueba con Face ID.',
+    androidNote: 'Android: próximamente.',
+    appStore: 'App Store',
     reportTitle: 'Informe matinal',
     reportRows: ['Qué se movió', 'Qué se aprendió', 'Tus decisiones'],
   },
-  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { who: '● frontend · T-5', q: '¿Publicar la página de precios?', d: 'Sale en equipe.im/pricing, para todos', ok: 'Aprobar', no: 'Aún no' },
+    phone: { name: 'frontend', verb: 'te pide que confirmes algo', age: 'Pedido hace un momento', where: 'Loop · T-5 Publicar la página de precios · Ask', tool: 'CONFIRM', action: 'Publicar la página de precios en loop.app/pricing, para todos', once: 'Desde el teléfono, una solicitud se permite una sola vez.', deny: 'Denegar', allow: 'Permitir una vez', close: 'Cerrar' },
   },
   who: {
     title: 'Para makers con más ideas que manos.',
@@ -113,6 +115,7 @@ const es: Messages = {
       { title: 'Una app para Mac', text: 'Mira el trabajo en vivo, los tickets en lista o tablero, y lo que te espera, arriba.' },
       { title: 'Tu Mac, tu plan', text: 'Los archivos y las sesiones se quedan en tu equipo. Gratis, licencia MIT.' },
       { title: 'Seguimientos programados', text: 'Pide un informe semanal una vez; el PM lo hace cada semana.' },
+      { title: 'Aprueba desde el iPhone', text: 'Un aviso push cuando te necesitan, Face ID para aprobar, cifrado de extremo a extremo. Android: próximamente.' },
     ],
     scenes: [
       { caption: 'PM, diseño, frontend, backend, móvil: un solo tablero.', alt: 'El tablero con seis columnas' },
@@ -126,7 +129,6 @@ const es: Messages = {
       { title: 'Metas hacia las que trabaja', text: 'Una Estrella Polar y metas trimestrales. Cada propuesta nombra la meta a la que sirve.' },
       { title: 'Se entera primero', text: 'Un registro roto o un proceso que falla llega al tablero antes de que lo veas.' },
       { title: 'Código para tu etapa', text: 'Rápido y ligero antes del encaje. Refactorización y estabilidad después.' },
-      { title: 'Aprueba desde el teléfono', text: 'Un aviso push cuando te necesitan, Face ID para aprobar, cifrado de extremo a extremo.' },
     ],
   },
   ev: {
@@ -175,8 +177,8 @@ equipe           # abre la consola del squad`,
       { question: '¿Qué es equipe?', answer: 'Un equipo de startup con IA (PM, diseñador, ingenieros) que construye tu producto, lo lanza y lo sigue mejorando, en tu Mac. Tú decides; ellos hacen el trabajo.' },
       { question: '¿Necesito saber programar?', answer: 'No. Hablas con el PM con palabras sencillas y apruebas lo que importa. Hoy la primera configuración aún necesita una línea en la Terminal; la estamos eliminando.' },
       { question: '¿Cuánto cuesta?', answer: 'equipe es gratis y de código abierto (MIT). Funciona con tu propio plan de Claude o ChatGPT: les pagas a ellos, no a nosotros.' },
-      { question: '¿Adónde van mi código y mis datos?', answer: 'Tus archivos se quedan en tu Mac. El squad trabaja sobre copias y deja los originales intactos hasta que aceptes. Los modelos de IA ven aquello en lo que trabajan a través de tu propio plan de Claude o ChatGPT, como en cualquier sesión de Claude Code o Codex. Próximamente: una app para el teléfono que habla con tu Mac con cifrado de extremo a extremo.' },
-      { question: '¿Qué funciona hoy y qué viene?', answer: 'Hoy: el equipo y el tablero, trabajo de código y de otro tipo, el navegador, la revisión del PM, la app para Mac. Próximamente: informes matinales, experimentos, metas y trabajo según la etapa, las apps del teléfono. Lo marcado como «Próximamente» aún no está disponible.' },
+      { question: '¿Adónde van mi código y mis datos?', answer: 'Tus archivos se quedan en tu Mac. El squad trabaja sobre copias y deja los originales intactos hasta que aceptes. Los modelos de IA ven aquello en lo que trabajan a través de tu propio plan de Claude o ChatGPT, como en cualquier sesión de Claude Code o Codex. La app para iPhone habla con tu Mac con cifrado de extremo a extremo. Android: próximamente.' },
+      { question: '¿Qué funciona hoy y qué viene?', answer: 'Hoy: el equipo y el tablero, trabajo de código y de otro tipo, el navegador, la revisión del PM, la app para Mac, la app para iPhone. Próximamente: informes matinales, experimentos, metas y trabajo según la etapa, la app para Android. Lo marcado como «Próximamente» aún no está disponible.' },
       { question: '¿En qué se diferencia de un agente de código con IA?', answer: 'No es otro agente. Es el equipo sobre Claude Code y Codex: roles, un tablero, un PM que revisa el trabajo y tú aprobando. No se queda en el código ni en el lanzamiento.' },
       { question: '¿Está listo para producción?', answer: 'Está en fase inicial y lo construye en público su propio squad. Espera cambios rápidos.' },
       { question: '¿Trabaja mientras duermo?', answer: 'Sí, mientras tu Mac esté despierto: se ejecuta en segundo plano. Próximamente: un presupuesto nocturno y un informe matinal.' },

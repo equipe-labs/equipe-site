@@ -79,13 +79,15 @@ const de: Messages = {
     buildAlt: 'Mehrere Mitglieder arbeiten gleichzeitig an ihren eigenen Tickets',
     approveCaption: 'Optionen mit Empfehlung. Nichts geht live, bis du bestätigst.',
     approveAlt: 'Eine Entscheidungskarte mit zwei Optionen und einer Empfehlung',
-    phoneCaption: 'Eine Illustration der Smartphone-App. Sie ist noch nicht erschienen.',
+    phoneCaption: 'Die iPhone-App. Mit Face ID freigeben.',
+    androidNote: 'Android: kommt.',
+    appStore: 'App Store',
     reportTitle: 'Morgenbericht',
     reportRows: ['Was sich bewegt hat', 'Was gelernt wurde', 'Deine Entscheidungen'],
   },
-  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { who: '● frontend · T-5', q: 'Preisseite veröffentlichen?', d: 'Geht live auf equipe.im/pricing, für alle', ok: 'Freigeben', no: 'Noch nicht' },
+    phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Ask', tool: 'CONFIRM', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
   },
   who: {
     title: 'Für Maker mit mehr Ideen als Händen.',
@@ -113,6 +115,7 @@ const de: Messages = {
       { title: 'Eine Mac-App', text: 'Arbeit live sehen, Tickets als Liste oder Board, und was auf dich wartet, ganz oben.' },
       { title: 'Dein Mac, dein Tarif', text: 'Dateien und Anmeldungen bleiben auf deinem Gerät. Kostenlos, MIT-Lizenz.' },
       { title: 'Regelmäßige Check-ins', text: 'Bitte einmal um einen Wochenbericht; der PM liefert ihn jede Woche.' },
+      { title: 'Per iPhone freigeben', text: 'Ein Push, wenn du gebraucht wirst, Face ID zum Freigeben, Ende-zu-Ende-verschlüsselt. Android: kommt.' },
     ],
     scenes: [
       { caption: 'PM, Designer, Frontend, Backend, Mobile – ein Board.', alt: 'Das Board mit sechs Spalten' },
@@ -126,7 +129,6 @@ const de: Messages = {
       { title: 'Ziele, auf die er hinarbeitet', text: 'Ein North Star und Quartalsziele. Jeder Vorschlag nennt das Ziel, dem er dient.' },
       { title: 'Er merkt es zuerst', text: 'Eine kaputte Anmeldung oder ein fehlschlagender Job steht auf dem Board, bevor du es siehst.' },
       { title: 'Code für deine Phase', text: 'Schnell und schlank vor der Passung. Umbau und Stabilität danach.' },
-      { title: 'Per Smartphone freigeben', text: 'Ein Push, wenn du gebraucht wirst, Face ID zum Freigeben, Ende-zu-Ende-verschlüsselt.' },
     ],
   },
   ev: {
@@ -175,8 +177,8 @@ equipe           # Squad-Konsole öffnen`,
       { question: 'Was ist equipe?', answer: 'Ein KI-Startup-Team – PM, Designer, Engineers –, das dein Produkt baut, ausliefert und weiter verbessert, auf deinem Mac. Du entscheidest, sie erledigen die Arbeit.' },
       { question: 'Muss ich programmieren können?', answer: 'Nein. Du sprichst mit dem PM in einfachen Worten und gibst frei, was zählt. Heute braucht die erste Einrichtung noch eine Zeile im Terminal – die entfernen wir.' },
       { question: 'Was kostet es?', answer: 'equipe ist kostenlos und Open Source (MIT). Es läuft mit deinem eigenen Claude- oder ChatGPT-Tarif – du zahlst die Anbieter, nicht uns.' },
-      { question: 'Wohin gehen mein Code und meine Daten?', answer: 'Deine Dateien bleiben auf deinem Mac. Der Squad arbeitet an Kopien und lässt die Originale in Ruhe, bis du übernimmst. Die KI-Modelle sehen, woran sie arbeiten, über deinen eigenen Claude- oder ChatGPT-Tarif, wie in jeder Claude-Code- oder Codex-Sitzung. Kommt: eine Smartphone-App, die Ende-zu-Ende-verschlüsselt mit deinem Mac spricht.' },
-      { question: 'Was läuft heute, und was kommt?', answer: 'Heute: Team und Board, Code- und andere Arbeit, der Browser, PM-Review, die Mac-App. Kommt: Morgenberichte, Experimente, Ziele und phasenbewusste Arbeit, die Smartphone-Apps. Alles, was mit „Kommt“ markiert ist, ist noch nicht erschienen.' },
+      { question: 'Wohin gehen mein Code und meine Daten?', answer: 'Deine Dateien bleiben auf deinem Mac. Der Squad arbeitet an Kopien und lässt die Originale in Ruhe, bis du übernimmst. Die KI-Modelle sehen, woran sie arbeiten, über deinen eigenen Claude- oder ChatGPT-Tarif, wie in jeder Claude-Code- oder Codex-Sitzung. Die iPhone-App spricht Ende-zu-Ende-verschlüsselt mit deinem Mac. Android kommt.' },
+      { question: 'Was läuft heute, und was kommt?', answer: 'Heute: Team und Board, Code- und andere Arbeit, der Browser, PM-Review, die Mac-App, die iPhone-App. Kommt: Morgenberichte, Experimente, Ziele und phasenbewusste Arbeit, die Android-App. Alles, was mit „Kommt“ markiert ist, ist noch nicht erschienen.' },
       { question: 'Was unterscheidet das von einem KI-Coding-Agent?', answer: 'Es ist kein weiterer Agent. Es ist das Team über Claude Code und Codex: Rollen, ein Board, ein PM, der die Arbeit prüft, und du, der freigibt. Es hört nicht beim Code auf und nicht beim Launch.' },
       { question: 'Ist es produktionsreif?', answer: 'Es ist früh und wird öffentlich von seinem eigenen Squad gebaut. Rechne mit schnellen Änderungen.' },
       { question: 'Arbeitet es, während ich schlafe?', answer: 'Ja, solange dein Mac wach ist – es läuft im Hintergrund. Kommt: ein Nachtbudget und ein Morgenbericht.' },

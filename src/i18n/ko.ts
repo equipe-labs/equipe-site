@@ -79,13 +79,15 @@ const ko: Messages = {
     buildAlt: '여러 멤버가 각자 티켓을 맡아 동시에 일하는 화면',
     approveCaption: '선택지와 추천이 같이 와요. 내가 제출하기 전엔 아무것도 나가지 않아요.',
     approveAlt: '선택지 두 개와 추천이 있는 결정 카드',
-    phoneCaption: '폰 앱을 그린 그림이에요. 아직 나오지 않았어요.',
+    phoneCaption: 'iPhone 앱. Face ID로 승인해요.',
+    androidNote: 'Android는 준비 중이에요.',
+    appStore: 'App Store',
     reportTitle: '아침 보고',
     reportRows: ['움직인 것', '배운 것', '내가 정할 것'],
   },
-  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { who: '● 프론트엔드 · T-5', q: '대표님, 가격 페이지 지금 공개할까요?', d: '모두가 보는 equipe.im/pricing에 바로 올라가요', ok: '공개', no: '나중에' },
+    phone: { name: '프론트엔드', verb: '확인을 요청합니다', age: '방금 요청됨', where: 'Loop · T-5 가격 페이지 공개 · Ask', tool: 'CONFIRM', action: '가격 페이지를 loop.app/pricing에 모두에게 공개', once: '휴대폰에서는 이번 한 번만 허용됩니다.', deny: '거부', allow: '이번만 허용', close: '닫기' },
   },
   who: {
     title: '손이 모자란 메이커에게.',
@@ -113,6 +115,7 @@ const ko: Messages = {
       { title: 'Mac 앱으로 한눈에', text: '지금 하는 일, 목록이나 보드로 보는 티켓, 맨 위엔 내 결정을 기다리는 일.' },
       { title: '내 Mac, 내 요금제', text: '파일과 로그인은 내 컴퓨터에만 있어요. 무료, MIT 라이선스.' },
       { title: '정기 점검', text: '주간 보고를 한 번 부탁해 두면 PM이 매주 챙겨요.' },
+      { title: 'iPhone으로 승인', text: '필요할 때 알림이 오고, Face ID로 승인해요. 종단 간 암호화돼요. Android는 준비 중이에요.' },
     ],
     scenes: [
       { caption: 'PM, 디자이너, 프론트엔드, 백엔드, 모바일이 한 보드에.', alt: '여섯 칸으로 나뉜 보드' },
@@ -126,7 +129,6 @@ const ko: Messages = {
       { title: '목표에 맞춰 제안해요', text: 'North Star와 분기 목표를 두고, 제안마다 어느 목표를 위한 건지 적어요.' },
       { title: '고장 나면 먼저 알아채요', text: '가입이 막히거나 작업이 실패하면, 내가 보기 전에 보드에 올라와요.' },
       { title: '단계에 맞는 코드', text: 'PMF 전엔 빠르고 가볍게, 그 뒤엔 탄탄하게.' },
-      { title: '폰으로 승인', text: '필요할 때 알림이 오고, Face ID로 승인해요. 종단 간 암호화돼요.' },
     ],
   },
   ev: {
@@ -175,8 +177,8 @@ equipe           # 스쿼드 콘솔 열기`,
       { question: 'equipe가 뭔가요?', answer: 'PM, 디자이너, 개발자로 이뤄진 AI 팀이에요. 내 Mac에서 제품을 만들고, 출시하고, 그다음 일도 이어서 해요. 승인은 내가 해요.' },
       { question: '코딩 몰라도 되나요?', answer: '네. PM에게 말로 맡기고, 중요한 것만 승인하면 돼요. 다만 지금은 처음 한 번 터미널에 한 줄을 입력해야 해요. 이 단계는 없애는 중이에요.' },
       { question: '돈이 드나요?', answer: 'equipe는 무료 오픈소스(MIT)예요. 쓰고 있는 Claude·ChatGPT 요금제로 돌아가서, 저희에게 내는 돈은 없어요.' },
-      { question: '코드랑 데이터는 어디로 가요?', answer: '파일은 내 Mac에 있어요. 스쿼드는 사본에서 일하고, 내가 승인하기 전까지 원래 파일은 그대로예요. AI 모델은 내 Claude·ChatGPT 요금제를 통해 작업 중인 내용만 봐요. Claude Code나 Codex를 쓸 때와 같아요. 준비 중: Mac과 종단 간 암호화로 연결되는 폰 앱.' },
-      { question: '지금 되는 것과 아직인 것은요?', answer: "지금: 팀과 보드, 코드와 코드 밖 일, 브라우저 작업, PM 검토, Mac 앱. 준비 중: 아침 보고, 실험, 목표와 단계별 일, 폰 앱. '준비 중'이 붙은 건 아직 나오지 않았어요." },
+      { question: '코드랑 데이터는 어디로 가요?', answer: '파일은 내 Mac에 있어요. 스쿼드는 사본에서 일하고, 내가 승인하기 전까지 원래 파일은 그대로예요. AI 모델은 내 Claude·ChatGPT 요금제를 통해 작업 중인 내용만 봐요. Claude Code나 Codex를 쓸 때와 같아요. iPhone 앱은 Mac과 종단 간 암호화로 연결돼요. Android는 준비 중이에요.' },
+      { question: '지금 되는 것과 아직인 것은요?', answer: "지금: 팀과 보드, 코드와 코드 밖 일, 브라우저 작업, PM 검토, Mac 앱, iPhone 앱. 준비 중: 아침 보고, 실험, 목표와 단계별 일, Android 앱. '준비 중'이 붙은 건 아직 나오지 않았어요." },
       { question: 'AI 코딩 에이전트랑 뭐가 달라요?', answer: '에이전트를 하나 더 주는 게 아니라, Claude Code와 Codex 위에 팀을 꾸려 줘요. 역할, 공유 보드, 일을 검토하는 PM, 그리고 승인하는 나. 코드에서도, 출시에서도 멈추지 않아요.' },
       { question: '실제 일에 써도 되나요?', answer: '아직 초기 단계예요. equipe 스쿼드가 직접, 공개로 만들고 있어서 자주 바뀌어요.' },
       { question: '자는 동안에도 일하나요?', answer: '네, Mac이 잠자기 상태만 아니면 백그라운드에서 계속 돌아요. 준비 중: 밤 사용 한도와 아침 보고.' },
