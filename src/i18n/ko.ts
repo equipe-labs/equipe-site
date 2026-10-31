@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const ko: Messages = {
   meta: {
-    title: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
+    title: 'equipe — 스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     description:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
-    ogTitle: 'equipe — 창업팀 전체가 한 번에. 당신은 승인만 하세요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
+    ogTitle: 'equipe — 스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     ogDescription:
-      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
+      'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ogImageAlt: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
   },
   ui: {
@@ -21,73 +21,136 @@ const ko: Messages = {
     language: '언어',
     bannerText: '이 페이지를 {language}로 보기',
     bannerClose: '닫기',
+    now: '지금 됨',
+    soon: '준비 중',
+    illu: 'Mac 앱을 그린 그림이에요. 실제 화면이 아니에요.',
   },
-  nav: { howItWorks: '작동 방식', getStarted: '시작하기', faq: '자주 묻는 질문', github: 'GitHub' },
+  nav: { stage: '단계', howItWorks: '작동 방식', features: '기능', getStarted: '시작하기', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: '창업팀 전체가 한 번에. 당신은 승인만 하세요.',
-    lead: 'PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 당신의 Mac에서 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
-    ctaPrimary: 'GitHub에서 보기',
-    chip: '초기 단계 · MIT 라이선스 · Codex·Claude Code 지원',
-    cliLink: '터미널로 설치하기 (CLI)',
-    shotAlt: 'equipe 데스크톱 앱: 진행 중인 일 사이드바, “당신 차례”와 “검토”가 맨 위에 오는 상태별 티켓 목록, 그 옆에 열린 티켓',
-    shotCaption: 'macOS용 equipe 데스크톱 앱 — 티켓을 목록이나 보드로 보고, 당신을 기다리는 일이 맨 위에 와요.',
+    title: '스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
+    lead: '기획·디자인·개발을 한 팀이 맡아요. 출시한 뒤에도 이어서 일하고, 공개나 결제 같은 일은 꼭 먼저 물어봐요.',
+    cta: 'Mac용 다운로드',
+    req: '무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로',
+    cliLink: 'Linux를 쓰거나 터미널이 편하다면 CLI로',
+    proof: '20일, 티켓 222개, 승인한 사람 한 명',
+    shotAlt: 'equipe Mac 앱. 받은함에 권한 요청 하나, 결정 둘, 내 차례인 일이 보이고, 옆에는 선택지와 추천이 있는 결정 카드가 열려 있어요.',
+    demo: 'Mac 앱 실제 화면이에요. 예시 데이터를 넣었어요.',
+    pins: ['내 차례인 일이 한곳에 모여요.', '결정은 선택지와 추천을 달고 와요.', '멤버마다 지금 하는 일이 보여요.'],
   },
-  how: {
-    title: '작동 방식',
-    intro: '이끄는 사람은 한 명이에요. 스쿼드는 병렬로 일하고, 모든 일은 보드를 거쳐요.',
-    steps: [
-      { title: '맡기기', text: 'PM에게 원하는 일을 말하면 공유 보드의 티켓으로 나눠요. 티켓마다 맡을 역할이 있어요.' },
-      { title: '병렬 작업', text: '멤버들이 동시에, 각자 자기 작업 공간에서 일해요. 당신의 파일은 건드리지 않고, 모든 행동은 보드에 기록돼요.' },
-      { title: '당신의 승인', text: '나가거나 보내기 전에 equipe가 당신에게 물어요. 당신이 말하기 전에는 아무것도 나가지 않아요.' },
-    ],
+  launch: {
+    title: '출시한 다음 날, 숫자는 누가 보나요?',
+    text: 'AI 도구는 보통 배포하면 끝이에요. 그런데 팀이 제일 필요한 건 그다음부터죠. 스쿼드는 출시 뒤에도 남아서, 이어서 할 일을 먼저 꺼내요.',
+    now: '이어서 할 일을 멤버가 먼저 제안하고, PM이 정리해요.',
+    soon: '목표를 정해 주면 거기까지 갈 다음 단계를 제안해요.',
+    caption: '출시한 날의 보드. 끝난 일은 완료에, 이어서 할 일은 벌써 제안돼 있어요.',
+    alt: '검토와 완료 칸이 있는 equipe 보드',
   },
-  features: {
-    title: '이런 걸 쓸 수 있어요',
-    intro: '스쿼드는 백그라운드 데몬에서 돌아서 터미널을 닫아도 멈추지 않아요. 어느 화면에서 봐도 같은 팀이에요.',
+  stage: {
+    title: '지금 단계에 필요한 일부터.',
+    text: '아무도 안 쓸 땐 다듬지 않고, 쓰는 사람이 생기면 서두르지 않게요.',
     items: [
-      { title: '한 보드 위의 역할', text: 'PM, 디자이너, 프론트엔드, 백엔드, 모바일, QA, 데이터가 각자 역할에 맞는 모델과 자기 메모리를 가져요. 보드가 단일 진실 공급원이에요.' },
-      { title: '격리된 브랜치', text: '멤버마다 자기 git worktree에서 일하고, 샌드박스 안에서만 움직여요. push나 배포처럼 그 밖의 일은 당신의 답을 기다려요.' },
-      { title: '결정은 당신에게', text: '허가 요청과 멤버가 던지는 질문이 카드로 도착해요. 키 하나, 클릭 한 번으로 답해요.' },
-      { title: '여러 프로젝트, 한 스쿼드', text: '대화는 고른 프로젝트를 따라가고, 티켓의 작업은 그 티켓에 남아요.' },
-      { title: 'macOS 데스크톱 앱', text: '진행 중인 일 사이드바, 목록과 보드를 갖춘 티켓 화면, 모든 일을 찾는 ⌘K, 브라우저 패널. 8개 언어를 지원하고 스스로 업데이트해요.' },
-      { title: '폰, 그리고 다른 맥', text: 'QR 코드로 폰을 연결하면 당신이 필요할 때 푸시가 와요. 데스크톱 앱은 SSH로 다른 맥의 스쿼드에도 붙어요.' },
+      { title: '아이디어', text: '누가 무엇 때문에 불편한지부터 찾아요. 경쟁사를 살피고, 인터뷰와 랜딩 테스트를 준비해요.' },
+      { title: '첫 출시', text: '출시에 꼭 필요한 것만 남겨요. 스토어 심사, 앱 서명, 약관, 분석 도구까지 챙겨요.' },
+      { title: 'PMF 찾기', text: '숫자로 가설을 세우고 실험을 돌려요. 배운 건 아침마다 보고해요. 지금은 완벽보다 속도예요.' },
+      { title: '성장', text: '오류와 만료가 다가오는 키를 먼저 잡고, 느려진 코드를 고치고, 많이 쓰는 기능부터 탄탄하게 다져요.' },
     ],
+    partNote: '준비 중: 공개 전에 숫자가 정말 들어오는지 확인해요.',
+    close: '지금 단계는 언제든 보고 바꿀 수 있어요. 넘어갈 때가 되면 스쿼드가 먼저 말해요.',
+    caption: '내 차례인 일이 맨 위에 와요.',
+    alt: '내 차례인 일 순서로 정렬된 equipe Mac 앱의 티켓 목록',
+  },
+  loop: {
+    title: '한 줄로 맡기면, 팀이 돌아가요.',
+    text: '목표를 말하면 스쿼드가 나눠서 만들고, 중요한 건 내가 정해요.',
+    steps: [
+      { title: '목표', text: 'PM에게 평소 말투로 말해요.' },
+      { title: '만들기', text: 'PM이 티켓으로 나누면 멤버들이 동시에 일해요. 코드, 조사, 글, 브라우저 작업까지요. 끝난 일은 PM이 먼저 봐요.' },
+      { title: '측정', text: '방문자 일부에게만 바꾼 화면을 보여 주고, 분석 도구로 결과를 봐요.' },
+      { title: '배우기', text: '된 건 남기고, 안 된 건 되돌리고, 다음 가설을 꺼내요.' },
+      { title: '아침 보고', text: '출근하면 한 장이 와 있어요. 무엇이 움직였는지, 무엇을 배웠는지, 무엇을 정해야 하는지.' },
+    ],
+    partNote: '준비 중: PM이 North Star와 분기 목표를 써 오면 내가 확정해요.',
+    back: '다음 목표로',
+    approveTitle: '중요한 건 내가 정해요.',
+    approveText: '승인 없이는 공개도, 발송도, 결제도 하지 않습니다.',
+    goalCaption: 'PM에게 평소 말투로 말해요.',
+    goalAlt: 'equipe Mac 앱의 PM 메시지 입력창',
+    buildCaption: '멤버들이 티켓 하나씩 맡아 동시에 일해요.',
+    buildAlt: '여러 멤버가 각자 티켓을 맡아 동시에 일하는 화면',
+    approveCaption: '선택지와 추천이 같이 와요. 내가 제출하기 전엔 아무것도 나가지 않아요.',
+    approveAlt: '선택지 두 개와 추천이 있는 결정 카드',
+    phoneCaption: '폰 앱을 그린 그림이에요. 아직 나오지 않았어요.',
+    reportTitle: '아침 보고',
+    reportRows: ['움직인 것', '배운 것', '내가 정할 것'],
+  },
+  // Text drawn inside the phone illustration (a mockup, not a screenshot).
+  demo: {
+    phone: { who: '● 프론트엔드 · T-5', q: '대표님, 가격 페이지 지금 공개할까요?', d: '모두가 보는 equipe.im/pricing에 바로 올라가요', ok: '공개', no: '나중에' },
   },
   who: {
-    title: 'equipe는 이런 분께 맞아요',
-    intro: 'equipe는 에이전트 하나에게 프롬프트를 하나씩 던지는 대신, AI 에이전트로 이뤄진 작은 소프트웨어 팀을 이끌고 싶은 분을 위한 도구예요. 방향은 정하고 결과는 검토하세요. 스쿼드가 일을 티켓으로 나누고 브랜치에서 처리해요.',
+    title: '손이 모자란 메이커에게.',
+    text: '코드를 짜든 못 짜든 괜찮아요. 말로 설명할 수 있으면 스쿼드가 만들고 출시하고, 그다음 일도 이어서 해요.',
     points: [
-      { lead: '이미 Codex나 Claude Code를 쓰고 있어요.', text: 'equipe가 둘을 움직이고, 로그인은 지금 쓰던 방식 그대로 해요.' },
-      { lead: '검토할 수 있는 병렬 작업을 원해요.', text: '모든 변경은 브랜치로 도착해요. 메인 브랜치에 불쑥 들어오는 일은 없어요.' },
-      { lead: '결정은 직접 하고 싶어요.', text: '승인 게이트는 중요한 지점에 있어서, 최종 판단은 계속 당신 몫이에요.' },
+      { lead: '할 일은 많은데 손이 둘뿐일 때.', text: 'PM, 디자이너, 개발자가 한 보드에서 같이 일해요.' },
+      { lead: '에이전트를 지켜볼 시간이 없을 때.', text: '나누고 확인하는 건 PM 몫이에요. 내 앞엔 내가 정할 일만 와요.' },
+      { lead: '결정권은 놓기 싫을 때.', text: '공개, 결제, 다른 사람에게 가는 일은 전부 내 OK를 기다려요.' },
+      { lead: '요금이 또 붙는 건 싫을 때.', text: 'equipe는 무료예요. 이미 쓰는 Claude·ChatGPT 요금제로 돌아가요.' },
     ],
-    proof: '이 사이트도 equipe 스쿼드가 공개적으로 만들었어요. 모든 변경은 티켓에서 시작해, 사람이 수락한 브랜치로 반영됐어요.',
+    caption: '받은함. 권한, 결정, 내 차례 순서로 쌓여요.',
+    alt: '권한 요청, 결정, 내 차례 순서로 쌓인 equipe 받은함',
   },
-  apps: {
-    title: '맥에서 지켜보고, 폰에서 승인해요.',
-    intro: '스쿼드는 터미널 밖에서도 보여요. 데스크톱 앱은 지금 받을 수 있어요. 에이전트가 허가를 기다리면 모바일 앱이 알려주고, Face ID로 승인해요. 주고받는 내용은 종단 간 암호화돼요.',
-    soon: '준비 중',
-    download: "macOS용 다운로드",
-    req: "macOS 12 이상 · Apple Silicon·Intel · 서명·공증됨",
-    cliNote: 'CLI가 앱에 들어 있어요. 따로 설치할 게 없어요.',
-    caption: "폰 화면은 시안 · 모바일 앱은 아직 준비 중",
-    items: [
-      { title: '데스크톱 앱', platform: 'macOS', text: '스쿼드, 티켓, PM 대화를 한 창에서.', alt: 'equipe 데스크톱 앱: PM 대화에서 허가 요청과 멤버의 질문이 답을 기다리고 있어요.' },
-      { title: '모바일 앱', platform: 'iOS · Android', text: 'QR 코드로 연결해요. 승인이 필요할 때만 알려줘요.', alt: '모바일 앱 시안: 승인 요청 두 건이 기다리고 있어요.' },
+  feat: {
+    title: '지금 되는 것, 준비 중인 것.',
+    comingTitle: '준비 중',
+    more: '그리고',
+    // The first four are shown as large scenes (order: 0, 4, 3, 2 of `now`); 1, 5, 6, 7 go in the short row.
+    now: [
+      { title: '한 보드에 한 팀', text: 'PM, 디자이너, 프론트엔드, 백엔드, 모바일, QA, 데이터. 각자 자기 일을 기억해요.' },
+      { title: '코드 밖의 일도', text: '조사, 글, 숫자 계산, 서류까지 같은 보드에서 해요.' },
+      { title: '브라우저 일도 대신', text: '내 계정으로 가입하고, 설정하고, 양식을 채워요. 되돌릴 수 없는 일은 먼저 물어요.' },
+      { title: '제품이 여럿이어도 한 팀', text: '프로젝트가 몇 개든 한 스쿼드가 맡아요.' },
+      { title: '내 앞에 오기 전에 한 번 더', text: '끝난 일은 PM이 검토하고, 화면이 바뀌면 디자인 점검부터 받아요.' },
+      { title: 'Mac 앱으로 한눈에', text: '지금 하는 일, 목록이나 보드로 보는 티켓, 맨 위엔 내 결정을 기다리는 일.' },
+      { title: '내 Mac, 내 요금제', text: '파일과 로그인은 내 컴퓨터에만 있어요. 무료, MIT 라이선스.' },
+      { title: '정기 점검', text: '주간 보고를 한 번 부탁해 두면 PM이 매주 챙겨요.' },
     ],
-    phone: { label: '나를 기다리는 것 · 3', askCommand: '명령을 실행할까요?', allow: '한 번 허용', decline: '거절', askMerge: '브랜치를 머지할까요?', approve: '승인', changes: '변경 요청' },
-    notify: { title: '모바일 앱이 나오면 알려드릴까요?', text: 'GitHub 릴리스를 구독하면 새 릴리스 소식만 메일로 와요. 가입도, 이메일 수집도 없어요.', cta: 'GitHub에서 알림 받기', how: 'equipe-labs/equipe 저장소에서 Watch → Custom → Releases를 고르세요.' },
+    scenes: [
+      { caption: 'PM, 디자이너, 프론트엔드, 백엔드, 모바일이 한 보드에.', alt: '여섯 칸으로 나뉜 보드' },
+      { caption: 'PM이 목표를 나누고, 티켓마다 맡기고, 결과를 보고해요.', alt: 'PM이 목표를 티켓으로 나누는 화면' },
+      { caption: '프로젝트도 멤버도 한 사이드바에.', alt: '프로젝트와 팀 멤버가 있는 사이드바' },
+      { caption: '되돌릴 수 없는 명령은 내 답을 기다려요.', alt: '답을 기다리는 권한 요청 카드' },
+    ],
+    coming: [
+      { title: '아침 보고', text: '움직인 숫자, 배운 것, 정할 것을 한 장에 담아요.' },
+      { title: '감 대신 실험', text: '가설을 A/B 테스트로 돌리고, 숫자로 판정해요.' },
+      { title: '목표에 맞춰 제안해요', text: 'North Star와 분기 목표를 두고, 제안마다 어느 목표를 위한 건지 적어요.' },
+      { title: '고장 나면 먼저 알아채요', text: '가입이 막히거나 작업이 실패하면, 내가 보기 전에 보드에 올라와요.' },
+      { title: '단계에 맞는 코드', text: 'PMF 전엔 빠르고 가볍게, 그 뒤엔 탄탄하게.' },
+      { title: '폰으로 승인', text: '필요할 때 알림이 오고, Face ID로 승인해요. 종단 간 암호화돼요.' },
+    ],
+  },
+  ev: {
+    title: '20일, 티켓 222개. 승인한 사람은 한 명.',
+    text: '이 사이트, Mac 앱, iOS 앱, 엔진까지 equipe 스쿼드 하나가 만들고 있어요.',
+    nums: [
+      { n: '222', label: '티켓' },
+      { n: '20', label: '일' },
+      { n: '4', label: '프로젝트' },
+      { n: '1', label: '승인한 사람' },
+    ],
+    small: '2026년 11월 1일 우리 보드 기준: 코드 162 · 조사·글 54 · 브라우저 6.',
+    caption: '우리 보드에서 끝난 일들이에요.',
+    alt: '우리 보드의 완료 칸',
   },
   start: {
-    title: '시작하기',
-    appSteps: [
-      { title: 'DMG 열기', text: '내려받은 `equipe.dmg`를 열어요. 서명·공증되어 있어서 macOS가 경고 없이 열어 줘요.' },
-      { title: 'Applications로 끌어다 놓기', text: '같은 창의 Applications 폴더로 equipe를 끌어다 놓고, 디스크 이미지는 꺼내요. 디스크 이미지 안에서 바로 실행하지 마세요. 명령줄 도구가 그 안을 가리켜서 꺼낸 뒤 끊겨요.' },
-      { title: 'equipe 실행', text: 'Applications에서 equipe를 열어요. 처음에는 앱이 내장된 `equipe` 명령을 스스로 연결해요. 따로 설치할 건 없어요. 그다음부터는 앱이 스스로 업데이트를 확인해요.' },
-      { title: '요금제 연결', text: 'equipe는 본인의 Claude 또는 ChatGPT 요금제로 일해요. 둘 중 하나가 필요해요(유료 요금제, 월 요금은 Anthropic·OpenAI에서 확인하세요). 앱이 묻으면 로그인하세요. 안 물으면 터미널에서 `equipe login`을 실행하세요.' },
-      { title: '첫 squad 만들기', text: '앱에서 squad를 만드세요. 스쿼드가 꺼져 있다고 나오면 터미널에서 `equipe`를 실행하세요. 앱이 거기에 연결돼요.' },
-      { title: 'PM에게 말하기', text: '만들고 싶은 것을 PM에게 쉬운 말로 알려 주세요. 그다음은 스쿼드가 진행하고, 승인이 필요할 때 물어봐요.' },
+    title: '세 단계면 시작해요.',
+    steps: [
+      { title: '다운로드해서 열기.', text: 'equipe를 응용 프로그램 폴더로 끌어 놓고 열어요. 명령줄 도구도 같이 들어 있어요.', alt: '앱을 막 열었을 때의 equipe 사이드바' },
+      { title: '요금제 연결.', text: '쓰고 있는 유료 Claude·ChatGPT 요금제로 돌아가요. 앱이 물으면 로그인하세요.', alt: 'equipe 사이드바에 보이는 내 요금제' },
+      { title: 'PM에게 목표 말하기.', text: '스쿼드를 만들고 하고 싶은 일을 말해요. 그다음은 PM이 맡고, 필요할 때 물어요.', alt: '사이드바에 준비된 새 스쿼드' },
     ],
+    note2: '앱이 묻지 않으면 터미널에서 `equipe login`을 실행하세요.',
+    note3: '스쿼드가 꺼져 있다고 나오면 터미널에서 `equipe`를 실행하세요.',
     cliTitle: '터미널로 설치 (CLI)',
     cliIntro: '데스크톱 앱에는 이미 `equipe` CLI가 들어 있어요. 터미널로 스쿼드를 쓰고 싶거나 Linux라면 아래 중 한 가지로 설치하세요. (macOS·Linux)',
     install: 'macOS와 Linux에서는 한 줄이면 돼요. 미리 빌드된 `equipe`를 `~/.local/bin`에 설치하고(SHA-256 확인), PATH에도 추가해요:',
@@ -106,64 +169,23 @@ equipe           # 스쿼드 콘솔 열기`,
   },
   faq: {
     title: '자주 묻는 질문',
+    devLabel: '개발자라면',
+    // The last three items are for developers (the page tags them); keep that order in every language.
     items: [
-      {
-        question: 'equipe란?',
-        answer:
-          'equipe는 오픈소스 AI 소프트웨어 스쿼드예요. PM, 디자이너, 프론트엔드, 백엔드, 모바일, QA, 데이터 같은 역할의 에이전트를 공유 보드 중심으로 조율해요. 에이전트는 격리된 git worktree에서 일하고, 변경은 사람이 승인한 뒤에 머지돼요.',
-      },
-      {
-        question: 'equipe도 AI 코딩 에이전트인가요?',
-        answer:
-          '아니에요. equipe는 새로운 에이전트 루프가 아니라, 기존 에이전트 엔진 위에 얹는 팀 계층이에요. 역할, 단일 진실 공급원인 보드, 병렬 작업을 위한 격리된 git worktree, 사람의 승인 게이트를 더해 줘요.',
-      },
-      {
-        question: 'equipe는 어떤 AI 엔진과 함께 쓸 수 있나요?',
-        answer:
-          '지금은 Codex와 Claude Code를 움직여요. Agent Client Protocol을 통해 더 많은 엔진을 지원하도록 설계했어요.',
-      },
-      {
-        question: 'equipe가 제 자격 증명을 다루나요?',
-        answer:
-          'Claude Code는 아니에요. 수정하지 않은 `claude` 바이너리를 직접 실행해 직접 로그인하니까, 비용도 본인 계정으로 청구돼요. Codex는 equipe가 ChatGPT 요금제로 OAuth 로그인을 하고, 요청에 `originator: equipe`라고 정직하게 밝혀요.',
-      },
-      {
-        question: 'equipe는 어떻게 설치하나요?',
-        answer:
-          '가장 쉬운 방법은 macOS 데스크톱 앱이에요. 최신 릴리스에서 `equipe.dmg`를 받아 Applications로 옮기면 돼요. 앱은 `equipe` CLI가 필요하고, 없으면 설치 방법을 보여 줘요. 터미널로 쓰거나 Linux라면 `brew install equipe-labs/tap/equipe`, install.sh 한 줄, 소스 빌드(Rust 1.88+) 중에서 고르세요. 방법은 모두 시작하기에 있어요.',
-      },
-      {
-        question: '작업은 누가 승인하나요?',
-        answer:
-          '당신이에요. 멤버는 각자 격리된 worktree의 자기 브랜치에서 일하고, 브랜치를 머지하기 전에 equipe가 사람의 승인을 요청해요. PM은 작업을 보드에 수락하고, 무엇을 반영할지는 스쿼드를 이끄는 사람이 정해요.',
-      },
-      {
-        question: 'equipe는 무료 오픈소스인가요?',
-        answer:
-          '네. equipe는 MIT 라이선스로 공개돼 있고, 첫 커밋부터 오픈소스였어요. equipe 자체는 무료예요. Claude Code와 Codex는 본인의 Anthropic, OpenAI(ChatGPT) 구독이나 계정으로 실행돼요.',
-      },
-      {
-        question: 'equipe를 프로덕션에서 쓸 수 있나요?',
-        answer:
-          'equipe는 아직 초기 단계예요. 스쿼드 데몬이 백그라운드에서 돌고, PM이 작업을 수락하고, 에이전트는 샌드박스 안의 브랜치에서 일하고, 머지 전에 당신이 승인해요. 데스크톱 앱, 폰, Telegram에서 스쿼드를 따라갈 수 있어요. 멤버 사이의 인수인계는 로드맵에 있는 대로 다음에 나와요.',
-      },
-      {
-        question: 'git worktree가 뭐고, 왜 쓰나요?',
-        answer:
-          'git worktree는 같은 저장소를 또 하나의 작업 폴더로 펼쳐 둔 것으로, 폴더마다 자기 브랜치를 가져요. equipe는 멤버마다 worktree를 하나씩 줘서, 여럿이 동시에 일해도 서로의, 그리고 당신의 체크아웃을 건드리지 않게 해요.',
-      },
-      {
-        question: '데스크톱 앱이 있나요?',
-        answer:
-          '네, Apple Silicon과 Intel의 macOS 12 이상에서 쓸 수 있어요. 최신 GitHub 릴리스에서 서명·공증된 equipe.dmg를 받으면 되고, 업데이트는 앱이 스스로 확인해요. 터미널과 같은 데몬을 보는 창이라서 스쿼드, 티켓, 결정, 멤버가 쓰는 브라우저 패널이 들어 있어요. `equipe` CLI가 필요하고, 없으면 설치를 안내해요. 앱은 8개 언어를 지원해요.',
-      },
-      {
-        question: '폰에서 스쿼드를 따라갈 수 있나요?',
-        answer:
-          '네. `equipe pair`를 실행하고 equipe 모바일 앱(아직 준비 중이에요)에서 QR 코드를 스캔하세요. 당신이 필요할 때 푸시가 오고, 답하고, 작업을 검토하고, PM과 대화할 수 있어요. 메시지는 종단 간 봉인돼요. Telegram도 `equipe telegram setup`으로 쓸 수 있어요.',
-      },
+      { question: 'equipe가 뭔가요?', answer: 'PM, 디자이너, 개발자로 이뤄진 AI 팀이에요. 내 Mac에서 제품을 만들고, 출시하고, 그다음 일도 이어서 해요. 승인은 내가 해요.' },
+      { question: '코딩 몰라도 되나요?', answer: '네. PM에게 말로 맡기고, 중요한 것만 승인하면 돼요. 다만 지금은 처음 한 번 터미널에 한 줄을 입력해야 해요. 이 단계는 없애는 중이에요.' },
+      { question: '돈이 드나요?', answer: 'equipe는 무료 오픈소스(MIT)예요. 쓰고 있는 Claude·ChatGPT 요금제로 돌아가서, 저희에게 내는 돈은 없어요.' },
+      { question: '코드랑 데이터는 어디로 가요?', answer: '파일은 내 Mac에 있어요. 스쿼드는 사본에서 일하고, 내가 승인하기 전까지 원래 파일은 그대로예요. AI 모델은 내 Claude·ChatGPT 요금제를 통해 작업 중인 내용만 봐요. Claude Code나 Codex를 쓸 때와 같아요. 준비 중: Mac과 종단 간 암호화로 연결되는 폰 앱.' },
+      { question: '지금 되는 것과 아직인 것은요?', answer: "지금: 팀과 보드, 코드와 코드 밖 일, 브라우저 작업, PM 검토, Mac 앱. 준비 중: 아침 보고, 실험, 목표와 단계별 일, 폰 앱. '준비 중'이 붙은 건 아직 나오지 않았어요." },
+      { question: 'AI 코딩 에이전트랑 뭐가 달라요?', answer: '에이전트를 하나 더 주는 게 아니라, Claude Code와 Codex 위에 팀을 꾸려 줘요. 역할, 공유 보드, 일을 검토하는 PM, 그리고 승인하는 나. 코드에서도, 출시에서도 멈추지 않아요.' },
+      { question: '실제 일에 써도 되나요?', answer: '아직 초기 단계예요. equipe 스쿼드가 직접, 공개로 만들고 있어서 자주 바뀌어요.' },
+      { question: '자는 동안에도 일하나요?', answer: '네, Mac이 잠자기 상태만 아니면 백그라운드에서 계속 돌아요. 준비 중: 밤 사용 한도와 아침 보고.' },
+      { question: '작업이 저장소에 어떻게 들어오나요?', answer: '멤버마다 샌드박스 안 git worktree에서 자기 branch로 일해요. 승인 전엔 main에 merge되지 않고, push와 배포는 먼저 물어요.' },
+      { question: '엔진과 로그인은요?', answer: 'Claude Code와 Codex예요. Claude Code는 수정하지 않은 `claude`를 내 로그인으로 돌리고, Codex는 ChatGPT 요금제로 OAuth 로그인해 `originator: equipe`로 표시돼요.' },
+      { question: '터미널, Linux, 다른 Mac, Telegram은요?', answer: 'CLI로 macOS와 Linux에서 스쿼드 전체를 돌려요(Homebrew, install.sh, 소스). Mac 앱은 SSH로 다른 Mac의 스쿼드에 붙어요. Telegram은 `equipe telegram setup`으로 연결해요.' },
     ],
   },
+  close: { title: '팀은 준비됐어요. 말만 하세요.' },
   notFound: { title: '페이지를 찾을 수 없어요 — equipe', description: '이 페이지는 없어요.', heading: '페이지를 찾을 수 없어요', text: '이 주소에는 아무것도 없어요. 페이지가 옮겨졌거나 링크가 잘못됐을 수 있어요.', home: '홈으로 가기' },
   footer: { license: 'MIT 라이선스', built: 'equipe 스쿼드가 공개적으로 만들었어요.' },
   app: {

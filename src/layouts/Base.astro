@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
+import interFont from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import koFont from '../assets/fonts/pretendard-ko-core.woff2?url';
 import { getLocale, type LocaleCode } from '../i18n';
 
@@ -26,6 +27,7 @@ const { lang } = getLocale(Astro.props.locale);
     <BaseHead {...Astro.props} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href={interFont} as="font" type="font/woff2" crossorigin />
     {lang === 'ko' && <link rel="preload" href={koFont} as="font" type="font/woff2" crossorigin />}
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add('js');</script>

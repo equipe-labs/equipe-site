@@ -26,6 +26,8 @@ export default defineConfig({
   },
   // Pages live at /path/ — canonical URLs, the sitemap and vercel.json's redirect all agree.
   trailingSlash: 'always',
+  // The page CSS is small; inlining it removes the render-blocking requests (Lighthouse performance).
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap({
       i18n: { defaultLocale: 'en', locales },
       lastmod: new Date(), // build time
