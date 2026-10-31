@@ -152,3 +152,9 @@
 
 /* the composer scene: the site frame is the card, so the app card draws no border of its own */
 .ap .comp.bare { margin: 0; border: 0; border-radius: 0; background: none; padding: 16px; }
+
+/* T-254: names, ticket ids and short labels never break mid-word (ko's `overflow-wrap: anywhere` on .ap is for translated sentences). */
+.ap .mono, .ap kbd, .ap .btn, .ap .who, .ap .age, .ap .id, .ap .tm b, .ap .tm em, .ap .pill, .ap .badge, .ap .row .who, .ap .row .id, .ap .row .age, .ap .foot b, .ap .tools > span { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; }
+.ap .row .who, .ap .tm b, .ap .tm em, .ap .pill { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.ap .chat th:not(:last-child), .ap .chat td:not(:last-child) { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; padding-left: 8px; padding-right: 8px; }
+.ap .ti { hyphens: auto; }
