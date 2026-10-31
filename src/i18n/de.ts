@@ -4,10 +4,10 @@ const de: Messages = {
   meta: {
     title: 'equipe — Dein ganzes Startup-Team. Du gibst nur frei.',
     description:
-      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten und fragen, bevor etwas rausgeht.',
+      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die dein Produkt von der ersten Idee über den Launch hinaus immer weiter wachsen lassen. Sie arbeiten auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif und fragen, bevor etwas rausgeht.',
     ogTitle: 'equipe — Dein ganzes Startup-Team. Du gibst nur frei.',
     ogDescription:
-      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten und fragen, bevor etwas rausgeht.',
+      'equipe ist ein KI-Squad: ein PM, Designer und Engineers, die dein Produkt von der ersten Idee über den Launch hinaus immer weiter wachsen lassen. Sie arbeiten auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif und fragen, bevor etwas rausgeht.',
     ogImageAlt: 'equipe — KI-Coding-Agenten als Squad, geleitet von einer einzigen Person',
   },
   ui: {
@@ -25,7 +25,7 @@ const de: Messages = {
   nav: { howItWorks: 'So funktioniert’s', getStarted: 'Loslegen', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Dein ganzes Startup-Team. Du gibst nur frei.',
-    lead: 'Ein PM, Designer und Engineers, die auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif arbeiten – und fragen, bevor etwas rausgeht.',
+    lead: 'Ein PM, Designer und Engineers, die dein Produkt von der ersten Idee über den Launch hinaus immer weiter wachsen lassen. Sie arbeiten auf deinem Mac mit deinem Claude- oder ChatGPT-Tarif und fragen, bevor etwas rausgeht.',
     ctaPrimary: 'Auf GitHub ansehen',
     chip: 'Frühe Phase · MIT-Lizenz · Codex und Claude Code',
     cliLink: 'Lieber im Terminal? CLI installieren',
