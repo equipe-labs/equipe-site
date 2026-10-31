@@ -174,7 +174,7 @@ equipe           # 打开小队控制台`,
         description: 'equipe 移动应用及其中继处理哪些信息：配对密钥只保存在手机上，中继只转发已封装的消息，没有分析或跟踪。',
       },
       title: 'equipe 应用隐私政策',
-      updated: '最后更新：2026-10-14',
+      updated: '最后更新：2026-11-01',
       intro: 'equipe 应用让你的手机与自己 Mac 上的 equipe 守护进程通信。本页用平实的语言说明应用和 equipe 中继会处理哪些信息。',
       sections: [
         {
@@ -213,6 +213,17 @@ equipe           # 打开小队控制台`,
           title: '分析与跟踪',
           text: '应用不含任何分析、广告或崩溃报告工具，也不会跨其他应用或网站跟踪你。本政策适用于应用和中继。网站 equipe.im 使用 PostHog 统计访问量，不使用 Cookie 或本地存储，也不建立个人档案。',
           items: [],
+        },
+        {
+          title: 'equipe 桌面端：匿名使用数据',
+          text: 'equipe 桌面应用在首次运行时会询问是否发送匿名使用数据。你答应之前，什么都不会发送。手机应用不发送这些数据。',
+          items: [
+            '**发送什么。** 只有这些事件：`first_run`、`squad_created`、`ticket_created`、`work_handed_in`、`work_accepted` 和 `daily_active`。内容只有 equipe 版本、`macos` 或 `linux`、随机的安装 ID 和 squad ID，以及数量或类型，例如工单类型（`code`、`task`、`action`）或一天的批准次数（区间）。另外还会带上几个简单的值：团队规模、工单由谁创建或批准（`person`、`pm` 或 `member`）、用了哪个引擎（`claude` 或 `codex`）以及日期。完整列表见 `docs/TELEMETRY.md`。',
+            '**绝不发送什么。** 不发送对话、提示词或回复；不发送工单的标题、正文、评论或图片；不发送文件、文件夹、仓库或网址；不发送 squad、成员、项目或个人的名字；不发送邮箱、电话或账号；不发送主机名等设备标识。',
+            '**没有画像。** 发送时关闭了个人档案和 GeoIP 查询。随机 ID 不是由你或你的 Mac 推算出来的。',
+            '**谁接收。** 美国的 PostHog（与统计 equipe.im 访问的是同一个项目）。请求到达时会经过你的 IP 地址，但不会保存（这个 PostHog 项目已设置为丢弃客户端 IP）。',
+            '**如何关闭。** 运行 `equipe telemetry off`，或设置 `EQUIPE_TELEMETRY=off`。立即生效，安装 ID 也会被清除。`equipe telemetry status` 可查看当前状态。完整清单见 equipe 仓库的 `docs/TELEMETRY.md`。',
+          ],
         },
         {
           title: '保留与删除',

@@ -174,7 +174,7 @@ equipe           # 스쿼드 콘솔 열기`,
         description: 'equipe 모바일 앱과 릴레이가 다루는 정보: 페어링 키는 폰에만 저장되고, 릴레이는 봉인된 메시지만 전달하며, 분석·추적은 없습니다.',
       },
       title: 'equipe 앱 개인정보처리방침',
-      updated: '최종 수정: 2026-10-14',
+      updated: '최종 수정: 2026-11-01',
       intro: 'equipe 앱은 폰이 내 Mac의 equipe 데몬과 대화하게 해 줍니다. 이 페이지는 앱과 equipe 릴레이가 어떤 정보를 다루는지 쉬운 말로 적었습니다.',
       sections: [
         {
@@ -213,6 +213,17 @@ equipe           # 스쿼드 콘솔 열기`,
           title: '분석과 추적',
           text: '앱에는 분석, 광고, 충돌 보고 도구가 없고, 다른 앱이나 웹사이트에서 사용자를 추적하지 않습니다. 이 방침은 앱과 릴레이에 적용됩니다. 웹사이트 equipe.im은 쿠키나 로컬 저장소 없이 PostHog로 방문 수를 세며 개인 프로필을 만들지 않습니다.',
           items: [],
+        },
+        {
+          title: 'equipe 데스크톱: 익명 사용 데이터',
+          text: 'equipe 데스크톱 앱은 처음 실행할 때 익명 사용 데이터를 보낼지 묻습니다. 예라고 하기 전에는 아무것도 보내지 않습니다. 휴대폰 앱은 이 데이터를 보내지 않습니다.',
+          items: [
+            '**보내는 것.** 아래 이벤트만 보냅니다: `first_run`, `squad_created`, `ticket_created`, `work_handed_in`, `work_accepted`, `daily_active`. equipe 버전, `macos` 또는 `linux`, 무작위 설치 ID와 스쿼드 ID, 그리고 티켓 종류(`code`, `task`, `action`)나 하루 승인 횟수(범위) 같은 값만 담깁니다. 팀 규모, 티켓을 만들거나 승인한 쪽(`person`, `pm`, `member`), 쓴 엔진(`claude`, `codex`), 날짜 같은 단순한 값도 함께 갑니다. 전체 목록은 `docs/TELEMETRY.md`에 있습니다.',
+            '**절대 보내지 않는 것.** 대화·프롬프트·답변, 티켓 제목·본문·댓글·이미지, 파일·폴더·저장소·URL, 스쿼드·멤버·프로젝트·사람 이름, 이메일·전화번호·계정, 호스트 이름 같은 기기 식별자는 보내지 않습니다.',
+            '**프로필 없음.** 사람 프로필과 GeoIP 조회를 끈 채로 보냅니다. 무작위 ID는 내 정보나 Mac에서 만들어지지 않습니다.',
+            '**받는 곳.** 미국의 PostHog입니다(equipe.im 방문을 세는 것과 같은 프로젝트). 요청이 닿을 때 IP 주소를 잠깐 거치지만 저장하지 않습니다(이 PostHog 프로젝트는 클라이언트 IP를 버리도록 설정했습니다).',
+            '**끄는 법.** `equipe telemetry off`를 실행하거나 `EQUIPE_TELEMETRY=off`를 설정하세요. 바로 적용되고 설치 ID도 지워집니다. `equipe telemetry status`로 현재 상태를 볼 수 있습니다. 전체 목록은 equipe 저장소의 `docs/TELEMETRY.md`에 있습니다.',
+          ],
         },
         {
           title: '보관과 삭제',
