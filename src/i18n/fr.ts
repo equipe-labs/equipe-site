@@ -3,12 +3,12 @@ import type { Messages } from './en';
 // French typography: U+202F (narrow no-break space) before ; ? ! : and inside « », written as   below.
 const fr: Messages = {
   meta: {
-    title: 'equipe — un squad d’agents de codage IA, dirigé par vous',
+    title: 'equipe — Toute votre équipe de startup. Vous n’avez qu’à approuver.',
     description:
-      'equipe est un squad IA open source\u202F: des agents spécialisés par rôle travaillent depuis un tableau partagé, dans des git worktrees isolés. Rien n’est fusionné sans votre accord.',
-    ogTitle: 'equipe — un squad d’agents de codage IA, dirigé par vous',
+      'equipe est une escouade d’IA\u202F: un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
+    ogTitle: 'equipe — Toute votre équipe de startup. Vous n’avez qu’à approuver.',
     ogDescription:
-      'equipe est un squad IA open source\u202F: des agents spécialisés par rôle travaillent depuis un tableau partagé, dans des git worktrees isolés. Rien n’est fusionné sans votre accord.',
+      'equipe est une escouade d’IA\u202F: un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT, et vous demandent avant que quoi que ce soit parte.',
     ogImageAlt: 'equipe — un squad d’agents de codage IA, dirigé par une seule personne',
   },
   ui: {
@@ -25,8 +25,8 @@ const fr: Messages = {
   },
   nav: { howItWorks: 'Comment ça marche', getStarted: 'Commencer', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Menez une équipe d’agents IA. Vous approuvez chaque fusion.',
-    lead: 'Des agents PM, designer, développeur et mobile travaillent depuis un tableau partagé, chacun sur sa propre branche de votre dépôt. Rien n’est fusionné sans votre approbation.',
+    title: 'Toute votre équipe de startup. Vous n’avez qu’à approuver.',
+    lead: 'Un PM, un designer et des ingénieurs qui travaillent sur votre Mac avec votre abonnement Claude ou ChatGPT — et vous demandent avant que quoi que ce soit parte.',
     ctaPrimary: 'Voir sur GitHub',
     chip: 'Phase initiale · Licence MIT · Codex et Claude Code',
     cliLink: 'Plutôt le terminal ? Installer la CLI',
@@ -38,8 +38,8 @@ const fr: Messages = {
     intro: 'Une personne dirige. Le squad travaille en parallèle. Tout passe par le tableau.',
     steps: [
       { title: 'Confier', text: 'Dites au PM ce que vous voulez. Il en fait des tickets sur un tableau partagé, chacun attribué à un rôle.' },
-      { title: 'Travail en parallèle', text: 'Les membres travaillent en même temps, chacun sur sa propre branche. Votre copie de travail reste intacte, et chaque action est consignée sur le tableau.' },
-      { title: 'Votre approbation', text: 'Avant toute fusion, equipe vous demande votre accord. Rien n’est intégré sans votre feu vert.' },
+      { title: 'Travail en parallèle', text: 'Les membres travaillent en même temps, chacun dans son propre espace de travail. Vos fichiers restent intacts et chaque action est consignée sur le tableau.' },
+      { title: 'Votre approbation', text: 'Avant que quoi que ce soit soit publié ou envoyé, equipe vous demande. Rien ne part tant que vous ne l’avez pas dit.' },
     ],
   },
   features: {

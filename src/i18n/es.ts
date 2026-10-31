@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const es: Messages = {
   meta: {
-    title: 'equipe — un squad de agentes de programación con IA',
+    title: 'equipe — Todo tu equipo de startup. Tú solo apruebas.',
     description:
-      'equipe es un squad de software con IA y de código abierto: agentes con roles trabajan desde un tablero compartido en git worktrees aislados, y nada se fusiona sin tu aprobación.',
-    ogTitle: 'equipe — un squad de agentes de programación con IA',
+      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
+    ogTitle: 'equipe — Todo tu equipo de startup. Tú solo apruebas.',
     ogDescription:
-      'equipe es un squad de software con IA y de código abierto: agentes con roles trabajan desde un tablero compartido en git worktrees aislados, y nada se fusiona sin tu aprobación.',
+      'equipe es un escuadrón de IA: un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT y preguntan antes de que algo salga.',
     ogImageAlt: 'equipe — un squad de agentes de programación con IA, liderado por una sola persona',
   },
   ui: {
@@ -24,8 +24,8 @@ const es: Messages = {
   },
   nav: { howItWorks: 'Cómo funciona', getStarted: 'Empezar', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: 'Dirige un equipo de agentes de IA. Tú apruebas cada fusión.',
-    lead: 'Agentes de PM, diseño, desarrollo y móvil trabajan desde un tablero compartido, cada uno en su propia rama de tu repositorio. Nada se fusiona sin tu aprobación.',
+    title: 'Todo tu equipo de startup. Tú solo apruebas.',
+    lead: 'Un PM, un diseñador y ingenieros que trabajan en tu Mac con tu plan de Claude o ChatGPT, y preguntan antes de que algo salga.',
     ctaPrimary: 'Ver en GitHub',
     chip: 'Fase inicial · Licencia MIT · Compatible con Codex y Claude Code',
     cliLink: '¿Prefieres la terminal? Instala la CLI',
@@ -37,8 +37,8 @@ const es: Messages = {
     intro: 'Una persona lidera. El squad trabaja en paralelo. Todo pasa por el tablero.',
     steps: [
       { title: 'Delégalo', text: 'Dile al PM lo que quieres. Se convierte en tickets en un tablero compartido, cada uno con el rol que se hará cargo.' },
-      { title: 'Trabajo en paralelo', text: 'Los miembros trabajan a la vez, cada uno en su propia rama. Tu copia de trabajo queda intacta y cada acción se registra en el tablero.' },
-      { title: 'Tu aprobación', text: 'Antes de fusionar nada, equipe te pregunta. Nada se incorpora hasta que tú lo digas.' },
+      { title: 'Trabajo en paralelo', text: 'Los miembros trabajan a la vez, cada uno en su propio espacio de trabajo. Tus archivos siguen intactos y cada acción queda registrada en el tablero.' },
+      { title: 'Tu aprobación', text: 'Antes de que algo se publique o se envíe, equipe te pregunta. Nada sale hasta que tú lo digas.' },
     ],
   },
   features: {

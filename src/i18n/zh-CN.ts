@@ -2,12 +2,12 @@ import type { Messages } from './en';
 
 const zhCN: Messages = {
   meta: {
-    title: 'equipe — 一个人带领的 AI 编程智能体小队',
+    title: 'equipe — 你的整个创业团队。你只需批准。',
     description:
-      'equipe 是开源的 AI 软件小队：按角色分工的智能体围绕共享看板，在隔离的 git worktree 中工作，合并前必须由你批准。',
-    ogTitle: 'equipe — 一个人带领的 AI 编程智能体小队',
+      'equipe 是一支 AI 小队：PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
+    ogTitle: 'equipe — 你的整个创业团队。你只需批准。',
     ogDescription:
-      'equipe 是开源的 AI 软件小队：按角色分工的智能体围绕共享看板，在隔离的 git worktree 中工作，合并前必须由你批准。',
+      'equipe 是一支 AI 小队：PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作，任何东西发出去之前都会先问你。',
     ogImageAlt: 'equipe — 一个人带领的 AI 编程智能体小队',
   },
   ui: {
@@ -24,8 +24,8 @@ const zhCN: Messages = {
   },
   nav: { howItWorks: '工作方式', getStarted: '开始使用', faq: '常见问题', github: 'GitHub' },
   hero: {
-    title: '带领一支 AI 智能体团队，每次合并都由你批准。',
-    lead: 'PM、设计师、开发者和移动端智能体在共享看板上工作，各自在你仓库的独立分支上开发。未经你批准，任何改动都不会被合并。',
+    title: '你的整个创业团队。你只需批准。',
+    lead: 'PM、设计师和工程师在你的 Mac 上，用你的 Claude 或 ChatGPT 套餐工作——任何东西发出去之前，都会先问你。',
     ctaPrimary: '在 GitHub 上查看',
     chip: '早期阶段 · MIT 许可证 · 支持 Codex 和 Claude Code',
     cliLink: '更喜欢终端？安装 CLI',
@@ -37,8 +37,8 @@ const zhCN: Messages = {
     intro: '一个人带队，小队并行工作，一切都在看板上流转。',
     steps: [
       { title: '交给小队', text: '告诉 PM 你想要什么，需求会被拆成共享看板上的工单，每张工单都有对应的角色来领取。' },
-      { title: '并行工作', text: '成员同时开工，各用自己的分支。你的本地工作目录不受影响，每个动作都记录在看板上。' },
-      { title: '你的批准', text: '合并之前，equipe 会先问你。你不点头，什么都不会被合并。' },
+      { title: '并行工作', text: '成员们同时工作，各自在自己的工作区里。你自己的文件不会被动，每个操作都记录在看板上。' },
+      { title: '你的批准', text: '任何东西发布或发送之前，equipe 都会先问你。你没点头，什么都不会发出去。' },
     ],
   },
   features: {
