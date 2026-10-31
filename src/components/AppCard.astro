@@ -1,11 +1,11 @@
 ---
 // One ticket card on the app's board. `n` is the ticket number (1–16); words come from the app text.
 import type { AppText } from '../i18n/app/en';
-interface Props { n: number; t: AppText; who: 'F' | 'D' | 'B' | 'M'; proj: 'website' | 'server' | 'ios'; kind?: 'warn' | 'bars' | 'done'; busy?: string; level?: 1 | 2 | 3 }
-const { n, t, who, proj, kind = 'bars', busy, level = 2 } = Astro.props;
+interface Props { n: number; t: AppText; who: 'F' | 'D' | 'B' | 'M'; proj: 'website' | 'server' | 'ios'; kind?: 'warn' | 'bars' | 'done'; busy?: string; level?: 1 | 2 | 3; cls?: string }
+const { n, t, who, proj, kind = 'bars', busy, level = 2, cls = '' } = Astro.props;
 const c = { website: 'c-web', server: 'c-srv', ios: 'c-ios' }[proj];
 ---
-<div class={`tc${kind === 'done' ? ' done' : ''}`}>
+<div class={`tc${kind === 'done' ? ' done' : ''}${cls ? ` ${cls}` : ''}`}>
   <div class="l1">
     {kind === 'warn' ? <i class="warn">!</i> : <span class="bars"><i style={`height:${level >= 1 ? 5 : 3}px`}></i><i style={`height:${level >= 2 ? 8 : 3}px;opacity:${level >= 2 ? 1 : 0.3}`}></i><i style={`height:11px;opacity:${level >= 3 ? 1 : 0.3}`}></i></span>}
     <span class="mono">T-{n}</span>

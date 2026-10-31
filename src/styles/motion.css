@@ -1,0 +1,38 @@
+/* Scroll motion (T-252). Everything below is gated on html.mo, which the inline head script sets only when the visitor has not asked
+   for reduced motion. Without it (no JS, reduce) nothing here applies and every block is simply visible.
+   Curve = motion.easing.standard (out-cubic). Duration is page-scale (a section arriving), longer than the UI-scale motion.duration tokens (≤200ms).
+   Only opacity and transform move, so nothing reflows (CLS 0). */
+:root { --m-ease: cubic-bezier(0.215, 0.61, 0.355, 1); --m-dur: 320ms; --m-rise: 12px; }
+
+/* 1. sections arriving: heading → text → product screen */
+html.mo .rv { opacity: 0; transform: translateY(var(--m-rise)); }
+html.mo .rv.in { opacity: 1; transform: none; transition: opacity var(--m-dur) var(--m-ease) var(--d, 0ms), transform var(--m-dur) var(--m-ease) var(--d, 0ms); }
+html.mo .rv[data-t='2'] { --d: 80ms; }
+html.mo .rv[data-t='3'] { --d: 160ms; }
+
+/* 2. get started: the three steps switch on one after another */
+html.mo .go .gs { opacity: 0; transform: translateY(var(--m-rise)); }
+html.mo .go .gs .n { transform: scale(0.6); }
+html.mo .go.in .gs { opacity: 1; transform: none; transition: opacity var(--m-dur) var(--m-ease) calc(var(--i) * 260ms), transform var(--m-dur) var(--m-ease) calc(var(--i) * 260ms); }
+html.mo .go.in .gs .n { transform: none; transition: transform 400ms var(--m-ease) calc(var(--i) * 260ms + 200ms); }
+.go .gs:nth-child(1) { --i: 0; } .go .gs:nth-child(2) { --i: 1; } .go .gs:nth-child(3) { --i: 2; }
+
+/* 3. inside the product screens: starts when the screen is on screen (.play) */
+/* launch: a card moves to the next lane (it starts in the lane before, under the first card) */
+html.mo .win .tc.mv { position: relative; z-index: 1; transform: translate(calc(-100% - 32px), calc(100% + 8px)); }
+html.mo .win.play .tc.mv { transform: none; transition: transform 700ms var(--m-ease) 800ms; }
+@media (max-width: 700px) {
+  html.mo .win .tc.mv { transform: translateY(-40px); opacity: 0; }
+  html.mo .win.play .tc.mv { opacity: 1; transition: transform 600ms var(--m-ease) 800ms, opacity 400ms var(--m-ease) 800ms; }
+}
+/* PM chat: line by line */
+html.mo .win .chat > * { opacity: 0; transform: translateY(8px); }
+html.mo .win.play .chat > * { opacity: 1; transform: none; transition: opacity var(--m-dur) var(--m-ease) var(--cd), transform var(--m-dur) var(--m-ease) var(--cd); }
+.chat > :nth-child(1) { --cd: 500ms; } .chat > :nth-child(2) { --cd: 900ms; } .chat > :nth-child(3) { --cd: 1300ms; } .chat > :nth-child(4) { --cd: 1800ms; } .chat > :nth-child(5) { --cd: 2400ms; }
+/* decision card: Submit is pressed, a check appears */
+.ap .opt.on { position: relative; }
+.ap .okm { display: none; }
+html.mo .ap .okm { display: grid; position: absolute; top: 9px; right: 44px; width: 22px; height: 22px; place-items: center; border-radius: 50%; background: var(--ok); color: var(--surface); font: 700 13px/1 var(--sans); opacity: 0; transform: scale(0.5); }
+html.mo .win.play .okm { opacity: 1; transform: none; transition: opacity 240ms var(--m-ease) 1500ms, transform 360ms var(--m-ease) 1500ms; }
+html.mo .win.play .dec .btn.pri { animation: m-press 360ms var(--m-ease) 1100ms both; }
+@keyframes m-press { 0%, 100% { transform: none; } 45% { transform: scale(0.94); } }

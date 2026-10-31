@@ -6,6 +6,7 @@ import '../styles/app.css';
 import { getAppText } from '../i18n/app';
 import State from '../components/State.astro';
 import '../styles/landing.css';
+import '../styles/motion.css';
 import Mark from '../components/Mark.astro';
 import LangMenu from '../components/LangMenu.astro';
 import Rich from '../components/Rich.astro';
@@ -44,6 +45,14 @@ const tryIt = 'equipe try --edit "…"';
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
   <Fragment slot="head">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Scroll motion is opt-in: blocks are hidden only once this class is set, and only if the visitor allows motion.
+      // If the script that reveals them never runs, the class is dropped after 3 s and everything shows.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__rv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
     <OrganizationJsonLd />
     <WebSiteJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} />
     <SoftwareApplicationJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} featureList={t.feat.now.map((f) => f.title)} />
@@ -338,6 +347,50 @@ const tryIt = 'equipe try --edit "…"';
 
   <Analytics />
   <LangBanner locale={code} />
+
+  <script>
+    // Scroll motion (T-252): blocks fade up as they arrive, product screens start their own small motion once on screen, numbers count up.
+    if (document.documentElement.classList.contains('mo')) {
+      (window as unknown as { __rv: boolean }).__rv = true;
+      const S = 'main.landing > section:not(.hero)';
+      const tiers: [string, string][] = [
+        ['2', `${S} :is(.lede, .lines, .tl, .lps, .pts, .alsoh, .also, .cm, .nums, .faqs, .back, .links, .h3big, .bp, .tick, .cli, .end .acts, .meta, .go ~ .acts, .fr .row > div > :is(.now, h3, p:not(.cap)))`],
+        ['1', `${S} h2`],
+        ['3', `${S} :is(.win, .phone, .mr, .cap):not(.gs *)`],
+      ];
+      const reveal = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px' });
+      for (const [t, sel] of tiers) document.querySelectorAll<HTMLElement>(sel).forEach((el) => {
+        if (el.classList.contains('rv')) return;
+        el.classList.add('rv'); el.dataset.t = t; reveal.observe(el);
+      });
+      document.querySelectorAll('.go').forEach((el) => reveal.observe(el));
+
+      const play = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('play'); play.unobserve(e.target); }
+      }), { threshold: 0.3 });
+      document.querySelectorAll(`${S} .win`).forEach((el) => play.observe(el));
+
+      const nums = new IntersectionObserver((es) => es.forEach((e) => {
+        if (!e.isIntersecting) return;
+        nums.unobserve(e.target);
+        const el = e.target as HTMLElement, end = el.dataset.end!, to = Number(end.match(/\d+/)![0]);
+        const t0 = performance.now(), D = 1100;
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - t0) / D), v = Math.round(to * (1 - (1 - p) ** 3));
+          el.textContent = end.replace(/\d+/, String(v));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }), { threshold: 0.6 });
+      document.querySelectorAll<HTMLElement>('.num dt').forEach((el) => {
+        const end = el.textContent ?? '';
+        if (!/\d/.test(end)) return;
+        el.dataset.end = end; el.textContent = end.replace(/\d+/, '0'); nums.observe(el);
+      });
+    }
+  </script>
 
   <script is:inline>
     document.querySelectorAll('.copy').forEach((b) =>

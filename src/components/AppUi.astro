@@ -42,7 +42,7 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
   {k === 'launch' && (
     <div class="lanes">
       <div class="lane"><h6>◔ {L.yourTurn} <span>1</span></h6><AppCard n={7} t={t} who="F" proj="website" kind="warn" /></div>
-      <div class="lane"><h6>◕ {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" /><AppCard n={6} t={t} who="B" proj="server" /></div>
+      <div class="lane"><h6>◕ {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" cls="mv" /><AppCard n={6} t={t} who="B" proj="server" /></div>
       <div class="lane m-hide"><h6>✔ {L.done} <span>4</span></h6><AppCard n={1} t={t} who="D" proj="website" kind="done" /><AppCard n={2} t={t} who="F" proj="website" kind="done" /></div>
     </div>
   )}
@@ -88,7 +88,7 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
     <div class="side-panel dec">
       <div class="k">{D.title}</div>
       <div class="hd"><span class="tag">{D.tag}</span><h3>{D.question}</h3></div>
-      <div class="opt on"><b>{D.a}</b><kbd>1</kbd><p>{D.aText}</p></div>
+      <div class="opt on"><b>{D.a}</b><i class="okm">✓</i><kbd>1</kbd><p>{D.aText}</p></div>
       <div class="opt"><b>{D.b}</b><kbd>2</kbd><p>{D.bText}</p></div>
       <div class="own"><span>✎</span><span>{D.own}</span><kbd>Tab</kbd></div>
       <div class="mu">⌀ {D.attach}</div>
