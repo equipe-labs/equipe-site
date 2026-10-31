@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const ko: Messages = {
   meta: {
-    title: 'equipe — 창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
+    title: 'equipe — 스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     description:
       'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
-    ogTitle: 'equipe — 창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
+    ogTitle: 'equipe — 스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     ogDescription:
       'equipe는 AI 스쿼드예요. PM·디자이너·엔지니어가 아이디어부터 출시, 그 뒤 성장까지 제품을 계속 키워요. 내 Mac에서 쓰던 Claude나 ChatGPT 요금제로 일하고, 내보내기 전엔 꼭 물어봐요.',
     ogImageAlt: 'equipe — 한 사람이 이끄는 AI 코딩 에이전트 스쿼드',
@@ -27,7 +27,7 @@ const ko: Messages = {
   },
   nav: { stage: '단계', howItWorks: '작동 방식', features: '기능', getStarted: '시작하기', faq: 'FAQ', github: 'GitHub' },
   hero: {
-    title: '창업팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
+    title: '스타트업 팀이 통째로 생겼어요. 나는 승인만 하면 돼요.',
     lead: '기획·디자인·개발을 한 팀이 맡아요. 출시한 뒤에도 이어서 일하고, 공개나 결제 같은 일은 꼭 먼저 물어봐요.',
     cta: 'Mac용 다운로드',
     req: '무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로',
