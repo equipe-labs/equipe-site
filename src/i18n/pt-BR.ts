@@ -129,6 +129,7 @@ const ptBR: Messages = {
       { title: 'Metas para perseguir', text: 'Uma North Star e metas trimestrais. Cada proposta diz a qual meta serve.' },
       { title: 'Percebe primeiro', text: 'Um cadastro quebrado ou uma tarefa falhando cai no quadro antes de você notar.' },
       { title: 'Código para a sua fase', text: 'Rápido e leve antes do fit. Refatoração e estabilidade depois.' },
+      { title: 'App para Android', text: 'O mesmo squad no seu bolso. O app para iPhone já funciona.' },
     ],
   },
   ev: {

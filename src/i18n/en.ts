@@ -131,6 +131,7 @@ export const en = {
       { title: 'Goals it works toward', text: 'A North Star and quarterly goals. Every proposal names the goal it serves.' },
       { title: 'It notices first', text: 'A broken signup or a failing job lands on the board before you spot it.' },
       { title: 'Code for your stage', text: 'Fast and light before fit. Refactoring and stability after.' },
+      { title: 'Android app', text: 'The same squad in your pocket. The iPhone app works today.' },
     ],
   },
   ev: {

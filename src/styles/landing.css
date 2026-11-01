@@ -3,7 +3,10 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --dash: #6B6D75; } }
 :root[data-theme='dark'] { --dash: #6B6D75; }
 
+/* space.section 104 between faces; 80 where two sections share a face (T-266 #13) */
 main.landing > section { padding: 104px 0; border: 0; }
+main.landing > section.launch { padding-top: 80px; }
+main.landing > section#stage { padding: 88px 0; }
 main.landing > section.alt { background: var(--sunken); }
 main.landing .wrap.w { max-width: 1360px; }
 main.landing .wrap { padding: 0 var(--s-6); }
@@ -24,7 +27,7 @@ header.site nav a.btn { color: var(--on-accent); }
 .btn.xl { min-height: 64px; padding: 0 var(--s-6); font-size: 18px; }
 
 /* status pills: solid dot = works today, dashed = coming */
-.soon, .now { display: inline-flex; align-items: center; gap: 6px; font: 600 12px/1 var(--sans); padding: 5px 10px; border-radius: 999px; white-space: nowrap; letter-spacing: 0; vertical-align: middle; }
+.soon, .now { display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; height: 22px; font: 600 12px/1 var(--sans); padding: 0 10px; border-radius: 999px; white-space: nowrap; letter-spacing: 0; vertical-align: middle; }
 .soon { border: 1.5px dashed var(--dash); color: var(--muted); }
 .now { background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); }
 .now::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--dot); }
@@ -84,6 +87,8 @@ main.landing h2 .tone { display: block; margin-top: var(--s-4); color: var(--mut
   .row { grid-template-columns: 4fr 8fr; gap: 96px; }
   .row.rev { grid-template-columns: 8fr 4fr; }
   .row.half { grid-template-columns: 1fr 1fr; align-items: start; gap: 80px; }
+  .row.half > .sk { position: sticky; top: 96px; }
+  .row.top, .launch .row, .fr .row { align-items: start; }
   .row.appr { grid-template-columns: 9fr 4fr; gap: 64px; }
 }
 
@@ -111,7 +116,7 @@ main.landing .st h3 { font-size: 21px; display: flex; gap: var(--s-2) var(--s-3)
 .close .soon { flex: none; }
 
 /* 4 how it works */
-.loopw { margin-top: var(--s-8); display: flex; flex-direction: column; gap: 88px; }
+.loopw { margin-top: 56px; display: flex; flex-direction: column; gap: 88px; }
 .lps { display: flex; flex-direction: column; gap: var(--s-5); }
 .lp { display: grid; grid-template-columns: 36px 1fr; gap: var(--s-4); }
 .lp .n { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font: 700 14px/32px var(--sans); text-align: center; }
@@ -131,7 +136,7 @@ main.landing .h3big { font-size: 26px; line-height: 1.15; letter-spacing: -0.025
 .phonebox .cap { margin-top: var(--s-4); }
 /* The iOS approval sheet, drawn in code: one thin bezel, iPhone 19.5:9, system font (no mono). */
 .phone { --lbl: #000; --sec: rgb(60 60 67 / 0.78); --fill: rgb(118 118 128 / 0.12); --sep: rgb(60 60 67 / 0.29); --tint: #0062CC; --tintbg: #0062CC; --red: #C4001A; --sec2: rgb(60 60 67 / 0.78);
-  width: 280px; max-width: 100%; aspect-ratio: 9 / 19.5; border: 5px solid #1B1C20; border-radius: 42px; background: #1B1C20; overflow: hidden; font-size: 12.6px; }
+  width: 280px; max-width: 100%; aspect-ratio: 9 / 15.5; border: 3px solid var(--dash); border-radius: 40px; background: var(--dash); overflow: hidden; font-size: 12.6px; }
 .phone .scr { position: relative; display: flex; flex-direction: column; height: 100%; border-radius: 37px; overflow: hidden; background: #fff; color: var(--lbl);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif; line-height: 1.3; letter-spacing: 0; text-align: left; }
 .phone p { margin: 0; }
@@ -140,7 +145,7 @@ main.landing .h3big { font-size: 26px; line-height: 1.15; letter-spacing: -0.025
 .phone .nav { position: relative; display: flex; justify-content: center; align-items: center; height: 30px; font-size: 1em; }
 .phone .nav b { font-weight: 600; }
 .phone .nav .cl { position: absolute; left: 14px; color: var(--tint); }
-.phone .body { flex: 1; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px; }
+.phone .body { flex: 1; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px; justify-content: flex-start; }
 .phone .who { font-size: 1.18em; font-weight: 600; line-height: 1.25; }
 .phone .sec { color: var(--sec); font-size: 0.86em; }
 .phone .who + .sec { margin-top: -6px; }
@@ -154,7 +159,7 @@ main.landing .h3big { font-size: 26px; line-height: 1.15; letter-spacing: -0.025
 .phone .allow { background: var(--tintbg); color: #fff; }
 .phone .hi { height: 5px; width: 36%; margin: 6px auto 8px; border-radius: 99px; background: var(--lbl); }
 @media (prefers-color-scheme: dark) {
-  .phone { --lbl: #fff; --sec: rgb(235 235 245 / 0.6); --fill: rgb(118 118 128 / 0.24); --sep: rgb(84 84 88 / 0.65); --tint: #0A84FF; --tintbg: #0A64C8; --red: #FF7A70; --sec2: rgb(235 235 245 / 0.72); border-color: #3A3A3F; background: #3A3A3F; }
+  .phone { --lbl: #fff; --sec: rgb(235 235 245 / 0.6); --fill: rgb(118 118 128 / 0.24); --sep: rgb(84 84 88 / 0.65); --tint: #0A84FF; --tintbg: #0A64C8; --red: #FF7A70; --sec2: rgb(235 235 245 / 0.72); }
   .phone .scr { background: #1C1C1E; }
   .phone .deny { background: rgb(255 69 58 / 0.2); }
 }
@@ -167,7 +172,7 @@ main.landing .h3big { font-size: 26px; line-height: 1.15; letter-spacing: -0.025
 .back i { flex: 1; height: 0; border-top: 2px dashed var(--line); }
 
 /* 5 who */
-.whofig { margin-top: var(--s-8); }
+.whofig { margin-top: 56px; }
 .pts { display: grid; grid-template-columns: 1fr; gap: var(--s-5); margin-top: var(--s-7); }
 .pt { border-top: 1px solid var(--line); padding-top: var(--s-4); }
 main.landing .pt h3 { font-size: 17px; line-height: 1.35; letter-spacing: -0.015em; }
@@ -176,7 +181,7 @@ main.landing .pt h3 { font-size: 17px; line-height: 1.35; letter-spacing: -0.015
 @media (min-width: 1100px) { .pts { grid-template-columns: repeat(4, 1fr); } }
 
 /* 6 features */
-.fr { display: flex; flex-direction: column; gap: 72px; margin-top: var(--s-8); }
+.fr { display: flex; flex-direction: column; gap: 72px; margin-top: 56px; }
 main.landing .fr h3 { font-size: 26px; line-height: 1.15; letter-spacing: -0.025em; margin-top: var(--s-4); }
 .fr p:not(.cap) { font-size: 16.5px; line-height: 1.6; color: var(--muted); margin-top: var(--s-3); }
 @media (min-width: 701px) { main.landing .fr h3 { font-size: 32px; } :lang(ko) main.landing .fr h3, :lang(ja) main.landing .fr h3, :lang(zh-CN) main.landing .fr h3 { font-size: 28px; line-height: 1.3; } .fr p:not(.cap) { font-size: 18px; } }
@@ -209,7 +214,7 @@ main.landing .evs h2 .tone, .evs .meta, .evs .cap, .evs dd { color: #A3A5AB; }
 :root[data-theme='dark'] .evs { background: var(--bone); color: #0A0A0C; }
 :root[data-theme='dark'] main.landing .evs h2 .tone, :root[data-theme='dark'] .evs .meta, :root[data-theme='dark'] .evs .cap, :root[data-theme='dark'] .evs dd { color: #4F5159; }
 .evg { display: grid; grid-template-columns: 1fr; gap: var(--s-7); align-items: center; margin-top: var(--s-7); }
-@media (min-width: 1100px) { .evg { grid-template-columns: 6fr 5fr; gap: 96px; margin-top: var(--s-8); } }
+@media (min-width: 1100px) { .evg { grid-template-columns: 6fr 5fr; gap: 96px; margin-top: 56px; } }
 .nums { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-4); margin: 0; }
 @media (min-width: 701px) { .nums { gap: var(--s-7) var(--s-6); } }
 .num dt { font: 700 56px/0.95 'Helvetica Neue', Inter, sans-serif; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
@@ -220,7 +225,7 @@ main.landing .evs h2 .tone, .evs .meta, .evs .cap, .evs dd { color: #A3A5AB; }
 
 /* 8 start */
 .go { display: grid; grid-template-columns: 1fr; gap: var(--s-7); margin-top: var(--s-7); }
-@media (min-width: 901px) { .go { grid-template-columns: repeat(3, 1fr); margin-top: var(--s-8); } }
+@media (min-width: 901px) { .go { grid-template-columns: repeat(3, 1fr); margin-top: 56px; } }
 .gs .vis { display: grid; place-items: center; height: 208px; margin-bottom: var(--s-5); border-radius: 12px; background: var(--sunken); overflow: hidden; }
 .gs .vis .win { width: min(300px, calc(100% - 32px)); max-height: 176px; box-shadow: none; background: var(--bg); }
 .gs:nth-child(3) .vis .win::after { content: ''; position: absolute; inset: auto 0 0; height: 48px; background: linear-gradient(to bottom, transparent, var(--bg)); }
@@ -266,4 +271,33 @@ main.landing .end h2 { font-size: 40px; line-height: 1.05; letter-spacing: -0.04
 @media (prefers-reduced-motion: no-preference) {
   .hero .win { animation: rise 160ms ease-out both; }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+}
+
+/* T-266 #20: hover / focus states, one sheet. Pointer-only (no sticky hover on touch); colours mix from the tokens, so light and dark both follow. */
+@media (hover: hover) {
+  a:hover { text-decoration-thickness: 2.5px; color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+  .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
+  .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }
+  .btn:not(.primary):hover { background: var(--surface); }
+  header.site nav a:not(.btn):hover, footer a:hover, .brand:hover { color: var(--text); }
+  header.site nav a:not(.btn):hover { text-decoration: underline; text-decoration-thickness: 1.5px; }
+  .brand:hover { text-decoration: none; }
+  summary:hover h3 { color: var(--accent); }
+  summary:hover::after { border-color: var(--text); }
+  .tablist label:hover { color: var(--text); }
+  .copy:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .hs-pause:hover { color: var(--text); border-color: var(--muted); }
+}
+.hs-pause:focus-visible, .copy:focus-visible, .tablist label:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.swipe:focus-visible { outline-offset: -2px; border-radius: 8px; }
+
+/* T-266: phones. Short lists swipe sideways instead of stacking (T-259 #16), so the page is ~1,800 px shorter. */
+@media (max-width: 700px) {
+  .swipe { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; gap: var(--s-4); margin: 0 calc(-1 * var(--s-6)); padding: 0 var(--s-6) var(--s-2); scroll-padding-inline: var(--s-6); scrollbar-width: none; }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe li { flex: 0 0 min(78%, 300px); scroll-snap-align: start; border-top: 1px solid var(--line); border-bottom: 0; padding: var(--s-4) 0 0; }
+  .cm { margin-top: var(--s-7); gap: var(--s-4); }
+  .alsoh { margin-top: var(--s-7) !important; }
+  /* hero: the decision card is the scene; the board of four tickets (the second half of the loop) stays on desktop */
+  .hs-board .hs-tc:nth-of-type(n+4) { display: none; }
 }
