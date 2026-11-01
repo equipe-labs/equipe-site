@@ -28,7 +28,7 @@ const ja: Messages = {
   nav: { stage: '段階', howItWorks: '仕組み', features: '機能', getStarted: 'はじめる', faq: 'よくある質問', github: 'GitHub' },
   hero: {
     title: 'スタートアップの​チームまるごと。​あなたは​承認するだけ。',
-    lead: 'PM、デザイナー、エンジニアが、プロダクトを作り、公開し、育て続けます。あなたのMacで、いま払っているClaudeまたはChatGPTのプランのままで。',
+    lead: 'PM、デザイナー、エンジニアが、プロダクトを作り、公開し、育て続けます。',
     cta: 'Mac版をダウンロード',
     req: '無料・オープンソース · macOS 12以降 · ClaudeまたはChatGPTのプランで動作',
     cliLink: 'Linuxの方、ターミナル派の方はCLIをどうぞ',

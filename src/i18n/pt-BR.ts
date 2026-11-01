@@ -28,7 +28,7 @@ const ptBR: Messages = {
   nav: { stage: 'Fase', howItWorks: 'Como funciona', features: 'Recursos', getStarted: 'Começar', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Todo o time da sua startup. Você só aprova.',
-    lead: 'Um PM, um designer e engenheiros que constroem seu produto, lançam e continuam fazendo ele crescer. No seu Mac, com o plano do Claude ou do ChatGPT que você já paga.',
+    lead: 'Um PM, um designer e engenheiros que constroem seu produto, lançam e continuam fazendo ele crescer.',
     cta: 'Baixar para Mac',
     req: 'Grátis e de código aberto · macOS 12+ · Roda no seu plano do Claude ou do ChatGPT',
     cliLink: 'No Linux, ou vive no terminal? Instale a CLI',
