@@ -12,9 +12,9 @@ html.mo .rv[data-t='3'] { --d: 160ms; }
 
 /* 2. get started: the three steps switch on one after another */
 html.mo .go .gs { opacity: 0; transform: translateY(var(--m-rise)); }
-html.mo .go .gs .n { transform: scale(0.6); }
+html.mo .go .gs > .n { transform: scale(0.6); }
 html.mo .go.in .gs { opacity: 1; transform: none; transition: opacity var(--m-dur) var(--m-ease) calc(var(--i) * 260ms), transform var(--m-dur) var(--m-ease) calc(var(--i) * 260ms); }
-html.mo .go.in .gs .n { transform: none; transition: transform 400ms var(--m-ease) calc(var(--i) * 260ms + 200ms); }
+html.mo .go.in .gs > .n { transform: none; transition: transform 400ms var(--m-ease) calc(var(--i) * 260ms + 200ms); }
 .go .gs:nth-child(1) { --i: 0; } .go .gs:nth-child(2) { --i: 1; } .go .gs:nth-child(3) { --i: 2; }
 
 /* 3. inside the product screens: starts when the screen is on screen (.play) */
@@ -36,3 +36,6 @@ html.mo .ap .okm { display: grid; position: absolute; top: 9px; right: 44px; wid
 html.mo .win.play .okm { opacity: 1; transform: none; transition: opacity 240ms var(--m-ease) 1500ms, transform 360ms var(--m-ease) 1500ms; }
 html.mo .win.play .dec .btn.pri { animation: m-press 360ms var(--m-ease) 1100ms both; }
 @keyframes m-press { 0%, 100% { transform: none; } 45% { transform: scale(0.94); } }
+
+/* print: show everything */
+@media print { html.mo .rv, html.mo .go .gs { opacity: 1; transform: none; } }

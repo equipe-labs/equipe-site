@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import AppUi from '../components/AppUi.astro';
+import IconSprite from '../components/IconSprite.astro';
 import HeroScene from '../components/HeroScene.astro';
 import '../styles/app.css';
 import { getAppText } from '../i18n/app';
@@ -37,8 +38,10 @@ const stageState = ['now', 'part', 'soon', 'soon'] as const;
 const loopState = ['part', 'now'] as const;
 // The last three FAQ items are for developers.
 const devFrom = t.faq.items.length - 3;
-// The four large scenes in Features: which `now` item each one shows.
-const scenes = [{ k: 'fa', n: 0 }, { k: 'fb', n: 4 }, { k: 'fc', n: 3, tall: true }, { k: 'fd', n: 2 }];
+// The large scenes in Features (the permission card is shown in section 1, so its feature sits in the list below): which `now` item each one shows.
+const scenes = [{ k: 'fa', n: 0 }, { k: 'fb', n: 4 }, { k: 'fc', n: 3, tall: true }];
+// Headline breaks at the sentence boundary (never mid-phrase): "Your whole startup team." / "You just approve."
+const heroLines = t.hero.title.split(/(?<=[.。])\s*(?=\S)/);
 const tryIt = 'equipe try --edit "…"';
 ---
 
@@ -59,6 +62,7 @@ const tryIt = 'equipe try --edit "…"';
     <FaqJsonLd lang={info.lang} faqs={t.faq.items} />
   </Fragment>
 
+  <IconSprite />
   <a class="skip" href="#main">{t.ui.skip}</a>
   <header class="site">
     <div class="wrap">
@@ -81,14 +85,14 @@ const tryIt = 'equipe try --edit "…"';
   <main id="main" class="landing">
     <section class="hero">
       <div class="wrap w">
-        <h1>{t.hero.title}</h1>
+        <h1>{heroLines.map((l, i) => <><span class="hl">{l}</span>{i < heroLines.length - 1 && ' '}</>)}</h1>
         <p class="lead">{t.hero.lead}</p>
         <div class="acts">
           <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="hero" download>{t.hero.cta}</a>
+          <p class="evline"><span>{t.hero.proof}</span></p>
           <a class="link" href="#cli-install" data-ph="cli_install_link_click" data-ph-location="hero">{t.hero.cliLink}</a>
         </div>
         <p class="meta">{t.hero.req}</p>
-        <p class="evline"><i></i><span>{t.hero.proof}</span></p>
       </div>
       <div class="wrap w heroshot">
         <HeroScene t={at} alt={t.hero.shotAlt} />
@@ -114,7 +118,7 @@ const tryIt = 'equipe try --edit "…"';
     <section id="stage" class="alt">
       <div class="wrap w">
         <div class="row rev half">
-          <div><AppUi k="stage" t={at} alt={t.stage.alt} /><p class="cap">{t.stage.caption}</p></div>
+          <div class="sk"><AppUi k="stage" t={at} alt={t.stage.alt} /><p class="cap">{t.stage.caption}</p></div>
           <div>
             <h2>{t.stage.title} <span class="tone">{t.stage.text}</span></h2>
             <ol class="tl">
@@ -145,13 +149,13 @@ const tryIt = 'equipe try --edit "…"';
             </ol>
             <div class="stack">
               <div><AppUi k="goal" t={at} alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
-              <div><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>
+              <div class="sk"><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>
             </div>
           </div>
 
           <div class="row rev appr">
             <div class="duo">
-              <div><AppUi k="appr" t={at} alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
+              <div class="sk"><AppUi k="appr" t={at} alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
               <div class="phonebox">
                 <div>
                   <div class="phone" role="img" aria-label={t.loop.phoneCaption}>
@@ -189,7 +193,7 @@ const tryIt = 'equipe try --edit "…"';
                 <li class="lp soonlp"><span class="n" aria-hidden="true">{i + 1}</span><div><h3>{t.loop.steps[i].title} <State s="soon" now={t.ui.now} soon={t.ui.soon} /></h3><p>{t.loop.steps[i].text}</p></div></li>
               ))}
             </ol>
-            <div>
+            <div class="sk">
               <div class="mr" role="img" aria-label={t.ui.illu}>
                 <h4>{t.loop.reportTitle}<span class="soon">{t.ui.soon}</span></h4>
                 {t.loop.reportRows.map((r) => <div class="rw"><span>{r}</span><i></i></div>)}
@@ -205,7 +209,7 @@ const tryIt = 'equipe try --edit "…"';
     <section id="who-for" class="alt">
       <div class="wrap w">
         <h2>{t.who.title} <span class="tone">{t.who.text}</span></h2>
-        <div class="whofig"><AppUi k="who" t={at} alt={t.who.alt} /><p class="cap">{t.who.caption}</p></div>
+        <div class="whofig sk"><AppUi k="who" t={at} alt={t.who.alt} /><p class="cap">{t.who.caption}</p></div>
         <ul class="pts">
           {t.who.points.map((p) => <li class="pt"><h3>{p.lead}</h3><p>{p.text}</p></li>)}
         </ul>
@@ -218,14 +222,14 @@ const tryIt = 'equipe try --edit "…"';
         <div class="fr">
           {scenes.map((sc, i) => (
             <div class={`row${i % 2 ? ' rev' : ''}`}>
-              {i % 2 === 1 && <div><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /><p class="cap">{t.feat.scenes[i].caption}</p></div>}
+              {i % 2 === 1 && <div class="sk"><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /><p class="cap">{t.feat.scenes[i].caption}</p></div>}
               <div>
                 <span class="now">{t.ui.now}</span>
                 <h3>{t.feat.now[sc.n].title}</h3>
                 <p>{t.feat.now[sc.n].text}</p>
               </div>
               {i % 2 === 0 && (
-                <div>
+                <div class={sc.tall ? 'sk' : undefined}>
                   {sc.tall ? <div class="tall"><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /></div> : <AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} />}
                   <p class="cap">{t.feat.scenes[i].caption}</p>
                 </div>
@@ -235,7 +239,7 @@ const tryIt = 'equipe try --edit "…"';
         </div>
         <p class="alsoh"><span>{t.feat.more}</span><i></i></p>
         <ul class="also">
-          {[1, 5, 6, 7, 8].map((n) => <li><h4>{t.feat.now[n].title}</h4><p>{t.feat.now[n].text}</p></li>)}
+          {[1, 2, 5, 6, 7, 8].map((n) => <li><h4>{t.feat.now[n].title}</h4><p>{t.feat.now[n].text}</p></li>)}
         </ul>
         <div class="cm">
           <h3>{t.feat.comingTitle}</h3>
@@ -358,14 +362,25 @@ const tryIt = 'equipe try --edit "…"';
         ['1', `${S} h2`],
         ['3', `${S} :is(.win, .phone, .mr, .cap):not(.gs *)`],
       ];
-      const reveal = new IntersectionObserver((es) => es.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
-      }), { rootMargin: '0px 0px -8% 0px' });
+      // A block is revealed once its top is above the lower 8% of the screen. A scroll sweep (not only an observer) means blocks
+      // jumped over by a fast scroll, an anchor link or a restored scroll position are shown too, never left as an empty area.
+      const pending = new Set<HTMLElement>();
+      const sweep = () => {
+        const line = window.innerHeight * 0.92;
+        pending.forEach((el) => { if (el.getBoundingClientRect().top < line) { el.classList.add('in'); pending.delete(el); } });
+      };
       for (const [t, sel] of tiers) document.querySelectorAll<HTMLElement>(sel).forEach((el) => {
         if (el.classList.contains('rv')) return;
-        el.classList.add('rv'); el.dataset.t = t; reveal.observe(el);
+        el.classList.add('rv'); el.dataset.t = t; pending.add(el);
       });
-      document.querySelectorAll('.go').forEach((el) => reveal.observe(el));
+      document.querySelectorAll<HTMLElement>('.go').forEach((el) => pending.add(el));
+      let raf = 0;
+      const queue = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; sweep(); }); };
+      addEventListener('scroll', queue, { passive: true });
+      addEventListener('resize', queue);
+      addEventListener('hashchange', queue);
+      addEventListener('beforeprint', () => { pending.forEach((el) => el.classList.add('in')); pending.clear(); });
+      sweep();
 
       const play = new IntersectionObserver((es) => es.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('play'); play.unobserve(e.target); }

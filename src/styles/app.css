@@ -158,3 +158,17 @@
 .ap .row .who, .ap .tm b, .ap .tm em, .ap .pill { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .ap .chat th:not(:last-child), .ap .chat td:not(:last-child) { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; padding-left: 8px; padding-right: 8px; }
 .ap .ti { hyphens: auto; }
+
+/* icons: one sprite (IconSprite.astro), 16 px, 1.6 px line, same shapes as the Mac app */
+.ap .ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ap .side .it .ic, .ap .row .ic, .ap .lane h6 .ic, .ap .tools .ic { color: var(--muted); }
+.ap .row > i { display: inline-flex; }
+.ap .lane h6 .plus { display: inline-flex; font-size: 0; }
+.ap .tc .ok .ic { width: 10px; height: 10px; stroke-width: 2.4; display: block; margin: 1px; }
+.ap .okm .ic, .ap .hs-live .ok .ic { width: 13px; height: 13px; stroke-width: 2.4; }
+.ap .comp .tools .plus .ic { color: var(--text); }
+.ap .comp .tools .go .ic { color: var(--text); width: 14px; height: 14px; }
+.ap .comp .tools span { display: inline-flex; align-items: center; gap: 4px; }
+.ap .side h5 span .ic { width: 14px; height: 14px; }
+.ap .side .tm .mu { display: inline-flex; }
+.ap .own .ic { width: 14px; height: 14px; }

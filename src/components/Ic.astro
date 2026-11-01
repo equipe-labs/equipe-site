@@ -1,0 +1,6 @@
+---
+// A 16 px line icon from the sprite in IconSprite.astro (same shapes as the Mac app's icons).
+interface Props { n: 'plus' | 'pm' | 'inbox' | 'progress' | 'tickets' | 'chevron' | 'send' | 'check' }
+const { n } = Astro.props;
+---
+<svg class="ic" width="16" height="16" aria-hidden="true" focusable="false"><use href={`#ic-${n}`} /></svg>

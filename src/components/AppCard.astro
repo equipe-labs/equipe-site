@@ -4,6 +4,7 @@ import type { AppText } from '../i18n/app/en';
 interface Props { n: number; t: AppText; who: 'F' | 'D' | 'B' | 'M'; proj: 'website' | 'server' | 'ios'; kind?: 'warn' | 'bars' | 'done'; busy?: string; level?: 1 | 2 | 3; cls?: string }
 const { n, t, who, proj, kind = 'bars', busy, level = 2, cls = '' } = Astro.props;
 const c = { website: 'c-web', server: 'c-srv', ios: 'c-ios' }[proj];
+import Ic from './Ic.astro';
 ---
 <div class={`tc${kind === 'done' ? ' done' : ''}${cls ? ` ${cls}` : ''}`}>
   <div class="l1">
@@ -14,5 +15,5 @@ const c = { website: 'c-web', server: 'c-srv', ios: 'c-ios' }[proj];
   </div>
   <div class="ti">{t.tickets[n - 1]}</div>
   {busy && <div class="l3"><span>{busy}</span></div>}
-  <div class="l3">{kind === 'done' && <i class="ok">✓</i>}<i class={`dot ${c}`} style="width:6px;height:6px"></i><span>{proj}</span></div>
+  <div class="l3">{kind === 'done' && <i class="ok"><Ic n="check" /></i>}<i class={`dot ${c}`} style="width:6px;height:6px"></i><span>{proj}</span></div>
 </div>
