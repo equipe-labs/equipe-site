@@ -55,23 +55,23 @@ main.landing h2 .tone { display: block; margin-top: var(--s-4); color: var(--mut
 }
 
 /* 1 hero */
-.hero { padding: 40px 0 0 !important; }
-@media (min-width: 701px) { .hero { padding-top: 44px !important; } }
+.hero { padding: var(--s-7) 0 0 !important; }
+@media (min-width: 701px) { .hero { padding-top: var(--s-9) !important; } }
 .hero h1 { font-size: 38px; line-height: 1.05; letter-spacing: -0.035em; max-width: 1100px; }
-.hero .lead { text-wrap: balance; font-size: 17px; line-height: 1.55; color: var(--muted); margin: var(--s-5) 0 0; max-width: 760px; }
-.acts { display: flex; align-items: center; gap: var(--s-4) var(--s-5); margin: var(--s-6) 0 var(--s-4); flex-wrap: wrap; }
+.hero .lead { text-wrap: balance; font-size: 17px; line-height: 1.55; color: var(--muted); margin: var(--s-6) 0 0; max-width: 560px; }
+.acts { display: flex; align-items: center; gap: var(--s-4) var(--s-5); margin: var(--s-6) 0 var(--s-5); flex-wrap: wrap; }
 .acts .link { font-weight: 500; font-size: 16px; text-wrap: balance; }
-.hero .acts + .meta { margin-top: var(--s-4); }
-.evline { margin: 0; font: 600 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
-@media (min-width: 701px) { .hero .acts { margin-top: var(--s-5); } .hero h1 .hl { display: block; text-wrap: balance; } }
+.hero .acts + .meta { margin-top: 0; line-height: 1.8; }
+.evline { font-variant-numeric: tabular-nums; }
+@media (min-width: 701px) { .hero h1 .hl { display: block; text-wrap: balance; } }
 @media (max-width: 700px) { .hero h1 { text-wrap: balance; } }
 /* Japanese headline: break only at the phrase marks (U+200B) written into the text, never inside a word */
 :lang(ja) .hero h1 { word-break: keep-all; overflow-wrap: anywhere; }
-.heroshot { margin-top: 40px; }
+.heroshot { margin-top: var(--s-7); max-height: 300px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
 @media (min-width: 701px) {
   .hero h1 { font-size: clamp(46px, 6.3vw, 68px); }
   .hero .lead { font-size: 21px; }
-  .heroshot { margin-top: 28px; }
+  .heroshot { margin-top: var(--s-8); max-height: 360px; }
 }
 :lang(ko) .hero h1, :lang(ja) .hero h1, :lang(zh-CN) .hero h1 { line-height: 1.2; letter-spacing: -0.03em; }
 @media (min-width: 701px) { :lang(ko) .hero h1, :lang(ja) .hero h1, :lang(zh-CN) .hero h1 { font-size: clamp(40px, 5.2vw, 56px); } }
