@@ -23,6 +23,8 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Sub-page this head belongs to (e.g. `app/privacy`); hreflang alternates point to the same page in each language. */
   subpage?: string;
+  /** Error page (404): no canonical, no hreflang cluster, no og:url — it is not one fixed URL. */
+  error?: boolean;
 }
 
 const {
@@ -40,6 +42,7 @@ const {
   noindex = false,
   ogType = 'website',
   subpage,
+  error = false,
 } = Astro.props;
 
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
@@ -59,9 +62,9 @@ const imageType = imageUrl
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
-{alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
-{alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+{!error && <link rel="canonical" href={canonical} />}
+{!error && alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+{!error && alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 <meta name="theme-color" content={themeColor} />
 {noindex && <meta name="robots" content="noindex" />}
 <link rel="icon" href={favicon.href} type={favicon.type} />
@@ -71,7 +74,7 @@ const imageType = imageUrl
 <meta property="og:type" content={ogType} />
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />
-<meta property="og:url" content={canonical} />
+{!error && <meta property="og:url" content={canonical} />}
 <meta property="og:locale" content={current.og} />
 {others.map((l) => <meta property="og:locale:alternate" content={l.og} />)}
 {imageUrl && <meta property="og:image" content={imageUrl} />}
