@@ -246,7 +246,7 @@ equipe           # Squad-Konsole öffnen`,
             '**Was nie gesendet wird.** Keine Unterhaltung, kein Prompt, keine Antwort. Kein Ticket-Titel, -Text, -Kommentar oder -Bild. Keine Datei, kein Ordner, kein Repository, keine URL. Kein Name von Squad, Mitglied, Projekt oder Person. Keine E-Mail, Telefonnummer oder Konto. Kein Hostname oder anderes Gerätemerkmal.',
             '**Kein Profil.** Die Ereignisse werden ohne Personenprofil und ohne GeoIP-Abfrage gesendet. Die zufälligen IDs sind nicht aus Ihnen oder Ihrem Mac abgeleitet.',
             '**Wer sie erhält.** PostHog in den USA (dasselbe Projekt, das Besuche auf equipe.im zählt). Die Anfrage kommt mit Ihrer IP-Adresse an, sie wird aber nicht gespeichert (dieses PostHog-Projekt verwirft Client-IPs).',
-            '**Ausschalten.** Führe `equipe telemetry off` aus oder setze `EQUIPE_TELEMETRY=off`. Das gilt sofort, und die IDs der Installation werden vergessen. `equipe telemetry status` zeigt den aktuellen Stand. Die vollständige Liste steht in `docs/TELEMETRY.md` im equipe-Repository.',
+            '**Ausschalten.** Führen Sie `equipe telemetry off` aus oder setzen Sie `EQUIPE_TELEMETRY=off`. Das gilt sofort, und die IDs der Installation werden vergessen. `equipe telemetry status` zeigt den aktuellen Stand. Die vollständige Liste steht in `docs/TELEMETRY.md` im equipe-Repository.',
           ],
         },
         {

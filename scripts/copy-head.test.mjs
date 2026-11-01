@@ -32,7 +32,7 @@ for (const s of slugs) {
 
 // Q12: German privacy page uses Sie, never du/dein.
 const de = read('de/app/privacy/index.html').replace(/<[^>]+>/g, ' ');
-check('Q12 de privacy has no du/dein/dir/dich', !/\b(du|dein\w*|dir|dich|Du)\b/.test(de));
+check('Q12 de privacy has no du forms incl. imperatives', !/\b(du|dein\w*|dir|dich|Du|Führe|setze|lösche|prüfe|öffne|melde|schreibe|nutze|wähle|starte|kannst|musst|willst|hast|bist|brauchst)\b/.test(de));
 
 // Q13
 check('Q13 pt-BR support has no "permite permitir"', !read('pt-br/app/support/index.html').includes('permite permitir'));
