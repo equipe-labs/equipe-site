@@ -55,7 +55,7 @@ main.landing h2 .tone { display: block; margin-top: var(--s-4); color: var(--mut
 .hero { padding: 40px 0 0 !important; }
 @media (min-width: 701px) { .hero { padding-top: 44px !important; } }
 .hero h1 { font-size: 38px; line-height: 1.05; letter-spacing: -0.035em; max-width: 1100px; }
-.hero .lead { font-size: 17px; line-height: 1.55; color: var(--muted); margin: var(--s-5) 0 0; max-width: 760px; }
+.hero .lead { text-wrap: balance; font-size: 17px; line-height: 1.55; color: var(--muted); margin: var(--s-5) 0 0; max-width: 760px; }
 .acts { display: flex; align-items: center; gap: var(--s-4) var(--s-5); margin: var(--s-6) 0 var(--s-4); flex-wrap: wrap; }
 .acts .link { font-weight: 500; font-size: 16px; text-wrap: balance; }
 .hero .acts + .meta { margin-top: var(--s-4); }
