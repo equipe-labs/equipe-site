@@ -124,7 +124,9 @@
 .ap .comp .ph { color: var(--muted); }
 .ap .comp .tools { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; flex-wrap: wrap; }
 .ap .comp .tools .plus { width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; color: var(--text); }
-.ap .comp .tools .go { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; background: var(--ap-sunken); display: inline-flex; align-items: center; justify-content: center; }
+.ap .comp .tools { justify-content: space-between; flex-wrap: nowrap; gap: 8px; }
+.ap .comp .tools > div { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.ap .comp .tools .snd { margin-left: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--ap-sunken); display: inline-flex; align-items: center; justify-content: center; }
 
 /* scene sizing: every scene is a flow of its own natural height */
 .ap.is-crop { background: var(--bg); }
@@ -154,7 +156,7 @@
 .ap .comp.bare { margin: 0; border: 0; border-radius: 0; background: none; padding: 16px; }
 
 /* T-254: names, ticket ids and short labels never break mid-word (ko's `overflow-wrap: anywhere` on .ap is for translated sentences). */
-.ap .mono, .ap kbd, .ap .btn, .ap .who, .ap .age, .ap .id, .ap .tm b, .ap .tm em, .ap .pill, .ap .badge, .ap .row .who, .ap .row .id, .ap .row .age, .ap .foot b, .ap .tools > span { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; }
+.ap .mono, .ap kbd, .ap .btn, .ap .who, .ap .age, .ap .id, .ap .tm b, .ap .tm em, .ap .pill, .ap .badge, .ap .row .who, .ap .row .id, .ap .row .age, .ap .foot b, .ap .tools span { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; }
 .ap .row .who, .ap .tm b, .ap .tm em, .ap .pill { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .ap .chat th:not(:last-child), .ap .chat td:not(:last-child) { word-break: keep-all; overflow-wrap: normal; white-space: nowrap; padding-left: 8px; padding-right: 8px; }
 .ap .ti { hyphens: auto; }
@@ -167,8 +169,10 @@
 .ap .tc .ok .ic { width: 10px; height: 10px; stroke-width: 2.4; display: block; margin: 1px; }
 .ap .okm .ic, .ap .hs-live .ok .ic { width: 13px; height: 13px; stroke-width: 2.4; }
 .ap .comp .tools .plus .ic { color: var(--text); }
-.ap .comp .tools .go .ic { color: var(--text); width: 14px; height: 14px; }
+.ap .comp .tools .snd .ic { color: var(--text); width: 14px; height: 14px; }
 .ap .comp .tools span { display: inline-flex; align-items: center; gap: 4px; }
 .ap .side h5 span .ic { width: 14px; height: 14px; }
 .ap .side .tm .mu { display: inline-flex; }
 .ap .own .ic { width: 14px; height: 14px; }
+
+@media (max-width: 480px) { .ap .comp .tools > div { gap: 8px; } .ap .comp .tools .eff { display: none; } }
