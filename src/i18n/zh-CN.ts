@@ -28,7 +28,7 @@ const zhCN: Messages = {
   nav: { stage: '阶段', howItWorks: '工作方式', features: '功能', getStarted: '开始', faq: '常见问题', github: 'GitHub' },
   hero: {
     title: '你的整个创业团队。你只需批准。',
-    lead: 'PM、设计师和工程师替你做产品、上线，再持续把它做大。就在你的 Mac 上，用你已经在付费的 Claude 或 ChatGPT 套餐。',
+    lead: 'PM、设计师和工程师替你做产品、上线，再持续把它做大。',
     cta: '下载 Mac 版',
     req: '免费开源 · macOS 12+ · 用你的 Claude 或 ChatGPT 套餐运行',
     cliLink: '用 Linux，或习惯待在终端？获取 CLI',

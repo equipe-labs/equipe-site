@@ -29,7 +29,7 @@ const fr: Messages = {
   nav: { stage: 'Étape', howItWorks: 'Comment ça marche', features: 'Fonctions', getStarted: 'Démarrer', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Toute votre équipe de startup. Vous n’avez qu’à approuver.',
-    lead: 'Un PM, un designer et des ingénieurs qui construisent votre produit, le lancent et continuent de le faire grandir. Sur votre Mac, avec l’abonnement Claude ou ChatGPT que vous payez déjà.',
+    lead: 'Un PM, un designer et des ingénieurs qui construisent votre produit, le lancent et continuent de le faire grandir.',
     cta: 'Télécharger pour Mac',
     req: 'Gratuit et open source · macOS 12+ · Fonctionne avec votre abonnement Claude ou ChatGPT',
     cliLink: 'Sous Linux, ou plutôt au terminal ? Installer la CLI',

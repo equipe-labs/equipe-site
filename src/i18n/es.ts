@@ -28,7 +28,7 @@ const es: Messages = {
   nav: { stage: 'Etapa', howItWorks: 'Cómo funciona', features: 'Funciones', getStarted: 'Empezar', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Todo tu equipo de startup. Tú solo apruebas.',
-    lead: 'Un PM, un diseñador y ingenieros que construyen tu producto, lo lanzan y lo siguen haciendo crecer. En tu Mac, con el plan de Claude o ChatGPT que ya pagas.',
+    lead: 'Un PM, un diseñador y ingenieros que construyen tu producto, lo lanzan y lo siguen haciendo crecer.',
     cta: 'Descargar para Mac',
     req: 'Gratis y de código abierto · macOS 12+ · Funciona con tu plan de Claude o ChatGPT',
     cliLink: '¿En Linux, o prefieres la terminal? Instala la CLI',

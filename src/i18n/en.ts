@@ -30,7 +30,7 @@ export const en = {
   nav: { stage: 'Stage', howItWorks: 'How it works', features: 'Features', getStarted: 'Start', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: 'Your whole startup team. You just approve.',
-    lead: 'A PM, a designer and engineers who build your product, ship it and keep growing it. On your Mac, on the Claude or ChatGPT plan you already pay for.',
+    lead: 'A PM, a designer and engineers who build your product, ship it and keep growing it.',
     cta: 'Download for Mac',
     req: 'Free and open source · macOS 12+ · Runs on your Claude or ChatGPT plan',
     cliLink: 'On Linux, or live in the terminal? Get the CLI',

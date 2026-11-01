@@ -28,7 +28,7 @@ const ko: Messages = {
   nav: { stage: '단계', howItWorks: '작동 방식', features: '기능', getStarted: '시작하기', faq: 'FAQ', github: 'GitHub' },
   hero: {
     title: '최고의 스타트업 팀을 드려요. 승인만 하세요.',
-    lead: '기획·디자인·개발을 한 팀이 맡아요. 출시한 뒤에도 이어서 일하고, 공개나 결제 같은 일은 꼭 먼저 물어봐요.',
+    lead: '기획·디자인·개발을 한 팀이 맡아요.',
     cta: 'Mac용 다운로드',
     req: '무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로',
     cliLink: 'Linux를 쓰거나 터미널이 편하다면 CLI로',
