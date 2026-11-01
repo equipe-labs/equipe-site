@@ -141,17 +141,16 @@ const tryIt = 'equipe try --edit "…"';
       <div class="wrap w">
         <h2>{t.loop.title} <span class="tone">{t.loop.text}</span></h2>
         <div class="loopw">
-          <div class="row">
-            <ol class="lps">
-              {[0, 1].map((i) => (
+          {[0, 1].map((i) => (
+            <div class="row">
+              <ol class="lps" start={i + 1}>
                 <li class="lp"><span class="n" aria-hidden="true">{i + 1}</span><div><h3>{t.loop.steps[i].title} <State s={loopState[i]} now={t.ui.now} soon={t.ui.soon} /></h3><p>{t.loop.steps[i].text}</p>{loopState[i] === 'part' && <span class="pn">{t.loop.partNote}</span>}</div></li>
-              ))}
-            </ol>
-            <div class="stack">
-              <div><AppUi k="goal" t={at} alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
-              <div class="sk"><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>
+              </ol>
+              {i === 0
+                ? <div><AppUi k="goal" t={at} alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
+                : <div><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>}
             </div>
-          </div>
+          ))}
 
           <div class="row rev appr">
             <div class="duo">
