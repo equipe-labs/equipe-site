@@ -3,6 +3,7 @@
 // Scenes: who · launch · stage · goal · build · appr · fa · fb · fc · fd · ev · st1 · st2 · st3
 import type { AppText } from '../i18n/app/en';
 import AppCard from './AppCard.astro';
+import Ic from './Ic.astro';
 interface Props { k: string; t: AppText; alt: string; dark?: boolean; class?: string }
 const { k, t, alt, dark = false, class: cls = '' } = Astro.props;
 const u = t.ui, L = t.lanes, I = t.inbox, D = t.decision, P = t.permission, C = t.chat;
@@ -18,18 +19,18 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
     <div class="split">
       <div>
         <div class="grp">{I.permission} <span>1</span></div>
-        <div class="row on"><i class="mono" style="color:var(--accent)">⚑</i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{I.allow}</span><span class="who">frontend</span><span></span></div>
+        <div class="row on"><i class="mu" style="color:var(--accent)"><Ic n="inbox" /></i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{I.allow}</span><span class="who">frontend</span><span></span></div>
         <div class="grp">{I.decisions} <span>2</span></div>
-        <div class="row"><i class="mu">▢</i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{I.publish}</span><span class="who">frontend</span><span></span></div>
-        <div class="row"><i class="mu">▢</i><span class="id mono">T-12</span><i class="dot c-srv"></i><span class="t">{I.paid}</span><span class="who" style="color:var(--ok)">data</span><span></span></div>
+        <div class="row"><i class="mu"><Ic n="inbox" /></i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{I.publish}</span><span class="who">frontend</span><span></span></div>
+        <div class="row"><i class="mu"><Ic n="inbox" /></i><span class="id mono">T-12</span><i class="dot c-srv"></i><span class="t">{I.paid}</span><span class="who" style="color:var(--ok)">data</span><span></span></div>
         <div class="grp">{I.yourTurn} <span>1</span></div>
-        <div class="row"><i class="mu">⏸</i><span class="id mono">T-7</span><i class="dot c-web"></i><span class="t">{I.connect}</span><span class="who">{I.postHog}</span><span class="age">6{u.hours}</span></div>
+        <div class="row"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-7</span><i class="dot c-web"></i><span class="t">{I.connect}</span><span class="who">{I.postHog}</span><span class="age">6{u.hours}</span></div>
         <div class="grp">{I.proposed} <span>1</span><span class="btn">{I.startAll}</span></div>
-        <div class="row"><i class="mu">◌</i><span class="id mono">T-16</span><i class="dot c-web"></i><span class="t">{t.tickets[15]}</span><span class="who mu">{I.fromPm}</span><span class="age">6{u.hours}</span></div>
+        <div class="row"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-16</span><i class="dot c-web"></i><span class="t">{t.tickets[15]}</span><span class="who mu">{I.fromPm}</span><span class="age">6{u.hours}</span></div>
       </div>
       <div class="side-panel perm">
         <div class="k">{P.label}</div>
-        <div class="lab">⚑ {P.label} <span class="mu">● frontend</span> <b class="mu">T-5</b></div>
+        <div class="lab">{P.label} <span class="mu">● frontend</span> <b class="mu">T-5</b></div>
         <h3>{P.title}</h3>
         <div class="cmd">{P.command}</div>
         <div class="why">{P.why}</div>
@@ -41,24 +42,24 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
 
   {k === 'launch' && (
     <div class="lanes">
-      <div class="lane"><h6>◔ {L.yourTurn} <span>1</span></h6><AppCard n={7} t={t} who="F" proj="website" kind="warn" /></div>
-      <div class="lane"><h6>◕ {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" cls="mv" /><AppCard n={6} t={t} who="B" proj="server" /></div>
-      <div class="lane m-hide"><h6>✔ {L.done} <span>4</span></h6><AppCard n={1} t={t} who="D" proj="website" kind="done" /><AppCard n={2} t={t} who="F" proj="website" kind="done" /></div>
+      <div class="lane"><h6><Ic n="progress" /> {L.yourTurn} <span>1</span></h6><AppCard n={7} t={t} who="F" proj="website" kind="warn" /></div>
+      <div class="lane"><h6><Ic n="progress" /> {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" cls="mv" /><AppCard n={6} t={t} who="B" proj="server" /></div>
+      <div class="lane m-hide"><h6><Ic n="check" /> {L.done} <span>4</span></h6><AppCard n={1} t={t} who="D" proj="website" kind="done" /><AppCard n={2} t={t} who="F" proj="website" kind="done" /></div>
     </div>
   )}
 
   {k === 'ev' && (
     <div class="lanes" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-      <div class="lane"><h6>◕ {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" /><AppCard n={6} t={t} who="B" proj="server" /></div>
-      <div class="lane"><h6>✔ {L.done} <span>4</span></h6><AppCard n={1} t={t} who="D" proj="website" kind="done" /><AppCard n={2} t={t} who="F" proj="website" kind="done" /><AppCard n={3} t={t} who="B" proj="server" kind="done" /><AppCard n={4} t={t} who="D" proj="ios" kind="done" /></div>
+      <div class="lane"><h6><Ic n="progress" /> {L.review} <span>2</span></h6><AppCard n={5} t={t} who="F" proj="website" kind="warn" /><AppCard n={6} t={t} who="B" proj="server" /></div>
+      <div class="lane"><h6><Ic n="check" /> {L.done} <span>4</span></h6><AppCard n={1} t={t} who="D" proj="website" kind="done" /><AppCard n={2} t={t} who="F" proj="website" kind="done" /><AppCard n={3} t={t} who="B" proj="server" kind="done" /><AppCard n={4} t={t} who="D" proj="ios" kind="done" /></div>
     </div>
   )}
 
   {(k === 'fa' || k === 'build') && (
     <div class="lanes">
-      <div class="lane"><h6>◌ {L.proposed} <span>1</span><i class="plus mu">+</i></h6><AppCard n={16} t={t} who="D" proj="website" level={1} /></div>
-      <div class="lane m-hide"><h6>○ {L.todo} <span>3</span><i class="plus mu">+</i></h6><AppCard n={13} t={t} who="F" proj="website" level={1} /><AppCard n={14} t={t} who="B" proj="server" level={1} />{k === 'fa' && <AppCard n={15} t={t} who="M" proj="ios" level={1} />}</div>
-      <div class="lane"><h6>◔ {L.inProgress} <span>5</span></h6><AppCard n={8} t={t} who="F" proj="website" busy={t.activity.t8} /><AppCard n={9} t={t} who="M" proj="ios" busy={t.activity.t9} />{k === 'fa' && <AppCard n={10} t={t} who="B" proj="server" busy={t.activity.t10} />}</div>
+      <div class="lane"><h6><Ic n="progress" /> {L.proposed} <span>1</span><i class="plus mu"><Ic n="plus" /></i></h6><AppCard n={16} t={t} who="D" proj="website" level={1} /></div>
+      <div class="lane m-hide"><h6><Ic n="progress" /> {L.todo} <span>3</span><i class="plus mu"><Ic n="plus" /></i></h6><AppCard n={13} t={t} who="F" proj="website" level={1} /><AppCard n={14} t={t} who="B" proj="server" level={1} />{k === 'fa' && <AppCard n={15} t={t} who="M" proj="ios" level={1} />}</div>
+      <div class="lane"><h6><Ic n="progress" /> {L.inProgress} <span>5</span></h6><AppCard n={8} t={t} who="F" proj="website" busy={t.activity.t8} /><AppCard n={9} t={t} who="M" proj="ios" busy={t.activity.t9} />{k === 'fa' && <AppCard n={10} t={t} who="B" proj="server" busy={t.activity.t10} />}</div>
     </div>
   )}
 
@@ -66,21 +67,21 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
     <div>
       <div class="sortbar"><b>{I.toSort}</b><span class="mu">{I.toSortHint}</span></div>
       <div class="grp">{L.yourTurn} <span>1</span></div>
-      <div class="row"><i class="mu">⏸</i><span class="id mono">T-7</span><i class="dot c-web"></i><span class="t">{t.tickets[6]}</span><span class="who">frontend</span><span class="age">6{u.hours}</span></div>
+      <div class="row"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-7</span><i class="dot c-web"></i><span class="t">{t.tickets[6]}</span><span class="who">frontend</span><span class="age">6{u.hours}</span></div>
       <div class="grp">{L.review} <span>2</span></div>
-      <div class="row"><i class="mu">◕</i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{t.tickets[4]}</span><span class="who">frontend</span><span class="age">4{u.hours}</span></div>
-      <div class="row"><i class="mu">◕</i><span class="id mono">T-6</span><i class="dot c-srv"></i><span class="t">{t.tickets[5]}</span><span class="who">backend</span><span class="age">5{u.hours}</span></div>
+      <div class="row"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-5</span><i class="dot c-web"></i><span class="t">{t.tickets[4]}</span><span class="who">frontend</span><span class="age">4{u.hours}</span></div>
+      <div class="row"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-6</span><i class="dot c-srv"></i><span class="t">{t.tickets[5]}</span><span class="who">backend</span><span class="age">5{u.hours}</span></div>
       <div class="grp">{L.inProgress} <span>5</span></div>
-      <div class="row two"><i class="mu">◔</i><span class="id mono">T-8</span><i class="dot c-web"></i><span class="t">{t.tickets[7]}<span class="act">{t.activity.t8}</span></span><span class="who">frontend</span><span class="age">7{u.hours}</span></div>
-      <div class="row two"><i class="mu">◔</i><span class="id mono">T-9</span><i class="dot c-ios"></i><span class="t">{t.tickets[8]}<span class="act">{t.activity.t9}</span></span><span class="who">mobile</span><span class="age">1{u.hours}</span></div>
-      <div class="row two"><i class="mu">◔</i><span class="id mono">T-10</span><i class="dot c-srv"></i><span class="t">{t.tickets[9]}<span class="act">{t.activity.t10}</span></span><span class="who">backend</span><span class="age">1{u.hours}</span></div>
+      <div class="row two"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-8</span><i class="dot c-web"></i><span class="t">{t.tickets[7]}<span class="act">{t.activity.t8}</span></span><span class="who">frontend</span><span class="age">7{u.hours}</span></div>
+      <div class="row two"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-9</span><i class="dot c-ios"></i><span class="t">{t.tickets[8]}<span class="act">{t.activity.t9}</span></span><span class="who">mobile</span><span class="age">1{u.hours}</span></div>
+      <div class="row two"><i class="mu"><Ic n="progress" /></i><span class="id mono">T-10</span><i class="dot c-srv"></i><span class="t">{t.tickets[9]}<span class="act">{t.activity.t10}</span></span><span class="who">backend</span><span class="age">1{u.hours}</span></div>
     </div>
   )}
 
   {k === 'goal' && (
     <div class="comp bare">
       <div class="ph">{u.composerBusy}</div>
-      <div class="tools"><span class="plus">+</span><span><i class="dot" style="background:var(--work);width:7px;height:7px"></i> pm ⌄</span><span>{u.auto} ⌄</span><span style="margin-left:auto">◔ 31%</span><span>opus 5.5 ⌄</span><span>{u.effort} ⌄</span><span class="go">↑</span></div>
+      <div class="tools"><span class="plus"><Ic n="plus" /></span><span><i class="dot" style="background:var(--work);width:7px;height:7px"></i> pm <Ic n="chevron" /></span><span>{u.auto} <Ic n="chevron" /></span><span style="margin-left:auto"><Ic n="progress" /> 31%</span><span>opus 5.5 <Ic n="chevron" /></span><span>{u.effort} <Ic n="chevron" /></span><span class="go"><Ic n="send" /></span></div>
     </div>
   )}
 
@@ -88,10 +89,10 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
     <div class="side-panel dec">
       <div class="k">{D.title}</div>
       <div class="hd"><span class="tag">{D.tag}</span><h3>{D.question}</h3></div>
-      <div class="opt on"><b>{D.a}</b><i class="okm">✓</i><kbd>1</kbd><p>{D.aText}</p></div>
+      <div class="opt on"><b>{D.a}</b><i class="okm"><Ic n="check" /></i><kbd>1</kbd><p>{D.aText}</p></div>
       <div class="opt"><b>{D.b}</b><kbd>2</kbd><p>{D.bText}</p></div>
-      <div class="own"><span>✎</span><span>{D.own}</span><kbd>Tab</kbd></div>
-      <div class="mu">⌀ {D.attach}</div>
+      <div class="own"><span><Ic n="plus" /></span><span>{D.own}</span><kbd>Tab</kbd></div>
+      <div class="mu">{D.attach}</div>
       <div class="ft"><div class="hint"><b>● {D.asks}</b>{D.hint}</div><span class="btn">{D.skip}</span><span class="btn pri">{D.submit} <kbd>⌘↵</kbd></span></div>
     </div>
   )}
@@ -118,7 +119,7 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
     <div>
       <div class="cardnav"><span>{P.card}</span><span>←</span><span>→</span></div>
       <div class="side-panel perm">
-        <div class="lab">⚑ {P.label} <span class="mu">● frontend</span> <b class="mu">T-5</b></div>
+        <div class="lab">{P.label} <span class="mu">● frontend</span> <b class="mu">T-5</b></div>
         <h3>{P.title}</h3>
         <div class="cmd">{P.command}</div>
         <div class="why">{P.why}</div>
@@ -130,8 +131,8 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
   {(k === 'fc' || k === 'st3') && (
     <div class="side" style="border:0">
       {k === 'fc' && <>
-        <h5>{u.projects}<span>+</span></h5>
-        <div class="tm"><span class="mu">⌄</span><i class="dot c-web"></i><b>website</b></div>
+        <h5>{u.projects}<span><Ic n="plus" /></span></h5>
+        <div class="tm"><span class="mu"><Ic n="chevron" /></span><i class="dot c-web"></i><b>website</b></div>
         <div class="tk"><i class="dot" style="background:var(--wait)"></i><span>{t.tickets[4]}</span><span class="mu">4{u.hours}</span></div>
         <div class="tk"><i class="dot" style="background:var(--wait)"></i><span>{t.tickets[6]}</span><span class="mu">6{u.hours}</span></div>
         <div class="tk"><i class="dot ring"></i><span>{t.tickets[7]}</span><span class="mu">7{u.hours}</span></div>
@@ -141,15 +142,15 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
           <div>Codex <span class="mu">{u.notRead}</span></div></div>
         <div class="sep"></div>
       </>}
-      <h5>⚇ {u.team} <span>6</span></h5>
+      <h5>{u.team} <span>6</span></h5>
       {team.map(([n, s, c]) => <div class="tm"><i class={`dot${c ? '' : ' ring'}`} style={c ? `background:${tint(c)}` : ''}></i><b>{n}</b><em class={c}>{s}</em></div>)}
     </div>
   )}
 
   {k === 'st1' && (
     <div class="side" style="border:0">
-      <div class="it">+ {u.newMessage}</div><div class="it">▭ {u.pm}</div>
-      <div class="it on">▣ {u.inbox}<span class="badge">5</span></div><div class="it">◔ {u.inProgress}<span class="n">5</span></div><div class="it">▦ {u.tickets}</div>
+      <div class="it"><Ic n="plus" /> {u.newMessage}</div><div class="it"><Ic n="pm" /> {u.pm}</div>
+      <div class="it on"><Ic n="inbox" /> {u.inbox}<span class="badge">5</span></div><div class="it"><Ic n="progress" /> {u.inProgress}<span class="n">5</span></div><div class="it"><Ic n="tickets" /> {u.tickets}</div>
     </div>
   )}
 
