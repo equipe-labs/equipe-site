@@ -3,33 +3,35 @@
 // Drawn in code with CSS keyframes (transform/opacity only); the base style is the 4.8 s frame, which is what shows with reduced motion.
 // The progress bars and the Live banner are staged for the loop; the caption says so.
 import type { AppText } from '../i18n/app/en';
+import Ic from './Ic.astro';
 interface Props { t: AppText; alt: string }
 const { t, alt } = Astro.props;
 const h = t.hero, u = t.ui, D = t.decision;
 const S = 8; // seconds in one loop
+// Every timeline starts and ends on the same frame, so the loop seam is a short cross-fade, never an empty window.
+// Order: the decision card is already up at 0 s → cursor 1.3 s → Approve pressed 2.3 s → the work finishes 3–4.6 s → Live → back to the card.
+type Stop = [number, string];
 const pc = (s: number) => +((s / S) * 100).toFixed(2);
-const win = (n: string, a: number, b: number) => `@keyframes ${n}{0%,${pc(a) - 0.4}%{opacity:0}${pc(a)}%,${pc(b)}%{opacity:1}${pc(b) + 0.4}%,100%{opacity:0}}`;
-const gone = (n: string, a: number, b: number) => `@keyframes ${n}{0%,${pc(a) - 0.4}%{opacity:1}${pc(a)}%,${pc(b)}%{opacity:0}${pc(b) + 0.4}%,100%{opacity:1}}`;
-const rise = (n: string, a: number, b: number, y = 8) => `@keyframes ${n}{0%,${pc(a)}%{opacity:0;transform:translateY(${y}px)}${pc(b)}%,${pc(7.5)}%{opacity:1;transform:none}${pc(7.9)}%,100%{opacity:0}}`;
+const kf = (n: string, stops: Stop[]) => `@keyframes ${n}{${stops.map(([t, v]) => `${pc(t)}%{${v}}`).join('')}}`;
+const op = (n: string, pts: [number, number][]) => kf(n, pts.map(([t, o]) => [t, `opacity:${o}`] as Stop));
 const tk = [
-  { n: 8, who: 'F', s: 2.35, e: 4.35 }, { n: 13, who: 'F', s: 2.5, e: 4.0 }, { n: 12, who: 'D', s: 2.45, e: 4.62 }, { n: 16, who: 'D', s: 2.6, e: 4.2 },
+  { n: 8, who: 'F', a: 0.45, e: 4.0 }, { n: 13, who: 'F', a: 0.3, e: 3.4 }, { n: 12, who: 'D', a: 0.4, e: 4.6 }, { n: 16, who: 'D', a: 0.25, e: 4.2 },
 ];
 const ids = [8, 13, 12, 16];
 const css = [
-  rise('hs-reply', 1.75, 2.0), rise('hs-reply2', 3.0, 3.3), rise('hs-dec', 4.7, 4.95, 14), rise('hs-live', 6.0, 6.3, 10),
-  win('hs-pm-work', 1.35, 1.8), gone('hs-pm-idle', 1.35, 1.8),
-  win('hs-fe-work', 2.35, 4.7), win('hs-fe-turn', 4.7, 5.95), win('hs-fe-done', 5.95, 7.5), `@keyframes hs-fe-idle{0%,${pc(2.35) - 0.4}%{opacity:1}${pc(2.35)}%,100%{opacity:0}}`,
-  win('hs-de-work', 2.45, 4.62), `@keyframes hs-de-idle{0%,${pc(2.45) - 0.4}%{opacity:0}${pc(2.45)}%,${pc(4.62)}%{opacity:0}${pc(4.62) + 0.4}%,100%{opacity:1}}`,
-  win('hs-badge', 4.7, 5.9),
-  `@keyframes hs-cursor{0%,${pc(5.0)}%{opacity:0;transform:translate(120px,-40px)}${pc(5.2)}%{opacity:1;transform:translate(120px,-40px)}${pc(5.7)}%,${pc(6.0)}%{opacity:1;transform:translate(0,0)}${pc(6.3)}%,100%{opacity:0;transform:translate(0,0)}}`,
-  `@keyframes hs-press{0%,${pc(5.7)}%{opacity:0}${pc(5.75)}%,100%{opacity:1}}`,
-  `@keyframes hs-out{0%,${pc(5.8)}%{opacity:1;transform:none}${pc(6.05)}%,100%{opacity:0;transform:translateY(8px)}}`,
-  `@keyframes hs-end{0%,${pc(7.55)}%{opacity:1}${pc(7.95)}%,100%{opacity:0}}`,
+  op('hs-dc', [[0, 1], [2.35, 1], [2.6, 0], [7.2, 0], [7.8, 1], [8, 1]]),
+  kf('hs-lv', [[0, 'opacity:0;transform:translateY(10px)'], [2.6, 'opacity:0;transform:translateY(10px);animation-timing-function:cubic-bezier(.2,.7,.2,1);'], [2.85, 'opacity:1;transform:none'], [7.0, 'opacity:1;transform:none'], [7.4, 'opacity:0;transform:none'], [8, 'opacity:0;transform:translateY(10px)']]),
+  op('hs-fe-turn', [[0, 1], [2.35, 1], [2.55, 0], [7.3, 0], [7.8, 1], [8, 1]]),
+  op('hs-fe-work', [[0, 0], [2.35, 0], [2.55, 1], [3.8, 1], [3.95, 0], [8, 0]]),
+  op('hs-fe-done', [[0, 0], [3.8, 0], [3.95, 1], [7.1, 1], [7.5, 0], [8, 0]]),
+  op('hs-de-work', [[0, 1], [4.1, 1], [4.3, 0], [7.4, 0], [7.8, 1], [8, 1]]),
+  op('hs-de-idle', [[0, 0], [4.1, 0], [4.3, 1], [7.1, 1], [7.5, 0], [8, 0]]),
+  kf('hs-cursor', [[0, 'opacity:0;transform:translate(110px,-34px)'], [1.2, 'opacity:0;transform:translate(110px,-34px)'], [1.4, 'opacity:1;transform:translate(110px,-34px);animation-timing-function:cubic-bezier(.4,0,.2,1)'], [2.2, 'opacity:1;transform:translate(0,0)'], [2.5, 'opacity:1;transform:translate(0,0)'], [2.6, 'opacity:0;transform:translate(0,0)'], [8, 'opacity:0;transform:translate(110px,-34px)']]),
+  op('hs-press', [[0, 0], [2.3, 0], [2.35, 1], [7.0, 1], [7.1, 0], [8, 0]]),
   ...tk.flatMap((k, i) => [
-    rise(`hs-tc${i}`, 2.05 + 0.1 * i, 2.35 + 0.1 * i, 12),
-    `@keyframes hs-bar${i}{0%,${pc(k.s)}%{transform:scaleX(0.04)}${pc(k.e)}%,100%{transform:scaleX(1)}}`,
-    win(`hs-w${i}`, k.s, k.e), `@keyframes hs-d${i}{0%,${pc(k.e) - 0.4}%{opacity:0}${pc(k.e)}%,100%{opacity:1}}`,
-    `@keyframes hs-c${i}{0%,${pc(k.s)}%{background:var(--muted)}${pc(k.e) - 0.5}%{background:var(--work)}${pc(k.e)}%,100%{background:var(--ok)}}`,
+    kf(`hs-bar${i}`, [[0, `transform:scaleX(${k.a})`], [k.e, 'transform:scaleX(1)'], [7.1, 'transform:scaleX(1)'], [7.8, `transform:scaleX(${k.a})`], [8, `transform:scaleX(${k.a})`]]),
+    op(`hs-w${i}`, [[0, 1], [k.e - 0.15, 1], [k.e, 0], [7.4, 0], [7.8, 1], [8, 1]]),
+    op(`hs-d${i}`, [[0, 0], [k.e - 0.15, 0], [k.e, 1], [7.1, 1], [7.5, 0], [8, 0]]),
   ]),
 ].join('');
 ---
@@ -38,12 +40,12 @@ const css = [
   <div class="ap" aria-hidden="true">
     <div class="shell">
       <div class="side">
-        <div class="it">+ {u.newMessage}</div><div class="it on">▭ {u.pm}</div>
-        <div class="it">▣ {u.inbox}<span class="badge hs-anim hs-b">1</span></div><div class="it">◔ {u.inProgress}</div><div class="it">▦ {u.tickets}</div>
+        <div class="it"><Ic n="plus" /> {u.newMessage}</div><div class="it on"><Ic n="pm" /> {u.pm}</div>
+        <div class="it"><Ic n="inbox" /> {u.inbox}<span class="badge">1</span></div><div class="it"><Ic n="progress" /> {u.inProgress}</div><div class="it"><Ic n="tickets" /> {u.tickets}</div>
         <h5>{u.projects}</h5><div class="tm"><i class="dot c-web"></i><b>website</b></div>
         <h5>{u.team} <span>6</span></h5>
-        <div class="tm"><i class="dot ring"></i><b>pm</b><em class="st"><span class="hs-anim hs-pmi">{u.idle}</span><span class="hs-anim hs-pmw w">{h.working}</span></em></div>
-        <div class="tm"><i class="dot ring"></i><b>frontend</b><em class="st"><span class="hs-anim hs-fei">{u.idle}</span><span class="hs-anim hs-few w">{h.working} · T-8</span><span class="hs-anim hs-fet y">{u.yourTurn}</span><span class="hs-anim hs-fed o">{u.done}</span></em></div>
+        <div class="tm"><i class="dot ring"></i><b>pm</b><em class="st"><span class="hs-pmi">{u.idle}</span></em></div>
+        <div class="tm"><i class="dot ring"></i><b>frontend</b><em class="st"><span class="hs-anim hs-few w">{h.working} · T-8</span><span class="hs-anim hs-fet y">{u.yourTurn}</span><span class="hs-anim hs-fed o">{u.done}</span></em></div>
         <div class="tm"><i class="dot ring"></i><b>designer</b><em class="st"><span class="hs-anim hs-dei">{u.idle}</span><span class="hs-anim hs-dew w">{h.working} · T-12</span></em></div>
         <div class="tm"><i class="dot ring"></i><b>data</b><em>{u.idle}</em></div>
         <div class="tm"><i class="dot ring"></i><b>backend</b><em>{u.idle}</em></div>
@@ -52,31 +54,31 @@ const css = [
       </div>
       <div class="main">
         <div class="top"><span class="pill"><i class="dot" style="background:var(--work)"></i> pm</span><span class="mu m-hide">{u.allProjects}</span><span class="mu m-hide" style="margin-left:auto">{u.context}</span></div>
-        <div class="hs-body hs-anim hs-end">
+        <div class="hs-body">
           <div class="hs-chat">
             <div class="hs-say">{h.ask}</div>
-            <div class="hs-pm hs-anim hs-reply m-hide">
+            <div class="hs-pm m-hide">
               <div class="who"><i class="dot" style="background:var(--work)"></i> pm</div>
               <p>{h.reply}</p>
-              <p class="hs-anim hs-reply2">{h.reply2}</p>
+              <p>{h.reply2}</p>
             </div>
             <div class="hs-decw">
               <div class="hs-dec hs-anim hs-dc">
-                <div class="hs-decin hs-anim hs-outc">
-                  <div class="k">◆ {D.title} · frontend · T-5</div>
+                <div class="hs-decin">
+                  <div class="k">{D.title} · frontend · T-5</div>
                   <b class="q">{D.question}</b>
                   <p class="mu">{D.aText}</p>
                   <div class="b"><span class="btn pri">{h.publish} <kbd>1</kbd></span><span class="btn">{h.hold} <kbd>2</kbd></span><span class="btn pri hs-foc hs-anim hs-pr">{h.publish} <kbd>1</kbd></span></div>
                   <svg class="hs-cur hs-anim hs-cu" width="20" height="24" viewBox="0 0 22 26"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L13.5 21.6 L10 14.5 L16.5 14 Z" fill="#fff" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/></svg>
                 </div>
               </div>
-              <div class="hs-livew"><div class="hs-live hs-anim hs-lv"><i class="ok">✓</i><div><b>{h.liveTitle}</b><span>{h.liveText}</span></div><em>{h.approved}</em></div></div>
+              <div class="hs-livew"><div class="hs-live hs-anim hs-lv"><i class="ok"><Ic n="check" /></i><div><b>{h.liveTitle}</b><span>{h.liveText}</span></div><em>{h.approved}</em></div></div>
             </div>
           </div>
           <div class="hs-board">
             <div class="hs-bh">{t.lanes.inProgress} <span class="mu">4</span></div>
             {tk.map((k, i) => (
-              <div class={`hs-tc hs-anim hs-tc${i}`}>
+              <div class="hs-tc">
                 <div class="l1"><span class={`av ${k.who}`}>{k.who}</span><span class="mono mu">T-{ids[i]}</span><span class="ti">{h.tickets[i]}</span>
                   <em class="hs-st"><span class={`w hs-anim hs-w${i}`}>{h.working}</span><span class={`o hs-anim hs-d${i}`}>{u.done}</span></em></div>
                 <i class="hs-bar"><i class={`hs-anim hs-bar${i}`}></i></i>
@@ -116,7 +118,11 @@ const css = [
   .hs .hs-foc { position: absolute; left: 0; top: 0; background: var(--accent); color: var(--on-accent); opacity: 0; }
   .hs-cur { position: absolute; left: 96px; bottom: -2px; opacity: 0; pointer-events: none; filter: drop-shadow(0 2px 3px #0008); }
   .hs-livew { position: absolute; left: 0; right: 0; bottom: 0; }
-  .hs-live { display: none; }
+  .hs-live { display: none; align-items: center; gap: 12px; border: 1.5px solid var(--ok); border-radius: 12px; background: var(--surface); padding: 14px; }
+  .hs-live .ok { width: 24px; height: 24px; border-radius: 50%; background: var(--ok); color: var(--surface); display: grid; place-items: center; flex: none; font-style: normal; }
+  .hs-live > div { display: grid; gap: 2px; min-width: 0; flex: 1; font-size: 13px; line-height: 1.35; }
+  .hs-live > div b { font-size: 15px; } .hs-live > div span { color: var(--muted); }
+  .hs-live em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--ok); white-space: nowrap; }
   .hs-board { padding: 16px; display: grid; align-content: start; gap: 10px; }
   .hs-bh { font-weight: 600; margin-bottom: 2px; }
   .hs-tc { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: grid; gap: 9px; }
@@ -144,18 +150,13 @@ const css = [
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hs:not(.paused):not(.off) .hs-anim, .hs.paused .hs-anim, .hs.off .hs-anim { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; animation-fill-mode: both; }
+    .hs:not(.paused):not(.off) .hs-anim, .hs.paused .hs-anim, .hs.off .hs-anim { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: linear; animation-fill-mode: both; }
     .hs.paused .hs-anim, .hs.off .hs-anim { animation-play-state: paused; }
-    .hs .hs-end { animation-name: hs-end; animation-timing-function: linear; }
-    .hs .hs-reply { animation-name: hs-reply; } .hs .hs-reply2 { animation-name: hs-reply2; } .hs .hs-dc { animation-name: hs-dec; } .hs .hs-lv { animation-name: hs-live; }
-    .hs .hs-outc { animation-name: hs-out; }
-    .hs .hs-pmi { animation-name: hs-pm-idle; } .hs .hs-pmw { animation-name: hs-pm-work; }
-    .hs .hs-fei { animation-name: hs-fe-idle; } .hs .hs-few { animation-name: hs-fe-work; } .hs .hs-fet { animation-name: hs-fe-turn; } .hs .hs-fed { animation-name: hs-fe-done; }
+    .hs .hs-dc { animation-name: hs-dc; } .hs .hs-lv { animation-name: hs-lv; }
+    .hs .hs-fet { animation-name: hs-fe-turn; } .hs .hs-few { animation-name: hs-fe-work; } .hs .hs-fed { animation-name: hs-fe-done; }
     .hs .hs-dei { animation-name: hs-de-idle; } .hs .hs-dew { animation-name: hs-de-work; }
-    .hs .hs-b { animation-name: hs-badge; }
-    .hs .hs-cu { animation-name: hs-cursor; animation-timing-function: ease-in-out; } .hs .hs-pr { animation-name: hs-press; }
+    .hs .hs-cu { animation-name: hs-cursor; } .hs .hs-pr { animation-name: hs-press; }
     .hs .hs-live { display: flex; }
-    .hs .hs-tc0 { animation-name: hs-tc0; } .hs .hs-tc1 { animation-name: hs-tc1; } .hs .hs-tc2 { animation-name: hs-tc2; } .hs .hs-tc3 { animation-name: hs-tc3; }
     .hs .hs-bar0 { animation-name: hs-bar0; } .hs .hs-bar1 { animation-name: hs-bar1; } .hs .hs-bar2 { animation-name: hs-bar2; } .hs .hs-bar3 { animation-name: hs-bar3; }
     .hs .hs-w0 { animation-name: hs-w0; } .hs .hs-w1 { animation-name: hs-w1; } .hs .hs-w2 { animation-name: hs-w2; } .hs .hs-w3 { animation-name: hs-w3; }
     .hs .hs-d0 { animation-name: hs-d0; } .hs .hs-d1 { animation-name: hs-d1; } .hs .hs-d2 { animation-name: hs-d2; } .hs .hs-d3 { animation-name: hs-d3; }
