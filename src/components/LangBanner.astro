@@ -21,12 +21,12 @@ const data = JSON.stringify({ current: getLocale(locale).lang, all: available.ma
 {
   targets.length > 0 && (
     <>
-      <div class="lang-banner" id="lang-banner" hidden>
+      <aside class="lang-banner" id="lang-banner" aria-label="Language" hidden>
         <a id="lang-banner-link" href="/" />
         <button type="button" id="lang-banner-close" aria-label="Dismiss">
           ×
         </button>
-      </div>
+      </aside>
       <script is:inline type="application/json" id="lang-banner-data" set:html={data} />
       <script is:inline>
         (function () {
@@ -59,7 +59,7 @@ const data = JSON.stringify({ current: getLocale(locale).lang, all: available.ma
           var link = document.getElementById('lang-banner-link');
           var close = document.getElementById('lang-banner-close');
           link.textContent = t.text; link.href = t.href; link.setAttribute('hreflang', t.lang);
-          box.setAttribute('lang', t.lang); close.setAttribute('aria-label', t.close);
+          box.setAttribute('lang', t.lang); box.setAttribute('aria-label', t.text); close.setAttribute('aria-label', t.close);
           link.addEventListener('click', function () { remember(); track('language_switch', { from: d.current, to: t.lang, source: 'banner' }); });
           close.addEventListener('click', function () { remember(); box.hidden = true; track('language_banner_dismissed', { from: d.current, suggested: t.lang }); });
           box.hidden = false;

@@ -36,8 +36,9 @@ const css = [
   ]),
 ].join('');
 ---
-<figure class="win hs" role="img" aria-label={`${alt} ${h.label}`} data-hs>
+<div class="win hs" data-hs>
   <style set:html={css} />
+  <div class="hs-img" role="img" aria-label={`${alt} ${h.label}`}>
   <div class="ap" aria-hidden="true">
     <div class="shell">
       <div class="side">
@@ -90,8 +91,9 @@ const css = [
       </div>
     </div>
   </div>
+  </div>
   <button class="hs-pause" type="button" data-pause data-play={h.play} data-stop={h.pause} aria-label={h.pause}><span aria-hidden="true">❚❚</span></button>
-</figure>
+</div>
 <p class="hs-cap meta">{h.caption}</p>
 
 <style>
@@ -130,6 +132,7 @@ const css = [
   .hs-tc .mono { white-space: nowrap; }
   .hs-tc .l1 { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .hs-tc .ti { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hs-img { display: block; }
   .hs-st { position: relative; margin-left: auto; width: 62px; height: 16px; flex: none; font-style: normal; }
   .hs-st span { position: absolute; right: 0; top: 0; font-size: 11.5px; padding: 0 7px; border-radius: 99px; line-height: 16px; white-space: nowrap; }
   .hs-st .w { background: color-mix(in srgb, var(--work) 14%, transparent); color: var(--work); opacity: 0; }
@@ -147,6 +150,8 @@ const css = [
     .hs-board { padding: 12px 14px 14px; }
     .hs .shell { grid-template-columns: 1fr; }
     .hs-pause { top: 8px; bottom: auto; }
+    .hs-st { width: 88px; }
+    .hs-tc .ti { white-space: normal; overflow-wrap: anywhere; line-height: 1.3; }
   }
 
   @media (prefers-reduced-motion: no-preference) {
