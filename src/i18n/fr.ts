@@ -130,6 +130,7 @@ const fr: Messages = {
       { title: 'Des objectifs à atteindre', text: 'Une étoile polaire et des objectifs trimestriels. Chaque proposition nomme l’objectif qu’elle sert.' },
       { title: 'Il le voit avant vous', text: 'Une inscription cassée ou une tâche en échec arrive sur le tableau avant que vous la repériez.' },
       { title: 'Du code à votre étape', text: 'Rapide et léger avant l’adéquation. Refactoring et stabilité après.' },
+      { title: 'App Android', text: 'Le même squad dans votre poche. L’app iPhone marche déjà.' },
     ],
   },
   ev: {

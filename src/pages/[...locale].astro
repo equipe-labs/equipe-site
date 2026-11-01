@@ -66,7 +66,7 @@ const tryIt = 'equipe try --edit "…"';
   <a class="skip" href="#main">{t.ui.skip}</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href={localePath(info)}><Mark size={28} /> equipe</a>
+      <a class="brand" href={localePath(info)}><Mark size={28} /> <span class="bt">equipe</span></a>
       <nav aria-label={t.ui.primaryNav}>
         <ul>
           <li class="opt"><a href="#stage">{t.nav.stage}</a></li>
@@ -238,12 +238,12 @@ const tryIt = 'equipe try --edit "…"';
           ))}
         </div>
         <p class="alsoh"><span>{t.feat.more}</span><i></i></p>
-        <ul class="also">
+        <ul class="also swipe" tabindex="0" aria-label={t.feat.more}>
           {[1, 2, 5, 6, 7, 8].map((n) => <li><h4>{t.feat.now[n].title}</h4><p>{t.feat.now[n].text}</p></li>)}
         </ul>
         <div class="cm">
           <h3>{t.feat.comingTitle}</h3>
-          <ul class="cl">
+          <ul class="cl swipe" tabindex="0" aria-label={t.feat.comingTitle}>
             {t.feat.coming.map((f) => <li><h4>{f.title}</h4><p>{f.text}</p></li>)}
           </ul>
         </div>

@@ -129,6 +129,7 @@ const es: Messages = {
       { title: 'Metas hacia las que trabaja', text: 'Una Estrella Polar y metas trimestrales. Cada propuesta nombra la meta a la que sirve.' },
       { title: 'Se entera primero', text: 'Un registro roto o un proceso que falla llega al tablero antes de que lo veas.' },
       { title: 'Código para tu etapa', text: 'Rápido y ligero antes del encaje. Refactorización y estabilidad después.' },
+      { title: 'App de Android', text: 'El mismo squad en tu bolsillo. La app de iPhone ya funciona.' },
     ],
   },
   ev: {

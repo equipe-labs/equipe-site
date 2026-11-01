@@ -129,6 +129,7 @@ const de: Messages = {
       { title: 'Ziele, auf die er hinarbeitet', text: 'Ein North Star und Quartalsziele. Jeder Vorschlag nennt das Ziel, dem er dient.' },
       { title: 'Er merkt es zuerst', text: 'Eine kaputte Anmeldung oder ein fehlschlagender Job steht auf dem Board, bevor du es siehst.' },
       { title: 'Code für deine Phase', text: 'Schnell und schlank vor der Passung. Umbau und Stabilität danach.' },
+      { title: 'Android-App', text: 'Derselbe Squad in deiner Tasche. Die iPhone-App läuft schon.' },
     ],
   },
   ev: {

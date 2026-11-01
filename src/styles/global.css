@@ -33,7 +33,7 @@ body {
 }
 @media (min-width: 641px) { body { font-size: 18px; } :root { --gutter: var(--s-5); --section-y: var(--s-9); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } body { transition: none; } }
-a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
 h1 { font-size: 36px; line-height: 1.05; }
@@ -167,4 +167,10 @@ section.nf-hero + section { border-top: 0; }
 @media (max-width: 400px) {
   header.site nav ul { gap: var(--s-1); }
   header.site .btn.sm { padding: 0 12px; font-size: 14px; }
+}
+/* 320px phones (T-266): the wordmark steps aside (the mark stays; the link keeps its name) so brand + language + download fit in every language */
+@media (max-width: 359px) {
+  .brand .bt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  header.site .wrap { padding: 0 var(--s-4); }
+  header.site .btn.sm { padding: 0 10px; font-size: 13px; }
 }
