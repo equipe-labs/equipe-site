@@ -83,6 +83,7 @@ main.landing h2 .tone { display: block; margin-top: var(--s-4); color: var(--mut
 
 /* two-column rows */
 .row { display: grid; grid-template-columns: 1fr; gap: var(--s-7); align-items: center; }
+.loopw > .row { align-items: start; }
 @media (min-width: 1100px) {
   .row { grid-template-columns: 4fr 8fr; gap: 96px; }
   .row.rev { grid-template-columns: 8fr 4fr; }
@@ -123,7 +124,7 @@ main.landing .st h3 { font-size: 21px; display: flex; gap: var(--s-2) var(--s-3)
 .lp.soonlp .n { background: transparent; color: var(--muted); border: 1.5px dashed var(--dash); line-height: 29px; }
 main.landing .lp h3 { font-size: 24px; display: flex; gap: var(--s-2) var(--s-3); align-items: center; flex-wrap: wrap; letter-spacing: -0.02em; }
 .lp p { font-size: 17px; line-height: 1.6; color: var(--muted); margin-top: var(--s-2); }
-.lp .pn { font-size: 15px; }
+.lp .pn { font-size: 13px; line-height: 1.45; padding-left: var(--s-3); border-left: 2px dashed var(--dash); }
 .stack { display: flex; flex-direction: column; gap: var(--s-5); }
 main.landing .h3big { font-size: 26px; line-height: 1.15; letter-spacing: -0.025em; }
 @media (min-width: 701px) { main.landing .h3big { font-size: 32px; } :lang(ko) main.landing .h3big, :lang(ja) main.landing .h3big, :lang(zh-CN) main.landing .h3big { font-size: 28px; line-height: 1.3; } }

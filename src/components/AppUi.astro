@@ -81,7 +81,7 @@ const tint = (c: string) => (c === 'y' ? 'var(--wait)' : c === 'w' ? 'var(--work
   {k === 'goal' && (
     <div class="comp bare">
       <div class="ph">{u.composerBusy}</div>
-      <div class="tools"><span class="plus"><Ic n="plus" /></span><span><i class="dot" style="background:var(--work);width:7px;height:7px"></i> pm <Ic n="chevron" /></span><span>{u.auto} <Ic n="chevron" /></span><span style="margin-left:auto"><Ic n="progress" /> 31%</span><span>opus 5.5 <Ic n="chevron" /></span><span>{u.effort} <Ic n="chevron" /></span><span class="go"><Ic n="send" /></span></div>
+      <div class="tools"><div class="tl-l"><span class="plus"><Ic n="plus" /></span><span><i class="dot" style="background:var(--work);width:7px;height:7px"></i> pm <Ic n="chevron" /></span><span>{u.auto} <Ic n="chevron" /></span></div><div class="tl-r"><span><Ic n="progress" /> 31%</span><span>opus 5.5 <Ic n="chevron" /></span><span class="eff">{u.effort} <Ic n="chevron" /></span><span class="snd"><Ic n="send" /></span></div></div>
     </div>
   )}
 
