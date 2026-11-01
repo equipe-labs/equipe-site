@@ -89,10 +89,9 @@ const tryIt = 'equipe try --edit "…"';
         <p class="lead">{t.hero.lead}</p>
         <div class="acts">
           <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="hero" download>{t.hero.cta}</a>
-          <p class="evline"><span>{t.hero.proof}</span></p>
           <a class="link" href="#cli-install" data-ph="cli_install_link_click" data-ph-location="hero">{t.hero.cliLink}</a>
         </div>
-        <p class="meta">{t.hero.req}</p>
+        <p class="meta">{t.hero.req} · <span class="evline">{t.hero.proof}</span></p>
       </div>
       <div class="wrap w heroshot">
         <HeroScene t={at} alt={t.hero.shotAlt} />
