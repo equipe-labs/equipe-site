@@ -33,6 +33,16 @@ if (cfg) {
     const v = params.get(k);
     if (v) utm[k] = v;
   }
+  // Our own visits (automation, or a browser opened once with ?internal=1) are flagged so reports can drop them.
+  const isInternal = (): boolean => {
+    try {
+      const flag = params.get('internal');
+      if (flag === '1') localStorage.setItem('equipe-internal', '1');
+      else if (flag === '0') localStorage.removeItem('equipe-internal');
+      if (localStorage.getItem('equipe-internal') === '1') return true;
+    } catch (e) {}
+    return navigator.webdriver === true || /HeadlessChrome|Playwright/i.test(navigator.userAgent);
+  };
   const ai = aiSource(document.referrer) ?? aiSource(params.get('utm_source'));
   const common: Props = {
     locale: document.documentElement.lang,
@@ -41,6 +51,7 @@ if (cfg) {
     browser_language_supported: languageSupported(navigator.language, cfg.locales ?? []),
     channel: channelOf(document.referrer, location.hostname, params.get('utm_source'), ai),
     environment: cfg.environment,
+    ...(isInternal() ? { internal: true } : {}),
     ...utm,
     ...(ai ? { ai_source: ai } : {}),
   };

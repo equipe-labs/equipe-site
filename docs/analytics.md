@@ -35,6 +35,17 @@
 
 사이트의 다른 localStorage 사용(`equipe-lang-dismissed`, 언어 배너 닫음 기억)은 PostHog와 무관하다.
 
+## 내부 방문 표시
+
+팀의 디자인 QA·PM 브라우저 방문이 외부 숫자에 섞이지 않게, 내부 방문의 모든 이벤트에 `internal: true`가 붙는다(외부 방문에는 속성이 없다). 다음 중 하나면 내부다.
+
+- 자동화 브라우저: `navigator.webdriver === true`, 또는 UA에 `HeadlessChrome`·`Playwright`
+- 표시한 브라우저: **팀원은 `https://equipe.im/?internal=1`을 한 번 열면 된다.** 그 브라우저의 localStorage에 `equipe-internal=1`이 저장되고, 이후 계속 내부로 표시된다. 풀 때는 `?internal=0`.
+
+이 플래그는 사이트 자체 localStorage이고(언어 배너 기억과 같은 방식) PostHog 저장소가 아니다. 그래서 PostHog는 여전히 쿠키·저장소를 쓰지 않는다. 방문자가 `?internal=1`을 붙이지 않는 한 아무것도 저장하지 않으므로 개인정보 안내는 바꾸지 않았다.
+
+**리포트에서 빼기**: 대시보드의 모든 인사이트는 `environment = production`과 `internal != true`(`is_not`은 속성이 없는 이벤트도 포함한다)를 건다. 패널을 `scripts/posthog-dashboard.mjs`의 `PROD`·`SITE_WHERE`에서 만든다. 새 인사이트를 직접 만들 때도 두 필터를 건다. 이 표시는 배포 이후 이벤트부터 붙는다(그 전 기록은 소급되지 않는다).
+
 ## 성능
 
 PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다. 첫 렌더링과 `load` 이벤트 이후, 브라우저가 한가할 때(`requestIdleCallback`, 최대 4초) 또는 첫 사용자 입력 시 불러온다. 그 전에 발생한 이벤트는 큐에 쌓였다가 로드 후 전송된다.
@@ -49,6 +60,7 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | `browser_language_supported` | 브라우저 언어에 맞는 페이지가 있으면 `true`. 기본 언어가 같으면 지원으로 본다(`pt-PT` → `pt-BR`). 중국어는 간체만(`zh-TW`는 미지원) |
 | `channel` | 유입 채널: `ai` / `search` / `social` / `github` / `direct` / `referral` / `internal`. 아래 **유입 채널** 참고 |
 | `environment` | `production` / `preview` / `local` |
+| `internal` | 우리 팀·자동화 브라우저일 때만 `true`. 아래 **내부 방문 표시** 참고 |
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | 방문 URL에 있을 때만 |
 | `ai_source` | AI 유입일 때만. `chatgpt`, `perplexity`, `claude`, `gemini`, `copilot`, … |
 
