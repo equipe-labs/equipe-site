@@ -64,7 +64,7 @@ const zhCN: DesignText = {
       ['extract.json', '每个值的依据和可信度，以及未能读取的内容。'],
       ['report.md', '同样的内容，写给人看。'],
       ['tokens.json', 'W3C DTCG 令牌，三层。'],
-      ['tokens.css', '浅色和深色的 CSS 变量，也支持 Tailwind v4 `@theme` 和 shadcn 主题。'],
+      ['tokens.css', '浅色和深色的 CSS 变量，也支持 Tailwind v4 `@theme`。'],
       ['Tokens.swift · Tokens.kt', '原生常量。'],
       ['figma-variables.json', '作为 Figma 变量导入。'],
     ],

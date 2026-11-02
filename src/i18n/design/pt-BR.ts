@@ -64,7 +64,7 @@ const ptBR: DesignText = {
       ['extract.json', 'Cada valor com sua evidência e confiança, e o que não pôde ser lido.'],
       ['report.md', 'O mesmo, escrito para pessoas.'],
       ['tokens.json', 'Tokens W3C DTCG, três camadas.'],
-      ['tokens.css', 'Propriedades CSS, claro e escuro. Também `@theme` do Tailwind v4 e temas do shadcn.'],
+      ['tokens.css', 'Propriedades CSS, claro e escuro. Também `@theme` do Tailwind v4.'],
       ['Tokens.swift · Tokens.kt', 'Constantes nativas.'],
       ['figma-variables.json', 'Importe como variáveis do Figma.'],
     ],

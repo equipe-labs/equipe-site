@@ -64,7 +64,7 @@ const de: DesignText = {
       ['extract.json', 'Jeder Wert mit Beleg und Verlässlichkeit, dazu was nicht gelesen werden konnte.'],
       ['report.md', 'Dasselbe, für Menschen geschrieben.'],
       ['tokens.json', 'W3C-DTCG-Tokens, drei Ebenen.'],
-      ['tokens.css', 'CSS-Variablen, hell und dunkel. Auch Tailwind-v4-`@theme` und shadcn-Themes.'],
+      ['tokens.css', 'CSS-Variablen, hell und dunkel. Auch Tailwind-v4-`@theme`.'],
       ['Tokens.swift · Tokens.kt', 'Native Konstanten.'],
       ['figma-variables.json', 'Als Figma-Variablen importieren.'],
     ],

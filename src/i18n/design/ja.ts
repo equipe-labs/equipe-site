@@ -64,7 +64,7 @@ const ja: DesignText = {
       ['extract.json', '値ごとの根拠と信頼度、読み取れなかったもの。'],
       ['report.md', '同じ内容を人が読める形にしたもの。'],
       ['tokens.json', 'W3C DTCG トークン、3 層。'],
-      ['tokens.css', 'ライト・ダークの CSS 変数。Tailwind v4 の `@theme` と shadcn テーマも。'],
+      ['tokens.css', 'ライト・ダークの CSS 変数。Tailwind v4 の `@theme`。'],
       ['Tokens.swift · Tokens.kt', 'ネイティブ定数。'],
       ['figma-variables.json', 'Figma 変数として読み込み。'],
     ],

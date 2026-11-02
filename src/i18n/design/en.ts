@@ -64,7 +64,7 @@ const en = {
       ['extract.json', 'Every value with its evidence and confidence, and what could not be read.'],
       ['report.md', 'The same, written for people.'],
       ['tokens.json', 'W3C DTCG tokens, three layers.'],
-      ['tokens.css', 'Custom properties, light and dark. Tailwind v4 `@theme` and shadcn themes too.'],
+      ['tokens.css', 'Custom properties, light and dark. Tailwind v4 `@theme`.'],
       ['Tokens.swift · Tokens.kt', 'Native constants.'],
       ['figma-variables.json', 'Import as Figma variables.'],
     ],

@@ -64,7 +64,7 @@ const ko: DesignText = {
       ['extract.json', '값마다 근거와 신뢰도, 못 읽은 것.'],
       ['report.md', '같은 내용을 사람이 읽게 쓴 것.'],
       ['tokens.json', 'W3C DTCG 토큰, 3층.'],
-      ['tokens.css', '라이트·다크 CSS 변수. Tailwind v4 `@theme`와 shadcn 테마도.'],
+      ['tokens.css', '라이트·다크 CSS 변수. Tailwind v4 `@theme`.'],
       ['Tokens.swift · Tokens.kt', '네이티브 상수.'],
       ['figma-variables.json', 'Figma 변수로 가져오기.'],
     ],
