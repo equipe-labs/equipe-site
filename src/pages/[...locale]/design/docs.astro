@@ -1,7 +1,7 @@
 ---
 import DesignShell from '../../../components/DesignShell.astro';
 import Rich from '../../../components/Rich.astro';
-import { available, type LocaleCode } from '../../../i18n';
+import { available, getMessages, type LocaleCode } from '../../../i18n';
 import { getDesignText } from '../../../i18n/design';
 
 export function getStaticPaths() {
@@ -10,6 +10,7 @@ export function getStaticPaths() {
 
 const { code } = Astro.props as { code: LocaleCode };
 const d = getDesignText(code);
+const t = getMessages(code);
 const p = d.docs;
 const install = 'npm i -g equipe-design';
 // Sections in reading order; the side nav groups them under Start / Use / Trust.
@@ -28,7 +29,7 @@ const all = groups.flat();
         {groups.map((g, i) => (
           <>
             <h4>{p.groups[i]}</h4>
-            {g.map((x) => <a href={`#${x.id}`}>{x.label}</a>)}
+            {g.map((x) => <a href={`#${x.id}`} aria-current={x.id === 'install' ? 'location' : undefined}>{x.label}</a>)}
           </>
         ))}
       </nav>
@@ -39,7 +40,7 @@ const all = groups.flat();
 
         <h2 id="install">{p.installTitle}</h2>
         <p>{p.installText}</p>
-        <div class="codeblock"><pre><code>$ {install}</code></pre></div>
+        <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
         <div class="ph">⚑ {d.soon}</div>
 
         <h2 id="cli">{p.cliTitle}</h2>
@@ -64,8 +65,20 @@ const all = groups.flat();
 
       <nav class="toc" aria-label={p.onThisPage}>
         <div class="lab">{p.onThisPage}</div>
-        {all.map((x) => <a href={`#${x.id}`}>{x.label}</a>)}
+        {all.map((x) => <a href={`#${x.id}`} aria-current={x.id === 'install' ? 'location' : undefined}>{x.label}</a>)}
       </nav>
     </div>
   </div>
+  <script>
+    // Mark the section being read in the side nav and the page list (works without JS: the first item stays marked).
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('.side a, .toc a')];
+    const heads = [...document.querySelectorAll<HTMLElement>('.body > h2[id]')];
+    const mark = () => {
+      const y = window.scrollY + 120;
+      const cur = heads.filter((h) => h.offsetTop <= y).pop() ?? heads[0];
+      links.forEach((a) => (a.getAttribute('href') === `#${cur.id}` ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current')));
+    };
+    addEventListener('scroll', mark, { passive: true });
+    mark();
+  </script>
 </DesignShell>

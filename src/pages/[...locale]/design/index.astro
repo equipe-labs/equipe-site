@@ -3,6 +3,7 @@ import DesignShell from '../../../components/DesignShell.astro';
 import { DESIGN_REPO } from '../../../data/design';
 import { available, getLocale, subPath, type LocaleCode } from '../../../i18n';
 import { getDesignText } from '../../../i18n/design';
+import { getMessages } from '../../../i18n';
 
 // /design/ in English, /<slug>/design/ in every other language that has a translation file.
 export function getStaticPaths() {
@@ -12,6 +13,7 @@ export function getStaticPaths() {
 const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const d = getDesignText(code);
+const t = getMessages(code);
 const p = d.intro;
 ---
 
@@ -23,7 +25,6 @@ const p = d.intro;
       <p class="lead">{p.lead}</p>
       <div class="acts">
         <a class="btn primary" href={subPath(info, 'design/docs')} data-ph="design_docs_click">{p.docsCta}</a>
-        <a class="btn" href={subPath(info, 'design/examples')}>{p.examplesCta}</a>
         <a class="btn" href={DESIGN_REPO} data-ph="design_github_click">{d.github}</a>
       </div>
     </div>
@@ -70,7 +71,7 @@ const p = d.intro;
     <div class="wrap">
       <h2>{p.installTitle}</h2>
       <p class="sub">{p.installSub}</p>
-      <div class="codeblock"><pre><code>$ npx equipe-design extract https://example.com</code></pre></div>
+      <div class="codeblock"><pre tabindex="0"><code>npx equipe-design extract https://example.com</code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
       <div class="ph">⚑ {d.soon}</div>
     </div>
   </section>

@@ -1,7 +1,8 @@
 /* equipe-design pages (T-281). Brand v1 tokens from global.css only; nothing new. */
 header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius: 0; font-weight: 600; }
 .dz { padding-bottom: var(--section-y); }
-.dz .wrap { max-width: var(--wrap); }
+.dz .wrap, header.site .wrap { max-width: 1360px; }
+.dz .wrap > :not(.docs) { max-width: calc(var(--wrap) - 2 * var(--gutter)); }
 .dz-tabs { display: flex; flex-wrap: wrap; gap: var(--s-2); padding-top: var(--s-5); }
 .dz-tabs a { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 var(--s-4); border: var(--bw-1) solid var(--line); border-radius: 99px; background: var(--surface); color: var(--text); font: 500 15px var(--sans); text-decoration: none; }
 .dz-tabs a[aria-current='page'] { background: var(--text); color: var(--bg); border-color: var(--text); }
@@ -62,6 +63,8 @@ header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius
 .dz .side h4:first-child { margin-top: 0; }
 .dz .side a, .dz .toc a { display: flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: var(--r-1); color: var(--muted); font-size: 15px; text-decoration: none; }
 .dz .side a:hover, .dz .toc a:hover { color: var(--text); }
+.dz .side a[aria-current], .dz .toc a[aria-current] { color: var(--text); font-weight: 600; }
+.dz .side a[aria-current] { background: var(--surface); box-shadow: inset 3px 0 0 var(--accent); }
 .dz .docs .body > h2 { margin-top: var(--s-7); scroll-margin-top: 80px; }
 .dz .docs .body > h2:first-of-type { margin-top: 0; }
 .dz .docs .body p { color: var(--muted); max-width: 640px; }
@@ -78,7 +81,7 @@ header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius
   .dz .docs { grid-template-columns: 1fr; gap: var(--s-4); padding-top: var(--s-5); }
   .dz .side { position: static; display: flex; gap: var(--s-2); overflow-x: auto; padding-bottom: var(--s-1); }
   .dz .side h4 { display: none; }
-  .dz .side a { flex: none; white-space: nowrap; border: var(--bw-1) solid var(--line); }
+  .dz .side a { flex: none; min-height: var(--tap); white-space: nowrap; border: var(--bw-1) solid var(--line); }
 }
 
 /* examples */
@@ -99,3 +102,5 @@ header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius
 .dz .src { margin: var(--s-4) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-5); font-size: 14px; }
 .dz .src a { color: var(--muted); }
 @media (min-width: 701px) { .dz .tok td:first-child { white-space: nowrap; word-break: normal; } }
+@media (min-width: 701px) { .dz .tok td:nth-child(2) { white-space: nowrap; } }
+.dz + footer .wrap { max-width: 1360px; }

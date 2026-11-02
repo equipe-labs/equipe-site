@@ -68,6 +68,17 @@ const home = localePath(info);
     </div>
   </footer>
 
+  <script is:inline>
+    document.querySelectorAll('.copy').forEach((b) =>
+      b.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(b.previousElementSibling.textContent);
+          b.textContent = b.dataset.done;
+          setTimeout(() => (b.textContent = b.dataset.label), 1500);
+        } catch {}
+      }),
+    );
+  </script>
   <Analytics />
   <LangBanner locale={code} subpage={sub[page]} />
 </Base>
