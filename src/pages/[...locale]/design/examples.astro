@@ -1,0 +1,81 @@
+---
+import DesignShell from '../../../components/DesignShell.astro';
+import { DESIGN_SOURCES } from '../../../data/design';
+import { available, type LocaleCode } from '../../../i18n';
+import { getDesignText } from '../../../i18n/design';
+
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const d = getDesignText(code);
+const p = d.examples;
+// equipe.im's own brand v1 tokens (the real values, until the engine's output replaces this sheet).
+const palette = ['#F6F5F1', '#FFFFFF', '#15161A', '#4F5159', '#1D4ED8', '#8FB0FF'];
+// The two remixes are made-up brands, drawn only to show what a remix can look like.
+const remixes = [
+  { bg: '#F3F7F4', fg: '#10231B', accent: '#0F6B4A', on: '#FFFFFF', radius: '6px', btn: '6px', font: 'Georgia,serif', weight: 600, pal: ['#F3F7F4', '#10231B', '#0F6B4A', '#9BC4B1'] },
+  { bg: '#1B1030', fg: '#FFF3E0', accent: '#FF7A3D', on: '#1B1030', radius: '24px', btn: '99px', font: 'inherit', weight: 700, pal: ['#1B1030', '#FFF3E0', '#FF7A3D', '#7C5CFF'] },
+];
+---
+
+<DesignShell code={code} page="examples" title={p.meta.title} description={p.meta.description}>
+  <section class="first" style="padding-bottom: var(--s-6)">
+    <div class="wrap">
+      <div class="eb">{p.eyebrow}</div>
+      <h1 class="sm">{p.title}</h1>
+      <p class="lead">{p.lead}</p>
+    </div>
+  </section>
+
+  <section style="border-top: 0; padding-top: 0">
+    <div class="wrap sheets">
+      {DESIGN_SOURCES.map((s, i) => (
+        <div class="card">
+          <div class="lab">{p.sheet}</div>
+          <h2 style="margin-top: 6px">{s.name}</h2>
+          <div class="cap" style="margin: 0 0 18px">{p.source} · <a href={s.href}>{s.licence}</a></div>
+          {i === 0 ? (
+            <div class="g3">
+              <div><div class="lab">{p.palette}</div><div class="pal">{palette.map((c) => <i style={`background:${c}`}></i>)}</div></div>
+              <div><div class="lab">{p.type}</div><div class="big">Aa 가나다</div><div class="cap">Inter · Pretendard</div></div>
+              <div><div class="lab">{p.shape}</div><div class="shapes"><i style="border-radius: 8px"></i><i style="border-radius: 12px"></i></div><div class="cap">radius 8 · 12</div></div>
+            </div>
+          ) : (
+            <p class="pend">{p.pending}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>{p.remixTitle}</h2>
+      <p class="sub">{p.remixSub}</p>
+      <div class="g2">
+        {remixes.map((r, i) => (
+          <div>
+            <div class="mini" style={`background:${r.bg};color:${r.fg};border-radius:${r.radius === '24px' ? '24px' : '6px'}`}>
+              <b style={`font-family:${r.font};font-weight:${r.weight}`}>{p.remixes[i].headline}</b>
+              <span class="bt" style={`background:${r.accent};color:${r.on};border-radius:${r.btn}`}>{p.remixes[i].cta}</span>
+            </div>
+            <h3 style="margin-top: 14px">{p.remixes[i].name}</h3>
+            <div class="pal">{r.pal.map((c) => <i style={`background:${c}`}></i>)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="lab">{p.footnoteTitle}</div>
+      <p class="cap" style="margin-top: var(--s-2)">{p.footnote}</p>
+      <ul class="src">
+        {DESIGN_SOURCES.map((s) => <li>{s.name} · <a href={s.href}>{s.licence} {p.licence}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</DesignShell>

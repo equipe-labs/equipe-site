@@ -1,0 +1,85 @@
+---
+import DesignShell from '../../../components/DesignShell.astro';
+import { DESIGN_REPO } from '../../../data/design';
+import { available, getLocale, subPath, type LocaleCode } from '../../../i18n';
+import { getDesignText } from '../../../i18n/design';
+import { getMessages } from '../../../i18n';
+
+// /design/ in English, /<slug>/design/ in every other language that has a translation file.
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const d = getDesignText(code);
+const t = getMessages(code);
+const p = d.intro;
+---
+
+<DesignShell code={code} page="overview" title={p.meta.title} description={p.meta.description}>
+  <section class="first">
+    <div class="wrap">
+      <div class="eb">{p.eyebrow}</div>
+      <h1>{p.title}</h1>
+      <p class="lead">{p.lead}</p>
+      <div class="acts">
+        <a class="btn primary" href={subPath(info, 'design/docs')} data-ph="design_docs_click">{p.docsCta}</a>
+        <a class="btn" href={DESIGN_REPO} data-ph="design_github_click">{d.github}</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>{p.flowTitle}</h2>
+      <p class="sub"></p>
+      <div class="flow">
+        {p.flow.map((f, i) => (
+          <>
+            {i > 0 && <div class="ar" aria-hidden="true">→</div>}
+            <div class="card"><div class="n">{i + 1}</div><h3>{f.t}</h3><p>{f.p}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>{p.tableTitle}</h2>
+      <p class="sub">{p.tableSub}</p>
+      <div class="tbl tok">
+        <table>
+          <thead><tr>{p.th.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+          <tbody>
+            {p.rows.map((r) => (
+              <tr>
+                <td>{r.token}</td>
+                <td>{r.swatch && <span class="sw" style={`background:${r.swatch}`}></span>}{r.value}</td>
+                <td class="l">{r.evidence}</td>
+                <td class="l">{r.limit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>{p.installTitle}</h2>
+      <p class="sub">{p.installSub}</p>
+      <div class="codeblock"><pre tabindex="0"><code>npx equipe-design extract https://example.com</code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+      <div class="ph">⚑ {d.soon}</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap bridge">
+      <p>{p.designer}</p>
+      <a class="l" href={subPath(info, 'design/docs') + '#mcp'}>{d.docs.mcpTitle} →</a>
+    </div>
+  </section>
+</DesignShell>

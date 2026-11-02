@@ -1,0 +1,84 @@
+---
+// Page chrome for the equipe-design pages (/design, /design/docs, /design/examples): header, page tabs, footer.
+import Base from '../layouts/Base.astro';
+import Mark from './Mark.astro';
+import LangMenu from './LangMenu.astro';
+import Analytics from './Analytics.astro';
+import LangBanner from './LangBanner.astro';
+import OrganizationJsonLd from './OrganizationJsonLd.astro';
+import '../styles/design.css';
+import { SITE } from '../data/site';
+import { DESIGN_LIVE, DESIGN_REPO } from '../data/design';
+import { getDesignText } from '../i18n/design';
+import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+
+type Page = 'overview' | 'docs' | 'examples';
+interface Props {
+  code: LocaleCode;
+  page: Page;
+  title: string;
+  description: string;
+}
+const { code, page, title, description } = Astro.props;
+const info = getLocale(code);
+const t = getMessages(code);
+const d = getDesignText(code);
+const sub: Record<Page, string> = { overview: 'design', docs: 'design/docs', examples: 'design/examples' };
+const tabs = (['overview', 'docs', 'examples'] as const).map((k) => ({ k, label: d.nav[k], href: subPath(info, sub[k]) }));
+const home = localePath(info);
+---
+
+<Base locale={code} title={title} description={description} image={SITE.ogImage} imageAlt={t.meta.ogImageAlt} subpage={sub[page]} noindex={!DESIGN_LIVE} alternates={DESIGN_LIVE}>
+  <Fragment slot="head">
+    <OrganizationJsonLd />
+  </Fragment>
+
+  <a class="skip" href="#main">{t.ui.skip}</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href={home}><Mark size={28} /> <span class="bt">equipe</span></a>
+      <nav aria-label={t.ui.primaryNav}>
+        <ul>
+          <li class="opt"><a href={`${home}#how-it-works`}>{t.nav.howItWorks}</a></li>
+          <li class="opt"><a href={`${home}#features`}>{t.nav.features}</a></li>
+          <li><a class="cur" href={subPath(info, 'design')} aria-current="page">{d.menu}</a></li>
+          <li class="opt"><a href={`${home}#faq`}>{t.nav.faq}</a></li>
+          <li class="opt"><a href={SITE.repo}>{t.nav.github}</a></li>
+          <li><LangMenu locale={code} label={t.ui.language} subpage={sub[page]} /></li>
+          <li class="opt"><a class="btn primary sm" href={SITE.desktopDmg} download>{t.hero.cta}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="dz">
+    <div class="wrap">
+      <nav class="dz-tabs" aria-label={d.nav.label}>
+        {tabs.map((x) => <a href={x.href} aria-current={x.k === page ? 'page' : undefined}>{x.label}</a>)}
+      </nav>
+      <p class="dz-note"><strong>{d.soon}</strong> · {d.soonNote}</p>
+    </div>
+    <slot />
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="foot-links"><a href={home}>{t.app.nav.home}</a><a href={`${subPath(info, 'design/docs')}#guardrails`}>{d.nav.guidelines}</a><a href={DESIGN_REPO}>{t.nav.github}</a></span>
+      <span>{t.footer.license}</span>
+    </div>
+  </footer>
+
+  <script is:inline>
+    document.querySelectorAll('.copy').forEach((b) =>
+      b.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(b.previousElementSibling.textContent);
+          b.textContent = b.dataset.done;
+          setTimeout(() => (b.textContent = b.dataset.label), 1500);
+        } catch {}
+      }),
+    );
+  </script>
+  <Analytics />
+  <LangBanner locale={code} subpage={sub[page]} />
+</Base>

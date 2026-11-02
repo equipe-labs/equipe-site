@@ -25,6 +25,8 @@ interface Props {
   subpage?: string;
   /** Error page (404): no canonical, no hreflang cluster, no og:url — it is not one fixed URL. */
   error?: boolean;
+  /** Emit the hreflang cluster; false for pages that are not meant to be found yet. */
+  alternates?: boolean;
 }
 
 const {
@@ -43,6 +45,7 @@ const {
   ogType = 'website',
   subpage,
   error = false,
+  alternates: withAlternates = true,
 } = Astro.props;
 
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
@@ -63,8 +66,8 @@ const imageType = imageUrl
 <title>{title}</title>
 <meta name="description" content={description} />
 {!error && <link rel="canonical" href={canonical} />}
-{!error && alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
-{!error && alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+{!error && withAlternates && alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+{!error && withAlternates && alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 <meta name="theme-color" content={themeColor} />
 {noindex && <meta name="robots" content="noindex" />}
 <link rel="icon" href={favicon.href} type={favicon.type} />

@@ -31,6 +31,7 @@ export default defineConfig({
   integrations: [sitemap({
       i18n: { defaultLocale: 'en', locales },
       lastmod: new Date(), // build time
-      filter: (page) => !page.endsWith('/404/'),
+      // The Design pages stay out of the sitemap until DESIGN_MENU_LIVE=true (src/data/design.ts).
+      filter: (page) => !page.endsWith('/404/') && (process.env.DESIGN_MENU_LIVE === 'true' || !/\/design\//.test(page)),
     })],
 });
