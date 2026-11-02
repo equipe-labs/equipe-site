@@ -10,7 +10,11 @@ import { pathToFileURL } from 'node:url';
 export const DASHBOARD = 'equipe.im KPI';
 export const CONVERSION_ACTION = 'GitHub 전환 (CTA 클릭 또는 설치 명령 복사)';
 
-const PROD = [{ key: 'environment', value: ['production'], operator: 'exact', type: 'event' }];
+// Production only, and never our own visits (`internal: true`, see docs/analytics.md). is_not also matches events without the property.
+const PROD = [
+  { key: 'environment', value: ['production'], operator: 'exact', type: 'event' },
+  { key: 'internal', value: ['true'], operator: 'is_not', type: 'event' },
+];
 const ev = (event, extra = {}) => ({ kind: 'EventsNode', event, name: event, ...extra });
 const pv = (extra) => ev('$pageview', { math: 'total', custom_name: '방문(페이지 로드)', ...extra });
 const trends = (series, { interval = 'day', from = '-30d', breakdown, display = 'ActionsLineGraph', props = PROD } = {}) => ({
@@ -38,7 +42,7 @@ const funnel = (actionId, breakdown) => ({
 });
 const table = (query) => ({ kind: 'DataTableNode', source: { kind: 'HogQLQuery', query: query.replace(/\s+/g, ' ').trim() } });
 
-const SITE_WHERE = "properties.environment = 'production' AND timestamp > now() - INTERVAL 30 DAY";
+const SITE_WHERE = "properties.environment = 'production' AND coalesce(toString(properties.internal), '') != 'true' AND timestamp > now() - INTERVAL 30 DAY";
 const CONVERTED = "event IN ('cta_github_click', 'install_command_copy', 'desktop_download_click')";
 // Per-visit conversion: with cookieless tracking one distinct_id = one page load (docs/analytics.md).
 const scorecard = (dim, label) =>
