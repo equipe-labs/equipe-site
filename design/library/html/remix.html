@@ -1,0 +1,94 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+:root{--bg:#F6F5F1;--surface:#fff;--code-bg:#EAE7E0;--text:#15161A;--muted:#4F5159;--accent:#1D4ED8;--on-accent:#fff;--line:#0A0A0C24;
+--s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:72px;--r-1:8px;--r-2:12px;
+--sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--ok:#15703a;--bad:#b3261e}
+@media(prefers-color-scheme:dark){:root{--bg:#0A0A0C;--surface:#16171A;--code-bg:#17171C;--text:#EFEDE7;--muted:#A3A5AB;--accent:#8FB0FF;--on-accent:#0B1226;--line:#E9E6DF24;--ok:#5fd08a;--bad:#ff8a80}}
+*{box-sizing:border-box}.two>*,.sc2>*,.hd>*,.rx>*,.dl>*{min-width:0}pre{max-width:100%}body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--sans);word-break:keep-all;overflow-wrap:anywhere}
+@media(min-width:641px){body{font-size:17px}}
+h1,h2,h3,p{margin:0}a{color:inherit}
+header.site{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header.site .w{max-width:1360px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;text-decoration:none}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;font-size:15px;text-decoration:none;color:var(--muted)}
+nav a.cur{color:var(--text);font-weight:600;box-shadow:0 2px 0 var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:var(--r-2);font:600 16px var(--sans);border:1px solid var(--line);background:var(--surface);color:var(--text);text-decoration:none;gap:8px}
+.btn.p{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.sm{min-height:40px;padding:0 14px;font-size:14px}
+.w{max-width:1360px;margin:auto;padding:0 24px}
+.tabs{display:flex;gap:8px;padding-top:24px;flex-wrap:wrap}
+.tabs a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface);font:500 15px var(--sans);text-decoration:none}
+.tabs a.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.eb{font:600 13px var(--mono);color:var(--accent);margin-bottom:12px}
+h1{font-size:clamp(32px,4.2vw,52px);line-height:1.25;letter-spacing:-.03em;margin-bottom:16px;max-width:900px}
+h2{font-size:26px;line-height:1.25;letter-spacing:-.02em;margin-bottom:8px}
+.lead{color:var(--muted);font-size:18px;max-width:640px}
+.lab{font:600 12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.mono{font-family:var(--mono)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:var(--surface);font:500 15px var(--sans);color:var(--text)}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.sw{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);display:inline-block}
+footer{border-top:1px solid var(--line);margin-top:72px;padding:32px 0;color:var(--muted);font-size:14px}
+footer .w{display:flex;gap:24px;flex-wrap:wrap}
+.note{font:400 13px/1.5 var(--mono);color:var(--muted);margin-top:16px}.note b{color:var(--accent);font-weight:600}
+@media(max-width:640px){header.site .w,.w{padding:0 16px}nav .opt{display:none}h2{font-size:23px}.lead{font-size:17px}}
+</style></head><body>
+<header class="site"><div class="w"><a class="brand" href="#"><svg viewBox="0 0 100 100" width="28" height="28"><rect width="100" height="100" rx="22" fill="#0A0A0C"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5"/></svg><span>equipe</span></a><nav><ul><li class="opt"><a href="#">어떻게 일해요</a></li><li class="opt"><a href="#">기능</a></li><li><a class="cur" href="#">디자인</a></li><li class="opt"><a href="#">FAQ</a></li><li><a href="#">한국어</a></li><li class="opt"><a class="btn p sm" href="#">앱 받기</a></li></ul></nav></div></header>
+<main><div class="w"><nav class="tabs"><a href="#">소개</a><a href="#" class=on>라이브러리</a><a href="#">문서</a><a href="#">예시</a></nav><style>
+.rx{display:grid;grid-template-columns:380px minmax(0,1fr);gap:32px;padding:40px 0 0;align-items:start}
+@media(max-width:980px){.rx{grid-template-columns:1fr}}
+.ctl{padding:24px;display:flex;flex-direction:column;gap:22px;position:sticky;top:88px}
+@media(max-width:980px){.ctl{position:static}}
+.fld{display:flex;flex-direction:column;gap:8px}
+.in{min-height:48px;padding:0 14px;border:1px solid var(--line);border-radius:var(--r-1);background:var(--bg);display:flex;align-items:center;gap:10px;font:500 16px var(--mono)}
+.sel{outline:2px solid var(--accent);outline-offset:2px}
+.sws{display:flex;gap:10px;flex-wrap:wrap}.sws i{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);display:block}
+.seg{display:flex;border:1px solid var(--line);border-radius:var(--r-1);overflow:hidden}.seg span{flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;font:500 15px var(--sans);border-right:1px solid var(--line)}.seg span:last-child{border:0}.seg .on{background:var(--text);color:var(--bg)}
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.pr{grid-template-columns:1fr}}
+.ck{display:flex;gap:8px;align-items:center;font-size:15px;flex-wrap:wrap}
+.ok{color:var(--ok);font-weight:600}.cp{padding:24px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line)}.cg{display:flex;flex-direction:column;gap:8px}.rw{display:flex;gap:8px;flex-wrap:wrap}
+.tabs2{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:24px 0 16px;overflow-x:auto}.tabs2 span{padding:0 14px;min-height:44px;display:flex;align-items:center;font:500 14px var(--mono);color:var(--muted);white-space:nowrap}.tabs2 .on{color:var(--text);box-shadow:0 2px 0 var(--accent);font-weight:600}
+pre{margin:0;background:var(--code-bg);border-radius:12px;padding:16px 18px;font:14px/1.6 var(--mono);overflow:hidden;white-space:pre;color:var(--text)}
+.bar{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}@media(max-width:640px){.bar .btn{width:100%}}
+</style>
+<div class="crumb" style="font:500 14px var(--mono);color:var(--muted);padding-top:32px">라이브러리 / Hearth / <span style="color:var(--text)">내 색으로 바꾸기</span></div>
+<section style="padding:24px 0 0"><h1 style="font-size:clamp(30px,3.6vw,44px)">브랜드색 하나로, Hearth가 내 걸로.</h1><p class="lead">색을 넣으면 오른쪽 미리보기가 바로 바뀌어요. 글자가 읽히는지는 라이트와 다크 모두 자동으로 맞춰요.</p></section>
+<div class="rx"><aside class="card ctl">
+<div class="fld"><span class="lab">1 · 시작 스타일</span><div class="in" style="font-family:var(--sans);justify-content:space-between"><span style="display:flex;gap:10px;align-items:center"><span class="dots" style="display:flex"><i style="background:#fff1e6"></i><i style="background:#b4411f"></i><i style="background:#f6d9c3"></i></span>Hearth · 따뜻한</span><span>▾</span></div></div>
+<div class="fld"><span class="lab">2 · 브랜드색</span><div class="in sel"><i class="sw" style="background:#0f766e;width:24px;height:24px;border-radius:99px"></i>#0f766e</div><div class="sws"><i style="background:#0f766e"></i><i style="background:#2a55d6"></i><i style="background:#7a46d6"></i><i style="background:#d6338a"></i><i style="background:#e8891d"></i><i style="background:#2f8f4e"></i></div><span style="font-size:13px;color:var(--muted)">색을 직접 고르거나, 쓰는 색의 #코드를 붙여 넣어요.</span></div>
+<div class="fld"><span class="lab">3 · 안에서 바꿀 것</span><div class="seg"><span class="on">버튼·강조만</span><span>배경까지</span></div></div>
+<div class="pr"><div class="fld"><span class="lab">변수 앞 이름</span><div class="in">acme</div></div><div class="fld"><span class="lab">후보 수</span><div class="seg"><span>1</span><span class="on">2</span><span>3</span></div></div></div>
+<div class="fld"><span class="lab">자동 검사</span><div class="ck"><span class="ok">✓</span><span>라이트 · 버튼 글자</span><span class="mono" style="margin-left:auto;color:var(--muted)">5.5:1</span></div><div class="ck"><span class="ok">✓</span><span>라이트 · 버튼 면/바탕</span><span class="mono" style="margin-left:auto;color:var(--muted)">4.9:1</span></div><div class="ck"><span class="ok">✓</span><span>다크 · 버튼 글자</span><span class="mono" style="margin-left:auto;color:var(--muted)">9.8:1</span></div><div class="ck"><span class="ok">✓</span><span>다크 · 버튼 면/바탕</span><span class="mono" style="margin-left:auto;color:var(--muted)">8.9:1</span></div><div style="font-size:13px;color:var(--muted)">기준에 못 미친 색은 밝기만 조금 옮겨서 맞춰요. 옮긴 값은 아래 표에 보여요.</div></div></aside>
+<div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px"><div style="display:flex;gap:8px"><span class="chip on">후보 1</span><span class="chip">후보 2</span></div><span style="font-size:14px;color:var(--muted)">Hearth 기본 → 내 색 · 11월 2일 기준</span></div>
+<div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:20px"><div class="cp" style="background:#fff1e6;color:#3b2418;border-radius:24px">
+<div class="lab" style="color:#76675c">LIGHT</div>
+<div style="font:700 22px/1.25 var(--sans);letter-spacing:-.015em">주문을 확인해 주세요</div>
+<div style="font-size:14px;color:#76675c;margin-top:-6px">3건이 승인을 기다려요 · 11월 2일 기준</div>
+<div class="cg"><span class="lab" style="color:#76675c">버튼</span><div class="rw"><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#0f766e;color:#ffffff;border:1px solid #0f766e;font:600 14px var(--sans);">기본</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#0f766e;color:#ffffff;border:1px solid #0f766e;font:600 14px var(--sans);filter:brightness(.92)">눌림</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#0f766e;color:#ffffff;border:1px solid #0f766e;font:600 14px var(--sans);box-shadow:0 0 0 2px #fff1e6,0 0 0 4px #0f766e">포커스</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#e6d6cb;color:#76675c;border:1px solid #e6d6cb;font:600 14px var(--sans);">비활성</span></div>
+<div class="rw"><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#d6ebe9;color:#3b2418;border:1px solid #d6ebe9;font:600 14px var(--sans);">보조</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:transparent;color:#3b2418;border:1px solid #938075;font:600 14px var(--sans);">윤곽</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#c62828;color:#fff;border:1px solid transparent;font:600 14px var(--sans);">삭제</span></div></div>
+<div class="cg"><span class="lab" style="color:#76675c">입력</span><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#ffffff;border:1px solid #938075;color:#76675c;font:400 14px var(--sans);">이메일</div><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#ffffff;border:1px solid #0f766e;color:#3b2418;font:400 14px var(--sans);box-shadow:0 0 0 3px #0f766e55;">mina@acme.kr</div><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#ffffff;border:1px solid #c62828;color:#c62828;font:400 14px var(--sans);">올바른 이메일이 아니에요</div></div>
+<div class="cg"><span class="lab" style="color:#76675c">카드·알림</span><div style="padding:14px 16px;border-radius:16px;background:#f8eadf;border:1px solid #e6d6cb"><div style="font-weight:700">이번 주 방문 <span class="mono" style="font-variant-numeric:tabular-nums">12,480</span></div><div style="font-size:13px;color:#76675c">전주 대비 <span style="color:#1b7a43">▲ 8.2%</span> · <span style="color:#8f5b00">서버 점검 예정</span></div></div></div></div><div class="cp" style="background:#1f1511;color:#f7e6d8;border-radius:24px">
+<div class="lab" style="color:#a5978c">DARK</div>
+<div style="font:700 22px/1.25 var(--sans);letter-spacing:-.015em">주문을 확인해 주세요</div>
+<div style="font-size:14px;color:#a5978c;margin-top:-6px">3건이 승인을 기다려요 · 11월 2일 기준</div>
+<div class="cg"><span class="lab" style="color:#a5978c">버튼</span><div class="rw"><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#1accbe;color:#0b0b0b;border:1px solid #1accbe;font:600 14px var(--sans);">기본</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#1accbe;color:#0b0b0b;border:1px solid #1accbe;font:600 14px var(--sans);filter:brightness(.92)">눌림</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#1accbe;color:#0b0b0b;border:1px solid #1accbe;font:600 14px var(--sans);box-shadow:0 0 0 2px #1f1511,0 0 0 4px #1accbe">포커스</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#3b302b;color:#a5978c;border:1px solid #3b302b;font:600 14px var(--sans);">비활성</span></div>
+<div class="rw"><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#2a4644;color:#f7e6d8;border:1px solid #2a4644;font:600 14px var(--sans);">보조</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:transparent;color:#f7e6d8;border:1px solid #96887e;font:600 14px var(--sans);">윤곽</span><span style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border-radius:10px;background:#ff7b72;color:#fff;border:1px solid transparent;font:600 14px var(--sans);">삭제</span></div></div>
+<div class="cg"><span class="lab" style="color:#a5978c">입력</span><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#352c29;border:1px solid #96887e;color:#a5978c;font:400 14px var(--sans);">이메일</div><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#352c29;border:1px solid #1accbe;color:#f7e6d8;font:400 14px var(--sans);box-shadow:0 0 0 3px #1accbe55;">mina@acme.kr</div><div style="min-height:40px;padding:9px 12px;border-radius:10px;background:#352c29;border:1px solid #ff7b72;color:#ff7b72;font:400 14px var(--sans);">올바른 이메일이 아니에요</div></div>
+<div class="cg"><span class="lab" style="color:#a5978c">카드·알림</span><div style="padding:14px 16px;border-radius:16px;background:#2a211d;border:1px solid #3b302b"><div style="font-weight:700">이번 주 방문 <span class="mono" style="font-variant-numeric:tabular-nums">12,480</span></div><div style="font-size:13px;color:#a5978c">전주 대비 <span style="color:#4cc38a">▲ 8.2%</span> · <span style="color:#e8b44a">서버 점검 예정</span></div></div></div></div></div>
+<div class="card" style="margin-top:20px;padding:16px 20px"><div class="lab" style="margin-bottom:10px">바뀐 값</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 24px;font-size:14px">
+<div style="display:flex;gap:12px;align-items:center"><span class="mono">primary 라이트</span><div style="display:flex;gap:4px;align-items:center"><i class="sw" style="background:#b4411f;width:22px;height:22px"></i><span style="color:var(--muted)">→</span><i class="sw" style="background:#0f766e;width:22px;height:22px"></i></div></div><div style="display:flex;gap:12px;align-items:center"><span class="mono">primary 다크</span><div style="display:flex;gap:4px;align-items:center"><i class="sw" style="background:#e8774f;width:22px;height:22px"></i><span style="color:var(--muted)">→</span><i class="sw" style="background:#1accbe;width:22px;height:22px"></i></div></div>
+<div style="display:flex;gap:12px"><span class="mono">ring · secondary</span><span style="color:var(--muted)">같이 바뀜</span></div><div style="display:flex;gap:12px"><span class="mono">나머지 11개</span><span style="color:var(--muted)">그대로</span></div></div></div>
+<div class="tabs2"><span class="on">CSS</span><span>Tailwind</span><span>DTCG JSON</span><span>shadcn</span><span>Figma</span></div>
+<pre>:root {
+  --acme-background: #fff1e6;
+  --acme-primary:    #0f766e;
+  --acme-on-primary: #ffffff;
+  --acme-ring:       #0f766e;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --acme-primary: #1accbe; … }
+}</pre>
+<div class="bar"><a class="btn p" href="#">코드 받기 (CSS)</a><a class="btn" href="#">복사</a><a class="btn" href="#">후보 둘 다 받기</a></div>
+<p class="note"><b>이 페이지는 내 브라우저에서만 계산해요.</b> 넣은 색은 서버에 저장하지 않아요.</p></div></div><style>.crumb{padding-top:32px}.two{display:grid}@media(max-width:900px){.two{grid-template-columns:1fr!important}}</style></div></main>
+<footer><div class="w"><span>© equipe</span><span>MIT 라이선스</span><span>GitHub</span></div></footer></body></html>
