@@ -7,9 +7,7 @@ export const DESIGN_LIVE = process.env.DESIGN_MENU_LIVE === 'true';
 
 export const DESIGN_REPO = 'https://github.com/equipe-labs/equipe-design';
 
-/** Open licences of the sites shown as examples (links checked 2026-11-02). */
+/** Whose system the example sheet shows, and its licence. Only our own: no other service is named on these pages. */
 export const DESIGN_SOURCES = [
   { name: 'equipe.im', href: 'https://github.com/equipe-labs/equipe/blob/main/LICENSE', licence: 'MIT' },
-  { name: 'shadcn/ui', href: 'https://github.com/shadcn-ui/ui/blob/main/LICENSE.md', licence: 'MIT' },
-  { name: 'GitHub Primer', href: 'https://github.com/primer/primitives/blob/main/LICENSE', licence: 'MIT' },
 ] as const;

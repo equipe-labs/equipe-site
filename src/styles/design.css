@@ -84,6 +84,14 @@ header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius
   .dz .side a { flex: none; min-height: var(--tap); white-space: nowrap; border: var(--bw-1) solid var(--line); }
 }
 
+/* library preview (placeholder styles) */
+.dz .lib { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s-5); }
+.dz .style h3 { margin: 12px 0 0; }
+.dz .style .pv { height: 132px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; border: var(--bw-1) solid var(--line); }
+.dz .style .pv b { font-size: 26px; letter-spacing: -0.03em; }
+.dz .style .pv .bt { width: 56px; height: 22px; }
+.dz .pal.sm { height: 20px; margin: var(--s-2) 0 0; }
+
 /* examples */
 .dz .g3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
 .dz .g2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }

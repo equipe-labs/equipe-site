@@ -15,6 +15,15 @@ const info = getLocale(code);
 const d = getDesignText(code);
 const t = getMessages(code);
 const p = d.intro;
+// Placeholder styles: palette [bg, text, accent, soft] and corner radius. Real styles come from the designer's work.
+const styles = [
+  { pal: ['#F6F5F1', '#15161A', '#1D4ED8', '#8FB0FF'], r: '12px' },
+  { pal: ['#F3F7F4', '#10231B', '#0F6B4A', '#9BC4B1'], r: '6px' },
+  { pal: ['#1B1030', '#FFF3E0', '#FF7A3D', '#7C5CFF'], r: '22px' },
+  { pal: ['#FFFFFF', '#111111', '#E5484D', '#F4C7C9'], r: '0px' },
+  { pal: ['#FBF4EA', '#3B2A1E', '#B45309', '#E9C9A0'], r: '16px' },
+];
+const letters = ['A', 'B', 'C', 'D', 'E'];
 ---
 
 <DesignShell code={code} page="overview" title={p.meta.title} description={p.meta.description}>
@@ -47,6 +56,25 @@ const p = d.intro;
 
   <section>
     <div class="wrap">
+      <h2>{p.libraryTitle}</h2>
+      <p class="sub">{p.librarySub}</p>
+      <div class="lib">
+        {styles.map((st, i) => (
+          <div class="style">
+            <div class="pv" style={`background:${st.pal[0]};color:${st.pal[1]};border-radius:${st.r}`} aria-hidden="true">
+              <b>Aa</b>
+              <span class="bt" style={`background:${st.pal[2]};color:${st.pal[0]};border-radius:${st.r === '0px' ? '0' : '99px'}`}></span>
+            </div>
+            <h3>{p.styleName} {letters[i]}</h3>
+            <div class="pal sm" aria-hidden="true">{st.pal.map((c) => <i style={`background:${c}`}></i>)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
       <h2>{p.tableTitle}</h2>
       <p class="sub">{p.tableSub}</p>
       <div class="tbl tok">
@@ -57,8 +85,7 @@ const p = d.intro;
               <tr>
                 <td>{r.token}</td>
                 <td>{r.swatch && <span class="sw" style={`background:${r.swatch}`}></span>}{r.value}</td>
-                <td class="l">{r.evidence}</td>
-                <td class="l">{r.limit}</td>
+                <td class="l">{r.use}</td>
               </tr>
             ))}
           </tbody>
