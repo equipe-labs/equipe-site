@@ -18,6 +18,8 @@ import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 import SoftwareApplicationJsonLd from '../components/SoftwareApplicationJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
 import { SITE } from '../data/site';
+import { DESIGN_LIVE } from '../data/design';
+import { getDesignText } from '../i18n/design';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 // One page per language that has a src/i18n/<code>.ts file. English lives at `/`, the rest at `/<slug>/`.
@@ -29,6 +31,7 @@ const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const t = getMessages(code);
 const at = getAppText(code);
+const dz = getDesignText(code);
 const pageUrl = new URL(localePath(info), Astro.site).href;
 
 const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
@@ -72,6 +75,7 @@ const tryIt = 'equipe try --edit "…"';
           <li class="opt"><a href="#stage">{t.nav.stage}</a></li>
           <li class="opt"><a href="#how-it-works">{t.nav.howItWorks}</a></li>
           <li class="opt"><a href="#features">{t.nav.features}</a></li>
+          {DESIGN_LIVE && <li><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
           <li class="opt"><a href="#get-started">{t.nav.getStarted}</a></li>
           <li class="opt"><a href="#faq">{t.nav.faq}</a></li>
           <li class="opt"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="header">{t.nav.github}</a></li>
@@ -245,6 +249,13 @@ const tryIt = 'equipe try --edit "…"';
             {t.feat.coming.map((f) => <li><h4>{f.title}</h4><p>{f.text}</p></li>)}
           </ul>
         </div>
+        {DESIGN_LIVE && (
+          <a class="dz-bridge" href={subPath(info, 'design')} data-ph="design_menu_click" data-ph-location="home">
+            <code>equipe-design</code>
+            <span>{dz.bridge.text}</span>
+            <span class="go">{dz.bridge.link} →</span>
+          </a>
+        )}
       </div>
     </section>
 
@@ -341,7 +352,7 @@ const tryIt = 'equipe try --edit "…"';
 
   <footer>
     <div class="wrap">
-      <span class="foot-links"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a><a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
+      <span class="foot-links"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a><a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a>{DESIGN_LIVE && <a href={`${subPath(info, 'design/docs')}#guardrails`}>{dz.nav.guidelines}</a>}<a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
       <span>{t.footer.license}</span>
       <span>{t.footer.built}</span>
     </div>

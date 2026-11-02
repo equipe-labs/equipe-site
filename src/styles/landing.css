@@ -302,3 +302,9 @@ main.landing .end h2 { font-size: 40px; line-height: 1.05; letter-spacing: -0.04
   /* hero: the decision card is the scene; the board of four tickets (the second half of the loop) stays on desktop */
   .hs-board .hs-tc:nth-of-type(n+4) { display: none; }
 }
+
+/* Home -> Design card (T-281); only rendered when DESIGN_MENU_LIVE=true */
+.dz-bridge { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); margin-top: var(--s-7); padding: var(--s-4) var(--s-5); border: var(--bw-1) solid var(--accent); border-radius: 14px; background: var(--surface); color: var(--text); text-decoration: none; font-size: 18px; }
+.dz-bridge code { background: none; padding: 0; color: var(--accent); font: 600 13px var(--mono); }
+.dz-bridge span:nth-of-type(1) { flex: 1 1 280px; }
+.dz-bridge .go { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

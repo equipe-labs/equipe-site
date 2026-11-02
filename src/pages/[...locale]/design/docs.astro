@@ -1,0 +1,71 @@
+---
+import DesignShell from '../../../components/DesignShell.astro';
+import Rich from '../../../components/Rich.astro';
+import { available, type LocaleCode } from '../../../i18n';
+import { getDesignText } from '../../../i18n/design';
+
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const d = getDesignText(code);
+const p = d.docs;
+const install = 'npm i -g equipe-design';
+// Sections in reading order; the side nav groups them under Start / Use / Trust.
+const groups = [
+  [{ id: 'install', label: p.installTitle }],
+  [{ id: 'cli', label: p.cliTitle }, { id: 'mcp', label: p.mcpTitle }, { id: 'output', label: p.outTitle }],
+  [{ id: 'evidence', label: p.evTitle }, { id: 'guardrails', label: p.gTitle }],
+];
+const all = groups.flat();
+---
+
+<DesignShell code={code} page="docs" title={p.meta.title} description={p.meta.description}>
+  <div class="wrap">
+    <div class="docs">
+      <nav class="side" aria-label={p.title}>
+        {groups.map((g, i) => (
+          <>
+            <h4>{p.groups[i]}</h4>
+            {g.map((x) => <a href={`#${x.id}`}>{x.label}</a>)}
+          </>
+        ))}
+      </nav>
+
+      <div class="body">
+        <div class="eb">{p.eyebrow}</div>
+        <h1 class="sm">{p.title}</h1>
+
+        <h2 id="install">{p.installTitle}</h2>
+        <p>{p.installText}</p>
+        <div class="codeblock"><pre><code>$ {install}</code></pre></div>
+        <div class="ph">⚑ {d.soon}</div>
+
+        <h2 id="cli">{p.cliTitle}</h2>
+        <div class="tbl"><table><tbody>{p.cliRows.map((r) => <tr><td>{r[0]}</td><td class="l">{r[1]}</td></tr>)}</tbody></table></div>
+
+        <h2 id="mcp">{p.mcpTitle}</h2>
+        <p><Rich s={p.mcpText} /></p>
+
+        <h2 id="output">{p.outTitle}</h2>
+        <div class="tbl"><table><tbody>{p.outRows.map((r) => <tr><td>{r[0]}</td><td class="l"><Rich s={r[1]} /></td></tr>)}</tbody></table></div>
+
+        <h2 id="evidence">{p.evTitle}</h2>
+        <p>{p.evText}</p>
+
+        <h2 id="guardrails">{p.gTitle}</h2>
+        <div class="warn">
+          <p>{p.gLead}</p>
+          <ul>{p.gItems.map((i) => <li>{i}</li>)}</ul>
+          <p class="legal">{p.gLegal}</p>
+        </div>
+      </div>
+
+      <nav class="toc" aria-label={p.onThisPage}>
+        <div class="lab">{p.onThisPage}</div>
+        {all.map((x) => <a href={`#${x.id}`}>{x.label}</a>)}
+      </nav>
+    </div>
+  </div>
+</DesignShell>
