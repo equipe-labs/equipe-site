@@ -1,0 +1,25 @@
+{
+  "millis": 28615,
+  "marks": [
+    {
+      "screen": "hero",
+      "at": 0
+    },
+    {
+      "screen": "home",
+      "at": 4766
+    },
+    {
+      "screen": "get-started",
+      "at": 12470
+    },
+    {
+      "screen": "faq",
+      "at": 17885
+    },
+    {
+      "screen": "end",
+      "at": 22652
+    }
+  ]
+}
