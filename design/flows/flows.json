@@ -203,6 +203,31 @@
           "wait": 2500
         },
         {
+          "press": "PageDown",
+          "screen": "home"
+        },
+        {
+          "say": "One long page: the product, how it works, what it does"
+        },
+        {
+          "press": "PageDown"
+        },
+        {
+          "wait": 700
+        },
+        {
+          "press": "PageDown"
+        },
+        {
+          "wait": 700
+        },
+        {
+          "press": "PageDown"
+        },
+        {
+          "wait": 700
+        },
+        {
           "go": "http://127.0.0.1:4378/#get-started",
           "screen": "get-started"
         },
@@ -218,6 +243,16 @@
         },
         {
           "say": "Questions before downloading"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "press": "End",
+          "screen": "end"
+        },
+        {
+          "say": "The closing Download for Mac"
         },
         {
           "wait": 2500
