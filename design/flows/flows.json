@@ -4,6 +4,7 @@
       "id": "first-visit",
       "title": "First visit → download",
       "summary": "A maker lands on equipe.im, reads the hero, scrolls to Get started and downloads the Mac app (DMG). The download itself has no on-page state: the browser takes over.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "hero",
@@ -228,6 +229,7 @@
       "id": "product-tour",
       "title": "Product tour (home sections)",
       "summary": "The sections between the hero and Get started that say what the app does: launch, stage, how it works, who it's for, features, evidence.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "launch",
@@ -431,6 +433,7 @@
       "id": "language",
       "title": "Change language",
       "summary": "8 languages. The globe menu in the header switches; a banner suggests the browser's language once, never redirects, and remembers a dismissal.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "menu",
@@ -622,6 +625,7 @@
       "id": "cli-install",
       "title": "Install with the CLI",
       "summary": "Secondary path for Linux and terminal people: from the hero link to the CLI block, Homebrew or install.sh, copy the command.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "cli",
@@ -721,6 +725,7 @@
       "id": "mobile-app",
       "title": "Mobile app · privacy and support",
       "summary": "The pages the iOS app's App Store listing points to, linked from every footer.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "privacy",
@@ -824,6 +829,7 @@
       "id": "design-menu",
       "title": "Design menu (hidden)",
       "summary": "HIDDEN on the live site: built, noindex, out of the sitemap and linked from nowhere until DESIGN_MENU_LIVE=true (src/data/design.ts). The library isn't built: its screens are T-303's mockups.",
+      "locale": "en-US",
       "screens": [
         {
           "id": "design-home",
@@ -1023,6 +1029,7 @@
       "id": "not-found",
       "title": "404 · page not found",
       "summary": "Any unknown path. One page holds all 8 languages: the URL prefix picks one, else the browser's language, else English (also without JavaScript).",
+      "locale": "ko-KR",
       "screens": [
         {
           "id": "not-found",
