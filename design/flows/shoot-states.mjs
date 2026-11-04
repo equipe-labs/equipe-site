@@ -6,7 +6,10 @@
 // puts the language banner on English pages and the 404 in that language — into the same paths: design/flows/<flow>/<screen>/<state>.<light|dark>.<width>.png.
 //
 //   npm run build && npx astro preview --port 4378
-//   node design/flows/shoot-states.mjs [http://127.0.0.1:4378] [--only <flow/screen>]
+//   node design/flows/shoot-states.mjs [http://127.0.0.1:4378] [--only <flow/screen>] [--live <url>]
+//
+// T-384: the `design-live` states come from a second build with the Design menu on:
+//   DESIGN_MENU_LIVE=true npm run build && npx astro preview --port 4384   (--live, default http://127.0.0.1:4384)
 //
 // Uses the Playwright that `equipe design` keeps in ~/.equipe/design-kit.
 import { createRequire } from 'node:module';
@@ -21,6 +24,8 @@ const { chromium } = require('playwright');
 const args = process.argv.slice(2);
 const onlyAt = args.indexOf('--only');
 const only = onlyAt >= 0 ? args.splice(onlyAt, 2)[1] : null;
+const liveAt = args.indexOf('--live');
+const LIVE = (liveAt >= 0 ? args.splice(liveAt, 2)[1] : 'http://127.0.0.1:4384').replace(/\/$/, '');
 const BASE = (args[0] || 'http://127.0.0.1:4378').replace(/\/$/, '');
 const OUT = dirname(fileURLToPath(import.meta.url));
 const WIDTHS = [390, 1280];
@@ -34,7 +39,7 @@ const S = (path, url, o = {}) => ({ path, url, view: 'fold', locale: 'en-US', js
 const openLang = async (p) => { await p.click('details.lang > summary'); };
 const tab = (id) => async (p) => { await p.click(`label[for="${id}"]`); };
 const copied = async (p) => {
-  await p.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE });
+  await p.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(p.url()).origin });
   await p.click('#get-started .tab-panel[data-panel="brew"] .copy');
 };
 const denied = async (p) => { await p.click('#get-started .tab-panel[data-panel="brew"] .copy'); };
@@ -94,6 +99,11 @@ const SHOTS = [
   S('design-menu/design-home/long', '/de/design/', { view: 'page', locale: 'de-DE' }),
   S('design-menu/docs/long', '/de/design/docs/', { view: 'page', locale: 'de-DE' }),
   S('design-menu/examples/long', '/de/design/examples/', { view: 'page', locale: 'de-DE' }),
+  // The Design menu live (T-384): the header link, the home card, the footer link
+  S('language/menu/design-live', '/', { live: true }),
+  S('first-visit/home/design-live', '/', { view: 'full', live: true }),
+  S('product-tour/features/design-live', '/', { view: '#features', live: true }),
+  S('product-tour/features/design-live-long', '/de/', { view: '#features', locale: 'de-DE', live: true }),
   // Not found
   S('not-found/not-found/default', '/nope/', { view: 'page' }),
   S('not-found/not-found/browser-lang', '/nope/', { locale: 'ja-JP' }),
@@ -126,7 +136,8 @@ try {
             await r.fulfill({ response: res, body: (await res.text()).replace('</head>', `<style>${UNSTICK}</style></head>`) });
           });
         }
-        await page.goto(BASE + shot.url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => page.waitForLoadState('load'));
+        const base = shot.live ? LIVE : BASE;
+        await page.goto(base + shot.url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => page.waitForLoadState('load'));
         if (shot.fonts !== false) await page.evaluate(() => document.fonts && document.fonts.ready);
         await page.waitForTimeout(1200);
         const file = join(OUT, `${shot.path}.${scheme}.${width}.png`);
