@@ -1,0 +1,1059 @@
+{
+  "flows": [
+    {
+      "id": "first-visit",
+      "title": "First visit → download",
+      "summary": "A maker lands on equipe.im, reads the hero, scrolls to Get started and downloads the Mac app (DMG). The download itself has no on-page state: the browser takes over.",
+      "screens": [
+        {
+          "id": "hero",
+          "title": "Home · first screen",
+          "note": "Primary action: Download for Mac (DMG); the CLI link is secondary. Offline isn't a state of its own: the site is static, with no service worker, so offline is the browser's own page.",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/HeroScene.astro",
+            "src/components/AppUi.astro"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long",
+            "loading",
+            "no-js"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the first screen only (390×844, 1280×800), hero scene mid-motion"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ko/ with the browser in ko-KR, so no language banner"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the first screen in German, the longest of the 8 languages, browser in de-DE"
+            },
+            {
+              "id": "loading",
+              "label": "Webfonts not loaded yet",
+              "kind": "loading",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): every .woff2 blocked: what a slow connection shows before Inter and Pretendard arrive"
+            },
+            {
+              "id": "no-js",
+              "label": "JavaScript off",
+              "kind": "no-js",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no hero motion, no banner; everything still reads"
+            }
+          ]
+        },
+        {
+          "id": "home",
+          "title": "Home · whole page",
+          "note": "The overview of the one long page; the sections are screens of their own below and in Product tour.",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppUi.astro",
+            "src/components/State.astro",
+            "src/styles/motion.css"
+          ],
+          "expects": [
+            "default",
+            "long",
+            "no-js"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): whole page at 1× (2× passes Chrome's capture height), scroll motion run through first so every block has arrived"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the whole page in German, the longest of the 8 languages, browser in de-DE"
+            },
+            {
+              "id": "no-js",
+              "label": "JavaScript off",
+              "kind": "no-js",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no scroll motion, no copy buttons, numbers shown as written"
+            }
+          ]
+        },
+        {
+          "id": "get-started",
+          "title": "Get started",
+          "url": "http://127.0.0.1:4378/#get-started",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppUi.astro"
+          ],
+          "expects": [
+            "default",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the #get-started section: 3 steps, the download button, then the CLI block"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the section in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "faq",
+          "title": "FAQ",
+          "url": "http://127.0.0.1:4378/#faq",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/FaqJsonLd.astro"
+          ],
+          "expects": [
+            "default",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (questions 1 and 5 open, as built)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the #faq section"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the section in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "end",
+          "title": "Closing call to action",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the last section and its Download button"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/",
+          "screen": "hero"
+        },
+        {
+          "say": "A maker lands on equipe.im"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/#get-started",
+          "screen": "get-started"
+        },
+        {
+          "say": "Get started: three steps and the download"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/#faq",
+          "screen": "faq"
+        },
+        {
+          "say": "Questions before downloading"
+        },
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
+      "id": "product-tour",
+      "title": "Product tour (home sections)",
+      "summary": "The sections between the hero and Get started that say what the app does: launch, stage, how it works, who it's for, features, evidence.",
+      "screens": [
+        {
+          "id": "launch",
+          "title": "Launch",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppUi.astro"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): section.launch"
+            }
+          ]
+        },
+        {
+          "id": "stage",
+          "title": "Stage",
+          "url": "http://127.0.0.1:4378/#stage",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppUi.astro",
+            "src/components/State.astro"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): #stage"
+            }
+          ]
+        },
+        {
+          "id": "how-it-works",
+          "title": "How it works",
+          "url": "http://127.0.0.1:4378/#how-it-works",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppUi.astro",
+            "src/components/State.astro"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): #how-it-works"
+            }
+          ]
+        },
+        {
+          "id": "who-for",
+          "title": "Who it's for",
+          "url": "http://127.0.0.1:4378/#who-for",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): #who-for"
+            }
+          ]
+        },
+        {
+          "id": "features",
+          "title": "Features",
+          "url": "http://127.0.0.1:4378/#features",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/AppCard.astro",
+            "src/components/Ic.astro"
+          ],
+          "expects": [
+            "default",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): #features"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the section in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "evidence",
+          "title": "Evidence (how this site was built)",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): section.evs, inverted in dark mode as built"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/#stage",
+          "screen": "stage"
+        },
+        {
+          "say": "Where the product stands"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/#how-it-works",
+          "screen": "how-it-works"
+        },
+        {
+          "say": "How the loop works"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/#features",
+          "screen": "features"
+        },
+        {
+          "say": "What it does"
+        },
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "title": "Change language",
+      "summary": "8 languages. The globe menu in the header switches; a banner suggests the browser's language once, never redirects, and remembers a dismissal.",
+      "screens": [
+        {
+          "id": "menu",
+          "title": "Language menu",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/components/LangMenu.astro",
+            "src/components/LangBanner.astro",
+            "src/styles/global.css",
+            "src/i18n/index.ts",
+            "src/i18n/locales.ts"
+          ],
+          "expects": [
+            "default",
+            "open",
+            "open-ko"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Closed",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the first screen with the menu closed"
+            },
+            {
+              "id": "open",
+              "label": "Open (English page)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): after a click on the globe"
+            },
+            {
+              "id": "open-ko",
+              "label": "Open (Korean page)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ko/ after a click on the globe"
+            }
+          ]
+        },
+        {
+          "id": "banner",
+          "title": "Language suggestion banner",
+          "url": "http://127.0.0.1:4378/",
+          "source": [
+            "src/components/LangMenu.astro",
+            "src/components/LangBanner.astro",
+            "src/styles/global.css",
+            "src/i18n/index.ts",
+            "src/i18n/locales.ts"
+          ],
+          "expects": [
+            "shown",
+            "long",
+            "none"
+          ],
+          "states": [
+            {
+              "id": "shown",
+              "label": "Shown (Korean browser on the English page)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ko-KR on /"
+            },
+            {
+              "id": "long",
+              "label": "Shown, longest text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in de-DE on /"
+            },
+            {
+              "id": "none",
+              "label": "Not shown (no matching language)",
+              "kind": "empty",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in zh-TW: no page for it, so no banner. After a dismissal it looks the same."
+            }
+          ]
+        },
+        {
+          "id": "localized-home",
+          "title": "Home in each language",
+          "url": "http://127.0.0.1:4378/ko/",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/i18n/ko.ts",
+            "src/i18n/ja.ts",
+            "src/i18n/zh-CN.ts",
+            "src/i18n/es.ts",
+            "src/i18n/pt-BR.ts",
+            "src/i18n/de.ts",
+            "src/i18n/fr.ts"
+          ],
+          "expects": [
+            "ko",
+            "ja",
+            "zh-cn",
+            "es",
+            "pt-br",
+            "de",
+            "fr"
+          ],
+          "states": [
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ko/ first screen, browser in the same language"
+            },
+            {
+              "id": "ja",
+              "label": "Japanese",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ja/ first screen, browser in the same language"
+            },
+            {
+              "id": "zh-cn",
+              "label": "Simplified Chinese",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /zh-cn/ first screen, browser in the same language"
+            },
+            {
+              "id": "es",
+              "label": "Spanish",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /es/ first screen, browser in the same language"
+            },
+            {
+              "id": "pt-br",
+              "label": "Portuguese (Brazil)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /pt-br/ first screen, browser in the same language"
+            },
+            {
+              "id": "de",
+              "label": "German",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /de/ first screen, browser in the same language"
+            },
+            {
+              "id": "fr",
+              "label": "French",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /fr/ first screen, browser in the same language"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/",
+          "screen": "menu"
+        },
+        {
+          "say": "The globe in the header"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "click": "details.lang > summary"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "click": "details.lang a[hreflang=\"ko\"]",
+          "screen": "localized-home"
+        },
+        {
+          "say": "The same page in Korean"
+        },
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
+      "id": "cli-install",
+      "title": "Install with the CLI",
+      "summary": "Secondary path for Linux and terminal people: from the hero link to the CLI block, Homebrew or install.sh, copy the command.",
+      "screens": [
+        {
+          "id": "cli",
+          "title": "CLI install block",
+          "url": "http://127.0.0.1:4378/#cli-install",
+          "source": [
+            "src/pages/[...locale].astro",
+            "src/styles/landing.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts",
+            "src/components/Rich.astro"
+          ],
+          "expects": [
+            "default",
+            "script",
+            "source-open",
+            "copied",
+            "copy-denied",
+            "no-js",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Homebrew tab",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the .cli block"
+            },
+            {
+              "id": "script",
+              "label": "install.sh tab",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): after a click on the install.sh tab"
+            },
+            {
+              "id": "source-open",
+              "label": "Build from source opened",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the details opened"
+            },
+            {
+              "id": "copied",
+              "label": "Copied",
+              "kind": "success",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): clipboard allowed, after a click on Copy (the label reads Copied for 1.5 s)"
+            },
+            {
+              "id": "copy-denied",
+              "label": "Copy refused by the browser",
+              "kind": "permission",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): clipboard not allowed: the click does nothing and says nothing — a gap, see follow-up"
+            },
+            {
+              "id": "no-js",
+              "label": "JavaScript off",
+              "kind": "no-js",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): copy buttons hidden; tabs still work (CSS only)"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the block in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/",
+          "screen": "cli"
+        },
+        {
+          "say": "On Linux? The CLI link under the download"
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "click": "a[href=\"#cli-install\"]"
+        },
+        {
+          "wait": 2000
+        },
+        {
+          "click": "label[for=\"tab-script\"]"
+        },
+        {
+          "say": "Homebrew or install.sh"
+        },
+        {
+          "wait": 2000
+        }
+      ]
+    },
+    {
+      "id": "mobile-app",
+      "title": "Mobile app · privacy and support",
+      "summary": "The pages the iOS app's App Store listing points to, linked from every footer.",
+      "screens": [
+        {
+          "id": "privacy",
+          "title": "Privacy policy",
+          "url": "http://127.0.0.1:4378/app/privacy/",
+          "source": [
+            "src/pages/[...locale]/app/privacy.astro",
+            "src/components/AppPageShell.astro",
+            "src/styles/app.css",
+            "src/styles/global.css",
+            "src/i18n/app/en.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "support",
+          "title": "Support",
+          "url": "http://127.0.0.1:4378/app/support/",
+          "source": [
+            "src/pages/[...locale]/app/support.astro",
+            "src/components/AppPageShell.astro",
+            "src/styles/app.css",
+            "src/styles/global.css",
+            "src/i18n/app/en.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/app/privacy/",
+          "screen": "privacy"
+        },
+        {
+          "say": "What the app collects"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/app/support/",
+          "screen": "support"
+        },
+        {
+          "say": "Where to get help"
+        },
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
+      "id": "design-menu",
+      "title": "Design menu (hidden)",
+      "summary": "HIDDEN on the live site: built, noindex, out of the sitemap and linked from nowhere until DESIGN_MENU_LIVE=true (src/data/design.ts). The library isn't built: its screens are T-303's mockups.",
+      "screens": [
+        {
+          "id": "design-home",
+          "title": "Design · intro",
+          "note": "Hidden: reached only by typing the URL.",
+          "url": "http://127.0.0.1:4378/design/",
+          "source": [
+            "src/pages/[...locale]/design/index.astro",
+            "src/components/DesignShell.astro",
+            "src/styles/design.css",
+            "src/i18n/design/en.ts",
+            "src/data/design.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "docs",
+          "title": "Design · docs",
+          "note": "Hidden: reached only by typing the URL.",
+          "url": "http://127.0.0.1:4378/design/docs/",
+          "source": [
+            "src/pages/[...locale]/design/docs.astro",
+            "src/components/DesignShell.astro",
+            "src/styles/design.css",
+            "src/i18n/design/en.ts",
+            "src/data/design.ts"
+          ],
+          "expects": [
+            "default",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "examples",
+          "title": "Design · examples",
+          "note": "Hidden: reached only by typing the URL.",
+          "url": "http://127.0.0.1:4378/design/examples/",
+          "source": [
+            "src/pages/[...locale]/design/examples.astro",
+            "src/components/DesignShell.astro",
+            "src/styles/design.css",
+            "src/i18n/design/en.ts",
+            "src/data/design.ts"
+          ],
+          "expects": [
+            "default",
+            "long"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            }
+          ]
+        },
+        {
+          "id": "library-list",
+          "title": "Library · list (mockup)",
+          "note": "Not built: /design/library/ returns 404. The library itself is on hold (ideas T-306…T-308).",
+          "url": "http://127.0.0.1:4378/design/library/",
+          "source": [
+            "design/library/html/list.html",
+            "design/library/gen.py"
+          ],
+          "ticket": 303,
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default — MOCKUP",
+              "kind": "default",
+              "note": "MOCKUP, not built: T-303's design/library/html/list.html rendered with `equipe design render`. /design/library/ is a 404 today."
+            }
+          ]
+        },
+        {
+          "id": "library-detail",
+          "title": "Library · style detail (mockup)",
+          "note": "Not built.",
+          "url": "http://127.0.0.1:4378/design/library/",
+          "source": [
+            "design/library/html/detail.html",
+            "design/library/gen.py"
+          ],
+          "ticket": 303,
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default — MOCKUP",
+              "kind": "default",
+              "note": "MOCKUP, not built: T-303's design/library/html/detail.html"
+            }
+          ]
+        },
+        {
+          "id": "library-remix",
+          "title": "Library · make it mine (mockup)",
+          "note": "Not built.",
+          "url": "http://127.0.0.1:4378/design/library/",
+          "source": [
+            "design/library/html/remix.html",
+            "design/library/gen.py"
+          ],
+          "ticket": 303,
+          "expects": [
+            "default"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default — MOCKUP",
+              "kind": "default",
+              "note": "MOCKUP, not built: T-303's design/library/html/remix.html"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/design/",
+          "screen": "design-home"
+        },
+        {
+          "say": "The hidden Design menu, by URL only"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "go": "http://127.0.0.1:4378/design/docs/",
+          "screen": "docs"
+        },
+        {
+          "wait": 2000
+        },
+        {
+          "go": "http://127.0.0.1:4378/design/examples/",
+          "screen": "examples"
+        },
+        {
+          "wait": 2000
+        }
+      ]
+    },
+    {
+      "id": "not-found",
+      "title": "404 · page not found",
+      "summary": "Any unknown path. One page holds all 8 languages: the URL prefix picks one, else the browser's language, else English (also without JavaScript).",
+      "screens": [
+        {
+          "id": "not-found",
+          "title": "Not found",
+          "url": "http://127.0.0.1:4378/nope/",
+          "source": [
+            "src/pages/404.astro",
+            "src/styles/global.css"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "browser-lang",
+            "long",
+            "no-js"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "error",
+              "note": "shot by design/flows/shoot-states.mjs in an en-US browser: `flows shoot` speaks the Mac's language (ko), which adds the language banner and turns the 404 Korean"
+            },
+            {
+              "id": "ko",
+              "label": "Korean (/ko/… path)",
+              "kind": "error",
+              "url": "http://127.0.0.1:4378/ko/nope/",
+              "note": "`equipe design flows shoot` from its URL"
+            },
+            {
+              "id": "browser-lang",
+              "label": "Browser's language (Japanese browser, unprefixed path)",
+              "kind": "error",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ja-JP on /nope/"
+            },
+            {
+              "id": "long",
+              "label": "German (/de/… path)",
+              "kind": "long",
+              "url": "http://127.0.0.1:4378/de/nope/",
+              "note": "`equipe design flows shoot` from its URL"
+            },
+            {
+              "id": "no-js",
+              "label": "JavaScript off",
+              "kind": "no-js",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ko/nope/ without JavaScript: English shows"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/ko/nope/",
+          "screen": "not-found"
+        },
+        {
+          "say": "A broken link lands on the 404, in the path's language"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "click": "a.btn.primary:visible"
+        },
+        {
+          "wait": 2000
+        }
+      ]
+    }
+  ]
+}
