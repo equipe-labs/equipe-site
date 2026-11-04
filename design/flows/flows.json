@@ -70,12 +70,15 @@
             "src/i18n/en.ts",
             "src/components/AppUi.astro",
             "src/components/State.astro",
-            "src/styles/motion.css"
+            "src/styles/motion.css",
+            "src/data/design.ts",
+            "src/i18n/design/en.ts"
           ],
           "expects": [
             "default",
             "long",
-            "no-js"
+            "no-js",
+            "design-live"
           ],
           "states": [
             {
@@ -95,6 +98,13 @@
               "label": "JavaScript off",
               "kind": "no-js",
               "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no scroll motion, no copy buttons, numbers shown as written"
+            },
+            {
+              "id": "design-live",
+              "kind": "default",
+              "label": "Whole page, Design menu live",
+              "url": "http://127.0.0.1:4384/",
+              "note": "shot by design/flows/shoot-states.mjs from a second build with the Design menu on (`DESIGN_MENU_LIVE=true npm run build && npx astro preview --port 4384`); on equipe.im today the menu is hidden (T-384): the header link, the equipe-design card at the end of Features and the Guidelines link in the footer. The 390 picture is 401 px wide because the page overflows."
             }
           ]
         },
@@ -322,11 +332,15 @@
             "src/styles/global.css",
             "src/i18n/en.ts",
             "src/components/AppCard.astro",
-            "src/components/Ic.astro"
+            "src/components/Ic.astro",
+            "src/data/design.ts",
+            "src/i18n/design/en.ts"
           ],
           "expects": [
             "default",
-            "long"
+            "long",
+            "design-live",
+            "design-live-long"
           ],
           "states": [
             {
@@ -340,6 +354,20 @@
               "label": "Long text (German)",
               "kind": "long",
               "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the section in German, the longest of the 8 languages, browser in de-DE"
+            },
+            {
+              "id": "design-live",
+              "kind": "default",
+              "label": "Design menu live: the equipe-design card",
+              "url": "http://127.0.0.1:4384/#features",
+              "note": "shot by design/flows/shoot-states.mjs from a second build with the Design menu on (`DESIGN_MENU_LIVE=true npm run build && npx astro preview --port 4384`); on equipe.im today the menu is hidden (T-384): the card after Coming."
+            },
+            {
+              "id": "design-live-long",
+              "kind": "long",
+              "label": "Design menu live, German",
+              "url": "http://127.0.0.1:4384/de/#features",
+              "note": "shot by design/flows/shoot-states.mjs from a second build with the Design menu on (`DESIGN_MENU_LIVE=true npm run build && npx astro preview --port 4384`); on equipe.im today the menu is hidden (T-384): /de/ in a German browser, the card in the longest language."
             }
           ]
         },
@@ -413,12 +441,16 @@
             "src/components/LangBanner.astro",
             "src/styles/global.css",
             "src/i18n/index.ts",
-            "src/i18n/locales.ts"
+            "src/i18n/locales.ts",
+            "src/data/design.ts",
+            "src/pages/[...locale].astro",
+            "src/i18n/design/en.ts"
           ],
           "expects": [
             "default",
             "open",
-            "open-ko"
+            "open-ko",
+            "design-live"
           ],
           "states": [
             {
@@ -438,6 +470,13 @@
               "label": "Open (Korean page)",
               "kind": "default",
               "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): /ko/ after a click on the globe"
+            },
+            {
+              "id": "design-live",
+              "kind": "default",
+              "label": "Design menu live",
+              "url": "http://127.0.0.1:4384/",
+              "note": "shot by design/flows/shoot-states.mjs from a second build with the Design menu on (`DESIGN_MENU_LIVE=true npm run build && npx astro preview --port 4384`); on equipe.im today the menu is hidden (T-384). At 390 the header overflows: the page is 401 px wide (41 px too wide at 360), \"Design\" touches the wordmark and the Download button is cut at the right edge."
             }
           ]
         },
