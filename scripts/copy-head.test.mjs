@@ -8,11 +8,13 @@ const slugs = ['', 'ko/', 'ja/', 'zh-cn/', 'es/', 'pt-br/', 'de/', 'fr/'];
 let bad = 0;
 const check = (name, cond) => { console.log(`${cond ? '  ok  ' : '  FAIL'} ${name}`); if (!cond) bad++; };
 
-// Q02: the phone FAQ must say Android is not released yet (and never claim current support).
-const notYet = { '': "isn't released yet", 'ko/': '출시 전', 'ja/': '未リリース', 'zh-cn/': '尚未发布', 'es/': 'aún no se ha lanzado', 'pt-br/': 'ainda não foi lançado', 'de/': 'noch nicht erschienen', 'fr/': 'pas encore sortie' };
+// Q02: every translated support page must offer the signed Android APK and pairing instructions.
 for (const s of slugs) {
   const h = read(`${s}app/support/index.html`).replace(/&#39;|&#x27;/g, "'");
-  check(`Q02 ${s || 'en/'} support FAQ marks Android unreleased`, h.includes(notYet[s]));
+  check(
+    `Q02 ${s || 'en/'} support offers Android APK`,
+    h.includes('data-ph="android_download_click"') && h.includes('equipe pair') && h.includes('bd8f267edeb10ce0aaed1efbb80f7b3c349895f6121e5f8a97d647d09f8d9773'),
+  );
 }
 
 // Q10/Q11: 404 has per-language skip text, and no canonical / hreflang / og:url.

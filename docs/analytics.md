@@ -77,6 +77,7 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` | GitHub로 가는 CTA·링크 클릭 |
 | `desktop_download_click` | `location`: `header` / `hero` / `start` / `close` | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
+| `android_download_click` | `location`: `phone` / `start` / `support` | 서명된 Android APK 다운로드 링크 클릭 |
 | `cli_install_link_click` | `location`: `hero` | 히어로의 "터미널로 설치하기" 링크 클릭 (설치 섹션의 CLI 블록으로 이동) |
 | `app_notify_click` | — | T-159 이후 발생하지 않는다(앱 섹션과 알림 카드가 없어짐). 과거 데이터만 남는다 |
 | `install_command_copy` | `command`: `install` / `install_brew` / `run` / `try`, (설치 섹션의 명령에만. T-137 전에는 히어로의 brew 명령에 `location=hero`가 붙었다) | 설치 명령 복사 버튼 클릭 |

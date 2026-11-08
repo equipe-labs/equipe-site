@@ -5,6 +5,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/download/android",
+      "destination": "https://github.com/equipe-labs/equipe-site/releases/download/android-v0.2.0/equipe-android-0.2.0.apk",
+      "statusCode": 307
+    },
+    {
       "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.equipe.im" }],
       "destination": "https://equipe.im/:path",

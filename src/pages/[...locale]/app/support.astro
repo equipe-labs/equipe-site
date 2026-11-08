@@ -2,6 +2,7 @@
 import AppPageShell from '../../../components/AppPageShell.astro';
 import Rich from '../../../components/Rich.astro';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../../i18n';
+import { SITE } from '../../../data/site';
 
 // /app/support/ in English, /<slug>/app/support/ in every other language that has a translation file.
 export function getStaticPaths() {
@@ -10,12 +11,29 @@ export function getStaticPaths() {
 
 const { code } = Astro.props as { code: LocaleCode };
 const s = getMessages(code).app.support;
+const android = getMessages(code).start.android;
 const privacy = subPath(getLocale(code), 'app/privacy');
+const androidFileSha256 = 'bd8f267edeb10ce0aaed1efbb80f7b3c349895f6121e5f8a97d647d09f8d9773';
+const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e367aee2ff769041a87';
 ---
 
 <AppPageShell code={code} subpage="app/support" title={s.meta.title} description={s.meta.description}>
   <h1>{s.title}</h1>
   <p class="lead">{s.intro}</p>
+
+  <section class="doc-section android-install">
+    <h2>{android.title}</h2>
+    <p>{android.intro}</p>
+    <p><a class="btn" href={SITE.androidApk} data-ph="android_download_click" data-ph-location="support">{android.download}</a></p>
+    <ol>
+      {android.steps.map((step) => <li><Rich s={step} /></li>)}
+    </ol>
+    <p>{android.playStore}</p>
+    <dl class="android-hashes">
+      <div><dt>{android.fileSha256}</dt><dd><code>{androidFileSha256}</code></dd></div>
+      <div><dt>{android.certificateSha256}</dt><dd><code>{androidCertificateSha256}</code></dd></div>
+    </dl>
+  </section>
 
   <section class="doc-section">
     <h2>{s.pairTitle}</h2>

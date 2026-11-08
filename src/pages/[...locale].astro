@@ -46,6 +46,8 @@ const scenes = [{ k: 'fa', n: 0 }, { k: 'fb', n: 4 }, { k: 'fc', n: 3, tall: tru
 // Headline breaks at the sentence boundary (never mid-phrase): "Your whole startup team." / "You just approve."
 const heroLines = t.hero.title.split(/(?<=[.。])\s*(?=\S)/);
 const tryIt = 'equipe try --edit "…"';
+const androidFileSha256 = 'bd8f267edeb10ce0aaed1efbb80f7b3c349895f6121e5f8a97d647d09f8d9773';
+const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e367aee2ff769041a87';
 ---
 
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
@@ -177,8 +179,8 @@ const tryIt = 'equipe try --edit "…"';
                       <div class="hi"></div>
                     </div>
                   </div>
-                  <p class="cap narrow"><span class="now">{t.ui.now}</span> {t.loop.phoneCaption} <a href={SITE.appStore} rel="noopener">{t.loop.appStore}</a></p>
-                  <p class="cap narrow"><span class="soon">{t.ui.soon}</span> {t.loop.androidNote}</p>
+                  <p class="cap narrow"><span class="now">{t.ui.now}</span> {t.loop.phoneCaption} <a href={SITE.appStore} rel="noopener">{t.loop.appStore}</a> · <a href={SITE.androidApk} data-ph="android_download_click" data-ph-location="phone">Android (APK)</a></p>
+                  <p class="cap narrow">{t.start.android.playStore}</p>
                 </div>
               </div>
             </div>
@@ -289,7 +291,20 @@ const tryIt = 'equipe try --edit "…"';
         </ol>
         <div class="acts">
           <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="start" download>{t.hero.cta}</a>
+          <a class="btn lg" href={SITE.androidApk} data-ph="android_download_click" data-ph-location="start">{t.start.android.download}</a>
           <span class="meta">{t.hero.req}</span>
+        </div>
+        <div class="android-install">
+          <h3>{t.start.android.title}</h3>
+          <p>{t.start.android.intro}</p>
+          <ol>
+            {t.start.android.steps.map((step) => <li><Rich s={step} /></li>)}
+          </ol>
+          <p>{t.start.android.playStore}</p>
+          <dl class="android-hashes">
+            <div><dt>{t.start.android.fileSha256}</dt><dd><code>{androidFileSha256}</code></dd></div>
+            <div><dt>{t.start.android.certificateSha256}</dt><dd><code>{androidCertificateSha256}</code></dd></div>
+          </dl>
         </div>
         <div class="cli">
           <h3 id="cli-install" class="cli-title">{t.start.cliTitle}</h3>
