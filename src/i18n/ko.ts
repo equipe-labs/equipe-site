@@ -15,6 +15,7 @@ const ko: Messages = {
     primaryNav: '주 메뉴',
     copy: '복사',
     copied: '복사됨',
+    copyFallback: '⌘C / Ctrl+C를 누르세요',
     copyInstall: '설치 명령어 복사',
     copyCommands: '명령어 복사',
     copyCommand: '명령어 복사',

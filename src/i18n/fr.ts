@@ -16,6 +16,7 @@ const fr: Messages = {
     primaryNav: 'Navigation principale',
     copy: 'Copier',
     copied: 'Copié',
+    copyFallback: 'Appuyez sur ⌘C / Ctrl+C',
     copyInstall: 'Copier les commandes d’installation',
     copyCommands: 'Copier les commandes',
     copyCommand: 'Copier la commande',

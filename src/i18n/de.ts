@@ -15,6 +15,7 @@ const de: Messages = {
     primaryNav: 'Hauptnavigation',
     copy: 'Kopieren',
     copied: 'Kopiert',
+    copyFallback: '⌘C / Strg+C drücken',
     copyInstall: 'Installationsbefehle kopieren',
     copyCommands: 'Befehle kopieren',
     copyCommand: 'Befehl kopieren',

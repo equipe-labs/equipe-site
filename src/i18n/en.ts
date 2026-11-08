@@ -16,6 +16,7 @@ export const en = {
     primaryNav: 'Primary',
     copy: 'Copy',
     copied: 'Copied',
+    copyFallback: 'Press ⌘C / Ctrl+C',
     copyInstall: 'Copy install commands',
     copyCommands: 'Copy commands',
     copyCommand: 'Copy command',

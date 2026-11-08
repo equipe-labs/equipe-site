@@ -15,6 +15,7 @@ const ja: Messages = {
     primaryNav: 'メインメニュー',
     copy: 'コピー',
     copied: 'コピー済み',
+    copyFallback: '⌘C / Ctrl+Cでコピー',
     copyInstall: 'インストールコマンドをコピー',
     copyCommands: 'コマンドをコピー',
     copyCommand: 'コマンドをコピー',

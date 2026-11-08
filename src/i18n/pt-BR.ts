@@ -15,6 +15,7 @@ const ptBR: Messages = {
     primaryNav: 'Principal',
     copy: 'Copiar',
     copied: 'Copiado',
+    copyFallback: 'Pressione ⌘C / Ctrl+C',
     copyInstall: 'Copiar comandos de instalação',
     copyCommands: 'Copiar comandos',
     copyCommand: 'Copiar comando',

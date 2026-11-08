@@ -15,6 +15,7 @@ const es: Messages = {
     primaryNav: 'Principal',
     copy: 'Copiar',
     copied: 'Copiado',
+    copyFallback: 'Pulsa ⌘C / Ctrl+C',
     copyInstall: 'Copiar los comandos de instalación',
     copyCommands: 'Copiar los comandos',
     copyCommand: 'Copiar el comando',

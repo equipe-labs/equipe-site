@@ -15,6 +15,7 @@ const zhCN: Messages = {
     primaryNav: '主导航',
     copy: '复制',
     copied: '已复制',
+    copyFallback: '请按 ⌘C / Ctrl+C',
     copyInstall: '复制安装命令',
     copyCommands: '复制命令',
     copyCommand: '复制命令',
