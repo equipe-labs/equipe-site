@@ -72,10 +72,10 @@ section { padding: var(--section-y) 0; }
 @media (min-width: 641px) { .notify { flex-direction: row; justify-content: space-between; align-items: center; gap: var(--s-5); } }
 
 /* code box: the text scrolls inside it, the Copy button sits beside it (never over the text), centred on the first line */
-.codeblock { display: flex; align-items: flex-start; margin: var(--s-4) 0 var(--s-5); background: var(--code-bg); border-radius: var(--r-1); }
-pre { flex: 1; min-width: 0; margin: 0; padding: var(--s-4); overflow-x: auto; font: 400 15px/1.6 var(--mono); white-space: pre; }
+.codeblock { display: flex; flex-wrap: wrap; align-items: flex-start; margin: var(--s-4) 0 var(--s-5); background: var(--code-bg); border-radius: var(--r-1); }
+pre { flex: 1 1 14em; min-width: 0; margin: 0; padding: var(--s-4); overflow-x: auto; font: 400 15px/1.6 var(--mono); white-space: pre; }
 pre code { background: none; padding: 0; font-size: inherit; }
-.copy { flex: none; display: none; min-width: var(--tap); min-height: var(--tap); margin: calc((24px + 2 * var(--s-4) - var(--tap)) / 2) var(--s-2) 0 0; background: none; border: 0; color: var(--accent); font: 600 14px var(--sans); cursor: pointer; }
+.copy { flex: none; display: none; min-width: var(--tap); min-height: var(--tap); margin: calc((24px + 2 * var(--s-4) - var(--tap)) / 2) var(--s-2) 0 auto; background: none; border: 0; color: var(--accent); font: 600 14px var(--sans); cursor: pointer; }
 .js .copy { display: block; }
 @media (max-width: 640px) { pre { font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; } }
 .links, .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-5); }
