@@ -142,11 +142,12 @@ code, pre, pre:lang(ko), pre:lang(ja), pre:lang(zh-CN), code:lang(ko), code:lang
 .android-install > p { margin-top: var(--s-3); color: var(--muted); }
 .android-install > ol { margin: var(--s-4) 0; padding-left: var(--s-5); list-style: decimal; }
 .android-install > ol li { margin-bottom: var(--s-2); line-height: 1.55; }
-.android-hashes { display: grid; gap: var(--s-3); margin: var(--s-5) 0 0; }
+.android-hashes { display: grid; gap: var(--s-2); margin: var(--s-5) 0 0; }
 .android-hashes div { min-width: 0; }
-.android-hashes dt { color: var(--muted); font-size: 13px; }
+.android-hashes dt { color: var(--muted); font-size: 12px; }
 .android-hashes dd { margin: var(--s-1) 0 0; }
 .android-hashes code { display: block; overflow-wrap: anywhere; word-break: break-all; font-size: 12px; line-height: 1.5; }
+@media (hover: hover) { .android-install .btn:hover { background: var(--surface); } }
 main.doc { padding: var(--s-7) 0 var(--s-8); }
 main.doc h1 { font-size: 32px; line-height: 1.15; }
 @media (min-width: 641px) { main.doc h1 { font-size: 44px; } }
