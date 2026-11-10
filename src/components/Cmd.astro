@@ -4,7 +4,7 @@
 // as a different command. textContent — what Copy puts on the clipboard — is unchanged.
 const { text } = Astro.props;
 const parts = String(text).split(/(\s+)/).map((tok) =>
-  /^\s*$/.test(tok) ? [tok] : tok.split(/(?<=\/)/)
+  /^\s*$/.test(tok) ? [tok] : tok.split(/(?<=\/)(?!\/)/)
 );
 ---
 {parts.map((segs) => segs.length === 1 && /^\s*$/.test(segs[0]) ? segs[0] : segs.map((s, i) => <Fragment>{i > 0 && <wbr />}<span class="nb">{s}</span></Fragment>))}
