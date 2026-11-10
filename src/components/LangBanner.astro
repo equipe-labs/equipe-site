@@ -61,8 +61,8 @@ const data = JSON.stringify({ current: getLocale(locale).lang, all: available.ma
           link.textContent = t.text; link.href = t.href; link.setAttribute('hreflang', t.lang);
           box.setAttribute('lang', t.lang); box.setAttribute('aria-label', t.text); close.setAttribute('aria-label', t.close);
           link.addEventListener('click', function () { remember(); track('language_switch', { from: d.current, to: t.lang, source: 'banner' }); });
-          close.addEventListener('click', function () { remember(); box.hidden = true; track('language_banner_dismissed', { from: d.current, suggested: t.lang }); });
-          box.hidden = false;
+          close.addEventListener('click', function () { remember(); box.hidden = true; document.body.classList.remove('has-lang-banner'); track('language_banner_dismissed', { from: d.current, suggested: t.lang }); });
+          box.hidden = false; document.body.classList.add('has-lang-banner');
           track('language_banner_shown', { from: d.current, suggested: t.lang });
         })();
       </script>
