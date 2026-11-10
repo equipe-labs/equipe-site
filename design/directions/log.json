@@ -112,5 +112,51 @@
       "R11",
       "R13"
     ]
+  },
+  {
+    "name": "A 한 테이크",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "left-aligned headline+CTA, below a wide cropped product window: one ticket's 7-step activity timeline with the decision card on the eye axis; Linear-like section rhythm with legible product crops",
+    "type": "Geist 600 tight + Geist Mono / Pretendard (ko)",
+    "palette": "graphite neutrals #0A0A0B/#F6F6F4, amber #F2A93B only for my turn",
+    "density": "medium-high, precise instrument",
+    "motion": "timeline steps tick in, decision card lamp breathes",
+    "references": [
+      "R6",
+      "R7"
+    ]
+  },
+  {
+    "name": "B 밤사이 일지",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "two-column editorial: serif headline left; right column pins the decision on top and the timestamped overnight log with artifact clippings below; ruled ledger sections",
+    "type": "Newsreader + Noto Serif KR headlines and PM quote / Pretendard body / JetBrains Mono ids",
+    "palette": "deep ink #0E1013 and paper white, phosphor green #4FD69C only for my turn",
+    "density": "low, wide margins",
+    "motion": "a new log line appears, the decision lamp glows",
+    "references": [
+      "R8",
+      "R2",
+      "R13"
+    ]
+  },
+  {
+    "name": "C 출발 안내판",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "full-width departures board of the squad as the hero, one row per job, only the 'you' row lit; board grammar carried through every section; board stays a dark physical panel in both themes",
+    "type": "IBM Plex Sans + IBM Plex Mono / IBM Plex Sans KR",
+    "palette": "pure black #070707 board, off-white page, signal yellow #FFD23F for my turn",
+    "density": "medium-high, tabular",
+    "motion": "status tiles flip, one working lamp blinks",
+    "references": [
+      "R11",
+      "R7"
+    ]
   }
 ]

@@ -1,0 +1,54 @@
+{
+  "$description": "Palette “C-Board”, tried with `equipe design palette`",
+  "color": {
+    "$type": "color",
+    "accent": {
+      "$extensions": {
+        "mode": {
+          "dark": "#846400"
+        }
+      },
+      "$value": "#7A5C00"
+    },
+    "bg": {
+      "$extensions": {
+        "mode": {
+          "dark": "#121212"
+        }
+      },
+      "$value": "#ECECE6"
+    },
+    "onPrimary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#121212"
+        }
+      },
+      "$value": "#ECECE6"
+    },
+    "primary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#7E7E7E"
+        }
+      },
+      "$value": "#0B0B0B"
+    },
+    "secondary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#2C2C1B"
+        }
+      },
+      "$value": "#FAFAF7"
+    },
+    "text": {
+      "$extensions": {
+        "mode": {
+          "dark": "#F2F2EE"
+        }
+      },
+      "$value": "#0B0B0B"
+    }
+  }
+}

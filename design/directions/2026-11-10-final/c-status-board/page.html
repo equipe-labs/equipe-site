@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>equipe — 최고의 스타트업 팀을 드려요. 승인만 하세요.</title>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), h = document.documentElement;
+    var t = q.get('theme'), l = q.get('lang');
+    if (t === 'light' || t === 'dark') h.dataset.theme = t;
+    if (l === 'en' || l === 'ko') h.lang = l;
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav wrap">
+  <a class="logo" href="#" aria-label="equipe">equipe<span class="dot">.</span></a>
+  <nav class="nav-links">
+    <a href="#cycle"><span class="ko">작동 방식</span><span class="en">How it works</span></a>
+    <a href="#"><span class="ko">디자인</span><span class="en">Design</span></a>
+    <a href="#">GitHub</a>
+    <span class="lang-switch"><a href="?lang=ko" class="is-ko">KO</a><span class="sep">/</span><a href="?lang=en" class="is-en">EN</a></span>
+  </nav>
+</header>
+
+<main>
+<!-- 1. first screen -->
+<section class="hero wrap">
+  <div class="hero-band">
+    <h1 class="h1">
+      <span class="ko">최고의 스타트업&nbsp;팀을<br class="m-only"> 드려요.<br>승인만 하세요.</span>
+      <span class="en">Your whole<br class="m-only"> startup team.<br>You just approve.</span>
+    </h1>
+    <div class="hero-side">
+      <p class="sub">
+        <span class="ko">PM·디자이너·엔지니어·QA가 지표를 보고 스스로 다음 일을 정해요. <span class="nb">내 Mac에서,</span> <span class="nb">쓰던 Claude·ChatGPT 요금제로.</span></span>
+        <span class="en">A PM, designer, engineers and QA read the numbers and pick the next job themselves. On your Mac, on the Claude or ChatGPT plan you already pay for.</span>
+      </p>
+      <div class="actions desk-only">
+        <a class="btn btn-primary" href="#" data-primary>
+          <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="ko">Mac용 다운로드</span><span class="en">Download for Mac</span>
+        </a>
+        <p class="meta"><span class="ko">무료 · macOS 14 이상 · Apple 실리콘</span><span class="en">Free · macOS 14+ · Apple silicon</span></p>
+      </div>
+      <div class="actions phone-only">
+        <a class="btn btn-primary" href="#" data-primary>
+          <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2.5M4.8 5.5 8 2.3l3.2 3.2M3.5 8.5v4.5h9V8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="ko">Mac으로 링크 보내기</span><span class="en">Send to my Mac</span>
+        </a>
+        <a class="btn btn-secondary" href="#"><span class="ko">iPhone 앱 받기</span><span class="en">Get the iPhone app</span></a>
+        <p class="meta meta--line"><span class="ko">equipe는 Mac에서 일해요. 폰은 승인하는 곳이에요.</span><span class="en">The squad works on your Mac. Your phone is where you approve.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- the departures board -->
+  <div class="board board--hero" role="table" aria-label="equipe-site squad">
+    <div class="board-top">
+      <div class="board-name">
+        <span class="lamp" aria-hidden="true"></span>
+        <span class="ko">equipe-site 스쿼드</span><span class="en">equipe-site squad</span>
+        <span class="tk" aria-label="T-507"><i>T</i><i>-</i><i>5</i><i>0</i><i>7</i></span>
+      </div>
+      <div class="board-meta">
+        <span class="count"><span class="ko">작업 중 1 · 내 차례 1</span><span class="en">Working 1 · Your call 1</span></span>
+        <span class="clock" aria-label="14:32"><i>1</i><i>4</i><b>:</b><i>3</i><i>2</i></span>
+      </div>
+    </div>
+    <div class="row row--head" role="row">
+      <span class="c-no"></span>
+      <span class="c-role"><span class="ko">역할</span><span class="en">Role</span></span>
+      <span class="c-now"><span class="ko">지금 하는 일</span><span class="en">Now</span></span>
+      <span class="c-st"><span class="ko">상태</span><span class="en">Status</span></span>
+    </div>
+
+    <div class="row row--fold" role="row">
+      <span class="flap flap--pass"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ko">01–05 끝남</span><span class="en">01–05 done</span></span>
+      <span class="chain">data → PM → designer → frontend → QA</span>
+    </div>
+    <div class="row row--done" role="row">
+      <span class="c-no">01</span>
+      <span class="c-role">data</span>
+      <span class="c-now"><span class="ko">LinkedIn 유입 18건 · 다운로드 클릭 0</span><span class="en">18 visits from LinkedIn · 0 download clicks</span></span>
+      <span class="c-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="row row--done" role="row">
+      <span class="c-no">02</span>
+      <span class="c-role">PM</span>
+      <span class="c-now"><span class="ko">폰 첫 화면에 ‘Mac으로 링크 보내기’</span><span class="en">“Send to my Mac” on the phone’s first screen</span></span>
+      <span class="c-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="row row--done" role="row">
+      <span class="c-no">03</span>
+      <span class="c-role">designer</span>
+      <span class="c-now"><span class="ko">폰 첫 화면 시안 3개</span><span class="en">Three options for the phone’s first screen</span></span>
+      <span class="c-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="row row--done" role="row">
+      <span class="c-no">04</span>
+      <span class="c-role">frontend</span>
+      <span class="c-now"><span class="ko">공유 시트로 링크 보내기 · 8개 언어</span><span class="en">Link via the share sheet · 8 languages</span></span>
+      <span class="c-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="row row--done" role="row">
+      <span class="c-no">05</span>
+      <span class="c-role">QA</span>
+      <span class="c-now"><span class="ko">320·360·390 폭 · 라이트·다크</span><span class="en">320 · 360 · 390 wide · light and dark</span></span>
+      <span class="c-st"><span class="flap flap--pass"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ko">통과</span><span class="en">passed</span></span></span>
+    </div>
+    <div class="row row--lit" role="row">
+      <span class="c-no">06</span>
+      <span class="c-role"><span class="ko">나</span><span class="en">you</span></span>
+      <span class="c-now">
+        <span class="q"><span class="ko">새 폰 동선을 공개할까요?</span><span class="en">Ship the new phone flow?</span></span>
+        <span class="keys">
+          <span class="key key--main"><span class="ko">공개</span><span class="en">Ship</span><kbd>⌘↵</kbd></span>
+          <span class="key"><span class="ko">아니요</span><span class="en">Not yet</span></span>
+        </span>
+        <span class="tap-note"><span class="ko">iPhone 앱에서 이렇게 승인해요.</span><span class="en">This is how you approve in the iPhone app.</span></span>
+      </span>
+      <span class="c-st"><span class="flap flap--call"><span class="ko">결정 필요</span><span class="en">your call</span></span></span>
+    </div>
+    <div class="row row--next" role="row">
+      <span class="c-no">07</span>
+      <span class="c-role">data</span>
+      <span class="c-now"><span class="ko">2주 뒤 다시 측정</span><span class="en">Measure again in two weeks</span></span>
+      <span class="c-st"><span class="flap flap--next"><span class="ko">다음</span><span class="en">next</span></span></span>
+    </div>
+    <div class="row row--side" role="row">
+      <span class="c-no">··</span>
+      <span class="c-role">marketing</span>
+      <span class="c-now"><span class="ko">LinkedIn 글 초안</span><span class="en">LinkedIn post draft</span></span>
+      <span class="c-st"><span class="flap flap--live"><span class="lamp" aria-hidden="true"></span><span class="ko">작업 중</span><span class="en">working</span></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 2. one cycle -->
+<section class="sec wrap" id="cycle">
+  <div class="sec-head">
+    <h2 class="h2"><span class="ko">지표에서 다음 개선까지,<br>팀이 이어서 해요.</span><span class="en">From a number to the next fix,<br>the team carries it.</span></h2>
+    <p class="sec-note"><span class="ko">이 사이트의 실제 사례예요. 2026년 11월 2일 유입&nbsp;리뷰에서 시작했어요.</span><span class="en">A real case from this site, starting with the Nov 2, 2026 traffic review.</span></p>
+  </div>
+
+  <div class="board board--table">
+    <div class="trow trow--head">
+      <span class="t-no">#</span>
+      <span class="t-role"><span class="ko">역할</span><span class="en">Role</span></span>
+      <span class="t-line"><span class="ko">한 일</span><span class="en">What happened</span></span>
+      <span class="t-st"><span class="ko">상태</span><span class="en">Status</span></span>
+    </div>
+    <div class="trow">
+      <span class="t-no">01</span>
+      <span class="t-role">data<em><span class="ko">지표</span><span class="en">numbers</span></em></span>
+      <span class="t-line"><strong><span class="ko">LinkedIn 유입 18건 · 다운로드 클릭 0</span><span class="en">18 visits from LinkedIn · 0 download clicks</span></strong><small><span class="ko">대부분 iPhone 앱 안 브라우저</span><span class="en">Mostly the iPhone in-app browser</span></small></span>
+      <span class="t-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="trow">
+      <span class="t-no">02</span>
+      <span class="t-role">PM<em><span class="ko">판단</span><span class="en">judgement</span></em></span>
+      <span class="t-line"><strong><span class="ko">폰에서 Mac 설치로 가는 길이 없어요.</span><span class="en">Phones have no way to the Mac install.</span></strong><small><span class="ko">폰 첫 화면에 ‘Mac으로 링크 보내기’를 넣어 볼게요.</span><span class="en">Let’s put “Send to my Mac” on the phone’s first screen.</span></small></span>
+      <span class="t-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="trow">
+      <span class="t-no">03</span>
+      <span class="t-role">designer<em><span class="ko">설계</span><span class="en">design</span></em></span>
+      <span class="t-line"><strong><span class="ko">폰 첫 화면 시안 3개</span><span class="en">Three options for the phone’s first screen</span></strong></span>
+      <span class="t-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="trow">
+      <span class="t-no">04</span>
+      <span class="t-role">frontend<em><span class="ko">구현</span><span class="en">build</span></em></span>
+      <span class="t-line"><strong><span class="ko">공유 시트로 링크 보내기 · 8개 언어</span><span class="en">Link via the share sheet · 8 languages</span></strong></span>
+      <span class="t-st"><span class="flap"><span class="ko">끝남</span><span class="en">done</span></span></span>
+    </div>
+    <div class="trow">
+      <span class="t-no">05</span>
+      <span class="t-role">QA<em><span class="ko">검증</span><span class="en">check</span></em></span>
+      <span class="t-line"><strong><span class="ko">320·360·390 폭, 라이트·다크 통과</span><span class="en">Passed at 320, 360, 390 · light and dark</span></strong><small><span class="ko">디자인 QA 통과 · 브랜치</span><span class="en">Design QA passed · branch</span> <code>t-507-send-to-mac</code></small></span>
+      <span class="t-st"><span class="flap flap--pass"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ko">통과</span><span class="en">passed</span></span></span>
+    </div>
+    <div class="trow trow--lit">
+      <span class="t-no">06</span>
+      <span class="t-role"><span class="ko">나</span><span class="en">you</span><em><span class="ko">결정</span><span class="en">decide</span></em></span>
+      <span class="t-line"><strong><span class="ko">새 폰 동선을 공개할까요?</span><span class="en">Ship the new phone flow?</span></strong><small><span class="ko">공개하면 배포하고 2주 뒤 다시 재요.</span><span class="en">It ships, then gets measured again in two weeks.</span></small>
+        <span class="keys">
+          <span class="key key--main"><span class="ko">공개</span><span class="en">Ship</span><kbd>⌘↵</kbd></span>
+          <span class="key"><span class="ko">아니요</span><span class="en">Not yet</span></span>
+        </span>
+      </span>
+      <span class="t-st"><span class="flap flap--call"><span class="ko">결정 필요</span><span class="en">your call</span></span></span>
+    </div>
+    <div class="trow trow--next">
+      <span class="t-no">07</span>
+      <span class="t-role">data<em><span class="ko">다시 측정</span><span class="en">measure again</span></em></span>
+      <span class="t-line"><strong><span class="ko">2주 뒤 다시 측정</span><span class="en">Measured again in two weeks</span></strong></span>
+      <span class="t-st"><span class="flap flap--next"><span class="ko">다음</span><span class="en">next</span></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. decisions -->
+<section class="sec wrap sec--asks">
+  <div class="sec-head">
+    <h2 class="h2"><span class="ko">공개·발송·결제 전엔<br>꼭 먼저 물어봐요.</span><span class="en">Before anything ships, gets sent or costs money, the squad asks.</span></h2>
+  </div>
+  <div class="board board--asks">
+    <div class="board-top">
+      <div class="board-name"><span class="ko">내 차례</span><span class="en">Your call</span> <span class="num">3</span></div>
+      <div class="board-meta"><span class="count"><span class="ko">답하기 전엔 아무것도 나가지 않아요</span><span class="en">Nothing goes out until you answer</span></span></div>
+    </div>
+    <div class="arow">
+      <span class="a-kind"><span class="ko">공개</span><span class="en">ship</span></span>
+      <span class="a-q"><span class="ko">새 폰 동선을 공개할까요?</span><span class="en">Ship the new phone flow?</span></span>
+      <span class="keys">
+        <span class="key key--main"><span class="ko">공개</span><span class="en">Ship</span><kbd>⌘↵</kbd></span>
+        <span class="key"><span class="ko">아니요</span><span class="en">Not yet</span></span>
+      </span>
+      <span class="a-st"><span class="flap flap--call"><span class="ko">결정 필요</span><span class="en">your call</span></span></span>
+    </div>
+    <div class="arow">
+      <span class="a-kind"><span class="ko">돈</span><span class="en">money</span></span>
+      <span class="a-q"><span class="ko">도메인 갱신 $12를 결제할까요?</span><span class="en">Renew the domain for $12?</span></span>
+      <span class="keys">
+        <span class="key key--main"><span class="ko">결제</span><span class="en">Pay</span><kbd>⌘↵</kbd></span>
+        <span class="key"><span class="ko">아니요</span><span class="en">Not yet</span></span>
+      </span>
+      <span class="a-st"><span class="flap flap--call"><span class="ko">결정 필요</span><span class="en">your call</span></span></span>
+    </div>
+    <div class="arow">
+      <span class="a-kind"><span class="ko">브랜드</span><span class="en">brand</span></span>
+      <span class="a-q"><span class="ko">첫 화면 문구 두 안 중 어느 쪽?</span><span class="en">Which of two headlines?</span></span>
+      <span class="keys">
+        <span class="key key--main"><span class="ko">A안</span><span class="en">A</span><span class="rec"><span class="ko">추천</span><span class="en">pick</span></span></span>
+        <span class="key"><span class="ko">B안</span><span class="en">B</span></span>
+      </span>
+      <span class="a-st"><span class="flap flap--call"><span class="ko">결정 필요</span><span class="en">your call</span></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. team -->
+<section class="sec wrap">
+  <div class="sec-head">
+    <h2 class="h2"><span class="ko">서로 다른 전문가가 한&nbsp;목표로.</span><span class="en">Different experts, one goal.</span></h2>
+    <p class="sec-note"><span class="ko">각자 자기 일을 하다가, 정할 게 생기면 나에게 와요.</span><span class="en">Each works their own lane and comes to you when there is something to decide.</span></p>
+  </div>
+  <div class="board board--roster">
+    <div class="rrow rrow--head">
+      <span class="r-role"><span class="ko">역할</span><span class="en">Role</span></span>
+      <span class="r-now"><span class="ko">지금</span><span class="en">Now</span></span>
+      <span class="r-st"><span class="ko">상태</span><span class="en">Status</span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">PM</span>
+      <span class="r-now"><span class="ko">새 폰 동선을 공개할지 나에게 물어봤어요</span><span class="en">Asked you whether to ship the phone flow</span></span>
+      <span class="r-st"><span class="flap flap--asked"><span class="ko">물어봄</span><span class="en">asked</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">designer</span>
+      <span class="r-now"><span class="ko">폰 첫 화면 시안 3개</span><span class="en">Three options for the phone’s first screen</span></span>
+      <span class="r-st"><span class="flap flap--rest"><span class="ko">쉬는 중</span><span class="en">resting</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">frontend</span>
+      <span class="r-now"><span class="ko">공유 시트로 링크 보내기 · 8개 언어</span><span class="en">Link via the share sheet · 8 languages</span></span>
+      <span class="r-st"><span class="flap flap--rest"><span class="ko">쉬는 중</span><span class="en">resting</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">backend</span>
+      <span class="r-now"><span class="ko">링크 보내기 API 없이 공유 시트로 결정</span><span class="en">Chose the share sheet over a send-link API</span></span>
+      <span class="r-st"><span class="flap flap--rest"><span class="ko">쉬는 중</span><span class="en">resting</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">QA</span>
+      <span class="r-now"><span class="ko">320·360·390 폭, 라이트·다크 통과</span><span class="en">Passed at 320, 360, 390 · light and dark</span></span>
+      <span class="r-st"><span class="flap flap--rest"><span class="ko">쉬는 중</span><span class="en">resting</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">data</span>
+      <span class="r-now"><span class="ko">공개 2주 뒤 다시 측정할 준비</span><span class="en">Set to measure again two weeks after it ships</span></span>
+      <span class="r-st"><span class="flap flap--rest"><span class="ko">쉬는 중</span><span class="en">resting</span></span></span>
+    </div>
+    <div class="rrow">
+      <span class="r-role">marketing</span>
+      <span class="r-now"><span class="ko">LinkedIn 글 초안</span><span class="en">LinkedIn post draft</span></span>
+      <span class="r-st"><span class="flap flap--live"><span class="lamp" aria-hidden="true"></span><span class="ko">작업 중</span><span class="en">working</span></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 5. closing -->
+<section class="close wrap">
+  <h2 class="display"><span class="ko">최고의 스타트업&nbsp;팀을<br class="m-only"> 드려요.<br>승인만 하세요.</span><span class="en">Your whole<br class="m-only"> startup team.<br>You just approve.</span></h2>
+  <div class="close-side">
+    <div class="actions desk-only">
+      <a class="btn btn-primary" href="#" data-primary>
+        <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="ko">Mac용 다운로드</span><span class="en">Download for Mac</span>
+      </a>
+      <p class="meta"><span class="ko">무료 · macOS 14 이상 · Apple 실리콘</span><span class="en">Free · macOS 14+ · Apple silicon</span></p>
+    </div>
+    <div class="actions phone-only">
+      <a class="btn btn-primary" href="#" data-primary>
+        <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2.5M4.8 5.5 8 2.3l3.2 3.2M3.5 8.5v4.5h9V8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="ko">Mac으로 링크 보내기</span><span class="en">Send to my Mac</span>
+      </a>
+      <p class="meta meta--line"><span class="ko">equipe는 Mac에서 일해요. 폰은 승인하는 곳이에요.</span><span class="en">The squad works on your Mac. Your phone is where you approve.</span></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot wrap">
+  <a class="logo logo--sm" href="#">equipe<span class="dot">.</span></a>
+  <nav class="foot-links">
+    <a href="#"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span></a>
+    <a href="#">GitHub</a>
+  </nav>
+  <span class="copy">© 2026 Umbriles Inc.</span>
+</footer>
+
+</body>
+</html>
