@@ -1,0 +1,98 @@
+{
+  "screen": "mobile-app/get-ios-link-copied",
+  "at": 1794271816,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/app-page/html/ios-link-copied.ko.html",
+      "modified": 1794271609
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 1,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+      ]
+    ],
+    "screen": "mobile-app/get-ios-link-copied",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a.brand “e equipe” is 95×29 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a “equipe 홈” is 60×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a “앱 개인정보처리방침” is 113×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a “앱 지원” is 40×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios-link-copied.ko.html",
+      "width": 360,
+      "evidence": "a “GitHub” is 45×22 (at 360, 390 px)"
+    }
+  ],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios-link-copied/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": null,
+  "fixes_in_a_row": 0
+}

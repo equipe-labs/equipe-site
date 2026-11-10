@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A ios</title><style>
+@font-face { font-family: 'Pretendard Variable'; font-weight: 400 700; src: url('file:///Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/src/assets/fonts/pretendard-ko-rest.woff2') format('woff2'); unicode-range: U+AC00-D7A3; }
+@font-face { font-family: 'Pretendard Variable'; font-weight: 400 700; src: url('file:///Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/src/assets/fonts/pretendard-ko-core.woff2') format('woff2'); }
+:root {
+  --bg: #F6F5F1; --surface: #FFFFFF; --code-bg: #EAE7E0; --text: #15161A; --muted: #4F5159;
+  --accent: #1D4ED8; --on-accent: #FFFFFF; --line: #0A0A0C24; --dot: #3F6FF5;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px; --s-9: 112px;
+  --r-1: 8px; --r-2: 12px; --tap: 44px; --wrap: 1040px; --gutter: 16px;
+  --sans: 'Inter Variable', Inter, system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg: #0A0A0C; --surface: #16171A; --code-bg: #17171C; --text: #EFEDE7; --muted: #A3A5AB;
+  --accent: #8FB0FF; --on-accent: #0B1226; --line: #E9E6DF24; } }
+@media (min-width: 641px) { :root { --gutter: 24px; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.6 var(--sans); }
+@media (min-width: 641px) { body { font-size: 18px; } }
+:lang(ko) { font-family: var(--sans), 'Pretendard Variable', 'Apple SD Gothic Neo', sans-serif; }
+html:lang(ko) { word-break: keep-all; overflow-wrap: anywhere; }
+:lang(ko) :is(h1,h2,h3) { letter-spacing: 0; line-height: 1.3; }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+h1 { font-size: 36px; line-height: 1.05; } h2 { font-size: 26px; line-height: 1.15; } h3 { font-size: 18px; line-height: 1.3; }
+@media (min-width: 641px) { h1 { font-size: 56px; } h2 { font-size: 32px; } }
+p { margin: 0 0 var(--s-4); }
+code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.muted { color: var(--muted); } .small { font-size: 14px; }
+header.site { border-bottom: 1px solid var(--line); background: var(--bg); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: var(--s-3); }
+.brand { display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 700; color: var(--text); text-decoration: none; font-size: 18px; }
+.mark { width: 28px; height: 28px; border-radius: 7px; background: #0A0A0C; color: #F6F5F1; display: inline-grid; place-items: center; font: 700 18px/1 var(--sans); position: relative; }
+@media (prefers-color-scheme: dark) { .mark { background: #EFEDE7; color: #0A0A0C; } }
+.mark i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--dot); right: 6px; bottom: 7px; }
+nav ul { display: flex; gap: var(--s-5); list-style: none; margin: 0; padding: 0; align-items: center; }
+nav a { color: var(--text); font-size: 16px; text-decoration: none; }
+nav .opt { display: none; } @media (min-width: 641px) { nav .opt { display: list-item; } }
+nav a[aria-current] { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.globe { width: 44px; height: 44px; display: inline-grid; place-items: center; color: var(--text); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--tap); padding: 0 20px; border-radius: var(--r-1); font-weight: 600; text-decoration: none; border: 2px solid var(--accent); color: var(--accent); font-size: 17px; }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.sm { min-height: 40px; padding: 0 14px; font-size: 15px; }
+.btn.lg { min-height: 52px; font-size: 18px; padding: 0 24px; }
+.btn.block { width: 100%; }
+.btn .sub { font-weight: 400; opacity: .85; font-size: .88em; }
+section { padding: var(--s-7) 0; }
+@media (min-width: 641px) { section { padding: var(--s-8) 0; } }
+hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.lead { font-size: 19px; color: var(--muted); max-width: 600px; margin-top: var(--s-4); }
+@media (min-width: 641px) { .lead { font-size: 21px; } }
+.meta { font-size: 14px; color: var(--muted); margin: var(--s-2) 0 0; }
+/* Apple badge stand-in: the build uses Apple's official localized SVG (black), at 48px tall */
+.appstore { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px 0 10px; border-radius: 9px; background: #000; color: #fff; border: 1px solid #A6A6A6; text-decoration: none; font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif; }
+.appstore .lg { width: 24px; height: 24px; border: 1.5px dashed #ffffff88; border-radius: 6px; flex: none; }
+.appstore span { display: flex; flex-direction: column; line-height: 1.05; }
+.appstore small { font-size: 10px; letter-spacing: .01em; }
+.appstore b { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.appstore.big { height: 56px; padding: 0 18px 0 12px; } .appstore.big b { font-size: 23px; } .appstore.big small { font-size: 11px; }
+.qrbox { background: #fff; padding: 12px; border-radius: var(--r-1); display: inline-block; line-height: 0; }
+.qrbox svg { width: 132px; height: 132px; display: block; }
+.ic { width: 20px; height: 20px; flex: none; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); counter-reset: s; }
+ol.steps > li { display: grid; grid-template-columns: 28px 1fr; gap: var(--s-3); counter-increment: s; }
+ol.steps > li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font: 700 15px/28px var(--sans); text-align: center; }
+ol.steps b { display: block; font-weight: 600; }
+ol.steps p { margin: 2px 0 0; color: var(--muted); font-size: 16px; }
+ol.inst { margin: 0; padding-left: 22px; display: grid; gap: var(--s-3); font-size: 16px; }
+ol.inst li::marker { color: var(--muted); font-weight: 600; }
+ol.inst b { font-weight: 600; }
+.ill { background: var(--code-bg); border-radius: var(--r-2); padding: var(--s-5); }
+.ill .cap { font-size: 13px; color: var(--muted); margin: var(--s-3) 0 0; }
+/* Android system screen, drawn in code */
+.droid { background: #FFFFFF; color: #1B1B1F; border-radius: 16px; padding: 18px 18px 8px; font-family: Roboto, system-ui, sans-serif; max-width: 320px; box-shadow: 0 0 0 1px #0000001a; }
+@media (prefers-color-scheme: dark) { .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; } }
+.droid h4 { margin: 0 0 14px; font: 500 18px/1.3 Roboto, system-ui, sans-serif; }
+.droid .app { display: flex; align-items: center; gap: 12px; font-size: 15px; margin-bottom: 10px; }
+.droid .app i { width: 28px; height: 28px; border-radius: 50%; background: conic-gradient(#DB4437 0 33%, #F4B400 0 66%, #0F9D58 0); }
+.droid .row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid #0000001f; font-size: 15px; }
+@media (prefers-color-scheme: dark) { .droid .row { border-color: #ffffff1f; } }
+.sw { width: 44px; height: 26px; border-radius: 13px; background: #3F5AA9; position: relative; flex: none; }
+.sw::after { content: ''; position: absolute; right: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; }
+.ring { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 13px; }
+/* Mac pairing sheet, drawn in code */
+.macsheet { background: var(--surface); border-radius: var(--r-2); box-shadow: 0 0 0 1px var(--line), 0 12px 32px #0000001f; padding: 20px; max-width: 360px; font-size: 14px; }
+.macsheet .dots { display: flex; gap: 6px; margin-bottom: 14px; } .macsheet .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.macsheet h4 { margin: 0 0 12px; font-size: 15px; }
+.macsheet .in { display: grid; grid-template-columns: 112px 1fr; gap: 16px; align-items: start; }
+.macsheet .qrbox { padding: 8px; } .macsheet .qrbox svg { width: 96px; height: 96px; }
+.macsheet ol { margin: 0; padding-left: 18px; color: var(--muted); }
+.macsheet .allow { margin-top: 14px; display: flex; justify-content: flex-end; gap: 8px; }
+.macsheet .allow span { padding: 4px 12px; border-radius: 6px; background: var(--code-bg); font-weight: 600; }
+.macsheet .allow span.y { background: var(--accent); color: var(--on-accent); }
+details { background: var(--surface); border-radius: var(--r-1); }
+summary { list-style: none; font-weight: 600; padding: 12px 16px; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+summary::after { content: ''; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); flex: none; }
+details[open] summary::after { transform: rotate(-135deg); }
+.dbody { padding: 0 16px 16px; font-size: 15px; }
+.hash { min-width: 0; font: 400 13px/1.55 var(--mono); background: var(--code-bg); border-radius: var(--r-1); padding: 10px 12px; word-break: break-all; margin: 4px 0 12px; }
+.dl { font-size: 14px; color: var(--muted); margin: 0; }
+footer { border-top: 1px solid var(--line); padding: var(--s-6) 0; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+footer a { color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+</style></head><body><header class="site"><div class="wrap"><a class="brand" href="#"><span class="mark">e<i></i></span> equipe</a>
+<nav><ul><li class="opt"><a href="#">Stage</a></li><li class="opt"><a href="#">How it works</a></li><li class="opt"><a href="#">Features</a></li><li class="opt"><a href="#">Start</a></li><li class="opt"><a href="#">FAQ</a></li>
+<li><span class="globe"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span></li><li><a class="btn sm" href="#">Download for Mac</a></li></ul></nav></div></header><main><section style="padding-bottom:40px"><div class="wrap"><h1>Approve from your phone.</h1><p class="lead">The squad works on your Mac. What it waits on comes to your phone, and you answer right there.</p>
+<div style="margin-top:28px"><a href="#" style="display:inline-block;line-height:0"><img src="file:///Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/directions/t507/badges/appstore-black-en.svg" style="height:52px;display:block" alt="Download on the App Store"></a></div><p class="meta">iOS 17 or later · Free</p>
+<p class="small" style="margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--code-bg)">The squad runs on a Mac. No Mac app yet? Send yourself the link and get it there. <a href="#">Send me the Mac link</a></p>
+<p style="margin-top:8px;font-size:16px"><a href="#">On Android? Get the APK →</a></p></div></section><hr>
+<section id="pair"><div class="wrap"><h2>Then connect it to your Mac</h2><div style="margin-top:24px"><ol class="steps"><li><div><b>On your Mac, open “Connect a phone…”</b><p>In a terminal, <code>equipe pair</code> does the same.</p></div></li><li><div><b>Scan the code with the equipe app</b><p>Settings › Pair with a computer opens the camera.</p></div></li><li><div><b>Click Allow on your Mac</b><p>The link is end-to-end encrypted.</p></div></li></ol></div><div class="ill" style="margin-top:24px"><div class="macsheet"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="dots" style="margin:0"><i></i><i></i><i></i></span><span style="font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px">Example</span></div>
+<p style="margin:0 0 4px;font-size:12px;color:var(--muted)">equipe › Connect a phone…</p><h4>Scan with the equipe app on your phone</h4>
+<div class="in" style="grid-template-columns:72px 1fr"><span class="qrbox" style="padding:6px;opacity:.45"><svg viewBox="0 0 25 25" style="width:60px;height:60px;display:block" shape-rendering="crispEdges"><g fill="#00000059"><rect x="10" y="0" width="1" height="1"/><rect x="15" y="0" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="14" y="1" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="16" y="2" width="1" height="1"/><rect x="8" y="4" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="15" y="5" width="1" height="1"/><rect x="9" y="6" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="16" y="7" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="8" y="9" width="1" height="1"/><rect x="13" y="9" width="1" height="1"/><rect x="18" y="9" width="1" height="1"/><rect x="23" y="9" width="1" height="1"/><rect x="0" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="10" y="10" width="1" height="1"/><rect x="15" y="10" width="1" height="1"/><rect x="20" y="10" width="1" height="1"/><rect x="4" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="14" y="11" width="1" height="1"/><rect x="19" y="11" width="1" height="1"/><rect x="24" y="11" width="1" height="1"/><rect x="1" y="12" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="11" y="12" width="1" height="1"/><rect x="16" y="12" width="1" height="1"/><rect x="21" y="12" width="1" height="1"/><rect x="3" y="14" width="1" height="1"/><rect x="8" y="14" width="1" height="1"/><rect x="13" y="14" width="1" height="1"/><rect x="18" y="14" width="1" height="1"/><rect x="23" y="14" width="1" height="1"/><rect x="0" y="15" width="1" height="1"/><rect x="5" y="15" width="1" height="1"/><rect x="10" y="15" width="1" height="1"/><rect x="15" y="15" width="1" height="1"/><rect x="20" y="15" width="1" height="1"/><rect x="4" y="16" width="1" height="1"/><rect x="9" y="16" width="1" height="1"/><rect x="14" y="16" width="1" height="1"/><rect x="19" y="16" width="1" height="1"/><rect x="24" y="16" width="1" height="1"/><rect x="11" y="17" width="1" height="1"/><rect x="16" y="17" width="1" height="1"/><rect x="21" y="17" width="1" height="1"/><rect x="8" y="19" width="1" height="1"/><rect x="13" y="19" width="1" height="1"/><rect x="18" y="19" width="1" height="1"/><rect x="23" y="19" width="1" height="1"/><rect x="10" y="20" width="1" height="1"/><rect x="15" y="20" width="1" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="9" y="21" width="1" height="1"/><rect x="14" y="21" width="1" height="1"/><rect x="19" y="21" width="1" height="1"/><rect x="24" y="21" width="1" height="1"/><rect x="11" y="22" width="1" height="1"/><rect x="16" y="22" width="1" height="1"/><rect x="21" y="22" width="1" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="13" y="24" width="1" height="1"/><rect x="18" y="24" width="1" height="1"/><rect x="23" y="24" width="1" height="1"/></g><g fill="#000"><rect x="0" y="0" width="7" height="7" fill="none" stroke="#000" stroke-width="1" transform="translate(.5 .5)"/><rect x="2" y="2" width="3" height="3"/><rect x="18" y="0" width="7" height="7" fill="none" stroke="#000" stroke-width="1" transform="translate(.5 .5)"/><rect x="20" y="2" width="3" height="3"/><rect x="0" y="18" width="7" height="7" fill="none" stroke="#000" stroke-width="1" transform="translate(.5 .5)"/><rect x="2" y="20" width="3" height="3"/></g></svg></span><ol><li>Open the equipe app on your phone</li><li>Settings › Pair with a computer</li><li>Point it here, then Allow</li></ol></div>
+<div class="allow"><span>Deny</span><span class="y" style="outline:2px solid var(--accent);outline-offset:2px">Allow</span></div></div><p class="cap">The Mac app, drawn as an example. This code doesn’t scan.</p></div></div></section></main><footer><div class="wrap"><span>© 2026 equipe · MIT</span><span class="links"><a href="#">Phone app</a><a href="#">App privacy policy</a><a href="#">App support</a><a href="#">GitHub</a></span></div></footer></body></html>

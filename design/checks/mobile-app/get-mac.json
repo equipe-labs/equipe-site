@@ -1,0 +1,127 @@
+{
+  "screen": "mobile-app/get-mac",
+  "at": 1794272029,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/app-page/html/mac.ko.html",
+      "modified": 1794272008
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 1,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+      ]
+    ],
+    "screen": "mobile-app/get-mac",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a.brand “e equipe” is 95×29 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a “equipe 홈” is 60×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a “앱 개인정보처리방침” is 113×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a “앱 지원” is 40×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.ko.html",
+      "width": 360,
+      "evidence": "a “GitHub” is 45×22 (at 360, 390 px)"
+    }
+  ],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": {
+    "pass": true,
+    "fixes": [],
+    "summary": "Mac 방문자 화면이 기준을 순서대로 지켜요: 'Mac용 다운로드'가 유일하게 채운 파란 버튼으로 가장 먼저 눈에 들어오고, 그 아래 iPhone·Android 줄, 폰에서 이 페이지를 여는 QR, 접힌 'Android 설치 방법'과 '받은 파일이 진짜인지 확인하기'가 이어지고, 실제 메뉴 이름(equipe › 휴대폰 연결…, 코드 스캔, 허용)을 쓴 연결 3단계로 끝나요. 360부터 1920까지 줄이 넘치지 않고, 한 열에서 두 열로 바뀌어도 위계와 간격 리듬이 유지되며, iOS 17·Android 8.0·APK 25 MB 같은 숫자는 모두 spec.md와 릴리스 줄에 있는 값이라 지어낸 것이 없어요.",
+    "at": 1794272119,
+    "by": "claude",
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "first": false,
+    "questions": [
+      {
+        "what": "한국어 페이지에 쓸 한국어 App Store 배지(Apple 공식 'App Store에서 다운로드하기' 배지 파일)가 프로젝트에 없어요. design/app-page/에는 appstore-black-en.svg만 있어서, ko 화면에도 영어 'Download on the App Store' 배지가 나와요.",
+        "wording": "한국어 배지를 구할 때까지 지금의 영어 배지를 그대로 두고, alt는 지금처럼 'App Store에서 다운로드하기'로 둬요."
+      }
+    ],
+    "reviewer": {
+      "engine": "claude",
+      "member": "claude",
+      "why": {
+        "kind": "failed"
+      }
+    }
+  },
+  "fixes_in_a_row": 0
+}
