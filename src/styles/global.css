@@ -178,15 +178,18 @@ section.nf-hero + section { border-top: 0; }
 /* 360px phones: keep brand + language + download inside the header (fr "Télécharger pour Mac" was 11px too wide) */
 @media (max-width: 400px) {
   header.site nav ul { gap: var(--s-1); }
-  header.site .btn.sm { padding: 0 10px; font-size: 13px; }
-  header.site nav a { font-size: 14px; }
+  header.site .btn.sm { padding: 0 var(--s-3); font-size: 14px; }
 }
-/* Phones (T-266, T-390): with the Design menu live, brand + Design + language + download only fit in every language once the wordmark steps aside (the mark stays; the link keeps its name) */
-@media (max-width: 440px) {
+/* Phones (T-390): the header Design link (Design menu live) steps aside; phones reach Design from the home card and the footer */
+@media (max-width: 480px) {
+  header.site nav li.dz-link { display: none; }
+}
+/* 320-379px phones (T-266): the wordmark steps aside (the mark stays; the link keeps its name) so brand + language + download fit in every language */
+@media (max-width: 379px) {
   .brand .bt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .brand { min-width: var(--tap); justify-content: center; }
+  header.site .wrap { padding: 0 var(--s-4); }
 }
 @media (max-width: 359px) {
-  header.site nav li.dz-link { display: none; }
-  header.site .wrap { padding: 0 var(--s-4); }
   header.site .btn.sm { padding: 0 10px; font-size: 13px; }
 }
