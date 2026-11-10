@@ -81,7 +81,7 @@ svg { display: inline-block; }
   font-family: var(--f-serif); font-weight: 400; font-size: var(--s-display);
   line-height: 1.02; letter-spacing: -0.022em; font-optical-sizing: auto; color: var(--text);
 }
-html:lang(ko) .display { font-weight: 600; font-size: 52px; line-height: 1.24; letter-spacing: -0.045em; }
+html:lang(ko) .display { font-weight: 600; font-size: 48px; line-height: 1.24; letter-spacing: -0.045em; }
 .h2 {
   font-family: var(--f-serif); font-weight: 400; font-size: var(--s-3xl); line-height: 1.08;
   letter-spacing: -0.018em; max-width: 15em;
@@ -114,7 +114,9 @@ html:lang(ko) .lede { max-width: none; }
   margin-top: var(--sp-5); padding-top: var(--sp-3); border-top: 1px solid var(--hair);
   max-width: 25em; font-size: var(--s-sm); line-height: 1.55; color: var(--muted);
 }
-.actions .colophon { align-self: stretch; }
+.hero-foot { margin-top: auto; padding-top: var(--sp-3); align-self: stretch; max-width: none; }
+.e > .no.word { font-family: var(--f-sans); font-weight: 600; color: var(--text); letter-spacing: 0; }
+.e-next > .no.word { font-weight: 500; color: var(--muted); }
 
 /* the log */
 .log-head {
@@ -197,7 +199,6 @@ html:lang(ko) .lede { max-width: none; }
 .e-next { padding-bottom: 0; }
 .e-next::before { background: var(--bg); box-shadow: 0 0 0 1px var(--mark); }
 .next { font-size: var(--s-sm); line-height: 20px; color: var(--muted); }
-.e-fold { display: none; }
 .how { margin-top: 8px; font-size: var(--s-sm); color: var(--muted); }
 .entries.top::before { bottom: 12px; }
 .path-h {
@@ -339,20 +340,17 @@ html:lang(ko) .display-close { font-size: 62px; }
   .log { margin-top: 24px; }
   .log-head { padding-bottom: 8px; }
   .dcard { margin-top: 8px; }
-  .e-fold { display: grid; }
-  .folded { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; font-size: var(--s-sm); line-height: 20px; }
-  .fold-a { display: inline-flex; align-items: center; gap: 6px; }
-  .folded .ck { width: 13px; height: 13px; color: var(--text); }
-  .folded strong { font-weight: 600; }
-  .folded .chain { color: var(--muted); white-space: nowrap; }
-  .e-fold { padding-bottom: 12px; }
-  .e-me { padding-bottom: 14px; }
+  .entries .e-me { padding-bottom: 12px; }
   .ib kbd { display: none; }
-  .path-h { margin: 40px 0 16px; padding-top: 0; border-top: 0; font: 400 24px/1.25 var(--f-serif); color: var(--text); }
-  html:lang(ko) .path-h { font-weight: 600; font-size: 21px; letter-spacing: -0.03em; }
+  .path-h { margin: 20px 0 12px; padding-top: 12px; }
+  .entries:not(.top) .e { padding-bottom: 14px; }
+  .entries:not(.top) .e > .art, .entries:not(.top) .sub { display: none; }
+  .entries:not(.top) .role { display: inline; }
+  .entries:not(.top) .line { margin-top: 0; font-size: var(--s-sm); line-height: 20px; color: var(--text-2); }
+  .entries:not(.top) .note { margin-top: 4px; font-size: var(--s-sm); line-height: 1.55; }
   .colophon.only-phone { display: block; margin-top: 8px; max-width: none; }
   .display { font-size: 42px; line-height: 1.04; }
-  html:lang(ko) .display { font-size: 34px; line-height: 1.3; }
+  html:lang(ko) .display { font-size: 32px; line-height: 1.3; }
   .lede { margin-top: var(--sp-4); font-size: 15px; line-height: 1.55; }
   .actions { margin-top: var(--sp-5); align-items: stretch; gap: 10px; }
   .btn { height: 50px; }
@@ -406,7 +404,7 @@ html:lang(ko) .display-close { font-size: 62px; }
   .close::before { margin-bottom: 72px; }
   .lr .w br { display: none; }
   .display-close { font-size: 44px; }
-  html:lang(ko) .display-close { font-size: 34px; }
+  html:lang(ko) .display-close { font-size: 32px; }
   .close .actions { margin-top: var(--sp-6); }
   .foot { flex-wrap: wrap; height: auto; padding-top: var(--sp-5); padding-bottom: var(--sp-6); gap: var(--sp-3) var(--sp-5); }
   .foot::before { left: 20px; right: 20px; }
@@ -417,6 +415,9 @@ html:lang(ko) .display-close { font-size: 62px; }
 @media (max-width: 360px) { .clip-h { font-size: var(--s-xs); } }
 
 @media (max-width: 360px) {
-  html:lang(ko) .display { font-size: 30px; }
+  html:lang(ko) .display, html:lang(ko) .display-close { font-size: 30px; }
   .display { font-size: 40px; }
+}
+@media (max-width: 340px) {
+  html:lang(ko) .display, html:lang(ko) .display-close { font-size: 26px; }
 }

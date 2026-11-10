@@ -101,7 +101,7 @@ body::after { /* grain over the whole page */
 }
 
 .window {
-  position: relative; width: calc(100% - 56px);
+  position: relative; width: min(880px, calc(100% - 424px));
   background: linear-gradient(var(--lift), transparent 200px), var(--surface);
   border-radius: var(--r-l);
   box-shadow:
@@ -123,7 +123,7 @@ body::after { /* grain over the whole page */
 .seg > span { padding: 4px 12px; border-radius: var(--r-xs); }
 .seg .on { background: var(--surface); color: var(--text); box-shadow: 0 0 0 1px var(--line); }
 
-.app { display: grid; grid-template-columns: minmax(0, 1fr) 384px; }
+.app { display: block; }
 
 .case-note { margin-top: 16px; font-size: 13px; color: var(--muted); }
 
@@ -137,7 +137,7 @@ body::after { /* grain over the whole page */
 }
 
 /* thread */
-.thread { padding: 18px 32px 12px 32px; overflow: hidden; }
+.thread { padding: 18px 64px 12px 32px; overflow: hidden; }
 .ticket-head { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
 .th-row { display: flex; align-items: center; gap: 12px; font-size: 13px; }
 .tid { color: var(--muted); font-size: 13px; }
@@ -206,9 +206,9 @@ html[lang="ko"] .th-title { font-family: "Pretendard", sans-serif; }
 .chip.ok svg { color: var(--text); }
 
 /* decision dock */
-.dock { position: relative; }
-/* the decision lifts off the window: above its top line, past its right edge, flush with the grid */
-.decision.big { position: absolute; top: -72px; right: -56px; width: 440px; padding: 22px 22px 20px; }
+.dock { position: absolute; z-index: 2; top: 16px; left: calc(100% - 32px); width: 440px; }
+/* the decision straddles the window's right edge, above its top line: the window ends where the timeline ends */
+.decision.big { padding: 22px 22px 20px; }
 [data-theme="light"] .decision.big { background: var(--surface); }
 [data-theme="light"] .decision.big .opt { background: var(--bg); }
 .decision.big .d-q { font-size: 21px; margin-top: 12px; letter-spacing: -0.02em; }
@@ -308,7 +308,6 @@ html[lang="ko"] .tr-big b { margin: 0 2px 0 0; }
 
 /* ---------- ≤ 1100 ---------- */
 @media (max-width: 1100px) {
-  .app { grid-template-columns: minmax(0, 1fr) 340px; }
   .st { grid-template-columns: 24px 110px minmax(0, 1fr) auto; }
   .art { display: none; }
   .say, .say.wide { grid-column: 3; }
@@ -325,7 +324,7 @@ html[lang="ko"] .tr-big b { margin: 0 2px 0 0; }
   .hero-grid { padding-top: 16px; row-gap: 12px; justify-items: stretch; }
   .display { font-size: 37px; line-height: 1.04; letter-spacing: -0.035em; }
   html[lang="ko"] .display { font-size: 32px; line-height: 1.28; letter-spacing: -0.045em; }
-  .lead { font-size: 15.5px; line-height: 1.55; }
+  .lead { font-size: 15.5px; line-height: 1.5; }
   html[lang="ko"] .lead { font-size: 15.5px; line-height: 1.6; }
   .desk-only { display: none; }
   .phone-only { display: flex; }
@@ -342,9 +341,19 @@ html[lang="ko"] .tr-big b { margin: 0 2px 0 0; }
   .pw-head { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px 0; font-size: 15px; letter-spacing: -0.01em; }
   .pw-head b { font-weight: 600; }
   .pw-head .tid { font-size: 13px; }
-  .done-line { display: flex; align-items: flex-start; gap: 8px; padding: 6px 14px 12px 16px; font-size: 12.5px; letter-spacing: -0.01em; line-height: 1.45; color: var(--muted); }
-  .done-line svg { width: 14px; height: 14px; margin-top: 2px; color: var(--text); flex: none; }
-  .done-line b { color: var(--text); font-weight: 500; }
+  .desk-br { display: none; }
+  /* the window's own timeline, compact: five checks, then my row opens into the decision */
+  .pw-tl { list-style: none; position: relative; padding: 6px 16px 0; }
+  .pw-tl::before { content: ""; position: absolute; left: 24px; top: 18px; bottom: 16px; width: 1px; background: var(--line-strong); }
+  .pw-tl li { position: relative; display: grid; grid-template-columns: 16px 64px minmax(0, 1fr); column-gap: 10px; align-items: center; height: 24px; font-size: 12.5px; letter-spacing: -0.01em; white-space: nowrap; }
+  .pw-tl li > span { overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+  .pw-tl b { font-weight: 500; }
+  .pn { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-strong); }
+  .pn svg { width: 9px; height: 9px; color: var(--text); }
+  .pn.now { box-shadow: inset 0 0 0 1px var(--signal-edge); }
+  .pn .lamp { width: 6px; height: 6px; }
+  .pw-now { margin-bottom: 4px; }
+  .pw-decide .d-from .lamp { display: none; }
   .pw-decide { margin: 0 8px 8px; padding: 14px 14px 14px; border-radius: 9px; background: var(--raised); box-shadow: inset 0 0 0 1px var(--signal-edge), inset 0 1px 0 var(--highlight); }
   .pw-decide .d-q { margin-top: 8px; font-size: 18px; }
   .pw-decide .d-btns { margin-top: 12px; }
