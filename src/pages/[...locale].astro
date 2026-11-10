@@ -77,7 +77,7 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
           <li class="opt"><a href="#stage">{t.nav.stage}</a></li>
           <li class="opt"><a href="#how-it-works">{t.nav.howItWorks}</a></li>
           <li class="opt"><a href="#features">{t.nav.features}</a></li>
-          {DESIGN_LIVE && <li><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
+          {DESIGN_LIVE && <li class="dz-link"><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
           <li class="opt"><a href="#get-started">{t.nav.getStarted}</a></li>
           <li class="opt"><a href="#faq">{t.nav.faq}</a></li>
           <li class="opt"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="header">{t.nav.github}</a></li>
