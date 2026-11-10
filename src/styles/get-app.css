@@ -168,6 +168,14 @@
 .get-app .url { overflow-wrap: anywhere; }
 .get-app .menu li, .get-app .menu .mb { overflow-wrap: anywhere; }
 /* Safari text at 200% leaves ~200px: no-break runs may break rather than push the page sideways */
-@media (max-width: 300px) { .get-app .nm, .get-app .nw, .get-app .cmd .w, .get-app .hash { white-space: normal; overflow-wrap: anywhere; } .get-app .droid .sw { flex-shrink: 1; } }
+@media (max-width: 300px) { .get-app .nm, .get-app .nw { white-space: normal; overflow-wrap: break-word; } .get-app .cmd .w, .get-app .hash { white-space: normal; overflow-wrap: anywhere; } .get-app .droid .sw { flex-shrink: 1; } }
 @media (max-width: 300px) { .get-app h1, .get-app h2, .get-app .btn, .get-app .macfirst, .get-app .qrline, .get-app .meta { overflow-wrap: anywhere; } .get-app .btn { white-space: normal; text-align: center; height: auto; } }
 @media (max-width: 300px) { .get-app ol.steps, .get-app .dbody, .get-app .ill, .get-app .droid, .get-app ol.steps p { overflow-wrap: anywhere; } .get-app .droid .drow { gap: 6px; } .get-app .sw { width: 32px; } .get-app .stepill, .get-app .ill { padding: var(--s-2); } }
+
+/* Design QA round 3 */
+.get-app pre.cmd .w { font-family: inherit; }
+@media (max-width: 560px) { .get-app .kv dd { grid-template-columns: minmax(0, 1fr); justify-items: start; } }
+.get-app .hash, .get-app pre.cmd { overflow-x: auto; }
+.get-app summary { min-width: 0; overflow-wrap: anywhere; }
+.get-app .phone .btn, .get-app .phone button { min-width: 0; overflow-wrap: anywhere; }
+@media (hover: hover) { .get-app .btn:not(.primary):hover { border-color: var(--muted); background: color-mix(in srgb, var(--text) 6%, var(--bg)); } .get-app .cp:hover { background: color-mix(in srgb, var(--text) 6%, var(--bg)); } }
