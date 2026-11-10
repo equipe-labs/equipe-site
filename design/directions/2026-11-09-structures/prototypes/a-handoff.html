@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>인계 레일</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .hero { padding: 48px 34px 0; }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+    .rail-wrap { position: relative; margin-top: 38px; }
+    .rail-line { position: absolute; left: 3%; right: 3%; top: 116px; height: 1px; background: var(--line-strong); }
+    .handoffs { display: grid; grid-template-columns: 1.08fr .9fr 1fr 1fr 1.08fr; gap: 12px; align-items: start; }
+    .handoff { min-height: 235px; }
+    .handoff:nth-child(2) { margin-top: 34px; }
+    .handoff:nth-child(3) { margin-top: 68px; }
+    .handoff:nth-child(4) { margin-top: 34px; }
+    .handoff::after { content: ""; position: absolute; right: -9px; top: 111px; width: 7px; height: 7px; border: 1px solid #777d87; border-radius: 50%; background: var(--bg); z-index: 2; }
+    .handoff:last-child::after { display: none; }
+    .handoff-result { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); color: #d7d9dd; font-size: 10px; }
+    .finish { min-height: 235px; display: grid; grid-template-rows: 1fr auto; gap: 9px; }
+    .finish .decision { align-self: end; }
+    .finish .actual-decision { height: 176px; }
+    .finish .next-measure { padding: 0 3px; }
+    .mobile-summary { display: none; }
+    @media (max-width: 600px) {
+      .hero { padding: 30px 16px 0; }
+      .intro { display: block; }
+      .intro-copy .sub { max-width: 320px; }
+      .headline { font-size: 35px; max-width: 330px; }
+      .sub { max-width: 340px; line-height: 1.4; }
+      .rail-wrap { margin-top: 15px; height: 310px; overflow: hidden; }
+      .rail-line, .handoffs { display: none; }
+      .mobile-summary { display: block; }
+      .mobile-steps { display: grid; grid-template-columns: repeat(5,1fr); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+      .mobile-step { min-height: 37px; padding: 6px 4px; border-right: 1px solid var(--line); color: var(--muted); font-size: 7px; }
+      .mobile-step:last-child { border-right: 0; }
+      .mobile-step b { display: block; margin-bottom: 2px; color: var(--text); font-size: 8px; }
+      .mobile-proof { margin-top: 7px; display: grid; grid-template-columns: .7fr 1.3fr; gap: 7px; }
+      .mobile-data { border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+      .mobile-data strong { display: block; font-size: 18px; }
+      .mobile-data small { color: var(--quiet); font-size: 7px; }
+      .mobile-proof .phone-compare { margin-top: 0; }
+      .mobile-proof .phone-shot { min-height: 88px; }
+      .mobile-summary .decision { margin-top: 7px; padding: 10px; }
+      .mobile-summary .decision p { margin-top: 4px; }
+      .mobile-summary .decision-row { margin-top: 7px; }
+      .mobile-summary .actual-decision { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <nav class="nav">
+    <img class="brand" src="../../../assets/logo/wordmark-on-dark.svg" alt="equipe">
+    <div class="nav-links"><span>How it works</span><span>Design</span><span>GitHub</span><span>한국어</span></div>
+  </nav>
+  <section class="hero">
+    <div class="intro">
+      <div class="intro-copy">
+        <div class="eyebrow">A · 인계 레일</div>
+        <h1 class="headline">최고의 스타트업 팀을 드려요.<br>승인만 하세요.</h1>
+      </div>
+      <div>
+        <p class="sub">지표에서 끊김을 찾고, 설계하고, 구현하고, 검증해요. 내게 오는 건 공개 결정 한 건입니다.</p>
+        <div class="site-actions"><button class="site-action primary">iPhone 앱에서 팀 보기</button><button class="site-action">Mac 링크 보내기</button></div>
+        <div class="spec">무료 · macOS 14+ · 쓰던 Claude·ChatGPT 요금제 그대로</div>
+      </div>
+    </div>
+    <div class="rail-wrap">
+      <div class="rail-line"></div>
+      <div class="handoffs">
+        <article class="artifact handoff">
+          <div class="artifact-head"><span class="role">01 · data</span><span class="status">증거를 PM에게</span></div>
+          <div class="artifact-body">
+            <h3>유입과 다음 행동</h3>
+            <div class="source-table"><div class="source-row"><b>LinkedIn</b><span>iPhone</span><b>18</b></div><div class="source-row"><b>download</b><span>click</span><b>0</b></div><div class="source-row"><b>hero</b><span>click</span><b>0</b></div></div>
+            <div class="handoff-result">결론 · 폰에서 이어갈 길 없음</div>
+          </div>
+        </article>
+        <article class="artifact handoff">
+          <div class="artifact-head"><span class="role">02 · PM</span><span class="status">판단을 design에</span></div>
+          <div class="artifact-body"><h3>성공 조건을 정했어요.</h3><div class="pm-brief"><div class="brief-row"><span>문제</span><b>Mac 설치만 보임</b></div><div class="brief-row"><span>바꿀 것</span><b>앱 열기 · Mac 링크</b></div><div class="brief-row"><span>성공</span><b>다음 행동 1건</b></div></div><div class="handoff-result">결정 · 폰 첫 화면 분기</div></div>
+        </article>
+        <article class="artifact handoff">
+          <div class="artifact-head"><span class="role">03 · design</span><span class="status">동선을 frontend에</span></div>
+          <div class="artifact-body"><h3>전 / 후 화면</h3><div class="phone-compare"><div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn">Mac 다운로드</div></div><div class="shot-label">이전</div></div><div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn fill">앱에서 보기</div><div class="phone-btn">Mac 링크</div></div><div class="shot-label">새 동선</div></div></div><div class="handoff-result">390 · ko/en · light/dark</div></div>
+        </article>
+        <article class="artifact handoff">
+          <div class="artifact-head"><span class="role">04 · frontend</span><span class="status">빌드를 QA에</span></div>
+          <div class="artifact-body"><h3>미리보기에서 작동해요.</h3><div class="phone-compare"><div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">iPhone</div><div class="phone-btn fill">앱에서 보기</div><div class="phone-btn">Mac 링크</div></div><div class="shot-label">390</div></div><div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">Mac</div><div class="phone-btn fill">Mac 앱 받기</div></div><div class="shot-label">1440</div></div></div><div class="handoff-result">preview · 7f2c9a1</div></div>
+        </article>
+        <div class="finish">
+          <article class="artifact handoff">
+            <div class="artifact-head"><span class="role">05 · QA</span><span class="status">결과를 내게</span></div>
+            <div class="artifact-body"><h3>네 렌더를 비교했어요.</h3><div class="qa-thumbs"><div class="qa-shot"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · dark</small></div><div class="qa-shot"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · dark</small></div><div class="qa-shot light"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · light</small></div><div class="qa-shot light"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · light</small></div></div><div class="qa-caption"><span>390px</span><span>4 / 4 통과</span></div></div>
+          </article>
+          <div class="actual-decision"><span class="actual-label">실제 equipe · 내 결정 1건</span><img src="assets/decision-panel.png" alt="equipe 실제 결정 화면"></div>
+          <div class="next-measure">결정 뒤 배포 → 같은 지표 재측정</div>
+        </div>
+      </div>
+      <div class="mobile-summary">
+        <div class="mobile-steps"><div class="mobile-step"><b>data</b>18 → 0</div><div class="mobile-step"><b>PM</b>조건</div><div class="mobile-step"><b>design</b>전/후</div><div class="mobile-step"><b>build</b>2 CTA</div><div class="mobile-step"><b>QA</b>4/4</div></div>
+        <div class="mobile-proof"><div class="mobile-data"><strong>방문 18건</strong><small>LinkedIn · iPhone</small><strong style="margin-top:8px">클릭 0건</strong><small>Mac 다운로드</small></div><div class="actual-decision"><span class="actual-label">팀 완료 → 내 결정</span><img src="assets/decision-panel.png" alt="equipe 실제 결정 화면"></div></div>
+        <div class="next-measure" style="margin-top:7px">결정 뒤 배포 → 같은 지표 재측정</div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>한 사건의 기록</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .chronicle { min-height: 830px; display: grid; grid-template-columns: minmax(360px, .85fr) minmax(660px, 1.3fr); }
+    .story-intro { padding: 56px 48px 38px 34px; display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+    .story-intro .headline { margin-top: 18px; max-width: 570px; }
+    .story-intro .sub { max-width: 460px; }
+    .story-intro .site-actions { margin-top: auto; }
+    .log { position: relative; padding: 36px 34px 28px 50px; }
+    .log::before { content: ""; position: absolute; left: 72px; top: 77px; bottom: 62px; width: 1px; background: var(--line-strong); }
+    .ticket-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+    .ticket-head h2 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
+    .ticket-head span { color: var(--quiet); font-size: 11px; }
+    .entry { position: relative; display: grid; grid-template-columns: 76px 118px 1fr; gap: 13px; min-height: 104px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+    .entry::before { content: ""; position: absolute; left: 18px; top: 25px; width: 7px; height: 7px; border-radius: 50%; border: 1px solid #a5a9b0; background: var(--bg); z-index: 2; }
+    .entry .time { padding-left: 36px; color: var(--quiet); }
+    .entry .who { font-size: 12px; font-weight: 700; }
+    .entry .what h3 { margin: 0; font-size: 15px; letter-spacing: -.02em; }
+    .entry .what p { margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .entry .inline-proof { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .proof-chip { padding: 5px 7px; border: 1px solid var(--line); border-radius: 4px; color: #c9ccd2; font-size: 9px; }
+    .entry.decision-entry { min-height: 136px; }
+    .entry .decision { margin-top: -4px; max-width: 480px; }
+    .entry.next { min-height: 74px; border-bottom: 0; }
+    .entry.decision-entry .actual-decision { height: 140px; max-width: 500px; }
+    @media (max-width: 600px) {
+      .chronicle { min-height: 846px; display: block; }
+      .story-intro { padding: 26px 16px 20px; border: 0; }
+      .story-intro .headline { margin-top: 12px; font-size: 34px; max-width: 330px; word-break: keep-all; }
+      .story-intro .sub { margin-top: 12px; }
+      .story-intro .site-actions { margin-top: 15px; }
+      .log { padding: 14px 16px 20px; border-top: 1px solid var(--line); }
+      .log::before { left: 27px; top: 61px; bottom: 45px; }
+      .ticket-head { padding-bottom: 10px; }
+      .ticket-head h2 { font-size: 15px; }
+      .entry { grid-template-columns: 43px 1fr; gap: 8px; min-height: 56px; padding: 8px 0; }
+      .entry::before { left: 8px; top: 17px; }
+      .entry .time { padding-left: 21px; font-size: 8px; }
+      .entry .who { grid-column: 2; grid-row: 1; font-size: 10px; }
+      .entry .what { grid-column: 2; }
+      .entry .what h3 { font-size: 13px; }
+      .entry .what p { display: none; }
+      .entry .inline-proof { margin-top: 4px; }
+      .entry .pm-brief { margin-top: 3px; gap: 2px; }
+      .entry .brief-row { grid-template-columns: 36px 1fr; font-size: 6px; }
+      .entry .phone-compare { margin-top: 3px; max-width: 220px; }
+      .entry .phone-shot { min-height: 34px; padding: 3px; }
+      .entry .phone-shot .browserbar { display: none; }
+      .entry .phone-shot .phone-title { font-size: 5px; }
+      .entry .phone-btn { min-height: 7px; margin-top: 2px; font-size: 3px; }
+      .entry .qa-thumbs { margin-top: 3px; max-width: 250px; }
+      .entry .qa-shot { height: 27px; padding: 2px; }
+      .entry .qa-shot small { display: none; }
+      .entry .qa-shot .mini-btn { height: 5px; margin-top: 3px; }
+      .entry.decision-entry { min-height: 104px; }
+      .entry .decision { margin-top: 0; }
+      .entry.decision-entry .actual-decision { height: 120px; max-width: none; }
+      .entry.next { min-height: 52px; }
+      .inline-proof { margin-top: 6px !important; }
+      .proof-chip { padding: 4px 5px; font-size: 8px; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <nav class="nav"><img class="brand" src="../../../assets/logo/wordmark-on-dark.svg" alt="equipe"><div class="nav-links"><span>How it works</span><span>Design</span><span>GitHub</span><span>한국어</span></div></nav>
+  <section class="chronicle">
+    <div class="story-intro">
+      <div class="eyebrow">C · 한 사건의 기록</div>
+      <h1 class="headline">최고의 스타트업 팀을 드려요.<br>승인만 하세요.</h1>
+      <p class="sub">문제 하나가 판단, 설계, 코드, 검증을 지나 내 결정으로 오는 기록입니다.</p>
+      <div class="site-actions"><button class="site-action primary">iPhone 앱에서 팀 보기</button><button class="site-action">Mac 링크 보내기</button></div>
+      <div class="spec">무료 · macOS 14+ · 쓰던 Claude·ChatGPT 요금제 그대로</div>
+    </div>
+    <div class="log">
+      <div class="ticket-head"><h2>T-521 · 폰 방문자의 다음 행동</h2><span>오늘 · 진행 중</span></div>
+      <article class="entry decision-entry"><time class="time">지금</time><div class="who">내 차례</div><div class="what"><div class="actual-decision"><span class="actual-label">실제 equipe · 팀 완료 → 내 결정</span><img src="assets/decision-panel.png" alt="equipe 실제 결정 화면"></div></div></article>
+      <article class="entry"><time class="time">09:10</time><div class="who">data → PM</div><div class="what"><h3>LinkedIn 방문 18건, 다운로드 클릭 0건.</h3><p>대부분 iPhone 인앱 브라우저에서 들어와 Mac 다운로드 앞에서 멈췄어요.</p><div class="inline-proof"><span class="proof-chip">LinkedIn 18</span><span class="proof-chip">iPhone 다수</span><span class="proof-chip">download 0</span></div></div></article>
+      <article class="entry"><time class="time">09:18</time><div class="who">PM → design</div><div class="what"><h3>폰 첫 화면의 성공 조건</h3><div class="pm-brief"><div class="brief-row"><span>바꿀 것</span><b>앱 열기 · Mac 링크</b></div><div class="brief-row"><span>성공</span><b>다음 행동 1건</b></div></div></div></article>
+      <article class="entry"><time class="time">10:42</time><div class="who">design → frontend</div><div class="what"><h3>Mac 다운로드 하나를 두 갈래로 바꿨어요.</h3><div class="phone-compare"><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn">Mac 다운로드</div></div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn fill">앱에서 보기</div><div class="phone-btn">Mac 링크</div></div></div></div></article>
+      <article class="entry"><time class="time">12:06</time><div class="who">frontend → QA</div><div class="what"><h3>390 미리보기에서 두 행동이 작동해요.</h3><div class="inline-proof"><span class="proof-chip">preview / 390</span><span class="proof-chip">앱 열기</span><span class="proof-chip">링크 보내기</span></div></div></article>
+      <article class="entry"><time class="time">13:20</time><div class="who">QA → 나</div><div class="what"><h3>같은 화면 네 렌더를 비교했어요.</h3><div class="qa-thumbs"><div class="qa-shot"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · dark</small></div><div class="qa-shot"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · dark</small></div><div class="qa-shot light"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · light</small></div><div class="qa-shot light"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · light</small></div></div></div></article>
+      <article class="entry next"><time class="time">다음</time><div class="who">data</div><div class="what"><div class="next-measure">배포 뒤 같은 유입과 다음 행동을 다시 측정</div></div></article>
+    </div>
+  </section>
+</main>
+</body>
+</html>

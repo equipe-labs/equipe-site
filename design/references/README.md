@@ -3,6 +3,16 @@
 규칙: 패턴과 레이아웃은 배우고 베껴도 된다. **로고·브랜드 마크·카피는 절대 가져오지 않는다.**
 방향: 1 = 계기판/콘솔 + 실제 제품 창 히어로 · 2 = 조용한 타입 중심 + 타임라인/로그 · 3 = 제품 오브젝트(창/카드 하나) 히어로 · 폰 = 맥 전용 제품의 폰 방문자 다음 행동
 
+## 2026-11-08 심층 재조사
+
+사람이 네 차례의 방향 시안을 모두 거절한 뒤, 기존 19개 폴더를 다시 보고 8개 사이트를 새로 캡처했다. 새 비교 보드 [`board.png`](board.png)와 [`board.json`](board.json)은 13곳을 제품 증거·구조·리듬·타입·색 기준으로 비교한다. 결론과 다음 제작법은 [`2026-11-08-deep-research.md`](2026-11-08-deep-research.md)에 있다.
+
+- **계속 볼 기준점:** Cursor, Linear, Flighty, Dessn, Proof, Granola, Dia.
+- **반면교사:** Offloop, Tines, Superhuman 현재 홈, Attio 현재 홈.
+- **핵심 결론:** 생성 이미지보다 실제 equipe의 `지표 → PM 판단 → 역할별 작업 → QA → 공개 결정 → 배포 → 재측정`을 브랜드의 시각 문법으로 삼는다.
+
+아래 표는 첫 패스에서 고른 아홉 곳이다.
+
 | slug | 링크 | 배울 것 (한 줄) | 방향 |
 |---|---|---|---|
 | [granola](granola/) | https://www.granola.ai/ | iPhone이면 주 버튼 "iOS 앱", 보조 "데스크톱 앱" → 바텀시트에서 이메일로 "맥에서 열 링크" 보내기 | 폰, 3 |
@@ -24,5 +34,5 @@ Amp·Dia의 블러 글로우/따뜻한 그라데이션 배경, 보라 그라데�
 
 ## 출처 메모
 - Lapa Ninja: 첫 검색 후 Cloudflare 차단(403) — 우회하지 않음.
-- Mobbin: Sites는 무료 계정에서 최신 4개만 보여 검색 결과 없음. Granola iOS 앱 페이지만 확보(`granola/mobbin-ios-app.jpg`).
+- Mobbin: 첫 패스에서는 무료 계정에서 Granola iOS 앱 페이지만 확보했다(`granola/mobbin-ios-app.jpg`). 심층 재조사 때 `equipe design refs sources`는 로그인 안 됨으로 표시되어 새 탐색을 생략했다.
 - 21st.dev: Timeline 목록에서 1개.

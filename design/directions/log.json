@@ -64,5 +64,53 @@
     "palette": "near-black #0B0B0C, one amber light patch, no other colour",
     "density": "low",
     "motion": "the light patch drifts slowly across the wall over the day"
+  },
+  {
+    "name": "인계 레일",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "가로로 이어진 실제 산출물 다섯 장; 폰은 세로 인계",
+    "type": "구조 검증 단계: 중립 산세리프",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "낮음; 한 화면에 한 성장 사이클",
+    "motion": "산출물이 다음 역할로 조용히 이동",
+    "references": [
+      "R6",
+      "R7",
+      "R12"
+    ]
+  },
+  {
+    "name": "팀 / 내 결정",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "넓은 팀 작업 영역과 좁고 고정된 사람 결정 영역; 폰에서도 소유권 분리",
+    "type": "구조 검증 단계: 중립 산세리프",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "중간; 팀 작업은 풍부하고 사람 행동은 하나",
+    "motion": "팀 결과가 결정 영역으로 접힘",
+    "references": [
+      "R2",
+      "R4",
+      "R9"
+    ]
+  },
+  {
+    "name": "한 사건의 기록",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "하나의 문제에 판단·수정·검증·공개가 누적되는 시간 기록",
+    "type": "구조 검증 단계: 중립 산세리프+고정폭 메타",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "중간; 읽을 수 있는 사건 기록",
+    "motion": "새 기록이 아래에 쌓이고 다음 측정으로 닫힘",
+    "references": [
+      "R8",
+      "R11",
+      "R13"
+    ]
   }
 ]
