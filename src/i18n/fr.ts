@@ -16,6 +16,7 @@ const fr: Messages = {
     primaryNav: 'Navigation principale',
     copy: 'Copier',
     copied: 'Copié',
+    copyFallback: 'Appuyez sur ⌘C / Ctrl+C',
     copyInstall: 'Copier les commandes d’installation',
     copyCommands: 'Copier les commandes',
     copyCommand: 'Copier la commande',
@@ -168,9 +169,9 @@ const fr: Messages = {
     sourceTitle: 'Compiler depuis les sources (avancé)',
     source: 'Vous préférez compiler vous-même\u202F? Installez depuis les sources avec Rust 1.88+ et git\u202F: clonez `github.com/equipe-labs/equipe`, puis lancez `cargo install --locked --path crates/cli`. Le moteur Claude requiert aussi le binaire `claude`.',
     run: 'Connectez-vous à un moteur, vérifiez qu’il est prêt, puis ouvrez la console du squad :',
-    runCode: `equipe login     # se connecter à Codex ou à Claude Code
-equipe status    # vérifier l'état du moteur et les modèles disponibles
-equipe           # ouvrir la console du squad`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: 'Envie d’un premier aperçu sans le tableau ? Laissez un agent modifier votre dépôt sur une nouvelle branche, dans un worktree isolé :',
     docs: 'Lire la documentation sur GitHub →',
     roadmap: 'Feuille de route',

@@ -15,6 +15,7 @@ const de: Messages = {
     primaryNav: 'Hauptnavigation',
     copy: 'Kopieren',
     copied: 'Kopiert',
+    copyFallback: '⌘C / Strg+C drücken',
     copyInstall: 'Installationsbefehle kopieren',
     copyCommands: 'Befehle kopieren',
     copyCommand: 'Befehl kopieren',
@@ -167,9 +168,9 @@ const de: Messages = {
     sourceTitle: 'Aus dem Quellcode bauen (für Fortgeschrittene)',
     source: 'Lieber selbst bauen? Dann installiere aus dem Quellcode mit Rust 1.88+ und git: Klone `github.com/equipe-labs/equipe` und führe `cargo install --locked --path crates/cli` aus. Die Claude-Engine braucht zusätzlich das `claude`-Binary.',
     run: 'Melde dich bei einer Engine an, prüfe, ob sie bereit ist, und öffne dann die Squad-Konsole:',
-    runCode: `equipe login     # bei Codex oder Claude Code anmelden
-equipe status    # Engine-Bereitschaft und verfügbare Modelle prüfen
-equipe           # Squad-Konsole öffnen`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: 'Du willst erst mal reinschnuppern, ohne das Board? Lass einen Agenten dein Repository auf einem neuen Branch bearbeiten, in einem isolierten Worktree:',
     docs: 'Doku auf GitHub lesen →',
     roadmap: 'Roadmap',

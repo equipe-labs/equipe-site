@@ -15,6 +15,7 @@ const ko: Messages = {
     primaryNav: '주 메뉴',
     copy: '복사',
     copied: '복사됨',
+    copyFallback: '⌘C / Ctrl+C를 누르세요',
     copyInstall: '설치 명령어 복사',
     copyCommands: '명령어 복사',
     copyCommand: '명령어 복사',
@@ -167,9 +168,9 @@ const ko: Messages = {
     sourceTitle: '소스에서 빌드 (고급)',
     source: '직접 빌드하고 싶다면 소스에서 설치할 수도 있어요. Rust 1.88+와 git이 필요하고, `github.com/equipe-labs/equipe`를 clone한 뒤 `cargo install --locked --path crates/cli`를 실행하세요. Claude 엔진을 쓰려면 `claude` 바이너리도 있어야 해요.',
     run: '엔진에 로그인하고 준비됐는지 확인한 다음, 스쿼드 콘솔을 열어요.',
-    runCode: `equipe login     # Codex 또는 Claude Code에 로그인
-equipe status    # 엔진 준비 상태와 모델 사용 가능 여부 확인
-equipe           # 스쿼드 콘솔 열기`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: '보드 없이 먼저 맛만 보고 싶다면, 에이전트 하나가 격리된 worktree의 새 브랜치에서 저장소를 수정하게 해 보세요.',
     docs: 'GitHub에서 문서 읽기 →',
     roadmap: '로드맵',
