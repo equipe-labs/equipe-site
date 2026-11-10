@@ -157,6 +157,7 @@ code, pre, pre:lang(ko), pre:lang(ja), pre:lang(zh-CN), code:lang(ko), code:lang
 .android-hashes code { display: block; overflow-wrap: anywhere; word-break: break-all; font-size: 12px; line-height: 1.5; }
 @media (hover: hover) { .android-install .btn:hover { background: var(--surface); } }
 main.doc { padding: var(--s-7) 0 var(--s-8); }
+@media (max-width: 640px) { main.app-doc { padding-bottom: var(--s-6); } }
 main.doc h1 { font-size: 32px; line-height: 1.15; }
 @media (min-width: 641px) { main.doc h1 { font-size: 44px; } }
 main.doc .lead { font-size: 19px; line-height: 1.5; margin: var(--s-4) 0 var(--s-2); }
