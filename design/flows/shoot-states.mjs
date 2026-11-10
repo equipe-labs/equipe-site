@@ -49,6 +49,18 @@ const denied = async (p) => {
 };
 const advanced = async (p) => { await p.click('#get-started details.advanced > summary'); };
 
+// T-508: /app/ picks its layout from the browser: ua + isMobile give an iPhone or an Android phone.
+const UA_IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
+const UA_DROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Mobile Safari/537.36';
+const ios = (o = {}) => ({ view: 'page', ua: UA_IOS, ...o });
+const droid = (o = {}) => ({ view: 'page', ua: UA_DROID, ...o });
+const openFolds = async (p) => { await p.evaluate(() => document.querySelectorAll('.get-app details').forEach((d) => (d.open = true))); };
+const grant = (p) => p.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(p.url()).origin });
+const sentLink = async (p) => { await grant(p); await p.evaluate(() => { Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); }); await p.click('.v-ios [data-send] .btn, .v-droid [data-send] .btn'); };
+const linkManual = async (p) => { await p.evaluate(() => { Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); navigator.clipboard.writeText = () => Promise.reject(new Error('refused')); }); await p.click('.v-ios [data-send] .btn'); };
+const copyDenied = async (p) => { await p.evaluate(() => { navigator.clipboard.writeText = () => Promise.reject(new Error('refused')); }); await openFolds(p); await p.click('.v-droid .cp[data-copy]:visible >> nth=0'); };
+const verifyCopied = async (p) => { await grant(p); await openFolds(p); await p.click('.v-droid .cp[data-copy]:visible >> nth=0'); };
+
 const SHOTS = [
   // First visit → download
   S('first-visit/hero/default', '/'),
@@ -108,6 +120,22 @@ const SHOTS = [
   S('first-visit/home/design-live', '/', { view: 'full', live: true }),
   S('product-tour/features/design-live', '/', { view: '#features', live: true }),
   S('product-tour/features/design-live-long', '/de/', { view: '#features', locale: 'de-DE', live: true }),
+  // Get the app (T-508): the Mac layout is the default, a phone gets its own app first
+  S('get-app/mac/default', '/app/', { view: 'page' }),
+  S('get-app/mac/ko', '/ko/app/', { view: 'page', locale: 'ko-KR' }),
+  S('get-app/mac/long', '/de/app/', { view: 'page', locale: 'de-DE' }),
+  S('get-app/mac/folds-open', '/app/', { view: 'page', act: openFolds }),
+  S('get-app/mac/no-js', '/app/', { view: 'page', js: false }),
+  S('get-app/ios/default', '/app/', ios()),
+  S('get-app/ios/ko', '/ko/app/', ios({ locale: 'ko-KR' })),
+  S('get-app/ios/long', '/de/app/', ios({ locale: 'de-DE' })),
+  S('get-app/ios/link-copied', '/app/', ios({ act: sentLink, settle: 200 })),
+  S('get-app/ios/link-manual', '/app/', ios({ act: linkManual, settle: 200 })),
+  S('get-app/android/default', '/app/', droid()),
+  S('get-app/android/ko', '/ko/app/', droid({ locale: 'ko-KR' })),
+  S('get-app/android/long', '/de/app/', droid({ locale: 'de-DE' })),
+  S('get-app/android/verify-copied', '/app/', droid({ act: verifyCopied, settle: 200 })),
+  S('get-app/android/copy-denied', '/app/', droid({ act: copyDenied, settle: 200 })),
   // Not found
   S('not-found/not-found/default', '/nope/', { view: 'page' }),
   S('not-found/not-found/browser-lang', '/nope/', { locale: 'ja-JP' }),
@@ -130,6 +158,7 @@ try {
           locale: shot.locale,
           javaScriptEnabled: shot.js,
           extraHTTPHeaders: { 'Accept-Language': shot.locale },
+          ...(shot.ua ? { userAgent: shot.ua, isMobile: true, hasTouch: true } : {}),
         });
         const page = await context.newPage();
         if (shot.fonts === false) await page.route(/\.(woff2?|ttf|otf)(\?.*)?$/, (r) => r.abort());
