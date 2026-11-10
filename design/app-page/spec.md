@@ -136,7 +136,7 @@ None beyond `<details>`: a 160ms opacity fade on the opened body, under `prefers
 
 ## Copy
 
-ko and en are in `gen.py` (`T`). Write the other six languages from scratch per language, not translated from en (`site-copy-voice`), and put them in `src/i18n/app/*.ts` under a new `get` group. Product names and labels stay as each app shows them.
+ko and en are in `gen.py` (`T`). Write the other six languages from scratch per language, not translated from en (`site-copy-voice`), and put them under a new `get` group. (As built: the copy is in `src/i18n/<lang>.ts` → `app.get`, not `src/i18n/app/*.ts`.) Product names and labels stay as each app shows them.
 
 ## Not decided here / unconfirmed
 

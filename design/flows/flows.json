@@ -861,6 +861,191 @@
       ]
     },
     {
+      "id": "get-app",
+      "title": "Get the phone app",
+      "summary": "equipe.im/app: the one address for the QR code, the App Store listing and the APK. A Mac sees every platform; an iPhone or Android phone sees its own app first. Layout is picked from the browser, with no redirect. (The walkthrough shows the Mac layout; the phone layouts are in the screens above.)",
+      "locale": "en-US",
+      "screens": [
+        {
+          "id": "mac",
+          "title": "Get the app · Mac and every other device",
+          "url": "http://127.0.0.1:4378/app/",
+          "source": [
+            "src/pages/[...locale]/app/index.astro",
+            "src/components/AppPageShell.astro",
+            "src/components/PhoneApproval.astro",
+            "src/components/ApkInstall.astro",
+            "src/components/ApkVerify.astro",
+            "src/styles/get-app.css",
+            "src/styles/phone.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long",
+            "folds-open",
+            "no-js"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the Mac layout: DMG first, both phone apps, QR"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages"
+            },
+            {
+              "id": "folds-open",
+              "label": "Both folds open",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the Android install steps and the file check opened"
+            },
+            {
+              "id": "no-js",
+              "label": "JavaScript off",
+              "kind": "no-js",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no layout switch, no copy buttons: the Mac layout lists every platform; a phone without JS sees this too"
+            }
+          ]
+        },
+        {
+          "id": "ios",
+          "title": "Get the app · iPhone",
+          "url": "http://127.0.0.1:4378/app/",
+          "source": [
+            "src/pages/[...locale]/app/index.astro",
+            "src/components/AppPageShell.astro",
+            "src/components/PhoneApproval.astro",
+            "src/components/ApkInstall.astro",
+            "src/components/ApkVerify.astro",
+            "src/styles/get-app.css",
+            "src/styles/phone.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long",
+            "link-copied",
+            "link-manual"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): iPhone user agent: the App Store badge is the primary action"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): iPhone, browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): iPhone, the page in German"
+            },
+            {
+              "id": "link-copied",
+              "label": "Link copied",
+              "kind": "success",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no share sheet in this browser: the link is copied and the button says so for 4 s"
+            },
+            {
+              "id": "link-manual",
+              "label": "Clipboard refused",
+              "kind": "permission",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): no share sheet and no clipboard: the link is shown selected in a field"
+            }
+          ]
+        },
+        {
+          "id": "android",
+          "title": "Get the app · Android",
+          "url": "http://127.0.0.1:4378/app/",
+          "source": [
+            "src/pages/[...locale]/app/index.astro",
+            "src/components/AppPageShell.astro",
+            "src/components/PhoneApproval.astro",
+            "src/components/ApkInstall.astro",
+            "src/components/ApkVerify.astro",
+            "src/styles/get-app.css",
+            "src/styles/phone.css",
+            "src/styles/global.css",
+            "src/i18n/en.ts"
+          ],
+          "expects": [
+            "default",
+            "ko",
+            "long",
+            "verify-copied",
+            "copy-denied"
+          ],
+          "states": [
+            {
+              "id": "default",
+              "label": "Default (English)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): Android user agent: Download for Android is the primary action"
+            },
+            {
+              "id": "ko",
+              "label": "Korean",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): Android, browser in ko-KR"
+            },
+            {
+              "id": "long",
+              "label": "Long text (German)",
+              "kind": "long",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): Android, the page in German"
+            },
+            {
+              "id": "verify-copied",
+              "label": "Hash copied",
+              "kind": "success",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): file check open, after a click on Copy (reads Copied for 2 s)"
+            },
+            {
+              "id": "copy-denied",
+              "label": "Copy refused by the browser",
+              "kind": "permission",
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): clipboard not allowed: the hash is selected so it can be copied by hand"
+            }
+          ]
+        }
+      ],
+      "walk": [
+        {
+          "go": "http://127.0.0.1:4378/app/",
+          "screen": "mac"
+        },
+        {
+          "say": "On a Mac: the app first, then both phones, then pairing"
+        },
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
       "id": "design-menu",
       "title": "Design menu (hidden)",
       "summary": "HIDDEN on the live site: built, noindex, out of the sitemap and linked from nowhere until DESIGN_MENU_LIVE=true (src/data/design.ts). The library isn't built: its screens are T-303's mockups.",

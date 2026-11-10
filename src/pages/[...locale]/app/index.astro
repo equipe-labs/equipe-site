@@ -1,0 +1,208 @@
+---
+import AppPageShell from '../../../components/AppPageShell.astro';
+import AppIcons from '../../../components/AppIcons.astro';
+import ApkInstall from '../../../components/ApkInstall.astro';
+import ApkVerify from '../../../components/ApkVerify.astro';
+import Nw from '../../../components/Nw.astro';
+import PhoneApproval from '../../../components/PhoneApproval.astro';
+import '../../../styles/get-app.css';
+import badgeUrl from '../../../assets/badges/app-store.svg?url';
+import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../../i18n';
+import { SITE } from '../../../data/site';
+
+// /app/ in English, /<slug>/app/ in every other language that has a translation file.
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const t = getMessages(code).app.get;
+const qrs = import.meta.glob<string>('../../../assets/qr/*.svg', { query: '?raw', import: 'default', eager: true });
+const qr = qrs[`../../../assets/qr/${code}.svg`].replace('<svg ', `<svg role="img" aria-label="${t.qrLabel}" `);
+const pageUrl = new URL(subPath(info, 'app'), SITE.url).href;
+const qrUrl = `equipe.im/${info.slug ? info.slug + '/' : ''}app`;
+const phoneLabel = t.sceneAlt;
+
+// Every send-to-Mac block (iPhone and Android layouts) behaves the same.
+const send = { text: t.sendText, btn: t.sendBtn, done: t.sendDone, live: t.sendLive, manual: t.sendManual };
+---
+
+<AppPageShell code={code} subpage="app" title={t.meta.title} description={t.meta.description} wide>
+  <Fragment slot="head">
+    <script is:inline>
+      // Pick the layout before first paint (no flash). iPhone → ios, Android phone → android, everything else (iPad, tablets, desktop) stays Mac.
+      (function () {
+        var ua = navigator.userAgent, uad = navigator.userAgentData, d = 'mac';
+        if (/Android/.test(ua) && (uad ? uad.mobile : /Mobile/.test(ua))) d = 'android';
+        else if (/iPhone|iPod/.test(ua)) d = 'ios';
+        document.documentElement.setAttribute('data-device', d);
+      })();
+    </script>
+  </Fragment>
+
+  <section class="hero">
+    <div class="wrap top">
+      <div>
+        <h1>{t.h1}</h1>
+        <p class="lead v-mac v-ios"><Nw s={t.lead} /></p>
+        <p class="lead v-droid"><Nw s={t.leadDroid} /></p>
+
+        <!-- The one primary action, by layout -->
+        <div class="macfirst v-mac">
+          <a class="btn primary lg" href={SITE.desktopDmg} download data-primary data-ph="desktop_download_click" data-ph-location="app_page" data-ph-platform="macos"><AppIcons n="down" />{t.macBtn}</a>
+          <p class="meta">{t.macReq}<br />{t.macMeta}</p>
+        </div>
+        <div class="get v-ios">
+          <a class="badge big" href={SITE.appStore} data-primary data-ph="ios_download_click" data-ph-location="app_page" data-ph-platform="ios"><img src={badgeUrl} width="132" height="52" alt={t.badgeAlt} /></a>
+          <span class="meta">{t.iosMeta}</span>
+        </div>
+        <div class="get v-droid">
+          <a class="btn primary lg" href={SITE.androidApk} data-primary data-ph="android_download_click" data-ph-location="app_page" data-ph-platform="android"><AppIcons n="down" />{t.apkMain}</a>
+          <span class="meta"><Nw s={t.apkMeta} /></span>
+          <span class="meta caveat"><span class="soon">{t.soon}</span>{t.pushNow}</span>
+        </div>
+
+        <div class="phoneinline"><PhoneApproval code={code} label={phoneLabel} fit /><p class="scenecap">{t.sceneCap}</p></div>
+
+        <!-- Mac and every other device: the platform list, QR, the two folds -->
+        <div class="v-mac">
+          <h2 class="listh">{t.phonesH}</h2>
+          <ul class="plat">
+            <li>
+              <div><h3 class="pn">{t.ios}</h3><p class="meta">{t.iosMeta}</p></div>
+              <div class="acts"><a class="badge" href={SITE.appStore} data-ph="ios_download_click" data-ph-location="app_page" data-ph-platform="ios"><img src={badgeUrl} width="120" height="44" alt={t.badgeAlt} /></a></div>
+            </li>
+            <li>
+              <div><h3 class="pn">{t.droid}</h3><p class="meta"><Nw s={t.droidMeta[0]} /><br /><Nw s={t.droidMeta[1]} /></p></div>
+              <div class="acts"><a class="btn" href={SITE.androidApk} data-ph="android_download_click" data-ph-location="app_page" data-ph-platform="android"><AppIcons n="down" />{t.apkBtn}</a></div>
+            </li>
+          </ul>
+          <div class="qrline"><span class="qrbox" set:html={qr} /><div><b>{t.qrTitle}</b><p>{t.qrText}</p><span class="url">{qrUrl}</span></div></div>
+          <div class="folds">
+            <details>
+              <summary>{t.installFold}</summary>
+              <div class="dbody"><ApkInstall t={t} /><p class="note" style="margin-top: 16px">{t.update} {t.pushNow}</p></div>
+            </details>
+            <ApkVerify t={t} />
+          </div>
+        </div>
+
+        <!-- Phones: install steps (Android), send the page to the Mac, the other phone -->
+        <div class="v-droid">
+          <h2 class="instH">{t.installH}</h2>
+          <ApkInstall t={t} />
+        </div>
+        {['ios', 'droid'].map((v) => (
+          <div class={`v-${v}`}>
+            <div class="sendmac" data-send data-url={pageUrl} data-title={t.sendTitle} data-live={send.live} data-manual={send.manual}>
+              <p>{send.text}</p>
+              <button class="btn" type="button" data-ph="app_link_send_click" data-ph-platform={v === 'ios' ? 'ios' : 'android'}><span class="s-idle">{send.btn}</span><span class="s-done" hidden><AppIcons n="check" />{send.done}</span></button>
+              <p class="live" role="status"></p>
+              <input type="text" readonly hidden aria-label={send.manual} />
+            </div>
+          </div>
+        ))}
+        <p class="other v-ios"><a href="#main" data-device-set="android">{t.otherDroid}</a></p>
+      </div>
+      <div class="phonecol"><PhoneApproval code={code} label={phoneLabel} fit /><p class="scenecap">{t.sceneCap}</p></div>
+    </div>
+  </section>
+  <hr />
+
+  <section id="pair">
+    <div class="wrap">
+      <h2>{t.pairH}</h2>
+      <div class="pairgrid">
+        <ol class="steps">
+          <li>
+            <div>
+              <b>{t.p1}</b>
+              <p><Nw s={t.p1s} /> <br /><Nw s={t.p1t} /></p>
+              <div class="ill stepill in"><div class="menu" role="img" aria-label={`${t.menuCap} ${t.menuApp} › ${t.menuPair}`}><div aria-hidden="true"><div class="mb"><b>{t.menuApp}</b></div><ul><li class="on">{t.menuPair}</li></ul></div></div></div>
+            </div>
+          </li>
+          <li><div><b>{t.p2}</b><p><Nw s={t.p2s} /></p></div></li>
+          <li><div><b>{t.p3}</b><p>{t.p3s}</p></div></li>
+        </ol>
+        <div class="ill stepill side"><div class="menu" role="img" aria-label={`${t.menuCap} ${t.menuApp} › ${t.menuPair}`}><div aria-hidden="true"><div class="mb"><b>{t.menuApp}</b></div><ul><li class="on">{t.menuPair}</li></ul></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v-droid" style="padding-top: 0">
+    <div class="wrap top">
+      <div>
+        <h3 style="margin-bottom: 12px">{t.extrasH}</h3>
+        <div class="extras"><p class="note">{t.update}</p><ApkVerify t={t} /></div>
+        <p class="other"><a href={SITE.appStore} data-ph="ios_download_click" data-ph-location="app_page" data-ph-platform="ios">{t.otherIos}</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const root = document.documentElement;
+    // Switch layout without reloading ("On Android? Get the APK →").
+    document.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest<HTMLElement>('[data-device-set]');
+      if (!a) return;
+      e.preventDefault();
+      root.setAttribute('data-device', a.dataset.deviceSet!);
+      window.scrollTo(0, 0);
+    });
+
+    const flash = (btn: HTMLElement, idle: string, done: string, ms: number, then?: () => void) => {
+      btn.querySelector<HTMLElement>(idle)!.hidden = true;
+      btn.querySelector<HTMLElement>(done)!.hidden = false;
+      btn.classList.add('done');
+      setTimeout(() => {
+        btn.querySelector<HTMLElement>(idle)!.hidden = false;
+        btn.querySelector<HTMLElement>(done)!.hidden = true;
+        btn.classList.remove('done');
+        then?.();
+      }, ms);
+    };
+
+    // Copy buttons in the file check.
+    document.addEventListener('click', async (e) => {
+      const b = (e.target as Element).closest<HTMLElement>('.cp[data-copy]');
+      if (!b || b.classList.contains('done')) return;
+      const value = b.dataset.copy!;
+      const done = b.querySelector<HTMLElement>('.c-done')!;
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        // No clipboard: select the text so the visitor can copy it by hand.
+        const target = b.closest('dd')?.firstElementChild;
+        if (target) { const r = document.createRange(); r.selectNodeContents(target); const s = getSelection(); s?.removeAllRanges(); s?.addRange(r); }
+        return;
+      }
+      const live = b.closest('.dbody')?.querySelector<HTMLElement>('.vlive');
+      flash(b, '.c-idle', '.c-done', 2000, () => { if (live) live.textContent = ''; });
+      if (live) live.textContent = done.textContent;
+    });
+
+    // Send the page to the Mac: share sheet, else clipboard, else a selected field.
+    document.querySelectorAll<HTMLElement>('[data-send]').forEach((box) => {
+      const btn = box.querySelector<HTMLElement>('.btn')!;
+      const live = box.querySelector<HTMLElement>('.live')!;
+      const field = box.querySelector<HTMLInputElement>('input')!;
+      const url = box.dataset.url!;
+      btn.addEventListener('click', async () => {
+        if (btn.classList.contains('done')) return;
+        if (navigator.share) {
+          try { await navigator.share({ url, title: box.dataset.title }); return; }
+          catch (err) { if ((err as Error).name === 'AbortError') return; }
+        }
+        try {
+          await navigator.clipboard.writeText(url);
+          live.textContent = box.dataset.live!;
+          flash(btn, '.s-idle', '.s-done', 4000, () => { live.textContent = ''; });
+        } catch {
+          live.textContent = box.dataset.manual!;
+          field.value = url; field.hidden = false; field.focus(); field.select();
+        }
+      });
+    });
+  </script>
+</AppPageShell>

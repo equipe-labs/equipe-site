@@ -1,0 +1,181 @@
+/* /app/: getting the phone app (T-507 spec → T-508). Tokens are the site's (global.css); the only local values are --ok and --dash,
+   which also exist in app.css / landing.css but those files belong to other pages. */
+:root { --ok: #1F6B33; --dash: #80828A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --ok: #7FCB8E; --dash: #6B6D75; } }
+:root[data-theme='dark'] { --ok: #7FCB8E; --dash: #6B6D75; }
+
+.get-app { --gap: var(--s-8); }
+.get-app section { padding: var(--s-7) 0; }
+@media (min-width: 641px) { .get-app section { padding: var(--s-8) 0; } }
+.get-app section.hero { padding-bottom: var(--s-7); }
+.get-app hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.get-app .nm { white-space: nowrap; }
+.get-app .lead { font-size: 19px; line-height: 1.5; color: var(--muted); max-width: 560px; margin: var(--s-4) 0 0; }
+@media (min-width: 641px) { .get-app .lead { font-size: 21px; } }
+.get-app .meta { font-size: 14px; line-height: 1.5; color: var(--muted); margin: var(--s-1) 0 0; }
+.get-app .btn { gap: var(--s-2); font-size: 17px; background: none; color: var(--accent); font-family: inherit; cursor: pointer; }
+.get-app .btn.primary { background: var(--accent); color: var(--on-accent); }
+.get-app .btn.lg { min-height: 52px; font-size: 18px; padding: 0 24px; }
+.get-app .btn.done { border-color: var(--line); color: var(--text); }
+.get-app .btn.done .ic, .get-app .cp.done .ic { color: var(--ok); }
+.get-app .ic { width: 20px; height: 20px; flex: none; }
+
+/* One grid for every section: from 900px the text and a 360px right column */
+.get-app .top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+@media (max-width: 899px) { .get-app .top > :first-child { max-width: 640px; } }
+@media (min-width: 900px) { .get-app .top { grid-template-columns: minmax(0, 1fr) 360px; gap: var(--gap); align-items: start; } }
+
+/* Which layout: the page is static and renders the Mac layout; an inline script sets data-device before first paint */
+.get-app .v-ios, .get-app .v-droid, .get-app .get.v-ios, .get-app .get.v-droid { display: none; }
+/* the lead is shared by Mac and iPhone: shown by default, hidden for Android below */
+.get-app .lead.v-mac { display: block; }
+[data-device='ios'] .get-app .v-mac:not(.v-ios), [data-device='android'] .get-app .v-mac { display: none; }
+[data-device='ios'] .get-app .v-ios, [data-device='android'] .get-app .v-droid { display: block; }
+[data-device='ios'] .get-app .get.v-ios, [data-device='android'] .get-app .get.v-droid { display: grid; }
+.get-app .macfirst { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: var(--s-6); }
+.get-app .macfirst .meta { margin: 0; }
+
+.get-app .listh { font-size: 18px; letter-spacing: 0; margin-top: var(--s-7); }
+.get-app .plat { list-style: none; margin: var(--s-3) 0 0; padding: 0; border-top: 1px solid var(--line); }
+.get-app .plat > li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-3) var(--s-5); align-items: center; padding: var(--s-4) 0; border-bottom: 1px solid var(--line); }
+.get-app .plat .pn { font-size: 18px; letter-spacing: 0; }
+.get-app .acts { display: grid; gap: var(--s-1); justify-items: end; }
+.get-app .acts .btn { min-width: 120px; }
+@media (max-width: 640px) { .get-app .plat > li { grid-template-columns: 1fr; } .get-app .acts { justify-items: start; } }
+.get-app .badge { display: inline-block; line-height: 0; border-radius: var(--r-1); }
+.get-app .badge img { height: 44px; width: auto; display: block; }
+.get-app .badge.big img { height: 52px; }
+.get-app .qrline { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-4); align-items: center; margin-top: var(--s-5); }
+.get-app .qrbox { background: #fff; padding: 6px; border-radius: var(--r-1); line-height: 0; box-shadow: 0 0 0 1px var(--line); }
+.get-app .qrbox svg { width: 76px; height: 76px; display: block; }
+.get-app .qrline b { display: block; font-size: 16px; font-weight: 600; }
+.get-app .qrline p { margin: 0; font-size: 15px; color: var(--muted); }
+.get-app .url { font: 400 14px var(--mono); color: var(--muted); }
+
+/* The phone: the sheet inline below 900px, in the right column from 900px */
+.get-app .scenecap { font-size: 14px; color: var(--muted); margin: var(--s-3) 0 0; max-width: 300px; }
+.get-app .phonecol { display: none; justify-items: center; align-content: start; }
+.get-app .phonecol .phone { width: 320px; font-size: 14.4px; }
+.get-app .phonecol .scenecap { text-align: center; }
+.get-app .phoneinline { margin-top: var(--s-6); display: grid; justify-items: center; text-align: center; }
+[data-device='ios'] .get-app .phoneinline, [data-device='android'] .get-app .phoneinline { justify-items: start; text-align: start; }
+.get-app .phoneinline .phone { width: min(300px, 100%); font-size: 14px; }
+@media (min-width: 900px) { .get-app .phonecol { display: grid; } .get-app .phoneinline { display: none; } }
+
+/* Phones: the device's own app first */
+.get-app .get { display: grid; gap: var(--s-2); justify-items: start; margin-top: var(--s-6); }
+.get-app .get .btn { width: 100%; }
+@media (min-width: 641px) { .get-app .get .btn { width: auto; } }
+.get-app .caveat { color: var(--text); margin-top: var(--s-2); display: block; }
+.get-app .soon { display: inline-flex; align-items: center; height: 22px; padding: 0 10px; margin-right: var(--s-2); border: 1.5px dashed var(--dash); border-radius: 999px; font: 600 12px/1 var(--sans); color: var(--muted); letter-spacing: 0; vertical-align: middle; white-space: nowrap; }
+.get-app .sendmac { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line); font-size: 15px; }
+.get-app .sendmac p { margin: 0 0 var(--s-2); color: var(--muted); }
+.get-app .sendmac .btn { font-size: 16px; padding: 0 16px; border-width: 1.5px; }
+.get-app .sendmac .live { font-size: 14px; margin: var(--s-2) 0 0; }
+.get-app .sendmac input { display: block; width: 100%; min-height: var(--tap); margin-top: var(--s-2); padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--r-1); background: var(--code-bg); color: var(--text); font: 400 14px var(--mono); }
+.get-app .other { margin: var(--s-4) 0 0; font-size: 16px; }
+.get-app .other a { display: inline-flex; align-items: center; min-height: var(--tap); }
+.get-app .sendmac[hidden], .get-app .sendmac [hidden] { display: none; }
+
+/* Folds (details): one entry each, nothing else points at them */
+.get-app .folds { display: grid; gap: var(--s-2); margin-top: var(--s-5); }
+.get-app details { margin: 0; box-shadow: 0 0 0 1px var(--line); }
+.get-app summary { font-size: 16px; padding: 10px 16px; }
+.get-app .dbody { padding: 0 16px 16px; font-size: 15px; }
+.get-app .dbody ol.steps { gap: var(--s-4); margin-bottom: var(--s-4); }
+@media (prefers-reduced-motion: no-preference) { .get-app details[open] .dbody { animation: get-open 160ms ease-out; } @keyframes get-open { from { opacity: 0; } } }
+.get-app .note { font-size: 15px; color: var(--muted); margin: 0; }
+.get-app .extras { display: grid; gap: var(--s-3); }
+
+/* Steps */
+.get-app ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: s; }
+.get-app ol.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--s-3); counter-increment: s; margin: 0; }
+.get-app ol.steps > li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--text); color: var(--text); font: 600 15px/28px var(--sans); text-align: center; }
+.get-app ol.steps b { display: block; font-weight: 600; }
+.get-app ol.steps p { margin: 2px 0 0; color: var(--muted); font-size: 16px; }
+.get-app .instH { font-size: 22px; margin: 40px 0 20px; }
+
+/* Pairing: the Mac menu, drawn as a diagram (no QR in it, so nobody scans an example) */
+.get-app .pairgrid { display: grid; gap: var(--s-6); margin-top: var(--s-6); max-width: 640px; }
+.get-app .ill { background: var(--code-bg); border-radius: var(--r-2); padding: var(--s-5); }
+.get-app .stepill { margin-top: var(--s-3); padding: var(--s-3); width: fit-content; max-width: 100%; }
+.get-app .stepill.side { display: none; }
+.get-app .menu { background: var(--surface); border-radius: var(--r-1); box-shadow: 0 0 0 1px var(--line), 0 8px 24px #0000001a; font-size: 15px; max-width: 280px; overflow: hidden; }
+.get-app .stepill .menu { width: 220px; font-size: 14px; }
+.get-app .menu .mb { display: flex; padding: 6px 12px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.get-app .menu .mb b { color: var(--text); }
+.get-app .menu ul { list-style: none; margin: 0; padding: 6px; display: block; }
+.get-app .menu li { padding: 6px 10px; border-radius: 6px; color: var(--muted); margin: 0; }
+.get-app .menu li.on { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.get-app .stepill .menu li { padding: 4px 10px; }
+@media (min-width: 900px) {
+  .get-app .pairgrid { max-width: none; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--gap); align-items: start; }
+  .get-app .stepill.in { display: none; }
+  .get-app .stepill.side { display: grid; justify-items: start; align-self: start; width: auto; margin-top: 0; padding: var(--s-4); }
+  .get-app .stepill.side .menu { width: 280px; font-size: 15px; }
+}
+.get-app .pairgrid ol.steps { max-width: 640px; }
+
+/* Android's own "install unknown apps" screen, drawn in code */
+.get-app .droid { background: #FFFFFF; color: #1B1B1F; border-radius: 16px; padding: 14px 14px 4px; font-family: Roboto, system-ui, sans-serif; max-width: 280px; box-shadow: 0 0 0 1px #0000001a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .get-app .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; } }
+:root[data-theme='dark'] .get-app .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; }
+.get-app .droid .h { margin: 0 0 8px; font: 500 16px/1.3 Roboto, system-ui, sans-serif; }
+.get-app .droid .app { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 4px; }
+.get-app .droid .app i { width: 22px; height: 22px; border-radius: 50%; background: #9AA0A6; }
+.get-app .droid .drow { display: flex; justify-content: space-between; align-items: center; padding: 8px 6px; font-size: 14px; border-radius: 10px; outline: 2px solid var(--accent); outline-offset: 2px; margin: 6px 0 10px; }
+.get-app .sw { width: 40px; height: 24px; border-radius: 12px; background: #3F5AA9; position: relative; flex: none; }
+.get-app .sw::after { content: ''; position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; }
+.get-app .ill .cap { font-size: 14px; color: var(--muted); margin: var(--s-3) 0 0; }
+
+/* File check */
+.get-app .file { font-size: 14px; margin: 0 0 var(--s-3); }
+.get-app .kv { margin: 0 0 var(--s-3); }
+.get-app .kv dt { font-size: 14px; color: var(--muted); margin-bottom: var(--s-1); }
+.get-app .kv dd { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-2); align-items: start; }
+.get-app dl { margin: 0; }
+.get-app .hash, .get-app pre.cmd { box-shadow: inset 0 0 0 1px var(--line); font: 400 13px/1.55 var(--mono); background: var(--code-bg); border-radius: var(--r-1); min-width: 0; }
+.get-app .hash { padding: 10px 12px; word-break: break-all; }
+.get-app pre.cmd { padding: 12px; margin: 0; white-space: pre-wrap; word-break: normal; overflow-wrap: normal; overflow: visible; }
+.get-app .cp { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: var(--tap); width: 8.5em; padding: 0 8px; white-space: nowrap; border-radius: var(--r-1); border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 600 14px var(--sans); cursor: pointer; }
+.get-app .cp .ic { width: 18px; height: 18px; }
+.get-app .cmdh { font-size: 15px; margin: var(--s-5) 0 var(--s-3); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+.get-app .vnote { margin: 0; }
+.get-app .vlive { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.get-app .cp > span, .get-app .btn > span { display: inline-flex; align-items: center; gap: 6px; }
+.get-app .cp > [hidden], .get-app .btn > [hidden] { display: none; }
+.get-app .cp { display: none; }
+.js .get-app .cp { display: inline-flex; }
+.get-app .vlink { margin: 0; }
+.get-app .vlink a { display: inline-flex; align-items: center; min-height: var(--tap); }
+
+/* T-508 design QA fixes */
+.get-app .dbody p { padding: 0; }
+.get-app .cmd .w { white-space: nowrap; }
+.get-app .btn.done { border-color: var(--muted); }
+.get-app .stepill.droidpanel { width: fit-content; max-width: 100%; }
+:root[data-theme='dark'] .get-app .sw { background: #A8C7FA; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .get-app .sw { background: #A8C7FA; } }
+@media (hover: hover) {
+  .get-app .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
+  .get-app .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }
+  .get-app .btn:not(.primary):hover, .get-app .cp:hover { background: var(--surface); }
+  .get-app .cp:hover { border-color: var(--muted); }
+}
+.get-app .menu, .get-app .droid { max-width: 100%; box-sizing: border-box; }
+.get-app .stepill .menu { width: min(220px, 100%); }
+@media (min-width: 900px) { .get-app .stepill.side .menu { width: min(280px, 100%); } }
+.get-app .url { overflow-wrap: anywhere; }
+.get-app .menu li, .get-app .menu .mb { overflow-wrap: anywhere; }
+/* Safari text at 200% leaves ~200px: no-break runs may break rather than push the page sideways */
+@media (max-width: 300px) { .get-app .nm, .get-app .nw { white-space: normal; overflow-wrap: break-word; } .get-app .cmd .w, .get-app .hash { white-space: normal; overflow-wrap: anywhere; } .get-app .droid .sw { flex-shrink: 1; } }
+@media (max-width: 300px) { .get-app h1, .get-app h2, .get-app .btn, .get-app .macfirst, .get-app .qrline, .get-app .meta { overflow-wrap: anywhere; } .get-app .btn { white-space: normal; text-align: center; height: auto; } }
+@media (max-width: 300px) { .get-app ol.steps, .get-app .dbody, .get-app .ill, .get-app .droid, .get-app ol.steps p { overflow-wrap: anywhere; } .get-app .droid .drow { gap: 6px; } .get-app .sw { width: 32px; } .get-app .stepill, .get-app .ill { padding: var(--s-2); } }
+
+/* Design QA round 3 */
+.get-app pre.cmd .w { font-family: inherit; }
+@media (max-width: 560px) { .get-app .kv dd { grid-template-columns: minmax(0, 1fr); justify-items: start; } }
+.get-app .hash, .get-app pre.cmd { overflow-x: auto; }
+.get-app summary { min-width: 0; overflow-wrap: anywhere; }
+.get-app .phone .btn, .get-app .phone button { min-width: 0; overflow-wrap: anywhere; }
+@media (hover: hover) { .get-app .btn:not(.primary):hover { border-color: var(--muted); background: color-mix(in srgb, var(--text) 6%, var(--bg)); } .get-app .cp:hover { background: color-mix(in srgb, var(--text) 6%, var(--bg)); } }
