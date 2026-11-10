@@ -96,6 +96,10 @@ footer { border-top: var(--bw-1) solid var(--line); padding: var(--s-6) 0; color
 footer .wrap { display: flex; flex-direction: column; gap: var(--s-2); }
 footer a { color: var(--muted); }
 .foot-links { gap: var(--s-1) var(--s-4); }
+@media (max-width: 640px) {
+  .app-foot .foot-links { flex-direction: column; flex-wrap: nowrap; gap: 0; }
+  .app-foot .foot-links a { display: flex; align-items: center; min-height: 44px; min-width: 44px; }
+}
 @media (min-width: 641px) { footer .wrap { flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2) var(--s-5); } }
 
 /* Install method tabs: radio inputs + labels, no JS */
