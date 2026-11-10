@@ -20,7 +20,7 @@ main.landing h4 { margin: 0; font: 700 17px/1.35 var(--sans); }
 header.site .wrap { max-width: 1360px; }
 header.site nav ul { gap: var(--s-5); }
 header.site nav .opt { display: none; }
-@media (min-width: 1100px) { header.site nav .opt { display: list-item; } }
+@media (min-width: 1120px) { header.site nav .opt { display: list-item; } }
 header.site nav a { color: var(--muted); font-size: 15px; font-weight: 500; text-decoration: none; }
 header.site nav a.btn { color: var(--on-accent); }
 .btn.sm { min-height: 38px; padding: 0 var(--s-4); font-size: 15px; white-space: nowrap; }
