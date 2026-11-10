@@ -1,0 +1,36 @@
+---
+// "Check the file is ours": file name, size, date, the two SHA-256 values with copy buttons, and the terminal commands.
+import AppIcons from './AppIcons.astro';
+import { SITE } from '../data/site';
+import type { Messages } from '../i18n';
+interface Props { t: Messages['app']['get']; open?: boolean }
+const { t, open = false } = Astro.props;
+const a = SITE.android;
+const cmds = [
+  { id: 'cmd_shasum', label: t.vHow, text: `shasum -a 256 ~/Downloads/${a.file}` },
+  { id: 'cmd_apksigner', label: t.vCertHow, text: `apksigner verify --print-certs ~/Downloads/${a.file}` },
+];
+---
+<details open={open}>
+  <summary>{t.verify}</summary>
+  <div class="dbody">
+    <p class="file"><span class="url">{a.file}</span> · {a.sizeMb} MB · {t.release.replace('%date%', a.released)}</p>
+    <dl>
+      {[{ id: 'file_sha256', label: t.vFile, value: a.fileSha256 }, { id: 'cert_sha256', label: t.vCert, value: a.certificateSha256 }].map((x) => (
+        <div class="kv"><dt>{x.label}</dt><dd><span class="hash">{x.value}</span>
+          <button class="cp" type="button" data-copy={x.value} data-ph="apk_verify_copy" data-ph-field={x.id}><span class="c-idle"><AppIcons n="copy" />{t.copy}</span><span class="c-done" hidden><AppIcons n="check" />{t.copied}</span></button></dd></div>
+      ))}
+    </dl>
+    <h4 class="cmdh">{t.vCmdH}</h4>
+    <p class="note" style="margin-bottom: 12px">{t.vCmdIntro}</p>
+    <dl>
+      {cmds.map((c) => (
+        <div class="kv"><dt>{c.label}</dt><dd><pre class="cmd" set:html={c.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\//g, '/<wbr>')} />
+          <button class="cp" type="button" data-copy={c.text} data-ph="apk_verify_copy" data-ph-field={c.id}><span class="c-idle"><AppIcons n="copy" />{t.copy}</span><span class="c-done" hidden><AppIcons n="check" />{t.copied}</span></button></dd></div>
+      ))}
+    </dl>
+    <p class="note vnote">{t.vNote}</p>
+    <p class="note vlink"><a href={a.release} data-ph="apk_release_link_click">{t.vLink}</a></p>
+    <p class="vlive" role="status"></p>
+  </div>
+</details>

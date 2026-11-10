@@ -1,0 +1,13 @@
+---
+// A translated string where `{…}` keeps a phrase on one line and `code` renders as <code>. The only markup in it is ours.
+import { segments } from '../i18n';
+const { s } = Astro.props as { s: string };
+const parts = s.split(/(\{[^}]*\})/).filter(Boolean);
+---
+
+{parts.map((p) => {
+  const nowrap = p.startsWith('{') && p.endsWith('}');
+  const inner = nowrap ? p.slice(1, -1) : p;
+  const out = segments(inner).map((x) => (x.kind === 'code' ? <code class="nw">{x.t}</code> : x.kind === 'strong' ? <strong>{x.t}</strong> : x.t));
+  return nowrap ? <span class="nm">{out}</span> : out;
+})}

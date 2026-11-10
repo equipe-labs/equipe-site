@@ -11,12 +11,14 @@ import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '..
 
 interface Props {
   code: LocaleCode;
-  /** `app/privacy` or `app/support`. */
-  subpage: 'app/privacy' | 'app/support';
+  /** `app` (get the app), `app/privacy` or `app/support`. */
+  subpage: 'app' | 'app/privacy' | 'app/support';
+  /** The get-the-app page lays out its own sections: no reading column, no contact line. */
+  wide?: boolean;
   title: string;
   description: string;
 }
-const { code, subpage, title, description } = Astro.props;
+const { code, subpage, title, description, wide = false } = Astro.props;
 const info = getLocale(code);
 const t = getMessages(code);
 ---
@@ -24,6 +26,7 @@ const t = getMessages(code);
 <Base locale={code} title={title} description={description} image={SITE.ogImage} imageAlt={t.meta.ogImageAlt} subpage={subpage}>
   <Fragment slot="head">
     <OrganizationJsonLd />
+    <slot name="head" />
   </Fragment>
 
   <a class="skip" href="#main">{t.ui.skip}</a>
@@ -32,6 +35,7 @@ const t = getMessages(code);
       <a class="brand" href={localePath(info)}><Mark size={28} /> equipe</a>
       <nav aria-label={t.ui.primaryNav}>
         <ul>
+          <li class="opt"><a href={subPath(info, 'app')} aria-current={subpage === 'app' ? 'page' : undefined}>{t.app.nav.get}</a></li>
           <li class="opt"><a href={subPath(info, 'app/privacy')} aria-current={subpage === 'app/privacy' ? 'page' : undefined}>{t.app.nav.privacy}</a></li>
           <li class="opt"><a href={subPath(info, 'app/support')} aria-current={subpage === 'app/support' ? 'page' : undefined}>{t.app.nav.support}</a></li>
           <li><LangMenu locale={code} label={t.ui.language} subpage={subpage} /></li>
@@ -40,16 +44,18 @@ const t = getMessages(code);
     </div>
   </header>
 
-  <main id="main" class="doc app-doc">
-    <div class="wrap col">
-      <slot />
-      <p class="contact"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a> · <a href={SITE.issues}>GitHub</a></p>
-    </div>
-  </main>
+  {wide
+    ? <main id="main" class="get-app"><slot /></main>
+    : <main id="main" class="doc app-doc">
+        <div class="wrap col">
+          <slot />
+          <p class="contact"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a> · <a href={SITE.issues}>GitHub</a></p>
+        </div>
+      </main>}
 
   <footer class="app-foot">
     <div class="wrap">
-      <span class="foot-links"><a href={localePath(info)}>{t.app.nav.home}</a><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
+      <span class="foot-links"><a href={localePath(info)}>{t.app.nav.home}</a><a href={subPath(info, 'app')}>{t.app.nav.get}</a><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
       <span>{t.footer.license}</span>
     </div>
   </footer>

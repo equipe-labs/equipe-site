@@ -63,6 +63,9 @@ if (cfg) {
         props[k[2].toLowerCase() + k.slice(3).replace(/[A-Z]/g, (c) => '_' + c.toLowerCase())] = v;
       }
     }
+    // The layout /app/ chose for this visitor (mac / ios / android), so a download click says what the page offered first.
+    const device = document.documentElement.dataset.device;
+    if (device && name.endsWith('_download_click') && el.dataset.phLocation === 'app_page') props.layout = device;
     track(name, props);
   };
 

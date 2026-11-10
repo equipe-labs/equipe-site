@@ -1,0 +1,21 @@
+---
+// The three Android install steps; step 2 carries Android's own "install unknown apps" screen, drawn in code.
+import type { Messages } from '../i18n';
+interface Props { t: Messages['app']['get'] }
+const { t } = Astro.props;
+---
+<ol class="steps">
+  <li><div><b>{t.i1}</b><p>{t.i1s}</p></div></li>
+  <li>
+    <div>
+      <b>{t.i2}</b><p>{t.i2s}</p>
+      <div class="ill" style="margin-top: 12px; padding: 16px">
+        <div class="droid" role="img" aria-label={`${t.droidScreenTitle}: ${t.droidScreenAllow}`}>
+          <div aria-hidden="true"><p class="h">{t.droidScreenTitle}</p><div class="app"><i></i>Chrome</div><div class="drow"><span>{t.droidScreenAllow}</span><span class="sw"></span></div></div>
+        </div>
+        <p class="cap">{t.droidScreenCap}</p>
+      </div>
+    </div>
+  </li>
+  <li><div><b>{t.i3}</b><p>{t.i3s}</p></div></li>
+</ol>

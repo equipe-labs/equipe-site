@@ -76,8 +76,12 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 |---|---|---|
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` | GitHub로 가는 CTA·링크 클릭 |
-| `desktop_download_click` | `location`: `header` / `hero` / `start` / `close` | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
-| `android_download_click` | `location`: `phone` / `start` / `support` | 서명된 Android APK 다운로드 링크 클릭 |
+| `desktop_download_click` | `location`: `header` / `hero` / `start` / `close` / `app_page`(`platform`: `macos`, `layout`) | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
+| `android_download_click` | `location`: `phone` / `start` / `support` / `app_page`, `platform`, `layout`(app_page만) | 서명된 Android APK 다운로드 링크 클릭 |
+| `ios_download_click` | `location`: `app_page`, `platform`: `ios`, `layout` | `/app/`의 App Store 배지 클릭 (T-508) |
+| `app_link_send_click` | `platform`: `ios` / `android` | `/app/`의 "Mac으로 링크 보내기" 클릭 (T-508) |
+| `apk_verify_copy` | `field`: `file_sha256` / `cert_sha256` / `cmd_shasum` / `cmd_apksigner` | `/app/` 파일 확인의 복사 버튼 클릭 |
+| `apk_release_link_click` | — | 파일 확인의 "GitHub 릴리스에서 보기" 클릭 |
 | `cli_install_link_click` | `location`: `hero` | 히어로의 "터미널로 설치하기" 링크 클릭 (설치 섹션의 CLI 블록으로 이동) |
 | `app_notify_click` | — | T-159 이후 발생하지 않는다(앱 섹션과 알림 카드가 없어짐). 과거 데이터만 남는다 |
 | `install_command_copy` | `command`: `install` / `install_brew` / `run` / `try`, (설치 섹션의 명령에만. T-137 전에는 히어로의 brew 명령에 `location=hero`가 붙었다) | 설치 명령 복사 버튼 클릭 |
