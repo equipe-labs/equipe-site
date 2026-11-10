@@ -25,7 +25,7 @@ const cmds = [
     <p class="note" style="margin-bottom: 12px">{t.vCmdIntro}</p>
     <dl>
       {cmds.map((c) => (
-        <div class="kv"><dt>{c.label}</dt><dd><pre class="cmd" set:html={c.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\//g, '/<wbr>')} />
+        <div class="kv"><dt>{c.label}</dt><dd><pre class="cmd" set:html={c.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').split(/( +)/).map((w) => (/^ +$/.test(w) ? w : `<span class="w">${w.replace(/\//g, '/</span><wbr><span class="w">')}</span>`)).join('')} />
           <button class="cp" type="button" data-copy={c.text} data-ph="apk_verify_copy" data-ph-field={c.id}><span class="c-idle"><AppIcons n="copy" />{t.copy}</span><span class="c-done" hidden><AppIcons n="check" />{t.copied}</span></button></dd></div>
       ))}
     </dl>

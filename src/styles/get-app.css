@@ -21,12 +21,15 @@
 .get-app .ic { width: 20px; height: 20px; flex: none; }
 
 /* One grid for every section: from 900px the text and a 360px right column */
-.get-app .top { display: grid; gap: var(--s-7); }
+.get-app .top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+@media (max-width: 899px) { .get-app .top > :first-child { max-width: 640px; } }
 @media (min-width: 900px) { .get-app .top { grid-template-columns: minmax(0, 1fr) 360px; gap: var(--gap); align-items: start; } }
 
 /* Which layout: the page is static and renders the Mac layout; an inline script sets data-device before first paint */
 .get-app .v-ios, .get-app .v-droid, .get-app .get.v-ios, .get-app .get.v-droid { display: none; }
-[data-device='ios'] .get-app .v-mac, [data-device='android'] .get-app .v-mac { display: none; }
+/* the lead is shared by Mac and iPhone: shown by default, hidden for Android below */
+.get-app .lead.v-mac { display: block; }
+[data-device='ios'] .get-app .v-mac:not(.v-ios), [data-device='android'] .get-app .v-mac { display: none; }
 [data-device='ios'] .get-app .v-ios, [data-device='android'] .get-app .v-droid { display: block; }
 [data-device='ios'] .get-app .get.v-ios, [data-device='android'] .get-app .get.v-droid { display: grid; }
 .get-app .macfirst { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: var(--s-6); }
@@ -54,8 +57,9 @@
 .get-app .phonecol { display: none; justify-items: center; align-content: start; }
 .get-app .phonecol .phone { width: 320px; font-size: 14.4px; }
 .get-app .phonecol .scenecap { text-align: center; }
-.get-app .phoneinline { margin-top: var(--s-6); display: grid; justify-items: start; }
-.get-app .phoneinline .phone { width: 300px; font-size: 14px; }
+.get-app .phoneinline { margin-top: var(--s-6); display: grid; justify-items: center; text-align: center; }
+[data-device='ios'] .get-app .phoneinline, [data-device='android'] .get-app .phoneinline { justify-items: start; text-align: start; }
+.get-app .phoneinline .phone { width: min(300px, 100%); font-size: 14px; }
 @media (min-width: 900px) { .get-app .phonecol { display: grid; } .get-app .phoneinline { display: none; } }
 
 /* Phones: the device's own app first */
@@ -144,3 +148,26 @@
 .js .get-app .cp { display: inline-flex; }
 .get-app .vlink { margin: 0; }
 .get-app .vlink a { display: inline-flex; align-items: center; min-height: var(--tap); }
+
+/* T-508 design QA fixes */
+.get-app .dbody p { padding: 0; }
+.get-app .cmd .w { white-space: nowrap; }
+.get-app .btn.done { border-color: var(--muted); }
+.get-app .stepill.droidpanel { width: fit-content; max-width: 100%; }
+:root[data-theme='dark'] .get-app .sw { background: #A8C7FA; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .get-app .sw { background: #A8C7FA; } }
+@media (hover: hover) {
+  .get-app .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
+  .get-app .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }
+  .get-app .btn:not(.primary):hover, .get-app .cp:hover { background: var(--surface); }
+  .get-app .cp:hover { border-color: var(--muted); }
+}
+.get-app .menu, .get-app .droid { max-width: 100%; box-sizing: border-box; }
+.get-app .stepill .menu { width: min(220px, 100%); }
+@media (min-width: 900px) { .get-app .stepill.side .menu { width: min(280px, 100%); } }
+.get-app .url { overflow-wrap: anywhere; }
+.get-app .menu li, .get-app .menu .mb { overflow-wrap: anywhere; }
+/* Safari text at 200% leaves ~200px: no-break runs may break rather than push the page sideways */
+@media (max-width: 300px) { .get-app .nm, .get-app .nw, .get-app .cmd .w, .get-app .hash { white-space: normal; overflow-wrap: anywhere; } .get-app .droid .sw { flex-shrink: 1; } }
+@media (max-width: 300px) { .get-app h1, .get-app h2, .get-app .btn, .get-app .macfirst, .get-app .qrline, .get-app .meta { overflow-wrap: anywhere; } .get-app .btn { white-space: normal; text-align: center; height: auto; } }
+@media (max-width: 300px) { .get-app ol.steps, .get-app .dbody, .get-app .ill, .get-app .droid, .get-app ol.steps p { overflow-wrap: anywhere; } .get-app .droid .drow { gap: 6px; } .get-app .sw { width: 32px; } .get-app .stepill, .get-app .ill { padding: var(--s-2); } }
