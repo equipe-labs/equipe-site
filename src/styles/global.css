@@ -78,7 +78,10 @@ pre code { background: none; padding: 0; font-size: inherit; }
 .copy { flex: none; display: none; min-width: var(--tap); min-height: var(--tap); margin: calc((24px + 2 * var(--s-4) - var(--tap)) / 2) var(--s-2) 0 auto; background: none; border: 0; color: var(--accent); font: 600 14px var(--sans); cursor: pointer; }
 .js .copy { display: block; }
 @media (max-width: 640px) { .codeblock:has(.copy.hint) { flex-wrap: wrap; } .codeblock:has(.copy.hint) pre { flex-basis: 100%; } .copy.hint { margin-top: calc(-1 * var(--s-3)); margin-bottom: var(--s-2); } }
-@media (max-width: 640px) { pre { font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; } }
+/* phones: the box wraps at spaces and after "/" only (Cmd.astro makes every other run nowrap), so a hyphen never reads as a line break */
+@media (max-width: 640px) { pre { font-size: 14px; white-space: pre-wrap; } .nb { white-space: nowrap; } }
+/* :lang() sets a sans family on every element; keep the command runs in the code font */
+pre .nb { font-family: inherit; }
 .links, .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-5); }
 .links { margin: 0; }
 .links a { white-space: nowrap; }

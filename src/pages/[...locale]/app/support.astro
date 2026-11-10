@@ -1,4 +1,5 @@
 ---
+import Cmd from '../../../components/Cmd.astro';
 import AppPageShell from '../../../components/AppPageShell.astro';
 import Rich from '../../../components/Rich.astro';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../../i18n';
@@ -43,7 +44,7 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
     <ol>
       {s.pairSteps.map((step) => <li><Rich s={step} /></li>)}
     </ol>
-    <div class="codeblock"><pre tabindex="0"><code>{s.pairCode}</code></pre></div>
+    <div class="codeblock"><pre tabindex="0"><code><Cmd text={s.pairCode} /></code></pre></div>
     <h3>{s.removeTitle}</h3>
     <p><Rich s={s.removeText} /></p>
   </section>

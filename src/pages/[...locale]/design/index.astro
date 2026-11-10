@@ -1,4 +1,5 @@
 ---
+import Cmd from '../../../components/Cmd.astro';
 import DesignShell from '../../../components/DesignShell.astro';
 import { DESIGN_REPO } from '../../../data/design';
 import { available, getLocale, subPath, type LocaleCode } from '../../../i18n';
@@ -98,7 +99,7 @@ const letters = ['A', 'B', 'C', 'D', 'E'];
     <div class="wrap">
       <h2>{p.installTitle}</h2>
       <p class="sub">{p.installSub}</p>
-      <div class="codeblock"><pre tabindex="0"><code>npx equipe-design extract https://example.com</code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
+      <div class="codeblock"><pre tabindex="0"><code><Cmd text="npx equipe-design extract https://example.com" /></code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
       <div class="ph">⚑ {d.soon}</div>
     </div>
   </section>
