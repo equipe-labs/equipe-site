@@ -166,9 +166,9 @@ const ja: Messages = {
     sourceTitle: 'ソースからビルド（上級者向け）',
     source: '自分でビルドしたい場合は、ソースからもインストールできます。Rust 1.88+とgitが必要です。`github.com/equipe-labs/equipe`をcloneし、`cargo install --locked --path crates/cli`を実行してください。Claudeエンジンを使う場合は、`claude`バイナリも必要です。',
     run: 'エンジンにログインし、準備ができているか確認してから、スクワッドコンソールを開きます：',
-    runCode: `equipe login     # CodexまたはClaude Codeにログイン
-equipe status    # エンジンの準備状況とモデルの利用可否を確認
-equipe           # スクワッドコンソールを開く`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: 'まずはボードなしで試してみたい場合は、1つのエージェントに、分離されたworktree内の新しいブランチでリポジトリを編集させてみましょう：',
     docs: 'GitHubでドキュメントを読む →',
     roadmap: 'ロードマップ',

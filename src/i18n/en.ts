@@ -171,9 +171,9 @@ export const en = {
     source: 'Prefer to build it yourself? Install from source with Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the `claude` binary.',
     run: 'Sign in to an engine, check it\'s ready, then open the squad console:',
     // Shell comments inside the code block may be translated; the commands must not be.
-    runCode: `equipe login     # sign in to Codex or Claude Code
-equipe status    # check engine readiness and model availability
-equipe           # open the squad console`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: 'Want a first taste without the board? Let one agent edit your repo on a new branch, in an isolated worktree:',
     docs: 'Read the docs on GitHub →',
     roadmap: 'Roadmap',

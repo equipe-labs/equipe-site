@@ -166,9 +166,9 @@ const zhCN: Messages = {
     sourceTitle: '从源码构建（进阶）',
     source: '想自己编译的话，也可以从源码安装：需要 Rust 1.88+ 和 git，克隆 `github.com/equipe-labs/equipe`，然后运行 `cargo install --locked --path crates/cli`。使用 Claude 引擎还需要 `claude` 二进制文件。',
     run: '先登录引擎，确认它已就绪，再打开小队控制台：',
-    runCode: `equipe login     # 登录 Codex 或 Claude Code
-equipe status    # 检查引擎是否就绪、模型是否可用
-equipe           # 打开小队控制台`,
+    runCode: `equipe login
+equipe status
+equipe`,
     tryIntro: '想先不用看板，简单试一下？让一个智能体在隔离的 worktree 里，用一个新分支修改你的仓库：',
     docs: '在 GitHub 上阅读文档 →',
     roadmap: '路线图',

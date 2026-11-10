@@ -42,7 +42,11 @@ const copied = async (p) => {
   await p.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(p.url()).origin });
   await p.click('#get-started .tab-panel[data-panel="brew"] .copy');
 };
-const denied = async (p) => { await p.click('#get-started .tab-panel[data-panel="brew"] .copy'); };
+// Headless Chrome lets writeText through after a click, so refuse it the way a denied permission does.
+const denied = async (p) => {
+  await p.evaluate(() => { Object.defineProperty(navigator, 'clipboard', { value: { writeText: () => Promise.reject(new DOMException('denied', 'NotAllowedError')) } }); });
+  await p.click('#get-started .tab-panel[data-panel="brew"] .copy');
+};
 const advanced = async (p) => { await p.click('#get-started details.advanced > summary'); };
 
 const SHOTS = [

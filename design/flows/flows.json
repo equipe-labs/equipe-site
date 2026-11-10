@@ -711,7 +711,7 @@
               "id": "copy-denied",
               "label": "Copy refused by the browser",
               "kind": "permission",
-              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): clipboard not allowed: the click does nothing and says nothing — a gap, see follow-up"
+              "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): clipboard not allowed: the click selects the command and the button reads \"Press ⌘C / Ctrl+C\" (aria-live) for 3 s, then Copy again (T-383)"
             },
             {
               "id": "no-js",

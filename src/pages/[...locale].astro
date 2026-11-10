@@ -445,7 +445,8 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
           sel.removeAllRanges();
           sel.addRange(r);
           b.textContent = b.dataset.fallback;
-          setTimeout(() => (b.textContent = b.dataset.label), 3000);
+          b.classList.add('hint');
+          setTimeout(() => { b.textContent = b.dataset.label; b.classList.remove('hint'); }, 3000);
         }
       }),
     );
