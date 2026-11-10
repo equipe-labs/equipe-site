@@ -265,6 +265,7 @@ html:lang(ko) .lede { max-width: none; }
 .st-prop i { border: 1.5px dashed var(--muted); }
 .st-todo i { border: 1.5px solid var(--muted); }
 .st-work i { background: var(--text); }
+.st-done i { background: var(--muted); }
 .st-me { color: var(--text); border-color: var(--sig-edge); }
 .st-me i { border: 1.5px solid var(--sig-edge); background: radial-gradient(circle, var(--sig-lamp) 0 2px, transparent 2.5px); }
 .tk .st { height: 22px; padding: 0 9px 0 7px; font-size: var(--s-xs); font-weight: 500; color: var(--text-2); }
