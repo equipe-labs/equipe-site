@@ -40,14 +40,14 @@ const t = getMessages(code);
     </div>
   </header>
 
-  <main id="main" class="doc">
+  <main id="main" class="doc app-doc">
     <div class="wrap col">
       <slot />
       <p class="contact"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a> · <a href={SITE.issues}>GitHub</a></p>
     </div>
   </main>
 
-  <footer>
+  <footer class="app-foot">
     <div class="wrap">
       <span class="foot-links"><a href={localePath(info)}>{t.app.nav.home}</a><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
       <span>{t.footer.license}</span>
