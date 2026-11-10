@@ -7,6 +7,7 @@ import '../styles/app.css';
 import { getAppText } from '../i18n/app';
 import State from '../components/State.astro';
 import '../styles/landing.css';
+import PhoneApproval from '../components/PhoneApproval.astro';
 import '../styles/motion.css';
 import Mark from '../components/Mark.astro';
 import LangMenu from '../components/LangMenu.astro';
@@ -162,23 +163,7 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
               <div class="sk"><AppUi k="appr" t={at} alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
               <div class="phonebox">
                 <div>
-                  <div class="phone" role="img" aria-label={t.loop.phoneCaption}>
-                    <div class="scr" aria-hidden="true">
-                      <div class="isl"></div>
-                      <div class="sb"><span>9:41</span></div>
-                      <div class="nav"><span class="cl">{t.demo.phone.close}</span><b>{t.demo.phone.name}</b></div>
-                      <div class="body">
-                        <p class="who">{t.demo.phone.name} {t.demo.phone.verb}</p>
-                        <p class="sec">{t.demo.phone.age}</p>
-                        <p class="wh">{t.demo.phone.where}</p>
-                        <p class="tool">{t.demo.phone.tool}</p>
-                        <p class="act">{t.demo.phone.action}</p>
-                        <p class="sec fn">{t.demo.phone.once}</p>
-                      </div>
-                      <div class="bar"><span class="deny">{t.demo.phone.deny}</span><span class="allow">{t.demo.phone.allow}</span></div>
-                      <div class="hi"></div>
-                    </div>
-                  </div>
+                  <PhoneApproval code={code} label={t.loop.phoneCaption} />
                   <p class="cap narrow"><span class="now">{t.ui.now}</span> {t.loop.phoneCaption} <a href={SITE.appStore} rel="noopener">{t.loop.appStore}</a> · <a href={SITE.androidApk} data-ph="android_download_click" data-ph-location="phone">Android (APK)</a></p>
                   <p class="cap narrow">{t.start.android.playStore}</p>
                 </div>

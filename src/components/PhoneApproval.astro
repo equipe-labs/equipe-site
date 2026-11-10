@@ -1,0 +1,32 @@
+---
+// The iOS approval sheet drawn in code (the home page's "approve" scene and /app/). Words: messages.demo.phone.
+import '../styles/phone.css';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props {
+  code: LocaleCode;
+  /** Full sentence for assistive tech; the drawing itself is aria-hidden. */
+  label: string;
+  /** Let the sheet take its content's height (no empty phone below the buttons). */
+  fit?: boolean;
+}
+const { code, label, fit = false } = Astro.props;
+const p = getMessages(code).demo.phone;
+---
+<div class:list={['phone', { fit }]} role="img" aria-label={label}>
+  <div class="scr" aria-hidden="true">
+    <div class="isl"></div>
+    <div class="sb"><span>9:41</span></div>
+    <div class="nav"><span class="cl">{p.close}</span><b>{p.name}</b></div>
+    <div class="body">
+      <p class="who">{p.name} {p.verb}</p>
+      <p class="sec">{p.age}</p>
+      <p class="wh">{p.where}</p>
+      <p class="tool">{p.tool}</p>
+      <p class="act">{p.action}</p>
+      <p class="sec fn">{p.once}</p>
+    </div>
+    <div class="bar"><span class="deny">{p.deny}</span><span class="allow">{p.allow}</span></div>
+    <div class="hi"></div>
+  </div>
+</div>
