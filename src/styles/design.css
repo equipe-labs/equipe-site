@@ -1,5 +1,8 @@
 /* equipe-design pages (T-281). Brand v1 tokens from global.css only; nothing new. */
 header.site nav a.cur { box-shadow: 0 var(--bw-2) 0 var(--accent); border-radius: 0; font-weight: 600; }
+/* T-666: same breakpoint as the home header — secondary links only from 1100px, so 641–1099px never overflows or crowds the wordmark */
+header.site nav .opt { display: none; }
+@media (min-width: 1100px) { header.site nav .opt { display: list-item; } }
 .dz { padding-bottom: var(--section-y); }
 .dz .wrap, header.site .wrap { max-width: 1360px; }
 .dz .wrap > :not(.docs) { max-width: calc(var(--wrap) - 2 * var(--gutter)); }
