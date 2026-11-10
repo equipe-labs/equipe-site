@@ -1,0 +1,35 @@
+[
+  {
+    "name": "phone-app-page",
+    "ticket": "T-507",
+    "at": 1794097466,
+    "chosen": true,
+    "layout": "dedicated /app/ page; device-aware primary (App Store badge or APK button), other OS as a link; on a Mac: Mac DMG first, then platform rows + QR to /app/; pairing section ends the page",
+    "type": "site type scale as is (h1 56/36), mono for hashes",
+    "palette": "site tokens as is: bone/void, one blue",
+    "density": "airy, one action per screen, Android help in an inline list",
+    "motion": "none beyond details open/close"
+  },
+  {
+    "name": "home-phone-block",
+    "ticket": "T-507",
+    "at": 1794097466,
+    "chosen": false,
+    "layout": "no new page; a phone block inside the home's Get started: iPhone/Android tabs on phones, QR + both downloads on a Mac, short pairing list",
+    "type": "site type scale as is, h3-level block",
+    "palette": "site tokens as is",
+    "density": "compact, tabs hide the other OS",
+    "motion": "none"
+  },
+  {
+    "name": "device-first-hero",
+    "ticket": "T-507",
+    "at": 1794097466,
+    "chosen": false,
+    "layout": "the home's first screen follows the device: phones get their app as the primary (badge / APK) and 'send me the Mac link'; Android install in a bottom sheet; Macs get an iPhone/Android row with a QR popover",
+    "type": "site type scale as is",
+    "palette": "site tokens as is",
+    "density": "first screen only, everything else stays",
+    "motion": "bottom sheet slides up; popover fades"
+  }
+]

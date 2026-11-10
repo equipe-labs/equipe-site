@@ -1,0 +1,98 @@
+{
+  "screen": "mobile-app/get-mac-en",
+  "at": 1794272042,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/app-page/html/mac.en.html",
+      "modified": 1794272008
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 1,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “Skip to content” is 115×27 (at 360, 390 px)"
+      ]
+    ],
+    "screen": "mobile-app/get-mac-en",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a.skip “Skip to content” is 115×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a.brand “e equipe” is 95×29 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a “equipe home” is 84×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a “App privacy policy” is 119×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a “App support” is 80×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/mac.en.html",
+      "width": 360,
+      "evidence": "a “GitHub” is 45×22 (at 360, 390 px)"
+    }
+  ],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-mac-en/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": null,
+  "fixes_in_a_row": 0
+}

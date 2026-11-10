@@ -1,0 +1,244 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get the phone app — equipe</title><style>
+@font-face { font-family: 'Pretendard Variable'; font-weight: 400 700; src: url('file:///Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/src/assets/fonts/pretendard-ko-rest.woff2') format('woff2'); unicode-range: U+AC00-D7A3; }
+@font-face { font-family: 'Pretendard Variable'; font-weight: 400 700; src: url('file:///Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/src/assets/fonts/pretendard-ko-core.woff2') format('woff2'); }
+:root {
+  --bg: #F6F5F1; --surface: #FFFFFF; --code-bg: #EAE7E0; --text: #15161A; --muted: #4F5159;
+  --accent: #1D4ED8; --on-accent: #FFFFFF; --line: #0A0A0C24; --dot: #3F6FF5; --ok: #1F6B33;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px;
+  --r-1: 8px; --r-2: 12px; --r-3: 24px; --tap: 44px; --wrap: 1040px; --gutter: 16px;
+  --sans: 'Inter Variable', Inter, system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg: #0A0A0C; --surface: #16171A; --code-bg: #17171C; --text: #EFEDE7; --muted: #A3A5AB;
+  --accent: #8FB0FF; --on-accent: #0B1226; --line: #E9E6DF24; --ok: #7FCB8E; } }
+@media (min-width: 641px) { :root { --gutter: 24px; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.6 var(--sans); }
+@media (min-width: 641px) { body { font-size: 18px; } }
+:lang(ko) { font-family: var(--sans), 'Pretendard Variable', 'Apple SD Gothic Neo', sans-serif; }
+html:lang(ko) { word-break: keep-all; overflow-wrap: anywhere; }
+:lang(ko) :is(h1,h2,h3) { letter-spacing: 0; line-height: 1.3; }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+h1 { font-size: 36px; line-height: 1.05; } h2 { font-size: 26px; line-height: 1.15; } h3 { font-size: 18px; line-height: 1.3; }
+@media (min-width: 641px) { h1 { font-size: 56px; } h2 { font-size: 32px; } }
+p { margin: 0 0 var(--s-4); }
+code { white-space: nowrap; font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: 1px 3px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.muted { color: var(--muted); }
+.meta { font-size: 14px; color: var(--muted); margin: var(--s-1) 0 0; }
+.skip { position: absolute; left: -999px; }
+header.site { border-bottom: 1px solid var(--line); background: var(--bg); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: var(--s-3); }
+.brand { display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 700; color: var(--text); text-decoration: none; font-size: 18px; }
+.mark { width: 28px; height: 28px; border-radius: 7px; background: #0A0A0C; color: #F6F5F1; display: inline-grid; place-items: center; font: 700 18px/1 var(--sans); position: relative; }
+@media (prefers-color-scheme: dark) { .mark { background: #EFEDE7; color: #0A0A0C; } }
+.mark i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--dot); right: 6px; bottom: 7px; }
+nav ul { display: flex; gap: var(--s-5); list-style: none; margin: 0; padding: 0; align-items: center; }
+nav a { color: var(--text); font-size: 16px; text-decoration: none; }
+nav .opt { display: none; } @media (min-width: 641px) { nav .opt { display: list-item; } }
+nav a[aria-current] { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.globe { width: 44px; height: 44px; display: inline-grid; place-items: center; color: var(--text); border-radius: var(--r-1); }
+.ic { width: 20px; height: 20px; flex: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--tap); padding: 0 20px; border-radius: var(--r-1); font-weight: 600; text-decoration: none; border: 2px solid var(--accent); color: var(--accent); font-size: 17px; background: none; font-family: inherit; }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.lg { min-height: 52px; font-size: 18px; padding: 0 24px; }
+.btn.block { width: 100%; }
+.btn.done { border-color: var(--line); color: var(--text); }
+.btn.done .ic { color: var(--ok); }
+.badge { display: inline-block; line-height: 0; border-radius: var(--r-1); }
+.badge img { height: 44px; width: auto; display: block; }
+.badge.big img { height: 52px; width: auto; }
+section { padding: var(--s-7) 0; }
+@media (min-width: 641px) { section { padding: var(--s-8) 0; } }
+section.hero { padding-bottom: var(--s-7); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.lead { font-size: 19px; color: var(--muted); max-width: 560px; margin: var(--s-4) 0 0; }
+@media (min-width: 641px) { .lead { font-size: 21px; } }
+
+/* Mac / other devices: the platform list and the phone beside it */
+.top { display: grid; gap: var(--s-7); }
+@media (min-width: 900px) { .top { grid-template-columns: minmax(0, 1fr) 360px; gap: var(--s-8); align-items: start; } }
+.plat { list-style: none; margin: var(--s-6) 0 0; padding: 0; border-top: 1px solid var(--line); }
+.plat > li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-3) var(--s-5); align-items: center; padding: var(--s-4) 0; border-bottom: 1px solid var(--line); }
+
+.plat .pn { font-size: 18px; line-height: 1.3; letter-spacing: 0; }
+.plat .act { display: grid; gap: var(--s-1); justify-items: end; }
+.plat .act .btn { width: auto; min-width: 120px; min-height: 44px; }
+@media (max-width: 640px) { .plat > li { grid-template-columns: 1fr; } .plat .act { justify-items: start; } .plat .act .btn { width: auto; } }
+.plat .help { font-size: 15px; display: inline-flex; align-items: center; min-height: var(--tap); }
+.qrline { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-4); align-items: center; margin-top: var(--s-5); }
+.qrbox { background: #fff; padding: 6px; border-radius: var(--r-1); line-height: 0; box-shadow: 0 0 0 1px var(--line); }
+.qrline b { display: block; font-size: 16px; font-weight: 600; }
+.qrline p { margin: 0; font-size: 15px; color: var(--muted); }
+.url { font: 400 14px var(--mono); color: var(--muted); }
+
+
+/* The phone: the home page's iOS approval sheet, reused as it is (src/styles/landing.css) */
+:root { --dash: #80828A; } @media (prefers-color-scheme: dark) { :root { --dash: #6B6D75; } }
+/* The iOS approval sheet, drawn in code: one thin bezel, iPhone 19.5:9, system font (no mono). */
+.phone { --lbl: #000; --sec: rgb(60 60 67 / 0.78); --fill: rgb(118 118 128 / 0.12); --sep: rgb(60 60 67 / 0.29); --tint: #0062CC; --tintbg: #0062CC; --red: #C4001A; --sec2: rgb(60 60 67 / 0.78);
+  width: 280px; max-width: 100%; aspect-ratio: 9 / 15.5; border: 3px solid var(--dash); border-radius: 40px; background: var(--dash); overflow: hidden; font-size: 12.6px; }
+.phone .scr { position: relative; display: flex; flex-direction: column; height: 100%; border-radius: 37px; overflow: hidden; background: #fff; color: var(--lbl);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif; line-height: 1.3; letter-spacing: 0; text-align: left; }
+.phone p { margin: 0; }
+.phone .isl { position: absolute; top: 7px; left: 50%; width: 31%; height: 17px; margin-left: -15.5%; border-radius: 99px; background: #000; }
+.phone .sb { height: 30px; padding: 9px 22px 0; font-weight: 600; font-size: 0.92em; }
+.phone .nav { position: relative; display: flex; justify-content: center; align-items: center; height: 30px; font-size: 1em; }
+.phone .nav b { font-weight: 600; }
+.phone .nav .cl { position: absolute; left: 14px; color: var(--tint); }
+.phone .body { flex: 1; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 10px; justify-content: flex-start; }
+.phone .who { font-size: 1.18em; font-weight: 600; line-height: 1.25; }
+.phone .sec { color: var(--sec); font-size: 0.86em; }
+.phone .who + .sec { margin-top: -6px; }
+.phone .wh { font-size: 1em; }
+.phone .tool { margin-bottom: -6px; color: var(--sec2); font-size: 0.82em; font-weight: 600; letter-spacing: 0.1em; }
+.phone .act { padding: 9px 10px; border-radius: 9px; background: var(--fill); font-size: 0.95em; }
+.phone .fn { font-size: 0.9em; color: var(--sec2); }
+.phone .bar { display: flex; gap: 10px; padding: 10px 14px 6px; border-top: 0.5px solid var(--sep); }
+.phone .bar span { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 4px; border-radius: 99px; font-size: 0.98em; font-weight: 600; text-align: center; line-height: 1.15; }
+.phone .deny { background: rgb(255 59 48 / 0.15); color: var(--red); }
+.phone .allow { background: var(--tintbg); color: #fff; }
+.phone .hi { height: 5px; width: 36%; margin: 6px auto 8px; border-radius: 99px; background: var(--lbl); }
+@media (prefers-color-scheme: dark) {
+  .phone { --lbl: #fff; --sec: rgb(235 235 245 / 0.6); --fill: rgb(118 118 128 / 0.24); --sep: rgb(84 84 88 / 0.65); --tint: #0A84FF; --tintbg: #0A64C8; --red: #FF7A70; --sec2: rgb(235 235 245 / 0.72); }
+  .phone .scr { background: #1C1C1E; }
+  .phone .deny { background: rgb(255 69 58 / 0.2); }
+}
+.scenecap { font-size: 14px; color: var(--muted); margin: var(--s-3) 0 0; max-width: 280px; }
+.phonecol { display: grid; justify-items: center; align-content: start; }
+.phonecol .phone { width: 320px; font-size: 14.4px; }
+.phonecol .scenecap { text-align: center; }
+.phone { --tint: var(--accent); --tintbg: var(--accent); } .phone .allow { color: var(--on-accent); }
+.caveat { color: var(--text); margin-top: var(--s-2); display: block; }
+.caveat .soon { display: inline-block; margin-right: var(--s-2); }
+.soon { border: 1.5px dashed var(--dash); color: var(--muted); border-radius: 6px; padding: 0 6px; font-size: 13px; font-weight: 600; }
+@media (max-width: 899px) { .phonecol { display: none; } }
+
+/* Phones: the device's own app first */
+.need { font-size: 15px; color: var(--muted); margin: var(--s-5) 0 var(--s-3); }
+.get { display: grid; gap: var(--s-2); justify-items: start; margin-top: var(--s-6); }
+.get .btn { width: 100%; }
+@media (min-width: 641px) { .get .btn { width: auto; } }
+.sendmac { margin-top: var(--s-5); padding: var(--s-4); border-radius: var(--r-2); background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.sendmac p { font-size: 15px; margin: 0 0 var(--s-3); }
+.sendmac .btn { width: 100%; min-height: var(--tap); font-size: 16px; }
+.sendmac .live { font-size: 14px; color: var(--muted); margin: var(--s-2) 0 0; }
+.other { margin: var(--s-4) 0 0; font-size: 16px; }
+.other a { display: inline-flex; align-items: center; min-height: var(--tap); }
+.narrow { max-width: 640px; }
+.nm { white-space: nowrap; }
+/* /app/ shows the sheet at its content's height, not a whole phone: less to scroll past on a phone */
+.phone.fit { aspect-ratio: auto; height: auto; } .phone.fit .body { padding-bottom: 14px; }
+.phoneinline .phone { width: 300px; font-size: 14px; }
+.phone.android .isl, .phone.android .sb { visibility: hidden; } .phone.android .sb { height: 16px; }
+.macfirst { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: var(--s-6); }
+.macfirst .meta { margin: 0; }
+.listh { font-size: 18px; margin-top: var(--s-7); letter-spacing: 0; }
+.listh + .plat { margin-top: var(--s-3); }
+.folds { display: grid; gap: var(--s-2); margin-top: var(--s-5); }
+.sendmac2 { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line); font-size: 15px; }
+.sendmac2 p { margin: 0 0 var(--s-2); color: var(--muted); }
+.sendmac2 .btn { min-height: var(--tap); font-size: 16px; padding: 0 16px; border-width: 1.5px; }
+.sendmac2 .live { font-size: 14px; color: var(--muted); margin: var(--s-2) 0 0; }
+.stepill { margin-top: var(--s-3); padding: var(--s-3); width: fit-content; max-width: 100%; }
+.pairgrid { display: grid; gap: var(--s-6); margin-top: var(--s-6); max-width: 640px; }
+.pairgrid .steps { max-width: 640px; }
+.stepill.side { display: none; }
+@media (min-width: 900px) { .pairgrid { max-width: none; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--s-8); align-items: start; } .stepill.in { display: none; } .stepill.side { display: grid; justify-items: start; align-self: start; width: auto; margin-top: 0; padding: var(--s-4); } .stepill.side .menu { width: 280px; font-size: 15px; } }
+.stepill .menu { width: 220px; font-size: 14px; } .stepill .menu li { padding: 4px 10px; }
+
+.phoneinline { margin-top: var(--s-6); display: grid; justify-items: start; }
+@media (min-width: 900px) { .phoneinline { display: none; } }
+
+
+/* Steps */
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: s; }
+ol.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--s-3); counter-increment: s; }
+ol.steps > li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--text); color: var(--text); font: 600 15px/28px var(--sans); text-align: center; }
+ol.steps b { display: block; font-weight: 600; }
+ol.steps p { margin: 2px 0 0; color: var(--muted); font-size: 16px; }
+.two { display: grid; gap: var(--s-6); margin-top: var(--s-6); }
+@media (min-width: 900px) { .two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); align-items: start; } }
+
+/* Mac menu, drawn as a diagram (no QR in the drawing, so nobody scans an example) */
+.ill { background: var(--code-bg); border-radius: var(--r-2); padding: var(--s-5); }
+.ill .cap { font-size: 14px; color: var(--muted); margin: var(--s-3) 0 0; }
+.menu { background: var(--surface); border-radius: var(--r-1); box-shadow: 0 0 0 1px var(--line), 0 8px 24px #0000001a; font-size: 15px; max-width: 280px; overflow: hidden; }
+.menu .mb { display: flex; gap: 16px; padding: 6px 12px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.menu .mb b { color: var(--text); }
+.menu ul { list-style: none; margin: 0; padding: 6px; }
+.menu li { padding: 6px 10px; border-radius: 6px; color: var(--muted); }
+.menu li.on { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.menu .bar1 { display: inline-block; width: 28px; height: 8px; border-radius: 4px; background: var(--line); align-self: center; }
+.menu .bar2 { display: block; width: 70%; height: 8px; border-radius: 4px; background: var(--line); margin: 6px 0; } .menu .bar2.s { width: 45%; }
+.menu li.sep { height: 1px; padding: 0; margin: 4px 6px; background: var(--line); }
+.arrow { display: flex; align-items: center; gap: 12px; margin-top: var(--s-4); font-size: 15px; }
+.arrow .scan { width: 44px; height: 44px; border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); display: grid; place-items: center; flex: none; color: var(--text); }
+
+/* Android: install steps, Android's own screen */
+.droid { background: #FFFFFF; color: #1B1B1F; border-radius: 16px; padding: 14px 14px 4px; font-family: Roboto, system-ui, sans-serif; max-width: 280px; box-shadow: 0 0 0 1px #0000001a; }
+@media (prefers-color-scheme: dark) { .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; } }
+.droid .h { margin: 0 0 8px; font: 500 16px/1.3 Roboto, system-ui, sans-serif; }
+.droid .app { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 4px; }
+.droid .app i { width: 22px; height: 22px; border-radius: 50%; background: #9AA0A6; }
+.droid .row { display: flex; justify-content: space-between; align-items: center; padding: 8px 6px; font-size: 14px; border-radius: 10px; outline: 2px solid var(--accent); outline-offset: 2px; margin: 6px 0 10px; }
+.sw { width: 40px; height: 24px; border-radius: 12px; background: #3F5AA9; position: relative; flex: none; }
+.sw::after { content: ''; position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; }
+
+/* The quiet extras: updates, notifications, checking the file */
+.extras { display: grid; gap: var(--s-3); }
+details { background: var(--surface); border-radius: var(--r-1); box-shadow: 0 0 0 1px var(--line); }
+summary { list-style: none; cursor: pointer; font-weight: 600; font-size: 16px; padding: 10px 16px; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ''; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); flex: none; margin-right: 4px; }
+details[open] summary::after { transform: rotate(-135deg); }
+.dbody { padding: 0 16px 16px; font-size: 15px; }
+.dbody ol.steps { gap: var(--s-4); margin-bottom: var(--s-4); }
+.file { font-size: 14px; margin: 0 0 var(--s-3); }
+.kv { margin: 0 0 var(--s-3); }
+.kv dt { font-size: 14px; color: var(--muted); margin-bottom: var(--s-1); }
+.kv dd { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-2); align-items: start; }
+.hash { box-shadow: inset 0 0 0 1px var(--line); font: 400 13px/1.55 var(--mono); background: var(--code-bg); border-radius: var(--r-1); padding: 10px 12px; word-break: break-all; min-width: 0; }
+.copy { min-height: var(--tap); width: 8.5em; white-space: nowrap; justify-content: center; padding: 0 8px; border-radius: var(--r-1); border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 600 14px var(--sans); display: inline-flex; align-items: center; gap: 6px; }
+.copy.done .ic { color: var(--ok); }
+pre.cmd { box-shadow: inset 0 0 0 1px var(--line); font: 400 13px/1.55 var(--mono); background: var(--code-bg); border-radius: var(--r-1); padding: 12px; margin: 0; white-space: pre-wrap; word-break: normal; overflow-wrap: normal; min-width: 0; }
+.cmdh { font-size: 15px; margin: var(--s-5) 0 var(--s-3); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+.note { font-size: 15px; color: var(--muted); margin: 0; }
+footer { border-top: 1px solid var(--line); padding: var(--s-6) 0; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+footer a { color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+@media (prefers-reduced-motion: no-preference) { details[open] .dbody { animation: open 160ms ease-out; } @keyframes open { from { opacity: 0; } } }
+</style></head><body><a class="skip" href="#main">Skip to content</a><header class="site"><div class="wrap"><a class="brand" href="#"><span class="mark" aria-hidden="true">e<i></i></span> equipe</a>
+<nav aria-label="Primary"><ul><li class="opt"><a href="#" aria-current="page">Get the app</a></li><li class="opt"><a href="#">App privacy policy</a></li><li class="opt"><a href="#">App support</a></li>
+<li><a class="globe" href="#" aria-label="Language"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></a></li></ul></nav></div></header><main id="main"><section class="hero"><div class="wrap top"><div><h1>Approve from your phone.</h1><p class="lead">Your squad works on your Mac. When something needs your yes — a deploy, a launch — it waits in the phone app. Open it and answer.</p>
+<div class="get"><a class="btn primary lg" href="#" data-primary><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download for Android</a><span class="meta">25 MB APK · Android 8.0 or later · Free · Works with the Mac app. <span class="nm">Not on Google Play yet.</span></span><span class="meta caveat"><span class="soon">Coming</span> Android notifications. Until then, open the app to see requests.</span></div>
+<div class="phoneinline"><div class="phone fit android" role="img" aria-label="A request on the phone: frontend asks to publish the pricing page for everyone, with Deny and Allow once." data-source="src/i18n/en.ts demo.phone"><div class="scr" aria-hidden="true">
+<div class="isl"></div><div class="sb"><span>9:41</span></div><div class="nav"><span class="cl">Close</span><b>frontend</b></div>
+<div class="body"><p class="who">frontend asks you to confirm something</p><p class="sec">Asked just now</p><p class="wh">Loop · T-5 Publish the pricing page · Ask</p><p class="tool">CONFIRM</p><p class="act">Publish the pricing page at loop.app/pricing, for everyone</p><p class="sec fn">From your phone, a request is allowed once only.</p></div>
+<div class="bar"><span class="deny">Deny</span><span class="allow">Allow once</span></div><div class="hi"></div></div></div><p class="scenecap">Before the pricing page goes live, this is what your phone shows.</p></div>
+<h2 style="font-size:22px;margin:40px 0 20px">Installing takes three steps</h2><ol class="steps"><li><div><b>Open the file</b><p>From the notification or Chrome’s downloads.</p></div></li>
+<li><div><b>Turn on “Allow from this source” once</b><p>Android asks once for apps from outside Play.</p><div class="ill" style="margin-top:12px;padding:16px"><div class="droid" role="img" aria-label="An Android screen as an example. It varies a little by phone."><div aria-hidden="true"><p class="h">Install unknown apps</p><div class="app"><i></i>Chrome</div>
+<div class="row"><span>Allow from this source</span><span class="sw"></span></div></div></div><p class="cap">An Android screen as an example. It varies a little by phone.</p></div></div></li>
+<li><div><b>Tap Install</b><p>Then tap Open.</p></div></li></ol>
+<div class="sendmac2"><p>The phone app pairs with the squad on your Mac. No Mac app yet? Send this page to your Mac.</p><button class="btn" type="button">Send the link to my Mac</button></div>
+</div><div class="phonecol"><div class="phone fit android" role="img" aria-label="A request on the phone: frontend asks to publish the pricing page for everyone, with Deny and Allow once." data-source="src/i18n/en.ts demo.phone"><div class="scr" aria-hidden="true">
+<div class="isl"></div><div class="sb"><span>9:41</span></div><div class="nav"><span class="cl">Close</span><b>frontend</b></div>
+<div class="body"><p class="who">frontend asks you to confirm something</p><p class="sec">Asked just now</p><p class="wh">Loop · T-5 Publish the pricing page · Ask</p><p class="tool">CONFIRM</p><p class="act">Publish the pricing page at loop.app/pricing, for everyone</p><p class="sec fn">From your phone, a request is allowed once only.</p></div>
+<div class="bar"><span class="deny">Deny</span><span class="allow">Allow once</span></div><div class="hi"></div></div></div><p class="scenecap">Before the pricing page goes live, this is what your phone shows.</p></div></div></section><hr><section id="pair"><div class="wrap"><h2>Then connect it to your Mac</h2><div class="pairgrid"><ol class="steps">
+<li><div><b>Open the pairing window on your Mac</b><p>Choose equipe › <span class="nm">“Connect a phone…”</span> and a QR code shows. <br><span class="nm">In a terminal, <code>equipe pair</code></span> does the same.</p><div class="ill stepill in"><div class="menu" role="img" aria-label="The Mac app’s menu, drawn. equipe › Connect a phone…"><div aria-hidden="true">
+<div class="mb"><b>equipe</b></div>
+<ul><li class="on">Connect a phone…</li></ul></div></div></div></div></li><li><div><b>Scan that code in the phone app</b><p>Tap <span class="nm">“Scan code”</span>, the first button the app shows, and point it at your Mac.</p></div></li><li><div><b>Click Allow on your Mac</b><p>Your phone and Mac talk end-to-end encrypted.</p></div></li></ol><div class="ill stepill side"><div class="menu" role="img" aria-label="The Mac app’s menu, drawn. equipe › Connect a phone…"><div aria-hidden="true">
+<div class="mb"><b>equipe</b></div>
+<ul><li class="on">Connect a phone…</li></ul></div></div></div></div></div></section><section style="padding-top:0"><div class="wrap top"><div><h3 style="margin-bottom:12px">Good to know</h3><div class="extras">
+<p class="note">Get new versions from this page. They’re signed with the same certificate, so they update in place.</p><details><summary>Check the file is ours</summary><div class="dbody">
+<p class="file"><span class="url">equipe-android-0.2.0.apk</span> · 25 MB · Released 2026-11-08</p>
+<dl><div class="kv"><dt>File SHA-256</dt><dd><span class="hash" data-source="placeholder: read from the release APK at build (spec.md)">bd8f267edeb10ce0aaed1efbb80f7b3c349895f6121e5f8a97d647d09f8d9773</span><button class="copy" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Copy</button></dd></div>
+<div class="kv"><dt>Signing certificate SHA-256</dt><dd><span class="hash" data-source="placeholder: keytool on the release APK at build (spec.md)">f6884e264a84a48b04cf7b04256e40e3887543795b430e367aee2ff769041a87</span><button class="copy" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Copy</button></dd></div></dl>
+<h4 class="cmdh">Check in a terminal</h4><p class="note" style="margin-bottom:12px">Download the same file on your Mac, then run:</p>
+<dl><div class="kv"><dt>The file (Mac terminal)</dt><dd><pre class="cmd">shasum -a 256 ~/<wbr>Downloads/<wbr>equipe-android-0.2.0.apk</pre><button class="copy" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Copy</button></dd></div>
+<div class="kv"><dt>The certificate (apksigner from Android SDK build-tools, the Signer #1 certificate SHA-256 line)</dt><dd><pre class="cmd">apksigner verify --print-certs ~/<wbr>Downloads/<wbr>equipe-android-0.2.0.apk</pre><button class="copy" type="button"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Copy</button></dd></div></dl>
+<p class="note">If either differs, don’t install it — download it again here. <a href="#">See the GitHub release</a></p></div></details></div></div></div></section>
+<section style="padding-top:0"><div class="wrap"><p class="other" style="margin:0"><a href="#">On iPhone? Get it on the App Store →</a></p></div></section></main><footer><div class="wrap"><span class="links"><a href="#">equipe home</a><a href="#">App privacy policy</a><a href="#">App support</a><a href="#">GitHub</a></span><span>© 2026 equipe · MIT</span></div></footer></body></html>

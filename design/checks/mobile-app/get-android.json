@@ -1,0 +1,127 @@
+{
+  "screen": "mobile-app/get-android",
+  "at": 1794271845,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/app-page/html/android.ko.html",
+      "modified": 1794271609
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 1,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+      ]
+    ],
+    "screen": "mobile-app/get-android",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a.brand “e equipe” is 95×29 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a “equipe 홈” is 60×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a “앱 개인정보처리방침” is 113×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a “앱 지원” is 40×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/android.ko.html",
+      "width": 360,
+      "evidence": "a “GitHub” is 45×22 (at 360, 390 px)"
+    }
+  ],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-android/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": {
+    "pass": true,
+    "fixes": [],
+    "summary": "Android 방문자 화면이 맞게 짜여 있어요. 모든 폭에서 처음 눈이 가는 곳이 'Android 앱 받기' 버튼이고, 바로 아래에 APK 사양과 '준비 중 · Android 알림' 안내가 붙어 있어요. 승인 요청 그림, Mac 앱이 필요하다는 말과 'Mac으로 링크 보내기', 실제 메뉴 이름을 쓴 연결 세 단계(equipe › 휴대폰 연결…, 코드 스캔, 허용), Android 화면 예시가 들어간 설치 세 단계, 접힌 파일 확인도 다 있어요. 360에서 1920까지 넘치거나 묻히는 곳이 없고, 간격과 번호 단계, 서체가 한 체계로 읽혀요. 다만 받은 그림은 라이트 테마와 한국어뿐이라 다크와 en은 여기서 판단하지 않았어요.",
+    "at": 1794271933,
+    "by": "claude",
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "first": false,
+    "questions": [
+      {
+        "what": "APK 크기(25 MB)와 최소 버전(Android 8.0)이 실제 빌드와 맞는지 아직 확인되지 않았어요. design/app-page/spec.md:143이 빌드로 다시 확인하라고 적어 두었고, 사이트 FAQ(src/i18n/ko.ts:306)에는 아직 '출시 전, 8.0 이상 지원 예정'이라고 남아 있어요.",
+        "wording": "확인 전까지 안내 줄은 'APK · 무료 · Mac 앱과 함께 써요. Google Play에는 아직 없어요.'로 쓰고, 크기와 최소 버전은 빌드로 확인한 뒤 넣어요."
+      }
+    ],
+    "reviewer": {
+      "engine": "claude",
+      "member": "claude",
+      "why": {
+        "kind": "failed"
+      }
+    }
+  },
+  "fixes_in_a_row": 0
+}

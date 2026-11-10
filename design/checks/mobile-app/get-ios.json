@@ -1,0 +1,133 @@
+{
+  "screen": "mobile-app/get-ios",
+  "at": 1794271785,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/app-page/html/ios.ko.html",
+      "modified": 1794271609
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 1,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+      ]
+    ],
+    "screen": "mobile-app/get-ios",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a.skip “본문으로 건너뛰기” is 122×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a.brand “e equipe” is 95×29 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a “equipe 홈” is 60×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a “앱 개인정보처리방침” is 113×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a “앱 지원” is 40×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "design/app-page/html/ios.ko.html",
+      "width": 360,
+      "evidence": "a “GitHub” is 45×22 (at 360, 390 px)"
+    }
+  ],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t507-6aefbda8/design/checks/mobile-app/get-ios/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": {
+    "pass": false,
+    "fixes": [
+      {
+        "where": "히어로의 App Store 배지 (360–1920 전부)",
+        "what": "미국판 'Download on the App Store' 배지를 Apple Marketing Tools의 한국어 공식 배지(App Store에서 다운로드)로 바꾸고, en 페이지에는 영어 배지를 언어별로 넣으세요. 높이는 spec대로 52px를 유지하세요.",
+        "why": "이 화면의 첫 행동이 한국어 페이지에서 혼자 영어로 보여요. 브리프의 '한국어는 처음부터 한국어로'와 8개 언어 일급 원칙에 어긋나고, 미완성 페이지처럼 보여 다운로드 버튼을 믿기 어려워져요."
+      }
+    ],
+    "summary": "iPhone 방문자용 화면으로서 할 일은 다 해요. App Store 배지가 첫 행동이고, 바로 아래 요구 사양 한 줄이 있고, 홈의 승인 장면, Mac 앱이 필요하다는 말과 'Mac으로 링크 보내기', 실제 메뉴 이름을 쓴 연결 3단계가 모든 폭에서 같은 위계로 읽히며 옆으로 넘치는 것도 없어요. 그런데 한국어 페이지의 가장 중요한 버튼이 영어 배지라서 사람이 보기 전에 고쳐야 해요. 사진은 라이트·ko만 있어서 다크, en, '복사됨' 상태는 이 리뷰에서 판단하지 못했어요.",
+    "at": 1794271936,
+    "by": "claude",
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "first": false,
+    "questions": [
+      {
+        "what": "en 페이지 2단계에 쓸 iOS 앱의 영어 버튼 이름 ('코드 스캔'의 en 라벨). spec에서도 'Scan code'는 미확인으로 남아 있어요.",
+        "wording": "Open the phone app and point it at the code on your Mac."
+      }
+    ],
+    "reviewer": {
+      "engine": "claude",
+      "member": "claude",
+      "why": {
+        "kind": "failed"
+      }
+    }
+  },
+  "fixes_in_a_row": 3
+}
