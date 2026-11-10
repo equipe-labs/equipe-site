@@ -318,11 +318,11 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
             </div>
             <div class="tab-panel" data-panel="brew">
               <p class="col"><Rich s={t.start.brew} /></p>
-              <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback} aria-live="polite">{t.ui.copy}</button></div>
+              <div class="codeblock"><pre tabindex="0"><code>{brew}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
             </div>
             <div class="tab-panel" data-panel="script">
               <p class="col"><Rich s={t.start.install} /></p>
-              <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback} aria-live="polite">{t.ui.copy}</button></div>
+              <div class="codeblock"><pre tabindex="0"><code>{install}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
             </div>
           </div>
           <details class="advanced">
@@ -330,9 +330,9 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
             <p><Rich s={t.start.source} /></p>
           </details>
           <p class="col">{t.start.run}</p>
-          <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback} aria-live="polite">{t.ui.copy}</button></div>
+          <div class="codeblock"><pre tabindex="0"><code>{t.start.runCode}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
           <p class="col">{t.start.tryIntro}</p>
-          <div class="codeblock"><pre tabindex="0"><code>{tryIt}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="try" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback} aria-live="polite">{t.ui.copy}</button></div>
+          <div class="codeblock"><pre tabindex="0"><code>{tryIt}</code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="try" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
           <p class="links"><a href={SITE.docs}>{t.start.docs}</a><a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a></p>
         </div>
       </div>
@@ -446,7 +446,8 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
           sel.addRange(r);
           b.textContent = b.dataset.fallback;
           b.classList.add('hint');
-          setTimeout(() => { b.textContent = b.dataset.label; b.classList.remove('hint'); }, 3000);
+          b.nextElementSibling.textContent = b.dataset.fallback;
+          setTimeout(() => { b.textContent = b.dataset.label; b.classList.remove('hint'); b.nextElementSibling.textContent = ''; }, 3000);
         }
       }),
     );

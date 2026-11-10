@@ -170,7 +170,6 @@ export const en = {
     sourceTitle: 'Build from source (advanced)',
     source: 'Prefer to build it yourself? Install from source with Rust 1.88+ and git: clone `github.com/equipe-labs/equipe`, then run `cargo install --locked --path crates/cli`. The Claude engine also needs the `claude` binary.',
     run: 'Sign in to an engine, check it\'s ready, then open the squad console:',
-    // Shell comments inside the code block may be translated; the commands must not be.
     runCode: `equipe login
 equipe status
 equipe`,
