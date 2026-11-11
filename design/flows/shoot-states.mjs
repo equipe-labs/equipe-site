@@ -29,7 +29,7 @@ const LIVE = (liveAt >= 0 ? args.splice(liveAt, 2)[1] : 'http://127.0.0.1:4384')
 const BASE = (args[0] || 'http://127.0.0.1:4378').replace(/\/$/, '');
 const OUT = dirname(fileURLToPath(import.meta.url));
 const WIDTHS = [390, 1280];
-const FOLD = { 390: 844, 1280: 800 };
+const FOLD = { 390: 844, 768: 1024, 1280: 800 };
 const UNSTICK = 'header.site{position:static!important}';
 
 // How a state is reached. view: 'fold' (the first screen), 'full' (the long home page,
@@ -112,6 +112,8 @@ const SHOTS = [
   S('mobile-app/support/ko', '/ko/app/support/', { view: 'page', locale: 'ko-KR' }),
   S('mobile-app/support/long', '/de/app/support/', { view: 'page', locale: 'de-DE' }),
   S('design-menu/design-home/ko', '/ko/design/', { view: 'page', locale: 'ko-KR' }),
+  // Tablet header (T-666): the width the header fix acts on (641–1099px); French is the longest menu
+  S('design-menu/design-home/tablet', '/fr/design/', { locale: 'fr-FR', widths: [768] }),
   S('design-menu/design-home/long', '/de/design/', { view: 'page', locale: 'de-DE' }),
   S('design-menu/docs/long', '/de/design/docs/', { view: 'page', locale: 'de-DE' }),
   S('design-menu/examples/long', '/de/design/examples/', { view: 'page', locale: 'de-DE' }),
@@ -147,7 +149,7 @@ let n = 0;
 try {
   for (const shot of SHOTS) {
     if (only && !shot.path.startsWith(only)) continue;
-    for (const width of WIDTHS) {
+    for (const width of shot.widths || WIDTHS) {
       for (const scheme of ['light', 'dark']) {
         const full = shot.view === 'full' || shot.view === 'page';
         const context = await browser.newContext({

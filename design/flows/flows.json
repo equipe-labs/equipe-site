@@ -1066,7 +1066,8 @@
           "expects": [
             "default",
             "ko",
-            "long"
+            "long",
+            "tablet"
           ],
           "states": [
             {
@@ -1086,6 +1087,12 @@
               "label": "Long text (German)",
               "kind": "long",
               "note": "shot by design/flows/shoot-states.mjs (not reachable by a URL alone): the page in German, the longest of the 8 languages, browser in de-DE"
+            },
+            {
+              "id": "tablet",
+              "label": "Tablet (768px, French)",
+              "kind": "default",
+              "note": "shot by design/flows/shoot-states.mjs at 768×1024 only (T-666): the header between the phone and 1100px, where the secondary links are hidden and the Download button stays; French is the longest menu, browser in fr-FR"
             }
           ]
         },
