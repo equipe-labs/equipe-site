@@ -1,0 +1,243 @@
+{
+  "screen": "home",
+  "at": 1794600595,
+  "files": [
+    {
+      "path": "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/src/styles/landing.css",
+      "modified": 1794600495
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      6,
+      7
+    ],
+    "habits": 0,
+    "waived": [
+      [
+        "gradient-hero",
+        "Not a gradient backdrop: three hard-edged radial-gradients draw the window's three solid neutral title-bar dots (--strong on --ap-sunken). In the build they may be three spans instead; either way no colour gradient sits behind the first screen."
+      ]
+    ],
+    "finish": 2,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "failing": [
+      [
+        "text-clipped",
+        "span.bt cuts off “equipe”"
+      ]
+    ],
+    "notes": [
+      [
+        "touch-target",
+        "a.skip “Skip to content” is 145×43 (at 360, 390 px)"
+      ],
+      [
+        "line-length",
+        "li.lp runs to about 107 characters a line"
+      ]
+    ],
+    "screen": "home",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale",
+      "primary-in-view"
+    ]
+  },
+  "findings": [
+    {
+      "rule": "gradient-hero",
+      "tier": "habit",
+      "file": "src/styles/landing.css",
+      "line": 82,
+      "evidence": ".hero .win::before has a radial-gradient behind it",
+      "waived": "Not a gradient backdrop: three hard-edged radial-gradients draw the window's three solid neutral title-bar dots (--strong on --ap-sunken). In the build they may be three spans instead; either way no colour gradient sits behind the first screen."
+    },
+    {
+      "rule": "gradient-hero",
+      "tier": "habit",
+      "file": "src/styles/landing.css",
+      "line": 92,
+      "evidence": ".hero .win::before has a radial-gradient behind it",
+      "waived": "Not a gradient backdrop: three hard-edged radial-gradients draw the window's three solid neutral title-bar dots (--strong on --ap-sunken). In the build they may be three spans instead; either way no colour gradient sits behind the first screen."
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "span.bt cuts off “equipe”"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "div.ap cuts off “Anything for pm — work outside any proje…”"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "span.sr-only cuts off “↺” (at 360, 390, 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a.skip “Skip to content” is 145×43 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a.btn.primary “Download for Mac” is 150×36 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "button.hs-pause “Pause the demo” is 28×28 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Read the docs on GitHub ” is 221×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Roadmap” is 76×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Architecture” is 98×27 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “GitHub” is 46×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Roadmap” is 62×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Architecture” is 81×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “Get the app” is 77×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “App privacy policy” is 123×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "touch-target",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 360,
+      "evidence": "a “App support” is 82×22 (at 360, 390 px)"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "div.ap cuts off “New message PM Inbox 1 In progress Ticke…”"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "span.sr-only cuts off “⌘” (at 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "span.sr-only cuts off “↵” (at 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "span.sr-only cuts off “⇧” (at 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "figure.win cuts off “New message PM Inbox 5 In progress 5 Tic…” (at 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "text-clipped",
+      "tier": "floor",
+      "file": "http://localhost:4325/",
+      "width": 768,
+      "evidence": "figure.win cuts off “Team 6 pm Idle frontend Permission data …” (at 768, 1024, 1280, 1440, 1920 px)"
+    },
+    {
+      "rule": "line-length",
+      "tier": "finish",
+      "file": "http://localhost:4325/",
+      "width": 1024,
+      "evidence": "li.lp runs to about 107 characters a line"
+    }
+  ],
+  "pictures": [
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/360.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/390.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/768.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/1024.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/1280.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/1440.png",
+    "/home/tenki/vol/equipe-home/worktrees/equipe-site/t5-6af76325-1/design/checks/home/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": null,
+  "fixes_in_a_row": 0
+}
