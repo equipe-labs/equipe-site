@@ -11,8 +11,11 @@
   --bw-1: 1px; --bw-2: 2px;
   --tap: 44px; --wrap: 1040px; --measure: 680px;
   --gutter: var(--s-4); --section-y: var(--s-8);
-  --sans: 'Inter Variable', Inter, system-ui, sans-serif;
-  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  /* --sym: ⌘ ⇧ ↵ and friends, which Inter and JetBrains Mono don't carry. --cjk: a CJK family for any page (each :lang() below narrows it to its own). */
+  --sym: 'Apple Symbols', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Sans Symbols', 'DejaVu Sans';
+  --cjk: 'Pretendard Variable', 'Apple SD Gothic Neo', 'Hiragino Sans', 'PingFang SC', 'Noto Sans CJK KR', 'Noto Sans KR', 'Noto Sans CJK JP', 'Noto Sans JP', 'Noto Sans CJK SC', 'Noto Sans SC', 'Malgun Gothic', Meiryo, 'Microsoft YaHei', 'Droid Sans Fallback';
+  --sans: 'Inter Variable', Inter, var(--cjk), system-ui, var(--sym), sans-serif;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', var(--cjk), ui-monospace, var(--sym), monospace;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -145,8 +148,8 @@ body.has-lang-banner { padding-bottom: var(--s-8); }
 :lang(ja) { --cjk: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Noto Sans CJK JP', Meiryo; }
 :lang(zh-CN) { --cjk: 'PingFang SC', 'Noto Sans SC', 'Noto Sans CJK SC', 'Microsoft YaHei'; }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) {
-  --sans: 'Inter Variable', Inter, var(--cjk), system-ui, sans-serif;
-  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', var(--cjk), ui-monospace, monospace;
+  --sans: 'Inter Variable', Inter, var(--cjk), system-ui, var(--sym), sans-serif;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', var(--cjk), ui-monospace, var(--sym), monospace;
   font-family: var(--sans);
 }
 :lang(ko) :is(h1, h2, h3), :lang(ja) :is(h1, h2, h3), :lang(zh-CN) :is(h1, h2, h3) { letter-spacing: 0; line-height: 1.3; }
