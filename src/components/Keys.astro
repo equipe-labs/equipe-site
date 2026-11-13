@@ -1,5 +1,5 @@
 ---
-// Key labels with ⌘ ⇧ ↵ drawn as inline line icons: many Linux systems have no font with these glyphs and show boxes.
+// Key labels and symbols (⌘ ⇧ ↵ ↺ ⚑) drawn as inline line icons: many Linux systems have no font with these glyphs and show boxes.
 // The character stays in the DOM (visually hidden) for screen readers and copy-paste.
 interface Props { text: string }
 const { text } = Astro.props;
@@ -7,8 +7,10 @@ const paths: Record<string, string> = {
   '⌘': 'M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z',
   '⇧': 'M9 19v-6H5l7-8 7 8h-4v6z',
   '↵': 'M19 5v6a4 4 0 0 1-4 4H5M9 11l-4 4 4 4',
+  '↺': 'M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5',
+  '⚑': 'M5 21V4m0 0c2.5-1.5 5-1.5 7 0s4.5 1.5 7 0v10c-2.5 1.5-5 1.5-7 0s-4.5-1.5-7 0',
 };
-const parts = text.split(/([⌘⇧↵])/).filter(Boolean);
+const parts = text.split(/([⌘⇧↵↺⚑])/).filter(Boolean);
 ---
 {parts.map((p) => paths[p]
   ? <><svg class="kg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={paths[p]} /></svg><span class="sr-only">{p}</span></>

@@ -1,4 +1,5 @@
 ---
+import Keys from '../../../components/Keys.astro';
 import Cmd from '../../../components/Cmd.astro';
 import DesignShell from '../../../components/DesignShell.astro';
 import Rich from '../../../components/Rich.astro';
@@ -42,7 +43,7 @@ const all = groups.flat();
         <h2 id="install">{p.installTitle}</h2>
         <p>{p.installText}</p>
         <div class="codeblock"><pre tabindex="0"><code><Cmd text={install} /></code></pre><button class="copy" type="button" data-ph="design_install_copy" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied}>{t.ui.copy}</button></div>
-        <div class="ph">⚑ {d.soon}</div>
+        <div class="ph"><Keys text="⚑" /> {d.soon}</div>
 
         <h2 id="cli">{p.cliTitle}</h2>
         <div class="tbl"><table><tbody>{p.cliRows.map((r) => <tr><td>{r[0]}</td><td class="l">{r[1]}</td></tr>)}</tbody></table></div>

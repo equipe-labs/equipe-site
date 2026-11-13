@@ -1,8 +1,8 @@
 /* The Mac app, drawn in code (T-242). Colours are the equipe design tokens (light/dark follow the site); no pictures.
    `.ap` is a scene's root. Inside it nothing has its own frame: the figure's border is the only box. */
-:root { --ok: #1F6B33; --work: #825600; --wait: #A04610; --hover: #0A0A0C0D; --strong: #74767D; --action: #15161A; --on-action: #F6F5F1; --ap-sunken: #EAE7E0; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --strong: #7C7E85; --action: #EFEDE7; --on-action: #0A0A0C; --ap-sunken: #111114; } }
-:root[data-theme='dark'] { --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --strong: #7C7E85; --action: #EFEDE7; --on-action: #0A0A0C; --ap-sunken: #111114; }
+:root { --ok: #1F6B33; --work: #825600; --wait: #A04610; --hover: #0A0A0C0D; --action: #15161A; --on-action: #F6F5F1; --ap-sunken: #EAE7E0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --action: #EFEDE7; --on-action: #0A0A0C; --ap-sunken: #111114; } }
+:root[data-theme='dark'] { --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --action: #EFEDE7; --on-action: #0A0A0C; --ap-sunken: #111114; }
 
 .ap { --ap-fs: 14px; position: relative; display: block; background: var(--bg); color: var(--text); font: 400 var(--ap-fs)/1.4 var(--sans); font-variant-numeric: tabular-nums; text-align: left; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; user-select: none; }
 .ap * { box-sizing: border-box; }

@@ -1,4 +1,5 @@
 ---
+import Keys from '../components/Keys.astro';
 import Cmd from '../components/Cmd.astro';
 import Base from '../layouts/Base.astro';
 import AppUi from '../components/AppUi.astro';
@@ -99,7 +100,7 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
           <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="hero" download>{t.hero.cta}</a>
           <a class="link" href="#cli-install" data-ph="cli_install_link_click" data-ph-location="hero">{t.hero.cliLink}</a>
         </div>
-        <p class="meta">{t.hero.req} · <span class="evline">{t.hero.proof}</span></p>
+        <p class="meta">{t.hero.req}<span class="evline">{t.hero.proof}</span></p>
       </div>
       <div class="wrap w heroshot">
         <HeroScene t={at} alt={t.hero.shotAlt} />
@@ -192,7 +193,7 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
             </div>
           </div>
         </div>
-        <p class="back"><span>↺ {t.loop.back}</span><i></i></p>
+        <p class="back"><span><Keys text="↺" /> {t.loop.back}</span><i></i></p>
       </div>
     </section>
 
