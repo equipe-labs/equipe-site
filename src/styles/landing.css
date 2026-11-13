@@ -189,7 +189,7 @@ main.landing .evs h2 .tone, .evs .meta, .evs .cap, .evs dd { color: #A3A5AB; }
 @media (min-width: 1100px) { .evg { grid-template-columns: 6fr 5fr; gap: 96px; margin-top: 56px; } }
 .nums { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-4); margin: 0; }
 @media (min-width: 701px) { .nums { gap: var(--s-7) var(--s-6); } }
-.num dt { font: 700 56px/0.95 'Helvetica Neue', Inter, sans-serif; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.num dt { font: 700 56px/0.95 'Helvetica Neue', Inter, var(--cjk), sans-serif; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 @media (min-width: 701px) { .num dt { font-size: 96px; } }
 .num dd { margin: var(--s-3) 0 0; font-size: 17px; }
 .evs .win { border-color: rgb(239 237 231 / 0.14); box-shadow: none; }

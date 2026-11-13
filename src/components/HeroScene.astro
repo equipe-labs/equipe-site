@@ -93,7 +93,7 @@ const css = [
     </div>
   </div>
   </div>
-  <button class="hs-pause" type="button" data-pause data-play={h.play} data-stop={h.pause} aria-label={h.pause}><span aria-hidden="true">❚❚</span></button>
+  <button class="hs-pause" type="button" data-pause data-play={h.play} data-stop={h.pause} aria-label={h.pause}><svg class="hs-pi hs-pi-stop" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><rect x="2.5" y="2" width="2.5" height="8" rx=".6" /><rect x="7" y="2" width="2.5" height="8" rx=".6" /></svg><svg class="hs-pi hs-pi-play" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3.5 2.2v7.6a.5.5 0 0 0 .76.43l6.1-3.8a.5.5 0 0 0 0-.86l-6.1-3.8a.5.5 0 0 0-.76.43z" /></svg></button>
 </div>
 <p class="hs-cap meta">{h.caption}</p>
 
@@ -142,6 +142,10 @@ const css = [
   .hs-bar i { display: block; height: 100%; width: 100%; transform-origin: left; background: var(--ok); border-radius: 99px; }
   .hs-pause { position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 12px; cursor: pointer; z-index: 3; }
   .hs-pause:focus-visible { outline: 2px solid var(--accent); }
+  .hs-pause { display: grid; place-items: center; padding: 0; }
+  .hs-pi { width: 14px; height: 14px; fill: currentColor; }
+  .hs-pi-play, .paused .hs-pi-stop { display: none; }
+  .paused .hs-pi-play { display: block; }
   .hs-cap { margin-top: var(--s-3); max-width: 760px; }
   .hs .hs-b { opacity: 1; }
   @media (max-width: 700px) {
@@ -176,7 +180,6 @@ const css = [
     btn.addEventListener('click', () => {
       const p = el.classList.toggle('paused');
       btn.setAttribute('aria-label', p ? btn.dataset.play! : btn.dataset.stop!);
-      btn.firstElementChild!.textContent = p ? '▶' : '❚❚';
     });
     new IntersectionObserver(([e]) => el.classList.toggle('off', !e.isIntersecting)).observe(el);
   });
