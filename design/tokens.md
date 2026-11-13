@@ -28,3 +28,19 @@
 - 사이트 안에서 오류 빨강을 직접 적지 않는다(`#b3261e`·`#ff8a80`처럼 만든 값 금지).
 
 적용 전/후(remix 잘못된 hex 상태, 390폭, 라이트·다크): `design/shots/t774/remix-invalid-hex-390-compare.png`. 전: T-304 첫 구현의 `#b3261e`/`#ff8a80` — 다크 입력칸 테두리가 `#b3261e`라 `--surface` 위 2.74:1로 3:1 미달. 후: `var(--err)`.
+
+### 홈 다듬기 역할 `--strong`·`--display`·`--shadow-window`·`--window-edge`·`--muted-inverse` (T-2)
+
+홈 다듬기 명세(`design/home-polish-spec.md` §0·P9)에서 쓰는 역할. 두 모드 모두 값이 있다.
+
+| 역할 | 라이트 | 다크 | 출처 | 쓰는 곳 |
+|---|---|---|---|---|
+| `--strong` | `#74767D` | `#7C7E85` | `color.border-strong` (warm.350 / 400) — 지금 `app.css`에만 있음, `global.css`로 올림 | 조용한 밑줄, 창 제목줄 점 |
+| `--display` | `clamp(48px, 5.6vw, 80px)` | 같음 | `type.display` 56을 폭에 따라 80까지 | 히어로 h1, 마지막 h2만 |
+| `--shadow-window` | `0 32px 64px -32px rgb(10 10 12 / .28), 0 2px 6px 0 rgb(10 10 12 / .06)` | `0 32px 64px -24px rgb(0 0 0 / .7)` | `elevation.overlay`를 히어로 창 깊이로 | 모든 `.win` |
+| `--window-edge` | `transparent` | `rgb(239 237 231 / .14)` | `--text`의 14% (`.evs` 창 테두리와 같음) | 다크에서 창이 바탕에 묻히지 않게 1px 테두리 |
+| `--muted-inverse` | `#A3A5AB` | `#4F5159` | 반대 모드의 `--muted` | 뒤집힌 띠(`.evs`)의 흐린 글자 — 지금 직접 적힌 hex를 대신함 |
+
+명암비(WCAG 2.x 계산):
+- `--strong`(UI 전용): `--bg` 위 4.16 / 4.88, `--ap-sunken` 위 3.67 / 4.65 — UI 3:1 통과. 글자에는 쓰지 않는다.
+- `--muted-inverse`: 뒤집힌 띠 바탕(`--void` / `--bone`) 위 8.03 / 7.25 — 글자 4.5:1 통과.

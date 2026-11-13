@@ -1,0 +1,19 @@
+/* Option C (bolder): at >=1200px the hero splits: words on the left, the product on the right, so the whole window is in the first screen.
+   Below 1200px it is option A (at 1100 the German decision buttons no longer fit side by side). Layered on home-polish.css. */
+@media (min-width: 1200px) {
+  .hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-8); align-items: start; max-width: 1360px; margin: 0 auto; padding: var(--s-8) var(--s-6) var(--s-7) !important; }
+  .hero > .wrap.w { max-width: none; margin: 0; padding: var(--s-7) 0 0; }   /* the headline's top sits near the window's title bar */
+  .hero h1 { font-size: clamp(48px, 4.4vw, 68px); }
+  .hero h1 .hl { display: inline; }
+  .hero .lead { font-size: 20px; }
+  .heroshot { margin: 0 !important; }
+  /* the window: no sidebar (as on phones), as tall as what it shows, titles wrap (up to three lines, for French) instead of being cut */
+  .hero .hs .shell { grid-template-columns: minmax(0, 1fr) !important; min-height: 0 !important; }
+  .hero .hs .ap { min-height: 0 !important; }
+  .hero .hs .shell > .side { display: none !important; }
+  .hero .hs-body { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+  .hero .hs-cap { max-width: 60ch; }
+  /* !important only because this mockup sits outside HeroScene's scoped styles; in the build these go in HeroScene.astro */
+  .hero .hs-tc .l1 { align-items: flex-start !important; }
+  .hero .hs-tc .ti { white-space: normal !important; text-overflow: clip !important; line-height: 1.3; display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+}
