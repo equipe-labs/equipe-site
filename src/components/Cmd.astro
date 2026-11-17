@@ -8,10 +8,10 @@
 // that beats scrolling sideways.
 // textContent — what Copy puts on the clipboard — is unchanged.
 const { text } = Astro.props;
-const isSpace = (s) => /^\s*$/.test(s);
+const isSpace = (s: string) => /^\s*$/.test(s);
 const parts = String(text).split(/(\s+)/).filter((tok) => tok !== "").map((tok) => {
   if (isSpace(tok)) return [tok];
-  const segs = [];
+  const segs: string[] = [];
   for (const s of tok.split(/(?<=\/)(?!\/)/)) {
     if (segs.length && segs[segs.length - 1].endsWith("://")) segs[segs.length - 1] += s;
     else segs.push(s);
@@ -19,7 +19,7 @@ const parts = String(text).split(/(\s+)/).filter((tok) => tok !== "").map((tok) 
   return segs;
 });
 // Fold "word | word" into one run: the pipe's spaces then don't wrap either.
-const inline = (t) => t && isSpace(t[0]) && !t[0].includes("\n");
+const inline = (t?: string[]) => t && isSpace(t[0]) && !t[0].includes("\n");
 for (let i = 0; i + 4 < parts.length; i++) {
   const [prev, sp1, pipe, sp2, next] = parts.slice(i, i + 5);
   if (isSpace(prev[0]) || !inline(sp1) || pipe.join("") !== "|" || !inline(sp2) || isSpace(next[0])) continue;
