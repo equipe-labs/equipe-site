@@ -174,7 +174,7 @@ main.doc { padding: var(--s-7) 0 var(--s-8); }
 main.doc h1 { font-size: 32px; line-height: 1.15; overflow-wrap: anywhere; }
 @media (max-width: 359px) { main.doc h1 { hyphens: auto; } }
 main.doc h1:lang(de) { hyphens: manual; }
-@media (min-width: 641px) { main.doc h1 { font-size: 44px; } }
+@media (min-width: 641px) { main.doc h1 { font-size: 44px; } main.doc h1:lang(de) { hyphens: none; } }
 main.doc .lead { font-size: 19px; line-height: 1.5; margin: var(--s-4) 0 var(--s-2); }
 main.doc .doc-section { padding: var(--s-6) 0 0; }
 main.doc .doc-section + .doc-section { border-top: 0; }
