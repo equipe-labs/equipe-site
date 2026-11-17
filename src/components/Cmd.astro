@@ -3,6 +3,9 @@
 // every other run (hyphens included) is a nowrap span, so a wrapped line never reads
 // as a different command. "scheme://host/" stays whole, and a pipe is kept with the
 // words on both sides ("install.sh | sh"), so neither "https://" nor "| sh" sits alone.
+// A "scheme://host/" run is an inline-block (.url) that may still break after "://", but
+// only when the run is wider than a whole line (de at 320px, beside its long Copy label):
+// that beats scrolling sideways.
 // textContent — what Copy puts on the clipboard — is unchanged.
 const { text } = Astro.props;
 const isSpace = (s) => /^\s*$/.test(s);
@@ -26,4 +29,7 @@ for (let i = 0; i + 4 < parts.length; i++) {
   i--;
 }
 ---
-{parts.map((segs) => segs.length === 1 && isSpace(segs[0]) ? segs[0] : segs.map((s, i) => <Fragment>{i > 0 && <wbr />}<span class="nb">{s}</span></Fragment>))}
+{parts.map((segs) => segs.length === 1 && isSpace(segs[0]) ? segs[0] : segs.map((s, i) => {
+  const url = s.match(/^(.*?:\/\/)(.+)$/);
+  return <Fragment>{i > 0 && <wbr />}{url ? <span class="nb url"><span class="nb">{url[1]}</span><wbr /><span class="nb">{url[2]}</span></span> : <span class="nb">{s}</span>}</Fragment>;
+}))}
