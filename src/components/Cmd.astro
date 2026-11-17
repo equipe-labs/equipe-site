@@ -1,10 +1,29 @@
 ---
 // A command in a code box. On phones the box wraps, but only at spaces and after "/":
 // every other run (hyphens included) is a nowrap span, so a wrapped line never reads
-// as a different command. textContent — what Copy puts on the clipboard — is unchanged.
+// as a different command. "scheme://host/" stays whole, and a pipe is kept with the
+// words on both sides ("install.sh | sh"), so neither "https://" nor "| sh" sits alone.
+// textContent — what Copy puts on the clipboard — is unchanged.
 const { text } = Astro.props;
-const parts = String(text).split(/(\s+)/).map((tok) =>
-  /^\s*$/.test(tok) ? [tok] : tok.split(/(?<=\/)(?!\/)/)
-);
+const isSpace = (s) => /^\s*$/.test(s);
+const parts = String(text).split(/(\s+)/).filter((tok) => tok !== "").map((tok) => {
+  if (isSpace(tok)) return [tok];
+  const segs = [];
+  for (const s of tok.split(/(?<=\/)(?!\/)/)) {
+    if (segs.length && segs[segs.length - 1].endsWith("://")) segs[segs.length - 1] += s;
+    else segs.push(s);
+  }
+  return segs;
+});
+// Fold "word | word" into one run: the pipe's spaces then don't wrap either.
+const inline = (t) => t && isSpace(t[0]) && !t[0].includes("\n");
+for (let i = 0; i + 4 < parts.length; i++) {
+  const [prev, sp1, pipe, sp2, next] = parts.slice(i, i + 5);
+  if (isSpace(prev[0]) || !inline(sp1) || pipe.join("") !== "|" || !inline(sp2) || isSpace(next[0])) continue;
+  prev[prev.length - 1] += sp1[0] + "|" + sp2[0] + next[0];
+  prev.push(...next.slice(1));
+  parts.splice(i + 1, 4);
+  i--;
+}
 ---
-{parts.map((segs) => segs.length === 1 && /^\s*$/.test(segs[0]) ? segs[0] : segs.map((s, i) => <Fragment>{i > 0 && <wbr />}<span class="nb">{s}</span></Fragment>))}
+{parts.map((segs) => segs.length === 1 && isSpace(segs[0]) ? segs[0] : segs.map((s, i) => <Fragment>{i > 0 && <wbr />}<span class="nb">{s}</span></Fragment>))}
