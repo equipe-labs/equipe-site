@@ -236,7 +236,7 @@ equipe`,
         title: 'Datenschutzerklärung der equipe-App',
         description: 'Was die equipe-Mobil-App und ihr Relay verarbeiten: Kopplungsschlüssel bleiben auf dem Telefon, das Relay leitet nur versiegelte Nachrichten weiter, es gibt weder Analyse noch Tracking.',
       },
-      title: 'Datenschutzerklärung der equipe-App',
+      title: 'Daten\u00ADschutz\u00ADerklärung der equipe-App',
       updated: 'Zuletzt aktualisiert: 2026-11-01',
       intro: 'Mit der equipe-App spricht Ihr Telefon mit dem equipe-Daemon auf Ihrem eigenen Mac. Diese Seite erklärt in einfachen Worten, was die App und das equipe-Relay verarbeiten.',
       sections: [
