@@ -1,0 +1,197 @@
+[
+  {
+    "id": "R1",
+    "url": "https://www.dessn.ai/",
+    "site": "dessn.ai",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "실제 제품 캔버스를 히어로 증거로 쓰고, 변형 상태를 나란히 보여 주는 법",
+    "aspects": [
+      "pattern"
+    ],
+    "shots": [
+      "references/R1/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R2",
+    "url": "https://www.proofeditor.ai/",
+    "site": "proofeditor.ai",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "사람과 에이전트가 같은 문서에서 주고받는 한 장면으로 협업을 설명하는 법",
+    "aspects": [
+      "layout"
+    ],
+    "shots": [
+      "references/R2/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R3",
+    "url": "https://www.tines.com/",
+    "site": "tines.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "복잡한 자동화 제품을 Build·Deploy·Operationalize 세 행동으로 묶는 정보 구조",
+    "aspects": [
+      "rhythm"
+    ],
+    "shots": [
+      "references/R3/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R4",
+    "url": "https://offloop.org/",
+    "site": "offloop.org",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "사람과 에이전트의 공유 작업공간을 실제 채널과 상태로 보여 주는 법",
+    "aspects": [
+      "pattern"
+    ],
+    "shots": [
+      "references/R4/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R5",
+    "url": "https://attio.com/",
+    "site": "attio.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "데이터가 움직이는 제품을 큰 화면 크롭과 절제된 타이포로 증명하는 법",
+    "aspects": [
+      "type"
+    ],
+    "shots": [
+      "references/R5/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R6",
+    "url": "https://cursor.com/",
+    "site": "cursor.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "작은 범주형 헤드라인 뒤에 실제 에이전트 작업 목록을 가장 큰 시각 증거로 두는 법",
+    "aspects": [
+      "layout"
+    ],
+    "shots": [
+      "references/R6/browser.jpg"
+    ],
+    "via": "browser"
+  },
+  {
+    "id": "R7",
+    "url": "https://linear.app/",
+    "site": "linear.app",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "크롬은 물러나고 실제 이슈·활동·에이전트 상태만 빛과 명암으로 앞으로 오게 하는 법",
+    "aspects": [
+      "colour"
+    ],
+    "shots": [
+      "references/R7/browser.jpg"
+    ],
+    "via": "browser"
+  },
+  {
+    "id": "R8",
+    "url": "https://21st.dev/@ephraimduncan/components/onboarding-06",
+    "site": "21st.dev",
+    "source": "21st",
+    "date": "2026-11-08",
+    "learn": "완료·진행 중·예정 세 상태를 작은 세로 로그 하나로 읽히게 하는 상태 문법",
+    "aspects": [
+      "pattern"
+    ],
+    "shots": [
+      "references/R8/browser.jpg"
+    ],
+    "via": "browser"
+  },
+  {
+    "id": "R9",
+    "url": "https://www.granola.ai/",
+    "site": "granola.ai",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "폰 방문자에게 iOS 앱과 Mac 링크 보내기를 같은 화면에서 이어 주는 다음 행동",
+    "aspects": [
+      "layout"
+    ],
+    "shots": [
+      "references/R9/browser.jpg"
+    ],
+    "via": "browser"
+  },
+  {
+    "id": "R10",
+    "url": "https://www.diabrowser.com/",
+    "site": "diabrowser.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "폰에서는 같은 CTA 자리를 공유 시트 기반 Mac 다운로드 링크 보내기로 바꾸는 법",
+    "aspects": [
+      "pattern"
+    ],
+    "shots": [
+      "references/R10/browser.jpg"
+    ],
+    "via": "browser"
+  },
+  {
+    "id": "R11",
+    "url": "https://flighty.com/",
+    "site": "flighty.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "실시간 알림과 상태를 공항 안내판 문법에서 빌려 한눈에 읽히게 하는 제품 고유 비유",
+    "aspects": [
+      "pattern"
+    ],
+    "shots": [
+      "references/R11/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R12",
+    "url": "https://superhuman.com/",
+    "site": "superhuman.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "하나의 실제 워크플로를 빠른 장면 전환과 정교한 크롭으로 제품의 속도로 느끼게 하는 법",
+    "aspects": [
+      "rhythm"
+    ],
+    "shots": [
+      "references/R12/1280.png"
+    ],
+    "via": "shoot"
+  },
+  {
+    "id": "R13",
+    "url": "https://www.notion.com/product/mail",
+    "site": "notion.com",
+    "source": "other",
+    "date": "2026-11-08",
+    "learn": "제품의 핵심 개념을 실제 메일 화면과 짧은 문장으로 번갈아 증명하는 섹션 리듬",
+    "aspects": [
+      "layout"
+    ],
+    "shots": [
+      "references/R13/1280.png"
+    ],
+    "via": "shoot"
+  }
+]

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>팀 / 내 결정</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .authority { min-height: 830px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(330px, 1fr); }
+    .team-side { padding: 34px; border-right: 1px solid var(--line); }
+    .me-side { padding: 34px 24px 30px; display: flex; flex-direction: column; }
+    .team-label, .me-label { display: flex; justify-content: space-between; align-items: center; padding-bottom: 11px; border-bottom: 1px solid var(--line); }
+    .ratio { color: var(--quiet); font-size: 10px; }
+    .team-side .headline { margin-top: 22px; max-width: 900px; font-size: 62px; word-break: keep-all; }
+    .team-side .sub { margin-top: 12px; }
+    .team-side > .site-actions { margin-top: 14px; }
+    .workbench { margin-top: 20px; display: grid; grid-template-columns: 1.15fr .85fr .95fr .95fr; grid-template-rows: 155px 155px; gap: 9px; }
+    .workbench .source { grid-row: 1 / 3; }
+    .source .real-crop { background-image: url('assets/metrics-dark.png'); background-position: 69% 20%; background-size: 135%; }
+    .source .artifact-body { position: relative; z-index: 2; margin-top: 86px; background: linear-gradient(transparent, var(--surface) 28%); }
+    .workbench .qa { grid-column: 2 / 5; }
+    .handoff-note { margin-top: 12px; display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 10px; }
+    .handoff-note::before { content: ""; width: 38px; height: 1px; background: var(--line-strong); }
+    .me-side .headline-small { margin: auto 0 24px; max-width: 250px; font-size: 34px; line-height: 1.03; letter-spacing: -.05em; word-break: keep-all; }
+    .me-side .decision { margin-top: 12px; }
+    .me-side .next-measure { margin-top: 16px; }
+    .me-side .actual-decision { height: 430px; margin-top: 18px; }
+    @media (max-width: 600px) {
+      .authority { min-height: 846px; display: block; }
+      .team-side { padding: 22px 16px 12px; border: 0; }
+      .me-side { padding: 0 16px 18px; border-top: 1px solid var(--line); }
+      .team-label, .me-label { padding-bottom: 7px; }
+      .team-side .headline { margin-top: 15px; font-size: 34px; max-width: 330px; }
+      .team-side .sub { margin-top: 8px; font-size: 12px; }
+      .team-side > .site-actions { margin-top: 10px; }
+      .team-side > .spec { margin-top: 7px; }
+      .workbench { margin-top: 12px; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 73px) 80px; gap: 5px; }
+      .workbench .source { grid-row: 1 / 4; }
+      .source .artifact-body { margin-top: 18px; }
+      .workbench .qa { grid-column: 1 / 3; }
+      .artifact-head { height: 23px; padding: 0 7px; }
+      .artifact-head .role, .artifact-head .status { font-size: 7px; }
+      .artifact-body { padding: 6px 7px; }
+      .artifact h3 { font-size: 10px; }
+      .source-table { margin-top: 4px; }
+      .source-row { min-height: 18px; grid-template-columns: 1fr .6fr; }
+      .source-row span { display: none; }
+      .source-row b { font-size: 8px; }
+      .pm-brief { margin-top: 3px; gap: 2px; }
+      .brief-row { grid-template-columns: 34px 1fr; font-size: 6px; }
+      .phone-compare { margin-top: 3px; gap: 3px; }
+      .phone-shot { min-height: 38px; padding: 3px; }
+      .phone-shot .browserbar { display: none; }
+      .phone-shot .phone-title { font-size: 5px; }
+      .phone-btn { min-height: 8px; margin-top: 2px; font-size: 3px; }
+      .shot-label { display: none; }
+      .qa-thumbs { margin-top: 3px; gap: 3px; }
+      .qa-shot { height: 31px; padding: 3px; }
+      .qa-shot small { display: none; }
+      .qa-shot .mini-btn { margin-top: 4px; height: 6px; }
+      .handoff-note { display: none; }
+      .me-label { margin-top: 10px; }
+      .me-side .headline-small { display: none; }
+      .me-side .decision { margin-top: 8px; padding: 10px; }
+      .me-side .decision p { margin-top: 4px; }
+      .me-side .decision-row { margin-top: 6px; }
+      .me-side .next-measure { margin-top: 8px; }
+      .me-side .actual-decision { height: 150px; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <nav class="nav"><img class="brand" src="../../../assets/logo/wordmark-on-dark.svg" alt="equipe"><div class="nav-links"><span>How it works</span><span>Design</span><span>GitHub</span><span>한국어</span></div></nav>
+  <section class="authority">
+    <div class="team-side">
+      <div class="team-label"><span class="label">팀이 마친 일</span><span class="ratio">지표 → 판단 → 설계 → 구현 → QA</span></div>
+      <h1 class="headline">최고의 스타트업 팀을 드려요.<br>승인만 하세요.</h1>
+      <p class="sub">말 한 줄 뒤에는 읽을 수 있는 결과가 남습니다.</p>
+      <div class="site-actions"><button class="site-action primary">iPhone 앱에서 팀 보기</button><button class="site-action">Mac 링크 보내기</button></div>
+      <div class="spec">무료 · macOS 14+ · 쓰던 Claude·ChatGPT 요금제 그대로</div>
+      <div class="workbench">
+        <article class="artifact source"><div class="artifact-head"><span class="role">data → PM</span><span class="status">근거</span></div><div class="real-crop"></div><div class="artifact-body"><h3>유입과 다음 행동</h3><div class="source-table"><div class="source-row"><b>LinkedIn</b><span>iPhone</span><b>18</b></div><div class="source-row"><b>download</b><span>click</span><b>0</b></div><div class="source-row"><b>hero</b><span>click</span><b>0</b></div></div></div></article>
+        <article class="artifact"><div class="artifact-head"><span class="role">PM</span><span class="status">판단</span></div><div class="artifact-body"><h3>폰 첫 화면 분기</h3><div class="pm-brief"><div class="brief-row"><span>바꿀 것</span><b>앱 · Mac 링크</b></div><div class="brief-row"><span>성공</span><b>다음 행동 1건</b></div></div></div></article>
+        <article class="artifact"><div class="artifact-head"><span class="role">design</span><span class="status">전 / 후</span></div><div class="artifact-body"><h3>두 행동을 한 화면에</h3><div class="phone-compare"><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn">Mac 다운로드</div></div><div class="phone-shot"><div class="browserbar"></div><div class="phone-title">승인만 하세요.</div><div class="phone-btn fill">앱에서 보기</div><div class="phone-btn">Mac 링크</div></div></div></div></article>
+        <article class="artifact"><div class="artifact-head"><span class="role">frontend</span><span class="status">preview</span></div><div class="artifact-body"><h3>390 미리보기</h3><div class="phone-compare"><div class="phone-shot"><div class="phone-title">KO · dark</div><div class="phone-btn fill">앱에서 보기</div></div><div class="phone-shot"><div class="phone-title">EN · light</div><div class="phone-btn fill">Open app</div></div></div></div></article>
+        <article class="artifact qa"><div class="artifact-head"><span class="role">QA → 사람</span><span class="status">4 / 4 검증</span></div><div class="artifact-body"><h3>같은 화면 네 렌더가 모두 통과했어요.</h3><div class="qa-thumbs"><div class="qa-shot"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · dark</small></div><div class="qa-shot"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · dark</small></div><div class="qa-shot light"><div class="mini-title">승인만 하세요.</div><div class="mini-btn"></div><small>KO · light</small></div><div class="qa-shot light"><div class="mini-title">You approve.</div><div class="mini-btn"></div><small>EN · light</small></div></div></div></article>
+      </div>
+      <div class="handoff-note">팀은 결과까지 만들고, 공개 권한은 넘지 않아요.</div>
+    </div>
+    <aside class="me-side">
+      <div class="me-label"><span class="label">내가 결정할 일</span><span class="ratio">1건</span></div>
+      <h2 class="headline-small">팀은 여기까지 왔어요.<br>내 차례는 하나.</h2>
+      <div class="actual-decision"><span class="actual-label">실제 equipe · 팀 완료 → 내 결정</span><img src="assets/decision-panel.png" alt="equipe 실제 결정 화면"></div>
+      <div class="next-measure">승인 뒤 같은 유입과 다음 행동 측정</div>
+    </aside>
+  </section>
+</main>
+</body>
+</html>

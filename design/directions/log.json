@@ -31,5 +31,165 @@
     "palette": "site tokens as is",
     "density": "first screen only, everything else stays",
     "motion": "bottom sheet slides up; popover fades"
+  },
+  {
+    "name": "A 관제 패널",
+    "ticket": "T-521",
+    "at": 1794099334,
+    "chosen": false,
+    "layout": "left headline over a full-width live app window (sidebar, in-progress list, decision dock); 3-up bordered panels; hairline grid",
+    "type": "Geist + Geist Mono / Pretendard (ko), grotesk 600 tight",
+    "palette": "graphite neutrals, amber lamps as the only colour, ink/white buttons",
+    "density": "high, instrument panel",
+    "motion": "lamps pulse, progress bars fill, decision card slides into the dock"
+  },
+  {
+    "name": "B 근무 일지",
+    "ticket": "T-521",
+    "at": 1794099334,
+    "chosen": false,
+    "layout": "two-column editorial hero: serif headline left, timestamped squad log card right; steps as ruled rows; centred closing",
+    "type": "Instrument Serif + Inter / MaruBuri + Pretendard (ko), serif display",
+    "palette": "warm ink and paper, one green live light, pill buttons",
+    "density": "low, wide margins",
+    "motion": "a new log line appears every few seconds, the last line glows green"
+  },
+  {
+    "name": "C 점 하나",
+    "ticket": "T-521",
+    "at": 1794099334,
+    "chosen": false,
+    "layout": "poster split: giant stacked headline left, the decision card as the hero object over the dim squad room; full-width proof numbers band; inverted approval band",
+    "type": "IBM Plex Sans + Plex Mono / IBM Plex Sans KR, 84px poster scale",
+    "palette": "pure neutrals, the logo's blue dot as the only colour (lamps and Approve button)",
+    "density": "medium, big type few objects",
+    "motion": "card rises over the room, Approve press, Live line"
+  },
+  {
+    "name": "KV-A 새벽 조정",
+    "ticket": "T-521",
+    "at": 1794102638,
+    "chosen": false,
+    "layout": "paper page, headline then an inset rounded painting panel, real app window on its left two-thirds, the rowing crew to its right",
+    "type": "Pretendard 600 52px, quiet",
+    "palette": "paper #EEEDE8, ink, painting in slate blue, grey and dawn ochre",
+    "density": "medium",
+    "motion": "the crew glides slowly across the panel; the app window stays still"
+  },
+  {
+    "name": "KV-B 밤의 건물",
+    "ticket": "T-521",
+    "at": 1794102638,
+    "chosen": false,
+    "layout": "dark page, headline on plain night, full-bleed night-street band with a Hopper-like building, one floor lit beside the real app window",
+    "type": "Pretendard 600 52px on dark",
+    "palette": "night blue-grey #0D1015, warm window light as the only warm colour",
+    "density": "medium-low",
+    "motion": "windows on the lit floor switch on one by one as tickets start"
+  },
+  {
+    "name": "KV-C 벽에 든 빛",
+    "ticket": "T-521",
+    "at": 1794102638,
+    "chosen": false,
+    "layout": "near-black page, headline over a photographed wall where evening window light falls to the right of the real app window",
+    "type": "Pretendard 600 52px on near-black",
+    "palette": "near-black #0B0B0C, one amber light patch, no other colour",
+    "density": "low",
+    "motion": "the light patch drifts slowly across the wall over the day"
+  },
+  {
+    "name": "인계 레일",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "가로로 이어진 실제 산출물 다섯 장; 폰은 세로 인계",
+    "type": "구조 검증 단계: 중립 산세리프",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "낮음; 한 화면에 한 성장 사이클",
+    "motion": "산출물이 다음 역할로 조용히 이동",
+    "references": [
+      "R6",
+      "R7",
+      "R12"
+    ]
+  },
+  {
+    "name": "팀 / 내 결정",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "넓은 팀 작업 영역과 좁고 고정된 사람 결정 영역; 폰에서도 소유권 분리",
+    "type": "구조 검증 단계: 중립 산세리프",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "중간; 팀 작업은 풍부하고 사람 행동은 하나",
+    "motion": "팀 결과가 결정 영역으로 접힘",
+    "references": [
+      "R2",
+      "R4",
+      "R9"
+    ]
+  },
+  {
+    "name": "한 사건의 기록",
+    "ticket": "T-521",
+    "at": 1794199111,
+    "chosen": false,
+    "layout": "하나의 문제에 판단·수정·검증·공개가 누적되는 시간 기록",
+    "type": "구조 검증 단계: 중립 산세리프+고정폭 메타",
+    "palette": "구조 검증 단계: 흑백",
+    "density": "중간; 읽을 수 있는 사건 기록",
+    "motion": "새 기록이 아래에 쌓이고 다음 측정으로 닫힘",
+    "references": [
+      "R8",
+      "R11",
+      "R13"
+    ]
+  },
+  {
+    "name": "A 한 테이크",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "left-aligned headline+CTA, below a wide cropped product window: one ticket's 7-step activity timeline with the decision card on the eye axis; Linear-like section rhythm with legible product crops",
+    "type": "Geist 600 tight + Geist Mono / Pretendard (ko)",
+    "palette": "graphite neutrals #0A0A0B/#F6F6F4, amber #F2A93B only for my turn",
+    "density": "medium-high, precise instrument",
+    "motion": "timeline steps tick in, decision card lamp breathes",
+    "references": [
+      "R6",
+      "R7"
+    ]
+  },
+  {
+    "name": "B 밤사이 일지",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "two-column editorial: serif headline left; right column pins the decision on top and the timestamped overnight log with artifact clippings below; ruled ledger sections",
+    "type": "Newsreader + Noto Serif KR headlines and PM quote / Pretendard body / JetBrains Mono ids",
+    "palette": "deep ink #0E1013 and paper white, phosphor green #4FD69C only for my turn",
+    "density": "low, wide margins",
+    "motion": "a new log line appears, the decision lamp glows",
+    "references": [
+      "R8",
+      "R2",
+      "R13"
+    ]
+  },
+  {
+    "name": "C 출발 안내판",
+    "ticket": "T-521",
+    "at": 1794291337,
+    "chosen": false,
+    "layout": "full-width departures board of the squad as the hero, one row per job, only the 'you' row lit; board grammar carried through every section; board stays a dark physical panel in both themes",
+    "type": "IBM Plex Sans + IBM Plex Mono / IBM Plex Sans KR",
+    "palette": "pure black #070707 board, off-white page, signal yellow #FFD23F for my turn",
+    "density": "medium-high, tabular",
+    "motion": "status tiles flip, one working lamp blinks",
+    "references": [
+      "R11",
+      "R7"
+    ]
   }
 ]

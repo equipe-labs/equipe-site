@@ -1,0 +1,54 @@
+{
+  "$description": "Palette “A-OneTake”, tried with `equipe design palette`",
+  "color": {
+    "$type": "color",
+    "accent": {
+      "$extensions": {
+        "mode": {
+          "dark": "#9A5B00"
+        }
+      },
+      "$value": "#9A5B00"
+    },
+    "bg": {
+      "$extensions": {
+        "mode": {
+          "dark": "#111113"
+        }
+      },
+      "$value": "#F6F6F4"
+    },
+    "onPrimary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#111113"
+        }
+      },
+      "$value": "#F6F6F4"
+    },
+    "primary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#7F7F81"
+        }
+      },
+      "$value": "#111113"
+    },
+    "secondary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#272721"
+        }
+      },
+      "$value": "#EFEFEC"
+    },
+    "text": {
+      "$extensions": {
+        "mode": {
+          "dark": "#F1F1EE"
+        }
+      },
+      "$value": "#111113"
+    }
+  }
+}

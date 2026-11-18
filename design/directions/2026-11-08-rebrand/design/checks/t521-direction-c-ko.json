@@ -1,0 +1,49 @@
+{
+  "screen": "t521-direction-c-ko",
+  "at": 1794099873,
+  "files": [
+    {
+      "path": "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/c/ko.html",
+      "modified": 1794099743
+    }
+  ],
+  "rendered": true,
+  "summary": {
+    "floor": [
+      8,
+      8
+    ],
+    "habits": 0,
+    "finish": 0,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440,
+      1920
+    ],
+    "screen": "t521-direction-c-ko",
+    "skipped": [
+      "token-colour",
+      "token-type",
+      "token-space",
+      "literal-on-scale"
+    ]
+  },
+  "findings": [],
+  "pictures": [
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/360.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/390.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/768.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/1024.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/1280.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/1440.png",
+    "/Users/abel/.equipe/worktrees/equipe-site/t521-6aefc4c0/design/directions/2026-11-08-rebrand/design/checks/t521-direction-c-ko/1920.png"
+  ],
+  "new": false,
+  "first": null,
+  "verdict": null,
+  "fixes_in_a_row": 0
+}

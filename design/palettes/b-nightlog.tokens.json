@@ -1,0 +1,54 @@
+{
+  "$description": "Palette “B-NightLog”, tried with `equipe design palette`",
+  "color": {
+    "$type": "color",
+    "accent": {
+      "$extensions": {
+        "mode": {
+          "dark": "#157A4C"
+        }
+      },
+      "$value": "#157A4C"
+    },
+    "bg": {
+      "$extensions": {
+        "mode": {
+          "dark": "#101114"
+        }
+      },
+      "$value": "#F7F7F5"
+    },
+    "onPrimary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#101114"
+        }
+      },
+      "$value": "#F7F7F5"
+    },
+    "primary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#7B7C91"
+        }
+      },
+      "$value": "#16181B"
+    },
+    "secondary": {
+      "$extensions": {
+        "mode": {
+          "dark": "#242424"
+        }
+      },
+      "$value": "#FFFFFF"
+    },
+    "text": {
+      "$extensions": {
+        "mode": {
+          "dark": "#F1F1EE"
+        }
+      },
+      "$value": "#16181B"
+    }
+  }
+}

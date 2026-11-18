@@ -1,0 +1,154 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Direction C</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"><style>
+:root{--bg:#FFFFFF;--sf:#F3F4F6;--sf2:#E8EAEE;--ln:#E1E3E8;--tx:#0A0B0D;--mu:#545A65;--sig:#2350E0;--lamp:#3F6FF5;--go:#2350E0;--on-go:#FFFFFF;--pri:#0A0B0D;--on-pri:#FFFFFF;--win:#FFFFFF;
+ --inv:#0A0B0D;--on-inv:#F3F4F6;--inv-mu:#9097A3;--inv-ln:#22252B;
+ --sans:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#060708;--sf:#0F1114;--sf2:#16191D;--ln:#202329;--tx:#F3F4F6;--mu:#8D939E;--sig:#7FA0FF;--lamp:#5B86FF;--go:#2F5CEB;--on-go:#FFFFFF;--pri:#F3F4F6;--on-pri:#060708;--win:#0C0E11;
+ --inv:#F3F4F6;--on-inv:#0A0B0D;--inv-mu:#545A65;--inv-ln:#D5D8DE}}
+:lang(ko){--sans:'IBM Plex Sans KR','IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+:lang(ko) body{word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+.ic{display:inline-flex;width:16px;height:16px}.ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:4px;border:1px solid var(--ln);font:500 15px/1 var(--sans);color:var(--tx);white-space:nowrap}
+.btn.pri{background:var(--pri);color:var(--on-pri);border-color:var(--pri)}
+.dec .btn.pri,.btn.go{background:var(--go);color:var(--on-go);border-color:var(--go)}
+.btn.wide{width:100%;justify-content:center;height:52px}
+.btn em{font-style:normal;font-size:12px;opacity:.8}
+kbd{font:400 11px/1 var(--mono);padding:3px 5px;border-radius:3px;border:1px solid currentColor;opacity:.6}
+.st{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mu);opacity:.4;flex:none}
+.st.on{background:var(--lamp);opacity:1}.s-working .st{background:var(--mu);opacity:.9}
+.s-turn .st{background:transparent;border:1.5px solid var(--tx);opacity:1}
+.top .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.logo{display:flex;margin-right:auto}
+.top nav{display:flex;gap:24px;font-size:14px;color:var(--mu)}
+.hero{padding:56px 0 96px;border-bottom:1px solid var(--ln)}
+.hero .wrap{display:grid;grid-template-columns:1fr 600px;gap:40px;align-items:center;min-height:560px}
+h1{font:600 64px/1.02 var(--sans);letter-spacing:-.04em}
+:lang(ko) h1{font-size:48px;line-height:1.18;letter-spacing:-.04em}
+h1 span{display:block}
+.lead{margin-top:28px;font-size:19px;color:var(--mu);max-width:440px}
+.ctas{display:flex;align-items:center;gap:20px;margin-top:36px}
+.ctas .btn.pri{height:52px;padding:0 24px;font-size:16px}
+.ctas .lnk{font-size:15px;color:var(--mu);display:inline-flex;gap:6px;align-items:center}
+.req{margin-top:16px;font:400 12.5px/1.5 var(--mono);color:var(--mu)}
+.room{position:relative;padding:0}
+.room .bg{border:1px solid var(--ln);border-radius:6px;background:var(--sf);padding:18px 20px;font-size:14px;color:var(--mu)}
+.room .bg .tm{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--ln)}
+.room .bg .tm:last-child{border-bottom:0}
+.room .bg .tm b{font-weight:500;color:var(--mu)}.room .bg .tm em{margin-left:auto;font-style:normal;font:400 12px var(--mono)}
+.room .bg .s-working em{color:var(--mu)}
+.room .dec{position:relative;margin:-1px 0 0 0;border-radius:0 0 8px 8px;border-color:var(--tx);box-shadow:0 24px 48px -24px rgba(0,0,0,.35)}
+.room .bg{border-radius:6px 6px 0 0}.room .bg .tm.s-turn{background:var(--win);margin:0 -20px -18px;padding:14px 24px;border-top:1px solid var(--tx)}
+.room .bg .tm .act{font-size:13px;color:var(--mu);margin-left:auto;text-align:right}.room .bg .tm em{margin-left:16px;width:72px;text-align:right}
+.room .bg .tm i.id{font:400 12px var(--mono);font-style:normal;width:40px}
+.room .bg .tm .tt{color:var(--tx)}
+.room .bg .tm.s-turn{color:var(--tx)}.room .bg .tm.s-turn em{color:var(--tx)}
+.room .cap{font:400 12px var(--mono);color:var(--mu);margin-top:12px}
+.dec{border:1px solid var(--ln);border-radius:8px;padding:18px;background:var(--win);box-shadow:0 1px 0 var(--ln),0 24px 48px -24px rgba(0,0,0,.28)}
+.dec .k{display:flex;align-items:center;gap:8px;font:400 12px var(--mono);color:var(--mu)}
+.lampdot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--tx)}
+.dec .q{display:block;font:600 17px/1.3 var(--sans);margin:12px 0 6px;letter-spacing:-.01em}
+.dec .qx{color:var(--mu);font-size:13.5px}
+.dec .b{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.dec .btn{height:36px;font-size:13px;padding:0 12px}
+.dec.big{padding:26px}.dec.big .q{font-size:26px;line-height:1.15;letter-spacing:-.025em;margin:12px 0 8px}:lang(ko) .dec.big .q{font-size:24px}
+.dec.big .qx{font-size:15px}.dec.big .btn{height:44px;font-size:15px;padding:0 18px}
+.proofl .st.on{background:var(--tx)}.proofl{border-bottom:1px solid var(--ln);padding:22px 0;font:400 15px var(--mono);color:var(--mu)}.proofl .wrap{display:flex;align-items:center;gap:12px}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--ln)}
+.proof div{padding:40px 48px;border-right:1px solid var(--ln)}.proof div:last-child{border-right:0}
+.proof b{display:block;font:500 96px/1 var(--mono);letter-spacing:-.06em}.proof span{color:var(--mu);font-size:15px;margin-top:8px;display:block}
+section.blk{padding:128px 0}
+h2{font:600 56px/1.04 var(--sans);letter-spacing:-.04em;max-width:900px}
+:lang(ko) h2{font-size:44px;line-height:1.2}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.cols>div{display:flex;flex-direction:column;gap:20px}
+.cols h3{font:600 22px/1.3 var(--sans);letter-spacing:-.02em}.cols p{color:var(--mu)}
+.art{height:200px;border:1px solid var(--ln);border-radius:6px;background:var(--sf);padding:20px;display:flex;flex-direction:column;justify-content:center;gap:8px;font-size:13px}
+.bub{align-self:flex-end;background:var(--tx);color:var(--bg);padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:14px}
+.bub2{align-self:flex-start;background:var(--win);border:1px solid var(--ln);padding:10px 14px;border-radius:14px 14px 14px 4px;font-size:13px;color:var(--mu);max-width:90%}
+.art .tm{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--ln)}.art .tm:last-child{border-bottom:0}
+.art .tm b{font-weight:500}.art .tm em{margin-left:auto;font-style:normal;font:400 12px var(--mono);color:var(--mu)}.art .s-working em{color:var(--mu)}
+.art .mini{background:var(--win);border:1px solid var(--ln);border-radius:6px;padding:14px}
+.art .mini b{display:block;margin-bottom:10px}.art .mini .b{display:flex;gap:6px}.art .mini .btn{height:30px;font-size:12px;padding:0 10px}
+.band{background:var(--bg);color:var(--tx);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.band .wrap{display:grid;grid-template-columns:7fr 5fr;gap:64px;align-items:end}
+.band h2{font-size:56px;line-height:1.04}:lang(ko) .band h2{font-size:44px;line-height:1.18}
+.band p.x{color:var(--mu);font-size:18px}
+.band .live{background:var(--win)}
+.live{display:flex;align-items:center;gap:12px;border:1px solid var(--ln);border-radius:6px;padding:16px 18px;font-size:15px;margin-top:20px}
+.live .ic{color:var(--tx)}.live div{display:flex;flex-direction:column}.live span{color:var(--mu);font-size:13px}.live em{margin-left:auto;font-style:normal;color:var(--mu);font:400 12px var(--mono)}
+.split{display:grid;grid-template-columns:6fr 5fr;gap:80px;align-items:center}
+.split p.x{color:var(--mu);font-size:18px;margin-top:24px;max-width:460px}
+.phone{width:310px;height:630px;border:1px solid var(--ln);border-radius:48px;background:var(--win);padding:56px 14px 14px;position:relative;margin:0 auto;display:flex;flex-direction:column;gap:12px;font-size:13px}
+.notch{position:absolute;top:14px;left:50%;width:96px;height:28px;border-radius:14px;background:var(--tx);transform:translateX(-50%)}
+.ps{position:absolute;top:19px;left:30px;font:600 12px var(--sans)}
+.pt{display:flex;align-items:center;gap:8px;font:600 20px var(--sans);padding:0 4px}.pt .badge{margin-left:0}
+.badge{font:500 11px/1 var(--mono);background:var(--tx);color:var(--bg);border-radius:9px;padding:3px 6px}
+.pmini{border-top:1px solid var(--ln);padding-top:6px}.pmini .tm{display:flex;align-items:center;gap:10px;padding:8px 4px}.pmini .tm em{margin-left:auto;font-style:normal;font-size:12px;color:var(--mu)}
+.store{margin-top:32px}
+.end h2{font-size:96px;line-height:.98}:lang(ko) h2.e{font-size:64px;line-height:1.14}
+footer{border-top:1px solid var(--ln);padding:28px 0;color:var(--mu);font-size:13px}
+footer .wrap{display:flex;gap:24px;align-items:center}footer .logo{margin-right:auto}
+.pb{display:grid;gap:10px}.pnext .hint{margin:12px 0 0}
+.only-phone{display:none}
+.hint{font-size:13px;color:var(--mu);margin:8px 0 18px;text-align:center}.hint .cp{color:var(--tx);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.pn{font-size:15px;margin-bottom:14px}
+@media (max-width:640px){
+ .wrap{padding:0 20px}
+ .top nav{display:none}.top .btn{display:none}.top .wrap{height:56px}
+ .hero{padding:28px 0 56px}
+ .hero .wrap{grid-template-columns:1fr;gap:8px;min-height:0}
+ h1{font-size:46px}:lang(ko) h1{font-size:30px;letter-spacing:-.045em}
+ .room .dec.big{padding:18px}.room .dec.big .q{font-size:22px;margin:10px 0 6px}:lang(ko) .room .dec.big .q{font-size:21px}.room .dec.big .qx{font-size:14px}.room .dec.big .btn{height:40px;font-size:14px}.room .dec.big em{display:none}
+ .lead{font-size:17px;margin-top:16px}
+ .only-desk{display:none!important}.only-phone{display:block}
+ .pnext{margin-top:24px}
+ .room{padding:32px 0 0 0}.room .dec{margin:0}
+ .room .dec{position:static;transform:none;right:auto}
+ .room .bg{padding:6px 14px 14px;font-size:13px}.room .bg .tm{padding:10px 0;gap:10px}.room .bg .tm:nth-child(n+3):not(.s-turn){display:none}.room .bg .tm .act,.room .bg .tm b{display:none}.room .bg .tm em{width:auto;margin-left:auto}.room .bg .tm.s-turn{margin:0 -14px -14px;padding:12px 14px}
+ .proof div{padding:22px 16px}.proof b{font-size:44px}.proof span{font-size:13px}
+ section.blk{padding:72px 0}
+ h2{font-size:34px}:lang(ko) h2{font-size:28px}
+ .cols{grid-template-columns:1fr;gap:40px;margin-top:40px}
+ .band .wrap{grid-template-columns:1fr;gap:28px}.band h2{font-size:40px}:lang(ko) .band h2{font-size:30px}
+ .split{grid-template-columns:1fr;gap:40px}
+ .phone{width:270px;height:550px}
+ .end h2{font-size:48px}:lang(ko) h2.e{font-size:32px}
+ footer .wrap{flex-wrap:wrap}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><a class="logo" href="#" aria-label="equipe"><svg width="58.4" height="22" viewBox="0 10 265.3 82" aria-hidden="true"><path fill="currentColor" d="M49.21 52.38C49.21 37.77 41.83 28.9 29.35 28.9C17.18 28.9 9.73 37.15 9.73 51.35C9.73 64.94 17.11 72.71 29.12 72.71C38.61 72.71 46.31 68.39 48.74 60.07H37.91C36.97 63.13 33.51 64.31 29.51 64.31C24.33 64.31 21.03 61.95 20.72 53.71H49.13ZM37.75 46.41H20.87C21.58 40.52 24.33 37.3 29.2 37.3C33.91 37.3 37.2 40.36 37.75 46.41ZM91.15 89.11V29.61H80.16V35.89C77.57 31.26 73.64 28.9 68.38 28.9C58.18 28.9 50.64 37.85 50.64 50.8C50.64 63.52 57.47 72.71 68.31 72.71C73.64 72.71 77.57 70.98 80.16 66.35V89.11ZM80.16 51.04C80.16 58.73 76.39 63.52 70.9 63.52C65.4 63.52 61.63 58.73 61.63 50.8C61.63 42.88 65.4 38.09 70.9 38.09C76.47 38.09 80.16 42.8 80.16 51.04ZM135.68 72V29.61H124.69V55.04C124.69 60.07 121.16 63.37 115.82 63.37C111.11 63.37 108.75 60.85 108.75 55.75V29.61H97.76V58.03C97.76 67.37 102.94 72.71 111.97 72.71C117.7 72.71 121.55 70.59 124.69 66.43V72ZM154.22 72V29.61H143.23V72ZM154.38 24.51V13.52H143.39V24.51ZM201.65 50.8C201.65 38.24 194.98 28.9 183.91 28.9C178.58 28.9 174.81 31.18 172.14 35.89V29.61H161.15V89.11H172.14V66.35C174.81 71.06 178.58 72.71 183.91 72.71C194.12 72.71 201.65 63.68 201.65 50.8ZM190.66 50.96C190.66 58.66 186.82 63.52 181.4 63.52C175.91 63.52 172.14 58.73 172.14 50.8C172.14 42.88 175.91 38.09 181.4 38.09C186.98 38.09 190.66 42.88 190.66 50.96ZM242.57 52.38C242.57 37.77 235.19 28.9 222.71 28.9C210.54 28.9 203.09 37.15 203.09 51.35C203.09 64.94 210.47 72.71 222.48 72.71C231.97 72.71 239.67 68.39 242.1 60.07H231.27C230.33 63.13 226.87 64.31 222.87 64.31C217.69 64.31 214.39 61.95 214.08 53.71H242.49ZM231.11 46.41H214.23C214.94 40.52 217.69 37.3 222.55 37.3C227.26 37.3 230.56 40.36 231.11 46.41Z"/><circle cx="246.83" cy="67.4" r="4.6" fill="#3F6FF5"/></svg></a><nav><a href="#">작동 방식</a><a href="#">폰 앱</a><a href="#">Design</a><a href="#">GitHub</a></nav><a class="btn pri" href="#" style="height:36px">Mac용 다운로드</a></div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <h1><span>최고의 스타트업</span><span>팀을 드려요.</span><span>승인만 하세요.</span></h1>
+    <p class="lead">기획·디자인·개발을 한 팀이 맡아요.</p>
+    <div class="ctas only-desk"><a class="btn pri" href="#" data-primary>Mac용 다운로드</a><a class="lnk" href="#">CLI로 설치 <i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a></div>
+    <p class="req only-desk">무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로</p>
+    <div class="pnext only-phone"><p class="pn">equipe는 Mac에서 돌아가요.</p><div class="pb"><a class="btn pri wide" href="#" data-primary><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v8M5 5l3-3 3 3M3 8v6h10V8"/></svg></i>Mac으로 링크 보내기</a><a class="btn wide" href="#"><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="4.5" y="1.5" width="7" height="13" rx="1.6"/><path d="M7 12.2h2"/></svg></i>iPhone 앱 받기</a></div><p class="hint">공유가 안 되면 <a class="cp" href="#">링크 복사</a></p></div>
+  </div>
+  <div class="room" role="img" aria-label="움직이는 장면의 한 프레임이에요. 예시 데이터예요."><div class="bg"><div class="tm s-working"><i class="st"></i><i class="id">T-12</i><b>designer</b><span class="tt">첫 화면 시안</span><span class="act">시안 3개를 올렸어요</span><em>작업 중</em></div><div class="tm s-working"><i class="st"></i><i class="id">T-13</i><b>backend</b><span class="tt">결제 웹훅</span><span class="act">테스트 48개 중 41개 통과</span><em>작업 중</em></div><div class="tm s-working"><i class="st"></i><i class="id">T-8</i><b>frontend</b><span class="tt">가입 폼 다듬기</span><span class="act">PR #14를 열었어요</span><em>작업 중</em></div><div class="tm s-done"><i class="st"></i><i class="id">T-16</i><b>data</b><span class="tt">가입 퍼널 지표</span><span class="act">대시보드 완성</span><em>완료</em></div><div class="tm s-turn"><i class="st"></i><i class="id">T-5</i><b>frontend</b><span class="tt">요금 페이지</span><span class="act">공개할지 물어봐요</span><em>내 차례</em></div></div><div class="dec big"><div class="k"><span class="lampdot"></span>결정 필요 · frontend · T-5</div><b class="q">요금 페이지를 공개할까요?</b><p class="qx">loop.app/pricing에 바로 열려요. 방문자에게 Pro 플랜이 월 $6로 보여요.</p><div class="b"><span class="btn pri">지금 공개 <em>추천</em><kbd>1</kbd></span><span class="btn">보류<kbd>2</kbd></span></div></div><p class="cap">움직이는 장면의 한 프레임이에요. 예시 데이터예요.</p></div>
+</div></section>
+<div class="proofl"><div class="wrap"><i class="st on"></i>20일, 티켓 222개, 승인한 사람 한 명</div></div>
+<section class="blk"><div class="wrap">
+  <h2>한 번 말하면, 나머지는 팀이 해요.</h2>
+  <div class="cols"><div><div class="art"><span class="bub">Loop 가입자를 늘려 줘</span><span class="bub2">티켓 4장으로 나눴어요. 공개할지는 내가 정할 일이라 질문으로 올릴게요.</span></div><h3>한 번만 말해요.</h3><p>PM에게 원하는 걸 말하면 티켓으로 나눠 멤버 한 명씩 맡겨요.</p></div><div><div class="art"><div class="tm s-working"><i class="st"></i><b>frontend</b><em>작업 중</em></div><div class="tm s-working"><i class="st"></i><b>designer</b><em>작업 중</em></div><div class="tm s-working"><i class="st"></i><b>backend</b><em>작업 중</em></div><div class="tm s-done"><i class="st"></i><b>data</b><em>완료</em></div></div><h3>팀이 나눠서 일해요.</h3><p>디자이너, 프론트엔드, 백엔드가 동시에, 각자 브랜치에서 내 Mac 안에서 일해요.</p></div><div><div class="art"><div class="mini"><b>요금 페이지를 공개할까요?</b><div class="b"><span class="btn go">지금 공개</span><span class="btn">보류</span></div></div></div><h3>정할 것만 내게 와요.</h3><p>공개·발송·결제는 내 OK를 기다려요. 질문마다 선택지와 추천이 같이 와요.</p></div></div>
+</div></section>
+<section class="blk band"><div class="wrap">
+  <h2>공개·발송·결제 전엔 꼭 먼저 물어봐요.</h2>
+  <div><p class="x">아무것도 혼자 공개되지 않아요. 질문에는 무슨 일이 생기는지와 팀의 추천이 같이 와요.</p><div class="live"><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></i><div><b>Live</b><span>loop.app/pricing · 방금 공개됨</span></div><em>승인함</em></div></div>
+</div></section>
+<section class="blk"><div class="wrap split">
+  <div><h2>걸어가면서 승인해요.</h2><p class="x">iPhone 앱이 내 Mac의 스쿼드와 이어져요. 결정은 카드로 오고, 한 번 누르면 답이 가요.</p><a class="btn store" href="#"><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="4.5" y="1.5" width="7" height="13" rx="1.6"/><path d="M7 12.2h2"/></svg></i>iPhone 앱 받기</a></div>
+  <div><div class="phone" role="img" aria-label="iPhone"><div class="notch"></div><div class="ps"><span>9:41</span></div><div class="pt"><b>받은함</b><span class="badge">1</span></div><div class="dec"><div class="k"><span class="lampdot"></span>결정 필요 · frontend · T-5</div><b class="q">요금 페이지를 공개할까요?</b><p class="qx">loop.app/pricing에 바로 열려요. 방문자에게 Pro 플랜이 월 $6로 보여요.</p><div class="b"><span class="btn pri">지금 공개<kbd>1</kbd></span><span class="btn">보류<kbd>2</kbd></span></div></div><div class="pmini"><div class="tm s-working"><i class="st"></i><b>designer</b><em>작업 중</em></div><div class="tm s-working"><i class="st"></i><b>backend</b><em>작업 중</em></div></div></div></div>
+</div></section>
+<section class="blk end" style="border-top:1px solid var(--ln)"><div class="wrap">
+  <h2 class="e">오늘 밤부터 팀에게 맡겨요.</h2>
+  <div class="ctas only-desk"><a class="btn pri" href="#">Mac용 다운로드</a><a class="lnk" href="#">CLI로 설치 <i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a></div>
+  <p class="req only-desk">무료 오픈소스 · macOS 12 이상 · 쓰던 Claude·ChatGPT 요금제 그대로</p>
+  <div class="pnext only-phone"><p class="pn">equipe는 Mac에서 돌아가요.</p><div class="pb"><a class="btn pri wide" href="#"><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v8M5 5l3-3 3 3M3 8v6h10V8"/></svg></i>Mac으로 링크 보내기</a><a class="btn wide" href="#"><i class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="4.5" y="1.5" width="7" height="13" rx="1.6"/><path d="M7 12.2h2"/></svg></i>iPhone 앱 받기</a></div><p class="hint">공유가 안 되면 <a class="cp" href="#">링크 복사</a></p></div>
+</div></section>
+</main>
+<footer><div class="wrap"><a class="logo" href="#" aria-label="equipe"><svg width="47.8" height="18" viewBox="0 10 265.3 82" aria-hidden="true"><path fill="currentColor" d="M49.21 52.38C49.21 37.77 41.83 28.9 29.35 28.9C17.18 28.9 9.73 37.15 9.73 51.35C9.73 64.94 17.11 72.71 29.12 72.71C38.61 72.71 46.31 68.39 48.74 60.07H37.91C36.97 63.13 33.51 64.31 29.51 64.31C24.33 64.31 21.03 61.95 20.72 53.71H49.13ZM37.75 46.41H20.87C21.58 40.52 24.33 37.3 29.2 37.3C33.91 37.3 37.2 40.36 37.75 46.41ZM91.15 89.11V29.61H80.16V35.89C77.57 31.26 73.64 28.9 68.38 28.9C58.18 28.9 50.64 37.85 50.64 50.8C50.64 63.52 57.47 72.71 68.31 72.71C73.64 72.71 77.57 70.98 80.16 66.35V89.11ZM80.16 51.04C80.16 58.73 76.39 63.52 70.9 63.52C65.4 63.52 61.63 58.73 61.63 50.8C61.63 42.88 65.4 38.09 70.9 38.09C76.47 38.09 80.16 42.8 80.16 51.04ZM135.68 72V29.61H124.69V55.04C124.69 60.07 121.16 63.37 115.82 63.37C111.11 63.37 108.75 60.85 108.75 55.75V29.61H97.76V58.03C97.76 67.37 102.94 72.71 111.97 72.71C117.7 72.71 121.55 70.59 124.69 66.43V72ZM154.22 72V29.61H143.23V72ZM154.38 24.51V13.52H143.39V24.51ZM201.65 50.8C201.65 38.24 194.98 28.9 183.91 28.9C178.58 28.9 174.81 31.18 172.14 35.89V29.61H161.15V89.11H172.14V66.35C174.81 71.06 178.58 72.71 183.91 72.71C194.12 72.71 201.65 63.68 201.65 50.8ZM190.66 50.96C190.66 58.66 186.82 63.52 181.4 63.52C175.91 63.52 172.14 58.73 172.14 50.8C172.14 42.88 175.91 38.09 181.4 38.09C186.98 38.09 190.66 42.88 190.66 50.96ZM242.57 52.38C242.57 37.77 235.19 28.9 222.71 28.9C210.54 28.9 203.09 37.15 203.09 51.35C203.09 64.94 210.47 72.71 222.48 72.71C231.97 72.71 239.67 68.39 242.1 60.07H231.27C230.33 63.13 226.87 64.31 222.87 64.31C217.69 64.31 214.39 61.95 214.08 53.71H242.49ZM231.11 46.41H214.23C214.94 40.52 217.69 37.3 222.55 37.3C227.26 37.3 230.56 40.36 231.11 46.41Z"/><circle cx="246.83" cy="67.4" r="4.6" fill="#3F6FF5"/></svg></a><a href="#">MIT 라이선스</a><a href="#">개인정보</a><a href="#">GitHub</a></div></footer>
+</body></html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>equipe — Your whole startup team. You just approve.</title>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), h = document.documentElement;
+    h.dataset.theme = q.get('theme') === 'light' ? 'light' : 'dark';
+    h.lang = q.get('lang') === 'en' ? 'en' : 'ko';
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 16 16"><rect x="2.5" y="4" width="11" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.8V4M6 8h.01M10 8h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 16 16"><path d="M2.5 9.5 4 3.5h8l1.5 6v3h-11z M2.5 9.5h3.2l.8 1.5h3l.8-1.5h3.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-spin" viewBox="0 0 16 16"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 16 16"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-map" viewBox="0 0 16 16"><path d="M2.5 4.5 6 3l4 1.5L13.5 3v8.5L10 13l-4-1.5-3.5 1.5zM6 3v8.5M10 4.5V13" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 2.5V8h5.5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 16 16"><path d="M8 2.5a5.5 5.5 0 1 0 0 11c.9 0 1.2-.7.8-1.4-.5-.8 0-1.6.9-1.6h1.3a2.5 2.5 0 0 0 2.5-2.5C13.5 4.8 11 2.5 8 2.5z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="5.5" cy="7.5" r=".9" fill="currentColor"/><circle cx="8" cy="5.3" r=".9" fill="currentColor"/><circle cx="10.6" cy="6.8" r=".9" fill="currentColor"/></symbol>
+    <symbol id="i-side" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 3v10" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="i-left" viewBox="0 0 16 16"><path d="M13 8H3.5M7.5 4 3.5 8l4 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 16 16"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m10.2 10.2 3.3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="m4 8.3 2.6 2.6L12 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-branch" viewBox="0 0 16 16"><circle cx="4.5" cy="3.8" r="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="4.5" cy="12.2" r="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="5.5" r="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 5.3v5.4M11.5 7c0 2.5-2 3-5.6 4.2" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3 13.5c.6-2.5 2.6-3.8 5-3.8s4.4 1.3 5 3.8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+    <symbol id="i-share" viewBox="0 0 16 16"><path d="M8 10V2.5M5 5.2 8 2.3l3 2.9M4.5 7.5H4a1 1 0 0 0-1 1v4.5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8.5a1 1 0 0 0-1-1h-.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v9M4.5 8 8 11.5 11.5 8M3.5 14h9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 16 16"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.3 1.3-2.4-.7-1-1.8-1.2-2.2-1.2-.9-.1-1.8.6-2.3.6-.5 0-1.2-.5-2-.5C4.9 5 3.9 5.6 3.4 6.6c-1.1 1.9-.3 4.7.8 6.2.5.8 1.1 1.6 1.9 1.6.8 0 1-.5 2-.5s1.2.5 2 .5 1.3-.8 1.8-1.5c.6-.8.8-1.6.8-1.7 0 0-1.5-.6-1.5-2.7zM9.7 3.9c.4-.5.7-1.2.6-1.9-.6 0-1.4.4-1.8.9-.4.4-.7 1.1-.6 1.8.7.1 1.4-.3 1.8-.8z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 5h11M2.5 11h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#" aria-label="equipe">equipe<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="#cycle"><span lang="ko">작동 방식</span><span lang="en">How it works</span></a>
+      <a href="#"><span lang="ko">디자인</span><span lang="en">Design</span></a>
+      <a href="#">GitHub</a>
+    </nav>
+    <div class="nav-right">
+      <a class="lang-switch" href="#"><span lang="ko">EN</span><span lang="en">한국어</span></a>
+      <button class="menu-btn" aria-label="menu"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <h1 class="display">
+      <span lang="ko"><span class="ln">최고의 <span class="nb">스타트업 팀을</span> 드려요.</span><span class="ln">승인만 하세요.</span></span>
+      <span lang="en"><span class="ln">Your whole startup team.</span><span class="ln">You just approve.</span></span>
+    </h1>
+    <p class="lead">
+      <span lang="ko">PM·디자이너·엔지니어·QA가 지표를 보고 스스로 <span class="nb">다음 일을 정해요.</span><br class="desk-br"> <span class="nb">내 Mac에서,</span> <span class="nb">쓰던 Claude·ChatGPT 요금제로.</span></span>
+      <span lang="en">A PM, designer, engineers and QA read the numbers and pick the next job themselves. On your Mac, on the Claude or ChatGPT plan you already pay for.</span>
+    </p>
+    <div class="actions desk-only">
+      <a class="btn btn-primary" href="#" data-primary><svg><use href="#i-apple"/></svg><span lang="ko">Mac용 다운로드</span><span lang="en">Download for Mac</span></a>
+      <p class="fine"><span lang="ko">무료 · macOS 14 이상 · Apple 실리콘</span><span lang="en">Free · macOS 14+ · Apple silicon</span></p>
+    </div>
+    <div class="actions phone-only">
+      <a class="btn btn-primary" href="#" data-primary><svg><use href="#i-share"/></svg><span lang="ko">Mac으로 링크 보내기</span><span lang="en">Send to my Mac</span></a>
+      <a class="btn btn-secondary" href="#"><span lang="ko">iPhone 앱 받기</span><span lang="en">Get the iPhone app</span></a>
+      <p class="fine"><span lang="ko">equipe는 Mac에서 일해요. 폰은 승인하는 곳이에요.</span><span lang="en">The squad works on your Mac. Your phone is where you approve.</span></p>
+    </div>
+
+    <!-- phone: the same window, cropped to the ticket head + the decision -->
+    <div class="pwin phone-only" role="img" aria-label="equipe — T-507: five done, your decision">
+      <div class="titlebar"><span class="lights"><i></i><i></i><i></i></span><span class="crumb"><span lang="ko">티켓</span><span lang="en">Tickets</span><span class="sep">/</span><span class="mono">T-507</span></span></div>
+      <p class="pw-head"><span class="mono tid">T-507</span><b><span lang="ko">폰 첫 화면의 다음 행동</span><span lang="en">The phone's next step</span></b></p>
+      <ol class="pw-tl">
+        <li><i class="pn"><svg><use href="#i-check"/></svg></i><b>data</b><span><span lang="ko">방문 18 · 다운로드 0</span><span lang="en">18 visits · 0 downloads</span></span></li>
+        <li><i class="pn"><svg><use href="#i-check"/></svg></i><b>PM</b><span><span lang="ko">‘Mac으로 링크 보내기’ 제안</span><span lang="en">Proposed “Send to my Mac”</span></span></li>
+        <li><i class="pn"><svg><use href="#i-check"/></svg></i><b>designer</b><span><span lang="ko">첫 화면 시안 3개</span><span lang="en">Three first-screen options</span></span></li>
+        <li><i class="pn"><svg><use href="#i-check"/></svg></i><b>frontend</b><span><span lang="ko">공유 시트 · 8개 언어</span><span lang="en">Share sheet · 8 languages</span></span></li>
+        <li><i class="pn"><svg><use href="#i-check"/></svg></i><b>QA</b><span><span lang="ko">320·360·390 · 라이트·다크 통과</span><span lang="en">Passed at 320·360·390, both themes</span></span></li>
+        <li class="pw-now"><i class="pn now"><i class="lamp on"></i></i><b><span lang="ko">나</span><span lang="en">You</span></b><span><span lang="ko">결정</span><span lang="en">decide</span></span></li>
+      </ol>
+      <div class="pw-decide">
+        <p class="d-from"><i class="lamp on"></i><span class="turn-t"><span lang="ko">내 차례</span><span lang="en">Your turn</span></span><span><span lang="ko">PM의 질문</span><span lang="en">From PM</span></span></p>
+        <p class="d-q"><span lang="ko">새 폰 동선을 공개할까요?</span><span lang="en">Ship the new phone flow?</span></p>
+        <div class="d-btns">
+          <span class="abtn solid"><span lang="ko">공개</span><span lang="en">Ship</span></span>
+          <span class="abtn"><span lang="ko">아니요</span><span lang="en">Not yet</span></span>
+        </div>
+        <p class="d-note"><span lang="ko">공개하면 배포하고 2주 뒤 다시 재요.</span><span lang="en">It ships, then gets measured again in two weeks.</span></p>
+      </div>
+    </div>
+    <p class="pw-caption phone-only"><span lang="ko">Mac에서 온 결정이에요. 폰에서도 답할 수 있어요.</span><span lang="en">A decision from your Mac. You can answer from your phone too.</span></p>
+  </div>
+
+  <!-- ============ PRODUCT STAGE (cropped: ticket thread + decision) ============ -->
+  <div class="stage wrap">
+    <div class="window" role="img" aria-label="equipe — ticket T-507: five finished steps and a decision waiting for you">
+      <div class="titlebar">
+        <span class="lights"><i></i><i></i><i></i></span>
+        <span class="crumb"><span lang="ko">티켓</span><span lang="en">Tickets</span><span class="sep">/</span><span class="mono">T-507</span></span>
+      </div>
+
+      <div class="app">
+        <div class="thread">
+          <div class="ticket-head">
+            <div class="th-row">
+              <span class="mono tid">T-507</span>
+              <span class="branch mono"><svg><use href="#i-branch"/></svg>equipe/frontend-t507</span>
+            </div>
+            <h3 class="th-title"><span lang="ko">폰 첫 화면의 다음 행동</span><span lang="en">The phone's next step</span></h3>
+          </div>
+
+          <ol class="tl">
+            <li class="st done">
+              <i class="node"><svg><use href="#i-check"/></svg></i>
+              <p class="who"><b>data</b><span><span lang="ko">지표</span><span lang="en">metrics</span></span></p>
+              <p class="say"><span lang="ko">LinkedIn 유입 · 대부분 iPhone 앱 안 브라우저<span class="sub">PostHog · 11월 2일</span></span><span lang="en">LinkedIn visits · mostly the iPhone in-app browser<span class="sub">PostHog · Nov 2</span></span></p>
+              <div class="art metric" data-source="PostHog, 2026-11-02 traffic review (SPEC.md)">
+                <span class="mt-num"><span lang="ko">방문 <b class="mono">18</b> · 다운로드 <b class="mono">0</b></span><span lang="en"><b class="mono">18</b> visits · <b class="mono">0</b> downloads</span></span>
+              </div>
+            </li>
+            <li class="st done">
+              <i class="node"><svg><use href="#i-check"/></svg></i>
+              <p class="who"><b>PM</b><span><span lang="ko">판단</span><span lang="en">call</span></span></p>
+              <p class="say wide"><span lang="ko">폰에서 Mac 설치로 가는 길이 없어요. 폰 첫 화면에 ‘Mac으로 링크 보내기’를 넣어 볼게요.</span><span lang="en">Phones have no way to the Mac install. Let's put “Send to my Mac” on the phone's first screen.</span></p>
+            </li>
+            <li class="st done">
+              <i class="node"><svg><use href="#i-check"/></svg></i>
+              <p class="who"><b>designer</b><span><span lang="ko">설계</span><span lang="en">design</span></span></p>
+              <p class="say"><span lang="ko">폰 첫 화면 시안 3개</span><span lang="en">Three options for the phone's first screen</span></p>
+              <div class="art chips"><span class="chip"><span lang="ko">시안</span><span lang="en">Options</span> A · B · C</span></div>
+            </li>
+            <li class="st done">
+              <i class="node"><svg><use href="#i-check"/></svg></i>
+              <p class="who"><b>frontend</b><span><span lang="ko">구현</span><span lang="en">build</span></span></p>
+              <p class="say"><span lang="ko">공유 시트로 링크 보내기 · 8개 언어</span><span lang="en">Link via the share sheet · 8 languages</span></p>
+              <div class="art chips"><span class="chip mono"><svg><use href="#i-branch"/></svg>equipe/frontend-t507</span></div>
+            </li>
+            <li class="st done">
+              <i class="node"><svg><use href="#i-check"/></svg></i>
+              <p class="who"><b>QA</b><span><span lang="ko">검증</span><span lang="en">check</span></span></p>
+              <p class="say"><span lang="ko"><span class="nb">320·360·390 폭,</span> <span class="nb">라이트·다크 통과</span></span><span lang="en">Passed at 320, 360, 390 · light and dark</span></p>
+              <div class="art chips"><span class="chip ok"><span lang="ko">디자인 QA 통과</span><span lang="en">Design QA passed</span> <svg><use href="#i-check"/></svg></span></div>
+            </li>
+            <li class="st now">
+              <i class="node"><i class="lamp on"></i></i>
+              <p class="who"><b><span lang="ko">나</span><span lang="en">You</span></b><span><span lang="ko">결정</span><span lang="en">decide</span></span></p>
+              <p class="say wide"><span lang="ko">오른쪽 카드에서 답해요</span><span lang="en">Answer in the card on the right</span> <span class="to-dock">→</span></p>
+              <time class="word"><span lang="ko">지금</span><span lang="en">now</span></time>
+            </li>
+            <li class="st next">
+              <i class="node"></i>
+              <p class="who"><b><span lang="ko">다음</span><span lang="en">Next</span></b><span>data</span></p>
+              <p class="say wide"><span lang="ko">2주 뒤 다시 측정</span><span lang="en">Measured again in two weeks</span></p>
+              <time class="word"><span lang="ko">2주 뒤</span><span lang="en">+2w</span></time>
+            </li>
+          </ol>
+        </div>
+
+        <aside class="dock">
+          <div class="decision lit big">
+            <p class="d-from"><i class="lamp on"></i><span class="turn-t"><span lang="ko">내 차례</span><span lang="en">Your turn</span></span><span><span lang="ko">PM의 질문</span><span lang="en">From PM</span></span><span class="mono dim">T-507</span></p>
+            <p class="d-q"><span lang="ko">새 폰 동선을 공개할까요?</span><span lang="en">Ship the new phone flow?</span></p>
+            <div class="opt rec">
+              <div><b><span lang="ko">공개</span><span lang="en">Ship</span></b> <span class="rec-tag"><span lang="ko">추천</span><span lang="en">recommended</span></span>
+              <p><span lang="ko">폰 첫 화면에 ‘Mac으로 링크 보내기’</span><span lang="en">“Send to my Mac” on the phone's first screen</span></p></div>
+              <kbd>1</kbd>
+            </div>
+            <div class="opt">
+              <div><b><span lang="ko">아니요</span><span lang="en">Not yet</span></b>
+              <p><span lang="ko">지금 첫 화면을 그대로 둬요</span><span lang="en">Keep the current first screen</span></p></div>
+              <kbd>2</kbd>
+            </div>
+            <p class="d-note"><span lang="ko">공개하면 배포하고 2주 뒤 다시 재요.</span><span lang="en">It ships, then gets measured again in two weeks.</span></p>
+            <div class="d-btns">
+              <span class="abtn solid"><span lang="ko">공개</span><span lang="en">Ship</span><kbd>⌘↵</kbd></span>
+              <span class="abtn"><span lang="ko">아니요</span><span lang="en">Not yet</span></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <p class="case-note"><span lang="ko">11월 2일 유입 리뷰에서 시작한 실제 사례예요.</span><span lang="en">A real case that began with the Nov 2 traffic review.</span></p>
+  </div>
+</section>
+
+<!-- ============ 2. ONE CYCLE ============ -->
+<section class="sec" id="cycle">
+  <div class="wrap">
+    <h2 class="h2"><span lang="ko">지표에서 다음 개선까지, <span class="nb">팀이 이어서 해요.</span></span><span lang="en">From a number to the next fix,<br>the team carries it.</span></h2>
+  </div>
+  <div class="wrap">
+    <div class="panel track">
+      <div class="panel-head">
+        <span class="mono">T-507</span><span><span lang="ko">폰 첫 화면의 다음 행동</span><span lang="en">The phone's next step</span></span>
+        <span class="ph-r dim"><span lang="ko">7단계 중 6</span><span lang="en">step 6 of 7</span></span>
+      </div>
+      <ol class="tr">
+        <li class="done"><span class="tr-n mono">01</span><i class="tr-node"><svg><use href="#i-check"/></svg></i>
+          <p class="tr-who">data · <span lang="ko">지표</span><span lang="en">metrics</span></p>
+          <p class="tr-big" data-source="PostHog, 2026-11-02 traffic review (SPEC.md)"><span lang="ko">방문 <b class="mono">18</b><br>다운로드 <b class="mono">0</b></span><span lang="en"><b class="mono">18</b> visits<br><b class="mono">0</b> downloads</span></p>
+          <p class="tr-say"><span lang="ko">LinkedIn 유입 18건 · 다운로드 클릭 0. 대부분 iPhone 앱 안 브라우저.</span><span lang="en">18 visits from LinkedIn · 0 download clicks. Mostly the iPhone in-app browser.</span></p></li>
+        <li class="done"><span class="tr-n mono">02</span><i class="tr-node"><svg><use href="#i-check"/></svg></i>
+          <p class="tr-who">PM · <span lang="ko">판단</span><span lang="en">call</span></p>
+          <p class="tr-say"><span lang="ko">폰에서 Mac 설치로 가는 길이 없어요. 폰 첫 화면에 ‘Mac으로 링크 보내기’를 넣어 볼게요.</span><span lang="en">Phones have no way to the Mac install. Let's put “Send to my Mac” on the phone's first screen.</span></p></li>
+        <li class="done"><span class="tr-n mono">03</span><i class="tr-node"><svg><use href="#i-check"/></svg></i>
+          <p class="tr-who">designer · <span lang="ko">설계</span><span lang="en">design</span></p>
+          <p class="tr-code"><span lang="ko">시안</span><span lang="en">Options</span> A · B · C</p>
+          <p class="tr-say"><span lang="ko">폰 첫 화면 시안 3개</span><span lang="en">Three options for the phone's first screen</span></p></li>
+        <li class="done"><span class="tr-n mono">04</span><i class="tr-node"><svg><use href="#i-check"/></svg></i>
+          <p class="tr-who">frontend · <span lang="ko">구현</span><span lang="en">build</span></p>
+          <p class="tr-code mono">equipe/frontend-t507</p>
+          <p class="tr-say"><span lang="ko">공유 시트로 링크 보내기 · 8개 언어</span><span lang="en">Link via the share sheet · 8 languages</span></p></li>
+        <li class="done"><span class="tr-n mono">05</span><i class="tr-node"><svg><use href="#i-check"/></svg></i>
+          <p class="tr-who">QA · <span lang="ko">검증</span><span lang="en">check</span></p>
+          <p class="tr-code tab">320·360·390 ✓</p>
+          <p class="tr-say"><span lang="ko"><span class="nb">320·360·390 폭,</span> <span class="nb">라이트·다크 통과</span></span><span lang="en">Passed at 320, 360, 390 · light and dark</span></p></li>
+        <li class="now"><span class="tr-n mono">06</span><i class="tr-node"><i class="lamp on"></i></i>
+          <p class="tr-who"><span lang="ko">나 · 결정</span><span lang="en">You · decide</span></p>
+          <p class="tr-q"><span lang="ko">새 폰 동선을 공개할까요?</span><span lang="en">Ship the new phone flow?</span></p>
+          <p class="tr-btns"><span class="abtn solid sm"><span lang="ko">공개</span><span lang="en">Ship</span></span><span class="abtn sm"><span lang="ko">아니요</span><span lang="en">Not yet</span></span></p>
+          <p class="tr-say"><span lang="ko">공개하면 배포하고 2주 뒤 다시 재요.</span><span lang="en">It ships, then gets measured again in two weeks.</span></p></li>
+        <li class="next"><span class="tr-n mono">07</span><i class="tr-node"></i>
+          <p class="tr-who">data · <span lang="ko">다시 측정</span><span lang="en">re-measure</span></p>
+          <p class="tr-say"><span lang="ko">2주 뒤 다시 측정</span><span lang="en">Measured again in two weeks</span></p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. DECISIONS ============ -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2"><span lang="ko">공개·발송·결제 전엔 <span class="nb">꼭 먼저 물어봐요.</span></span><span lang="en">Before anything ships, gets sent or costs money, the squad asks.</span></h2>
+    <div class="dec-row">
+      <div class="decision lit sm">
+        <p class="d-kind"><span lang="ko">공개</span><span lang="en">Ship</span></p>
+        <p class="d-from"><i class="lamp on"></i><span lang="ko">PM의 질문</span><span lang="en">From PM</span><span class="mono dim">T-507</span></p>
+        <p class="d-q"><span lang="ko">새 폰 동선을 공개할까요?</span><span lang="en">Ship the new phone flow?</span></p>
+        <div class="opt rec"><div><b><span lang="ko">공개</span><span lang="en">Ship</span></b> <span class="rec-tag"><span lang="ko">추천</span><span lang="en">recommended</span></span></div><kbd>1</kbd></div>
+        <div class="opt"><div><b><span lang="ko">아니요</span><span lang="en">Not yet</span></b></div><kbd>2</kbd></div>
+        <p class="d-note"><span lang="ko">공개하면 배포하고 2주 뒤 다시 재요.</span><span lang="en">It ships, then gets measured again in two weeks.</span></p>
+      </div>
+      <div class="decision sm">
+        <p class="d-kind"><span lang="ko">돈</span><span lang="en">Money</span></p>
+        <p class="d-from"><i class="lamp on"></i><span lang="ko">backend의 질문</span><span lang="en">From backend</span><span class="mono dim">T-512</span></p>
+        <p class="d-q"><span lang="ko">도메인 갱신 <span class="mono">$12</span>를 결제할까요?</span><span lang="en">Renew the domain for <span class="mono">$12</span>?</span></p>
+        <div class="opt rec"><div><b><span lang="ko">결제</span><span lang="en">Pay</span></b> <span class="rec-tag"><span lang="ko">추천</span><span lang="en">recommended</span></span></div><kbd>1</kbd></div>
+        <div class="opt"><div><b><span lang="ko">아니요</span><span lang="en">Not yet</span></b></div><kbd>2</kbd></div>
+        <p class="d-note"><span lang="ko">내가 고르기 전엔 결제하지 않아요.</span><span lang="en">Nothing is paid until you choose.</span></p>
+      </div>
+      <div class="decision sm">
+        <p class="d-kind"><span lang="ko">브랜드</span><span lang="en">Brand</span></p>
+        <p class="d-from"><i class="lamp on"></i><span lang="ko">marketing의 질문</span><span lang="en">From marketing</span><span class="mono dim">T-515</span></p>
+        <p class="d-q"><span lang="ko">첫 화면 문구 두 안 중 어느 쪽?</span><span lang="en">Which of two headlines?</span></p>
+        <div class="opt rec"><div><b>A</b> <span class="q-line"><span lang="ko">최고의 스타트업 팀을 드려요.</span><span lang="en">Your whole startup team.</span></span></div><kbd>1</kbd></div>
+        <div class="opt"><div><b>B</b> <span class="q-line"><span lang="ko">팀이 알아서, 나는 승인만.</span><span lang="en">The team builds. You approve.</span></span></div><kbd>2</kbd></div>
+        <p class="d-note"><span lang="ko">고른 문구로 첫 화면을 바꿔요.</span><span lang="en">The first screen changes to the one you pick.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. TEAM ============ -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="h2"><span lang="ko">서로 다른 전문가가 <span class="nb">한 목표로.</span></span><span lang="en">Different experts, one goal.</span></h2>
+    <div class="panel roster">
+      <div class="panel-head">
+        <svg class="ico"><use href="#i-user"/></svg><span><span lang="ko">팀</span><span lang="en">Team</span></span><span class="mono dim">7</span>
+        <span class="ph-r dim"><span lang="ko">끝남 3 · 물어봄 1 · 쉬는 중 3</span><span lang="en">3 done · 1 asked · 3 resting</span></span>
+      </div>
+      <ul class="rs">
+        <li><i class="lamp done"></i><b>PM</b><em><span lang="ko">물어봄</span><span lang="en">Asked</span></em><p><span lang="ko">새 폰 동선을 공개할지 나에게 물어봤어요</span><span lang="en">Asked you whether to ship the new phone flow</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp done"></i><b>designer</b><em><span lang="ko">끝남</span><span lang="en">Done</span></em><p><span lang="ko">폰 첫 화면 시안 3개를 넘겼어요</span><span lang="en">Handed over three phone first-screen options</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp done"></i><b>frontend</b><em><span lang="ko">끝남</span><span lang="en">Done</span></em><p><span lang="ko">공유 시트로 링크 보내기 · 8개 언어</span><span lang="en">Link via the share sheet · 8 languages</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp"></i><b>backend</b><em><span lang="ko">쉬는 중</span><span lang="en">Resting</span></em><p><span lang="ko">링크 보내기 API 없이 공유 시트로 결정</span><span lang="en">Chose the share sheet over a send-link API</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp done"></i><b>QA</b><em><span lang="ko">끝남</span><span lang="en">Done</span></em><p><span lang="ko"><span class="nb">320·360·390 폭,</span> <span class="nb">라이트·다크 통과</span></span><span lang="en">Passed at 320, 360, 390 · light and dark</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp"></i><b>data</b><em><span lang="ko">쉬는 중</span><span lang="en">Resting</span></em><p><span lang="ko">공개되면 2주 뒤 다운로드 클릭을 다시 재요</span><span lang="en">Re-measures download clicks two weeks after it ships</span></p><span class="mono dim">T-507</span></li>
+        <li><i class="lamp"></i><b>marketing</b><em><span lang="ko">쉬는 중</span><span lang="en">Resting</span></em><p><span lang="ko">LinkedIn 글 초안</span><span lang="en">LinkedIn post draft</span></p><span class="mono dim">T-509</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. CLOSE ============ -->
+<section class="close">
+  <div class="wrap close-in">
+    <h2 class="display close-h">
+      <span lang="ko"><span class="ln">최고의 <span class="nb">스타트업 팀을</span> 드려요.</span><span class="ln">승인만 하세요.</span></span>
+      <span lang="en"><span class="ln">Your whole startup team.</span><span class="ln">You just approve.</span></span>
+    </h2>
+    <div class="actions desk-only">
+      <a class="btn btn-primary" href="#" data-primary><svg><use href="#i-apple"/></svg><span lang="ko">Mac용 다운로드</span><span lang="en">Download for Mac</span></a>
+      <p class="fine"><span lang="ko">무료 · macOS 14 이상 · Apple 실리콘</span><span lang="en">Free · macOS 14+ · Apple silicon</span></p>
+    </div>
+    <div class="actions phone-only">
+      <a class="btn btn-primary" href="#" data-primary><svg><use href="#i-share"/></svg><span lang="ko">Mac으로 링크 보내기</span><span lang="en">Send to my Mac</span></a>
+      <a class="btn btn-secondary" href="#"><span lang="ko">iPhone 앱 받기</span><span lang="en">Get the iPhone app</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="logo sm" href="#">equipe<span class="dot">.</span></a>
+    <nav><a href="#"><span lang="ko">개인정보처리방침</span><span lang="en">Privacy</span></a><a href="#">GitHub</a></nav>
+    <p class="dim">© 2026 Umbriles Inc.</p>
+  </div>
+</footer>
+</body>
+</html>
