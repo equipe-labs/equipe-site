@@ -561,6 +561,7 @@
 {"path":"flows/product-tour/who-for/default.dark.390.png","hash":"59819759a6dad29e9933159f6da9e4e421724488","size":136171,"created_at":1793758764,"flow":"product-tour","screen":"who-for","state":"default","mode":"dark","width":390},
 {"path":"flows/product-tour/who-for/default.light.1280.png","hash":"4edc5a93e81e62f6e801bfd3d2ee0b306a3f6f00","size":295288,"created_at":1794293308,"flow":"product-tour","screen":"who-for","state":"default","mode":"light","width":1280},
 {"path":"flows/product-tour/who-for/default.light.390.png","hash":"c25889fb47f78a97f8e2840e97d02e4c8ffe12e8","size":137409,"created_at":1793758764,"flow":"product-tour","screen":"who-for","state":"default","mode":"light","width":390},
+{"path":"qa/T-909/precheck-get-app-mac-ko-390.png","hash":"8388c22f72295bc3d8a8f047b80530314bd3ea80","size":393318,"created_at":1794894343,"ticket":909},
 {"path":"references/t507/apk-1280-dark.png","hash":"1bcd76c9e18c07a0be9dec8b9db10a3ce9baf33f","size":533952,"created_at":1794298158},
 {"path":"references/t507/apk-1280-light.png","hash":"1bcd76c9e18c07a0be9dec8b9db10a3ce9baf33f","size":533952,"created_at":1794298158},
 {"path":"references/t507/apk-390-dark.png","hash":"86d5dc1b1d48bdf8913a6a40f818d67ce8827bcc","size":483170,"created_at":1794298158},

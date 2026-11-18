@@ -1,4 +1,9 @@
 {
+  "precheck": {
+    "preview": "(test -d node_modules || npm ci --no-audit --no-fund) && npx astro build && npx astro preview --host 127.0.0.1 --port {port}",
+    "origin": "http://127.0.0.1:4378",
+    "ready": "/app/"
+  },
   "flows": [
     {
       "id": "first-visit",
@@ -873,6 +878,7 @@
           "source": [
             "src/pages/[...locale]/app/index.astro",
             "src/components/AppPageShell.astro",
+            "src/components/Nw.astro",
             "src/components/PhoneApproval.astro",
             "src/components/ApkInstall.astro",
             "src/components/ApkVerify.astro",
@@ -928,6 +934,7 @@
           "source": [
             "src/pages/[...locale]/app/index.astro",
             "src/components/AppPageShell.astro",
+            "src/components/Nw.astro",
             "src/components/PhoneApproval.astro",
             "src/components/ApkInstall.astro",
             "src/components/ApkVerify.astro",
@@ -983,6 +990,7 @@
           "source": [
             "src/pages/[...locale]/app/index.astro",
             "src/components/AppPageShell.astro",
+            "src/components/Nw.astro",
             "src/components/PhoneApproval.astro",
             "src/components/ApkInstall.astro",
             "src/components/ApkVerify.astro",
