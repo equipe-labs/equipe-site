@@ -39,13 +39,13 @@ const home = localePath(info);
       <a class="brand" href={home}><Mark size={28} /> <span class="bt">equipe</span></a>
       <nav aria-label={t.ui.primaryNav}>
         <ul>
-          <li class="opt"><a href={`${home}#how-it-works`}>{t.nav.howItWorks}</a></li>
-          <li class="opt"><a href={`${home}#features`}>{t.nav.features}</a></li>
+          <li class="opt"><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
+          <li class="opt"><a href={subPath(info, 'developers')}>{t.nav.developers}</a></li>
           <li><a class="cur" href={subPath(info, 'design')} aria-current="page">{d.menu}</a></li>
           <li class="opt"><a href={`${home}#faq`}>{t.nav.faq}</a></li>
           <li class="opt"><a href={SITE.repo}>{t.nav.github}</a></li>
           <li><LangMenu locale={code} label={t.ui.language} subpage={sub[page]} /></li>
-          <li class="cta"><a class="btn primary sm" href={SITE.desktopDmg} download>{t.hero.cta}</a></li>
+          <li class="cta"><a class="btn primary sm" href={SITE.desktopDmg} download>{t.dev.macCta}</a></li>
         </ul>
       </nav>
     </div>

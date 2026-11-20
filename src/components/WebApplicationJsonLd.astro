@@ -1,0 +1,24 @@
+---
+// The hosted product (equipe in the browser, app.equipe.im) for the home page. No price yet: billing is not live.
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+
+interface Props { lang: string; url: string; description: string; featureList?: string[] }
+const { lang, url, description, featureList } = Astro.props;
+---
+
+<JsonLd
+  data={{
+    '@type': 'WebApplication',
+    '@id': `${url}#app`,
+    name: SITE.name,
+    url,
+    inLanguage: lang,
+    description,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web browser',
+    browserRequirements: 'Requires a modern web browser',
+    ...(featureList ? { featureList } : {}),
+    author: { '@id': `${SITE.url}/#organization` },
+  }}
+/>

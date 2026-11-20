@@ -1,0 +1,119 @@
+---
+// The early-access form. POSTs JSON {name, email, about, locale, source} to SITE.earlyAccessApi
+// and shows the result inline: 200 {ok:true} -> thank-you panel; 4xx {error} or a network failure -> a message under the button.
+// Without JavaScript the form does nothing harmful: it has no action, and the fallback line offers the support address.
+import { SITE } from '../data/site';
+import { getLocale, getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const f = getMessages(code).form;
+const lang = getLocale(code).lang;
+const cfg = JSON.stringify({
+  api: SITE.earlyAccessApi, locale: lang,
+  msg: { name: f.errName, email: f.errEmail, about: f.errAbout, server: f.errServer, network: f.errNetwork, sending: f.sending, submit: f.submit, ok: f.okText },
+}).replace(/</g, '\\u003c');
+const [fbBefore, fbAfter] = f.fallback.split('{email}');
+---
+<div class="ea" data-ea>
+  <form class="ea-form" novalidate data-ea-form>
+    <div class="ea-f">
+      <label for="ea-name">{f.name}</label>
+      <input id="ea-name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="ea-name-err" />
+      <p class="ea-err" id="ea-name-err" hidden></p>
+    </div>
+    <div class="ea-f">
+      <label for="ea-email">{f.email}</label>
+      <input id="ea-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="ea-email-err" />
+      <p class="ea-err" id="ea-email-err" hidden></p>
+    </div>
+    <div class="ea-f wide">
+      <label for="ea-about">{f.about}</label>
+      <textarea id="ea-about" name="about" rows="4" required maxlength="2000" placeholder={f.placeholder} aria-describedby="ea-about-err"></textarea>
+      <p class="ea-err" id="ea-about-err" hidden></p>
+    </div>
+    <div class="ea-go wide">
+      <button class="btn primary lg" type="submit" data-ea-submit>{f.submit}</button>
+      <p class="ea-note">{f.privacy}</p>
+    </div>
+    <div class="ea-alert wide" role="alert" data-ea-alert hidden>
+      <p data-ea-alert-text></p>
+      <p class="ea-fb">{fbBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{fbAfter}</p>
+    </div>
+  </form>
+  <div class="ea-ok" data-ea-ok hidden tabindex="-1">
+    <span class="ea-tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+    <h3>{f.okTitle}</h3>
+    <p data-ea-ok-text></p>
+  </div>
+  <script is:inline type="application/json" data-ea-cfg set:html={cfg} />
+</div>
+
+<script>
+  type Cfg = { api: string; locale: string; msg: Record<string, string> };
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  document.querySelectorAll<HTMLElement>('[data-ea]').forEach((root) => {
+    const cfg = JSON.parse(root.querySelector('[data-ea-cfg]')!.textContent!) as Cfg;
+    const form = root.querySelector<HTMLFormElement>('[data-ea-form]')!;
+    const btn = root.querySelector<HTMLButtonElement>('[data-ea-submit]')!;
+    const alert = root.querySelector<HTMLElement>('[data-ea-alert]')!;
+    const alertText = root.querySelector<HTMLElement>('[data-ea-alert-text]')!;
+    const ok = root.querySelector<HTMLElement>('[data-ea-ok]')!;
+    const track = (n: string, p?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, p);
+    const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement | HTMLTextAreaElement;
+
+    const setErr = (n: string, msg: string) => {
+      const el = field(n), err = root.querySelector<HTMLElement>(`#ea-${n}-err`)!;
+      err.textContent = msg; err.hidden = !msg;
+      el.toggleAttribute('aria-invalid', !!msg);
+    };
+    const check = (n: string) => {
+      const v = field(n).value.trim();
+      const bad = n === 'email' ? !EMAIL.test(v) : v.length < (n === 'about' ? 3 : 1);
+      setErr(n, bad ? cfg.msg[n] : '');
+      return !bad;
+    };
+    // Validate a field once the visitor leaves it, and clear its message as soon as it is fixed.
+    ['name', 'email', 'about'].forEach((n) => {
+      const el = field(n);
+      el.addEventListener('blur', () => { if (el.value.trim()) check(n); });
+      el.addEventListener('input', () => { if (el.hasAttribute('aria-invalid')) check(n); });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alert.hidden = true;
+      const valid = ['name', 'email', 'about'].map(check);
+      if (valid.includes(false)) { field(['name', 'email', 'about'][valid.indexOf(false)]).focus(); return; }
+      const body = { name: field('name').value.trim(), email: field('email').value.trim(), about: field('about').value.trim(), locale: cfg.locale, source: 'equipe.im' };
+      btn.disabled = true; btn.textContent = cfg.msg.sending; form.setAttribute('aria-busy', 'true');
+      let fail = '';
+      try {
+        const res = await fetch(cfg.api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        let data: { ok?: boolean; error?: string } = {};
+        try { data = await res.json(); } catch { /* not JSON */ }
+        if (res.ok && data.ok) {
+          ok.querySelector('[data-ea-ok-text]')!.textContent = cfg.msg.ok.replace('{email}', body.email);
+          form.hidden = true; ok.hidden = false; ok.focus();
+          track('early_access_submitted', { locale: cfg.locale });
+          return;
+        }
+        // The server's `error` is a short English code, so it is never shown as is: an email problem points at the email field,
+        // anything else gets the translated "on our side" message.
+        if (res.status >= 400 && res.status < 500 && /mail/i.test(String(data.error ?? ''))) {
+          setErr('email', cfg.msg.email); field('email').focus();
+          btn.disabled = false; btn.textContent = cfg.msg.submit; form.removeAttribute('aria-busy');
+          track('early_access_failed', { status: res.status });
+          return;
+        }
+        fail = cfg.msg.server;
+        track('early_access_failed', { status: res.status });
+      } catch {
+        fail = cfg.msg.network;
+        track('early_access_failed', { status: 0 });
+      }
+      alertText.textContent = fail; alert.hidden = false;
+      btn.disabled = false; btn.textContent = cfg.msg.submit; form.removeAttribute('aria-busy');
+    });
+  });
+</script>

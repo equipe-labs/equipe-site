@@ -1,0 +1,75 @@
+/* Chrome shared by the home page and /developers: header, footer, buttons, status pills, section heads. Tokens come from global.css. */
+:root { --dash: #80828A; --sunken: var(--code-bg); --wrap-w: 1200px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --dash: #6B6D75; } }
+:root[data-theme='dark'] { --dash: #6B6D75; }
+
+/* header */
+header.site { background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+header.site .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 var(--s-6); }
+header.site nav ul { gap: var(--s-5); }
+header.site nav .opt { display: none; }
+@media (min-width: 1060px) { header.site nav .opt { display: list-item; } }
+header.site nav a { color: var(--muted); font-size: 15px; font-weight: 500; text-decoration: none; }
+header.site nav a[aria-current='page'] { color: var(--text); font-weight: 600; }
+header.site nav a.btn { color: var(--on-accent); }
+header.site .cta-s { display: none; }
+@media (max-width: 520px) { header.site .cta-l { display: none; } header.site .cta-s { display: inline; } }
+@media (max-width: 640px) { header.site .wrap { padding: 0 var(--s-4); } }
+
+/* buttons */
+.btn.sm { min-height: 38px; padding: 0 var(--s-4); font-size: 15px; white-space: nowrap; }
+.btn.lg { min-height: 52px; padding: 0 26px; font-size: 17px; border-radius: 10px; }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+
+/* status pills: dashed = coming */
+.soon, .now { display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; height: 22px; font: 600 12px/1 var(--sans); padding: 0 10px; border-radius: 999px; white-space: nowrap; letter-spacing: 0; vertical-align: middle; }
+.soon { border: 1.5px dashed var(--dash); color: var(--muted); }
+.now { background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); }
+.now::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--dot); }
+
+/* small badge with a pulsing dot */
+.badge { display: inline-flex; align-items: center; gap: 10px; margin: 0; padding: 6px 14px 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14px; font-weight: 500; color: var(--text); }
+.badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--dot); box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot) 22%, transparent); }
+
+.meta { font-size: 14px; line-height: 1.5; color: var(--muted); }
+.cap { margin: var(--s-4) 0 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+/* FAQ (home and /developers) */
+.fq { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 96px; }
+.faqs details { background: none; border-radius: 0; border-top: 1px solid var(--line); margin: 0; padding: var(--s-5) 0; }
+.faqs details:last-child { border-bottom: 1px solid var(--line); }
+.faqs summary { padding: 0; min-height: 0; align-items: baseline; font-size: 18px; line-height: 1.45; }
+.faqs summary::after { content: '+'; width: auto; height: auto; border: 0; transform: none; font-weight: 400; font-size: 26px; color: var(--muted); line-height: 1; }
+.faqs details[open] summary::after { content: '−'; transform: none; }
+.faqs summary h3 { font-size: inherit; font-weight: 600; letter-spacing: -0.01em; text-wrap: pretty; }
+.faqs details p { padding: 0; color: var(--muted); margin: var(--s-3) 0 0; font-size: 17px; line-height: 1.65; max-width: 680px; }
+
+@media (max-width: 1100px) { .fq { gap: 48px; } }
+@media (max-width: 900px) { .fq { grid-template-columns: 1fr; } }
+
+/* footer */
+footer.site-foot { border-top: 1px solid var(--line); padding: var(--s-8) 0 var(--s-6); color: var(--muted); font-size: 15px; }
+footer.site-foot .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 var(--s-6); display: grid; gap: var(--s-7); grid-template-columns: 1fr; }
+footer.site-foot .fb .brand { color: var(--text); font-size: 18px; }
+footer.site-foot .fb p { margin: var(--s-2) 0 0; }
+footer.site-foot .fcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6); }
+footer.site-foot h2 { font-size: 13px; letter-spacing: 0.02em; color: var(--text); font-weight: 600; margin: 0 0 var(--s-3); }
+footer.site-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
+footer.site-foot a { color: var(--muted); text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
+footer.site-foot .fl { display: flex; flex-direction: column; gap: var(--s-2); padding-top: var(--s-5); border-top: 1px solid var(--line); font-size: 13.5px; }
+@media (min-width: 900px) {
+  footer.site-foot .wrap { grid-template-columns: 4fr 7fr; }
+  footer.site-foot .fcols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  footer.site-foot .fl { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+}
+@media (max-width: 640px) { footer.site-foot .wrap { padding: 0 var(--s-4); } }
+
+/* hover / focus: pointer only */
+@media (hover: hover) {
+  a:hover { text-decoration-thickness: 2.5px; color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+  .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
+  .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }
+  .btn.ghost:hover { background: var(--surface); color: var(--text); border-color: color-mix(in srgb, var(--text) 30%, transparent); }
+  header.site nav a:not(.btn):hover, footer.site-foot a:hover, .brand:hover { color: var(--text); text-decoration: none; }
+  summary:hover h3 { color: var(--accent); }
+}

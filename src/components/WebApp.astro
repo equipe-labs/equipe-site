@@ -1,0 +1,201 @@
+---
+// The equipe web app (app.equipe.im), drawn in code for the home page. No screenshots, no images.
+// `k` names a scene: hero · chat · team · decision · growth · cost · import. The words come from messages.scene.
+// The example product is "Harbor Bakery", an order page someone made in Claude; names and amounts stay the same in every language.
+import Mark from './Mark.astro';
+import type { Messages } from '../i18n';
+interface Props { k: 'hero' | 'chat' | 'team' | 'decision' | 'growth' | 'cost' | 'import'; s: Messages['scene']; alt: string; class?: string }
+const { k, s, alt, class: cls = '' } = Astro.props;
+const A = s.activity, D = s.decision, G = s.growth, C = s.cost;
+const domain = 'harborbakery.com';
+// Role icons: 24-unit grid, drawn with currentColor.
+const icons: Record<string, string> = {
+  pm: 'M5 20V5h11l-2 4 2 4H5',
+  eng: 'M9 7l-5 5 5 5M15 7l5 5-5 5',
+  design: 'M4 20l4-1 11-11-3-3L5 16zM14 7l3 3',
+  qa: 'M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6zM8.5 12l2.5 2.5 4.5-5',
+  data: 'M5 20V11M12 20V5M19 20v-6',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
+  lock: 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z',
+  send: 'M12 19V5M6 11l6-6 6 6',
+  chat: 'M4 5h16v11H9l-5 4z',
+  team: 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3 3-5 6-5s6 2 6 5M16 5a3 3 0 0 1 0 6M18 15c2 .5 3 2.5 3 5',
+  dec: 'M4 6h16v12H4zM4 10h16',
+  usage: 'M4 20h16M7 16v-5M12 16V7M17 16v-8',
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+};
+const tasks = [
+  { r: 'eng', st: 'working' }, { r: 'eng', st: 'working' }, { r: 'design', st: 'done' }, { r: 'qa', st: 'working' }, { r: 'data', st: 'next' },
+] as const;
+const roleName = (r: string) => (A.roles as Record<string, string>)[r];
+const stateName = (st: string) => (A.states as Record<string, string>)[st];
+---
+{/* Shared pieces, rendered inline per scene below */}
+<figure class={`wa-fig wa-${k} ${cls}`.trim()} role="img" aria-label={alt}>
+<div class="wa" aria-hidden="true">
+
+  {k === 'hero' && (
+    <div class="wa-win">
+      <div class="wa-bar"><i></i><i></i><i></i><span class="wa-url"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>app.equipe.im</span></div>
+      <div class="wa-app">
+        <aside class="wa-side">
+          <div class="wa-brand"><Mark size={20} /><b>equipe</b></div>
+          <div class="wa-proj"><span class="wa-pi">H</span><span><b>Harbor Bakery</b><em><i class="wa-live-dot"></i>{s.live}</em></span></div>
+          <nav>
+            <span class="on"><svg viewBox="0 0 24 24"><path d={icons.chat} /></svg>{s.nav.chat}</span>
+            <span><svg viewBox="0 0 24 24"><path d={icons.team} /></svg>{s.nav.team}</span>
+            <span><svg viewBox="0 0 24 24"><path d={icons.dec} /></svg>{s.nav.decisions}<b class="wa-badge">1</b></span>
+            <span><svg viewBox="0 0 24 24"><path d={icons.usage} /></svg>{s.nav.usage}</span>
+          </nav>
+          <div class="wa-mini">
+            <span>{C.title}</span>
+            <b>$38</b>
+            <div class="wa-meter sm"><i style="width:38%"></i><i class="exp" style="width:26%"></i></div>
+            <span>{C.expected}</span>
+            <span class="v">~$64 / $100</span>
+          </div>
+        </aside>
+        <div class="wa-chat">
+          <div class="wa-chat-h"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><b>PM</b><span class="wa-mu">Harbor Bakery</span></div>
+          <div class="wa-msgs">
+            <p class="me">{s.ask}</p>
+            <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply}</p></div>
+            <p class="me">{s.answer}</p>
+            <div class="wa-dec inchat">
+              <div class="wa-dec-k"><i></i>{D.label}</div>
+              <b class="wa-dec-q">{D.title}</b>
+              <div class="wa-opt on"><span class="wa-radio"></span><span><b>{D.a}</b><em>{D.aText}</em></span><span class="wa-rec">{D.rec}</span></div>
+              <div class="wa-opt"><span class="wa-radio"></span><span><b>{D.b}</b><em>{D.bText}</em></span></div>
+              <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri">{D.approve}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-right">
+          <div class="wa-prev">
+            <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span><span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
+            <div class="wa-site">
+              <b class="wa-site-t">Harbor Bakery</b>
+              <span class="wa-site-s">{s.site.sub}</span>
+              <div class="wa-fields">
+                <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
+                <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
+              </div>
+              <span class="wa-site-b">{s.site.btn}</span>
+            </div>
+          </div>
+          <div class="wa-act">
+            <div class="wa-act-h">{A.title}</div>
+            {tasks.slice(0, 4).map((t, i) => (
+              <div class="wa-row"><span class={`wa-av ${t.r}`}><svg viewBox="0 0 24 24"><path d={icons[t.r]} /></svg></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span><em class={`wa-st ${t.st}`}>{stateName(t.st)}</em></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {k === 'chat' && (
+    <div class="wa-card wa-chat solo">
+      <div class="wa-chat-h"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><b>PM</b><span class="wa-mu">Harbor Bakery</span></div>
+      <div class="wa-msgs">
+        <p class="me">{s.ask}</p>
+        <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply}</p></div>
+        <p class="me">{s.answer}</p>
+        <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply2}</p></div>
+      </div>
+      <div class="wa-comp"><span>{s.composer}</span><i><svg viewBox="0 0 24 24"><path d={icons.send} /></svg></i></div>
+    </div>
+  )}
+
+  {k === 'team' && (
+    <div class="wa-teamscene">
+      <div class="wa-card wa-act">
+        <div class="wa-act-h">{A.title}<span class="wa-mu">Harbor Bakery</span></div>
+        {tasks.map((t, i) => (
+          <div class="wa-row"><span class={`wa-av ${t.r}`}><svg viewBox="0 0 24 24"><path d={icons[t.r]} /></svg></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span><em class={`wa-st ${t.st}`}>{stateName(t.st)}</em></div>
+        ))}
+      </div>
+      <div class="wa-card wa-prev wa-phone">
+        <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span></div>
+        <div class="wa-site">
+          <b class="wa-site-t">Harbor Bakery</b>
+          <span class="wa-site-s">{s.site.sub}</span>
+          <div class="wa-fields">
+            <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
+            <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
+            <label><span>{s.site.name}</span><i class="ph"></i></label>
+          </div>
+          <span class="wa-site-b">{s.site.btn}</span>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {k === 'decision' && (
+    <div class="wa-card wa-dec solo">
+      <div class="wa-dec-k"><i></i>{D.label}</div>
+      <b class="wa-dec-q">{D.title}</b>
+      <div class="wa-opt on"><span class="wa-radio"></span><span><b>{D.a}</b><em>{D.aText}</em></span><span class="wa-rec">{D.rec}</span></div>
+      <div class="wa-opt"><span class="wa-radio"></span><span><b>{D.b}</b><em>{D.bText}</em></span></div>
+      <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri">{D.approve}</span></div>
+    </div>
+  )}
+
+  {k === 'growth' && (
+    <div class="wa-card wa-grow">
+      <div class="wa-grow-k"><span class="wa-av data"><svg viewBox="0 0 24 24"><path d={icons.data} /></svg></span>{G.label}<span class="wa-mu">{G.week}</span></div>
+      <div class="wa-stats">
+        <div><b>312</b><span>{G.stats[0]}</span></div>
+        <div><b>41</b><span>{G.stats[1]}</span></div>
+        <div class="warn"><b>58%</b><span>{G.stats[2]}</span></div>
+      </div>
+      <b class="wa-grow-t">{G.title}</b>
+      <p>{G.text}</p>
+      <div class="wa-dec-f"><span class="wa-cost">{G.cost} <b>~$3</b></span><span class="wa-btn">{G.no}</span><span class="wa-btn pri">{G.yes}</span></div>
+    </div>
+  )}
+
+  {k === 'cost' && (
+    <div class="wa-card wa-costc">
+      <div class="wa-cost-h"><span>{C.title}</span><em class="ok"><svg viewBox="0 0 24 24"><path d={icons.check} /></svg>{C.under}</em></div>
+      <div class="wa-cost-n"><b>$38</b><span>{C.spent}</span></div>
+      <div class="wa-meter"><i style="width:38%"></i><i class="exp" style="width:26%"></i><span class="cap"></span></div>
+      <dl>
+        <div><dt><i class="k2"></i>{C.expected}</dt><dd>~$64</dd></div>
+        <div><dt><i class="k3"></i>{C.cap}</dt><dd>$100</dd></div>
+      </dl>
+    </div>
+  )}
+
+  {k === 'import' && (
+    <div class="wa-flow">
+      <div class="wa-card wa-step">
+        <div class="wa-step-h"><span class="wa-chipk">{s.imp.from}</span></div>
+        <div class="wa-art">
+          <b>Harbor Bakery</b>
+          <span class="l w70"></span><span class="l w90"></span><span class="l w50"></span>
+          <span class="box"></span>
+          <span class="l w60"></span>
+        </div>
+      </div>
+      <span class="wa-link"><svg viewBox="0 0 24 24"><path d={icons.arrow} /></svg></span>
+      <div class="wa-card wa-step">
+        <div class="wa-step-h"><span class="wa-chipk">{s.imp.setup}</span></div>
+        <ul class="wa-checks">
+          {s.imp.checks.map((c) => <li><i><svg viewBox="0 0 24 24"><path d={icons.check} /></svg></i>{c}</li>)}
+        </ul>
+      </div>
+      <span class="wa-link"><svg viewBox="0 0 24 24"><path d={icons.arrow} /></svg></span>
+      <div class="wa-card wa-step wa-prev">
+        <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span><span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
+        <div class="wa-site">
+          <b class="wa-site-t">Harbor Bakery</b>
+          <span class="wa-site-s">{s.site.sub}</span>
+          <span class="wa-site-b">{s.site.btn}</span>
+        </div>
+      </div>
+    </div>
+  )}
+
+</div>
+</figure>

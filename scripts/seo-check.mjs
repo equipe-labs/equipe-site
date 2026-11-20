@@ -113,6 +113,9 @@ for (const { lang, path } of LOCALES) {
         );
         check(data.inLanguage === lang, `${path} FAQPage inLanguage ${lang}`);
       }
+      if (data['@type'] === 'WebApplication') {
+        check(data.name && data.applicationCategory && data.operatingSystem, `${path} WebApplication has name/category/OS`);
+      }
       if (data['@type'] === 'SoftwareApplication') {
         check(
           data.name && data.offers?.price !== undefined && data.applicationCategory && data.operatingSystem,
@@ -123,7 +126,8 @@ for (const { lang, path } of LOCALES) {
       fail(`${path} JSON-LD parse error: ${e.message}`);
     }
   }
-  for (const t of ['Organization', 'WebSite', 'SoftwareApplication', 'FAQPage']) {
+  // The home page describes the hosted product (WebApplication); the open-source app (SoftwareApplication) is on /developers.
+  for (const t of ['Organization', 'WebSite', 'WebApplication', 'FAQPage']) {
     check(types.includes(t), `${path} JSON-LD ${t}`);
   }
 }

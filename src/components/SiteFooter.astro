@@ -1,0 +1,57 @@
+---
+// Footer for the home page and /developers.
+import Mark from './Mark.astro';
+import { SITE } from '../data/site';
+import { DESIGN_LIVE } from '../data/design';
+import { getDesignText } from '../i18n/design';
+import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; page: 'home' | 'developers' }
+const { code, page } = Astro.props;
+const info = getLocale(code);
+const t = getMessages(code);
+const dz = getDesignText(code);
+const home = page === 'home' ? '' : localePath(info);
+---
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="fb">
+      <a class="brand" href={localePath(info)}><Mark size={24} /> <span>equipe</span></a>
+      <p>{t.foot.tagline}</p>
+    </div>
+    <nav class="fcols" aria-label="Footer">
+      <div>
+        <h2>{t.foot.product}</h2>
+        <ul>
+          <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
+          <li><a href={`${home}#team`}>{t.nav.team}</a></li>
+          <li><a href={`${home}#status`}>{t.nav.status}</a></li>
+          <li><a href={`${home}#faq`}>{t.nav.faq}</a></li>
+          <li><a href={`${home}#early-access`} data-ph="early_access_cta_click" data-ph-location="footer">{t.nav.cta}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{t.foot.developers}</h2>
+        <ul>
+          <li><a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="footer">{t.nav.developers}</a></li>
+          <li><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a></li>
+          <li><a href={SITE.roadmap}>{t.start.roadmap}</a></li>
+          <li><a href={SITE.architecture}>{t.start.architecture}</a></li>
+          {DESIGN_LIVE && <li><a href={`${subPath(info, 'design/docs')}#guardrails`}>{dz.nav.guidelines}</a></li>}
+        </ul>
+      </div>
+      <div>
+        <h2>{t.foot.phone}</h2>
+        <ul>
+          <li><a href={subPath(info, 'app')}>{t.app.nav.get}</a></li>
+          <li><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a></li>
+          <li><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="fl">
+      <span>{t.foot.engine}</span>
+      <span>{t.footer.built}</span>
+    </div>
+  </div>
+</footer>

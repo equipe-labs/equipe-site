@@ -1,0 +1,197 @@
+---
+// /developers: the open-source engine (Mac app, CLI, phone apps, developer FAQ). The home page is for non-developers.
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import HeroScene from '../../components/HeroScene.astro';
+import PhoneApproval from '../../components/PhoneApproval.astro';
+import IconSprite from '../../components/IconSprite.astro';
+import Cmd from '../../components/Cmd.astro';
+import Rich from '../../components/Rich.astro';
+import Analytics from '../../components/Analytics.astro';
+import LangBanner from '../../components/LangBanner.astro';
+import OrganizationJsonLd from '../../components/OrganizationJsonLd.astro';
+import SoftwareApplicationJsonLd from '../../components/SoftwareApplicationJsonLd.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import badgeUrl from '../../assets/badges/app-store.svg?url';
+import '../../styles/app.css';
+import '../../styles/site.css';
+import '../../styles/dev.css';
+import { SITE } from '../../data/site';
+import { getAppText } from '../../i18n/app';
+import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../i18n';
+
+export function getStaticPaths() {
+  return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } }));
+}
+
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const t = getMessages(code);
+const d = t.dev, st = t.start;
+const at = getAppText(code);
+const pageUrl = new URL(subPath(info, 'developers'), Astro.site).href;
+const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
+const brew = 'brew install equipe-labs/tap/equipe';
+const tryIt = 'equipe try --edit "…"';
+---
+
+<Base locale={code} title={d.meta.title} description={d.meta.description} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt} subpage="developers">
+  <Fragment slot="head">
+    <OrganizationJsonLd />
+    <SoftwareApplicationJsonLd lang={info.lang} url={pageUrl} description={d.meta.description} />
+    <FaqJsonLd lang={info.lang} faqs={d.faq} />
+  </Fragment>
+
+  <IconSprite />
+  <a class="skip" href="#main">{t.ui.skip}</a>
+  <SiteHeader code={code} page="developers" />
+
+  <main id="main" class="dev">
+    <section class="dhero">
+      <div class="wrap">
+        <p class="badge"><i></i>{d.kicker}</p>
+        <h1>{d.h1}</h1>
+        <p class="lead">{d.lead}</p>
+        <div class="acts">
+          <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="developers" download>{d.macCta}</a>
+          <a class="btn ghost lg" href="#cli-install" data-ph="cli_install_link_click" data-ph-location="developers">{d.cliLink}</a>
+          <a class="link" href={SITE.repo} data-ph="cta_github_click" data-ph-location="developers">{t.nav.github} →</a>
+        </div>
+        <p class="meta">{d.macReq}</p>
+      </div>
+      <div class="wrap shot"><HeroScene t={at} alt={d.shotAlt} /></div>
+    </section>
+
+    <section class="dsec" id="mac">
+      <div class="wrap">
+        <h2>{d.setupTitle}</h2>
+        <p class="sub">{st.title}</p>
+        <ol class="dsteps">
+          {st.steps.map((s, i) => (
+            <li>
+              <span class="n" aria-hidden="true">{i + 1}</span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              {i === 1 && <p class="note"><Rich s={st.note2} /></p>}
+              {i === 2 && <p class="note"><Rich s={st.note3} /></p>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="dsec alt" id="cli">
+      <div class="wrap">
+        <div class="cli">
+          <h2 id="cli-install">{st.cliTitle}</h2>
+          <p class="col"><Rich s={st.cliIntro} /></p>
+          <div class="tabs">
+            <input type="radio" name="install-method" id="tab-brew" class="tab-input" checked />
+            <input type="radio" name="install-method" id="tab-script" class="tab-input" />
+            <div class="tablist" role="group" aria-label={st.tabsLabel}>
+              <label for="tab-brew">Homebrew</label>
+              <label for="tab-script">install.sh</label>
+            </div>
+            <div class="tab-panel" data-panel="brew">
+              <p class="col"><Rich s={st.brew} /></p>
+              <div class="codeblock"><pre tabindex="0"><code><Cmd text={brew} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
+            </div>
+            <div class="tab-panel" data-panel="script">
+              <p class="col"><Rich s={st.install} /></p>
+              <div class="codeblock"><pre tabindex="0"><code><Cmd text={install} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
+            </div>
+          </div>
+          <details class="advanced">
+            <summary>{st.sourceTitle}</summary>
+            <p><Rich s={st.source} /></p>
+          </details>
+          <p class="col">{st.run}</p>
+          <div class="codeblock"><pre tabindex="0"><code><Cmd text={st.runCode} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
+          <p class="col">{st.tryIntro}</p>
+          <div class="codeblock"><pre tabindex="0"><code><Cmd text={tryIt} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="try" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
+          <p class="links"><a href={SITE.docs}>{st.docs}</a><a href={SITE.roadmap}>{st.roadmap}</a><a href={SITE.architecture}>{st.architecture}</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dsec" id="phone">
+      <div class="wrap">
+        <div class="phgrid">
+          <div>
+            <h2>{d.phoneTitle}</h2>
+            <p class="sub">{d.phoneText}</p>
+            <div class="acts">
+              <a class="appbadge" href={SITE.appStore} data-ph="ios_download_click" data-ph-location="developers" data-ph-platform="ios"><img src={badgeUrl} width="132" height="44" alt={d.appStore} /></a>
+              <a class="btn ghost" href={SITE.androidApk} data-ph="android_download_click" data-ph-location="developers">{st.android.download}</a>
+              <a class="link" href={subPath(info, 'app')} data-ph="app_page_link_click" data-ph-location="developers">{t.app.nav.get} →</a>
+            </div>
+            <div class="android-install">
+              <h3>{st.android.title}</h3>
+              <p>{st.android.intro}</p>
+              <ol>{st.android.steps.map((step) => <li><Rich s={step} /></li>)}</ol>
+              <p>{st.android.playStore}</p>
+              <dl class="android-hashes">
+                <div><dt>{st.android.fileSha256}</dt><dd><code>{SITE.android.fileSha256}</code></dd></div>
+                <div><dt>{st.android.certificateSha256}</dt><dd><code>{SITE.android.certificateSha256}</code></dd></div>
+              </dl>
+            </div>
+          </div>
+          <div class="phonebox">
+            <PhoneApproval code={code} label={d.phoneCaption} />
+            <p class="cap">{d.phoneCaption}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dsec alt" id="faq">
+      <div class="wrap">
+        <div class="fq">
+          <h2>{d.faqTitle}</h2>
+          <div class="faqs">
+            {d.faq.map((f, i) => (
+              <details data-faq-id={`dev-faq-${i + 1}`} open={i === 0}>
+                <summary><h3>{f.question}</h3></summary>
+                <p><Rich s={f.answer} /></p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dsec hosted">
+      <div class="wrap">
+        <p>{d.hosted}</p>
+        <a class="btn primary lg" href={`${localePath(info)}#early-access`} data-ph="early_access_cta_click" data-ph-location="developers">{d.hostedLink}</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter code={code} page="developers" />
+  <Analytics />
+  <LangBanner locale={code} subpage="developers" />
+
+  <script is:inline>
+    document.querySelectorAll('.copy').forEach((b) =>
+      b.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(b.previousElementSibling.textContent);
+          b.textContent = b.dataset.done;
+          setTimeout(() => (b.textContent = b.dataset.label), 1500);
+        } catch {
+          const r = document.createRange();
+          r.selectNodeContents(b.previousElementSibling);
+          const sel = getSelection();
+          sel.removeAllRanges();
+          sel.addRange(r);
+          b.textContent = b.dataset.fallback;
+          b.classList.add('hint');
+          b.nextElementSibling.textContent = b.dataset.fallback;
+          setTimeout(() => { b.textContent = b.dataset.label; b.classList.remove('hint'); b.nextElementSibling.textContent = ''; }, 3000);
+        }
+      }),
+    );
+  </script>
+</Base>

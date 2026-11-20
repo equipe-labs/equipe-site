@@ -1,0 +1,72 @@
+/* /developers. Tokens: global.css; chrome: site.css; the Mac app drawing: app.css + HeroScene. */
+main.dev .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 var(--s-6); }
+:where(main.dev) :where(ol, ul) { list-style: none; margin: 0; padding: 0; }
+:where(main.dev) :where(p) { margin: 0; }
+main.dev > section { padding: 112px 0; }
+main.dev > section.alt { background: var(--sunken); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+main.dev h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.08; letter-spacing: -0.03em; }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) main.dev h2 { line-height: 1.3; letter-spacing: -0.02em; }
+main.dev .sub { margin-top: var(--s-4); font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 640px; }
+main.dev .acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); margin-top: var(--s-6); }
+main.dev .link { font-weight: 500; }
+
+/* the Mac app frame (HeroScene draws inside .win) */
+.win { position: relative; margin: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); box-shadow: 0 60px 120px -60px rgb(21 22 26 / 0.5), 0 16px 32px -20px rgb(21 22 26 / 0.2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .win { box-shadow: 0 40px 80px -40px #000; } }
+:root[data-theme='dark'] .win { box-shadow: 0 40px 80px -40px #000; }
+
+/* hero */
+main.dev > section.dhero { padding: 88px 0 var(--s-8); overflow: hidden; }
+.dhero h1 { margin-top: var(--s-6); font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.045em; max-width: 17ch; }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) .dhero h1 { font-size: clamp(36px, 4.8vw, 60px); line-height: 1.2; letter-spacing: -0.03em; max-width: 16em; }
+.dhero .lead { margin-top: var(--s-5); font-size: 21px; line-height: 1.5; color: var(--muted); max-width: 640px; }
+.dhero .meta { margin-top: var(--s-4); }
+.dhero .shot { position: relative; isolation: isolate; margin-top: 72px; padding-bottom: var(--s-5); }
+.dhero .shot::before { content: ''; position: absolute; left: -100vw; right: -100vw; top: 45%; bottom: -200px; background: var(--sunken); z-index: -1; }
+.dhero .hs-cap { margin-top: var(--s-4); }
+
+/* setup steps */
+.dsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); margin-top: var(--s-7); }
+.dsteps li { padding: var(--s-5); border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.dsteps .n { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--text); color: var(--bg); font: 700 13px/1 var(--sans); }
+main.dev .dsteps h3 { margin-top: var(--s-4); font-size: 20px; }
+.dsteps p { margin-top: var(--s-2); color: var(--muted); font-size: 16px; line-height: 1.55; }
+.dsteps .note { margin-top: var(--s-3); font-size: 14px; padding-left: var(--s-3); border-left: 2px solid var(--line); }
+
+/* CLI */
+.cli { max-width: 820px; }
+.cli .col { margin-top: var(--s-4); color: var(--muted); }
+.cli .codeblock { background: var(--bg); border: 1px solid var(--line); }
+.cli details { background: var(--bg); border: 1px solid var(--line); }
+.cli .tablist { background: var(--bg); border: 1px solid var(--line); }
+.cli .links { margin-top: var(--s-5); }
+
+/* phone */
+.phgrid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 96px; align-items: start; }
+.appbadge { display: inline-flex; border-radius: 8px; }
+.appbadge img { display: block; height: 44px; width: auto; }
+main.dev .android-install { margin-top: var(--s-7); }
+main.dev .android-install > ol { list-style: decimal; padding-left: var(--s-5); }
+main.dev .android-install h3 { font-size: 20px; }
+.phonebox { display: grid; justify-items: center; }
+.phonebox .cap { text-align: center; max-width: 280px; }
+
+/* hosted band */
+main.dev > section.hosted { padding: 88px 0; }
+.hosted .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-5); }
+.hosted p { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 600; max-width: 22em; }
+
+@media (max-width: 900px) {
+  main.dev > section { padding: 80px 0; }
+  .dsteps { grid-template-columns: 1fr; gap: var(--s-4); }
+  .phgrid { grid-template-columns: 1fr; gap: var(--s-7); }
+}
+@media (max-width: 700px) {
+  main.dev .wrap { padding: 0 20px; }
+  main.dev > section { padding: 64px 0; }
+  main.dev > section.dhero { padding-top: 48px; }
+  .dhero .lead { font-size: 18px; }
+  main.dev .acts .btn { width: 100%; }
+  .dhero .shot { margin-top: 48px; }
+  main.dev .sub { font-size: 17px; }
+}

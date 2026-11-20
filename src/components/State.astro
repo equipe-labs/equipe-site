@@ -1,9 +1,0 @@
----
-// "Works today" or "Coming", for a stage or a step.
-interface Props { s: 'now' | 'part' | 'soon'; now: string; soon: string }
-const { s, now, soon } = Astro.props;
----
-
-{/* one pill per item: a partly done item shows "Works today" only; its "Coming:" line sits under the text (partNote) */}
-{(s === 'now' || s === 'part') && <span class="now">{now}</span>}
-{s === 'soon' && <span class="soon">{soon}</span>}

@@ -1,27 +1,20 @@
 ---
-import Cmd from '../components/Cmd.astro';
+// The home page, for non-developers: a startup team for one person, in the cloud. Developer content lives on /developers.
 import Base from '../layouts/Base.astro';
-import AppUi from '../components/AppUi.astro';
-import IconSprite from '../components/IconSprite.astro';
-import HeroScene from '../components/HeroScene.astro';
-import '../styles/app.css';
-import { getAppText } from '../i18n/app';
-import State from '../components/State.astro';
-import '../styles/landing.css';
-import PhoneApproval from '../components/PhoneApproval.astro';
-import '../styles/motion.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import Mark from '../components/Mark.astro';
-import LangMenu from '../components/LangMenu.astro';
-import Rich from '../components/Rich.astro';
+import WebApp from '../components/WebApp.astro';
+import EarlyAccess from '../components/EarlyAccess.astro';
 import Analytics from '../components/Analytics.astro';
 import LangBanner from '../components/LangBanner.astro';
 import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
 import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
-import SoftwareApplicationJsonLd from '../components/SoftwareApplicationJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
-import { SITE } from '../data/site';
-import { DESIGN_LIVE } from '../data/design';
-import { getDesignText } from '../i18n/design';
+import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
+import '../styles/site.css';
+import '../styles/webapp.css';
+import '../styles/home.css';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 // One page per language that has a src/i18n/<code>.ts file. English lives at `/`, the rest at `/<slug>/`.
@@ -32,29 +25,27 @@ export function getStaticPaths() {
 const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const t = getMessages(code);
-const at = getAppText(code);
-const dz = getDesignText(code);
+const s = t.scene;
 const pageUrl = new URL(localePath(info), Astro.site).href;
-
-const install = 'curl -fsSL https://github.com/equipe-labs/equipe/releases/latest/download/install.sh | sh';
-const brew = 'brew install equipe-labs/tap/equipe';
-// Status of each stage and loop step: now = works today, part = partly, soon = coming (the same in every language).
-const stageState = ['now', 'part', 'soon', 'soon'] as const;
-const loopState = ['part', 'now'] as const;
-// The last three FAQ items are for developers.
-const devFrom = t.faq.items.length - 3;
-// The large scenes in Features (the permission card is shown in section 1, so its feature sits in the list below): which `now` item each one shows.
-const scenes = [{ k: 'fa', n: 0 }, { k: 'fb', n: 4 }, { k: 'fc', n: 3, tall: true }];
-// Headline breaks at the sentence boundary (never mid-phrase): "Your whole startup team." / "You just approve."
-const heroLines = t.hero.title.split(/(?<=[.。])\s*(?=\S)/);
-const tryIt = 'equipe try --edit "…"';
-const androidFileSha256 = 'bd8f267edeb10ce0aaed1efbb80f7b3c349895f6121e5f8a97d647d09f8d9773';
-const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e367aee2ff769041a87';
+// How-it-works scenes, in step order. Step 4 (usage reports and proposals) is not shipped yet.
+const howScenes = ['chat', 'team', 'decision', 'growth'] as const;
+const howSoon = [false, false, false, true];
+// Where we are: one state per item.
+const statusState = ['now', 'early', 'soon'] as const;
+const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'] as const;
+const roleIcon: Record<string, string> = {
+  pm: 'M5 20V5h11l-2 4 2 4H5',
+  eng: 'M9 7l-5 5 5 5M15 7l5 5-5 5',
+  design: 'M4 20l4-1 11-11-3-3L5 16zM14 7l3 3',
+  qa: 'M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6zM8.5 12l2.5 2.5 4.5-5',
+  data: 'M5 20V11M12 20V5M19 20v-6',
+};
+const check = 'M5 12.5l4.5 4.5L19 7.5';
 ---
 
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
   <Fragment slot="head">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://app.equipe.im" crossorigin />
     <script is:inline>
       // Scroll motion is opt-in: blocks are hidden only once this class is set, and only if the visitor allows motion.
       // If the script that reveals them never runs, the class is dropped after 3 s and everything shows.
@@ -65,276 +56,176 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
     </script>
     <OrganizationJsonLd />
     <WebSiteJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} />
-    <SoftwareApplicationJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} featureList={t.feat.now.map((f) => f.title)} />
+    <WebApplicationJsonLd lang={info.lang} url={pageUrl} description={t.meta.description} featureList={t.team.roles.map((r) => `${r.name}: ${r.text}`)} />
     <FaqJsonLd lang={info.lang} faqs={t.faq.items} />
   </Fragment>
 
-  <IconSprite />
   <a class="skip" href="#main">{t.ui.skip}</a>
-  <header class="site">
-    <div class="wrap">
-      <a class="brand" href={localePath(info)}><Mark size={28} /> <span class="bt">equipe</span></a>
-      <nav aria-label={t.ui.primaryNav}>
-        <ul>
-          <li class="opt"><a href="#stage">{t.nav.stage}</a></li>
-          <li class="opt"><a href="#how-it-works">{t.nav.howItWorks}</a></li>
-          <li class="opt"><a href="#features">{t.nav.features}</a></li>
-          {DESIGN_LIVE && <li class="dz-link"><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
-          <li class="opt"><a href="#get-started">{t.nav.getStarted}</a></li>
-          <li class="opt"><a href="#faq">{t.nav.faq}</a></li>
-          <li class="opt"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="header">{t.nav.github}</a></li>
-          <li><LangMenu locale={code} label={t.ui.language} /></li>
-          <li><a class="btn primary sm" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="header" download>{t.hero.cta}</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader code={code} page="home" />
 
-  <main id="main" class="landing">
+  <main id="main" class="home">
     <section class="hero">
-      <div class="wrap w">
-        <h1>{heroLines.map((l, i) => <><span class="hl">{l}</span>{i < heroLines.length - 1 && ' '}</>)}</h1>
-        <p class="lead">{t.hero.lead}</p>
-        <div class="acts">
-          <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="hero" download>{t.hero.cta}</a>
-          <a class="link" href="#cli-install" data-ph="cli_install_link_click" data-ph-location="hero">{t.hero.cliLink}</a>
+      <div class="wrap top">
+        <div class="hl">
+          <p class="badge"><i></i>{t.hero.badge}</p>
+          <h1>{t.hero.title}</h1>
         </div>
-        <p class="meta">{t.hero.req} · <span class="evline">{t.hero.proof}</span></p>
+        <div class="hr">
+          <p class="lead">{t.hero.lead}</p>
+          <p class="approve">{t.hero.approve}</p>
+          <div class="acts">
+            <a class="btn primary lg" href="#early-access" data-ph="early_access_cta_click" data-ph-location="hero">{t.hero.cta}</a>
+            <a class="btn ghost lg" href="#how-it-works">{t.hero.secondary}</a>
+          </div>
+          <p class="meta">{t.hero.meta}</p>
+        </div>
       </div>
-      <div class="wrap w heroshot">
-        <HeroScene t={at} alt={t.hero.shotAlt} />
+      <div class="wrap shot">
+        <WebApp k="hero" s={s} alt={t.hero.shotAlt} />
+        <p class="cap">{t.hero.caption}</p>
       </div>
     </section>
 
-    <section class="launch">
-      <div class="wrap w">
-        <div class="row">
+    <section class="wedge" id="from-claude">
+      <div class="wrap">
+        <div class="head rv">
+          <p class="kicker">{t.wedge.kicker}</p>
+          <h2>{t.wedge.title}</h2>
+          <p class="sub">{t.wedge.text}</p>
+        </div>
+        <div class="rv"><WebApp k="import" s={s} alt={t.wedge.alt} /></div>
+        <ol class="wsteps rv">
+          {t.wedge.steps.map((st, i) => <li><span class="n">{i + 1}</span><h3>{st.title}</h3><p>{st.text}</p></li>)}
+        </ol>
+        <div class="handled rv">
           <div>
-            <h2>{t.launch.title}</h2>
-            <p class="lede">{t.launch.text}</p>
-            <div class="lines">
-              <div class="ln"><span class="tagcol"><span class="now">{t.ui.now}</span></span><p>{t.launch.now}</p></div>
-              <div class="ln"><span class="tagcol"><span class="soon">{t.ui.soon}</span></span><p>{t.launch.soon}</p></div>
-            </div>
+            <h3>{t.wedge.handledTitle}</h3>
+            <ul>{t.wedge.handled.map((h) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{h}</li>)}</ul>
           </div>
-          <div><AppUi k="launch" t={at} alt={t.launch.alt} /><p class="cap">{t.launch.caption}</p></div>
+          <p class="never">{t.wedge.never}</p>
         </div>
+        <p class="honest rv"><span class="soon">{t.ui.soon}</span><span>{t.wedge.note}</span></p>
       </div>
     </section>
 
-    <section id="stage" class="alt">
-      <div class="wrap w">
-        <div class="row rev half">
-          <div class="sk"><AppUi k="stage" t={at} alt={t.stage.alt} /><p class="cap">{t.stage.caption}</p></div>
-          <div>
-            <h2>{t.stage.title} <span class="tone">{t.stage.text}</span></h2>
-            <ol class="tl">
-              {t.stage.items.map((s, i) => (
-                <li class={`st is-${stageState[i]}`}>
-                  <i class="dot" aria-hidden="true"></i>
-                  <h3>{s.title} <State s={stageState[i]} now={t.ui.now} soon={t.ui.soon} /></h3>
-                  <p>{s.text}</p>
-                  {stageState[i] === 'part' && <span class="pn">{t.stage.partNote}</span>}
-                </li>
-              ))}
-            </ol>
-            <p class="close"><span class="soon">{t.ui.soon}</span><span>{t.stage.close}</span></p>
-          </div>
+    <section class="how" id="how-it-works">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>{t.how.title}</h2>
+          <p class="sub">{t.how.text}</p>
         </div>
-      </div>
-    </section>
-
-    <section id="how-it-works">
-      <div class="wrap w">
-        <h2>{t.loop.title} <span class="tone">{t.loop.text}</span></h2>
-        <div class="loopw">
-          {[0, 1].map((i) => (
-            <div class="row">
-              <ol class="lps" start={i + 1}>
-                <li class="lp"><span class="n" aria-hidden="true">{i + 1}</span><div><h3>{t.loop.steps[i].title} <State s={loopState[i]} now={t.ui.now} soon={t.ui.soon} /></h3><p>{t.loop.steps[i].text}</p>{loopState[i] === 'part' && <span class="pn">{t.loop.partNote}</span>}</div></li>
-              </ol>
-              {i === 0
-                ? <div><AppUi k="goal" t={at} alt={t.loop.goalAlt} /><p class="cap">{t.loop.goalCaption}</p></div>
-                : <div><AppUi k="build" t={at} alt={t.loop.buildAlt} /><p class="cap">{t.loop.buildCaption}</p></div>}
-            </div>
-          ))}
-
-          <div class="row rev appr">
-            <div class="duo">
-              <div class="sk"><AppUi k="appr" t={at} alt={t.loop.approveAlt} /><p class="cap">{t.loop.approveCaption}</p></div>
-              <div class="phonebox">
-                <div>
-                  <PhoneApproval code={code} label={t.loop.phoneCaption} />
-                  <p class="cap narrow"><span class="now">{t.ui.now}</span> {t.loop.phoneCaption} <a href={subPath(info, 'app')} data-ph="app_page_link_click" data-ph-location="phone">{t.app.nav.get}</a></p>
-                  <p class="cap narrow">{t.start.android.playStore}</p>
-                </div>
+        <ol class="steps">
+          {t.how.steps.map((st, i) => (
+            <li class={`step${i % 2 ? ' rev' : ''}`}>
+              <div class="txt rv">
+                <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{st.title}{howSoon[i] && <span class="soon">{t.ui.soon}</span>}</h3>
+                <p>{st.text}</p>
               </div>
-            </div>
-            <div>
-              <svg class="tick" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-              <h3 class="h3big">{t.loop.approveTitle}</h3>
-              <p class="bp">{t.loop.approveText}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <ol class="lps" start="3">
-              {[2, 3, 4].map((i) => (
-                <li class="lp soonlp"><span class="n" aria-hidden="true">{i + 1}</span><div><h3>{t.loop.steps[i].title} <State s="soon" now={t.ui.now} soon={t.ui.soon} /></h3><p>{t.loop.steps[i].text}</p></div></li>
-              ))}
-            </ol>
-            <div class="sk">
-              <div class="mr" role="img" aria-label={t.ui.illu}>
-                <h4>{t.loop.reportTitle}<span class="soon">{t.ui.soon}</span></h4>
-                {t.loop.reportRows.map((r) => <div class="rw"><span>{r}</span><i></i></div>)}
+              <div class="vis rv">
+                <div class="stage"><WebApp k={howScenes[i]} s={s} alt={st.alt} /></div>
+                <p class="cap">{st.caption}</p>
               </div>
-              <p class="cap">{t.ui.illu}</p>
-            </div>
-          </div>
-        </div>
-        <p class="back"><span>↺ {t.loop.back}</span><i></i></p>
-      </div>
-    </section>
-
-    <section id="who-for" class="alt">
-      <div class="wrap w">
-        <h2>{t.who.title} <span class="tone">{t.who.text}</span></h2>
-        <div class="whofig sk"><AppUi k="who" t={at} alt={t.who.alt} /><p class="cap">{t.who.caption}</p></div>
-        <ul class="pts">
-          {t.who.points.map((p) => <li class="pt"><h3>{p.lead}</h3><p>{p.text}</p></li>)}
-        </ul>
-      </div>
-    </section>
-
-    <section id="features">
-      <div class="wrap w">
-        <h2>{t.feat.title}</h2>
-        <div class="fr">
-          {scenes.map((sc, i) => (
-            <div class={`row${i % 2 ? ' rev' : ''}`}>
-              {i % 2 === 1 && <div class="sk"><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /><p class="cap">{t.feat.scenes[i].caption}</p></div>}
-              <div>
-                <span class="now">{t.ui.now}</span>
-                <h3>{t.feat.now[sc.n].title}</h3>
-                <p>{t.feat.now[sc.n].text}</p>
-              </div>
-              {i % 2 === 0 && (
-                <div class={sc.tall ? 'sk' : undefined}>
-                  {sc.tall ? <div class="tall"><AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} /></div> : <AppUi k={sc.k} t={at} alt={t.feat.scenes[i].alt} />}
-                  <p class="cap">{t.feat.scenes[i].caption}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        <p class="alsoh"><span>{t.feat.more}</span><i></i></p>
-        <ul class="also swipe" tabindex="0" aria-label={t.feat.more}>
-          {[1, 2, 5, 6, 7, 8].map((n) => <li><h4>{t.feat.now[n].title}</h4><p>{t.feat.now[n].text}</p></li>)}
-        </ul>
-        <div class="cm">
-          <h3>{t.feat.comingTitle}</h3>
-          <ul class="cl swipe" tabindex="0" aria-label={t.feat.comingTitle}>
-            {t.feat.coming.map((f) => <li><h4>{f.title}</h4><p>{f.text}</p></li>)}
-          </ul>
-        </div>
-        {DESIGN_LIVE && (
-          <a class="dz-bridge" href={subPath(info, 'design')} data-ph="design_menu_click" data-ph-location="home">
-            <code>equipe-design</code>
-            <span>{dz.bridge.text}</span>
-            <span class="go">{dz.bridge.link} →</span>
-          </a>
-        )}
-      </div>
-    </section>
-
-    <section class="evs">
-      <div class="wrap w">
-        <h2>{t.ev.title} <span class="tone">{t.ev.text}</span></h2>
-        <div class="evg">
-          <dl class="nums">
-            {t.ev.nums.map((n) => <div class="num"><dt>{n.n}</dt><dd>{n.label}</dd></div>)}
-          </dl>
-          <div><AppUi k="ev" dark t={at} alt={t.ev.alt} /><p class="cap">{t.ev.caption}</p></div>
-        </div>
-        <p class="meta">{t.ev.small}</p>
-      </div>
-    </section>
-
-    <section id="get-started">
-      <div class="wrap w">
-        <h2>{t.start.title}</h2>
-        <ol class="go">
-          {t.start.steps.map((s, i) => (
-            <li class="gs">
-              <div class="vis"><AppUi k={`st${i + 1}`} t={at} alt={s.alt} /></div>
-              <span class="n" aria-hidden="true">{i + 1}</span>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-              {i === 1 && <p class="note"><Rich s={t.start.note2} /></p>}
-              {i === 2 && <p class="note"><Rich s={t.start.note3} /></p>}
             </li>
           ))}
         </ol>
-        <div class="acts">
-          <a class="btn primary lg" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="start" download>{t.hero.cta}</a>
-          <a class="btn lg" href={SITE.androidApk} data-ph="android_download_click" data-ph-location="start">{t.start.android.download}</a>
-          <span class="meta">{t.hero.req}</span>
+      </div>
+    </section>
+
+    <section class="team" id="team">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>{t.team.title}</h2>
+          <p class="sub">{t.team.text}</p>
         </div>
-        <div class="android-install">
-          <h3>{t.start.android.title}</h3>
-          <p>{t.start.android.intro} <a href={subPath(info, 'app')} data-ph="app_page_link_click" data-ph-location="start">{t.app.nav.get} →</a></p>
-          <ol>
-            {t.start.android.steps.map((step) => <li><Rich s={step} /></li>)}
-          </ol>
-          <p>{t.start.android.playStore}</p>
-          <dl class="android-hashes">
-            <div><dt>{t.start.android.fileSha256}</dt><dd><code>{androidFileSha256}</code></dd></div>
-            <div><dt>{t.start.android.certificateSha256}</dt><dd><code>{androidCertificateSha256}</code></dd></div>
-          </dl>
-        </div>
-        <div class="cli">
-          <h3 id="cli-install" class="cli-title">{t.start.cliTitle}</h3>
-          <p class="col"><Rich s={t.start.cliIntro} /></p>
-          <div class="tabs">
-            <input type="radio" name="install-method" id="tab-brew" class="tab-input" checked />
-            <input type="radio" name="install-method" id="tab-script" class="tab-input" />
-            <div class="tablist" role="group" aria-label={t.start.tabsLabel}>
-              <label for="tab-brew">Homebrew</label>
-              <label for="tab-script">install.sh</label>
-            </div>
-            <div class="tab-panel" data-panel="brew">
-              <p class="col"><Rich s={t.start.brew} /></p>
-              <div class="codeblock"><pre tabindex="0"><code><Cmd text={brew} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install_brew" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
-            </div>
-            <div class="tab-panel" data-panel="script">
-              <p class="col"><Rich s={t.start.install} /></p>
-              <div class="codeblock"><pre tabindex="0"><code><Cmd text={install} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="install" aria-label={t.ui.copyInstall} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
-            </div>
+        <ul class="roles rv">
+          {t.team.roles.map((r, i) => (
+            <li class={`role r-${roleKeys[i]}`}>
+              <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={roleIcon[roleKeys[i]]} /></svg></span>
+              <h3>{r.name}</h3>
+              <p>{r.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="compare">
+      <div class="wrap">
+        <h2 class="rv">{t.compare.title}</h2>
+        <div class="cmp rv">
+          <div class="cl">
+            <h3>{t.compare.left.name}</h3>
+            <ul>{t.compare.left.items.map((x) => <li><i aria-hidden="true"></i>{x}</li>)}</ul>
           </div>
-          <details class="advanced">
-            <summary>{t.start.sourceTitle}</summary>
-            <p><Rich s={t.start.source} /></p>
-          </details>
-          <p class="col">{t.start.run}</p>
-          <div class="codeblock"><pre tabindex="0"><code><Cmd text={t.start.runCode} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="run" aria-label={t.ui.copyCommands} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
-          <p class="col">{t.start.tryIntro}</p>
-          <div class="codeblock"><pre tabindex="0"><code><Cmd text={tryIt} /></code></pre><button class="copy" type="button" data-ph="install_command_copy" data-ph-command="try" aria-label={t.ui.copyCommand} data-label={t.ui.copy} data-done={t.ui.copied} data-fallback={t.ui.copyFallback}>{t.ui.copy}</button><span class="sr-only" role="status"></span></div>
-          <p class="links"><a href={SITE.docs}>{t.start.docs}</a><a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a></p>
+          <div class="cr">
+            <h3><Mark size={24} />{t.compare.right.name}</h3>
+            <ul>{t.compare.right.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="alt">
-      <div class="wrap w">
+    <section class="control">
+      <div class="wrap">
+        <div class="cgrid">
+          <div class="rv">
+            <h2>{t.control.title}</h2>
+            <p class="sub">{t.control.text}</p>
+            <ul class="pts">
+              {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
+            </ul>
+            <p class="honest"><span class="soon">{t.ui.soon}</span><span>{t.control.note}</span></p>
+          </div>
+          <div class="cvis rv">
+            <WebApp k="cost" s={s} alt={t.control.alt} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="who">
+      <div class="wrap">
+        <h2 class="rv">{t.who.title}</h2>
+        <ul class="wcards rv">
+          {t.who.items.map((w) => <li><h3>{w.title}</h3><p>{w.text}</p></li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="status" id="status">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>{t.status.title}</h2>
+          <p class="sub">{t.status.text}</p>
+        </div>
+        <ol class="track rv">
+          {t.status.items.map((it, i) => (
+            <li class={`is-${statusState[i]}`}>
+              <span class="dot" aria-hidden="true"></span>
+              <span class="lbl">{t.status.labels[statusState[i]]}</span>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="proof rv">
+          <h3>{t.proof.title}</h3>
+          <dl>{t.proof.nums.map((n) => <div><dt>{n.n}</dt><dd>{n.label}</dd></div>)}</dl>
+          <p class="meta">{t.proof.small}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap">
         <div class="fq">
-          <h2>{t.faq.title}</h2>
-          <div class="faqs">
+          <h2 class="rv">{t.faq.title}</h2>
+          <div class="faqs rv">
             {t.faq.items.map((f, i) => (
-              <details data-faq-id={`faq-${i + 1}`} open={i === 0 || i === 4}>
-                <summary>
-                  <h3>{i >= devFrom && <span class="dv">{t.faq.devLabel}</span>}{f.question}</h3>
-                </summary>
-                <p><Rich s={f.answer} /></p>
+              <details data-faq-id={`faq-${i + 1}`} open={i === 0}>
+                <summary><h3>{f.question}</h3></summary>
+                <p>{f.answer}{i === t.faq.items.length - 1 && <> <a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="faq">{t.faq.devLink} →</a></>}</p>
               </details>
             ))}
           </div>
@@ -342,48 +233,35 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
       </div>
     </section>
 
-    <section class="end">
+    <section class="early" id="early-access">
       <div class="wrap">
-        <h2>{t.close.title}</h2>
-        <div class="acts"><a class="btn primary xl" href={SITE.desktopDmg} data-ph="desktop_download_click" data-ph-location="close" download>{t.hero.cta}</a></div>
-        <p class="meta">{t.hero.req}</p>
+        <div class="egrid">
+          <div class="etxt">
+            <p class="badge"><i></i>{t.hero.badge}</p>
+            <h2>{t.form.title}</h2>
+            <p class="sub">{t.form.text}</p>
+            <ol class="next">{t.form.next.map((n, i) => <li><span>{i + 1}</span>{n}</li>)}</ol>
+          </div>
+          <div class="ecard"><EarlyAccess code={code} /></div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <span class="foot-links"><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a><a href={SITE.roadmap}>{t.start.roadmap}</a><a href={SITE.architecture}>{t.start.architecture}</a>{DESIGN_LIVE && <a href={`${subPath(info, 'design/docs')}#guardrails`}>{dz.nav.guidelines}</a>}<a href={subPath(info, 'app')}>{t.app.nav.get}</a><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></span>
-      <span>{t.footer.license}</span>
-      <span>{t.footer.built}</span>
-    </div>
-  </footer>
-
+  <SiteFooter code={code} page="home" />
   <Analytics />
   <LangBanner locale={code} />
 
   <script>
-    // Scroll motion (T-252): blocks fade up as they arrive, product screens start their own small motion once on screen, numbers count up.
+    // Scroll motion: blocks fade up as they arrive. A scroll sweep (not only an observer) means blocks jumped over
+    // by a fast scroll, an anchor link or a restored scroll position are shown too, never left as an empty area.
     if (document.documentElement.classList.contains('mo')) {
       (window as unknown as { __rv: boolean }).__rv = true;
-      const S = 'main.landing > section:not(.hero)';
-      const tiers: [string, string][] = [
-        ['2', `${S} :is(.lede, .lines, .tl, .lps, .pts, .alsoh, .also, .cm, .nums, .faqs, .back, .links, .h3big, .bp, .tick, .cli, .end .acts, .meta, .go ~ .acts, .fr .row > div > :is(.now, h3, p:not(.cap)))`],
-        ['1', `${S} h2`],
-        ['3', `${S} :is(.win, .phone, .mr, .cap):not(.gs *)`],
-      ];
-      // A block is revealed once its top is above the lower 8% of the screen. A scroll sweep (not only an observer) means blocks
-      // jumped over by a fast scroll, an anchor link or a restored scroll position are shown too, never left as an empty area.
-      const pending = new Set<HTMLElement>();
+      const pending = new Set(document.querySelectorAll<HTMLElement>('main.home .rv'));
       const sweep = () => {
         const line = window.innerHeight * 0.92;
         pending.forEach((el) => { if (el.getBoundingClientRect().top < line) { el.classList.add('in'); pending.delete(el); } });
       };
-      for (const [t, sel] of tiers) document.querySelectorAll<HTMLElement>(sel).forEach((el) => {
-        if (el.classList.contains('rv')) return;
-        el.classList.add('rv'); el.dataset.t = t; pending.add(el);
-      });
-      document.querySelectorAll<HTMLElement>('.go').forEach((el) => pending.add(el));
       let raf = 0;
       const queue = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; sweep(); }); };
       addEventListener('scroll', queue, { passive: true });
@@ -391,51 +269,6 @@ const androidCertificateSha256 = 'f6884e264a84a48b04cf7b04256e40e3887543795b430e
       addEventListener('hashchange', queue);
       addEventListener('beforeprint', () => { pending.forEach((el) => el.classList.add('in')); pending.clear(); });
       sweep();
-
-      const play = new IntersectionObserver((es) => es.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('play'); play.unobserve(e.target); }
-      }), { threshold: 0.3 });
-      document.querySelectorAll(`${S} .win`).forEach((el) => play.observe(el));
-
-      const nums = new IntersectionObserver((es) => es.forEach((e) => {
-        if (!e.isIntersecting) return;
-        nums.unobserve(e.target);
-        const el = e.target as HTMLElement, end = el.dataset.end!, to = Number(end.match(/\d+/)![0]);
-        const t0 = performance.now(), D = 1100;
-        const tick = (now: number) => {
-          const p = Math.min(1, (now - t0) / D), v = Math.round(to * (1 - (1 - p) ** 3));
-          el.textContent = end.replace(/\d+/, String(v));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }), { threshold: 0.6 });
-      document.querySelectorAll<HTMLElement>('.num dt').forEach((el) => {
-        const end = el.textContent ?? '';
-        if (!/\d/.test(end)) return;
-        el.dataset.end = end; el.textContent = end.replace(/\d+/, '0'); nums.observe(el);
-      });
     }
-  </script>
-
-  <script is:inline>
-    document.querySelectorAll('.copy').forEach((b) =>
-      b.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(b.previousElementSibling.textContent);
-          b.textContent = b.dataset.done;
-          setTimeout(() => (b.textContent = b.dataset.label), 1500);
-        } catch {
-          const r = document.createRange();
-          r.selectNodeContents(b.previousElementSibling);
-          const sel = getSelection();
-          sel.removeAllRanges();
-          sel.addRange(r);
-          b.textContent = b.dataset.fallback;
-          b.classList.add('hint');
-          b.nextElementSibling.textContent = b.dataset.fallback;
-          setTimeout(() => { b.textContent = b.dataset.label; b.classList.remove('hint'); b.nextElementSibling.textContent = ''; }, 3000);
-        }
-      }),
-    );
   </script>
 </Base>

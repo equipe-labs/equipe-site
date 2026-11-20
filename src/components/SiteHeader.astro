@@ -1,0 +1,32 @@
+---
+// Header for the home page and /developers: the wordmark, section links, Developers, language, and the early-access button.
+import Mark from './Mark.astro';
+import LangMenu from './LangMenu.astro';
+import { DESIGN_LIVE } from '../data/design';
+import { getDesignText } from '../i18n/design';
+import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; page: 'home' | 'developers' }
+const { code, page } = Astro.props;
+const info = getLocale(code);
+const t = getMessages(code);
+const dz = getDesignText(code);
+// On /developers the section links go back to the home page.
+const home = page === 'home' ? '' : localePath(info);
+---
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href={localePath(info)}><Mark size={28} /> <span class="bt">equipe</span></a>
+    <nav aria-label={t.ui.primaryNav}>
+      <ul>
+        <li class="opt"><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
+        <li class="opt"><a href={`${home}#team`}>{t.nav.team}</a></li>
+        <li class="opt"><a href={`${home}#faq`}>{t.nav.faq}</a></li>
+        {DESIGN_LIVE && <li class="opt dz-link"><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
+        <li class="opt"><a href={subPath(info, 'developers')} aria-current={page === 'developers' ? 'page' : undefined} data-ph="developers_link_click" data-ph-location="header">{t.nav.developers}</a></li>
+        <li><LangMenu locale={code} label={t.ui.language} subpage={page === 'developers' ? 'developers' : undefined} /></li>
+        <li><a class="btn primary sm" href={`${home}#early-access`} data-ph="early_access_cta_click" data-ph-location="header"><span class="cta-l">{t.nav.cta}</span><span class="cta-s">{t.nav.ctaShort}</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
