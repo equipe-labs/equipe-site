@@ -70,7 +70,7 @@ const faqMore = t.faq.more.split('{email}');
       <div class="wrap top">
         <div class="hl">
           <p class="badge"><i></i>{t.hero.badge}</p>
-          <h1>{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <br class="hb" />}{l}</>)}</h1>
+          <h1>{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <>{' '}<br class="hb" /></>}{l}</>)}</h1>
         </div>
         <div class="hr">
           <p class="lead">{t.hero.lead}</p>
