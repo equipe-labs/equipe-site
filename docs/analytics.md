@@ -75,8 +75,12 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | 이벤트 | 속성 | 발생 시점 |
 |---|---|---|
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
-| `cta_github_click` | `location`: `hero` / `header` / `footer` | GitHub로 가는 CTA·링크 클릭 |
-| `desktop_download_click` | `location`: `header` / `hero` / `start` / `close` / `app_page`(`platform`: `macos`, `layout`) | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
+| `early_access_cta_click` | `location`: `header` / `hero` / `footer` / `developers` | "얼리 액세스 신청" 버튼·링크 클릭 (홈의 폼으로 이동). 2026-11 비개발자 개편 이후 홈의 주 행동 |
+| `early_access_submitted` | `locale` | 얼리 액세스 폼 제출이 성공(`200 {ok:true}`)함 |
+| `early_access_failed` | `status`: HTTP 상태, 네트워크 오류는 `0` | 얼리 액세스 폼 제출 실패 |
+| `developers_link_click` | `location`: `header` / `footer` / `faq` | `/developers` 링크 클릭 |
+| `cta_github_click` | `location`: `hero` / `header` / `footer` / `developers` | GitHub로 가는 CTA·링크 클릭 |
+| `desktop_download_click` | `location`: `developers` / `app_page`(`platform`: `macos`, `layout`) | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
 | `android_download_click` | `location`: `phone` / `start` / `support` / `app_page`, `platform`, `layout`(app_page만) | 서명된 Android APK 다운로드 링크 클릭 |
 | `ios_download_click` | `location`: `app_page`, `platform`: `ios`, `layout` | `/app/`의 App Store 배지 클릭 (T-508) |
 | `app_link_send_click` | `platform`: `ios` / `android` | `/app/`의 "Mac으로 링크 보내기" 클릭 (T-508) |

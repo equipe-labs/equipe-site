@@ -30,6 +30,7 @@ export const en = {
     illu: 'An illustration of the equipe web app, not a screenshot.',
   },
   nav: { how: 'How it works', team: 'The team', status: 'Where we are', faq: 'FAQ', developers: 'Developers', github: 'GitHub', cta: 'Get early access', ctaShort: 'Early access' },
+  // hero.title may contain one \n: a line break kept on wide screens (useful where the language would otherwise break mid-phrase).
   hero: {
     badge: 'Early access, by invitation',
     title: 'A startup team for one person.',

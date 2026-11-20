@@ -1,6 +1,12 @@
 # equipe
 
-> equipe is an open-source AI software squad: a team of role-based agents (PM, Designer, Frontend, Backend, Mobile, QA and Data) that works on your repository through a shared board, in isolated git worktrees, and waits for a person's approval before anything merges. It is the team layer on top of existing agent engines (Codex and Claude Code today), not another agent loop. Early-stage, MIT licensed.
+> equipe is a startup team for one person: AI agents in the roles of a PM, engineers, a designer, QA and a data analyst take an idea, or something the person already built in Claude or a similar tool, live as a real service (hosting, database, domain), watch how people use it and propose the next improvement. The person approves anything that goes live, costs money or reaches customers. It runs in the cloud and is used in the browser (app.equipe.im); no Mac or code is needed. Early access is by invitation (request it at https://equipe.im/#early-access). Not shipped yet, planned for the paid launch: one-step import from Claude with a database and domain, usage-based credits with spending caps, and weekly usage reports with proposals.
+
+## The open-source engine (for developers)
+
+The team runs on the open-source equipe engine, which developers can run themselves: https://equipe.im/developers/
+
+> The engine is an open-source AI software squad: a team of role-based agents (PM, Designer, Frontend, Backend, Mobile, QA and Data) that works on your repository through a shared board, in isolated git worktrees, and waits for a person's approval before anything merges. It is the team layer on top of existing agent engines (Codex and Claude Code today), not another agent loop. Early-stage, MIT licensed.
 
 ## How it works
 
