@@ -29,4 +29,5 @@ export const SITE = {
   issues: 'https://github.com/equipe-labs/equipe/issues',
   ogImage: '/og.png',
   themeColor: '#F6F5F1',
+  themeColorDark: '#17181C',
 };

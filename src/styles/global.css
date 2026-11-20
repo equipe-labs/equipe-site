@@ -23,15 +23,14 @@
   --mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', var(--cjk), var(--sym), monospace;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #0A0A0C; --surface: #16171A; --code-bg: #17171C; --text: #EFEDE7; --muted: #A3A5AB;
-    --accent: #8FB0FF; --on-accent: #0B1226; --line: #E9E6DF24; color-scheme: dark;
-  }
-}
 :root[data-theme='dark'] {
-  --bg: #0A0A0C; --surface: #16171A; --code-bg: #17171C; --text: #EFEDE7; --muted: #A3A5AB;
-  --accent: #8FB0FF; --on-accent: #0B1226; --line: #E9E6DF24; color-scheme: dark;
+  /* Dark: lifted off black (page #17181C, cards a step lighter), visible lines, text short of pure white. */
+  --bg: #17181C; --surface: #222329; --code-bg: #1C1D22; --text: #E8E6E1; --muted: #A6A8AF;
+  --accent: #8FB0FF; --on-accent: #0B1226; --line: #FFFFFF17; color-scheme: dark;
+}
+/* Without JavaScript there is no data-theme: the device setting still applies. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { --bg: #17181C; --surface: #222329; --code-bg: #1C1D22; --text: #E8E6E1; --muted: #A6A8AF; --accent: #8FB0FF; --on-accent: #0B1226; --line: #FFFFFF17; color-scheme: dark; }
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
@@ -127,17 +126,22 @@ footer a { color: var(--muted); }
 details.advanced { margin: 0 0 var(--s-5); }
 details.advanced p { max-width: none; }
 
-/* Language menu (plain links, works without JS) */
+/* Language menu: a compact popover under the trigger (plain links, works without JS) */
 nav li { position: relative; }
 details.lang { background: none; margin: 0; border-radius: 0; }
-details.lang summary { padding: 0 var(--s-1); min-height: var(--tap); gap: 6px; font-weight: 400; font-size: 16px; justify-content: flex-start; }
-details.lang summary::after { margin-left: var(--bw-2); }
-/* Narrow screens: globe icon only (aria-label keeps the name); "Português (Brasil)" would overflow the header at 320-360px */
-@media (max-width: 800px) { details.lang .lang-name { display: none; } details.lang summary { min-width: var(--tap); justify-content: center; } }
-details.lang ul { position: absolute; right: 0; top: 100%; z-index: 6; flex-direction: column; align-items: stretch; gap: 0; min-width: 190px; padding: var(--s-2) 0; background: var(--bg); border: var(--bw-1) solid var(--line); border-radius: var(--r-1); }
-details.lang ul a { padding: 0 var(--s-4); width: 100%; text-decoration: none; }
-details.lang ul a[aria-current] { font-weight: 700; }
-details.lang ul a:hover { background: var(--surface); }
+details.lang summary { padding: 0 var(--s-2); min-height: 40px; gap: 6px; font-weight: 500; font-size: 15px; justify-content: flex-start; border-radius: 8px; }
+details.lang summary::after { margin-left: var(--bw-2); width: 6px; height: 6px; }
+details.lang[open] summary { background: color-mix(in srgb, var(--text) 6%, transparent); }
+@media (max-width: 800px) { details.lang .lang-name { display: none; } details.lang summary { min-width: 40px; justify-content: center; } }
+header.site nav details.lang ul.lm, details.lang ul.lm { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; display: grid; gap: 2px; min-width: 184px; width: max-content; max-width: min(260px, calc(100vw - 24px)); margin: 0; padding: 5px; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px -12px rgb(10 10 12 / 0.28), 0 2px 6px -2px rgb(10 10 12 / 0.08); transform-origin: top right; }
+details.lang[open] ul.lm { animation: lm-in 120ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+@keyframes lm-in { from { opacity: 0; transform: scale(0.97) translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { details.lang[open] ul.lm { animation: none; } }
+details.lang ul.lm li { display: block; }
+header.site nav details.lang ul.lm a, details.lang ul.lm a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 34px; padding: 6px 10px; border-radius: 8px; font-size: 14px; font-weight: 450; color: var(--text); text-decoration: none; white-space: nowrap; }
+details.lang ul.lm a[aria-current] { font-weight: 600; }
+details.lang ul.lm a:hover, details.lang ul.lm a:focus-visible { background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--text); outline: none; }
+details.lang .lm-ck { color: var(--accent); flex: none; }
 
 /* "View this page in …" suggestion; fixed so it never shifts the layout */
 .lang-banner { position: fixed; left: var(--s-3); right: var(--s-3); bottom: var(--s-3); z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); max-width: 520px; margin: 0 auto; padding: 0 var(--s-1) 0 var(--s-4); background: var(--surface); border: var(--bw-1) solid var(--line); border-radius: var(--s-3); box-shadow: 0 4px 16px rgb(0 0 0 / 0.15); }

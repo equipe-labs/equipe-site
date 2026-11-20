@@ -1,0 +1,100 @@
+/* Motion for the home page. Everything here is gated on html.mo, which the inline <head> script sets only when the visitor
+   has not asked for reduced motion (and removes again if the page script never runs). Without it every element shows its
+   final, static state. Only transform and opacity animate, plus a dash offset on two small SVG strokes. */
+:root { --ease: cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* 1. hero copy and the idea box arrive on load (the headline only moves, so it never waits to be painted) */
+html.mo .ld { animation: ld-in 700ms var(--ease) both; animation-delay: calc(var(--d, 0) * 90ms + 60ms); }
+html.mo h1.ld { animation-name: ld-move; }
+@keyframes ld-in { from { opacity: 0; transform: translateY(14px); } }
+@keyframes ld-move { from { transform: translateY(10px); } }
+html.mo .hero .shot .wa-win { animation: ld-in 900ms var(--ease) both 380ms; }
+html.mo .hero .shot .wa-device { animation: phone-in 1000ms var(--ease) both 700ms; }
+html.mo .hero .shot .wa-metrics { animation: ld-in 800ms var(--ease) both 1100ms; }
+@keyframes phone-in { from { opacity: 0; transform: translateY(40px) rotate(-3deg); } }
+
+/* rotating word */
+html.mo .rot-w > .in { animation: rot-in 450ms var(--ease) both; }
+html.mo .rot-w > .out { animation: rot-out 380ms var(--ease) both; }
+@keyframes rot-in { from { opacity: 0; transform: translateY(60%); filter: blur(4px); } }
+@keyframes rot-out { to { opacity: 0; transform: translateY(-60%); filter: blur(4px); } }
+
+/* team strip (kept for when the hero badge is chosen) */
+html.mo .tstrip .ta { animation: ld-in 500ms var(--ease) both; animation-delay: calc(var(--i) * 80ms + 200ms); }
+
+/* 2. sections fade up as they enter */
+html.mo main.home .rv, html.mo footer .rv { opacity: 0; transform: translateY(18px); }
+html.mo main.home .rv.in, html.mo footer .rv.in { opacity: 1; transform: none; transition: opacity 600ms var(--ease), transform 600ms var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+html.mo .fsteps.in li { animation: ld-in 600ms var(--ease) both; animation-delay: calc(var(--i) * 140ms + 100ms); }
+
+/* 3. scenes come alive while on screen (.live) */
+/* Working -> Done, then back, on a 9 s loop */
+html.mo .wa-fig.live .wa-sw > .working { animation: sw-a 9s var(--ease) infinite; }
+html.mo .wa-fig.live .wa-sw > .done { animation: sw-b 9s var(--ease) infinite; }
+html.mo .wa-fig.live .wa-sw.late > * { animation-delay: 2.6s; }
+@keyframes sw-a { 0%, 30% { opacity: 1; transform: none; } 34%, 88% { opacity: 0; transform: translateY(-4px); } 92%, 100% { opacity: 1; transform: none; } }
+@keyframes sw-b { 0%, 30% { opacity: 0; transform: translateY(4px); } 34%, 88% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: translateY(4px); } }
+/* the PM is typing, then the message appears */
+html.mo .wa-fig.live .tw-dots { animation: tw-dots 8s linear infinite; }
+html.mo .wa-fig.live .tw p { animation: tw-msg 8s var(--ease) infinite; }
+html.mo .wa-fig.live .tw-dots i { animation: tw-bounce 1s ease-in-out infinite; }
+html.mo .wa-fig.live .tw-dots i:nth-child(2) { animation-delay: 0.15s; } html.mo .wa-fig.live .tw-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tw-dots { 0%, 2% { opacity: 0; } 5%, 24% { opacity: 1; } 27%, 100% { opacity: 0; } }
+@keyframes tw-msg { 0%, 25% { opacity: 0; transform: translateY(6px); } 30%, 92% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+@keyframes tw-bounce { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-3px); } }
+/* the decision card slides in, Approve is pressed and turns into a check */
+html.mo .wa-decision.live .wa-dec { animation: dec-in 10s var(--ease) infinite; }
+html.mo .wa-decision.live .wa-ap { animation: ap-press 10s var(--ease) infinite; }
+html.mo .wa-decision.live .wa-ap .l { animation: ap-l 10s var(--ease) infinite; }
+html.mo .wa-decision.live .wa-ap .ok { animation: ap-ok 10s var(--ease) infinite; }
+@keyframes dec-in { 0% { opacity: 0; transform: translateY(18px) scale(0.98); } 7%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
+@keyframes ap-press { 0%, 44% { transform: none; } 47% { transform: scale(0.93); } 50%, 100% { transform: none; } }
+@keyframes ap-l { 0%, 48% { opacity: 1; } 51%, 100% { opacity: 0; } }
+@keyframes ap-ok { 0%, 48% { opacity: 0; transform: scale(0.5); } 52%, 100% { opacity: 1; transform: none; } }
+.wa-ap { position: relative; }
+.wa-ap .ok { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+/* the cost meter fills from the left */
+.wa-meter.seg i { transform-origin: left; }
+html.mo .wa-cost .wa-meter.seg i { transform: scaleX(0); }
+html.mo .wa-cost.live .wa-meter.seg i { transform: none; transition: transform 900ms var(--ease); }
+html.mo .wa-cost.live .wa-meter.seg i:nth-child(2) { transition-delay: 120ms; } html.mo .wa-cost.live .wa-meter.seg i:nth-child(3) { transition-delay: 240ms; }
+html.mo .wa-cost.live .wa-meter.seg i:nth-child(4) { transition-delay: 360ms; } html.mo .wa-cost.live .wa-meter.seg i:nth-child(5) { transition-delay: 480ms; } html.mo .wa-cost.live .wa-meter.seg i:nth-child(6) { transition-delay: 640ms; }
+/* the hero's in-chat decision arrives a beat after the window */
+html.mo .wa-hero .wa-dec.inchat { animation: ld-in 700ms var(--ease) both 1300ms; }
+/* habit check fills on the phone */
+html.mo .wa-fig.live .st-habits li:nth-child(2) .st-ck { animation: ck 9s var(--ease) infinite; }
+@keyframes ck { 0%, 20% { transform: scale(1); } 24% { transform: scale(1.18); } 28%, 100% { transform: scale(1); } }
+/* live dots breathe */
+html.mo .wa-live-dot, html.mo .tstrip-dot, html.mo .nd .ri .pulse { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(0.82); } }
+/* team conduits: data flows along the lines */
+html.mo .flowmap.in .conn .flow { animation: dash 1.6s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -24; } }
+html.mo .flowmap.in .node { animation: ld-in 600ms var(--ease) both; animation-delay: calc(var(--i) * 110ms + 100ms); }
+/* marquee */
+html.mo .mq-track { animation: mq 46s linear infinite; }
+html.mo .mq:hover .mq-track, html.mo .mq:focus-within .mq-track, html.mo .mq:focus .mq-track { animation-play-state: paused; }
+@keyframes mq { to { transform: translateX(calc(-100% - 12px)); } }
+html:not(.mo) .mq { overflow-x: auto; scrollbar-width: none; }
+
+/* 4. hover micro-interactions (pointer devices) */
+@media (hover: hover) {
+  .btn { transition: transform 160ms var(--ease), background-color 150ms, border-color 150ms, color 150ms, box-shadow 160ms; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary:hover { box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--accent) 80%, transparent); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+  .tile:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--text) 18%, transparent); box-shadow: 0 24px 48px -30px rgb(16 18 24 / 0.45); }
+  .plan:hover { transform: translateY(-3px); }
+  .nd { transition: transform 200ms var(--ease), border-color 200ms; }
+  .nd:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 50%, var(--line)); }
+  .wcards li, .track li { transition: transform 200ms var(--ease); }
+  .wcards li:hover { transform: translateY(-2px); }
+  .idea-ex button { transition: transform 140ms var(--ease), color 140ms, border-color 140ms; }
+  .idea-ex button:hover { transform: translateY(-1px); }
+  .mq-track li { transition: border-color 160ms, transform 160ms var(--ease); }
+  .mq-track li:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); transform: translateY(-1px); }
+}
+
+/* print and reduced motion: everything visible, nothing moving */
+@media print { html.mo .rv, html.mo .ld { opacity: 1 !important; transform: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .mq-track { animation: none !important; } .btn:hover, .tile:hover, .plan:hover, .nd:hover { transform: none; } }

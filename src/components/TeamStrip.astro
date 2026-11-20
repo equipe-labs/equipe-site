@@ -1,0 +1,20 @@
+---
+// The five roles as small overlapping avatars, then a short line ("Your team is ready") and a live dot.
+// Drawn in code with the role colours of the app scenes. Motion (stagger in, dot pulse) lives in motion.css.
+interface Props { text: string; class?: string }
+const { text, class: cls = '' } = Astro.props;
+const roles = [
+  { r: 'pm', d: 'M5 20V5h11l-2 4 2 4H5' },
+  { r: 'eng', d: 'M9 7l-5 5 5 5M15 7l5 5-5 5' },
+  { r: 'design', d: 'M4 20l4-1 11-11-3-3L5 16zM14 7l3 3' },
+  { r: 'qa', d: 'M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6zM8.5 12l2.5 2.5 4.5-5' },
+  { r: 'data', d: 'M5 20V11M12 20V5M19 20v-6' },
+];
+---
+<p class={`tstrip ${cls}`.trim()}>
+  <span class="tstrip-av" aria-hidden="true">
+    {roles.map((x, i) => <span class={`ta ta-${x.r}`} style={`--i:${i}`}><svg viewBox="0 0 24 24"><path d={x.d} /></svg></span>)}
+  </span>
+  <span class="tstrip-t">{text}</span>
+  <i class="tstrip-dot" aria-hidden="true"></i>
+</p>

@@ -1,5 +1,5 @@
 ---
-// The hosted product (equipe in the browser, app.equipe.im) for the home page. No price yet: billing is not live.
+// The hosted product for the home page and /pricing: equipe in the browser (app.equipe.im), with the Mac and iPhone apps.
 import JsonLd from './JsonLd.astro';
 import { SITE } from '../data/site';
 
@@ -9,16 +9,17 @@ const { lang, url, description, featureList } = Astro.props;
 
 <JsonLd
   data={{
-    '@type': 'WebApplication',
+    '@type': 'SoftwareApplication',
     '@id': `${url}#app`,
     name: SITE.name,
+    alternateName: 'equipe AI',
     url,
     inLanguage: lang,
     description,
     applicationCategory: 'BusinessApplication',
-    operatingSystem: 'Web browser',
-    browserRequirements: 'Requires a modern web browser',
+    operatingSystem: 'Web, macOS, iOS',
     ...(featureList ? { featureList } : {}),
-    author: { '@id': `${SITE.url}/#organization` },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Start free with $5 of credit; no card needed.', url: `${SITE.url}/pricing/` },
+    publisher: { '@id': `${SITE.url}/#organization` },
   }}
 />

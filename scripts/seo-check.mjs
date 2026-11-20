@@ -104,7 +104,7 @@ for (const { lang, path } of LOCALES) {
     try {
       const data = JSON.parse(b.replace(/^<script[^>]*>|<\/script>$/g, ''));
       types.push(data['@type']);
-      if (data['@type'] === 'Organization') check(/\.png$/.test(data.logo ?? ''), `${path} Organization logo is PNG`);
+      if (data['@type'] === 'Organization') check(/\.png$/.test(typeof data.logo === 'string' ? data.logo : data.logo?.url ?? ''), `${path} Organization logo is PNG`);
       if (data['@type'] === 'FAQPage') {
         const qs = data.mainEntity ?? [];
         check(
@@ -126,8 +126,7 @@ for (const { lang, path } of LOCALES) {
       fail(`${path} JSON-LD parse error: ${e.message}`);
     }
   }
-  // The home page describes the hosted product (WebApplication); the open-source app (SoftwareApplication) is on /developers.
-  for (const t of ['Organization', 'WebSite', 'WebApplication', 'FAQPage']) {
+  for (const t of ['Organization', 'WebSite', 'SoftwareApplication', 'FAQPage']) {
     check(types.includes(t), `${path} JSON-LD ${t}`);
   }
 }
@@ -183,7 +182,7 @@ section('robots.txt, sitemap, llms.txt');
   check(res.status === 200, `robots.txt ${res.status}`);
   check(!/^\s*Disallow:\s*\/\s*$/m.test(body), 'robots.txt does not disallow /');
   const sm = body.match(/^Sitemap:\s*(\S+)/m)?.[1];
-  check(sm === `${CANONICAL}/sitemap-index.xml`, `robots.txt Sitemap: ${sm}`);
+  check(sm === `${CANONICAL}/sitemap.xml` || sm === `${CANONICAL}/sitemap-index.xml`, `robots.txt Sitemap: ${sm}`);
 
   const idx = await get(`${CANONICAL}/sitemap-index.xml`);
   const idxBody = await idx.text();

@@ -27,7 +27,22 @@ const { lang } = getLocale(Astro.props.locale);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {/* No font preloads: San Francisco is the system font on Apple devices, and Inter / Pretendard are fetched only where it is missing. */}
     <slot name="head" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      // Theme: follows the device unless the header toggle stored 'light' or 'dark' (absent = system).
+      (function () {
+        var r = document.documentElement, t = null, mq = matchMedia('(prefers-color-scheme: dark)');
+        try { t = localStorage.getItem('equipe-theme'); } catch (e) {}
+        function apply() {
+          var mode = t === 'light' || t === 'dark' ? t : mq.matches ? 'dark' : 'light';
+          r.dataset.theme = mode; r.dataset.themePref = t === 'light' || t === 'dark' ? t : 'system';
+          var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = mode === 'dark' ? '#17181C' : '#F6F5F1';
+        }
+        apply();
+        mq.addEventListener && mq.addEventListener('change', function () { if (r.dataset.themePref === 'system') apply(); });
+        window.__eqTheme = function (v) { t = v === 'system' ? null : v; try { t ? localStorage.setItem('equipe-theme', t) : localStorage.removeItem('equipe-theme'); } catch (e) {} apply(); };
+      })();
+    </script>
   </head>
   <body>
     <slot />

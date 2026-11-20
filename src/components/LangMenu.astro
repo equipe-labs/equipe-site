@@ -13,7 +13,7 @@ const current = getLocale(locale);
 
 {
   available.length > 1 && (
-    <details class="lang">
+    <details class="lang" data-lang-menu>
       <summary aria-label={`${current.name}, ${label}`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
@@ -21,16 +21,17 @@ const current = getLocale(locale);
         </svg>
         <span class="lang-name" lang={current.lang}>{current.name}</span>
       </summary>
-      <ul>
+      <ul class="lm" role="list">
         {available.map((l) => (
-          <li>
+          <li class="lm-i">
             <a href={subpage ? subPath(l, subpage) : localePath(l)} lang={l.lang} hreflang={l.lang} aria-current={l.code === locale ? 'true' : undefined} data-lang-choice
               data-ph={l.code === locale ? undefined : 'language_switch'}
               data-ph-from={current.lang}
               data-ph-to={l.lang}
               data-ph-source="menu"
             >
-              {l.name}
+              <span>{l.name}</span>
+              {l.code === locale && <svg class="lm-ck" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>}
             </a>
           </li>
         ))}
@@ -39,6 +40,20 @@ const current = getLocale(locale);
   )
 }
 <script>
+  // Close on Escape or a click outside; arrow keys move between languages.
+  document.querySelectorAll<HTMLDetailsElement>('[data-lang-menu]').forEach((d) => {
+    const links = () => [...d.querySelectorAll<HTMLAnchorElement>('.lm a')];
+    d.addEventListener('toggle', () => { if (d.open) (links().find((a) => a.getAttribute('aria-current')) ?? links()[0])?.focus({ preventScroll: true }); });
+    document.addEventListener('click', (e) => { if (d.open && !d.contains(e.target as Node)) d.open = false; });
+    d.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && d.open) { d.open = false; d.querySelector('summary')!.focus(); return; }
+      if (!d.open || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      const l = links(), i = l.indexOf(document.activeElement as HTMLAnchorElement);
+      const n = e.key === 'Home' ? 0 : e.key === 'End' ? l.length - 1 : (i + (e.key === 'ArrowDown' ? 1 : -1) + l.length) % l.length;
+      l[n].focus();
+    });
+  });
   // Keep the section the reader is on when switching language.
   document.querySelectorAll<HTMLAnchorElement>('[data-lang-choice]').forEach((a) => {
     a.addEventListener('click', () => {

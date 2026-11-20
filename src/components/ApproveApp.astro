@@ -1,0 +1,29 @@
+---
+// The equipe phone app's approval screen, for /developers: a push banner, the member asking, the request as a card, Deny / Allow once.
+// Words from messages.demo.phone.
+import { getMessages, type LocaleCode } from '../i18n';
+interface Props { code: LocaleCode }
+const p = getMessages(Astro.props.code).demo.phone;
+// The request names a URL; it is shown as its own line in the card.
+const url = (p.action.match(/[a-z0-9.-]+\.[a-z]{2,}\/[^\s,，、。]*/i) ?? [''])[0];
+---
+<div class="ap2">
+  <div class="ap2-push">
+    <span class="ap2-pi" aria-hidden="true">e</span>
+    <span class="ap2-pt"><b>equipe</b><span>{p.name} {p.verb}</span></span>
+    <em>{p.age}</em>
+  </div>
+  <div class="ap2-head"><span class="ap2-x">{p.close}</span></div>
+  <div class="ap2-who">
+    <span class="ap2-av" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5" /></svg></span>
+    <span class="ap2-wn"><b>{p.name}</b><span class="ap2-chip">{p.tool}</span></span>
+  </div>
+  <p class="ap2-q">{p.verb}</p>
+  <p class="ap2-where">{p.where}</p>
+  <div class="ap2-card">
+    <p>{p.action}</p>
+    {url && <span class="ap2-url"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z" /></svg>{url}</span>}
+  </div>
+  <p class="ap2-once">{p.once}</p>
+  <div class="ap2-acts"><span class="ap2-deny">{p.deny}</span><span class="ap2-allow">{p.allow}</span></div>
+</div>

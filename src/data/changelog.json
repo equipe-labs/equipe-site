@@ -1,0 +1,126 @@
+[
+ {
+  "version": "v0.103.153",
+  "date": "2026-11-20",
+  "items": [
+   "Fewer sign-in asks: record finished sign-ins, AWS/Slack out of the browser, one ask per site",
+   "Refuse a secret ask that repeats a key the squad already holds"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.153"
+ },
+ {
+  "version": "v0.103.152",
+  "date": "2026-11-20",
+  "items": [
+   "Let the PM take away cards it says to ignore",
+   "Read the board in the design-QA upgrade test instead of racing its event"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.152"
+ },
+ {
+  "version": "v0.103.151",
+  "date": "2026-11-19",
+  "items": [
+   "Decided requests apart from production; one sign-in ask; run-lane binding test",
+   "Blocked on missing work: name it, equipe makes the ticket, no more relay",
+   "PM context: say each turn's blocks once per conversation, then only what changed"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.151"
+ },
+ {
+  "version": "v0.103.150",
+  "date": "2026-11-19",
+  "items": [
+   "Let verification roles run tests on Codex in a disposable copy"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.150"
+ },
+ {
+  "version": "v0.103.149",
+  "date": "2026-11-19",
+  "items": [
+   "AI platforms: sign out, switch account and a real reason for \"Couldn't check\""
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.149"
+ },
+ {
+  "version": "v0.103.148",
+  "date": "2026-11-19",
+  "items": [
+   "Machine credentials first: no sign-in card while one already works",
+   "Squad health: ticket budgets, spend alarms and a self-watch",
+   "Growth: the growth loop — evidence, cards, tickets, measured outcomes"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.148"
+ },
+ {
+  "version": "v0.103.147",
+  "date": "2026-11-19",
+  "items": [
+   "Stop baton loops: cap hand-overs between hand-ins and checklist growth",
+   "Run a project's go-live command after landed work is pushed",
+   "Requests: name the request a ticket serves, only work covers one, close honestly",
+   "Waiting on you: one list of everything waiting on the person, told to them and the PM",
+   "Make Always answer a kept-login sign-in card",
+   "Give runtime tests' event wait 45s on loaded CI runners",
+   "Needs you: every project's and the PM desk's, with what each asks; small talk opens no request",
+   "Metrics: read-only ad-hoc HogQL queries through a squad's connection",
+   "Don't open main-red tickets for equipe's own advisory checks",
+   "Close a person's request only when its work is live",
+   "List Metrics connection keys under Keys & secrets"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.147"
+ },
+ {
+  "version": "v0.103.144",
+  "date": "2026-11-18",
+  "items": [
+   "Land finished work now: red main, decide-and-tell choices, additive migrations",
+   "Count only a branch's own files when weighing who lands it"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.144"
+ },
+ {
+  "version": "v0.103.143",
+  "date": "2026-11-18",
+  "items": [
+   "Pacing never blocks the person; held turns say why; orphans reaped; lighter lanes",
+   "Keep work going when a plan or model runs out mid-turn",
+   "Design QA only when needed: precheck first, no designer while it runs, cheaper bounded turns",
+   "Push main when a member lands its own work"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.143"
+ },
+ {
+  "version": "v0.103.142",
+  "date": "2026-11-18",
+  "items": [
+   "One ticket per request: driver, checklist, baton, self-landing, no meta tickets"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.142"
+ },
+ {
+  "version": "v0.103.141",
+  "date": "2026-11-18",
+  "items": [
+   "Squad autonomy policy: levels, hard floor, standing allowances",
+   "Stay responsive on an overloaded Mac: board in memory, patient hellos, load pacing, no whole-disk searches",
+   "Design session pages: root addresses served, files checked, the page looked at before \"sent\"",
+   "Keep squad-folder git off the daemon's loop"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.141"
+ },
+ {
+  "version": "v0.103.140",
+  "date": "2026-11-18",
+  "items": [
+   "Land accepted work one at a time per repository",
+   "Remote-aware: design session pages and everything shown reach the person's screen wherever it is",
+   "A project's page has a \"What's live\" tab, and the sidebar says when a project's work went live and what it brought",
+   "equipe tells you when work you asked for is live, in its conversation and as a notification (Settings › Notifications › Work goes live)",
+   "Restart to Update says what's new, and after updating equipe says once what the update brought",
+   "Pinned conversations get their own section at the top"
+  ],
+  "url": "https://github.com/equipe-labs/equipe/releases/tag/v0.103.140"
+ }
+]

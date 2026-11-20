@@ -1,0 +1,34 @@
+---
+// Chrome for the top-level marketing pages (/pricing, /security, /about, /changelog, /customers/…): header, footer, JSON-LD.
+import Base from '../layouts/Base.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import Analytics from './Analytics.astro';
+import LangBanner from './LangBanner.astro';
+import ConsentBanner from './ConsentBanner.astro';
+import OrganizationJsonLd from './OrganizationJsonLd.astro';
+import WebSiteJsonLd from './WebSiteJsonLd.astro';
+import '../styles/site.css';
+import '../styles/pages.css';
+import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; page: string; title: string; description: string }
+const { code, page, title, description } = Astro.props;
+const info = getLocale(code);
+const t = getMessages(code);
+const url = new URL(subPath(info, page), Astro.site).href;
+---
+<Base locale={code} title={title} description={description} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt} subpage={page}>
+  <Fragment slot="head">
+    <OrganizationJsonLd />
+    <WebSiteJsonLd lang={info.lang} url={url} description={description} />
+    <slot name="head" />
+  </Fragment>
+  <a class="skip" href="#main">{t.ui.skip}</a>
+  <SiteHeader code={code} page={page} />
+  <main id="main" class="pg"><slot /></main>
+  <SiteFooter code={code} page={page} />
+  <Analytics />
+  <LangBanner locale={code} subpage={page} />
+  <ConsentBanner code={code} />
+</Base>

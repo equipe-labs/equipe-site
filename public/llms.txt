@@ -2,6 +2,15 @@
 
 > equipe is a startup team for one person: AI agents in the roles of a PM, engineers, a designer, QA and a data analyst take an idea, or something the person already built in Claude or a similar tool, live as a real service (hosting, database, domain), watch how people use it and propose the next improvement. The person approves anything that goes live, costs money or reaches customers. It runs in the cloud and is used in the browser (app.equipe.im); no Mac or code is needed. Sign-up is open: start at https://app.equipe.im/start (add ?idea=<text> to bring an idea along); returning users sign in at https://app.equipe.im/login. Pricing: 1 credit = $1; $5 free on sign-up and $10 more when a card is added; credit packs of $25, $50, $100 and $250; Team plan $19/month plus monthly credits; Hosting only $19/month. Not shipped yet: one-step import from Claude with a database and domain, monthly spending caps, and weekly usage reports with proposals.
 
+## Pages
+
+- Pricing: https://equipe.im/pricing/
+- Security: https://equipe.im/security/
+- About (Umbriles Inc.): https://equipe.im/about/
+- Changelog: https://equipe.im/changelog/
+- Sign up: https://app.equipe.im/start · Sign in: https://app.equipe.im/login
+- Brand files: https://equipe.im/brand/ (mark.svg, wordmark.svg, lockup.svg, logo-512.png)
+
 ## The open-source engine (for developers)
 
 The team runs on the open-source equipe engine, which developers can run themselves: https://equipe.im/developers/

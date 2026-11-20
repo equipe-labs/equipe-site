@@ -1,6 +1,7 @@
 ---
 import JsonLd from './JsonLd.astro';
 import { SITE } from '../data/site';
+// sameAs lists official profiles only; add social accounts here when they exist.
 ---
 
 <JsonLd
@@ -8,8 +9,12 @@ import { SITE } from '../data/site';
     '@type': 'Organization',
     '@id': `${SITE.url}/#organization`,
     name: SITE.name,
+    alternateName: 'equipe AI',
+    legalName: 'Umbriles Inc.',
     url: SITE.url,
-    logo: `${SITE.url}/logo.png`,
+    logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/logo-512.png`, width: 512, height: 512 },
+    email: SITE.supportEmail,
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.supportEmail },
     sameAs: [SITE.repo],
   }}
 />

@@ -1,0 +1,20 @@
+---
+// /security: how equipe keeps products and data safe. Facts supplied by the owner; nothing beyond them.
+import PageShell from '../../components/PageShell.astro';
+import { SITE } from '../../data/site';
+import { available, getMessages, type LocaleCode } from '../../i18n';
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const S = getMessages(code).pages.security;
+const icons = ['M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5zM12 15v2', 'M5 12.5l4.5 4.5L19 7.5', 'M4 5h16v10H4zM8 19h8M12 15v4', 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13', 'M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM5 20c0-3.5 3-6 7-6s7 2.5 7 6'];
+const [cBefore, cAfter] = S.contact.split('{email}');
+---
+<PageShell code={code} page="security" title={S.title} description={S.desc}>
+  <section class="pg-h"><div class="wrap"><h1>{S.h1}</h1><p class="pg-lead">{S.lead}</p></div></section>
+  <section class="pg-s"><div class="wrap">
+    <ul class="pg-grid">
+      {S.items.map((it, i) => <li class="pg-card"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={icons[i]} /></svg></span><h2>{it.title}</h2><p>{it.text}</p></li>)}
+    </ul>
+    <p class="pg-note">{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
+  </div></section>
+</PageShell>

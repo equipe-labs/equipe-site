@@ -1,0 +1,37 @@
+---
+// /pricing: the plans (same data as the home page), the pricing facts and the cost FAQ.
+import PageShell from '../../components/PageShell.astro';
+import WebApplicationJsonLd from '../../components/WebApplicationJsonLd.astro';
+import '../../styles/sections.css';
+import { SITE } from '../../data/site';
+import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const t = getMessages(code);
+const P = t.pages.pricing;
+const check = 'M5 12.5l4.5 4.5L19 7.5';
+const cost = t.faq.items[4];
+---
+<PageShell code={code} page="pricing" title={P.title} description={P.desc}>
+  <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
+  <section class="pg-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>
+  <section class="pg-s"><div class="wrap">
+    <ul class="plans">
+      {t.plans.items.map((p, i) => (
+        <li class={`plan${i === 1 ? ' featured' : ''}`}>
+          <div class="plan-h"><h2>{p.name}</h2>{i === 1 && <span class="plan-b">{t.plans.featured}</span>}</div>
+          <p class="plan-d">{p.text}</p>
+          <p class="plan-p"><b>{p.price}</b><span>{p.per}</span></p>
+          <ul class="plan-f">{p.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+          <a class={`btn ${i === 1 ? 'primary' : 'ghost'} plan-a`} href={SITE.start} data-ph="signup_cta_click" data-ph-location={`pricing_page_${i}`}>{p.cta}</a>
+        </li>
+      ))}
+    </ul>
+    <p class="pg-note">{t.plans.text} {t.control.note}</p>
+    <div class="pg-prose" style="margin-top:64px">
+      <h2>{cost.question}</h2>
+      <p>{cost.answer}</p>
+    </div>
+  </div></section>
+</PageShell>

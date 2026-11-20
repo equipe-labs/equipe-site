@@ -1,7 +1,6 @@
 /* /app/: getting the phone app (T-507 spec → T-508). Tokens are the site's (global.css); the only local values are --ok and --dash,
    which also exist in app.css / landing.css but those files belong to other pages. */
 :root { --ok: #1F6B33; --dash: #80828A; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --ok: #7FCB8E; --dash: #6B6D75; } }
 :root[data-theme='dark'] { --ok: #7FCB8E; --dash: #6B6D75; }
 
 .get-app { --gap: var(--s-8); }
@@ -118,7 +117,6 @@
 
 /* Android's own "install unknown apps" screen, drawn in code */
 .get-app .droid { background: #FFFFFF; color: #1B1B1F; border-radius: 16px; padding: 14px 14px 4px; font-family: Roboto, system-ui, var(--cjk), sans-serif; max-width: 280px; box-shadow: 0 0 0 1px #0000001a; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .get-app .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; } }
 :root[data-theme='dark'] .get-app .droid { background: #1E1F23; color: #E3E2E6; box-shadow: 0 0 0 1px #ffffff1a; }
 .get-app .droid .h { margin: 0 0 8px; font: 500 16px/1.3 Roboto, system-ui, var(--cjk), sans-serif; }
 .get-app .droid .app { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 4px; }
@@ -155,7 +153,6 @@
 .get-app .btn.done { border-color: var(--muted); }
 .get-app .stepill.droidpanel { width: fit-content; max-width: 100%; }
 :root[data-theme='dark'] .get-app .sw { background: #A8C7FA; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .get-app .sw { background: #A8C7FA; } }
 @media (hover: hover) {
   .get-app .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
   .get-app .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }

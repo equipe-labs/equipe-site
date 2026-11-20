@@ -1,0 +1,37 @@
+---
+// "Stride", the example app the team shipped (a habit tracker at getstride.app), as it looks on a phone. Drawn in code; words from messages.scene.app.
+import type { Messages } from '../i18n';
+interface Props { s: Messages['scene'] }
+const { s } = Astro.props;
+const a = s.app;
+const week = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+const icons = [
+  'M13 4a2 2 0 1 0 0 .1M9 21l2.5-6 2.5 2v4M7 12l3-3 3 1 2 3h3M10 9l-1 4', // run
+  'M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z', // book
+  'M12 3c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0C7 9.5 9 7 12 3z', // drop
+];
+---
+<div class="st">
+  <div class="st-top">
+    <div>
+      <span class="st-date">{a.today}</span>
+      <b class="st-greet">{a.greet}</b>
+    </div>
+    <span class="st-me" aria-hidden="true">M</span>
+  </div>
+  <div class="st-streak">
+    <div class="st-streak-n"><svg viewBox="0 0 24 24"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2.4 1.2-3.9 2.4-5 .1 1.6.8 2.7 1.8 3.3C11 8.7 11.3 5.3 12 2z" /></svg><b>12</b><span>{a.streak}</span></div>
+    <div class="st-week">{week.map((d, i) => <span class={i < 5 ? 'on' : i === 5 ? 'cur' : ''}><i></i>{d}</span>)}</div>
+  </div>
+  <ul class="st-habits">
+    {a.habits.map((h, i) => (
+      <li class={i < 2 ? 'done' : 'todo'}>
+        <span class={`st-hi st-hi${i}`}><svg viewBox="0 0 24 24"><path d={icons[i]} /></svg></span>
+        <span class="st-hn">{h}</span>
+        <span class="st-ck"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4L18 8" /></svg></span>
+      </li>
+    ))}
+  </ul>
+  <div class="st-prog"><span>{a.today}</span><b>2 / 3</b><i><i></i></i></div>
+  <span class="st-cta">+ {a.add}</span>
+</div>

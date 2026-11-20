@@ -1,9 +1,12 @@
 ---
 // The home page, for non-developers: a startup team for one person, in the cloud. Developer content lives on /developers.
+// Section patterns were studied on 21st.dev (workflow hero, bento grid, how-it-works rail, marquee, pricing with a featured plan,
+// call-to-action) and rewritten here as plain Astro + CSS with our tokens: no React, no new dependencies.
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Mark from '../components/Mark.astro';
+import RoleIcon from '../components/RoleIcon.astro';
 import WebApp from '../components/WebApp.astro';
 import IdeaBox from '../components/IdeaBox.astro';
 import Analytics from '../components/Analytics.astro';
@@ -12,9 +15,13 @@ import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
 import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
 import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import '../styles/site.css';
 import '../styles/webapp.css';
+import '../styles/iphone.css';
 import '../styles/home.css';
+import '../styles/sections.css';
+import '../styles/motion.css';
 import { SITE } from '../data/site';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
@@ -28,28 +35,35 @@ const info = getLocale(code);
 const t = getMessages(code);
 const s = t.scene;
 const pageUrl = new URL(localePath(info), Astro.site).href;
-// How-it-works scenes, in step order. Step 4 (usage reports and proposals) is not shipped yet.
-const howScenes = ['chat', 'team', 'decision', 'growth'] as const;
-const howSoon = [false, false, false, true];
 // Where we are: one state per item.
 const statusState = ['now', 'early', 'soon'] as const;
 const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'] as const;
-const roleIcon: Record<string, string> = {
-  pm: 'M5 20V5h11l-2 4 2 4H5',
-  eng: 'M9 7l-5 5 5 5M15 7l5 5-5 5',
-  design: 'M4 20l4-1 11-11-3-3L5 16zM14 7l3 3',
-  qa: 'M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6zM8.5 12l2.5 2.5 4.5-5',
-  data: 'M5 20V11M12 20V5M19 20v-6',
-};
+// What each member is doing right now in the team section: a task from the app scene, and its state.
+const roleNow = [
+  { text: s.decision.label, st: 'next' },
+  { text: s.activity.tasks[0], st: 'working' },
+  { text: s.activity.tasks[2], st: 'done' },
+  { text: s.activity.tasks[3], st: 'working' },
+  { text: s.activity.tasks[4], st: 'next' },
+] as const;
+const stateName = (st: string) => (s.activity.states as Record<string, string>)[st];
 const check = 'M5 12.5l4.5 4.5L19 7.5';
 const faqMore = t.faq.more.split('{email}');
+// Bento tiles: a scene, a title and a line. Reuses the how-it-works and cost strings.
+const tiles = [
+  { k: 'chat', title: t.how.steps[0].title, text: t.how.steps[0].caption, alt: t.how.steps[0].alt, cls: 'b-a' },
+  { k: 'team', title: t.how.steps[1].title, text: t.how.steps[1].caption, alt: t.how.steps[1].alt, cls: 'b-b' },
+  { k: 'decision', title: t.how.steps[2].title, text: t.how.steps[2].caption, alt: t.how.steps[2].alt, cls: 'b-c' },
+  { k: 'growth', title: t.how.steps[3].title, text: t.how.steps[3].caption, alt: t.how.steps[3].alt, cls: 'b-d', soon: true },
+  { k: 'cost', title: t.control.points[1].lead, text: t.control.points[1].text, alt: t.control.alt, cls: 'b-e' },
+] as const;
 ---
 
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
   <Fragment slot="head">
     <link rel="preconnect" href="https://app.equipe.im" crossorigin />
     <script is:inline>
-      // Scroll motion is opt-in: blocks are hidden only once this class is set, and only if the visitor allows motion.
+      // Motion is opt-in: blocks are hidden only once this class is set, and only if the visitor allows motion.
       // If the script that reveals them never runs, the class is dropped after 3 s and everything shows.
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('mo');
@@ -67,23 +81,60 @@ const faqMore = t.faq.more.split('{email}');
 
   <main id="main" class="home">
     <section class="hero">
+      <div class="field" aria-hidden="true"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div>
+      <div class="wrap hc">
+        <h1 class="ld" style="--d:0">{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <>{' '}<br class="hb" /></>}{l}</>)}</h1>
+        <p class="hsub ld" style="--d:1">{t.hero.approve}</p>
+        <div class="hbox ld" style="--d:2"><IdeaBox code={code} id="idea-hero" location="hero" big /></div>
+        <p class="more ld" style="--d:3"><a href="#see">{t.hero.secondary} ↓</a><span>{t.hero.meta}</span><a class="si" href={SITE.login} data-ph="signin_click" data-ph-location="hero">{t.nav.signIn} →</a></p>
+      </div>
+    </section>
+
+    <section class="see" id="see">
       <div class="wrap top">
-        <div class="hl">
-          <p class="badge"><i></i>{t.hero.badge}</p>
-          <h1>{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <>{' '}<br class="hb" /></>}{l}</>)}</h1>
+        <div class="hl rv">
+          <p class="kicker">{t.see.kicker}</p>
+          <h2>{t.see.title}</h2>
         </div>
-        <div class="hr">
+        <div class="hr rv">
           <p class="lead">{t.hero.lead}</p>
-          <p class="approve">{t.hero.approve}</p>
         </div>
-        <div class="ask">
-          <IdeaBox code={code} id="idea-hero" location="hero" />
-          <p class="more"><a href="#how-it-works">{t.hero.secondary} ↓</a><span>{t.hero.meta}</span><a class="si" href={SITE.login} data-ph="signin_click" data-ph-location="hero">{t.nav.signIn} →</a></p>
-        </div>
+        <div class="side rv"><WebApp k="mini" s={s} alt={s.activity.title} /></div>
       </div>
       <div class="wrap shot">
         <WebApp k="hero" s={s} alt={t.hero.shotAlt} />
         <p class="cap">{t.hero.caption}</p>
+      </div>
+    </section>
+
+    <section class="ideas" aria-label={t.marquee.label}>
+      <p class="ideas-l">{t.marquee.label}</p>
+      <div class="mq" tabindex="0">
+        <ul class="mq-track">
+          {t.marquee.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" /></svg>{x}</li>)}
+        </ul>
+        <ul class="mq-track" aria-hidden="true">
+          {t.marquee.items.map((x) => <li><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" /></svg>{x}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="flow" id="how-it-works">
+      <div class="wrap">
+        <div class="head center rv">
+          <p class="kicker">{t.nav.how}</p>
+          <h2>{t.flow.title}</h2>
+        </div>
+        <ol class="fsteps rv">
+          {t.flow.steps.map((st, i) => (
+            <li style={`--i:${i}`}>
+              <span class="fn" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{st.title}</h3>
+              <p>{st.text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="fcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
 
@@ -109,32 +160,23 @@ const faqMore = t.faq.more.split('{email}');
       </div>
     </section>
 
-    <section class="how" id="how-it-works">
+    <section class="bento-s" id="what">
       <div class="wrap">
         <div class="head rv">
-          <p class="kicker">{t.nav.how}</p>
-          <h2>{t.how.title}</h2>
-          <p class="sub">{t.how.text}</p>
+          <h2>{t.bento.title}</h2>
+          <p class="sub">{t.bento.text}</p>
         </div>
-        <ol class="rail rv" aria-hidden="true">
-          {t.how.steps.map((st, i) => <li class={howSoon[i] ? 'is-soon' : undefined}><a href={`#step-${i + 1}`} tabindex="-1"><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{st.title}</span></a></li>)}
-        </ol>
-        <ol class="steps">
-          {t.how.steps.map((st, i) => (
-            <li class={`step${i % 2 ? ' rev' : ''}`} id={`step-${i + 1}`}>
-              <div class="txt rv">
-                <p class="lab"><span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{howSoon[i] && <span class="soon">{t.ui.soon}</span>}</p>
-                <h3>{st.title}</h3>
-                <p>{st.text}</p>
+        <div class="bento">
+          {tiles.map((x, i) => (
+            <article class={`tile ${x.cls} rv`} style={`--i:${i}`}>
+              <div class="tile-vis"><WebApp k={x.k} s={s} alt={x.alt} /></div>
+              <div class="tile-t">
+                <h3>{x.title}{'soon' in x && x.soon && <span class="soon">{t.ui.soon}</span>}</h3>
+                <p>{x.text}</p>
               </div>
-              <div class="vis rv">
-                <div class="stage"><WebApp k={howScenes[i]} s={s} alt={st.alt} /></div>
-                <p class="cap">{st.caption}</p>
-              </div>
-            </li>
+            </article>
           ))}
-        </ol>
-        <div class="howcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
+        </div>
       </div>
     </section>
 
@@ -145,15 +187,27 @@ const faqMore = t.faq.more.split('{email}');
           <h2>{t.team.title}</h2>
           <p class="sub">{t.team.text}</p>
         </div>
-        <ul class="roles rv">
-          {t.team.roles.map((r, i) => (
-            <li class={`role r-${roleKeys[i]}`}>
-              <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={roleIcon[roleKeys[i]]} /></svg></span>
-              <h3>{r.name}</h3>
-              <p>{r.text}</p>
-            </li>
-          ))}
-        </ul>
+        <div class="flowmap rv">
+          <i class="px px-tl" aria-hidden="true"></i><i class="px px-tr" aria-hidden="true"></i><i class="px px-bl" aria-hidden="true"></i><i class="px px-br" aria-hidden="true"></i>
+          <ol class="nodes">
+            {t.team.roles.map((r, i) => (
+              <li class={`node r-${roleKeys[i]}`} style={`--i:${i}`}>
+                {i < 4 && (
+                  <svg class="conn" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="base" d={i % 2 ? 'M0 50 C 45 50, 55 10, 100 10' : 'M0 10 C 45 10, 55 50, 100 50'} />
+                    <path class="flow" d={i % 2 ? 'M0 50 C 45 50, 55 10, 100 10' : 'M0 10 C 45 10, 55 50, 100 50'} />
+                  </svg>
+                )}
+                <div class="nd">
+                  <span class="ri" aria-hidden="true"><RoleIcon r={roleKeys[i]} /><i class="pulse"></i></span>
+                  <h3>{r.name}</h3>
+                  <p>{r.text}</p>
+                  <span class={`nd-now st-${roleNow[i].st}`}><em>{stateName(roleNow[i].st)}</em>{roleNow[i].text}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -177,21 +231,28 @@ const faqMore = t.faq.more.split('{email}');
       </div>
     </section>
 
-    <section class="control">
+    <section class="pricing" id="pricing">
       <div class="wrap">
-        <div class="cgrid">
-          <div class="rv">
-            <h2>{t.control.title}</h2>
-            <p class="sub">{t.control.text}</p>
-            <ul class="pts">
-              {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
-            </ul>
-            <p class="honest"><span class="soon">{t.ui.soon}</span><span>{t.control.note}</span></p>
-          </div>
-          <div class="cvis rv">
-            <WebApp k="cost" s={s} alt={t.control.alt} />
-          </div>
+        <div class="head center rv">
+          <p class="kicker">{t.plans.title}</p>
+          <h2>{t.control.title}</h2>
+          <p class="sub">{t.plans.text}</p>
         </div>
+        <ul class="plans">
+          {t.plans.items.map((p, i) => (
+            <li class={`plan rv${i === 1 ? ' featured' : ''}`} style={`--i:${i}`}>
+              <div class="plan-h"><h3>{p.name}</h3>{i === 1 && <span class="plan-b">{t.plans.featured}</span>}</div>
+              <p class="plan-d">{p.text}</p>
+              <p class="plan-p"><b>{p.price}</b><span>{p.per}</span></p>
+              <ul class="plan-f">{p.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+              <a class={`btn ${i === 1 ? 'primary' : 'ghost'} plan-a`} href={SITE.start} data-ph="signup_cta_click" data-ph-location={`pricing_${i}`}>{p.cta}</a>
+            </li>
+          ))}
+        </ul>
+        <ul class="pts rv">
+          {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
+        </ul>
+        <p class="honest center rv"><span class="soon">{t.ui.soon}</span><span>{t.control.note}</span></p>
       </div>
     </section>
 
@@ -222,7 +283,7 @@ const faqMore = t.faq.more.split('{email}');
         </ol>
         <div class="proof rv">
           <h3>{t.proof.title}</h3>
-          <dl>{t.proof.nums.map((n) => <div><dt>{n.n}</dt><dd>{n.label}</dd></div>)}</dl>
+          <dl>{t.proof.nums.map((n) => <div><dt data-tick={n.n}>{n.n}</dt><dd>{n.label}</dd></div>)}</dl>
           <p class="meta">{t.proof.small}</p>
         </div>
       </div>
@@ -247,23 +308,14 @@ const faqMore = t.faq.more.split('{email}');
       </div>
     </section>
 
-    <section class="early" id="start">
+    <section class="early final" id="start">
       <span id="early-access" aria-hidden="true"></span>
       <div class="wrap">
-        <div class="egrid">
-          <div class="etxt">
-            <p class="badge"><i></i>{t.hero.badge}</p>
-            <h2>{t.band.title}</h2>
-            <p class="sub">{t.band.text}</p>
-            <div class="price">
-              <h3>{t.pricing.title}</h3>
-              <ul>{t.pricing.facts.map((f) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{f}</li>)}</ul>
-            </div>
-          </div>
-          <div class="ecard">
-            <IdeaBox code={code} id="idea-band" location="band" />
-            <p class="signin"><a href={SITE.login} data-ph="signin_click" data-ph-location="band">{t.nav.signIn} →</a></p>
-          </div>
+        <div class="fin rv">
+          <span class="fin-mark" aria-hidden="true"><Mark size={44} /></span>
+          <h2>{t.band.title}</h2>
+          <p class="sub">{t.band.text}</p>
+          <div class="fbox"><IdeaBox code={code} id="idea-band" location="band" big /></div>
         </div>
       </div>
     </section>
@@ -272,24 +324,40 @@ const faqMore = t.faq.more.split('{email}');
   <SiteFooter code={code} page="home" />
   <Analytics />
   <LangBanner locale={code} />
+  <ConsentBanner code={code} />
 
   <script>
-    // Scroll motion: blocks fade up as they arrive. A scroll sweep (not only an observer) means blocks jumped over
-    // by a fast scroll, an anchor link or a restored scroll position are shown too, never left as an empty area.
-    if (document.documentElement.classList.contains('mo')) {
+    // Motion, all gated on html.mo (set in <head> only when the visitor allows motion):
+    // - blocks fade up as they enter (IntersectionObserver; anything already on screen shows at once)
+    // - drawn scenes get `.live` while on screen, so their loops only run when someone can see them
+    // - numbers with data-tick count up once, the first time they are seen
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
       (window as unknown as { __rv: boolean }).__rv = true;
-      const pending = new Set(document.querySelectorAll<HTMLElement>('main.home .rv'));
-      const sweep = () => {
-        const line = window.innerHeight * 0.92;
-        pending.forEach((el) => { if (el.getBoundingClientRect().top < line) { el.classList.add('in'); pending.delete(el); } });
-      };
-      let raf = 0;
-      const queue = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; sweep(); }); };
-      addEventListener('scroll', queue, { passive: true });
-      addEventListener('resize', queue);
-      addEventListener('hashchange', queue);
-      addEventListener('beforeprint', () => { pending.forEach((el) => el.classList.add('in')); pending.clear(); });
-      sweep();
+      const reveal = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('main.home .rv, footer .rv').forEach((el) => reveal.observe(el));
+      addEventListener('beforeprint', () => document.querySelectorAll('.rv').forEach((el) => el.classList.add('in')));
+
+      const tickOnce = (box: Element) => box.querySelectorAll<HTMLElement>('[data-tick]').forEach((el) => {
+        if (el.dataset.done) return; el.dataset.done = '1';
+        const end = Number(String(el.dataset.tick).replace(/[^\d.]/g, '')); if (!end) return;
+        const dec = Number(el.dataset.dec || 0), pre = el.dataset.prefix ?? '', suf = el.dataset.suffix ?? '';
+        const t0 = performance.now(), D = 1200;
+        const step = (now: number) => {
+          const p = Math.min(1, (now - t0) / D), v = end * (1 - (1 - p) ** 3);
+          el.textContent = pre + v.toFixed(dec) + suf;
+          if (p < 1) requestAnimationFrame(step); else el.textContent = pre + end.toFixed(dec) + suf;
+        };
+        requestAnimationFrame(step);
+      });
+      const live = new IntersectionObserver((es) => es.forEach((e) => {
+        e.target.classList.toggle('live', e.isIntersecting);
+        if (e.isIntersecting) tickOnce(e.target);
+      }), { threshold: 0.25 });
+      document.querySelectorAll('.wa-fig, .proof').forEach((el) => live.observe(el));
+
     }
   </script>
 </Base>

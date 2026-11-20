@@ -1,14 +1,18 @@
 ---
-// The equipe web app (app.equipe.im), drawn in code for the home page. No screenshots, no images.
-// `k` names a scene: hero · chat · team · decision · growth · cost · import. The words come from messages.scene.
-// The example product is "Harbor Bakery", an order page someone made in Claude; names and amounts stay the same in every language.
+// The equipe web app (app.equipe.im), drawn in code. No screenshots, no images.
+// `k` names a scene: hero · mini · chat · team · decision · growth · cost · import. Words come from messages.scene.
+// The example product is "Stride", a habit app at getstride.app; names and amounts stay the same in every language.
+// Motion: the page adds `.live` to a scene while it is on screen (and motion is allowed); motion.css animates from there.
+// Without it every scene shows its final, static state.
 import Mark from './Mark.astro';
+import IPhone from './IPhone.astro';
+import StrideApp from './StrideApp.astro';
+import RoleIcon from './RoleIcon.astro';
 import type { Messages } from '../i18n';
-interface Props { k: 'hero' | 'chat' | 'team' | 'decision' | 'growth' | 'cost' | 'import'; s: Messages['scene']; alt: string; class?: string }
+interface Props { k: 'hero' | 'mini' | 'chat' | 'team' | 'decision' | 'growth' | 'cost' | 'import'; s: Messages['scene']; alt: string; class?: string }
 const { k, s, alt, class: cls = '' } = Astro.props;
 const A = s.activity, D = s.decision, G = s.growth, C = s.cost;
-const domain = 'harborbakery.com';
-// Role icons: 24-unit grid, drawn with currentColor.
+const domain = 'getstride.app';
 const icons: Record<string, string> = {
   pm: 'M5 20V5h11l-2 4 2 4H5',
   eng: 'M9 7l-5 5 5 5M15 7l5 5-5 5',
@@ -24,16 +28,16 @@ const icons: Record<string, string> = {
   usage: 'M4 20h16M7 16v-5M12 16V7M17 16v-8',
   arrow: 'M5 12h14M13 6l6 6-6 6',
 };
+// Who does what. `swap` rows change from Working to Done on a loop while the scene is live.
 const tasks = [
-  { r: 'eng', st: 'working' }, { r: 'eng', st: 'working' }, { r: 'design', st: 'done' }, { r: 'qa', st: 'working' }, { r: 'data', st: 'next' },
+  { r: 'eng', st: 'working', swap: true }, { r: 'eng', st: 'working' }, { r: 'design', st: 'done' }, { r: 'qa', st: 'working', swap: true, late: true }, { r: 'data', st: 'next' },
 ] as const;
-// This month's spend by role (dollars; adds up to $38).
-const spend = [{ r: 'eng', v: 19 }, { r: 'pm', v: 7 }, { r: 'design', v: 5 }, { r: 'qa', v: 4 }, { r: 'data', v: 3 }];
 const roleName = (r: string) => (A.roles as Record<string, string>)[r];
 const stateName = (st: string) => (A.states as Record<string, string>)[st];
+// This month's spend by role (dollars; adds up to $38).
+const spend = [{ r: 'eng', v: 19 }, { r: 'pm', v: 7 }, { r: 'design', v: 5 }, { r: 'qa', v: 4 }, { r: 'data', v: 3 }];
 ---
-{/* Shared pieces, rendered inline per scene below */}
-<figure class={`wa-fig wa-${k} ${cls}`.trim()} role="img" aria-label={alt}>
+<figure class={`wa-fig wa-${k} ${cls}`.trim()} role="img" aria-label={alt} data-scene={k}>
 <div class="wa" aria-hidden="true">
 
   {k === 'hero' && (
@@ -42,7 +46,7 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
       <div class="wa-app">
         <aside class="wa-side">
           <div class="wa-brand"><Mark size={20} /><b>equipe</b></div>
-          <div class="wa-proj"><span class="wa-pi">H</span><span><b>Harbor Bakery</b><em><i class="wa-live-dot"></i>{s.live}</em></span></div>
+          <div class="wa-proj"><span class="wa-pi">S</span><span><b>Stride</b><em><i class="wa-live-dot"></i>{s.live}</em></span></div>
           <nav>
             <span class="on"><svg viewBox="0 0 24 24"><path d={icons.chat} /></svg>{s.nav.chat}</span>
             <span><svg viewBox="0 0 24 24"><path d={icons.team} /></svg>{s.nav.team}</span>
@@ -51,10 +55,10 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
           </nav>
         </aside>
         <div class="wa-chat">
-          <div class="wa-chat-h"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><b>PM</b><span class="wa-mu">Harbor Bakery</span></div>
+          <div class="wa-chat-h"><span class="wa-av pm"><RoleIcon r="pm" /></span><b>PM</b><span class="wa-mu">Stride</span></div>
           <div class="wa-msgs">
             <p class="me">{s.ask}</p>
-            <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply}</p></div>
+            <div class="pm"><span class="wa-av pm"><RoleIcon r="pm" /></span><p>{s.reply}</p></div>
             <p class="me">{s.answer}</p>
             <div class="wa-dec inchat">
               <div class="wa-dec-k"><i></i>{D.label}</div>
@@ -69,46 +73,57 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
           <div class="wa-act">
             <div class="wa-act-h">{A.title}</div>
             {tasks.map((t, i) => (
-              <div class="wa-row"><span class={`wa-av ${t.r}`}><svg viewBox="0 0 24 24"><path d={icons[t.r]} /></svg></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span><em class={`wa-st ${t.st}`}>{stateName(t.st)}</em></div>
+              <div class="wa-row"><span class={`wa-av ${t.r}`}><RoleIcon r={t.r} /></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span>
+                {'swap' in t && t.swap
+                  ? <em class={`wa-sw${'late' in t && t.late ? ' late' : ''}`}><span class="wa-st working">{stateName('working')}</span><span class="wa-st done">{stateName('done')}</span></em>
+                  : <em class={`wa-st ${t.st}`}>{stateName(t.st)}</em>}
+              </div>
             ))}
           </div>
           <div class="wa-week">
             <div class="wa-act-h">{G.week}<span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
             <div class="wa-stats">
-              <div><b>312</b><span>{G.stats[0]}</span></div>
-              <div><b>41</b><span>{G.stats[1]}</span></div>
+              <div><b data-tick="412">412</b><span>{G.stats[0]}</span></div>
+              <div><b data-tick="186">186</b><span>{G.stats[1]}</span></div>
             </div>
             <div class="wa-spark"><svg viewBox="0 0 200 48" preserveAspectRatio="none"><path class="ar" d="M0 40 L28 36 L57 38 L85 28 L114 30 L142 18 L171 20 L200 8 L200 48 L0 48Z" /><path class="ln" d="M0 40 L28 36 L57 38 L85 28 L114 30 L142 18 L171 20 L200 8" /></svg></div>
           </div>
         </div>
       </div>
-      {/* the live site, as a customer sees it on a phone */}
-      <div class="wa-device">
-        <div class="wa-device-in">
-          <div class="wa-device-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span></div>
-          <div class="wa-site">
-            <b class="wa-site-t">Harbor Bakery</b>
-            <span class="wa-site-s">{s.site.sub}</span>
-            <div class="wa-fields">
-              <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
-              <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
-              <label><span>{s.site.name}</span><i class="ph"></i></label>
-            </div>
-            <span class="wa-site-b">{s.site.btn}</span>
-          </div>
-        </div>
+      <div class="wa-device"><IPhone w={232} url={domain}><StrideApp s={s} /></IPhone></div>
+      <div class="wa-metrics">
+        <div class="wa-m"><span>{s.metrics.signups}</span><b data-tick="128">128</b><em class="up">▲ 18%</em></div>
+        <div class="wa-m"><span>{s.metrics.conv}</span><b data-tick="4.2" data-dec="1">4.2</b><em>%</em></div>
+        <svg class="wa-m-sp" viewBox="0 0 120 28" preserveAspectRatio="none"><path d="M0 24 L15 22 L30 23 L45 17 L60 18 L75 11 L90 12 L105 6 L120 3" /></svg>
       </div>
+    </div>
+  )}
+
+  {k === 'mini' && (
+    <div class="wa-card wa-minic">
+      <div class="wa-act-h">{A.title}<span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
+      {[0, 2, 3].map((i) => {
+        const t = tasks[i];
+        return (
+          <div class="wa-row"><span class={`wa-av ${t.r}`}><RoleIcon r={t.r} /></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span>
+            {'swap' in t && t.swap
+              ? <em class={`wa-sw${'late' in t && t.late ? ' late' : ''}`}><span class="wa-st working">{stateName('working')}</span><span class="wa-st done">{stateName('done')}</span></em>
+              : <em class={`wa-st ${t.st}`}>{stateName(t.st)}</em>}
+          </div>
+        );
+      })}
+      <div class="wa-mini-dec"><span class="wa-dec-k"><i></i>{D.label}</span><b>{D.title}</b><span class="wa-btn pri">{D.approve}</span></div>
     </div>
   )}
 
   {k === 'chat' && (
     <div class="wa-card wa-chat solo">
-      <div class="wa-chat-h"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><b>PM</b><span class="wa-mu">Harbor Bakery</span></div>
+      <div class="wa-chat-h"><span class="wa-av pm"><RoleIcon r="pm" /></span><b>PM</b><span class="wa-mu">Stride</span></div>
       <div class="wa-msgs">
         <p class="me">{s.ask}</p>
-        <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply}</p></div>
+        <div class="pm"><span class="wa-av pm"><RoleIcon r="pm" /></span><p>{s.reply}</p></div>
         <p class="me">{s.answer}</p>
-        <div class="pm"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><p>{s.reply2}</p></div>
+        <div class="pm tw"><span class="wa-av pm"><RoleIcon r="pm" /></span><span class="tw-c"><span class="tw-dots"><i></i><i></i><i></i></span><p>{s.reply2}</p></span></div>
       </div>
       <div class="wa-comp"><span>{s.composer}</span><i><svg viewBox="0 0 24 24"><path d={icons.send} /></svg></i></div>
     </div>
@@ -117,24 +132,16 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
   {k === 'team' && (
     <div class="wa-teamscene">
       <div class="wa-card wa-act">
-        <div class="wa-act-h">{A.title}<span class="wa-mu">Harbor Bakery</span></div>
+        <div class="wa-act-h">{A.title}<span class="wa-mu">Stride</span></div>
         {tasks.map((t, i) => (
-          <div class="wa-row"><span class={`wa-av ${t.r}`}><svg viewBox="0 0 24 24"><path d={icons[t.r]} /></svg></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span><em class={`wa-st ${t.st}`}>{stateName(t.st)}</em></div>
+          <div class="wa-row"><span class={`wa-av ${t.r}`}><RoleIcon r={t.r} /></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span>
+            {'swap' in t && t.swap
+              ? <em class={`wa-sw${'late' in t && t.late ? ' late' : ''}`}><span class="wa-st working">{stateName('working')}</span><span class="wa-st done">{stateName('done')}</span></em>
+              : <em class={`wa-st ${t.st}`}>{stateName(t.st)}</em>}
+          </div>
         ))}
       </div>
-      <div class="wa-card wa-prev wa-phone">
-        <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span></div>
-        <div class="wa-site">
-          <b class="wa-site-t">Harbor Bakery</b>
-          <span class="wa-site-s">{s.site.sub}</span>
-          <div class="wa-fields">
-            <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
-            <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
-            <label><span>{s.site.name}</span><i class="ph"></i></label>
-          </div>
-          <span class="wa-site-b">{s.site.btn}</span>
-        </div>
-      </div>
+      <div class="wa-phone"><IPhone w={196} url={domain}><StrideApp s={s} /></IPhone></div>
     </div>
   )}
 
@@ -144,17 +151,17 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
       <b class="wa-dec-q">{D.title}</b>
       <div class="wa-opt on"><span class="wa-radio"></span><span><b>{D.a}</b><em>{D.aText}</em></span><span class="wa-rec">{D.rec}</span></div>
       <div class="wa-opt"><span class="wa-radio"></span><span><b>{D.b}</b><em>{D.bText}</em></span></div>
-      <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri">{D.approve}</span></div>
+      <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri wa-ap"><span class="l">{D.approve}</span><svg class="ok" viewBox="0 0 24 24"><path d={icons.check} /></svg></span></div>
     </div>
   )}
 
   {k === 'growth' && (
     <div class="wa-card wa-grow">
-      <div class="wa-grow-k"><span class="wa-av data"><svg viewBox="0 0 24 24"><path d={icons.data} /></svg></span>{G.label}<span class="wa-mu">{G.week}</span></div>
+      <div class="wa-grow-k"><span class="wa-av data"><RoleIcon r="data" /></span>{G.label}<span class="wa-mu">{G.week}</span></div>
       <div class="wa-stats">
-        <div><b>312</b><span>{G.stats[0]}</span></div>
-        <div><b>41</b><span>{G.stats[1]}</span></div>
-        <div class="warn"><b>58%</b><span>{G.stats[2]}</span></div>
+        <div><b data-tick="412">412</b><span>{G.stats[0]}</span></div>
+        <div><b data-tick="186">186</b><span>{G.stats[1]}</span></div>
+        <div class="warn"><b data-tick="41" data-suffix="%">41%</b><span>{G.stats[2]}</span></div>
       </div>
       <b class="wa-grow-t">{G.title}</b>
       <p>{G.text}</p>
@@ -165,7 +172,7 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
   {k === 'cost' && (
     <div class="wa-card wa-costc">
       <div class="wa-cost-h"><span class="wa-cost-ic"><svg viewBox="0 0 24 24"><path d={icons.usage} /></svg></span><span>{C.title}</span><em class="ok"><svg viewBox="0 0 24 24"><path d={icons.check} /></svg>{C.under}</em></div>
-      <div class="wa-cost-n"><b>$38</b><span>/ $100 · {C.cap}</span></div>
+      <div class="wa-cost-n"><b data-tick="38" data-prefix="$">$38</b><span>/ $100 · {C.cap}</span></div>
       <div class="wa-meter seg">
         {spend.map((x) => <i class={`r-${x.r}`} style={`width:${x.v}%`}></i>)}
         <i class="exp" style="width:26%"></i>
@@ -182,7 +189,7 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
       <div class="wa-card wa-step">
         <div class="wa-step-h"><span class="wa-chipk">{s.imp.from}</span></div>
         <div class="wa-art">
-          <b>Harbor Bakery</b>
+          <b>Stride</b>
           <span class="l w70"></span><span class="l w90"></span><span class="l w50"></span>
           <span class="box"></span>
           <span class="l w60"></span>
@@ -198,10 +205,10 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
       <span class="wa-link"><svg viewBox="0 0 24 24"><path d={icons.arrow} /></svg></span>
       <div class="wa-card wa-step wa-prev">
         <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span><span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
-        <div class="wa-site">
-          <b class="wa-site-t">Harbor Bakery</b>
-          <span class="wa-site-s">{s.site.sub}</span>
-          <span class="wa-site-b">{s.site.btn}</span>
+        <div class="wa-stride-web">
+          <span class="sw-logo"><i></i>Stride</span>
+          <b>{s.app.tagline}</b>
+          <span class="sw-cta">{s.app.add}</span>
         </div>
       </div>
     </div>

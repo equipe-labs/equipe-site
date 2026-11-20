@@ -23,11 +23,9 @@
 .phone .deny { background: rgb(255 59 48 / 0.15); color: var(--red); }
 .phone .allow { background: var(--tintbg); color: #fff; }
 .phone .hi { height: 5px; width: 36%; margin: 6px auto 8px; border-radius: 99px; background: var(--lbl); }
-@media (prefers-color-scheme: dark) {
-  .phone { --lbl: #fff; --sec: rgb(235 235 245 / 0.6); --fill: rgb(118 118 128 / 0.24); --sep: rgb(84 84 88 / 0.65); --tint: #0A84FF; --tintbg: #0A64C8; --red: #FF7A70; --sec2: rgb(235 235 245 / 0.72); }
-  .phone .scr { background: #1C1C1E; }
-  .phone .deny { background: rgb(255 69 58 / 0.2); }
-}
+:root[data-theme='dark'] .phone { --lbl: #fff; --sec: rgb(235 235 245 / 0.6); --fill: rgb(118 118 128 / 0.24); --sep: rgb(84 84 88 / 0.65); --tint: #0A84FF; --tintbg: #0A64C8; --red: #FF7A70; --sec2: rgb(235 235 245 / 0.72); }
+:root[data-theme='dark'] .phone .scr { background: #1C1C1E; }
+:root[data-theme='dark'] .phone .deny { background: rgb(255 69 58 / 0.2); }
 /* The live app's blue is the accent (design system v1), not iOS system blue. */
 .phone { --tint: var(--accent); --tintbg: var(--accent); }
 .phone .allow { color: var(--on-accent); }

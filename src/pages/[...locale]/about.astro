@@ -1,0 +1,31 @@
+---
+// /about: who runs equipe and why. The founder block shows only once the owner supplies it (src/data/flags.ts FOUNDER).
+import PageShell from '../../components/PageShell.astro';
+import { SITE } from '../../data/site';
+import { FOUNDER } from '../../data/flags';
+import { available, getLocale, getMessages, type LocaleCode } from '../../i18n';
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const A = getMessages(code).pages.about;
+const lang = getLocale(code).code;
+const [cBefore, cAfter] = A.contact.split('{email}');
+---
+<PageShell code={code} page="about" title={A.title} description={A.desc}>
+  <section class="pg-h"><div class="wrap"><h1>{A.h1}</h1></div></section>
+  <section class="pg-s"><div class="wrap">
+    <div class="pg-prose">
+      <p class="mission">{A.mission}</p>
+      {A.body.map((p) => <p>{p}</p>)}
+      {FOUNDER && (
+        <>
+          <h2>{A.founderH}</h2>
+          <div class="pg-founder"><img src={FOUNDER.photo} alt={FOUNDER.name} width="120" height="120" /><p>{FOUNDER.story[lang] ?? FOUNDER.story.en}</p></div>
+        </>
+      )}
+      <h2>{A.ossH}</h2>
+      <p>{A.oss} <a href={SITE.repo}>github.com/equipe-labs/equipe</a></p>
+      <h2>{A.contactH}</h2>
+      <p>{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
+    </div>
+  </div></section>
+</PageShell>

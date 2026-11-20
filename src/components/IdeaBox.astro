@@ -1,25 +1,47 @@
 ---
 // "What do you want to build?" — the idea box that starts sign-up. It is a plain GET form to app.equipe.im/start?idea=<text>,
-// so it works without JavaScript; the script only adds Enter-to-send, the example chips and dropping an empty idea.
+// so it works without JavaScript; the script adds Enter-to-send, the example chips/menu, the typing placeholder and drops an empty idea.
 // app.equipe.im keeps the idea as a draft, shows it on the sign-in page and carries it into team creation.
+// `big`: the hero version (large rounded surface, + menu of examples, "Whole team" chip, round send button, chips below).
 import { SITE } from '../data/site';
 import { getMessages, type LocaleCode } from '../i18n';
 
-interface Props { code: LocaleCode; id: string; location: string }
-const { code, id, location } = Astro.props;
+interface Props { code: LocaleCode; id: string; location: string; big?: boolean }
+const { code, id, location, big = false } = Astro.props;
 const p = getMessages(code).prompt;
+const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
 ---
-<form class="idea" action={SITE.start} method="get" data-idea data-ph-location={location}>
-  <label class="idea-l" for={id}>{p.label}</label>
+<form class={`idea${big ? ' big' : ''}`} action={SITE.start} method="get" data-idea data-ph-location={location} data-examples={JSON.stringify(p.examples)}>
+  <label class={big ? 'sr-only' : 'idea-l'} for={id}>{p.label}</label>
   <div class="idea-box">
-    <textarea id={id} name="idea" rows="3" maxlength="2000" placeholder={p.placeholder} enterkeyhint="send"></textarea>
+    <textarea id={id} name="idea" rows={big ? 3 : 3} maxlength="2000" placeholder={p.placeholder} enterkeyhint="send"></textarea>
     <div class="idea-bar">
-      <div class="idea-ex" role="group" aria-label={p.label}>
-        {p.examples.map((x) => <button type="button" data-ex={x}>{x}</button>)}
-      </div>
-      <button class="btn primary idea-go" type="submit"><span>{p.submit}</span><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+      {big ? (
+        <>
+          <div class="idea-l2">
+            <span class="idea-plusw">
+              <button type="button" class="idea-plus" aria-haspopup="true" aria-expanded="false" aria-label={p.label} data-plus>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+              </button>
+              <span class="idea-menu" role="menu" hidden data-menu>
+                {p.examples.map((x) => <button type="button" role="menuitem" data-ex={x}>{x}</button>)}
+              </span>
+            </span>
+            <span class="idea-team" aria-hidden="true"><span class="it-av">{roles.map((c) => <i style={`--c:${c}`}></i>)}</span>{p.team}</span>
+          </div>
+          <button class="idea-send" type="submit" aria-label={p.submit}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></button>
+        </>
+      ) : (
+        <>
+          <div class="idea-ex" role="group" aria-label={p.label}>
+            {p.examples.map((x) => <button type="button" data-ex={x}>{x}</button>)}
+          </div>
+          <button class="btn primary idea-go" type="submit"><span>{p.submit}</span><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+        </>
+      )}
     </div>
   </div>
+  {big && <div class="idea-chips" role="group" aria-label={p.label}>{p.examples.map((x) => <button type="button" data-ex={x}>{x}</button>)}</div>}
   <p class="idea-note">{p.note}</p>
 </form>
 
@@ -27,11 +49,33 @@ const p = getMessages(code).prompt;
   document.querySelectorAll<HTMLFormElement>('[data-idea]').forEach((form) => {
     const ta = form.querySelector('textarea')!;
     const track = (n: string, props?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, props);
-    form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; ta.focus(); }));
+    const plus = form.querySelector<HTMLButtonElement>('[data-plus]');
+    const menu = form.querySelector<HTMLElement>('[data-menu]');
+    const closeMenu = () => { if (menu && plus) { menu.hidden = true; plus.setAttribute('aria-expanded', 'false'); } };
+    form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; closeMenu(); ta.focus(); }));
+    plus?.addEventListener('click', () => { const open = menu!.hidden; menu!.hidden = !open; plus.setAttribute('aria-expanded', String(open)); if (open) menu!.querySelector<HTMLButtonElement>('button')?.focus(); });
+    document.addEventListener('click', (e) => { if (menu && !menu.hidden && !plus!.parentElement!.contains(e.target as Node)) closeMenu(); });
+    form.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu && !menu.hidden) { closeMenu(); plus!.focus(); } });
     // Enter sends, Shift+Enter adds a line; never while an input method (Korean, Japanese, Chinese) is composing.
     ta.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); }
     });
+    // The placeholder types out example ideas in turn (motion allowed only); it stops while the box has focus or text.
+    if (document.documentElement.classList.contains('mo')) {
+      const ex: string[] = JSON.parse(form.dataset.examples || '[]');
+      const base = ta.placeholder;
+      let i = 0, n = 0, dir = 1, wait = 0, visible = false;
+      new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(form);
+      setInterval(() => {
+        if (!visible || document.activeElement === ta || ta.value) { if (ta.placeholder !== base && document.activeElement === ta) ta.placeholder = base; return; }
+        if (wait > 0) { wait--; return; }
+        const w = ex[i] ?? base;
+        n += dir;
+        ta.placeholder = w.slice(0, Math.max(0, n)) + (dir > 0 ? '|' : '');
+        if (dir > 0 && n >= w.length) { ta.placeholder = w; dir = -1; wait = 28; }
+        else if (dir < 0 && n <= 0) { dir = 1; i = (i + 1) % ex.length; wait = 4; }
+      }, 55);
+    }
     form.addEventListener('submit', () => {
       const v = ta.value.trim();
       ta.value = v;

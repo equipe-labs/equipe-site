@@ -1,6 +1,7 @@
 ---
 import AppPageShell from '../../../components/AppPageShell.astro';
 import Rich from '../../../components/Rich.astro';
+import { AD_PARTNERS } from '../../../data/consent';
 import { available, getMessages, type LocaleCode } from '../../../i18n';
 
 // /app/privacy/ in English, /<slug>/app/privacy/ in every other language that has a translation file.
@@ -9,14 +10,17 @@ export function getStaticPaths() {
 }
 
 const { code } = Astro.props as { code: LocaleCode };
-const p = getMessages(code).app.privacy;
+const m = getMessages(code);
+const p = m.app.privacy;
+// The Cookies section goes after "Analytics and tracking" (section 5); the Advertising paragraph only exists when ad tags are configured.
+const after = 4;
 ---
 
 <AppPageShell code={code} subpage="app/privacy" title={p.meta.title} description={p.meta.description}>
   <h1>{p.title}</h1>
   <p class="muted small">{p.updated}</p>
   <p class="lead">{p.intro}</p>
-  {p.sections.map((s) => (
+  {p.sections.map((s, i) => (<>
     <section class="doc-section">
       <h2>{s.title}</h2>
       <p><Rich s={s.text} /></p>
@@ -26,5 +30,19 @@ const p = getMessages(code).app.privacy;
         </ul>
       )}
     </section>
-  ))}
+    {i === after && (
+      <section class="doc-section" id="cookies">
+        <h2>{p.cookies.title}</h2>
+        <p>{p.cookies.text}</p>
+        <ul>{p.cookies.items.map((x) => <li>{x}</li>)}</ul>
+        {AD_PARTNERS.length > 0 && (
+          <>
+            <h3>{m.consent.adsH}</h3>
+            <p>{m.consent.adsP}</p>
+            <ul>{AD_PARTNERS.map((x) => <li>{x}</li>)}</ul>
+          </>
+        )}
+      </section>
+    )}
+  </>))}
 </AppPageShell>

@@ -1,58 +1,64 @@
 ---
-// Footer for the home page and /developers.
+// Footer for the marketing pages: Product / Company / Legal, the support address and the cookie line.
 import Mark from './Mark.astro';
+import Wordmark from './Wordmark.astro';
 import { SITE } from '../data/site';
-import { DESIGN_LIVE } from '../data/design';
-import { getDesignText } from '../i18n/design';
+import { SHOW_CJ } from '../data/flags';
+import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
-interface Props { code: LocaleCode; page: 'home' | 'developers' }
+interface Props { code: LocaleCode; page: string }
 const { code, page } = Astro.props;
 const info = getLocale(code);
 const t = getMessages(code);
-const dz = getDesignText(code);
+const f = t.foot;
 const home = page === 'home' ? '' : localePath(info);
 ---
 <footer class="site-foot">
   <div class="wrap">
     <div class="fb">
-      <a class="brand" href={localePath(info)}><Mark size={24} /> <span>equipe</span></a>
-      <p>{t.foot.tagline}</p>
+      <a class="brand" href={localePath(info)} aria-label="equipe"><Mark size={26} /><Wordmark height={19} /></a>
+      <p>{f.tagline}</p>
+      <p class="fsup"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
     </div>
     <nav class="fcols" aria-label="Footer">
       <div>
-        <h2>{t.foot.product}</h2>
+        <h2>{f.product}</h2>
         <ul>
           <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
-          <li><a href={`${home}#team`}>{t.nav.team}</a></li>
-          <li><a href={`${home}#status`}>{t.nav.status}</a></li>
+          <li><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
           <li><a href={`${home}#faq`}>{t.nav.faq}</a></li>
+          <li><a href={subPath(info, 'app')}>{t.app.nav.get}</a></li>
           <li><a href={SITE.start} data-ph="signup_cta_click" data-ph-location="footer">{t.nav.cta}</a></li>
           <li><a href={SITE.login} data-ph="signin_click" data-ph-location="footer">{t.nav.signIn}</a></li>
         </ul>
       </div>
       <div>
-        <h2>{t.foot.developers}</h2>
+        <h2>{f.company}</h2>
         <ul>
+          <li><a href={subPath(info, 'about')}>{t.nav.about}</a></li>
+          <li><a href={subPath(info, 'changelog')}>{t.pages.changelog.h1}</a></li>
+          {SHOW_CJ && <li><a href={subPath(info, 'customers/cj')}>CJ</a></li>}
           <li><a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="footer">{t.nav.developers}</a></li>
           <li><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a></li>
-          <li><a href={SITE.roadmap}>{t.start.roadmap}</a></li>
-          <li><a href={SITE.architecture}>{t.start.architecture}</a></li>
-          {DESIGN_LIVE && <li><a href={`${subPath(info, 'design/docs')}#guardrails`}>{dz.nav.guidelines}</a></li>}
         </ul>
       </div>
       <div>
-        <h2>{t.foot.phone}</h2>
+        <h2>{f.legal}</h2>
         <ul>
-          <li><a href={subPath(info, 'app')}>{t.app.nav.get}</a></li>
-          <li><a href={subPath(info, 'app/privacy')}>{t.app.nav.privacy}</a></li>
-          <li><a href={subPath(info, 'app/support')}>{t.app.nav.support}</a></li>
+          <li><a href={subPath(info, 'security')}>{t.nav.security}</a></li>
+          <li><a href={subPath(info, 'app/privacy')}>{f.privacy}</a></li>
+          <li><a href={`${subPath(info, 'app/privacy')}#cookies`}>{f.noCookies}</a></li>
+          {CONSENT_REQUIRED && <li><a href="#consent" data-consent-open>{f.cookieSettings}</a></li>}
+          {CONSENT_REQUIRED && <li><a href="#consent" data-consent-open>{f.doNotSell}</a></li>}
+          <li><a href={subPath(info, 'app/support')}>{f.support}</a></li>
         </ul>
       </div>
     </nav>
+    <p class="fw rv" aria-hidden="true">equipe</p>
     <div class="fl">
-      <span>{t.foot.engine}</span>
-      <span>{t.footer.built}</span>
+      <span>{f.engine}</span>
+      <span>© Umbriles Inc. · {t.footer.built}</span>
     </div>
   </div>
 </footer>

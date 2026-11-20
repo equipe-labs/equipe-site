@@ -4,12 +4,14 @@ import Base from '../../layouts/Base.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import HeroScene from '../../components/HeroScene.astro';
-import PhoneApproval from '../../components/PhoneApproval.astro';
+import IPhone from '../../components/IPhone.astro';
+import ApproveApp from '../../components/ApproveApp.astro';
 import IconSprite from '../../components/IconSprite.astro';
 import Cmd from '../../components/Cmd.astro';
 import Rich from '../../components/Rich.astro';
 import Analytics from '../../components/Analytics.astro';
 import LangBanner from '../../components/LangBanner.astro';
+import ConsentBanner from '../../components/ConsentBanner.astro';
 import OrganizationJsonLd from '../../components/OrganizationJsonLd.astro';
 import SoftwareApplicationJsonLd from '../../components/SoftwareApplicationJsonLd.astro';
 import FaqJsonLd from '../../components/FaqJsonLd.astro';
@@ -17,6 +19,7 @@ import badgeUrl from '../../assets/badges/app-store.svg?url';
 import '../../styles/app.css';
 import '../../styles/site.css';
 import '../../styles/dev.css';
+import '../../styles/iphone.css';
 import { SITE } from '../../data/site';
 import { getAppText } from '../../i18n/app';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../i18n';
@@ -61,6 +64,16 @@ const tryIt = 'equipe try --edit "…"';
         <p class="meta">{d.macReq}</p>
       </div>
       <div class="wrap shot"><HeroScene t={at} alt={d.shotAlt} /></div>
+    </section>
+
+    <section class="dsec real" id="real">
+      <div class="wrap">
+        <figure class="realshot">
+          <img class="th-light" src="/screens/needs-you-light.webp" width="1600" height="1013" loading="lazy" decoding="async" alt={d.shotAlt} />
+          <img class="th-dark" src="/screens/needs-you-dark.webp" width="1600" height="1013" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+          <figcaption class="cap">{d.realCap}</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="dsec" id="mac">
@@ -138,7 +151,7 @@ const tryIt = 'equipe try --edit "…"';
             </div>
           </div>
           <div class="phonebox">
-            <PhoneApproval code={code} label={d.phoneCaption} />
+            <IPhone w={290} label={d.phoneCaption}><ApproveApp code={code} /></IPhone>
             <p class="cap">{d.phoneCaption}</p>
           </div>
         </div>
@@ -172,6 +185,7 @@ const tryIt = 'equipe try --edit "…"';
   <SiteFooter code={code} page="developers" />
   <Analytics />
   <LangBanner locale={code} subpage="developers" />
+  <ConsentBanner code={code} />
 
   <script is:inline>
     document.querySelectorAll('.copy').forEach((b) =>

@@ -1,0 +1,13 @@
+---
+// /customers/cj: CJ's story. Built only with SHOW_CJ=true (src/data/flags.ts) until CJ confirms permission. No invented numbers or quotes.
+import PageShell from '../../../components/PageShell.astro';
+import { SHOW_CJ } from '../../../data/flags';
+import { available, getMessages, type LocaleCode } from '../../../i18n';
+export function getStaticPaths() { return SHOW_CJ ? available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })) : []; }
+const { code } = Astro.props as { code: LocaleCode };
+const C = getMessages(code).pages.cj;
+---
+<PageShell code={code} page="customers/cj" title={C.title} description={C.desc}>
+  <section class="pg-h"><div class="wrap"><h1>{C.h1}</h1></div></section>
+  <section class="pg-s"><div class="wrap"><div class="pg-prose"><p>{C.text}</p></div></div></section>
+</PageShell>

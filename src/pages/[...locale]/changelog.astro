@@ -1,0 +1,24 @@
+---
+// /changelog: recent release notes of the open-source engine (snapshot in src/data/changelog.json, made by scripts/changelog.mjs).
+import PageShell from '../../components/PageShell.astro';
+import releases from '../../data/changelog.json';
+import { available, getMessages, type LocaleCode } from '../../i18n';
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const C = getMessages(code).pages.changelog;
+---
+<PageShell code={code} page="changelog" title={C.title} description={C.desc}>
+  <section class="pg-h"><div class="wrap"><h1>{C.h1}</h1><p class="pg-lead">{C.lead}</p></div></section>
+  <section class="pg-s"><div class="wrap">
+    <p class="pg-note" style="margin:0 0 24px;text-align:left">{C.note}</p>
+    <ol>
+      {releases.map((r) => (
+        <li class="rel" lang="en">
+          <div class="rel-v"><a href={r.url}>{r.version}</a><time datetime={r.date}>{r.date}</time></div>
+          <ul>{r.items.map((x) => <li>{x}</li>)}</ul>
+        </li>
+      ))}
+    </ol>
+    <p class="pg-note"><a href="https://github.com/equipe-labs/equipe/releases">{C.more} →</a></p>
+  </div></section>
+</PageShell>

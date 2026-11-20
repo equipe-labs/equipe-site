@@ -1,0 +1,89 @@
+---
+// Consent banner + tag loader. Rendered only when CONSENT_REQUIRED (src/data/consent.ts): today it is off.
+// Region from the browser's time zone (no server call): EU/EEA/UK/Switzerland and Korea get an opt-in banner with
+// Accept and Reject side by side; the US gets a light notice plus "Do not sell or share", and a Global Privacy
+// Control signal counts as an opt-out; anywhere unknown is treated as opt-in. The choice is kept for 12 months and
+// "Cookie settings" in the footer reopens it. Google tags get Consent Mode v2 defaults (denied) before anything loads.
+import { CONSENT_REQUIRED, TAGS } from '../data/consent';
+import { getMessages, type LocaleCode } from '../i18n';
+interface Props { code: LocaleCode }
+const m = getMessages(Astro.props.code);
+const c = m.consent;
+const cfg = JSON.stringify(TAGS).replace(/</g, '\\u003c');
+---
+{CONSENT_REQUIRED && (
+  <>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+    </script>
+    <aside class="cb" id="consent" hidden aria-labelledby="cb-t" data-tags={cfg}>
+      <h2 id="cb-t">{c.title}</h2>
+      <p class="cb-text" data-optin>{c.text}</p>
+      <p class="cb-text" data-notice hidden>{c.notice}</p>
+      <p class="cb-gpc" data-gpc hidden>{c.gpc}</p>
+      <div class="cb-prefs" data-prefs hidden>
+        <label><input type="checkbox" checked disabled /> <span><b>{c.essential}</b>{c.essentialText}</span></label>
+        <label><input type="checkbox" data-cat="analytics" /> <span><b>{c.analytics}</b>{c.analyticsText}</span></label>
+        <label><input type="checkbox" data-cat="ads" /> <span><b>{c.ads}</b>{c.adsText}</span></label>
+      </div>
+      <div class="cb-acts">
+        <button type="button" class="pill dark" data-act="accept">{c.accept}</button>
+        <button type="button" class="pill out" data-act="reject">{c.reject}</button>
+        <button type="button" class="cb-link" data-act="manage">{c.manage}</button>
+        <button type="button" class="pill dark" data-act="save" hidden>{c.save}</button>
+      </div>
+      <a class="cb-link" href="#consent" data-dnss hidden>{m.foot.doNotSell}</a>
+    </aside>
+    <script is:inline>
+      (function () {
+        var box = document.getElementById('consent'); if (!box) return;
+        var KEY = 'equipe-consent', YEAR = 365 * 864e5;
+        var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+        // US time zones get the opt-out notice; everything else (EU/EEA/UK/CH, Korea, unknown) gets opt-in.
+        var optin = !/^(America\/(New_York|Chicago|Denver|Phoenix|Los_Angeles|Anchorage|Detroit|Boise|Indiana|Kentucky|Juneau|Sitka|Menominee|Nome|Metlakatla|Yakutat|Adak)|Pacific\/Honolulu)/.test(tz);
+        var gpc = navigator.globalPrivacyControl === true;
+        var tags = JSON.parse(box.dataset.tags || '{}');
+        function read() { try { var v = JSON.parse(localStorage.getItem(KEY) || 'null'); return v && Date.now() - v.ts < YEAR ? v : null; } catch (e) { return null; } }
+        function save(v) { v.ts = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} apply(v); box.hidden = true; }
+        function script(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+        var loaded = {};
+        function apply(v) {
+          window.gtag('consent', 'update', { analytics_storage: v.analytics ? 'granted' : 'denied', ad_storage: v.ads ? 'granted' : 'denied', ad_user_data: v.ads ? 'granted' : 'denied', ad_personalization: v.ads ? 'granted' : 'denied' });
+          if (v.analytics && tags.googleAnalytics && !loaded.ga) { loaded.ga = 1; script('https://www.googletagmanager.com/gtag/js?id=' + tags.googleAnalytics); window.gtag('js', new Date()); window.gtag('config', tags.googleAnalytics); }
+          if (!v.ads) return;
+          if (tags.googleAds && !loaded.gads) { loaded.gads = 1; script('https://www.googletagmanager.com/gtag/js?id=' + tags.googleAds); window.gtag('js', new Date()); window.gtag('config', tags.googleAds); }
+          if (tags.metaPixel && !loaded.meta) { loaded.meta = 1; !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); window.fbq('init', tags.metaPixel); window.fbq('track', 'PageView'); }
+          if (tags.tiktokPixel && !loaded.tt) { loaded.tt = 1; script('https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=' + tags.tiktokPixel); }
+          if (tags.linkedinPartner && !loaded.li) { loaded.li = 1; window._linkedin_partner_id = tags.linkedinPartner; script('https://snap.licdn.com/li.lms-analytics/insight.min.js'); }
+          if (tags.redditPixel && !loaded.rd) { loaded.rd = 1; window.rdt = window.rdt || function () { (window.rdt.q = window.rdt.q || []).push(arguments); }; script('https://www.redditstatic.com/ads/pixel.js'); window.rdt('init', tags.redditPixel); window.rdt('track', 'PageVisit'); }
+        }
+        function open(prefs) {
+          box.querySelector('[data-optin]').hidden = !optin; box.querySelector('[data-notice]').hidden = optin;
+          box.querySelector('[data-dnss]').hidden = optin; box.querySelector('[data-gpc]').hidden = !(gpc && !optin);
+          var p = box.querySelector('[data-prefs]'); p.hidden = !prefs; box.querySelector('[data-act="save"]').hidden = !prefs;
+          var cur = read() || {};
+          box.querySelectorAll('[data-cat]').forEach(function (i) { i.checked = !!cur[i.dataset.cat]; });
+          box.hidden = false;
+        }
+        box.addEventListener('click', function (e) {
+          var a = e.target.closest('[data-act]'); var d = e.target.closest('[data-dnss]');
+          if (d) { e.preventDefault(); save({ analytics: false, ads: false }); return; }
+          if (!a) return;
+          var act = a.dataset.act;
+          if (act === 'accept') save({ analytics: !(gpc && !optin), ads: !(gpc && !optin) });
+          else if (act === 'reject') save({ analytics: false, ads: false });
+          else if (act === 'manage') open(true);
+          else if (act === 'save') { var v = {}; box.querySelectorAll('[data-cat]').forEach(function (i) { v[i.dataset.cat] = i.checked; }); save(v); }
+        });
+        document.querySelectorAll('[data-consent-open]').forEach(function (l) { l.addEventListener('click', function (e) { e.preventDefault(); open(true); }); });
+        var v = read();
+        if (v) apply(v);
+        else if (!optin && gpc) save({ analytics: false, ads: false });
+        else if (!optin) { apply({ analytics: true, ads: true }); open(false); }
+        else open(false);
+      })();
+    </script>
+  </>
+)}

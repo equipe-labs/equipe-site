@@ -129,7 +129,6 @@ main.home .proof h3 { font-size: 28px; line-height: 1.15; letter-spacing: -0.025
 .egrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 80px; align-items: start; }
 main.home .early h2 { margin-top: var(--s-5); }
 .ecard { padding: var(--s-6); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 40px 80px -50px rgb(21 22 26 / 0.45); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .ecard { box-shadow: none; } }
 :root[data-theme='dark'] .ecard { box-shadow: none; }
 
 /* scroll motion (html.mo is set only when motion is allowed) */
@@ -244,7 +243,6 @@ main.home .cmp h3 { font-size: 15px; font-weight: 600; letter-spacing: 0; paddin
 
 /* early access: the closing band, dark in both themes, the form on its own card */
 .early { --band: #0A0A0C; background: var(--band); color: #EFEDE7; border-top: 0; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .early { --band: #111114; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); } }
 :root[data-theme='dark'] .early { --band: #111114; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .early .etxt .sub { color: #A3A5AB; }
 .early .etxt .badge { background: transparent; color: #EFEDE7; border-color: rgb(239 237 231 / 0.22); }
@@ -302,9 +300,8 @@ main.home :is(.sub, .hero .lead) { text-wrap: balance; }
   .proof dd { margin: 0; font-size: 15px; }
 }
 /* the closing band in dark mode: lifted off the page so it reads as one block, with the card a step lighter again */
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .early { --band: #16171A; } :root:not([data-theme='light']) .early .ecard { background: #1E1F24; border-color: #E9E6DF2E; } }
-:root[data-theme='dark'] .early { --band: #16171A; }
-:root[data-theme='dark'] .early .ecard { background: #1E1F24; border-color: #E9E6DF2E; }
+:root[data-theme='dark'] .early { --band: #1F2026; }
+:root[data-theme='dark'] .early .ecard { background: #282930; border-color: #FFFFFF1F; }
 @media (max-width: 900px) {
   .wsteps { grid-template-columns: 1fr; gap: var(--s-5); }
   .wsteps li:nth-child(n) { grid-column: auto; }
