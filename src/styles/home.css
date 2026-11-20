@@ -3,7 +3,7 @@ main.home .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 va
 main.home > section { padding: 128px 0; }
 :where(main.home) :where(ol, ul) { list-style: none; margin: 0; padding: 0; }
 :where(main.home) :where(p) { margin: 0; }
-main.home h2 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1.04; letter-spacing: -0.035em; max-width: 18ch; }
+main.home h2 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1.06; letter-spacing: -0.027em; max-width: 18ch; }
 main.home h3 { letter-spacing: -0.015em; }
 main.home .head { max-width: 760px; }
 main.home .sub { margin-top: var(--s-5); font-size: 20px; line-height: 1.55; color: var(--muted); max-width: 640px; text-wrap: pretty; }
@@ -16,7 +16,7 @@ main.home h3 .soon { margin-left: var(--s-3); position: relative; top: -3px; }
 
 /* 1 hero */
 main.home > section.hero { padding: 88px 0 0; overflow: hidden; }
-.hero h1 { margin-top: var(--s-6); font-size: clamp(48px, 7.4vw, 96px); line-height: 0.98; letter-spacing: -0.048em; max-width: 11.5ch; }
+.hero h1 { margin-top: var(--s-6); font-size: clamp(48px, 7.4vw, 96px); line-height: 0.98; letter-spacing: -0.034em; max-width: 11.5ch; }
 .hero h1 .hb { display: block; }
 @media (max-width: 420px) { .hero h1 .hb { display: none; } }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) .hero h1 { font-size: clamp(42px, 6vw, 76px); line-height: 1.15; letter-spacing: -0.03em; max-width: 13em; }
@@ -55,7 +55,7 @@ main.home .handled h3 { font-size: 15px; font-weight: 600; color: var(--muted); 
 .step.rev { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
 .step.rev .txt { order: 2; }
 .step .n { display: block; font: 600 15px/1 var(--mono); color: var(--accent); letter-spacing: 0.04em; }
-main.home .step h3 { margin-top: var(--s-4); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -0.025em; }
+main.home .step h3 { margin-top: var(--s-4); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -0.02em; }
 .step .txt p { margin-top: var(--s-4); font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 460px; }
 .stage { display: grid; place-items: center; padding: 48px 40px; border-radius: 24px; background: var(--sunken); border: 1px solid var(--line); min-height: 380px; }
 .stage > .wa-fig { width: 100%; max-width: 560px; }
@@ -120,7 +120,7 @@ main.home .track h3 { margin-top: var(--s-2); font-size: 22px; }
 .proof { margin-top: 96px; padding: var(--s-7) var(--s-7) var(--s-6); border-radius: 24px; background: var(--text); color: var(--bg); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--s-4) var(--s-7); align-items: end; }
 main.home .proof h3 { font-size: 28px; line-height: 1.15; letter-spacing: -0.025em; align-self: start; }
 .proof dl { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
-.proof dt { font: 700 clamp(56px, 7vw, 96px)/0.9 var(--sans); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+.proof dt { font: 700 clamp(56px, 7vw, 96px)/0.9 var(--sans); letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
 .proof dd { margin: var(--s-3) 0 0; font-size: 16px; color: color-mix(in srgb, var(--bg) 70%, var(--text)); }
 .proof .meta { grid-column: 1 / -1; margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid color-mix(in srgb, var(--bg) 18%, transparent); color: color-mix(in srgb, var(--bg) 62%, var(--text)); }
 
@@ -315,3 +315,30 @@ main.home > section.early { padding: 120px 0; }
 .proof .meta { color: var(--muted); border-top-color: var(--line); }
 .proof dl > div { border-left: 1px solid var(--line); padding-left: var(--s-5); }
 .proof dl > div:first-child { border-left: 0; padding-left: 0; }
+
+/* ---- polish pass ---- */
+/* short paragraphs: even lines, no one-word last line (most visible in ja, zh, es) */
+main.home :is(.sub, .hero .lead), .ea-ok p { text-wrap: balance; }
+/* step label: number and the Coming pill share the first line, so the heading never ends with a lone pill */
+.step .lab { display: flex; align-items: center; gap: var(--s-3); }
+.step .lab .soon { position: static; margin: 0; }
+/* Japanese and Chinese headlines: let a long phrase break instead of pushing the page sideways on phones */
+@media (max-width: 700px) {
+  :is(:lang(ja), :lang(zh-CN)) .hero h1 { font-size: clamp(32px, 9vw, 42px); overflow-wrap: anywhere; word-break: normal; }
+  :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home h2 { font-size: 28px; }
+}
+/* proof numbers on narrow phones: one row each, number then label */
+@media (max-width: 480px) {
+  .proof dl { grid-template-columns: 1fr; gap: 0; }
+  .proof dl > div, .proof dl > div:first-child { display: flex; align-items: baseline; gap: var(--s-4); padding: var(--s-3) 0; border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+  .proof dt { font-size: 44px; min-width: 3.2ch; }
+  .proof dd { margin: 0; font-size: 15px; }
+}
+/* the closing band in dark mode: lifted off the page so it reads as one block, with the card a step lighter again */
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .early { --band: #16171A; } :root:not([data-theme='light']) .early .ecard { background: #1E1F24; border-color: #E9E6DF2E; } }
+:root[data-theme='dark'] .early { --band: #16171A; }
+:root[data-theme='dark'] .early .ecard { background: #1E1F24; border-color: #E9E6DF2E; }
+@media (max-width: 900px) {
+  .wsteps { grid-template-columns: 1fr; gap: var(--s-5); }
+  .wsteps li:nth-child(n) { grid-column: auto; }
+}

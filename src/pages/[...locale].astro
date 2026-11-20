@@ -124,8 +124,8 @@ const faqMore = t.faq.more.split('{email}');
           {t.how.steps.map((st, i) => (
             <li class={`step${i % 2 ? ' rev' : ''}`} id={`step-${i + 1}`}>
               <div class="txt rv">
-                <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{st.title}{howSoon[i] && <span class="soon">{t.ui.soon}</span>}</h3>
+                <p class="lab"><span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{howSoon[i] && <span class="soon">{t.ui.soon}</span>}</p>
+                <h3>{st.title}</h3>
                 <p>{st.text}</p>
               </div>
               <div class="vis rv">

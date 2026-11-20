@@ -260,3 +260,42 @@
 
 @media (max-width: 1240px) { .wa-device { left: 12px; } }
 @media (max-width: 1023px) { .wa-device { display: none; } .wa-hero .wa-right .wa-week { display: none; } .wa-hero .wa-right .wa-act { display: grid; } }
+
+/* ---- polish pass ---- */
+/* task names wrap to a second line instead of being cut off with an ellipsis (de, fr, es run long) */
+.wa-row-t span { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.3; }
+.wa-row { align-items: center; }
+/* the cost card header wraps on narrow phones instead of widening the page */
+.wa-cost-h { flex-wrap: wrap; row-gap: 8px; }
+.wa-cost-n { flex-wrap: wrap; row-gap: 2px; }
+.wa-split li span { white-space: normal; }
+/* scenes size themselves to their frame, not the window: the team scene drops the phone preview when its frame is narrow */
+.wa-fig { container-type: inline-size; }
+@container (max-width: 600px) {
+  .wa-teamscene { grid-template-columns: 1fr; }
+  .wa-teamscene .wa-phone { display: none; }
+}
+@container (max-width: 420px) {
+  .wa-stats b { font-size: 20px; }
+  .wa-dec-f .wa-btn:not(.pri) { display: none; }
+}
+/* decision card: on a narrow card the Recommended chip moves under the option title instead of squeezing the text */
+.wa-dec { container-type: inline-size; }
+@container (max-width: 400px) {
+  .wa-opt { grid-template-columns: auto minmax(0, 1fr); }
+  .wa-opt .wa-rec { grid-column: 2; grid-row: 2; justify-self: start; margin-top: 2px; }
+}
+/* tablets: the hero window stacks the chat over what the team is doing */
+@media (min-width: 701px) and (max-width: 1023px) {
+  .wa-hero .wa-app { grid-template-columns: 1fr; }
+  .wa-hero .wa-app > .wa-chat { border-right: 0; border-bottom: 1px solid var(--line); }
+  .wa-hero .wa-right { display: grid; }
+}
+/* the import flow stacks before its three cards get cramped */
+@media (max-width: 900px) {
+  .wa-flow { grid-template-columns: 1fr; gap: 0; }
+  .wa-link { height: 36px; }
+  .wa-link svg { transform: rotate(90deg); }
+  .wa-step { min-height: 0; }
+  .wa-art { min-height: 120px; }
+}
