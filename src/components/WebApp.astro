@@ -151,7 +151,7 @@ const spend = [{ r: 'eng', v: 19 }, { r: 'pm', v: 7 }, { r: 'design', v: 5 }, { 
       <b class="wa-dec-q">{D.title}</b>
       <div class="wa-opt on"><span class="wa-radio"></span><span><b>{D.a}</b><em>{D.aText}</em></span><span class="wa-rec">{D.rec}</span></div>
       <div class="wa-opt"><span class="wa-radio"></span><span><b>{D.b}</b><em>{D.bText}</em></span></div>
-      <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri wa-ap"><span class="l">{D.approve}</span><svg class="ok" viewBox="0 0 24 24"><path d={icons.check} /></svg></span></div>
+      <div class="wa-dec-f"><span class="wa-cost">{D.cost} <b>$6</b></span><span class="wa-btn">{D.ask}</span><span class="wa-btn pri wa-ap">{D.approve}</span></div>
     </div>
   )}
 
@@ -178,7 +178,7 @@ const spend = [{ r: 'eng', v: 19 }, { r: 'pm', v: 7 }, { r: 'design', v: 5 }, { 
         <i class="exp" style="width:26%"></i>
       </div>
       <ul class="wa-split">
-        {spend.map((x) => <li><i class={`r-${x.r}`}></i><span>{roleName(x.r)}</span><b>${x.v}</b><em>{Math.round((x.v / 38) * 100)}%</em></li>)}
+        {spend.map((x) => <li><span class={`rav rav-${x.r}`}><RoleIcon r={x.r} /></span><span>{roleName(x.r)}</span><b>${x.v}</b><em>{Math.round((x.v / 38) * 100)}%</em></li>)}
       </ul>
       <div class="wa-cost-f"><span><i class="k2"></i>{C.expected}</span><b>~$64</b></div>
     </div>

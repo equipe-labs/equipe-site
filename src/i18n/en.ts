@@ -95,7 +95,7 @@ export const en = {
       { lead: 'You see the cost first', text: 'Every proposal shows what it is expected to cost, and you always see the expected total for the month.' },
       { lead: 'Pay for what the team uses', text: '1 credit = $1. You start with $5 free, no card needed.' },
     ],
-    note: 'Monthly spending caps are coming.',
+    note: 'Weekly usage reports with proposals are coming.',
     alt: 'The cost view: $38 spent this month, about $64 expected by the end of the month, under a $100 cap',
   },
   who: {
@@ -113,7 +113,7 @@ export const en = {
     items: [
       { title: 'The team itself', text: 'The PM, engineers, designer, QA and data roles already build and ship real products. This site and our apps were built by them.' },
       { title: 'Your team in the cloud', text: 'Sign up, describe your idea and get your own team in about a minute. Chat with the PM, follow the work and open preview links.' },
-      { title: 'Still coming', text: 'One-step import from Claude with a database and a domain, monthly spending caps, and weekly usage reports with proposals.' },
+      { title: 'Still coming', text: 'One-step import from Claude with a database and a domain, and weekly usage reports with proposals.' },
     ],
   },
   proof: {
@@ -132,7 +132,7 @@ export const en = {
       { question: 'What can I bring?', answer: 'An idea, a description, or something you already made in Claude, Lovable or a similar tool: an artifact, a prototype or its code. The team takes it from there.' },
       { question: 'Do I need a Mac, or to install anything?', answer: 'No. Your team works in the cloud and you use it in your browser, on any computer or phone.' },
       { question: 'Who runs the hosting, the database and the domain?', answer: 'We do, as one project per customer, so there is nothing for you to set up or sign in to. If your product outgrows that, we can move it to your own accounts.' },
-      { question: 'What does it cost?', answer: 'You pay for what your team uses, in credits: 1 credit = $1. You get $5 free when you sign up and $10 more when you add a card. Packs are $25, $50, $100 or $250. The Team plan is $19 a month plus monthly credits, and Hosting only is $19 a month for a finished product.' },
+      { question: 'What does it cost?', answer: 'You pay for what your team uses, with credits: 1 credit = $1. Sign up and get $5 free (+$10 when you add a card), including up to 2 hours of team time. The Team plan is $19 a month with 20 hours of team time, hosting and storage; AI and extra time come from credits ($0.25 per team hour). Hosting only is $19 a month. Every request shows its expected cost first, and you set a monthly cap.' },
       { question: 'What does “you approve” mean?', answer: 'Anything that goes live, costs money or reaches your customers waits for your OK. You get a short card with options and a recommendation, and answer with one tap.' },
       { question: 'How do I start?', answer: 'Sign up at app.equipe.im and describe your idea. Your team is set up in about a minute, with $5 of free credit and no card needed.' },
       { question: 'I am a developer. Can I run it myself?', answer: 'Yes. The engine behind the team is open source and runs on your own machine. The developers page has the Mac app and the command-line tool.' },
@@ -167,13 +167,15 @@ export const en = {
   bento: { title: 'What your team does', text: 'Each member has a job. You see all of it, and you approve what matters.' },
   plans: {
     title: 'Simple pricing',
-    text: '1 credit = $1. You only pay for what the team does.',
+    text: '1 credit = $1. Credit packs: $25, $50, $100 or $250.',
     featured: 'Recommended',
     items: [
-      { name: 'Start free', price: '$0', per: 'to start', text: '$5 of credit when you sign up. No card needed.', points: ['1 credit = $1', '+$10 when you add a card', 'Packs of $25, $50, $100 or $250'], cta: 'Start free' },
-      { name: 'Team', price: '$19', per: '/month + credits', text: 'For a product you keep growing.', points: ['$19 a month base', 'Monthly credits included', 'Top up with packs anytime'], cta: 'Get started' },
-      { name: 'Hosting only', price: '$19', per: '/month', text: 'Keep a finished product running.', points: ['For a finished product', 'Hosting, database and domain kept running', 'Add credits when you want changes'], cta: 'Get started' },
+      { name: 'Start free', price: '$0', per: 'to start', text: '$5 of credit when you sign up, +$10 when you add a card.', points: ['1 credit = $1', 'Up to 2 hours of team time', 'No card needed'], cta: 'Start free' },
+      { name: 'Team', price: '$19', per: '/month', text: 'For a product you keep growing.', points: ['20 hours of team time each month', 'Hosting for your sites and storage', 'AI and extra time from credits ($0.25 per team hour)'], cta: 'Get started' },
+      { name: 'Hosting only', price: '$19', per: '/month', text: 'Your product stays live while the team sleeps.', points: ['Hosting, database and domain kept', 'The team sleeps until you need it', 'Add credits when you want changes'], cta: 'Get started' },
     ],
+    teamTime: { title: 'What is team time?', text: 'Your team’s computer only runs while it’s working. It pauses after 20 minutes of quiet and wakes up when you need it.' },
+    estimate: { title: 'Estimate before you spend', text: 'Every request shows its expected cost first, and you set a monthly cap.' },
   },
   band: { title: 'Start with your idea.', text: 'Tell the PM what you want to build. Your team is ready in about a minute.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -210,7 +212,7 @@ export const en = {
       label: 'Proposal from usage',
       week: 'This week',
       title: 'Make the first habit easier to pick',
-      stats: ['sign-ups', 'active today', 'drop off at step 2'],
+      stats: ['sign-ups', 'active today', 'drop at step 2'],
       text: 'Many people stop when they pick their first habit. Suggest three starter habits instead.',
       cost: 'Expected cost',
       yes: 'Approve',
@@ -231,7 +233,7 @@ export const en = {
   pages: {
     pricing: {
       title: 'Pricing — equipe',
-      desc: 'Start free with $5 of credit, no card needed. 1 credit = $1. Team plan $19 a month plus monthly credits, or Hosting only for $19 a month.',
+      desc: 'Start free with $5 of credit and up to 2 hours of team time. Team plan: $19 a month with 20 hours of team time. Hosting only: $19 a month.',
       h1: 'Pricing',
       lead: 'Start free. Pay for what your team does, and see the cost before it happens.',
     },

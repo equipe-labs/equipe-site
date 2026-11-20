@@ -1,7 +1,7 @@
 /* Motion for the home page. Everything here is gated on html.mo, which the inline <head> script sets only when the visitor
    has not asked for reduced motion (and removes again if the page script never runs). Without it every element shows its
    final, static state. Only transform and opacity animate, plus a dash offset on two small SVG strokes. */
-:root { --ease: cubic-bezier(0.2, 0.7, 0.2, 1); }
+:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
 
 /* 1. hero copy and the idea box arrive on load (the headline only moves, so it never waits to be painted) */
 html.mo .ld { animation: ld-in 700ms var(--ease) both; animation-delay: calc(var(--d, 0) * 90ms + 60ms); }

@@ -91,7 +91,7 @@ const es: Messages = {
       { lead: 'Ves el costo antes', text: 'Cada propuesta muestra cuánto se espera que cueste, y siempre ves el total esperado del mes.' },
       { lead: 'Paga lo que usa el equipo', text: '1 crédito = $1. Empiezas con $5 gratis, sin tarjeta.' },
     ],
-    note: 'Los topes de gasto mensual llegarán pronto.',
+    note: 'Los informes semanales de uso con propuestas llegarán pronto.',
     alt: 'La vista de costos: $38 gastados este mes, unos $64 esperados a fin de mes, por debajo de un tope de $100',
   },
   who: {
@@ -109,7 +109,7 @@ const es: Messages = {
     items: [
       { title: 'El equipo en sí', text: 'El PM, los ingenieros, el diseñador, QA y los analistas de datos ya construyen y publican productos reales. Este sitio y nuestras apps los hicieron ellos.' },
       { title: 'Tu equipo en la nube', text: 'Regístrate, describe tu idea y ten tu propio equipo en más o menos un minuto. Habla con el PM, sigue el trabajo y abre enlaces de vista previa.' },
-      { title: 'Lo que aún falta', text: 'Importación en un paso desde Claude con base de datos y dominio, topes de gasto mensual e informes semanales de uso con propuestas.' },
+      { title: 'Lo que aún falta', text: 'Importación en un paso desde Claude con base de datos y dominio, e informes semanales de uso con propuestas.' },
     ],
   },
   proof: {
@@ -128,7 +128,7 @@ const es: Messages = {
       { question: '¿Qué puedo traer?', answer: 'Una idea, una descripción o algo que ya hiciste en Claude, Lovable o una herramienta parecida: un artefacto, un prototipo o su código. El equipo sigue desde ahí.' },
       { question: '¿Necesito un Mac o instalar algo?', answer: 'No. Tu equipo trabaja en la nube y lo usas en tu navegador, desde cualquier ordenador o móvil.' },
       { question: '¿Quién se encarga del alojamiento, la base de datos y el dominio?', answer: 'Nosotros, con un proyecto por cliente, así que no tienes nada que configurar ni ningún sitio al que entrar. Si tu producto crece más de lo previsto, podemos pasarlo a tus propias cuentas.' },
-      { question: '¿Cuánto cuesta?', answer: 'Pagas lo que usa tu equipo, en créditos: 1 crédito = $1. Recibes $5 gratis al registrarte y $10 más al añadir una tarjeta. Los paquetes son de $25, $50, $100 o $250. El plan Equipo cuesta $19 al mes más créditos mensuales, y Solo hosting cuesta $19 al mes para un producto terminado.' },
+      { question: '¿Cuánto cuesta?', answer: 'Pagas lo que usa tu equipo, con créditos: 1 crédito = $1. Al registrarte recibes $5 gratis (+$10 al añadir una tarjeta), con hasta 2 horas de tiempo de equipo. El plan Equipo cuesta $19 al mes con 20 horas de tiempo de equipo, hosting y almacenamiento; la IA y el tiempo extra salen de los créditos ($0,25 por hora de equipo). Solo hosting cuesta $19 al mes. Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
       { question: '¿Qué significa «tú apruebas»?', answer: 'Todo lo que sale en vivo, cuesta dinero o llega a tus clientes espera tu visto bueno. Recibes una tarjeta corta con opciones y una recomendación, y respondes con un toque.' },
       { question: '¿Cómo empiezo?', answer: 'Regístrate en app.equipe.im y describe tu idea. Tu equipo queda listo en más o menos un minuto, con $5 de crédito gratis y sin tarjeta.' },
       { question: 'Soy desarrollador. ¿Puedo ejecutarlo yo mismo?', answer: 'Sí. El motor que hay detrás del equipo es de código abierto y funciona en tu propio ordenador. La página para desarrolladores tiene la app para Mac y la herramienta de línea de comandos.' },
@@ -163,13 +163,15 @@ const es: Messages = {
   bento: { title: 'Lo que hace tu equipo', text: 'Cada miembro tiene su tarea. Lo ves todo, y tú apruebas lo importante.' },
   plans: {
     title: 'Precios sencillos',
-    text: '1 crédito = $1. Solo pagas lo que hace el equipo.',
+    text: '1 crédito = $1. Paquetes de créditos: $25, $50, $100 o $250.',
     featured: 'Recomendado',
     items: [
-      { name: 'Empieza gratis', price: '$0', per: 'para empezar', text: '$5 de crédito al registrarte. Sin tarjeta.', points: ['1 crédito = $1', '+$10 al añadir una tarjeta', 'Paquetes de $25, $50, $100 o $250'], cta: 'Empezar gratis' },
-      { name: 'Equipo', price: '$19', per: '/mes + créditos', text: 'Para un producto que sigues haciendo crecer.', points: ['$19 al mes de base', 'Créditos mensuales incluidos', 'Recarga con paquetes cuando quieras'], cta: 'Empezar' },
-      { name: 'Solo hosting', price: '$19', per: '/mes', text: 'Para mantener en marcha un producto terminado.', points: ['Para un producto terminado', 'Hosting, base de datos y dominio en marcha', 'Añade créditos cuando quieras cambios'], cta: 'Empezar' },
+      { name: 'Empieza gratis', price: '$0', per: 'para empezar', text: '$5 de crédito al registrarte, +$10 al añadir una tarjeta.', points: ['1 crédito = $1', 'Hasta 2 horas de tiempo de equipo', 'Sin tarjeta'], cta: 'Empezar gratis' },
+      { name: 'Equipo', price: '$19', per: '/mes', text: 'Para un producto que sigues haciendo crecer.', points: ['20 horas de tiempo de equipo al mes', 'Hosting para tus sitios y almacenamiento', 'IA y tiempo extra con créditos ($0,25 por hora de equipo)'], cta: 'Empezar' },
+      { name: 'Solo hosting', price: '$19', per: '/mes', text: 'Tu producto sigue en vivo mientras el equipo descansa.', points: ['Hosting, base de datos y dominio se mantienen', 'El equipo descansa hasta que lo necesites', 'Añade créditos cuando quieras cambios'], cta: 'Empezar' },
     ],
+    teamTime: { title: '¿Qué es el tiempo de equipo?', text: 'El ordenador de tu equipo solo funciona mientras trabaja. Se pausa tras 20 minutos sin actividad y despierta cuando lo necesitas.' },
+    estimate: { title: 'Calcula antes de gastar', text: 'Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
   },
   band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué quieres crear. Tu equipo está listo en más o menos un minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -206,7 +208,7 @@ const es: Messages = {
       label: 'Propuesta según el uso',
       week: 'Esta semana',
       title: 'Facilitar elegir el primer hábito',
-      stats: ['registros', 'activos hoy', 'abandonan en el paso 2'],
+      stats: ['registros', 'activos hoy', 'abandono paso 2'],
       text: 'Mucha gente se va al elegir su primer hábito. Sugiere tres hábitos para empezar.',
       cost: 'Costo esperado',
       yes: 'Aprobar',
@@ -227,7 +229,7 @@ const es: Messages = {
   pages: {
     pricing: {
       title: 'Precios — equipe',
-      desc: 'Empieza gratis con $5 de crédito, sin tarjeta. 1 crédito = $1. Plan Equipo: $19 al mes más créditos mensuales, o Solo hosting por $19 al mes.',
+      desc: 'Empieza gratis con $5 de crédito y hasta 2 horas de tiempo de equipo. Plan Equipo: $19 al mes con 20 horas. Solo hosting: $19 al mes.',
       h1: 'Precios',
       lead: 'Empieza gratis. Paga lo que hace tu equipo y ve el coste antes de que ocurra.',
     },

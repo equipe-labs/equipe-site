@@ -16,6 +16,7 @@ import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
 import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
 import '../styles/iphone.css';
@@ -125,15 +126,24 @@ const tiles = [
           <p class="kicker">{t.nav.how}</p>
           <h2>{t.flow.title}</h2>
         </div>
-        <ol class="fsteps rv">
-          {t.flow.steps.map((st, i) => (
-            <li style={`--i:${i}`}>
-              <span class="fn" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{st.title}</h3>
-              <p>{st.text}</p>
-            </li>
-          ))}
-        </ol>
+        <div class="hiw" data-hiw>
+          <ol class="hiw-steps">
+            {t.flow.steps.map((st, i) => (
+              <li class={`hiw-step${i === 0 ? ' on' : ''}`} data-step={i}>
+                <button type="button" class="hiw-b" aria-controls={`hiw-p${i}`} data-go={i}>
+                  <span class="fn" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="hiw-t"><b>{st.title}</b><span>{st.text}</span></span>
+                </button>
+                <div class="hiw-m">{i === 0 ? <div class="hiw-type"><span class="ht-l">{t.prompt.label}</span><p class="ht-x" data-typer={JSON.stringify(t.prompt.examples)}>{t.prompt.examples[0]}</p><span class="ht-send" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></span></div> : i === 1 ? <WebApp k="mini" s={s} alt={st.title} /> : <WebApp k="growth" s={s} alt={st.title} />}</div>
+              </li>
+            ))}
+          </ol>
+          <div class="hiw-stage" aria-hidden="true">
+            <div class="hiw-p on" id="hiw-p0"><div class="hiw-type big"><span class="ht-l">{t.prompt.label}</span><p class="ht-x" data-typer={JSON.stringify(t.prompt.examples)}>{t.prompt.examples[0]}</p><span class="ht-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></span></div></div>
+            <div class="hiw-p" id="hiw-p1"><WebApp k="mini" s={s} alt="" /></div>
+            <div class="hiw-p" id="hiw-p2"><WebApp k="growth" s={s} alt="" /></div>
+          </div>
+        </div>
         <div class="fcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
@@ -249,6 +259,10 @@ const tiles = [
             </li>
           ))}
         </ul>
+        <div class="pfacts rv">
+          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg><div><h3>{t.plans.teamTime.title}</h3><p>{t.plans.teamTime.text}</p></div></div>
+          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5h16M7 15V11M12 15V7M17 15v-2.5" /></svg><div><h3>{t.plans.estimate.title}</h3><p>{t.plans.estimate.text}</p>{TYPICAL_TOTALS?.[code] && <p class="pfact-x">{TYPICAL_TOTALS[code]}</p>}</div></div>
+        </div>
         <ul class="pts rv">
           {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
         </ul>
@@ -331,8 +345,26 @@ const tiles = [
     // - blocks fade up as they enter (IntersectionObserver; anything already on screen shows at once)
     // - drawn scenes get `.live` while on screen, so their loops only run when someone can see them
     // - numbers with data-tick count up once, the first time they are seen
+    // How it works: the step in the middle of the screen is active; its preview fades in on the right. Clicking a step jumps to it.
+    document.querySelectorAll<HTMLElement>('[data-hiw]').forEach((box) => {
+      const steps = [...box.querySelectorAll<HTMLElement>('.hiw-step')];
+      const panes = [...box.querySelectorAll<HTMLElement>('.hiw-p')];
+      const set = (n: number) => { steps.forEach((s, i) => s.classList.toggle('on', i === n)); panes.forEach((p, i) => p.classList.toggle('on', i === n)); box.style.setProperty('--prog', String(n / Math.max(1, steps.length - 1))); };
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(Number((e.target as HTMLElement).dataset.step)); }), { rootMargin: '-45% 0px -45% 0px' });
+      steps.forEach((s) => io.observe(s));
+      box.querySelectorAll<HTMLButtonElement>('[data-go]').forEach((b) => b.addEventListener('click', () => { const n = Number(b.dataset.go); set(n); steps[n].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); }));
+    });
     const root = document.documentElement;
     if (root.classList.contains('mo')) {
+      // the step-1 preview types example ideas
+      document.querySelectorAll<HTMLElement>('[data-typer]').forEach((el) => {
+        const ex: string[] = JSON.parse(el.dataset.typer!); let i = 0, n = ex[0].length, dir = -1, wait = 30;
+        setInterval(() => {
+          if (wait > 0) { wait--; return; }
+          const w = ex[i]; n += dir; el.textContent = w.slice(0, Math.max(0, n));
+          if (dir > 0 && n >= w.length) { dir = -1; wait = 30; } else if (dir < 0 && n <= 0) { dir = 1; i = (i + 1) % ex.length; wait = 6; }
+        }, 60);
+      });
       (window as unknown as { __rv: boolean }).__rv = true;
       const reveal = new IntersectionObserver((es) => es.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }

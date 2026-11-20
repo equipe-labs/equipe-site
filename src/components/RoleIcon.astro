@@ -1,8 +1,8 @@
 ---
-// One role's line icon (24 grid, 1.8 stroke), from the shared avatar set (public/brand/avatars/, data in src/data/roles.json).
+// One role's glyph (white, SF Symbols-like), for the gradient role avatar. Shared set: public/brand/avatars/, data: src/data/roles.json.
 import roles from '../data/roles.json';
 interface Props { r: string }
 const map: Record<string, keyof typeof roles> = { pm: 'pm', eng: 'engineer', engineer: 'engineer', design: 'designer', designer: 'designer', qa: 'qa', data: 'data', marketing: 'marketing' };
-const body = roles[map[Astro.props.r] ?? 'pm'].path;
+const body = roles[map[Astro.props.r] ?? 'pm'].glyph;
 ---
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={body} />
+<svg viewBox="0 0 24 24" aria-hidden="true" set:html={body} />

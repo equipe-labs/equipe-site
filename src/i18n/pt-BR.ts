@@ -91,7 +91,7 @@ const ptBR: Messages = {
       { lead: 'Você vê o custo antes', text: 'Cada proposta mostra quanto deve custar, e você sempre vê o total esperado do mês.' },
       { lead: 'Pague pelo que o time usa', text: '1 crédito = $1. Você começa com $5 grátis, sem cartão.' },
     ],
-    note: 'Limites de gasto mensal chegam em breve.',
+    note: 'Relatórios semanais de uso com propostas chegam em breve.',
     alt: 'A tela de custos: $38 gastos neste mês, cerca de $64 previstos até o fim do mês, abaixo de um limite de $100',
   },
   who: {
@@ -109,7 +109,7 @@ const ptBR: Messages = {
     items: [
       { title: 'O próprio time', text: 'O PM, os engenheiros, o designer, o QA e os analistas de dados já constroem e publicam produtos de verdade. Este site e os nossos apps foram feitos por eles.' },
       { title: 'Seu time na nuvem', text: 'Cadastre-se, descreva sua ideia e tenha seu próprio time em cerca de um minuto. Converse com o PM, acompanhe o trabalho e abra links de prévia.' },
-      { title: 'Ainda por vir', text: 'Importação em um passo do Claude com banco de dados e domínio, limites de gasto mensal e relatórios semanais de uso com propostas.' },
+      { title: 'Ainda por vir', text: 'Importação em um passo do Claude com banco de dados e domínio, e relatórios semanais de uso com propostas.' },
     ],
   },
   proof: {
@@ -128,7 +128,7 @@ const ptBR: Messages = {
       { question: 'O que posso trazer?', answer: 'Uma ideia, uma descrição ou algo que você já fez no Claude, no Lovable ou numa ferramenta parecida: um artefato, um protótipo ou o código dele. O time continua a partir daí.' },
       { question: 'Preciso de um Mac ou de instalar alguma coisa?', answer: 'Não. O seu time trabalha na nuvem e você usa no navegador, em qualquer computador ou celular.' },
       { question: 'Quem cuida da hospedagem, do banco de dados e do domínio?', answer: 'Nós, com um projeto por cliente, então não há nada para você configurar nem nenhum lugar para entrar. Se o seu produto crescer além disso, podemos passá-lo para as suas próprias contas.' },
-      { question: 'Quanto custa?', answer: 'Você paga pelo que seu time usa, em créditos: 1 crédito = $1. Você ganha $5 grátis no cadastro e mais $10 ao adicionar um cartão. Os pacotes são de $25, $50, $100 ou $250. O plano Time custa $19 por mês mais créditos mensais, e Só hospedagem custa $19 por mês para um produto pronto.' },
+      { question: 'Quanto custa?', answer: 'Você paga pelo que seu time usa, em créditos: 1 crédito = $1. No cadastro você ganha $5 (+$10 ao adicionar um cartão), com até 2 horas de tempo de time. O plano Time custa $19 por mês com 20 horas de tempo de time, hospedagem e armazenamento; IA e tempo extra saem dos créditos ($0,25 por hora de time). Só hospedagem custa $19 por mês. Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
       { question: 'O que significa “você aprova”?', answer: 'Tudo o que vai ao ar, custa dinheiro ou chega aos seus clientes espera o seu OK. Você recebe um cartão curto com opções e uma recomendação e responde com um toque.' },
       { question: 'Como eu começo?', answer: 'Cadastre-se em app.equipe.im e descreva sua ideia. Seu time fica pronto em cerca de um minuto, com $5 de crédito grátis e sem cartão.' },
       { question: 'Sou desenvolvedor. Posso rodar por conta própria?', answer: 'Pode. O engine por trás do time é de código aberto e roda na sua própria máquina. A página para desenvolvedores tem o app para Mac e a ferramenta de linha de comando.' },
@@ -163,13 +163,15 @@ const ptBR: Messages = {
   bento: { title: 'O que seu time faz', text: 'Cada membro tem sua função. Você vê tudo e aprova o que importa.' },
   plans: {
     title: 'Preços simples',
-    text: '1 crédito = $1. Você só paga pelo que o time faz.',
+    text: '1 crédito = $1. Pacotes de créditos: $25, $50, $100 ou $250.',
     featured: 'Recomendado',
     items: [
-      { name: 'Comece grátis', price: '$0', per: 'para começar', text: '$5 de crédito no cadastro. Sem cartão.', points: ['1 crédito = $1', '+$10 ao adicionar um cartão', 'Pacotes de $25, $50, $100 ou $250'], cta: 'Começar grátis' },
-      { name: 'Time', price: '$19', per: '/mês + créditos', text: 'Para um produto que você continua fazendo crescer.', points: ['$19 por mês de base', 'Créditos mensais incluídos', 'Recarregue com pacotes quando quiser'], cta: 'Começar' },
-      { name: 'Só hospedagem', price: '$19', per: '/mês', text: 'Para manter um produto pronto no ar.', points: ['Para um produto pronto', 'Hospedagem, banco de dados e domínio no ar', 'Adicione créditos quando quiser mudanças'], cta: 'Começar' },
+      { name: 'Comece grátis', price: '$0', per: 'para começar', text: '$5 de crédito no cadastro, +$10 ao adicionar um cartão.', points: ['1 crédito = $1', 'Até 2 horas de tempo de time', 'Sem cartão'], cta: 'Começar grátis' },
+      { name: 'Time', price: '$19', per: '/mês', text: 'Para um produto que você continua fazendo crescer.', points: ['20 horas de tempo de time por mês', 'Hospedagem dos seus sites e armazenamento', 'IA e tempo extra com créditos ($0,25 por hora de time)'], cta: 'Começar' },
+      { name: 'Só hospedagem', price: '$19', per: '/mês', text: 'Seu produto continua no ar enquanto o time descansa.', points: ['Hospedagem, banco de dados e domínio mantidos', 'O time descansa até você precisar', 'Adicione créditos quando quiser mudanças'], cta: 'Começar' },
     ],
+    teamTime: { title: 'O que é tempo de time?', text: 'O computador do seu time só roda enquanto trabalha. Ele pausa depois de 20 minutos parado e acorda quando você precisa.' },
+    estimate: { title: 'Estimativa antes de gastar', text: 'Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
   },
   band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM o que você quer criar. Seu time fica pronto em cerca de um minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -206,7 +208,7 @@ const ptBR: Messages = {
       label: 'Proposta baseada no uso',
       week: 'Esta semana',
       title: 'Facilitar a escolha do primeiro hábito',
-      stats: ['cadastros', 'ativos hoje', 'desistem no passo 2'],
+      stats: ['cadastros', 'ativos hoje', 'saem no passo 2'],
       text: 'Muita gente para ao escolher o primeiro hábito. Sugira três hábitos para começar.',
       cost: 'Custo esperado',
       yes: 'Aprovar',
@@ -227,7 +229,7 @@ const ptBR: Messages = {
   pages: {
     pricing: {
       title: 'Preços — equipe',
-      desc: 'Comece grátis com $5 de crédito, sem cartão. 1 crédito = $1. Plano Time: $19 por mês mais créditos mensais, ou Só hospedagem por $19 por mês.',
+      desc: 'Comece grátis com $5 de crédito e até 2 horas de tempo de time. Plano Time: $19 por mês com 20 horas. Só hospedagem: $19 por mês.',
       h1: 'Preços',
       lead: 'Comece grátis. Pague pelo que seu time faz e veja o custo antes.',
     },

@@ -4,6 +4,7 @@ import PageShell from '../../components/PageShell.astro';
 import WebApplicationJsonLd from '../../components/WebApplicationJsonLd.astro';
 import '../../styles/sections.css';
 import { SITE } from '../../data/site';
+import { TYPICAL_TOTALS } from '../../data/flags';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
@@ -28,6 +29,10 @@ const cost = t.faq.items[4];
         </li>
       ))}
     </ul>
+    <div class="pfacts">
+          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg><div><h2>{t.plans.teamTime.title}</h2><p>{t.plans.teamTime.text}</p></div></div>
+          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5h16M7 15V11M12 15V7M17 15v-2.5" /></svg><div><h2>{t.plans.estimate.title}</h2><p>{t.plans.estimate.text}</p>{TYPICAL_TOTALS?.[code] && <p class="pfact-x">{TYPICAL_TOTALS[code]}</p>}</div></div>
+        </div>
     <p class="pg-note">{t.plans.text} {t.control.note}</p>
     <div class="pg-prose" style="margin-top:64px">
       <h2>{cost.question}</h2>

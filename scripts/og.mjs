@@ -39,12 +39,12 @@ const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display',Inter,'Apple SD 
 const IPHONE_CSS = await (await import('node:fs/promises')).readFile('src/styles/iphone.css', 'utf8');
 const WORDMARK = (await (await import('node:fs/promises')).readFile('public/brand/wordmark.svg', 'utf8')).replace('<svg ', '<svg height="46" ');
 const ROLES = JSON.parse(await (await import('node:fs/promises')).readFile('src/data/roles.json', 'utf8'));
-const ROLE_ICONS = ['pm', 'engineer', 'designer', 'qa', 'data'].map((k) => ROLES[k].path);
+const ROLE_KEYS = ['pm', 'engineer', 'designer', 'qa', 'data'];
 const ROLE_COLORS = ['oklch(0.58 0.11 262)', 'oklch(0.58 0.09 232)', 'oklch(0.58 0.09 292)', 'oklch(0.58 0.08 212)', 'oklch(0.58 0.08 192)'];
 function card(lang, m) {
   const title = m.hero.title;
   const a = m.scene.app;
-  const roles = m.team.roles.map((r, i) => `<span class="r" style="--c:${ROLE_COLORS[i]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ROLE_ICONS[i]}</svg></span>`).join('');
+  const roles = ROLE_KEYS.map((k) => `<span class="r" style="--t:${ROLES[k].top};--b:${ROLES[k].bottom};--cut:${ROLES[k].bottom}"><svg viewBox="0 0 24 24">${ROLES[k].glyph}</svg></span>`).join('');
   const names = m.team.roles.map((r) => esc(r.name)).join(' · ');
   const habits = a.habits.map((h, i) => `<li class="${i < 2 ? 'done' : 'todo'}"><span class="st-hi st-hi${i}"></span><span class="st-hn">${esc(h)}</span><span class="st-ck"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4L18 8"/></svg></span></li>`).join('');
   return `<html lang="${lang}"><head><meta charset="utf-8"><style>
@@ -59,8 +59,8 @@ function card(lang, m) {
   h1 { margin: 56px 0 0; font-size: ${lang === 'en' ? 76 : 64}px; line-height: ${/^(ko|ja|zh)/.test(lang) ? 1.18 : 1.0}; letter-spacing: ${/^(ko|ja|zh)/.test(lang) ? '-0.02em' : '-0.04em'}; font-weight: 700; word-break: keep-all; }
   p { margin: 22px 0 0; font-size: 28px; line-height: 1.3; color: #4F5159; font-weight: 500; word-break: keep-all; }
   .team { position: absolute; left: 72px; bottom: 58px; display: flex; align-items: center; gap: 14px; font-size: 20px; color: #4F5159; font-weight: 500; }
-  .rs { display: inline-flex; } .r { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; margin-left: -9px; background: color-mix(in srgb, var(--c) 18%, #fff); color: var(--c); box-shadow: 0 0 0 3px #F6F5F1; } .r:first-child { margin-left: 0; }
-  .r svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .rs { display: inline-flex; } .r { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; margin-left: -8px; background: linear-gradient(180deg, var(--t), var(--b)); box-shadow: 0 0 0 3px #F6F5F1, inset 0 1px 0 rgb(255 255 255 / 0.45); } .r:first-child { margin-left: 0; }
+  .r svg { width: 24px; height: 24px; }
   .url { position: absolute; right: 72px; top: 40px; font: 600 22px ui-monospace, 'SF Mono', Menlo, monospace; color: #1D4ED8; }
   .phone { position: absolute; right: 120px; top: 100px; transform: rotate(4deg); }
   .phone .iph { --w: 300px; }

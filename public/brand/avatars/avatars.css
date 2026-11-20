@@ -1,10 +1,11 @@
-/* equipe role avatars: a soft circle in the role colour with the line icon centred. Pair with roles.svg (symbols eq-role-*). */
-.eq-av { --c: #3F6FF5; display: inline-grid; place-items: center; width: var(--eq-av-size, 28px); height: var(--eq-av-size, 28px); border-radius: 50%; flex: none; background: color-mix(in srgb, var(--c) 16%, #fff); color: var(--c); }
-.eq-av > svg { width: 58%; height: 58%; }
-@media (prefers-color-scheme: dark) { .eq-av { background: color-mix(in srgb, var(--c) 24%, #1c1d22); color: color-mix(in srgb, var(--c) 70%, #fff); } }
-.eq-av--pm { --c: #3F6FF5; }
-.eq-av--engineer { --c: #2F9E55; }
-.eq-av--designer { --c: #D6498E; }
-.eq-av--qa { --c: #E2822E; }
-.eq-av--data { --c: #1B8A8F; }
-.eq-av--marketing { --c: #8B5CF6; }
+/* equipe role avatars (Apple-style): a circle with a soft vertical gradient, a 1px top highlight, a faint bottom shade, a white glyph centred.
+   Sizes 20/28/40/64 via --eq-av-size. Glyphs: roles.svg (symbols eq-role-*). */
+.eq-av { --t: #5B86FF; --b: #2F57D8; --cut: var(--b); display: inline-flex; align-items: center; justify-content: center; width: var(--eq-av-size, 28px); height: var(--eq-av-size, 28px); border-radius: 50%; flex: none; line-height: 0;
+  background: linear-gradient(180deg, var(--t), var(--b)); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), inset 0 -1px 0 rgb(0 0 0 / 0.12); }
+.eq-av > svg { width: 60%; height: 60%; display: block; }
+.eq-av--pm { --t: #5B86FF; --b: #2F57D8; }
+.eq-av--engineer { --t: #4FC3D9; --b: #1E8FA8; }
+.eq-av--designer { --t: #8E7CFF; --b: #5B45E0; }
+.eq-av--qa { --t: #4CD787; --b: #22A35A; }
+.eq-av--data { --t: #FFB54D; --b: #F08A1C; }
+.eq-av--marketing { --t: #FF7AA8; --b: #E5487F; }

@@ -10,3 +10,9 @@ export const FOUNDER: null | { name: string; photo: string; story: Record<string
 
 /** "See it work" demo video: set to a path under /public (with a .vtt captions file next to it) once the video exists. */
 export const DEMO_VIDEO: null | { src: string; poster: string; captions: string } = null;
+
+/**
+ * Pricing: typical monthly totals ("most products spend $X–$Y a month"). Hidden until there is real usage data.
+ * Fill in per-locale lines, e.g. { en: 'Most products spend …', ko: '…' }, to show them under "Estimate before you spend".
+ */
+export const TYPICAL_TOTALS: null | Record<string, string> = null;
