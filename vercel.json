@@ -16,7 +16,7 @@
       "statusCode": 301
     },
     {
-      "source": "/:path((?!ingest/|_vercel/)(?:[^/]+/)*[^/.]+)",
+      "source": "/:path((?!ingest/|_vercel/|\\.well-known/)(?:[^/]+/)*[^/.]+)",
       "destination": "/:path/",
       "statusCode": 301
     }
@@ -47,6 +47,10 @@
     {
       "source": "/((?!_astro/|ingest/).*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [{ "key": "Content-Type", "value": "application/json" }]
     },
     {
       "source": "/_astro/(.*)",
