@@ -291,3 +291,67 @@ a.idea-plus { text-decoration: none; }
   .idea-team > summary { padding: 0 8px; } .idea-team > summary .it-av ~ * { }
 }
 .idea.big .idea-box { position: relative; z-index: 3; }
+
+/* ---- prompt box toolbar: one row, three 36px controls, 16px from the edges ---- */
+.idea.big textarea { padding: 20px 16px 8px; }
+main.home .idea.big .idea-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 16px 16px; }
+.idea.big .idea-l2 { display: flex; align-items: center; gap: 8px; }
+.idea.big .idea-plus, .idea.big .idea-send { width: 36px; height: 36px; }
+.idea-team > summary { height: 36px; padding: 0 12px 0 8px; gap: 8px; box-sizing: border-box; }
+.it-av { display: inline-flex; align-items: center; }
+.it-av .rav { margin-left: -6px; box-shadow: 0 0 0 2px var(--bg); }
+.it-av .rav:first-child { margin-left: 0; }
+.idea-team > summary .it-av i { display: none; }
+/* the team menu sits above everything after the box */
+main.home .hero .hbox, main.home .final .fbox { position: relative; z-index: 10; }
+.it-list { display: none; }
+.it-pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 30; width: 300px; animation: lm-in 120ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.pop-h { margin: 4px 8px 6px; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+.it-pop ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.pop-i { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 4px 8px; border-radius: 8px; outline: none; }
+.pop-i:hover, .pop-i:focus-visible { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.pop-i .rav { width: 28px; height: 28px; } .pop-i .rav svg { width: 15px; height: 15px; }
+.pop-t { display: grid; line-height: 1.25; min-width: 0; }
+.pop-t b { font-size: 14px; color: var(--text); } .pop-t em { font-style: normal; font-size: 12.5px; color: var(--muted); }
+.pop-f { margin: 6px 8px 4px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.final .it-pop { text-align: left; }
+.hero .idea-chips { margin-top: 24px; }
+.hero .idea.big .idea-note { margin-top: 16px; }
+.hero .more { margin-top: 24px; }
+
+/* ---- scenes in one palette ---- */
+.wa .wa-av { --c: var(--role-pm); background: color-mix(in oklab, var(--c) 16%, var(--surface)); color: var(--c); }
+.wa .wa-av.eng { --c: var(--role-eng); } .wa .wa-av.design { --c: var(--role-design); } .wa .wa-av.qa { --c: var(--role-qa); } .wa .wa-av.data { --c: var(--role-data); } .wa .wa-av.pm { --c: var(--role-pm); }
+:root[data-theme='dark'] .wa .wa-av { background: color-mix(in oklab, var(--c) 26%, var(--surface)); color: color-mix(in oklab, var(--c) 62%, #fff); }
+.node { --c: var(--role-pm); } .node.r-eng { --c: var(--role-eng); } .node.r-design { --c: var(--role-design); } .node.r-qa { --c: var(--role-qa); } .node.r-data { --c: var(--role-data); }
+.wa .r-pm { background: var(--role-pm); } .wa .r-eng { background: var(--role-eng); } .wa .r-design { background: var(--role-design); } .wa .r-qa { background: var(--role-qa); } .wa .r-data { background: var(--role-data); }
+/* status: Working = accent tint, Done = a check and muted text, Next = outline */
+.wa .wa-st.working, .nd .st-working em { color: var(--accent); background: color-mix(in srgb, var(--accent) 11%, transparent); }
+.wa .wa-st.done, .nd .st-done em { color: var(--muted); background: none; padding-left: 16px; position: relative; }
+.wa .wa-st.done::before, .nd .st-done em::before { content: ''; position: absolute; left: 3px; top: 50%; width: 8px; height: 4px; margin-top: -3px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
+.nd .st-done em { padding-left: 16px; }
+/* Needs your OK = accent tint with an accent dot */
+.wa .wa-dec-k { color: var(--accent); } .wa .wa-dec-k i { background: var(--accent); }
+.wa .wa-dec.inchat, .wa .wa-mini-dec { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+/* live: a soft green dot, muted text */
+.wa .wa-live { color: var(--muted); font-weight: 500; }
+.wa .wa-proj em { color: var(--muted); font-weight: 500; }
+.wa .wa-stats .warn b { color: var(--text); }
+.wa-hero .wa-m em.up { color: var(--accent); }
+/* Stride in a calm indigo-to-blue palette */
+.st-streak { background: radial-gradient(120% 140% at 0% 0%, #6D7CF7 0%, #4F5FE8 50%, #3343C7 100%) !important; box-shadow: 0 calc(var(--u) * 10) calc(var(--u) * 24) calc(var(--u) * -10) rgb(63 80 220 / 0.55) !important; }
+.st-hi0 { background: #E9ECFF !important; color: #4250D8 !important; } .st-hi1 { background: #EAF2FF !important; color: #2F6BD8 !important; } .st-hi2 { background: #E5F4F6 !important; color: #2A8696 !important; }
+.st-habits .done .st-ck { background: #4F5FE8 !important; }
+.st-prog > i > i { background: linear-gradient(90deg, #4F5FE8, #6D8BFF) !important; }
+.wa .wa-pi, .wa-stride-web .sw-logo i { background: radial-gradient(120% 140% at 0% 0%, #6D7CF7, #4F5FE8 55%, #3343C7) !important; }
+/* the colour field fades into the page instead of ending on a hard line */
+.field { -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
+
+/* ---- "See it work" composition: the window is the base; the phone overlaps its left edge by a fixed 64px and starts
+   below the sidebar links; the metrics card hangs 24px below the window's right corner. Nothing crosses another card.
+   Under 1240px the floating pieces step aside rather than overlap. ---- */
+.wa-hero .wa-device { left: -64px; bottom: -150px; }
+.wa-hero .wa-metrics { left: auto; right: 0; bottom: auto; top: calc(100% + 24px); box-shadow: 0 18px 40px -22px rgb(16 18 24 / 0.38); }
+:root[data-theme='dark'] .wa-hero .wa-metrics { box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.65); }
+main.home .see .shot .cap { text-align: center; margin-top: 24px; }
+@media (max-width: 1240px) { .wa-hero .wa-device, .wa-hero .wa-metrics { display: none; } main.home .see .shot { padding-bottom: var(--s-8); } }

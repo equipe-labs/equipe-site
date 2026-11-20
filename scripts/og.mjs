@@ -40,7 +40,7 @@ const IPHONE_CSS = await (await import('node:fs/promises')).readFile('src/styles
 const WORDMARK = (await (await import('node:fs/promises')).readFile('public/brand/wordmark.svg', 'utf8')).replace('<svg ', '<svg height="46" ');
 const ROLES = JSON.parse(await (await import('node:fs/promises')).readFile('src/data/roles.json', 'utf8'));
 const ROLE_ICONS = ['pm', 'engineer', 'designer', 'qa', 'data'].map((k) => ROLES[k].path);
-const ROLE_COLORS = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
+const ROLE_COLORS = ['oklch(0.58 0.11 262)', 'oklch(0.58 0.09 232)', 'oklch(0.58 0.09 292)', 'oklch(0.58 0.08 212)', 'oklch(0.58 0.08 192)'];
 function card(lang, m) {
   const title = m.hero.title;
   const a = m.scene.app;

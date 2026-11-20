@@ -143,3 +143,32 @@ a.cb-link { display: inline-block; margin-top: 10px; }
 :root[data-theme='dark'] .wm { --wm-dot: #6F93FF; }
 footer.site-foot .fsup { margin-top: var(--s-2); }
 @media (max-width: 379px) { header.site .brand .wm { display: none; } }
+
+/* ---- display type: looser tracking for San Francisco (Display optical size), scaled with size; CJK at 0 ---- */
+html { font-optical-sizing: auto; }
+:root { --tr-hero: -0.016em; --tr-h1: -0.014em; --tr-h2: -0.012em; --tr-num: -0.012em; --lh-hero: 1.08; }
+@media (min-width: 700px) { :root { --tr-hero: -0.022em; --tr-h1: -0.02em; --tr-h2: -0.018em; --tr-num: -0.02em; --lh-hero: 1.06; } }
+@media (min-width: 1100px) { :root { --tr-hero: -0.028em; --tr-h1: -0.025em; --tr-h2: -0.022em; --tr-num: -0.025em; --lh-hero: 1.05; } }
+main.home .hero h1 { letter-spacing: var(--tr-hero); line-height: var(--lh-hero); }
+main.pg h1, .dhero h1 { letter-spacing: var(--tr-h1); line-height: 1.07; }
+main.home h2, main.pg h2, main.dev h2 { letter-spacing: var(--tr-h2); line-height: 1.1; }
+main.home .step h3, main.home .wcards h3, main.home .proof h3 { letter-spacing: -0.012em; }
+.proof dt, .plan-p b, .wa-cost-n b { letter-spacing: var(--tr-num); }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) :is(main.home .hero h1, main.pg h1, .dhero h1, main.home h2, main.pg h2, main.dev h2) { letter-spacing: 0; }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home .hero h1 { line-height: 1.18; }
+
+/* ---- one palette: neutral surfaces, the equipe blue as the only accent; role colours are tonally matched (same L and C, hue nudged) ---- */
+:root { --role-pm: oklch(0.58 0.11 262); --role-eng: oklch(0.58 0.09 232); --role-design: oklch(0.58 0.09 292); --role-qa: oklch(0.58 0.08 212); --role-data: oklch(0.58 0.08 192); }
+.rav { --c: var(--role-pm); display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; flex: none; background: color-mix(in oklab, var(--c) 18%, var(--surface)); color: var(--c); }
+.rav svg { width: 12px; height: 12px; stroke-width: 2; }
+.rav-eng { --c: var(--role-eng); } .rav-design { --c: var(--role-design); } .rav-qa { --c: var(--role-qa); } .rav-data { --c: var(--role-data); }
+:root[data-theme='dark'] .rav { background: color-mix(in oklab, var(--c) 28%, var(--surface)); color: color-mix(in oklab, var(--c) 60%, #fff); }
+
+/* ---- one popover style for the language menu, the Product menu and the team menu ---- */
+.pop, header.site .navdd ul.lm, details.lang ul.lm, header.site nav details.lang ul.lm { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px; box-shadow: 0 18px 40px -16px rgb(10 10 12 / 0.32), 0 2px 6px -2px rgb(10 10 12 / 0.08); }
+:root[data-theme='dark'] :is(.pop, header.site .navdd ul.lm, details.lang ul.lm) { box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.7); }
+header.site .navdd ul.lm a, details.lang ul.lm a, header.site nav details.lang ul.lm a { min-height: 36px; padding: 6px 10px; border-radius: 8px; font-size: 14px; }
+/* the language menu hangs from its own trigger, right-aligned to it */
+details.lang { position: relative; }
+header.site details.lang ul.lm { right: 0; left: auto; top: calc(100% + 6px); min-width: 200px; width: max-content; }
+details.lang .lm-ck { margin-left: auto; }

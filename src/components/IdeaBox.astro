@@ -4,6 +4,7 @@
 // app.equipe.im keeps the idea as a draft, shows it on the sign-in page and carries it into team creation.
 // `big`: the hero version (large rounded surface, + menu of examples, "Whole team" chip, round send button, chips below).
 import { SITE } from '../data/site';
+import RoleIcon from './RoleIcon.astro';
 import { getMessages, type LocaleCode } from '../i18n';
 
 interface Props { code: LocaleCode; id: string; location: string; big?: boolean }
@@ -11,7 +12,7 @@ const { code, id, location, big = false } = Astro.props;
 const m = getMessages(code);
 const p = m.prompt;
 const team = m.team.roles;
-const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
+const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
 ---
 <form class={`idea${big ? ' big' : ''}`} action={SITE.start} method="get" data-idea data-ph-location={location} data-examples={JSON.stringify(p.examples)}>
   <label class={big ? 'sr-only' : 'idea-l'} for={id}>{p.label}</label>
@@ -25,8 +26,12 @@ const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
             </a>
             <details class="idea-team" data-teamdd>
-              <summary><span class="it-av" aria-hidden="true">{roles.map((c) => <i style={`--c:${c}`}></i>)}</span>{p.team}<svg class="it-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></summary>
-              <ul class="it-list">{team.map((r, i) => <li><i style={`--c:${roles[i]}`}></i>{r.name}</li>)}</ul>
+              <summary><span class="it-av" aria-hidden="true">{roleKeys.map((r) => <span class={`rav rav-${r}`}><RoleIcon r={r} /></span>)}</span><span class="it-l">{p.team}</span><svg class="it-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></summary>
+              <div class="pop it-pop">
+                <p class="pop-h">{p.teamHead}</p>
+                <ul role="list">{team.map((r, i) => <li tabindex="-1" class="pop-i"><span class={`rav rav-${roleKeys[i]}`} aria-hidden="true"><RoleIcon r={roleKeys[i]} /></span><span class="pop-t"><b>{r.name}</b><em>{p.teamLines[i]}</em></span></li>)}</ul>
+                <p class="pop-f">{p.teamNote}</p>
+              </div>
             </details>
           </div>
           <button class="idea-send" type="submit" aria-label={p.submit} data-send><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></button>
@@ -60,7 +65,15 @@ const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
     form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; fit(); ta.focus(); }));
     if (dd) {
       document.addEventListener('click', (e) => { if (dd.open && !dd.contains(e.target as Node)) dd.open = false; });
-      dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { dd.open = false; dd.querySelector('summary')!.focus(); } });
+      const items = () => [...dd.querySelectorAll<HTMLElement>('.pop-i')];
+      dd.addEventListener('toggle', () => { if (dd.open) items()[0]?.focus({ preventScroll: true }); });
+      dd.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && dd.open) { e.preventDefault(); dd.open = false; dd.querySelector('summary')!.focus(); return; }
+        if (!dd.open || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;
+        e.preventDefault();
+        const l = items(), i = l.indexOf(document.activeElement as HTMLElement);
+        l[e.key === 'Home' ? 0 : e.key === 'End' ? l.length - 1 : (i + (e.key === 'ArrowDown' ? 1 : -1) + l.length) % l.length].focus();
+      });
     }
     // Enter sends, Shift+Enter adds a line; never while an input method (Korean, Japanese, Chinese) is composing.
     ta.addEventListener('keydown', (e) => {
