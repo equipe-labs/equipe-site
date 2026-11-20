@@ -147,6 +147,7 @@ export const en = {
     examples: ['A habit tracker with daily streaks', 'Take my Claude artifact live', 'A booking page for my studio'],
     submit: 'Start',
     team: 'Whole team',
+    import: 'Import a project',
     note: 'Start free — $5 credit included, no card needed.',
   },
   see: { kicker: 'See it work', title: 'Your team, at work.' },

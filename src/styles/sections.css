@@ -266,3 +266,28 @@ main.home > section.see { overflow-x: clip; }
 .nd .ri { border-radius: 50%; }
 main.home .see .shot { padding-bottom: 210px; }
 @media (max-width: 1023px) { main.home .see .shot { padding-bottom: var(--s-8); } }
+
+/* idea box v3: + imports a project, the Whole team chip opens the roster, the send button idles while empty, chips in one row */
+a.idea-plus { text-decoration: none; }
+.idea.big textarea { resize: none; overflow-y: auto; line-height: 1.45; }
+.idea-team { position: relative; padding: 0; border: 0; background: none; height: auto; }
+.idea-team > summary { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); font-size: 13.5px; font-weight: 600; color: var(--muted); white-space: nowrap; cursor: pointer; list-style: none; min-height: 0; }
+.idea-team > summary::-webkit-details-marker { display: none; }
+.idea-team > summary::after { display: none; }
+.idea-team[open] > summary { color: var(--text); }
+.it-caret { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.it-list { position: absolute; left: 0; top: calc(100% + 8px); z-index: 20; display: grid; gap: 2px; min-width: 200px; margin: 0; padding: 6px; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 36px -14px rgb(10 10 12 / 0.3); animation: lm-in 120ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.it-list li { display: flex; align-items: center; gap: 10px; min-height: 32px; padding: 4px 8px; font-size: 14px; color: var(--text); }
+.it-list li i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+.idea-send.idle { background: color-mix(in srgb, var(--text) 14%, transparent); color: var(--muted); }
+.idea-send.idle:hover { transform: none; background: color-mix(in srgb, var(--text) 20%, transparent); color: var(--text); }
+.idea-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; justify-content: center; padding: 2px; }
+.idea-chips::-webkit-scrollbar { display: none; }
+.idea-chips button { flex: none; white-space: nowrap; }
+@media (max-width: 700px) {
+  .idea-chips { justify-content: flex-start; margin-left: -20px; margin-right: -20px; padding: 2px 20px; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  .idea-chips button:nth-child(n+3) { display: inline-block; }
+  .idea-team { display: block; }
+  .idea-team > summary { padding: 0 8px; } .idea-team > summary .it-av ~ * { }
+}
+.idea.big .idea-box { position: relative; z-index: 3; }

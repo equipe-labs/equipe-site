@@ -143,6 +143,7 @@ const es: Messages = {
     examples: ['Un rastreador de hábitos con rachas diarias', 'Publicar lo que hice en Claude', 'Una página de reservas para mi estudio'],
     submit: 'Empezar',
     team: 'Todo el equipo',
+    import: 'Importar un proyecto',
     note: 'Empieza gratis: $5 de crédito incluidos, sin tarjeta.',
   },
   see: { kicker: 'Míralo en acción', title: 'Tu equipo, trabajando.' },

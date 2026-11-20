@@ -143,6 +143,7 @@ const zhCN: Messages = {
     examples: ['每天连续打卡的习惯应用', '把我在 Claude 里做的东西上线', '工作室的预约页面'],
     submit: '开始',
     team: '整个团队',
+    import: '导入项目',
     note: '免费开始，含 $5 额度，无需绑卡。',
   },
   see: { kicker: '看看团队怎么做', title: '你的团队，正在工作。' },

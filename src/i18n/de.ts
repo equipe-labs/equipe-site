@@ -143,6 +143,7 @@ const de: Messages = {
     examples: ['Ein Gewohnheits-Tracker mit täglichen Serien', 'Mein Claude-Projekt live bringen', 'Eine Buchungsseite für mein Studio'],
     submit: 'Loslegen',
     team: 'Ganzes Team',
+    import: 'Projekt importieren',
     note: 'Kostenlos starten: $5 Guthaben inklusive, keine Karte nötig.',
   },
   see: { kicker: 'So arbeitet es', title: 'Dein Team bei der Arbeit.' },

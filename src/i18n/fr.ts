@@ -144,6 +144,7 @@ const fr: Messages = {
     examples: ['Un suivi d’habitudes avec des séries quotidiennes', 'Mettre en ligne ce que j’ai fait dans Claude', 'Une page de réservation pour mon studio'],
     submit: 'Commencer',
     team: 'Toute l’équipe',
+    import: 'Importer un projet',
     note: 'Gratuit pour commencer : $5 de crédit offerts, sans carte.',
   },
   see: { kicker: 'À l’œuvre', title: 'Votre équipe, au travail.' },

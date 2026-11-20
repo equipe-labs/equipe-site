@@ -8,7 +8,9 @@ import { getMessages, type LocaleCode } from '../i18n';
 
 interface Props { code: LocaleCode; id: string; location: string; big?: boolean }
 const { code, id, location, big = false } = Astro.props;
-const p = getMessages(code).prompt;
+const m = getMessages(code);
+const p = m.prompt;
+const team = m.team.roles;
 const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
 ---
 <form class={`idea${big ? ' big' : ''}`} action={SITE.start} method="get" data-idea data-ph-location={location} data-examples={JSON.stringify(p.examples)}>
@@ -19,17 +21,15 @@ const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
       {big ? (
         <>
           <div class="idea-l2">
-            <span class="idea-plusw">
-              <button type="button" class="idea-plus" aria-haspopup="true" aria-expanded="false" aria-label={p.label} data-plus>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-              </button>
-              <span class="idea-menu" role="menu" hidden data-menu>
-                {p.examples.map((x) => <button type="button" role="menuitem" data-ex={x}>{x}</button>)}
-              </span>
-            </span>
-            <span class="idea-team" aria-hidden="true"><span class="it-av">{roles.map((c) => <i style={`--c:${c}`}></i>)}</span>{p.team}</span>
+            <a class="idea-plus" href={SITE.importProject} aria-label={p.import} title={p.import} data-ph="import_click" data-ph-location={location}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            </a>
+            <details class="idea-team" data-teamdd>
+              <summary><span class="it-av" aria-hidden="true">{roles.map((c) => <i style={`--c:${c}`}></i>)}</span>{p.team}<svg class="it-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></summary>
+              <ul class="it-list">{team.map((r, i) => <li><i style={`--c:${roles[i]}`}></i>{r.name}</li>)}</ul>
+            </details>
           </div>
-          <button class="idea-send" type="submit" aria-label={p.submit}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></button>
+          <button class="idea-send" type="submit" aria-label={p.submit} data-send><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></button>
         </>
       ) : (
         <>
@@ -49,13 +49,19 @@ const roles = ['#3F6FF5', '#2F9E55', '#D6498E', '#E2822E', '#1B8A8F'];
   document.querySelectorAll<HTMLFormElement>('[data-idea]').forEach((form) => {
     const ta = form.querySelector('textarea')!;
     const track = (n: string, props?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, props);
-    const plus = form.querySelector<HTMLButtonElement>('[data-plus]');
-    const menu = form.querySelector<HTMLElement>('[data-menu]');
-    const closeMenu = () => { if (menu && plus) { menu.hidden = true; plus.setAttribute('aria-expanded', 'false'); } };
-    form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; closeMenu(); ta.focus(); }));
-    plus?.addEventListener('click', () => { const open = menu!.hidden; menu!.hidden = !open; plus.setAttribute('aria-expanded', String(open)); if (open) menu!.querySelector<HTMLButtonElement>('button')?.focus(); });
-    document.addEventListener('click', (e) => { if (menu && !menu.hidden && !plus!.parentElement!.contains(e.target as Node)) closeMenu(); });
-    form.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu && !menu.hidden) { closeMenu(); plus!.focus(); } });
+    const send = form.querySelector<HTMLElement>('[data-send]');
+    const dd = form.querySelector<HTMLDetailsElement>('[data-teamdd]');
+    // Grow with the text up to about six lines; the send button looks idle while the box is empty.
+    const fit = () => {
+      if (form.classList.contains('big')) { ta.style.height = 'auto'; const lh = parseFloat(getComputedStyle(ta).lineHeight) || 26; ta.style.height = Math.min(ta.scrollHeight, lh * 6 + 30) + 'px'; }
+      send?.classList.toggle('idle', !ta.value.trim());
+    };
+    ta.addEventListener('input', fit); fit();
+    form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; fit(); ta.focus(); }));
+    if (dd) {
+      document.addEventListener('click', (e) => { if (dd.open && !dd.contains(e.target as Node)) dd.open = false; });
+      dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { dd.open = false; dd.querySelector('summary')!.focus(); } });
+    }
     // Enter sends, Shift+Enter adds a line; never while an input method (Korean, Japanese, Chinese) is composing.
     ta.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); }

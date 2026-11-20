@@ -143,6 +143,7 @@ const ptBR: Messages = {
     examples: ['Um app de hábitos com sequências diárias', 'Colocar no ar o que fiz no Claude', 'Uma página de agendamento para meu estúdio'],
     submit: 'Começar',
     team: 'Time todo',
+    import: 'Importar um projeto',
     note: 'Comece grátis: $5 de crédito incluídos, sem cartão.',
   },
   see: { kicker: 'Veja funcionando', title: 'Seu time, trabalhando.' },

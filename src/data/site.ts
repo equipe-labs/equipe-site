@@ -6,6 +6,8 @@ export const SITE = {
   app: 'https://app.equipe.im',
   start: 'https://app.equipe.im/start',
   login: 'https://app.equipe.im/login',
+  /** Import an existing project (Claude artifact, code) straight into team creation. */
+  importProject: 'https://app.equipe.im/new?import=1',
   docs: 'https://github.com/equipe-labs/equipe/tree/main/docs',
   /** Stable URL of the signed, notarized macOS DMG attached to every release. */
   desktopDmg: 'https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg',
