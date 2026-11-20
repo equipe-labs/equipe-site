@@ -128,7 +128,7 @@ const ptBR: Messages = {
       { question: 'O que posso trazer?', answer: 'Uma ideia, uma descrição ou algo que você já fez no Claude, no Lovable ou numa ferramenta parecida: um artefato, um protótipo ou o código dele. O time continua a partir daí.' },
       { question: 'Preciso de um Mac ou de instalar alguma coisa?', answer: 'Não. O seu time trabalha na nuvem e você usa no navegador, em qualquer computador ou celular.' },
       { question: 'Quem cuida da hospedagem, do banco de dados e do domínio?', answer: 'Nós, com um projeto por cliente, então não há nada para você configurar nem nenhum lugar para entrar. Se o seu produto crescer além disso, podemos passá-lo para as suas próprias contas.' },
-      { question: 'Quanto custa?', answer: 'Você paga pelo que seu time usa, em créditos: 1 crédito = $1. No cadastro você ganha $5 (+$10 ao adicionar um cartão), com até 2 horas de tempo de time. O plano Time custa $19 por mês com 20 horas de tempo de time, hospedagem e armazenamento; IA e tempo extra saem dos créditos ($0,25 por hora de time). Só hospedagem custa $19 por mês. Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
+      { question: 'Quanto custa?', answer: 'Você paga com créditos: 1 crédito = $1. Você ganha $5 ao criar seu time (+$10 ao adicionar um cartão), com até 2 horas de tempo de time. O plano Time custa $19 por mês ou $190 por ano, com 20 horas de tempo de time todo mês, hospedagem e armazenamento; o tempo extra custa $0,25 por hora e o trabalho de IA sai dos créditos. Só hospedagem custa $19 por mês. Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
       { question: 'O que significa “você aprova”?', answer: 'Tudo o que vai ao ar, custa dinheiro ou chega aos seus clientes espera o seu OK. Você recebe um cartão curto com opções e uma recomendação e responde com um toque.' },
       { question: 'Como eu começo?', answer: 'Cadastre-se em app.equipe.im e descreva sua ideia. Seu time fica pronto em cerca de um minuto, com $5 de crédito grátis e sem cartão.' },
       { question: 'Sou desenvolvedor. Posso rodar por conta própria?', answer: 'Pode. O engine por trás do time é de código aberto e roda na sua própria máquina. A página para desenvolvedores tem o app para Mac e a ferramenta de linha de comando.' },
@@ -179,15 +179,19 @@ const ptBR: Messages = {
   bento: { title: 'O que seu time faz', text: 'Cada membro tem sua função. Você vê tudo e aprova o que importa.' },
   plans: {
     title: 'Preços simples',
-    text: '1 crédito = $1. Pacotes de créditos: $25, $50, $100 ou $250.',
+    text: '1 crédito = $1. Pacotes: $25, $50, $100 ou $250. Os créditos valem por 12 meses; créditos não usados podem ser reembolsados em até 14 dias.',
     featured: 'Recomendado',
     items: [
-      { name: 'Comece grátis', price: '$0', per: 'para começar', text: '$5 de crédito no cadastro, +$10 ao adicionar um cartão.', points: ['1 crédito = $1', 'Até 2 horas de tempo de time', 'Sem cartão'], cta: 'Começar grátis' },
-      { name: 'Time', price: '$19', per: '/mês', text: 'Para um produto que você continua fazendo crescer.', points: ['20 horas de tempo de time por mês', 'Hospedagem dos seus sites e armazenamento', 'IA e tempo extra com créditos ($0,25 por hora de time)'], cta: 'Começar' },
-      { name: 'Só hospedagem', price: '$19', per: '/mês', text: 'Seu produto continua no ar enquanto o time descansa.', points: ['Hospedagem, banco de dados e domínio mantidos', 'O time descansa até você precisar', 'Adicione créditos quando quiser mudanças'], cta: 'Começar' },
+      { name: 'Comece grátis', price: '$0', per: 'para começar', text: '$5 de crédito ao criar seu time, +$10 ao adicionar um cartão (sem cobrança).', points: ['1 crédito = $1', 'Até 2 horas de tempo de time para testar', 'Sem cartão para começar'], cta: 'Começar grátis' },
+      { name: 'Time', price: '$19', per: '/mês', text: 'Para um produto que você continua fazendo crescer.', points: ['20 horas de tempo de time todo mês', 'Hospedagem dos seus sites e armazenamento', 'Tempo extra a $0,25 por hora, dos créditos', 'Créditos mensais opcionais para trabalho de IA', 'O time todo: PM, engenharia, design, QA, dados'], cta: 'Começar' },
+      { name: 'Só hospedagem', price: '$19', per: '/mês', text: 'Seu produto continua no ar enquanto o time descansa.', points: ['Seu produto, sites e domínios continuam no ar', 'O armazenamento é mantido', 'Para acordar o time, faça upgrade ou adicione créditos'], cta: 'Começar' },
     ],
-    teamTime: { title: 'O que é tempo de time?', text: 'O computador do seu time só roda enquanto trabalha. Ele pausa depois de 20 minutos parado e acorda quando você precisa.' },
+    teamTime: { title: 'O que é tempo de time?', text: 'É o tempo em que o computador do seu time está ligado: enquanto constrói, testa, publica ou espera por você. Depois de 20 minutos sem uso ele dorme e o relógio para; acorda em segundos quando você precisa. Além das horas do plano custa $0,25 por hora, medido por minuto.' },
     estimate: { title: 'Estimativa antes de gastar', text: 'Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
+    yearly: 'ou $190 por ano (dois meses grátis)',
+    credits: { title: 'O que os créditos pagam', text: 'Trabalho de IA pelo preço de tabela do modelo mais a nossa margem, mostrado em centavos por tarefa; tempo de time além do plano; domínios a preço de custo.' },
+    freeNote: 'Quando as 2 horas grátis acabam, seu time descansa até você escolher um plano ou adicionar créditos. Times gratuitos que ninguém abre por 14 dias recebem um email e são apagados 7 dias depois, a menos que você os abra; antes disso você pode baixar seu projeto.',
+    faq: [{ question: 'Eu pago enquanto estou fora?', answer: 'Não. Seu time dorme depois de 20 minutos sem atividade, e o tempo dormindo é grátis.' }, { question: 'E se eu passar de 20 horas?', answer: 'Cada hora extra custa $0,25, descontada dos seus créditos. Ela aparece numa linha própria de “Tempo de time”.' }, { question: 'As horas não usadas acumulam?', answer: 'Não. As 20 horas reiniciam todo mês. Os créditos mensais opcionais de IA acumulam por 2 meses.' }, { question: 'O que acontece com meus sites se eu pagar só a hospedagem?', answer: 'Eles continuam no ar, com seus domínios e armazenamento.' }],
   },
   band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM o que você quer criar. Seu time fica pronto em cerca de um minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -245,7 +249,7 @@ const ptBR: Messages = {
   pages: {
     pricing: {
       title: 'Preços — equipe',
-      desc: 'Comece grátis com $5 de crédito e até 2 horas de tempo de time. Plano Time: $19 por mês com 20 horas. Só hospedagem: $19 por mês.',
+      desc: 'Comece grátis com $5 de crédito e até 2 horas de tempo de time. Time: $19 por mês ou $190 por ano, com 20 horas. Só hospedagem: $19 por mês.',
       h1: 'Preços',
       lead: 'Comece grátis. Pague pelo que seu time faz e veja o custo antes.',
     },

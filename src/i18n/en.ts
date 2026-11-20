@@ -132,7 +132,7 @@ export const en = {
       { question: 'What can I bring?', answer: 'An idea, a description, or something you already made in Claude, Lovable or a similar tool: an artifact, a prototype or its code. The team takes it from there.' },
       { question: 'Do I need a Mac, or to install anything?', answer: 'No. Your team works in the cloud and you use it in your browser, on any computer or phone.' },
       { question: 'Who runs the hosting, the database and the domain?', answer: 'We do, as one project per customer, so there is nothing for you to set up or sign in to. If your product outgrows that, we can move it to your own accounts.' },
-      { question: 'What does it cost?', answer: 'You pay for what your team uses, with credits: 1 credit = $1. Sign up and get $5 free (+$10 when you add a card), including up to 2 hours of team time. The Team plan is $19 a month with 20 hours of team time, hosting and storage; AI and extra time come from credits ($0.25 per team hour). Hosting only is $19 a month. Every request shows its expected cost first, and you set a monthly cap.' },
+      { question: 'What does it cost?', answer: 'You pay with credits: 1 credit = $1. You get $5 when you create your team (+$10 when you add a card), including up to 2 hours of team time. The Team plan is $19 a month or $190 a year, with 20 hours of team time every month, hosting and storage; extra team time is $0.25 per hour and AI work is paid from credits. Hosting only is $19 a month. Every request shows its expected cost first, and you set a monthly cap.' },
       { question: 'What does “you approve” mean?', answer: 'Anything that goes live, costs money or reaches your customers waits for your OK. You get a short card with options and a recommendation, and answer with one tap.' },
       { question: 'How do I start?', answer: 'Sign up at app.equipe.im and describe your idea. Your team is set up in about a minute, with $5 of free credit and no card needed.' },
       { question: 'I am a developer. Can I run it myself?', answer: 'Yes. The engine behind the team is open source and runs on your own machine. The developers page has the Mac app and the command-line tool.' },
@@ -183,15 +183,19 @@ export const en = {
   bento: { title: 'What your team does', text: 'Each member has a job. You see all of it, and you approve what matters.' },
   plans: {
     title: 'Simple pricing',
-    text: '1 credit = $1. Credit packs: $25, $50, $100 or $250.',
+    text: '1 credit = $1. Packs: $25, $50, $100 or $250. Credits last 12 months; unused credits are refundable within 14 days.',
     featured: 'Recommended',
     items: [
-      { name: 'Start free', price: '$0', per: 'to start', text: '$5 of credit when you sign up, +$10 when you add a card.', points: ['1 credit = $1', 'Up to 2 hours of team time', 'No card needed'], cta: 'Start free' },
-      { name: 'Team', price: '$19', per: '/month', text: 'For a product you keep growing.', points: ['20 hours of team time each month', 'Hosting for your sites and storage', 'AI and extra time from credits ($0.25 per team hour)'], cta: 'Get started' },
-      { name: 'Hosting only', price: '$19', per: '/month', text: 'Your product stays live while the team sleeps.', points: ['Hosting, database and domain kept', 'The team sleeps until you need it', 'Add credits when you want changes'], cta: 'Get started' },
+      { name: 'Start free', price: '$0', per: 'to start', text: '$5 of credit when you create your team, +$10 when you add a card (no charge).', points: ['1 credit = $1', 'Up to 2 hours of team time to try it', 'No card needed to start'], cta: 'Start free' },
+      { name: 'Team', price: '$19', per: '/month', text: 'For a product you keep growing.', points: ['20 hours of team time every month', 'Hosting for your sites, and storage', 'Extra team time $0.25 per hour, from credits', 'Optional monthly credits for AI work', 'Your whole team: PM, engineers, designer, QA, data'], cta: 'Get started' },
+      { name: 'Hosting only', price: '$19', per: '/month', text: 'Your product stays live while the team sleeps.', points: ['Your product, sites and domains stay live', 'Storage is kept', 'To wake the team, upgrade or add credits'], cta: 'Get started' },
     ],
-    teamTime: { title: 'What is team time?', text: 'Your team’s computer only runs while it’s working. It pauses after 20 minutes of quiet and wakes up when you need it.' },
+    teamTime: { title: 'What is team time?', text: 'The time your team’s computer is running: while it builds, tests, deploys or waits for you. After 20 minutes without use it sleeps and the clock stops; it wakes in a few seconds when you need it. Beyond your plan’s hours it costs $0.25 per hour, metered per minute.' },
     estimate: { title: 'Estimate before you spend', text: 'Every request shows its expected cost first, and you set a monthly cap.' },
+    yearly: 'or $190 a year (two months free)',
+    credits: { title: 'What credits pay for', text: 'AI work at the model’s list price plus our margin, shown to the cent for each task; team time beyond your plan; domains at cost.' },
+    freeNote: 'When the free 2 hours are used, your team rests until you choose a plan or add credits. Free teams nobody opens for 14 days get an email and are deleted 7 days later unless you open them; you can download your project first.',
+    faq: [{ question: 'Do I pay while I’m away?', answer: 'No. Your team sleeps after 20 minutes without activity, and sleeping time is free.' }, { question: 'What if I go over 20 hours?', answer: 'Extra hours are $0.25 each, taken from your credits. You see them as their own “Team time” line.' }, { question: 'Do unused hours carry over?', answer: 'No. The 20 hours reset every month. Optional monthly AI credits roll over for 2 months.' }, { question: 'What happens to my sites if I only pay for hosting?', answer: 'They stay live, with their domains and storage.' }],
   },
   band: { title: 'Start with your idea.', text: 'Tell the PM what you want to build. Your team is ready in about a minute.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -249,7 +253,7 @@ export const en = {
   pages: {
     pricing: {
       title: 'Pricing — equipe',
-      desc: 'Start free with $5 of credit and up to 2 hours of team time. Team plan: $19 a month with 20 hours of team time. Hosting only: $19 a month.',
+      desc: 'Start free with $5 of credit and up to 2 hours of team time. Team: $19 a month or $190 a year, with 20 hours of team time. Hosting only: $19 a month.',
       h1: 'Pricing',
       lead: 'Start free. Pay for what your team does, and see the cost before it happens.',
     },

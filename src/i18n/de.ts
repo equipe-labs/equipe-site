@@ -128,7 +128,7 @@ const de: Messages = {
       { question: 'Was kann ich mitbringen?', answer: 'Eine Idee, eine Beschreibung oder etwas, das du schon in Claude, Lovable oder einem ähnlichen Tool gemacht hast: ein Artefakt, einen Prototyp oder den Code. Ab da übernimmt das Team.' },
       { question: 'Brauche ich einen Mac oder muss ich etwas installieren?', answer: 'Nein. Dein Team arbeitet in der Cloud, und du nutzt es im Browser, an jedem Computer und auf dem Handy.' },
       { question: 'Wer betreibt Hosting, Datenbank und Domain?', answer: 'Wir, als eigenes Projekt pro Kunde. Du musst nichts einrichten und dich nirgends anmelden. Wächst dein Produkt darüber hinaus, ziehen wir es auf deine eigenen Konten um.' },
-      { question: 'Was kostet es?', answer: 'Du zahlst, was dein Team nutzt, in Credits: 1 Credit = $1. Bei der Anmeldung bekommst du $5 (+$10 mit hinterlegter Karte), inklusive bis zu 2 Stunden Teamzeit. Der Team-Plan kostet $19 im Monat mit 20 Stunden Teamzeit, Hosting und Speicher; KI und Extrazeit laufen über Credits ($0,25 pro Teamstunde). Nur Hosting kostet $19 im Monat. Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
+      { question: 'Was kostet es?', answer: 'Du zahlst mit Credits: 1 Credit = $1. Wenn du dein Team anlegst, bekommst du $5 (+$10 mit hinterlegter Karte), inklusive bis zu 2 Stunden Teamzeit. Der Team-Plan kostet $19 im Monat oder $190 im Jahr, mit 20 Stunden Teamzeit jeden Monat, Hosting und Speicher; Extra-Teamzeit kostet $0,25 pro Stunde, KI-Arbeit läuft über Credits. Nur Hosting kostet $19 im Monat. Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
       { question: 'Was heißt „Du gibst frei“?', answer: 'Alles, was live geht, Geld kostet oder deine Kunden erreicht, wartet auf dein Okay. Du bekommst eine kurze Karte mit Optionen und einer Empfehlung und antwortest mit einem Tipp.' },
       { question: 'Wie fange ich an?', answer: 'Melde dich auf app.equipe.im an und beschreib deine Idee. Dein Team ist in etwa einer Minute bereit, mit $5 Gratis-Guthaben und ohne Karte.' },
       { question: 'Ich bin Entwickler. Kann ich es selbst betreiben?', answer: 'Ja. Die Engine hinter dem Team ist Open Source und läuft auf deinem eigenen Rechner. Auf der Entwicklerseite findest du die Mac-App und das Kommandozeilen-Tool.' },
@@ -179,15 +179,19 @@ const de: Messages = {
   bento: { title: 'Was dein Team macht', text: 'Jedes Mitglied hat seine Aufgabe. Du siehst alles und gibst frei, was zählt.' },
   plans: {
     title: 'Einfache Preise',
-    text: '1 Credit = $1. Credit-Pakete: $25, $50, $100 oder $250.',
+    text: '1 Credit = $1. Pakete: $25, $50, $100 oder $250. Credits gelten 12 Monate; ungenutzte Credits werden innerhalb von 14 Tagen erstattet.',
     featured: 'Empfohlen',
     items: [
-      { name: 'Kostenlos starten', price: '$0', per: 'zum Start', text: '$5 Guthaben bei der Anmeldung, +$10 mit hinterlegter Karte.', points: ['1 Credit = $1', 'Bis zu 2 Stunden Teamzeit', 'Keine Karte nötig'], cta: 'Kostenlos starten' },
-      { name: 'Team', price: '$19', per: '/Monat', text: 'Für ein Produkt, das du weiter wachsen lässt.', points: ['20 Stunden Teamzeit pro Monat', 'Hosting für deine Seiten und Speicher', 'KI und Extrazeit über Credits ($0,25 pro Teamstunde)'], cta: 'Loslegen' },
-      { name: 'Nur Hosting', price: '$19', per: '/Monat', text: 'Dein Produkt bleibt live, während das Team schläft.', points: ['Hosting, Datenbank und Domain bleiben', 'Das Team schläft, bis du es brauchst', 'Credits dazu, wenn du Änderungen willst'], cta: 'Loslegen' },
+      { name: 'Kostenlos starten', price: '$0', per: 'zum Start', text: '$5 Guthaben, wenn du dein Team anlegst, +$10 mit hinterlegter Karte (ohne Abbuchung).', points: ['1 Credit = $1', 'Bis zu 2 Stunden Teamzeit zum Ausprobieren', 'Zum Start keine Karte nötig'], cta: 'Kostenlos starten' },
+      { name: 'Team', price: '$19', per: '/Monat', text: 'Für ein Produkt, das du weiter wachsen lässt.', points: ['20 Stunden Teamzeit jeden Monat', 'Hosting für deine Seiten und Speicher', 'Extra-Teamzeit $0,25 pro Stunde, aus Credits', 'Optionale Monats-Credits für KI-Arbeit', 'Dein ganzes Team: PM, Engineering, Design, QA, Daten'], cta: 'Loslegen' },
+      { name: 'Nur Hosting', price: '$19', per: '/Monat', text: 'Dein Produkt bleibt live, während das Team schläft.', points: ['Produkt, Seiten und Domains bleiben live', 'Der Speicher bleibt erhalten', 'Zum Aufwecken upgraden oder Credits dazu'], cta: 'Loslegen' },
     ],
-    teamTime: { title: 'Was ist Teamzeit?', text: 'Der Rechner deines Teams läuft nur, während es arbeitet. Nach 20 ruhigen Minuten pausiert er und wacht auf, wenn du ihn brauchst.' },
+    teamTime: { title: 'Was ist Teamzeit?', text: 'Die Zeit, in der der Rechner deines Teams läuft: während es baut, testet, veröffentlicht oder auf dich wartet. Nach 20 Minuten ohne Nutzung schläft er ein und die Uhr stoppt; er wacht in Sekunden auf, wenn du ihn brauchst. Über die Stunden deines Plans hinaus kostet sie $0,25 pro Stunde, minutengenau abgerechnet.' },
     estimate: { title: 'Erst schätzen, dann ausgeben', text: 'Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
+    yearly: 'oder $190 im Jahr (zwei Monate gratis)',
+    credits: { title: 'Wofür Credits bezahlen', text: 'KI-Arbeit zum Listenpreis des Modells plus unsere Marge, auf den Cent genau pro Aufgabe; Teamzeit über deinen Plan hinaus; Domains zum Selbstkostenpreis.' },
+    freeNote: 'Sind die 2 Gratis-Stunden verbraucht, ruht dein Team, bis du einen Plan wählst oder Credits hinzufügst. Kostenlose Teams, die 14 Tage niemand öffnet, bekommen eine E-Mail und werden 7 Tage später gelöscht, wenn du sie nicht öffnest; vorher kannst du dein Projekt herunterladen.',
+    faq: [{ question: 'Zahle ich, während ich weg bin?', answer: 'Nein. Dein Team schläft nach 20 Minuten ohne Aktivität ein, und Schlafzeit ist kostenlos.' }, { question: 'Was, wenn ich über 20 Stunden komme?', answer: 'Jede Extrastunde kostet $0,25 und wird von deinen Credits abgezogen. Du siehst sie als eigene Zeile „Teamzeit“.' }, { question: 'Werden ungenutzte Stunden übertragen?', answer: 'Nein. Die 20 Stunden starten jeden Monat neu. Optionale KI-Monats-Credits bleiben 2 Monate erhalten.' }, { question: 'Was passiert mit meinen Seiten, wenn ich nur Hosting zahle?', answer: 'Sie bleiben live, mit ihren Domains und ihrem Speicher.' }],
   },
   band: { title: 'Fang mit deiner Idee an.', text: 'Sag dem PM, was du bauen willst. Dein Team ist in etwa einer Minute bereit.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -245,7 +249,7 @@ const de: Messages = {
   pages: {
     pricing: {
       title: 'Preise — equipe',
-      desc: 'Kostenlos starten mit $5 Guthaben und bis zu 2 Stunden Teamzeit. Team-Plan: $19 im Monat mit 20 Stunden. Nur Hosting: $19 im Monat.',
+      desc: 'Kostenlos starten mit $5 Guthaben und bis zu 2 Stunden Teamzeit. Team: $19 im Monat oder $190 im Jahr, mit 20 Stunden. Nur Hosting: $19 im Monat.',
       h1: 'Preise',
       lead: 'Starte kostenlos. Zahl, was dein Team tut, und sieh die Kosten, bevor sie entstehen.',
     },

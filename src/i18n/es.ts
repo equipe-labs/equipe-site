@@ -128,7 +128,7 @@ const es: Messages = {
       { question: '¿Qué puedo traer?', answer: 'Una idea, una descripción o algo que ya hiciste en Claude, Lovable o una herramienta parecida: un artefacto, un prototipo o su código. El equipo sigue desde ahí.' },
       { question: '¿Necesito un Mac o instalar algo?', answer: 'No. Tu equipo trabaja en la nube y lo usas en tu navegador, desde cualquier ordenador o móvil.' },
       { question: '¿Quién se encarga del alojamiento, la base de datos y el dominio?', answer: 'Nosotros, con un proyecto por cliente, así que no tienes nada que configurar ni ningún sitio al que entrar. Si tu producto crece más de lo previsto, podemos pasarlo a tus propias cuentas.' },
-      { question: '¿Cuánto cuesta?', answer: 'Pagas lo que usa tu equipo, con créditos: 1 crédito = $1. Al registrarte recibes $5 gratis (+$10 al añadir una tarjeta), con hasta 2 horas de tiempo de equipo. El plan Equipo cuesta $19 al mes con 20 horas de tiempo de equipo, hosting y almacenamiento; la IA y el tiempo extra salen de los créditos ($0,25 por hora de equipo). Solo hosting cuesta $19 al mes. Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
+      { question: '¿Cuánto cuesta?', answer: 'Pagas con créditos: 1 crédito = $1. Recibes $5 al crear tu equipo (+$10 al añadir una tarjeta), con hasta 2 horas de tiempo de equipo. El plan Equipo cuesta $19 al mes o $190 al año, con 20 horas de tiempo de equipo cada mes, hosting y almacenamiento; el tiempo extra cuesta $0,25 por hora y el trabajo de IA sale de los créditos. Solo hosting cuesta $19 al mes. Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
       { question: '¿Qué significa «tú apruebas»?', answer: 'Todo lo que sale en vivo, cuesta dinero o llega a tus clientes espera tu visto bueno. Recibes una tarjeta corta con opciones y una recomendación, y respondes con un toque.' },
       { question: '¿Cómo empiezo?', answer: 'Regístrate en app.equipe.im y describe tu idea. Tu equipo queda listo en más o menos un minuto, con $5 de crédito gratis y sin tarjeta.' },
       { question: 'Soy desarrollador. ¿Puedo ejecutarlo yo mismo?', answer: 'Sí. El motor que hay detrás del equipo es de código abierto y funciona en tu propio ordenador. La página para desarrolladores tiene la app para Mac y la herramienta de línea de comandos.' },
@@ -179,15 +179,19 @@ const es: Messages = {
   bento: { title: 'Lo que hace tu equipo', text: 'Cada miembro tiene su tarea. Lo ves todo, y tú apruebas lo importante.' },
   plans: {
     title: 'Precios sencillos',
-    text: '1 crédito = $1. Paquetes de créditos: $25, $50, $100 o $250.',
+    text: '1 crédito = $1. Paquetes: $25, $50, $100 o $250. Los créditos duran 12 meses; los no usados se reembolsan en un plazo de 14 días.',
     featured: 'Recomendado',
     items: [
-      { name: 'Empieza gratis', price: '$0', per: 'para empezar', text: '$5 de crédito al registrarte, +$10 al añadir una tarjeta.', points: ['1 crédito = $1', 'Hasta 2 horas de tiempo de equipo', 'Sin tarjeta'], cta: 'Empezar gratis' },
-      { name: 'Equipo', price: '$19', per: '/mes', text: 'Para un producto que sigues haciendo crecer.', points: ['20 horas de tiempo de equipo al mes', 'Hosting para tus sitios y almacenamiento', 'IA y tiempo extra con créditos ($0,25 por hora de equipo)'], cta: 'Empezar' },
-      { name: 'Solo hosting', price: '$19', per: '/mes', text: 'Tu producto sigue en vivo mientras el equipo descansa.', points: ['Hosting, base de datos y dominio se mantienen', 'El equipo descansa hasta que lo necesites', 'Añade créditos cuando quieras cambios'], cta: 'Empezar' },
+      { name: 'Empieza gratis', price: '$0', per: 'para empezar', text: '$5 de crédito al crear tu equipo, +$10 al añadir una tarjeta (sin cargo).', points: ['1 crédito = $1', 'Hasta 2 horas de tiempo de equipo para probar', 'Sin tarjeta para empezar'], cta: 'Empezar gratis' },
+      { name: 'Equipo', price: '$19', per: '/mes', text: 'Para un producto que sigues haciendo crecer.', points: ['20 horas de tiempo de equipo cada mes', 'Hosting para tus sitios y almacenamiento', 'Tiempo extra a $0,25 por hora, con créditos', 'Créditos mensuales opcionales para trabajo de IA', 'Todo el equipo: PM, ingenieros, diseño, QA, datos'], cta: 'Empezar' },
+      { name: 'Solo hosting', price: '$19', per: '/mes', text: 'Tu producto sigue en vivo mientras el equipo descansa.', points: ['Tu producto, sitios y dominios siguen en vivo', 'El almacenamiento se mantiene', 'Para despertar al equipo, mejora el plan o añade créditos'], cta: 'Empezar' },
     ],
-    teamTime: { title: '¿Qué es el tiempo de equipo?', text: 'El ordenador de tu equipo solo funciona mientras trabaja. Se pausa tras 20 minutos sin actividad y despierta cuando lo necesitas.' },
+    teamTime: { title: '¿Qué es el tiempo de equipo?', text: 'Es el tiempo que el ordenador de tu equipo está encendido: mientras construye, prueba, publica o te espera. Tras 20 minutos sin uso se duerme y el reloj se para; despierta en segundos cuando lo necesitas. Fuera de las horas de tu plan cuesta $0,25 por hora, medido por minuto.' },
     estimate: { title: 'Calcula antes de gastar', text: 'Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
+    yearly: 'o $190 al año (dos meses gratis)',
+    credits: { title: 'Qué pagan los créditos', text: 'El trabajo de IA al precio de lista del modelo más nuestro margen, mostrado al céntimo en cada tarea; el tiempo de equipo fuera de tu plan; los dominios a precio de coste.' },
+    freeNote: 'Cuando se acaban las 2 horas gratis, tu equipo descansa hasta que eliges un plan o añades créditos. Si nadie abre un equipo gratuito en 14 días, te enviamos un email y se borra 7 días después salvo que lo abras; antes puedes descargar tu proyecto.',
+    faq: [{ question: '¿Pago mientras no estoy?', answer: 'No. Tu equipo se duerme tras 20 minutos sin actividad, y el tiempo dormido es gratis.' }, { question: '¿Y si paso de 20 horas?', answer: 'Cada hora extra cuesta $0,25 y se descuenta de tus créditos. La ves en su propia línea de “Tiempo de equipo”.' }, { question: '¿Las horas no usadas se acumulan?', answer: 'No. Las 20 horas se reinician cada mes. Los créditos mensuales de IA opcionales se acumulan durante 2 meses.' }, { question: '¿Qué pasa con mis sitios si solo pago hosting?', answer: 'Siguen en vivo, con sus dominios y su almacenamiento.' }],
   },
   band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué quieres crear. Tu equipo está listo en más o menos un minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -245,7 +249,7 @@ const es: Messages = {
   pages: {
     pricing: {
       title: 'Precios — equipe',
-      desc: 'Empieza gratis con $5 de crédito y hasta 2 horas de tiempo de equipo. Plan Equipo: $19 al mes con 20 horas. Solo hosting: $19 al mes.',
+      desc: 'Empieza gratis con $5 de crédito y hasta 2 horas de tiempo de equipo. Equipo: $19 al mes o $190 al año, con 20 horas. Solo hosting: $19 al mes.',
       h1: 'Precios',
       lead: 'Empieza gratis. Paga lo que hace tu equipo y ve el coste antes de que ocurra.',
     },

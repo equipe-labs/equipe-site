@@ -129,7 +129,7 @@ const fr: Messages = {
       { question: 'Que puis-je apporter ?', answer: 'Une idée, une description, ou quelque chose que vous avez déjà fait dans Claude, Lovable ou un outil similaire : un artefact, un prototype ou son code. L’équipe prend le relais.' },
       { question: 'Me faut-il un Mac, ou dois-je installer quelque chose ?', answer: 'Non. Votre équipe travaille dans le cloud et vous l’utilisez dans votre navigateur, sur n’importe quel ordinateur ou téléphone.' },
       { question: 'Qui s’occupe de l’hébergement, de la base de données et du domaine ?', answer: 'Nous, avec un projet séparé par client : vous n’avez rien à configurer ni de compte où vous connecter. Si votre produit dépasse ce cadre, nous pouvons le déplacer vers vos propres comptes.' },
-      { question: 'Combien ça coûte ?', answer: 'Vous payez ce que votre équipe utilise, en crédits : 1 crédit = $1. À l’inscription vous recevez $5 (+$10 en ajoutant une carte), avec jusqu’à 2 heures de temps d’équipe. L’offre Équipe coûte $19 par mois avec 20 heures de temps d’équipe, l’hébergement et le stockage ; l’IA et le temps en plus passent par les crédits ($0,25 par heure d’équipe). L’Hébergement seul coûte $19 par mois. Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
+      { question: 'Combien ça coûte ?', answer: 'Vous payez avec des crédits : 1 crédit = $1. Vous recevez $5 à la création de votre équipe (+$10 en ajoutant une carte), avec jusqu’à 2 heures de temps d’équipe. L’offre Équipe coûte $19 par mois ou $190 par an, avec 20 heures de temps d’équipe chaque mois, l’hébergement et le stockage ; le temps en plus coûte $0,25 de l’heure et le travail d’IA passe par les crédits. L’Hébergement seul coûte $19 par mois. Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
       { question: 'Que signifie « vous approuvez » ?', answer: 'Tout ce qui passe en ligne, coûte de l’argent ou atteint vos clients attend votre feu vert. Vous recevez une courte carte avec des options et une recommandation, et vous répondez d’un geste.' },
       { question: 'Comment commencer ?', answer: 'Inscrivez-vous sur app.equipe.im et décrivez votre idée. Votre équipe est prête en une minute environ, avec $5 de crédit offerts et sans carte.' },
       { question: 'Je suis développeur. Puis-je l’héberger moi-même ?', answer: 'Oui. Le moteur de l’équipe est open source et tourne sur votre propre machine. La page développeurs propose l’appli Mac et l’outil en ligne de commande.' },
@@ -180,15 +180,19 @@ const fr: Messages = {
   bento: { title: 'Ce que fait votre équipe', text: 'Chaque membre a son rôle. Vous voyez tout, et vous approuvez ce qui compte.' },
   plans: {
     title: 'Des prix simples',
-    text: '1 crédit = $1. Packs de crédits : $25, $50, $100 ou $250.',
+    text: '1 crédit = $1. Packs : $25, $50, $100 ou $250. Les crédits sont valables 12 mois ; les crédits non utilisés sont remboursables sous 14 jours.',
     featured: 'Recommandé',
     items: [
-      { name: 'Gratuit pour commencer', price: '$0', per: 'pour démarrer', text: '$5 de crédit à l’inscription, +$10 en ajoutant une carte.', points: ['1 crédit = $1', 'Jusqu’à 2 heures de temps d’équipe', 'Sans carte'], cta: 'Commencer gratuitement' },
-      { name: 'Équipe', price: '$19', per: '/mois', text: 'Pour un produit que vous continuez à faire grandir.', points: ['20 heures de temps d’équipe par mois', 'Hébergement de vos sites et stockage', 'IA et temps en plus via les crédits ($0,25 par heure d’équipe)'], cta: 'Commencer' },
-      { name: 'Hébergement seul', price: '$19', per: '/mois', text: 'Votre produit reste en ligne pendant que l’équipe dort.', points: ['Hébergement, base de données et domaine conservés', 'L’équipe dort jusqu’à ce que vous en ayez besoin', 'Ajoutez des crédits quand vous voulez des changements'], cta: 'Commencer' },
+      { name: 'Gratuit pour commencer', price: '$0', per: 'pour démarrer', text: '$5 de crédit à la création de votre équipe, +$10 en ajoutant une carte (sans débit).', points: ['1 crédit = $1', 'Jusqu’à 2 heures de temps d’équipe pour essayer', 'Pas de carte pour commencer'], cta: 'Commencer gratuitement' },
+      { name: 'Équipe', price: '$19', per: '/mois', text: 'Pour un produit que vous continuez à faire grandir.', points: ['20 heures de temps d’équipe chaque mois', 'Hébergement de vos sites et stockage', 'Temps en plus à $0,25 de l’heure, via les crédits', 'Crédits mensuels optionnels pour le travail d’IA', 'Toute l’équipe : PM, ingénieurs, design, QA, données'], cta: 'Commencer' },
+      { name: 'Hébergement seul', price: '$19', per: '/mois', text: 'Votre produit reste en ligne pendant que l’équipe dort.', points: ['Votre produit, vos sites et domaines restent en ligne', 'Le stockage est conservé', 'Pour réveiller l’équipe, passez à Équipe ou ajoutez des crédits'], cta: 'Commencer' },
     ],
-    teamTime: { title: 'Qu’est-ce que le temps d’équipe ?', text: 'L’ordinateur de votre équipe ne tourne que pendant qu’elle travaille. Il se met en pause après 20 minutes de calme et se réveille quand vous en avez besoin.' },
+    teamTime: { title: 'Qu’est-ce que le temps d’équipe ?', text: 'C’est le temps pendant lequel l’ordinateur de votre équipe tourne : quand elle construit, teste, publie ou vous attend. Après 20 minutes sans utilisation, il se met en veille et le compteur s’arrête ; il se réveille en quelques secondes quand vous en avez besoin. Au-delà des heures de votre offre, c’est $0,25 de l’heure, décompté à la minute.' },
     estimate: { title: 'Une estimation avant de dépenser', text: 'Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
+    yearly: 'ou $190 par an (deux mois offerts)',
+    credits: { title: 'Ce que paient les crédits', text: 'Le travail d’IA au prix catalogue du modèle plus notre marge, affiché au centime pour chaque tâche ; le temps d’équipe au-delà de votre offre ; les domaines à prix coûtant.' },
+    freeNote: 'Quand les 2 heures gratuites sont utilisées, votre équipe se repose jusqu’à ce que vous choisissiez une offre ou ajoutiez des crédits. Les équipes gratuites que personne n’ouvre pendant 14 jours reçoivent un e-mail et sont supprimées 7 jours plus tard si vous ne les ouvrez pas ; vous pouvez d’abord télécharger votre projet.',
+    faq: [{ question: 'Est-ce que je paie quand je ne suis pas là ?', answer: 'Non. Votre équipe se met en veille après 20 minutes sans activité, et le temps de veille est gratuit.' }, { question: 'Et si je dépasse 20 heures ?', answer: 'Chaque heure en plus coûte $0,25, prise sur vos crédits. Vous la voyez sur sa propre ligne « Temps d’équipe ».' }, { question: 'Les heures non utilisées sont-elles reportées ?', answer: 'Non. Les 20 heures repartent à zéro chaque mois. Les crédits mensuels d’IA optionnels sont reportés pendant 2 mois.' }, { question: 'Que deviennent mes sites si je ne paie que l’hébergement ?', answer: 'Ils restent en ligne, avec leurs domaines et leur stockage.' }],
   },
   band: { title: 'Commencez par votre idée.', text: 'Dites au PM ce que vous voulez créer. Votre équipe est prête en une minute environ.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
@@ -246,7 +250,7 @@ const fr: Messages = {
   pages: {
     pricing: {
       title: 'Tarifs — equipe',
-      desc: 'Commencez gratuitement avec $5 de crédit et jusqu’à 2 heures de temps d’équipe. Offre Équipe : $19 par mois avec 20 heures. Hébergement seul : $19 par mois.',
+      desc: 'Commencez gratuitement avec $5 de crédit et jusqu’à 2 heures de temps d’équipe. Équipe : $19 par mois ou $190 par an, avec 20 heures. Hébergement seul : $19 par mois.',
       h1: 'Tarifs',
       lead: 'Commencez gratuitement. Payez ce que fait votre équipe et voyez le coût à l’avance.',
     },
