@@ -466,3 +466,37 @@ main.home > section.hero { overflow: visible; overflow-x: clip; position: relati
 .it-pop .pop-f { margin: 4px 10px 4px; padding-top: 6px; font-size: 12px; line-height: 16px; }
 .it-pop .pop-h { margin-left: 8px; } .it-pop .pop-f { margin-left: 8px; margin-right: 8px; }
 .pfacts .pfact :is(h2, h3) { margin: 0 0 4px !important; font-size: 16px !important; line-height: 1.35 !important; letter-spacing: -0.005em !important; font-weight: 600 !important; }
+
+/* Gallery: live example products in neutral frames (browser chrome, iPhone) so their own palettes sit in one system. */
+.gal { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.gal-c { grid-column: span 2; min-width: 0; }
+.gal-c.big { grid-column: span 3; }
+.gal-c > a { display: flex; flex-direction: column; height: 100%; border-radius: 22px; border: 0.5px solid var(--line); background: var(--surface); color: inherit; text-decoration: none; overflow: hidden; transition: transform 300ms var(--ease, cubic-bezier(.22,1,.36,1)), box-shadow 300ms var(--ease, cubic-bezier(.22,1,.36,1)); }
+.gal-c > a:hover { transform: translateY(-2px); box-shadow: 0 24px 48px -28px rgb(16 18 24 / 0.35); }
+.gal-c > a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.gal-v { position: relative; padding: 24px 24px 0; background: var(--sunken); border-bottom: 0.5px solid var(--line); overflow: hidden; }
+.gal-c.big .gal-v { padding: 32px 96px 0 32px; }
+.gal-br { border-radius: 12px 12px 0 0; overflow: hidden; background: var(--surface); box-shadow: 0 0 0 0.5px var(--line), 0 18px 40px -24px rgb(16 18 24 / 0.35); }
+.gal-bar { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 10px; background: var(--surface); border-bottom: 0.5px solid var(--line); }
+.gal-dots { display: inline-flex; gap: 5px; flex: none; } .gal-dots i { width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--text) 16%, transparent); }
+.gal-url { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 20px; margin-right: 34px; border-radius: 6px; background: var(--sunken); font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gal-url svg { width: 10px; height: 10px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.gal-br img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.gal-ph { position: absolute; right: 22px; bottom: -64px; }
+.gal-ph .iph-screen { background: var(--sl); }
+.gal-ph .iph-content img { display: block; width: 100%; height: auto; }
+.gal .th-d { display: none !important; }
+:root[data-theme='dark'] .gal .th-d { display: block !important; }
+:root[data-theme='dark'] .gal .th-l { display: none !important; }
+:root[data-theme='dark'] .gal-ph .iph-screen { background: var(--sd); color: #F4F4F5; }
+.gal-t { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px 22px; flex: 1; }
+.gal-k { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; font-size: 12.5px; color: var(--muted); }
+.gal-k span:first-child { color: var(--accent); font-weight: 600; }
+.gal-t h3 { margin: 0; font-size: 19px; line-height: 1.3; letter-spacing: -0.01em; }
+.gal-d { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.gal-o { margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 4px; font-size: 14.5px; font-weight: 600; color: var(--accent); }
+.gal-o svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 300ms var(--ease, cubic-bezier(.22,1,.36,1)); }
+.gal-c > a:hover .gal-o svg { transform: translate(2px, -2px); }
+.gal-n { margin: 24px auto 0; max-width: 640px; text-align: center; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 1040px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .gal-c, .gal-c.big { grid-column: span 1; } .gal-c.big .gal-v { padding: 24px 24px 0; } .gal-ph { display: none; } }
+@media (max-width: 640px) { .gal { grid-template-columns: 1fr; gap: 16px; } .gal-v { padding: 16px 16px 0; } .gal-c.big .gal-v { padding: 16px 16px 0; } }

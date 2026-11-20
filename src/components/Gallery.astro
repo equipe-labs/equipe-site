@@ -1,0 +1,65 @@
+---
+// "Built by equipe teams": live example products (src/data/gallery.json, screenshots in /public/gallery).
+// The businesses are fictional, so the section always carries the honest note; never present them as customers.
+// Each product keeps its own palette inside a neutral frame (browser chrome + iPhone), so the section reads as one palette.
+import gallery from '../data/gallery.json';
+import IPhone from './IPhone.astro';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const g = getMessages(code).gallery;
+const host = (u: string) => new URL(u).host;
+const webp = (p: string) => p.replace(/\.png$/, '.webp');
+const mins = (s: string) => s.match(/\d+/)?.[0] ?? '';
+// Top-of-page colour of each mobile screenshot, so the drawn iOS status bar continues the product's own background.
+const status: Record<string, [string, string]> = {
+  littlewins: ['#FBF8F3', '#12110F'], fernly: ['#F6F3EA', '#0E1610'], jiwoo: ['#FAF7F2', '#10151F'],
+  smallhours: ['#FBF8F1', '#161412'], tidepool: ['#F5EFE4', '#171513'],
+};
+const lock = 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z';
+---
+<section class="gal-s" id="gallery">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="kicker">{g.kicker}</p>
+      <h2>{g.title}</h2>
+      <p class="sub">{g.text}</p>
+    </div>
+    <ul class="gal" role="list">
+      {gallery.map((p, i) => {
+        const it = g.items[i];
+        const big = i < 2;
+        const [sl, sd] = status[p.slug] ?? ['#FBFAF8', '#141414'];
+        return (
+          <li class={`gal-c rv${big ? ' big' : ''}`} style={`--i:${i}`}>
+            <a href={p.url} target="_blank" rel="noopener" data-ph="gallery_open" data-ph-location={p.slug}>
+              <div class="gal-v">
+                <div class="gal-br" aria-hidden="true">
+                  <div class="gal-bar"><span class="gal-dots"><i></i><i></i><i></i></span><span class="gal-url"><svg viewBox="0 0 24 24"><path d={lock} /></svg>{host(p.url)}</span></div>
+                  <img class="th-l" src={webp(p.screenshotLight)} width="1200" height="750" alt="" loading="lazy" decoding="async" />
+                  <img class="th-d" src={webp(p.screenshotDark)} width="1200" height="750" alt="" loading="lazy" decoding="async" />
+                </div>
+                {big && (
+                  <div class="gal-ph" aria-hidden="true" style={`--sl:${sl};--sd:${sd}`}>
+                    <IPhone w={150}>
+                      <img class="th-l" src={webp(p.screenshotLightMobile)} width="390" height="844" alt="" loading="lazy" decoding="async" />
+                      <img class="th-d" src={webp(p.screenshotDarkMobile)} width="390" height="844" alt="" loading="lazy" decoding="async" />
+                    </IPhone>
+                  </div>
+                )}
+              </div>
+              <div class="gal-t">
+                <p class="gal-k"><span>{it.category}</span><span>{g.made.replace('{n}', mins(p.madeIn))}</span></p>
+                <h3>{p.name}</h3>
+                <p class="gal-d">{it.text}</p>
+                <span class="gal-o">{g.open}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L16 8M9.5 8H16v6.5" /></svg><span class="sr-only"> — {host(p.url)} ({g.newTab})</span></span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="gal-n rv">{g.note}</p>
+  </div>
+</section>

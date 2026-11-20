@@ -61,3 +61,12 @@ Then:
 - [Architecture](https://github.com/equipe-labs/equipe/blob/main/docs/ARCHITECTURE.md): how the squad is built
 - [App privacy policy](https://equipe.im/app/privacy/): what the equipe mobile app and relay handle
 - [App support](https://equipe.im/app/support/): pairing the app with `equipe pair`, FAQ, contact
+
+## Example products
+
+Live example products built by equipe teams (the businesses are fictional, made up for the demo; the sites are real):
+- Little Wins (personal habit tool): https://littlewins.showcase.equipe.page
+- Fernly (bilingual waitlist page): https://fernly.showcase.equipe.page
+- Jiwoo Korean (tutor bookings): https://jiwoo.showcase.equipe.page
+- Small Hours (newsletter and blog): https://smallhours.showcase.equipe.page
+- Tidepool Ceramics (small shop): https://tidepool.showcase.equipe.page

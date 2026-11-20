@@ -160,6 +160,22 @@ const ptBR: Messages = {
       { title: 'Continua melhorando', text: 'O time acompanha o uso real e propõe o próximo passo. Você diz sim, ou agora não.' },
     ],
   },
+  gallery: {
+    kicker: 'Feito por times da equipe',
+    title: 'Produtos reais, no ar agora.',
+    text: 'Cada um foi construído e lançado por um time da equipe. Abra qualquer um.',
+    note: 'Produtos de exemplo feitos por times da equipe. Os negócios são inventados para a demo; os sites são reais e estão no ar.',
+    open: 'Abrir site',
+    made: 'Feito em cerca de {n} minutos',
+    newTab: 'abre em uma nova aba',
+    items: [
+      { category: 'Ferramenta pessoal', text: 'Hábitos, um timer de foco e um diário de uma linha, salvos em um link privado que você pode compartilhar só para leitura.' },
+      { category: 'Página de lançamento', text: 'Uma lista de espera bilíngue para um app de cuidado de plantas, com posições por indicação e uma área de admin secreta.' },
+      { category: 'Agendamentos', text: 'Agendamento para uma professora de coreano: horários no seu fuso, página de confirmação e arquivo de calendário.' },
+      { category: 'Newsletter e blog', text: 'Uma newsletter semanal com seis edições, formulário de inscrição, RSS e uma página de admin para escrever a próxima.' },
+      { category: 'Loja', text: 'Uma loja de cerâmica em pequenos lotes com pedido de compra, sem lidar com cartão, e um admin de pedidos e estoque.' },
+    ],
+  },
   bento: { title: 'O que seu time faz', text: 'Cada membro tem sua função. Você vê tudo e aprova o que importa.' },
   plans: {
     title: 'Preços simples',

@@ -78,6 +78,7 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | `idea_submit` | `location`: `hero` / `band`, `has_idea`, `length` | 아이디어 상자 제출 (app.equipe.im/start?idea=… 로 이동). 홈의 주 행동 |
 | `signup_cta_click` | `location`: `header` / `how` / `compare` / `footer` / `developers` | "시작하기" 버튼·링크 클릭 (app.equipe.im/start) |
 | `signin_click` | `location`: `header` / `band` / `footer` | "로그인" 링크 클릭 (app.equipe.im/login) |
+| `gallery_open` | `location`: 제품 slug (`littlewins` / `fernly` / `jiwoo` / `smallhours` / `tidepool`) | 홈 "Built by equipe teams" 갤러리의 예시 제품 카드 클릭 (새 탭으로 열림) |
 | `early_access_cta_click`, `early_access_submitted`, `early_access_failed` | — | 셀프 가입 전환(2026-11) 이후 발생하지 않는다. 과거 데이터만 남는다 |
 | `developers_link_click` | `location`: `header` / `footer` / `faq` | `/developers` 링크 클릭 |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` / `developers` | GitHub로 가는 CTA·링크 클릭 |

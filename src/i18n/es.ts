@@ -160,6 +160,22 @@ const es: Messages = {
       { title: 'Sigue mejorando', text: 'El equipo mira el uso real y propone el siguiente paso. Tú dices sí, o ahora no.' },
     ],
   },
+  gallery: {
+    kicker: 'Hecho por equipos de equipe',
+    title: 'Productos reales, en vivo ahora mismo.',
+    text: 'Cada uno lo construyó y lanzó un equipo de equipe. Abre el que quieras.',
+    note: 'Productos de ejemplo hechos por equipos de equipe. Los negocios son inventados para la demo; los sitios son reales y están en vivo.',
+    open: 'Abrir sitio',
+    made: 'Hecho en unos {n} minutos',
+    newTab: 'se abre en una pestaña nueva',
+    items: [
+      { category: 'Herramienta personal', text: 'Hábitos, un temporizador de concentración y un diario de una línea, guardados en un enlace privado que puedes compartir en solo lectura.' },
+      { category: 'Página de lanzamiento', text: 'Una lista de espera bilingüe para una app de cuidado de plantas, con puestos por referidos y una vista de admin secreta.' },
+      { category: 'Reservas', text: 'Reservas para una tutora de coreano: disponibilidad en tu zona horaria, página de confirmación y archivo de calendario.' },
+      { category: 'Newsletter y blog', text: 'Un newsletter semanal con seis números, formulario de suscripción, RSS y una página de admin para escribir el siguiente.' },
+      { category: 'Tienda', text: 'Una tienda de cerámica en pequeños lotes con solicitud de compra, sin manejar tarjetas, y un admin de pedidos y stock.' },
+    ],
+  },
   bento: { title: 'Lo que hace tu equipo', text: 'Cada miembro tiene su tarea. Lo ves todo, y tú apruebas lo importante.' },
   plans: {
     title: 'Precios sencillos',

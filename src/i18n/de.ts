@@ -160,6 +160,22 @@ const de: Messages = {
       { title: 'Es wird immer besser', text: 'Das Team schaut auf die echte Nutzung und schlägt den nächsten Schritt vor. Du sagst ja oder jetzt nicht.' },
     ],
   },
+  gallery: {
+    kicker: 'Gebaut von equipe-Teams',
+    title: 'Echte Produkte, jetzt live.',
+    text: 'Jedes wurde von einem equipe-Team gebaut und veröffentlicht. Öffne einfach eins.',
+    note: 'Beispielprodukte, gebaut von equipe-Teams. Die Firmen sind für die Demo erfunden; die Seiten sind echt und live.',
+    open: 'Seite öffnen',
+    made: 'In etwa {n} Minuten gebaut',
+    newTab: 'öffnet in einem neuen Tab',
+    items: [
+      { category: 'Persönliches Tool', text: 'Gewohnheiten, ein Fokus-Timer und ein Ein-Satz-Tagebuch, gespeichert unter einem privaten Link, den du lesend teilen kannst.' },
+      { category: 'Launch-Seite', text: 'Eine zweisprachige Warteliste für eine Pflanzenpflege-App, mit Empfehlungsplätzen und geheimer Admin-Ansicht.' },
+      { category: 'Buchungen', text: 'Buchung für eine Koreanisch-Lehrerin: freie Termine in deiner Zeitzone, Bestätigungsseite und Kalenderdatei.' },
+      { category: 'Newsletter und Blog', text: 'Ein wöchentlicher Newsletter mit sechs Ausgaben, Anmeldeformular, RSS und einer Admin-Seite für die nächste Ausgabe.' },
+      { category: 'Shop', text: 'Ein Keramik-Shop für Kleinserien mit Kaufanfrage statt Kartenzahlung und einer Verwaltung für Bestellungen und Bestand.' },
+    ],
+  },
   bento: { title: 'Was dein Team macht', text: 'Jedes Mitglied hat seine Aufgabe. Du siehst alles und gibst frei, was zählt.' },
   plans: {
     title: 'Einfache Preise',

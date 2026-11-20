@@ -161,6 +161,22 @@ const fr: Messages = {
       { title: 'Il continue de s’améliorer', text: 'L’équipe suit l’usage réel et propose l’étape suivante. Vous dites oui, ou plus tard.' },
     ],
   },
+  gallery: {
+    kicker: 'Construit par des équipes equipe',
+    title: 'De vrais produits, en ligne maintenant.',
+    text: 'Chacun a été construit et lancé par une équipe equipe. Ouvrez celui que vous voulez.',
+    note: 'Des produits d’exemple construits par des équipes equipe. Les entreprises sont inventées pour la démo ; les sites sont réels et en ligne.',
+    open: 'Ouvrir le site',
+    made: 'Construit en environ {n} minutes',
+    newTab: 's’ouvre dans un nouvel onglet',
+    items: [
+      { category: 'Outil perso', text: 'Habitudes, minuteur de concentration et journal d’une ligne, enregistrés sur un lien privé partageable en lecture seule.' },
+      { category: 'Page de lancement', text: 'Une liste d’attente bilingue pour une app d’entretien des plantes, avec classement par parrainage et vue admin secrète.' },
+      { category: 'Réservations', text: 'Des réservations pour une prof de coréen : disponibilités dans votre fuseau horaire, page de confirmation et fichier calendrier.' },
+      { category: 'Newsletter et blog', text: 'Une newsletter hebdomadaire avec six numéros, formulaire d’inscription, RSS et une page admin pour écrire le suivant.' },
+      { category: 'Boutique', text: 'Une boutique de céramique en petites séries avec demande d’achat, sans gestion de carte, et un admin des commandes et du stock.' },
+    ],
+  },
   bento: { title: 'Ce que fait votre équipe', text: 'Chaque membre a son rôle. Vous voyez tout, et vous approuvez ce qui compte.' },
   plans: {
     title: 'Des prix simples',

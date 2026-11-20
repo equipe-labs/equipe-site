@@ -164,6 +164,22 @@ export const en = {
       { title: 'It keeps improving', text: 'The team watches real usage and proposes the next step. You say yes, or not now.' },
     ],
   },
+  gallery: {
+    kicker: 'Built by equipe teams',
+    title: 'Real products, live right now.',
+    text: 'Each one was built and launched by an equipe team. Open any of them.',
+    note: 'Example products built by equipe teams. The businesses are made up for the demo; the sites are real and live.',
+    open: 'Open site',
+    made: 'Built in about {n} minutes',
+    newTab: 'opens in a new tab',
+    items: [
+      { category: 'Personal tool', text: 'Habits, a focus timer and a one-line journal, saved to a private link you can share read-only.' },
+      { category: 'Launch page', text: 'A bilingual waitlist page for a plant-care app, with referral positions and a secret admin view.' },
+      { category: 'Bookings', text: 'Booking for a solo Korean tutor: live availability in your timezone, confirmation page and calendar file.' },
+      { category: 'Newsletter and blog', text: 'A weekly newsletter with six issues, a subscribe form, RSS and an admin page to write the next one.' },
+      { category: 'Shop', text: 'A small-batch pottery shop with a request-to-buy flow, no card handling, and an orders and stock admin.' },
+    ],
+  },
   bento: { title: 'What your team does', text: 'Each member has a job. You see all of it, and you approve what matters.' },
   plans: {
     title: 'Simple pricing',
