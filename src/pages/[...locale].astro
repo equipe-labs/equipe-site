@@ -15,6 +15,7 @@ import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import '../styles/site.css';
 import '../styles/webapp.css';
 import '../styles/home.css';
+import { SITE } from '../data/site';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 // One page per language that has a src/i18n/<code>.ts file. English lives at `/`, the rest at `/<slug>/`.
@@ -41,6 +42,7 @@ const roleIcon: Record<string, string> = {
   data: 'M5 20V11M12 20V5M19 20v-6',
 };
 const check = 'M5 12.5l4.5 4.5L19 7.5';
+const faqMore = t.faq.more.split('{email}');
 ---
 
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
@@ -111,12 +113,16 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
     <section class="how" id="how-it-works">
       <div class="wrap">
         <div class="head rv">
+          <p class="kicker">{t.nav.how}</p>
           <h2>{t.how.title}</h2>
           <p class="sub">{t.how.text}</p>
         </div>
+        <ol class="rail rv" aria-hidden="true">
+          {t.how.steps.map((st, i) => <li class={howSoon[i] ? 'is-soon' : undefined}><a href={`#step-${i + 1}`} tabindex="-1"><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{st.title}</span></a></li>)}
+        </ol>
         <ol class="steps">
           {t.how.steps.map((st, i) => (
-            <li class={`step${i % 2 ? ' rev' : ''}`}>
+            <li class={`step${i % 2 ? ' rev' : ''}`} id={`step-${i + 1}`}>
               <div class="txt rv">
                 <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{st.title}{howSoon[i] && <span class="soon">{t.ui.soon}</span>}</h3>
@@ -129,12 +135,14 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
             </li>
           ))}
         </ol>
+        <div class="howcta rv"><a class="btn primary lg" href="#early-access" data-ph="early_access_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
 
     <section class="team" id="team">
       <div class="wrap">
         <div class="head rv">
+          <p class="kicker">{t.nav.team}</p>
           <h2>{t.team.title}</h2>
           <p class="sub">{t.team.text}</p>
         </div>
@@ -156,12 +164,16 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
         <div class="cmp rv">
           <div class="cl">
             <h3>{t.compare.left.name}</h3>
-            <ul>{t.compare.left.items.map((x) => <li><i aria-hidden="true"></i>{x}</li>)}</ul>
+            <ul>{t.compare.left.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" /></svg>{x}</li>)}</ul>
           </div>
           <div class="cr">
-            <h3><Mark size={24} />{t.compare.right.name}</h3>
+            <h3><Mark size={22} />{t.compare.right.name}</h3>
             <ul>{t.compare.right.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
           </div>
+        </div>
+        <div class="outcome rv">
+          <ul>{t.compare.outcome.map((o, i) => <li><span class="on" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{o}</li>)}</ul>
+          <a class="btn primary" href="#early-access" data-ph="early_access_cta_click" data-ph-location="compare">{t.hero.cta}</a>
         </div>
       </div>
     </section>
@@ -220,7 +232,10 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
     <section class="faq" id="faq">
       <div class="wrap">
         <div class="fq">
-          <h2 class="rv">{t.faq.title}</h2>
+          <div class="fqh rv">
+            <h2>{t.faq.title}</h2>
+            <p class="more">{faqMore[0]}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{faqMore[1]}</p>
+          </div>
           <div class="faqs rv">
             {t.faq.items.map((f, i) => (
               <details data-faq-id={`faq-${i + 1}`} open={i === 0}>
@@ -240,7 +255,7 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
             <p class="badge"><i></i>{t.hero.badge}</p>
             <h2>{t.form.title}</h2>
             <p class="sub">{t.form.text}</p>
-            <ol class="next">{t.form.next.map((n, i) => <li><span>{i + 1}</span>{n}</li>)}</ol>
+            <ol class="ea-next">{t.form.next.map((n, i) => <li><span>{i + 1}</span>{n}</li>)}</ol>
           </div>
           <div class="ecard"><EarlyAccess code={code} /></div>
         </div>

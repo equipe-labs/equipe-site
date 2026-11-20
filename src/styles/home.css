@@ -128,9 +128,9 @@ main.home .proof h3 { font-size: 28px; line-height: 1.15; letter-spacing: -0.025
 .early { background: var(--sunken); border-top: 1px solid var(--line); }
 .egrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 80px; align-items: start; }
 main.home .early h2 { margin-top: var(--s-5); }
-.next { margin-top: var(--s-6); display: grid; gap: var(--s-3); counter-reset: n; }
-.next li { display: flex; align-items: center; gap: var(--s-3); font-size: 17px; }
-.next li span { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); font: 600 13px/1 var(--sans); }
+.ea-next { margin-top: var(--s-6); display: grid; gap: var(--s-3); counter-reset: n; }
+.ea-next li { display: flex; align-items: center; gap: var(--s-3); font-size: 17px; }
+.ea-next li span { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); font: 600 13px/1 var(--sans); }
 .ecard { padding: var(--s-6); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 40px 80px -50px rgb(21 22 26 / 0.45); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .ecard { box-shadow: none; } }
 :root[data-theme='dark'] .ecard { box-shadow: none; }
@@ -232,3 +232,86 @@ html.mo main.home .rv.in { opacity: 1; transform: none; transition: opacity 420m
   .ea-form { grid-template-columns: 1fr; }
   .ea-go .btn { width: 100%; }
 }
+
+/* ---- refine pass (patterns studied on 21st.dev, redrawn in our tokens) ---- */
+/* hero floor: a faint dot grid, the control-room table the window sits on */
+.hero .shot::before { background: radial-gradient(circle, color-mix(in srgb, var(--text) 13%, transparent) 1px, transparent 1.3px) 0 0 / 22px 22px, var(--sunken); }
+main.home .hero .shot { padding-bottom: 120px; }
+@media (min-width: 1024px) { .hero .shot .cap { text-align: right; } }
+@media (max-width: 1023px) { main.home .hero .shot { padding-bottom: var(--s-8); } }
+
+/* how it works: an overview rail (numbered nodes on one line) before the detailed rows, and a CTA after them */
+.rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 64px; }
+.rail li { position: relative; padding-top: 22px; }
+.rail li::before { content: ''; position: absolute; left: 0; right: 0; top: 13px; height: 2px; background: var(--accent); }
+.rail li:last-child::before { right: 50%; }
+.rail li.is-soon::before { background: none; border-top: 2px dashed var(--dash); }
+.rail a { display: grid; gap: var(--s-2); text-decoration: none; color: var(--text); padding-right: var(--s-4); }
+.rail .n { position: absolute; top: 0; left: 0; display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font: 600 13px/1 var(--mono); letter-spacing: 0.02em; }
+.rail .is-soon .n { background: var(--bg); color: var(--muted); border: 1.5px dashed var(--dash); }
+.rail .t { margin-top: 24px; font-size: 17px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
+.how .steps { margin-top: 96px; }
+.howcta { display: flex; justify-content: center; margin-top: 96px; }
+
+/* compare: one panel cut in two, the old way muted with crosses, the team ticked; an outcome strip closes it */
+.cmp { gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.cmp > div { border-radius: 0; border: 0; padding: var(--s-6) var(--s-7) var(--s-7); }
+.cmp .cl { background: var(--bg); border: 0; }
+.cmp .cr { background: var(--surface); border: 0; box-shadow: inset 0 3px 0 var(--accent); }
+main.home .cmp h3 { font-size: 15px; font-weight: 600; letter-spacing: 0; padding-bottom: 0; border-bottom: 0; min-height: 24px; }
+.cmp .cr h3 { color: var(--text); }
+.cmp ul { gap: 0; margin-top: var(--s-4); }
+.cmp li { padding: var(--s-4) 0; border-top: 1px solid var(--line); }
+.cmp li svg { flex: none; width: 20px; height: 20px; margin-top: 2px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.cmp .cl li svg { stroke: var(--dash); }
+.cmp .cr li { font-weight: 500; }
+.outcome { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4) var(--s-6); margin-top: var(--s-5); padding: var(--s-4) var(--s-5) var(--s-4) var(--s-6); border: 1px solid var(--line); border-radius: 16px; }
+.outcome ul { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); }
+.outcome li { display: flex; align-items: center; gap: var(--s-2); font-size: 15.5px; font-weight: 500; }
+.outcome .on { font: 600 12px/1 var(--mono); color: var(--accent); }
+
+/* FAQ: a way out for questions the list does not answer */
+.fqh .more { margin-top: var(--s-5); font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 320px; }
+
+/* early access: the closing band, dark in both themes, the form on its own card */
+.early { --band: #0A0A0C; background: var(--band); color: #EFEDE7; border-top: 0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .early { --band: #111114; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); } }
+:root[data-theme='dark'] .early { --band: #111114; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.early .etxt .sub { color: #A3A5AB; }
+.early .etxt .badge { background: transparent; color: #EFEDE7; border-color: rgb(239 237 231 / 0.22); }
+.early .ea-next li { color: #EFEDE7; }
+.early .ea-next li span { background: transparent; border-color: rgb(239 237 231 / 0.28); color: #EFEDE7; }
+.early .ecard { box-shadow: 0 40px 80px -40px #000; border-color: rgb(239 237 231 / 0.12); }
+main.home > section.early { padding: 120px 0; }
+
+@media (max-width: 900px) {
+  .rail { grid-template-columns: 1fr 1fr; row-gap: var(--s-5); }
+  .rail li:nth-child(2)::before { right: 50%; }
+}
+@media (max-width: 700px) {
+  .rail { display: none; }
+  .how .steps { margin-top: var(--s-7); }
+  .howcta { margin-top: var(--s-8); }
+  .howcta .btn { width: 100%; }
+  .cmp > div { padding: var(--s-5); }
+  .outcome { padding: var(--s-4); }
+  .outcome ul { flex-direction: column; gap: var(--s-3); }
+  .outcome .btn { width: 100%; }
+  main.home > section.early { padding: 72px 0; }
+}
+
+/* wedge: the never-sign-in line sits under the chips, full width */
+.handled { display: grid; justify-content: stretch; gap: var(--s-4); }
+.handled .never { max-width: none; padding-top: var(--s-4); border-top: 1px solid var(--line); }
+
+/* the form card keeps the page colours inside the dark band */
+.early .ecard { color: var(--text); }
+/* FAQ heading stays in view while the list scrolls */
+@media (min-width: 901px) { .fqh { position: sticky; top: 104px; align-self: start; } }
+/* proof: a quiet card now that the closing band is the dark block */
+.proof { background: var(--surface); color: var(--text); border: 1px solid var(--line); }
+.proof dt { color: var(--text); }
+.proof dd { color: var(--muted); }
+.proof .meta { color: var(--muted); border-top-color: var(--line); }
+.proof dl > div { border-left: 1px solid var(--line); padding-left: var(--s-5); }
+.proof dl > div:first-child { border-left: 0; padding-left: 0; }

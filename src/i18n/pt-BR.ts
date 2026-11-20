@@ -78,6 +78,7 @@ const ptBR: Messages = {
     title: 'Criadores de apps param na primeira versão. É onde a gente começa.',
     left: { name: 'Um criador de apps', items: ['Faz uma primeira versão', 'Hospedagem, dados e domínio ficam por sua conta', 'Quando algo quebra, você se vira sozinho', 'O que construir depois é um palpite'] },
     right: { name: 'O seu time do equipe', items: ['Começa por para quem é e o que testar', 'Coloca no ar com banco de dados e o seu domínio', 'Mantém funcionando e conserta o que quebra', 'Lê o uso real e propõe o próximo passo'] },
+    outcome: ['Uma conversa para começar', 'Nada para configurar nem para fazer login', 'Você aprova o que vai ao ar'],
   },
   control: {
     title: 'Sem surpresas. Nem no seu produto, nem na sua conta.',
@@ -130,6 +131,7 @@ const ptBR: Messages = {
       { question: 'Sou desenvolvedor. Posso rodar por conta própria?', answer: 'Pode. O engine por trás do time é de código aberto e roda na sua própria máquina. A página para desenvolvedores tem o app para Mac e a ferramenta de linha de comando.' },
     ],
     devLink: 'Ir para a página para desenvolvedores',
+    more: 'Ainda tem alguma dúvida? Escreva para {email}.',
   },
   form: {
     title: 'Peça acesso antecipado',
@@ -264,7 +266,7 @@ equipe`,
     phone: { name: 'frontend', verb: 'pede que você confirme algo', age: 'Pedido agora há pouco', where: 'Loop · T-5 Publicar a página de preços · Perguntar', tool: 'CONFIRMAR', action: 'Publicar a página de preços em loop.app/pricing, para todos', once: 'Pelo celular, um pedido é permitido uma única vez.', deny: 'Negar', allow: 'Permitir uma vez', close: 'Fechar' },
   },
   notFound: { title: 'Página não encontrada — equipe', description: 'Esta página não existe.', heading: 'Página não encontrada', text: 'Não há nada neste endereço. Ela pode ter sido movida, ou o link pode estar errado.', home: 'Ir para a página inicial' },
-  footer: { license: 'Licença MIT', built: 'Construído em público por um squad do equipe.' },
+  footer: { license: 'Licença MIT', built: 'Construído em público pelo próprio time do equipe.' },
   app: {
     nav: { get: 'Baixar o app', privacy: 'Política de privacidade do app', support: 'Suporte do app', home: 'Início do equipe' },
     get: {

@@ -78,6 +78,7 @@ const es: Messages = {
     title: 'Los creadores de apps se quedan en la primera versión. Ahí empezamos nosotros.',
     left: { name: 'Un creador de apps', items: ['Hace una primera versión', 'El alojamiento, los datos y el dominio corren por tu cuenta', 'Si algo se rompe, estás solo', 'Qué construir después es una adivinanza'] },
     right: { name: 'Tu equipo de equipe', items: ['Empieza por para quién es y qué probar', 'Lo pone en línea con una base de datos y tu dominio', 'Lo mantiene funcionando y arregla lo que se rompe', 'Lee el uso real y propone el siguiente paso'] },
+    outcome: ['Una conversación para empezar', 'Nada que configurar ni donde iniciar sesión', 'Tú apruebas lo que sale'],
   },
   control: {
     title: 'Sin sorpresas. Ni en tu producto ni en tu factura.',
@@ -130,6 +131,7 @@ const es: Messages = {
       { question: 'Soy desarrollador. ¿Puedo ejecutarlo yo mismo?', answer: 'Sí. El motor que hay detrás del equipo es de código abierto y funciona en tu propio ordenador. La página para desarrolladores tiene la app para Mac y la herramienta de línea de comandos.' },
     ],
     devLink: 'Ir a la página para desarrolladores',
+    more: '¿Tienes otra pregunta? Escríbenos a {email}.',
   },
   form: {
     title: 'Pide acceso anticipado',
@@ -264,7 +266,7 @@ equipe`,
     phone: { name: 'frontend', verb: 'te pide que confirmes algo', age: 'Pedido hace un momento', where: 'Loop · T-5 Publicar la página de precios · Preguntar', tool: 'CONFIRMAR', action: 'Publicar la página de precios en loop.app/pricing, para todos', once: 'Desde el teléfono, una solicitud se permite una sola vez.', deny: 'Denegar', allow: 'Permitir una vez', close: 'Cerrar' },
   },
   notFound: { title: 'Página no encontrada — equipe', description: 'Esta página no existe.', heading: 'Página no encontrada', text: 'No hay nada en esta dirección. Puede que se haya movido o que el enlace sea incorrecto.', home: 'Ir a la página de inicio' },
-  footer: { license: 'Licencia MIT', built: 'Construido en público por un squad de equipe.' },
+  footer: { license: 'Licencia MIT', built: 'Construido en público por el propio equipo de equipe.' },
   app: {
     nav: { get: 'Descargar la app', privacy: 'Política de privacidad de la app', support: 'Soporte de la app', home: 'Inicio de equipe' },
     get: {

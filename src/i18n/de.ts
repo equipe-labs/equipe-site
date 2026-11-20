@@ -4,10 +4,10 @@ const de: Messages = {
   meta: {
     title: 'equipe — Ein Startup-Team für eine Person',
     description:
-      'Ein PM, Engineers, Designer, QA und Datenanalyse bringen deine Idee oder dein Claude-Projekt als echten Dienst live und verbessern ihn. Du gibst nur frei.',
+      'Ein PM, Engineers, Designer, QA und ein Datenanalyst bringen deine Idee oder dein Claude-Projekt als echten Dienst live und verbessern ihn. Du gibst nur frei.',
     ogTitle: 'equipe — Ein Startup-Team für eine Person',
     ogDescription:
-      'Aus deinem Claude-Projekt wird ein echter Dienst. Ein PM, Engineers, Designer, QA und Datenanalyse bauen, veröffentlichen und entwickeln ihn weiter. Du gibst frei.',
+      'Aus deinem Claude-Projekt wird ein echter Dienst. Ein PM, Engineers, Designer, QA und ein Datenanalyst bauen, veröffentlichen und entwickeln ihn weiter. Du gibst frei.',
     ogImageAlt: 'equipe — Ein Startup-Team für eine Person. Du gibst frei. Das Team baut, veröffentlicht und lässt es wachsen.',
   },
   ui: {
@@ -30,7 +30,7 @@ const de: Messages = {
   hero: {
     badge: 'Frühzugang, auf Einladung',
     title: 'Ein Startup-Team für eine Person.',
-    lead: 'Bring eine Idee mit oder etwas, das du schon in Claude gebaut hast. Ein PM, Engineers, Designer, QA und Datenanalyse bringen es als echten Dienst live und machen es danach immer besser.',
+    lead: 'Bring eine Idee mit oder etwas, das du schon in Claude gebaut hast. Ein PM, Engineers, Designer, QA und ein Datenanalyst bringen es als echten Dienst live und machen es danach immer besser.',
     approve: 'Du gibst frei. Das Team baut, veröffentlicht und lässt es wachsen.',
     cta: 'Frühzugang sichern',
     secondary: 'So funktioniert’s',
@@ -60,7 +60,7 @@ const de: Messages = {
       { title: 'Sag dem PM, was du willst', text: 'Eine Idee, ein Problem oder etwas, das du schon gebaut hast. Der PM stellt zuerst die richtigen Fragen: für wen es ist, was die Leute brauchen, was vor dem Bauen zu klären ist.', caption: 'Der PM beginnt mit Fragen, nicht mit Code.', alt: 'Ein Chat mit dem PM darüber, eine Bestellseite für eine Bäckerei live zu bringen' },
       { title: 'Das Team baut es', text: 'Engineers, Designer und QA arbeiten gleichzeitig. Du siehst, wer was macht, und bekommst einen Vorschau-Link, den du auf dem Handy öffnen kannst.', caption: 'Woran das Team gerade arbeitet.', alt: 'Eine Liste, woran jedes Teammitglied arbeitet, neben einer Vorschau der Bestellseite' },
       { title: 'Du gibst frei, was zählt', text: 'Bevor etwas live geht, Geld kostet oder deine Kunden erreicht, bekommst du eine kurze Karte mit Optionen und einer Empfehlung. Ein Tipp genügt.', caption: 'Eine Entscheidung mit Optionen, Empfehlung und erwarteten Kosten.', alt: 'Eine Entscheidungskarte: Soll die Bestellseite live gehen? Zwei Optionen und eine Schaltfläche „Freigeben“' },
-      { title: 'Es wird immer besser', text: 'Die Datenanalyse beobachtet, wie die Leute es nutzen, und der PM schlägt in einfachen Worten die nächste Verbesserung vor. Du sagst Ja oder „Jetzt nicht“.', caption: 'Ein Vorschlag auf Basis echter Nutzung.', alt: 'Eine Vorschlagskarte mit den Besuchen und Bestellungen dieser Woche und einer empfohlenen Verbesserung' },
+      { title: 'Es wird immer besser', text: 'Der Datenanalyst beobachtet, wie die Leute es nutzen, und der PM schlägt in einfachen Worten die nächste Verbesserung vor. Du sagst Ja oder „Jetzt nicht“.', caption: 'Ein Vorschlag auf Basis echter Nutzung.', alt: 'Eine Vorschlagskarte mit den Besuchen und Bestellungen dieser Woche und einer empfohlenen Verbesserung' },
     ],
   },
   team: {
@@ -71,13 +71,14 @@ const de: Messages = {
       { name: 'Engineers', text: 'Bauen das Produkt, binden Datenbank und Zahlungen an und beheben, was kaputtgeht.' },
       { name: 'Designer', text: 'Macht es klar und leicht bedienbar, auf dem Handy wie am Laptop.' },
       { name: 'QA', text: 'Probiert alles so aus, wie deine Kunden es tun würden – bevor sie es tun.' },
-      { name: 'Datenanalyse', text: 'Liest, wie die Leute es wirklich nutzen, und findet heraus, wo sie hängen bleiben.' },
+      { name: 'Datenanalyst', text: 'Liest, wie die Leute es wirklich nutzen, und findet heraus, wo sie hängen bleiben.' },
     ],
   },
   compare: {
     title: 'App-Builder hören bei der ersten Version auf. Dort fangen wir an.',
     left: { name: 'Ein App-Builder', items: ['Liefert eine erste Version', 'Hosting, Daten und Domain sind deine Sache', 'Wenn etwas kaputtgeht, bist du allein', 'Was als Nächstes kommt, ist geraten'] },
     right: { name: 'Dein equipe-Team', items: ['Beginnt mit der Frage, für wen es ist und was getestet wird', 'Bringt es live, mit Datenbank und deiner Domain', 'Hält es am Laufen und behebt, was kaputtgeht', 'Liest die echte Nutzung und schlägt den nächsten Schritt vor'] },
+    outcome: ['Ein Gespräch genügt zum Start', 'Nichts einzurichten, nirgends anzumelden', 'Du gibst frei, was live geht'],
   },
   control: {
     title: 'Keine Überraschungen. Weder im Produkt noch auf der Rechnung.',
@@ -103,7 +104,7 @@ const de: Messages = {
     text: 'Wir sind noch früh dran. Hier steht genau, was schon klappt und was noch nicht.',
     labels: { now: 'Läuft heute', early: 'Frühzugang', soon: 'Kommt' },
     items: [
-      { title: 'Das Team selbst', text: 'PM, Engineers, Designer, QA und Datenanalyse bauen und veröffentlichen schon echte Produkte. Diese Website und unsere Apps hat das Team gebaut.' },
+      { title: 'Das Team selbst', text: 'PM, Engineers, Designer, QA und Datenanalyst bauen und veröffentlichen schon echte Produkte. Diese Website und unsere Apps hat das Team gebaut.' },
       { title: 'Dein Team in der Cloud', text: 'Chatte mit dem PM, verfolge die Arbeit und öffne Vorschau-Links. Wir nehmen Leute von Hand auf, ein paar auf einmal.' },
       { title: 'Für den bezahlten Start', text: 'Import aus Claude in einem Schritt mit Datenbank und Domain, Credits mit Ausgabenlimits und wöchentliche Nutzungsberichte mit Vorschlägen.' },
     ],
@@ -130,6 +131,7 @@ const de: Messages = {
       { question: 'Ich bin Entwickler. Kann ich es selbst betreiben?', answer: 'Ja. Die Engine hinter dem Team ist Open Source und läuft auf deinem eigenen Rechner. Auf der Entwicklerseite findest du die Mac-App und das Kommandozeilen-Tool.' },
     ],
     devLink: 'Zur Entwicklerseite',
+    more: 'Noch eine Frage? Schreib uns an {email}.',
   },
   form: {
     title: 'Frühzugang sichern',
@@ -164,7 +166,7 @@ const de: Messages = {
     site: { sub: 'Torte zur Abholung bestellen', cake: 'Torte', cakeVal: 'Zitronencreme, mittel', day: 'Abholtag', dayVal: 'Samstag', name: 'Dein Name', btn: 'Bestellen' },
     activity: {
       title: 'Woran das Team arbeitet',
-      roles: { eng: 'Engineer', design: 'Designer', qa: 'QA', data: 'Datenanalyse', pm: 'PM' },
+      roles: { eng: 'Engineer', design: 'Designer', qa: 'QA', data: 'Datenanalyst', pm: 'PM' },
       tasks: ['Bestellungen in einer Datenbank speichern', 'harborbakery.com verbinden', 'Bestellformular auf dem Handy', '20 Testbestellungen aufgeben', 'Besuche und Bestellungen zählen'],
       states: { working: 'In Arbeit', done: 'Erledigt', next: 'Als Nächstes' },
     },
@@ -264,7 +266,7 @@ equipe`,
     phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Fragen', tool: 'BESTÄTIGEN', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
   },
   notFound: { title: 'Seite nicht gefunden — equipe', description: 'Diese Seite gibt es nicht.', heading: 'Seite nicht gefunden', text: 'Unter dieser Adresse gibt es nichts. Vielleicht wurde die Seite verschoben, oder der Link ist falsch.', home: 'Zur Startseite' },
-  footer: { license: 'MIT-Lizenz', built: 'Öffentlich von einem equipe-Squad gebaut.' },
+  footer: { license: 'MIT-Lizenz', built: 'Öffentlich gebaut vom eigenen equipe-Team.' },
   app: {
     nav: { get: 'Die App holen', privacy: 'Datenschutz der App', support: 'App-Support', home: 'equipe-Startseite' },
     get: {

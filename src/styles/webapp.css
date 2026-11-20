@@ -216,3 +216,47 @@
   .wa-stats b { font-size: 20px; }
   .wa-cost-n b { font-size: 36px; }
 }
+
+/* --- refine pass --- */
+/* hero: this week's usage under the activity list */
+.wa-week { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 12px 14px 0; display: grid; gap: 10px; overflow: hidden; }
+.wa-week .wa-act-h { padding: 0; }
+.wa-week .wa-stats { grid-template-columns: 1fr 1fr; }
+.wa-week .wa-stats div { padding: 8px 10px; }
+.wa-week .wa-stats b { font-size: 20px; }
+.wa-spark { height: 44px; margin: 0 -14px; }
+.wa-spark svg { width: 100%; height: 100%; display: block; }
+.wa-spark .ln { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.wa-spark .ar { fill: color-mix(in srgb, var(--accent) 12%, transparent); stroke: none; }
+.wa-hero .wa-right .wa-act { padding: 2px 0 0; }
+
+/* hero: the live site on a phone, overlapping the window */
+.wa-device { position: absolute; left: -56px; bottom: -64px; width: 212px; z-index: 3; padding: 7px; border-radius: 36px; background: #0A0A0C; box-shadow: 0 40px 80px -30px rgb(21 22 26 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06) inset; }
+.wa-device-in { border-radius: 29px; overflow: hidden; background: var(--surface); }
+.wa-device-bar { display: flex; justify-content: center; padding: 26px 10px 8px; border-bottom: 1px solid var(--line); position: relative; }
+.wa-device-bar::before { content: ''; position: absolute; top: 9px; left: 50%; width: 64px; height: 18px; margin-left: -32px; border-radius: 10px; background: #0A0A0C; }
+.wa-device .wa-site { padding: 16px 14px 18px; }
+.wa-device .wa-site-t { font-size: 18px; }
+.wa-device .wa-fields { grid-template-columns: 1fr; gap: 6px; }
+.wa-device .wa-site-b { justify-self: stretch; text-align: center; margin-top: 2px; }
+
+/* cost card: spend by role */
+.wa-cost-h { justify-content: flex-start; }
+.wa-cost-h em.ok { margin-left: auto; }
+.wa-cost-ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--wa-sunken); color: var(--muted); }
+.wa-cost-n span { font-size: 14px; }
+.wa-meter.seg { gap: 2px; background: var(--wa-sunken); }
+.wa-meter.seg i:first-child { border-radius: 99px 0 0 99px; }
+.wa .r-pm { background: #3F6FF5; } .wa .r-eng { background: #2F9E55; } .wa .r-design { background: #D6498E; } .wa .r-qa { background: #E2822E; } .wa .r-data { background: #1B8A8F; }
+.wa-split { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.wa .wa-split { padding: 0; margin: 0; }
+.wa-split li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto 44px; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+.wa-split li i { width: 10px; height: 10px; border-radius: 3px; }
+.wa-split li span { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-split li em { color: var(--muted); text-align: right; font-size: 12.5px; }
+.wa-cost-f { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13.5px; }
+.wa-cost-f span { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+.wa-cost-f i { width: 10px; height: 10px; border-radius: 3px; background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--accent) 45%, transparent) 0 3px, color-mix(in srgb, var(--accent) 18%, transparent) 3px 6px); }
+
+@media (max-width: 1240px) { .wa-device { left: 12px; } }
+@media (max-width: 1023px) { .wa-device { display: none; } .wa-hero .wa-right .wa-week { display: none; } .wa-hero .wa-right .wa-act { display: grid; } }

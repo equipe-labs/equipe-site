@@ -82,6 +82,7 @@ export const en = {
     title: 'App builders stop at the first version. That is where we start.',
     left: { name: 'An app builder', items: ['Makes a first version', 'Hosting, data and the domain are up to you', 'When something breaks, you are on your own', 'What to build next is a guess'] },
     right: { name: 'Your equipe team', items: ['Starts with who it is for and what to test', 'Puts it live with a database and your domain', 'Keeps it running and fixes what breaks', 'Reads real usage and proposes the next step'] },
+    outcome: ['One conversation to start', 'Nothing to set up or sign in to', 'You approve what goes live'],
   },
   control: {
     title: 'No surprises. Not in your product, not on your bill.',
@@ -134,6 +135,7 @@ export const en = {
       { question: 'I am a developer. Can I run it myself?', answer: 'Yes. The engine behind the team is open source and runs on your own machine. The developers page has the Mac app and the command-line tool.' },
     ],
     devLink: 'Go to the developers page',
+    more: 'Still have a question? Write to us at {email}.',
   },
   form: {
     title: 'Get early access',
@@ -268,7 +270,7 @@ equipe`,
     phone: { name: 'frontend', verb: 'asks you to confirm something', age: 'Asked just now', where: 'Loop · T-5 Publish the pricing page · Ask', tool: 'CONFIRM', action: 'Publish the pricing page at loop.app/pricing, for everyone', once: 'From your phone, a request is allowed once only.', deny: 'Deny', allow: 'Allow once', close: 'Close' },
   },
   notFound: { title: 'Page not found — equipe', description: 'This page does not exist.', heading: 'Page not found', text: 'There is nothing at this address. It may have moved, or the link may be wrong.', home: 'Go to the home page' },
-  footer: { license: 'MIT License', built: 'Built by an equipe squad, in public.' },
+  footer: { license: 'MIT License', built: 'Built in public by equipe’s own team.' },
   app: {
     nav: { get: 'Get the app', privacy: 'App privacy policy', support: 'App support', home: 'equipe home' },
     // /app/: getting the phone app. `{…}` keeps a phrase on one line.

@@ -79,6 +79,7 @@ const fr: Messages = {
     title: 'Les créateurs d’applis s’arrêtent à la première version. C’est là que nous commençons.',
     left: { name: 'Un créateur d’applis', items: ['Produit une première version', 'L’hébergement, les données et le domaine sont votre affaire', 'Quand quelque chose casse, vous êtes seul', 'La suite relève de l’intuition'] },
     right: { name: 'Votre équipe equipe', items: ['Commence par savoir pour qui, et quoi tester', 'Met en ligne avec une base de données et votre domaine', 'Garde le tout en marche et répare ce qui casse', 'Lit l’usage réel et propose la prochaine étape'] },
+    outcome: ['Une conversation pour commencer', 'Rien à configurer, aucun compte à gérer', 'Vous approuvez ce qui est mis en ligne'],
   },
   control: {
     title: 'Pas de mauvaises surprises. Ni dans votre produit, ni sur votre facture.',
@@ -131,6 +132,7 @@ const fr: Messages = {
       { question: 'Je suis développeur. Puis-je l’héberger moi-même ?', answer: 'Oui. Le moteur de l’équipe est open source et tourne sur votre propre machine. La page développeurs propose l’appli Mac et l’outil en ligne de commande.' },
     ],
     devLink: 'Aller à la page développeurs',
+    more: 'Une autre question ? Écrivez-nous à {email}.',
   },
   form: {
     title: 'Obtenir l’accès anticipé',
@@ -265,7 +267,7 @@ equipe`,
     phone: { name: 'frontend', verb: 'vous demande de confirmer quelque chose', age: 'Demandé à l’instant', where: 'Loop · T-5 Publier la page des tarifs · Demander', tool: 'CONFIRMER', action: 'Publier la page des tarifs sur loop.app/pricing, pour tout le monde', once: 'Depuis le téléphone, une demande n’est autorisée qu’une seule fois.', deny: 'Refuser', allow: 'Autoriser une fois', close: 'Fermer' },
   },
   notFound: { title: 'Page introuvable — equipe', description: 'Cette page n’existe pas.', heading: 'Page introuvable', text: 'Il n’y a rien à cette adresse. La page a peut-être été déplacée, ou le lien est erroné.', home: 'Aller à la page d’accueil' },
-  footer: { license: 'Licence MIT', built: 'Construit en public par un squad equipe.' },
+  footer: { license: 'Licence MIT', built: 'Construit en public par l’équipe d’equipe elle-même.' },
   app: {
     nav: { get: 'Obtenir l’appli', privacy: 'Confidentialité de l’app', support: 'Assistance de l’app', home: 'Accueil equipe' },
     get: {

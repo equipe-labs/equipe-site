@@ -27,6 +27,8 @@ const icons: Record<string, string> = {
 const tasks = [
   { r: 'eng', st: 'working' }, { r: 'eng', st: 'working' }, { r: 'design', st: 'done' }, { r: 'qa', st: 'working' }, { r: 'data', st: 'next' },
 ] as const;
+// This month's spend by role (dollars; adds up to $38).
+const spend = [{ r: 'eng', v: 19 }, { r: 'pm', v: 7 }, { r: 'design', v: 5 }, { r: 'qa', v: 4 }, { r: 'data', v: 3 }];
 const roleName = (r: string) => (A.roles as Record<string, string>)[r];
 const stateName = (st: string) => (A.states as Record<string, string>)[st];
 ---
@@ -47,13 +49,6 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
             <span><svg viewBox="0 0 24 24"><path d={icons.dec} /></svg>{s.nav.decisions}<b class="wa-badge">1</b></span>
             <span><svg viewBox="0 0 24 24"><path d={icons.usage} /></svg>{s.nav.usage}</span>
           </nav>
-          <div class="wa-mini">
-            <span>{C.title}</span>
-            <b>$38</b>
-            <div class="wa-meter sm"><i style="width:38%"></i><i class="exp" style="width:26%"></i></div>
-            <span>{C.expected}</span>
-            <span class="v">~$64 / $100</span>
-          </div>
         </aside>
         <div class="wa-chat">
           <div class="wa-chat-h"><span class="wa-av pm"><svg viewBox="0 0 24 24"><path d={icons.pm} /></svg></span><b>PM</b><span class="wa-mu">Harbor Bakery</span></div>
@@ -71,23 +66,35 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
           </div>
         </div>
         <div class="wa-right">
-          <div class="wa-prev">
-            <div class="wa-prev-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span><span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
-            <div class="wa-site">
-              <b class="wa-site-t">Harbor Bakery</b>
-              <span class="wa-site-s">{s.site.sub}</span>
-              <div class="wa-fields">
-                <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
-                <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
-              </div>
-              <span class="wa-site-b">{s.site.btn}</span>
-            </div>
-          </div>
           <div class="wa-act">
             <div class="wa-act-h">{A.title}</div>
-            {tasks.slice(0, 4).map((t, i) => (
+            {tasks.map((t, i) => (
               <div class="wa-row"><span class={`wa-av ${t.r}`}><svg viewBox="0 0 24 24"><path d={icons[t.r]} /></svg></span><span class="wa-row-t"><b>{roleName(t.r)}</b><span>{A.tasks[i]}</span></span><em class={`wa-st ${t.st}`}>{stateName(t.st)}</em></div>
             ))}
+          </div>
+          <div class="wa-week">
+            <div class="wa-act-h">{G.week}<span class="wa-live"><i class="wa-live-dot"></i>{s.live}</span></div>
+            <div class="wa-stats">
+              <div><b>312</b><span>{G.stats[0]}</span></div>
+              <div><b>41</b><span>{G.stats[1]}</span></div>
+            </div>
+            <div class="wa-spark"><svg viewBox="0 0 200 48" preserveAspectRatio="none"><path class="ar" d="M0 40 L28 36 L57 38 L85 28 L114 30 L142 18 L171 20 L200 8 L200 48 L0 48Z" /><path class="ln" d="M0 40 L28 36 L57 38 L85 28 L114 30 L142 18 L171 20 L200 8" /></svg></div>
+          </div>
+        </div>
+      </div>
+      {/* the live site, as a customer sees it on a phone */}
+      <div class="wa-device">
+        <div class="wa-device-in">
+          <div class="wa-device-bar"><span class="wa-url sm"><svg viewBox="0 0 24 24"><path d={icons.lock} /></svg>{domain}</span></div>
+          <div class="wa-site">
+            <b class="wa-site-t">Harbor Bakery</b>
+            <span class="wa-site-s">{s.site.sub}</span>
+            <div class="wa-fields">
+              <label><span>{s.site.cake}</span><i>{s.site.cakeVal}</i></label>
+              <label><span>{s.site.day}</span><i>{s.site.dayVal}</i></label>
+              <label><span>{s.site.name}</span><i class="ph"></i></label>
+            </div>
+            <span class="wa-site-b">{s.site.btn}</span>
           </div>
         </div>
       </div>
@@ -157,13 +164,16 @@ const stateName = (st: string) => (A.states as Record<string, string>)[st];
 
   {k === 'cost' && (
     <div class="wa-card wa-costc">
-      <div class="wa-cost-h"><span>{C.title}</span><em class="ok"><svg viewBox="0 0 24 24"><path d={icons.check} /></svg>{C.under}</em></div>
-      <div class="wa-cost-n"><b>$38</b><span>{C.spent}</span></div>
-      <div class="wa-meter"><i style="width:38%"></i><i class="exp" style="width:26%"></i><span class="cap"></span></div>
-      <dl>
-        <div><dt><i class="k2"></i>{C.expected}</dt><dd>~$64</dd></div>
-        <div><dt><i class="k3"></i>{C.cap}</dt><dd>$100</dd></div>
-      </dl>
+      <div class="wa-cost-h"><span class="wa-cost-ic"><svg viewBox="0 0 24 24"><path d={icons.usage} /></svg></span><span>{C.title}</span><em class="ok"><svg viewBox="0 0 24 24"><path d={icons.check} /></svg>{C.under}</em></div>
+      <div class="wa-cost-n"><b>$38</b><span>/ $100 · {C.cap}</span></div>
+      <div class="wa-meter seg">
+        {spend.map((x) => <i class={`r-${x.r}`} style={`width:${x.v}%`}></i>)}
+        <i class="exp" style="width:26%"></i>
+      </div>
+      <ul class="wa-split">
+        {spend.map((x) => <li><i class={`r-${x.r}`}></i><span>{roleName(x.r)}</span><b>${x.v}</b><em>{Math.round((x.v / 38) * 100)}%</em></li>)}
+      </ul>
+      <div class="wa-cost-f"><span><i class="k2"></i>{C.expected}</span><b>~$64</b></div>
     </div>
   )}
 

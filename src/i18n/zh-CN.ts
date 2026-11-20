@@ -78,6 +78,7 @@ const zhCN: Messages = {
     title: '应用生成工具止步于第一版，我们从这里开始。',
     left: { name: '应用生成工具', items: ['生成一个初版', '服务器、数据和域名都得自己搞', '出了问题，只能自己扛', '下一步做什么，全靠猜'] },
     right: { name: '你的 equipe 团队', items: ['先弄清楚给谁用、要验证什么', '配上数据库和你的域名，正式上线', '持续运行，出问题就修', '读懂真实使用情况，提出下一步'] },
+    outcome: ['一次对话就能开始', '无需配置，也无需登录任何后台', '上线与否由你批准'],
   },
   control: {
     title: '没有意外。产品里没有，账单上也没有。',
@@ -130,6 +131,7 @@ const zhCN: Messages = {
       { question: '我是开发者，可以自己运行吗？', answer: '可以。团队背后的引擎是开源的，可以在你自己的电脑上运行。开发者页面有 Mac 应用和命令行工具。' },
     ],
     devLink: '前往开发者页面',
+    more: '还有其他问题？请写信到 {email}。',
   },
   form: {
     title: '申请抢先体验',
@@ -263,7 +265,7 @@ equipe`,
     phone: { name: 'frontend', verb: '请你确认一件事', age: '刚刚请求', where: 'Loop · T-5 发布价格页 · 询问', tool: '确认', action: '把价格页发布到 loop.app/pricing，所有人可见', once: '在手机上，请求只允许这一次。', deny: '拒绝', allow: '仅允许一次', close: '关闭' },
   },
   notFound: { title: '页面未找到 — equipe', description: '此页面不存在。', heading: '页面未找到', text: '这个地址下没有内容。页面可能已经移动，或者链接有误。', home: '返回首页' },
-  footer: { license: 'MIT 许可证', built: '由 equipe 小队公开构建。' },
+  footer: { license: 'MIT 许可证', built: '由 equipe 自己的团队公开构建。' },
   app: {
     nav: { get: '获取应用', privacy: '应用隐私政策', support: '应用支持', home: 'equipe 首页' },
     get: {
