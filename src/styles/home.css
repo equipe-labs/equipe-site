@@ -128,38 +128,9 @@ main.home .proof h3 { font-size: 28px; line-height: 1.15; letter-spacing: -0.025
 .early { background: var(--sunken); border-top: 1px solid var(--line); }
 .egrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 80px; align-items: start; }
 main.home .early h2 { margin-top: var(--s-5); }
-.ea-next { margin-top: var(--s-6); display: grid; gap: var(--s-3); counter-reset: n; }
-.ea-next li { display: flex; align-items: center; gap: var(--s-3); font-size: 17px; }
-.ea-next li span { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); font: 600 13px/1 var(--sans); }
 .ecard { padding: var(--s-6); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 40px 80px -50px rgb(21 22 26 / 0.45); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .ecard { box-shadow: none; } }
 :root[data-theme='dark'] .ecard { box-shadow: none; }
-
-/* the form */
-.ea-form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-4); }
-.ea-form .wide { grid-column: 1 / -1; }
-.ea-f { display: grid; gap: var(--s-2); align-content: start; }
-.ea-f label { font-size: 15px; font-weight: 600; }
-.ea-f input, .ea-f textarea { width: 100%; font: 400 17px/1.45 var(--sans); color: var(--text); background: var(--bg); border: 1px solid color-mix(in srgb, var(--text) 22%, transparent); border-radius: 10px; padding: 12px 14px; transition: border-color 120ms, box-shadow 120ms; }
-.ea-f input { min-height: 50px; }
-.ea-f textarea { resize: vertical; min-height: 120px; }
-.ea-f :is(input, textarea)::placeholder { color: color-mix(in srgb, var(--muted) 80%, transparent); }
-.ea-f :is(input, textarea):focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
-.ea-f :is(input, textarea)[aria-invalid] { border-color: var(--wa-wait); }
-.ea-err { margin: 0; font-size: 14px; color: var(--wa-wait); font-weight: 500; }
-.ea-go { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
-.ea-go .btn { cursor: pointer; font-family: var(--sans); }
-.ea-go .btn:disabled { opacity: 0.7; cursor: progress; }
-.ea-note { margin: 0; font-size: 14px; color: var(--muted); flex: 1 1 200px; }
-.ea-alert { padding: var(--s-4); border-radius: 12px; border: 1px solid color-mix(in srgb, var(--wa-wait) 45%, transparent); background: color-mix(in srgb, var(--wa-wait) 8%, var(--surface)); }
-.ea-alert p { margin: 0; font-size: 15px; }
-.ea-alert p:first-child { font-weight: 600; color: var(--text); }
-.ea-alert .ea-fb { margin-top: var(--s-1); color: var(--muted); }
-.ea-ok { display: grid; justify-items: start; gap: var(--s-3); padding: var(--s-5) 0; outline: none; }
-.ea-tick { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--wa-ok) 15%, transparent); color: var(--wa-ok); }
-main.home .ea-ok h3 { font-size: 26px; }
-.ea-ok p { margin: 0; color: var(--muted); font-size: 17px; }
-[hidden] { display: none !important; }
 
 /* scroll motion (html.mo is set only when motion is allowed) */
 html.mo main.home .rv { opacity: 0; transform: translateY(14px); }
@@ -229,8 +200,6 @@ html.mo main.home .rv.in { opacity: 1; transform: none; transition: opacity 420m
   .proof dt { font-size: 48px; }
   .proof dd { font-size: 14px; }
   .ecard { padding: var(--s-5); border-radius: 18px; }
-  .ea-form { grid-template-columns: 1fr; }
-  .ea-go .btn { width: 100%; }
 }
 
 /* ---- refine pass (patterns studied on 21st.dev, redrawn in our tokens) ---- */
@@ -279,8 +248,6 @@ main.home .cmp h3 { font-size: 15px; font-weight: 600; letter-spacing: 0; paddin
 :root[data-theme='dark'] .early { --band: #111114; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .early .etxt .sub { color: #A3A5AB; }
 .early .etxt .badge { background: transparent; color: #EFEDE7; border-color: rgb(239 237 231 / 0.22); }
-.early .ea-next li { color: #EFEDE7; }
-.early .ea-next li span { background: transparent; border-color: rgb(239 237 231 / 0.28); color: #EFEDE7; }
 .early .ecard { box-shadow: 0 40px 80px -40px #000; border-color: rgb(239 237 231 / 0.12); }
 main.home > section.early { padding: 120px 0; }
 
@@ -318,7 +285,7 @@ main.home > section.early { padding: 120px 0; }
 
 /* ---- polish pass ---- */
 /* short paragraphs: even lines, no one-word last line (most visible in ja, zh, es) */
-main.home :is(.sub, .hero .lead), .ea-ok p { text-wrap: balance; }
+main.home :is(.sub, .hero .lead) { text-wrap: balance; }
 /* step label: number and the Coming pill share the first line, so the heading never ends with a lone pill */
 .step .lab { display: flex; align-items: center; gap: var(--s-3); }
 .step .lab .soon { position: static; margin: 0; }
@@ -342,3 +309,42 @@ main.home :is(.sub, .hero .lead), .ea-ok p { text-wrap: balance; }
   .wsteps { grid-template-columns: 1fr; gap: var(--s-5); }
   .wsteps li:nth-child(n) { grid-column: auto; }
 }
+
+/* ---- sign-up: the idea box ---- */
+.idea { display: grid; gap: var(--s-3); }
+.idea-l { font-size: 15px; font-weight: 600; }
+.idea-box { border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 18px; background: var(--surface); box-shadow: 0 1px 0 rgb(10 10 12 / 0.03), 0 24px 48px -32px rgb(21 22 26 / 0.35); transition: border-color 120ms, box-shadow 120ms; }
+.idea-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent), 0 24px 48px -32px rgb(21 22 26 / 0.35); }
+.idea textarea { display: block; width: 100%; min-height: 92px; resize: none; border: 0; outline: none; background: transparent; color: var(--text); font: 400 19px/1.45 var(--sans); letter-spacing: -0.012em; padding: 18px 20px 6px; }
+.idea textarea::placeholder { color: color-mix(in srgb, var(--muted) 85%, transparent); }
+.idea-bar { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-3); padding: 8px 10px 10px 14px; }
+.idea-ex { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.idea-ex button { border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 99px; padding: 5px 12px; font: 500 13.5px/1.3 var(--sans); cursor: pointer; text-align: left; }
+.idea-go { flex: none; gap: 8px; min-height: 44px; border-radius: 12px; padding: 0 18px; cursor: pointer; font: 600 16px var(--sans); }
+.idea-note { margin: 0; font-size: 14px; color: var(--muted); }
+@media (hover: hover) { .idea-ex button:hover { color: var(--text); border-color: color-mix(in srgb, var(--text) 30%, transparent); } }
+.idea-ex button:focus-visible, .idea-go:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* hero: the idea box spans under the headline and the lead */
+.hero .top { align-items: end; }
+.hero .ask { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-4) 72px; align-items: end; margin-top: var(--s-2); }
+.hero .ask .more { margin: 0 0 34px; display: grid; gap: var(--s-2); font-size: 15px; color: var(--muted); }
+.hero .ask .more a { font-weight: 600; text-decoration: none; }
+@media (max-width: 1100px) { .hero .ask { grid-template-columns: 1fr; } .hero .ask .more { margin: 0; } }
+@media (max-width: 700px) {
+  .idea textarea { font-size: 17px; min-height: 84px; padding: 14px 14px 4px; }
+  .idea-bar { flex-direction: column; align-items: stretch; padding: 8px 10px 10px; }
+  .idea-ex { display: none; }
+  .idea-go { width: 100%; justify-content: center; }
+}
+
+/* closing band: pricing facts beside the idea box */
+.early .price { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid rgb(239 237 231 / 0.16); }
+main.home .early .price h3 { font-size: 15px; font-weight: 600; color: #EFEDE7; letter-spacing: 0; }
+.early .price ul { display: grid; gap: var(--s-3); margin-top: var(--s-4); }
+.early .price li { display: flex; gap: var(--s-3); align-items: flex-start; font-size: 16px; line-height: 1.5; color: #D6D4CE; }
+.early .price li svg { flex: none; width: 18px; height: 18px; margin-top: 3px; fill: none; stroke: #8FB0FF; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.early .ecard .idea-box { box-shadow: none; background: var(--bg); }
+.early .signin { margin: var(--s-4) 0 0; font-size: 14px; color: var(--muted); }
+.hero .ask .more .si { display: none; }
+@media (max-width: 460px) { .hero .ask .more .si { display: inline; } }

@@ -1,0 +1,43 @@
+---
+// "What do you want to build?" — the idea box that starts sign-up. It is a plain GET form to app.equipe.im/start?idea=<text>,
+// so it works without JavaScript; the script only adds Enter-to-send, the example chips and dropping an empty idea.
+// app.equipe.im keeps the idea as a draft, shows it on the sign-in page and carries it into team creation.
+import { SITE } from '../data/site';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; id: string; location: string }
+const { code, id, location } = Astro.props;
+const p = getMessages(code).prompt;
+---
+<form class="idea" action={SITE.start} method="get" data-idea data-ph-location={location}>
+  <label class="idea-l" for={id}>{p.label}</label>
+  <div class="idea-box">
+    <textarea id={id} name="idea" rows="3" maxlength="2000" placeholder={p.placeholder} enterkeyhint="send"></textarea>
+    <div class="idea-bar">
+      <div class="idea-ex" role="group" aria-label={p.label}>
+        {p.examples.map((x) => <button type="button" data-ex={x}>{x}</button>)}
+      </div>
+      <button class="btn primary idea-go" type="submit"><span>{p.submit}</span><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+    </div>
+  </div>
+  <p class="idea-note">{p.note}</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-idea]').forEach((form) => {
+    const ta = form.querySelector('textarea')!;
+    const track = (n: string, props?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, props);
+    form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; ta.focus(); }));
+    // Enter sends, Shift+Enter adds a line; never while an input method (Korean, Japanese, Chinese) is composing.
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); }
+    });
+    form.addEventListener('submit', () => {
+      const v = ta.value.trim();
+      ta.value = v;
+      if (!v) ta.disabled = true; // no idea yet: open /start without an empty ?idea=
+      track('idea_submit', { location: form.dataset.phLocation, has_idea: !!v, length: v.length });
+      setTimeout(() => (ta.disabled = false), 0);
+    });
+  });
+</script>

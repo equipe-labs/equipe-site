@@ -5,7 +5,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Mark from '../components/Mark.astro';
 import WebApp from '../components/WebApp.astro';
-import EarlyAccess from '../components/EarlyAccess.astro';
+import IdeaBox from '../components/IdeaBox.astro';
 import Analytics from '../components/Analytics.astro';
 import LangBanner from '../components/LangBanner.astro';
 import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
@@ -75,11 +75,10 @@ const faqMore = t.faq.more.split('{email}');
         <div class="hr">
           <p class="lead">{t.hero.lead}</p>
           <p class="approve">{t.hero.approve}</p>
-          <div class="acts">
-            <a class="btn primary lg" href="#early-access" data-ph="early_access_cta_click" data-ph-location="hero">{t.hero.cta}</a>
-            <a class="btn ghost lg" href="#how-it-works">{t.hero.secondary}</a>
-          </div>
-          <p class="meta">{t.hero.meta}</p>
+        </div>
+        <div class="ask">
+          <IdeaBox code={code} id="idea-hero" location="hero" />
+          <p class="more"><a href="#how-it-works">{t.hero.secondary} ↓</a><span>{t.hero.meta}</span><a class="si" href={SITE.login} data-ph="signin_click" data-ph-location="hero">{t.nav.signIn} →</a></p>
         </div>
       </div>
       <div class="wrap shot">
@@ -135,7 +134,7 @@ const faqMore = t.faq.more.split('{email}');
             </li>
           ))}
         </ol>
-        <div class="howcta rv"><a class="btn primary lg" href="#early-access" data-ph="early_access_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
+        <div class="howcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
 
@@ -173,7 +172,7 @@ const faqMore = t.faq.more.split('{email}');
         </div>
         <div class="outcome rv">
           <ul>{t.compare.outcome.map((o, i) => <li><span class="on" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{o}</li>)}</ul>
-          <a class="btn primary" href="#early-access" data-ph="early_access_cta_click" data-ph-location="compare">{t.hero.cta}</a>
+          <a class="btn primary" href={SITE.start} data-ph="signup_cta_click" data-ph-location="compare">{t.hero.cta}</a>
         </div>
       </div>
     </section>
@@ -248,16 +247,23 @@ const faqMore = t.faq.more.split('{email}');
       </div>
     </section>
 
-    <section class="early" id="early-access">
+    <section class="early" id="start">
+      <span id="early-access" aria-hidden="true"></span>
       <div class="wrap">
         <div class="egrid">
           <div class="etxt">
             <p class="badge"><i></i>{t.hero.badge}</p>
-            <h2>{t.form.title}</h2>
-            <p class="sub">{t.form.text}</p>
-            <ol class="ea-next">{t.form.next.map((n, i) => <li><span>{i + 1}</span>{n}</li>)}</ol>
+            <h2>{t.band.title}</h2>
+            <p class="sub">{t.band.text}</p>
+            <div class="price">
+              <h3>{t.pricing.title}</h3>
+              <ul>{t.pricing.facts.map((f) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{f}</li>)}</ul>
+            </div>
           </div>
-          <div class="ecard"><EarlyAccess code={code} /></div>
+          <div class="ecard">
+            <IdeaBox code={code} id="idea-band" location="band" />
+            <p class="signin"><a href={SITE.login} data-ph="signin_click" data-ph-location="band">{t.nav.signIn} →</a></p>
+          </div>
         </div>
       </div>
     </section>

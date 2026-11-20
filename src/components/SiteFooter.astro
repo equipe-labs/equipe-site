@@ -27,7 +27,8 @@ const home = page === 'home' ? '' : localePath(info);
           <li><a href={`${home}#team`}>{t.nav.team}</a></li>
           <li><a href={`${home}#status`}>{t.nav.status}</a></li>
           <li><a href={`${home}#faq`}>{t.nav.faq}</a></li>
-          <li><a href={`${home}#early-access`} data-ph="early_access_cta_click" data-ph-location="footer">{t.nav.cta}</a></li>
+          <li><a href={SITE.start} data-ph="signup_cta_click" data-ph-location="footer">{t.nav.cta}</a></li>
+          <li><a href={SITE.login} data-ph="signin_click" data-ph-location="footer">{t.nav.signIn}</a></li>
         </ul>
       </div>
       <div>

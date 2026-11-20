@@ -2,9 +2,10 @@ export const SITE = {
   name: 'equipe',
   url: 'https://equipe.im',
   repo: 'https://github.com/equipe-labs/equipe',
-  /** The hosted product (equipe cloud) and its early-access sign-up endpoint (POST JSON, CORS allows equipe.im and Vercel previews). */
+  /** The hosted product (equipe cloud): sign up at /start (optionally ?idea=<text>, kept as a draft through team creation), sign in at /login. */
   app: 'https://app.equipe.im',
-  earlyAccessApi: 'https://app.equipe.im/api/early-access',
+  start: 'https://app.equipe.im/start',
+  login: 'https://app.equipe.im/login',
   docs: 'https://github.com/equipe-labs/equipe/tree/main/docs',
   /** Stable URL of the signed, notarized macOS DMG attached to every release. */
   desktopDmg: 'https://github.com/equipe-labs/equipe/releases/latest/download/equipe.dmg',

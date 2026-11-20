@@ -13,6 +13,8 @@ header.site nav a { color: var(--muted); font-size: 15px; font-weight: 500; text
 header.site nav a[aria-current='page'] { color: var(--text); font-weight: 600; }
 header.site nav a.btn { color: var(--on-accent); }
 header.site .cta-s { display: none; }
+header.site nav li.signin a { color: var(--text); font-weight: 600; }
+@media (max-width: 460px) { header.site nav li.signin { display: none; } }
 @media (max-width: 520px) { header.site .cta-l { display: none; } header.site .cta-s { display: inline; } }
 @media (max-width: 640px) { header.site .wrap { padding: 0 var(--s-4); } }
 

@@ -75,9 +75,10 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | 이벤트 | 속성 | 발생 시점 |
 |---|---|---|
 | `$pageview` | — | 페이지 로드 후 PostHog가 뜨면 한 번. (수동 전송: 공통 속성을 먼저 등록하기 위해) |
-| `early_access_cta_click` | `location`: `header` / `hero` / `footer` / `developers` | "얼리 액세스 신청" 버튼·링크 클릭 (홈의 폼으로 이동). 2026-11 비개발자 개편 이후 홈의 주 행동 |
-| `early_access_submitted` | `locale` | 얼리 액세스 폼 제출이 성공(`200 {ok:true}`)함 |
-| `early_access_failed` | `status`: HTTP 상태, 네트워크 오류는 `0` | 얼리 액세스 폼 제출 실패 |
+| `idea_submit` | `location`: `hero` / `band`, `has_idea`, `length` | 아이디어 상자 제출 (app.equipe.im/start?idea=… 로 이동). 홈의 주 행동 |
+| `signup_cta_click` | `location`: `header` / `how` / `compare` / `footer` / `developers` | "시작하기" 버튼·링크 클릭 (app.equipe.im/start) |
+| `signin_click` | `location`: `header` / `band` / `footer` | "로그인" 링크 클릭 (app.equipe.im/login) |
+| `early_access_cta_click`, `early_access_submitted`, `early_access_failed` | — | 셀프 가입 전환(2026-11) 이후 발생하지 않는다. 과거 데이터만 남는다 |
 | `developers_link_click` | `location`: `header` / `footer` / `faq` | `/developers` 링크 클릭 |
 | `cta_github_click` | `location`: `hero` / `header` / `footer` / `developers` | GitHub로 가는 CTA·링크 클릭 |
 | `desktop_download_click` | `location`: `developers` / `app_page`(`platform`: `macos`, `layout`) | macOS 앱(DMG) 다운로드 버튼 클릭. 사이트의 주 행동 (T-137). T-159에서 `apps` 구역이 없어지고 `header`·`start`·`close`가 생겼다 |
