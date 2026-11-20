@@ -172,9 +172,9 @@ const fr: Messages = {
     items: [
       { category: 'Outil perso', text: 'Habitudes, minuteur de concentration et journal d’une ligne, enregistrés sur un lien privé partageable en lecture seule.' },
       { category: 'Page de lancement', text: 'Une liste d’attente bilingue pour une app d’entretien des plantes, avec classement par parrainage et vue admin secrète.' },
-      { category: 'Réservations', text: 'Des réservations pour une prof de coréen : disponibilités dans votre fuseau horaire, page de confirmation et fichier calendrier.' },
-      { category: 'Newsletter et blog', text: 'Une newsletter hebdomadaire avec six numéros, formulaire d’inscription, RSS et une page admin pour écrire le suivant.' },
-      { category: 'Boutique', text: 'Une boutique de céramique en petites séries avec demande d’achat, sans gestion de carte, et un admin des commandes et du stock.' },
+      { category: 'Réservations', text: 'Des réservations pour une prof de coréen : la semaine d’un coup d’œil dans votre fuseau horaire, e-mail de confirmation et fichier calendrier.' },
+      { category: 'Newsletter et blog', text: 'Une newsletter hebdomadaire avec six numéros, inscription avec double confirmation, RSS et une page admin pour écrire et envoyer le suivant.' },
+      { category: 'Boutique', text: 'Une boutique de céramique en petites séries avec demande d’achat (sans gestion de carte), mises à jour par e-mail et un admin des commandes et du stock.' },
     ],
   },
   bento: { title: 'Ce que fait votre équipe', text: 'Chaque membre a son rôle. Vous voyez tout, et vous approuvez ce qui compte.' },

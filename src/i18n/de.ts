@@ -171,9 +171,9 @@ const de: Messages = {
     items: [
       { category: 'Persönliches Tool', text: 'Gewohnheiten, ein Fokus-Timer und ein Ein-Satz-Tagebuch, gespeichert unter einem privaten Link, den du lesend teilen kannst.' },
       { category: 'Launch-Seite', text: 'Eine zweisprachige Warteliste für eine Pflanzenpflege-App, mit Empfehlungsplätzen und geheimer Admin-Ansicht.' },
-      { category: 'Buchungen', text: 'Buchung für eine Koreanisch-Lehrerin: freie Termine in deiner Zeitzone, Bestätigungsseite und Kalenderdatei.' },
-      { category: 'Newsletter und Blog', text: 'Ein wöchentlicher Newsletter mit sechs Ausgaben, Anmeldeformular, RSS und einer Admin-Seite für die nächste Ausgabe.' },
-      { category: 'Shop', text: 'Ein Keramik-Shop für Kleinserien mit Kaufanfrage statt Kartenzahlung und einer Verwaltung für Bestellungen und Bestand.' },
+      { category: 'Buchungen', text: 'Buchung für eine Koreanisch-Lehrerin: Wochenübersicht in deiner Zeitzone, Bestätigungs-E-Mail und Kalenderdatei.' },
+      { category: 'Newsletter und Blog', text: 'Ein wöchentlicher Newsletter mit sechs Ausgaben, Anmeldung mit Double-Opt-in, RSS und einer Admin-Seite, um die nächste Ausgabe zu schreiben und zu versenden.' },
+      { category: 'Shop', text: 'Ein Keramik-Shop für Kleinserien mit Kaufanfrage (ohne Kartenzahlung), E-Mail-Updates und einer Verwaltung für Bestellungen und Bestand.' },
     ],
   },
   bento: { title: 'Was dein Team macht', text: 'Jedes Mitglied hat seine Aufgabe. Du siehst alles und gibst frei, was zählt.' },

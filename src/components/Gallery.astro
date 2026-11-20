@@ -14,9 +14,11 @@ const webp = (p: string) => p.replace(/\.png$/, '.webp');
 const mins = (s: string) => s.match(/\d+/)?.[0] ?? '';
 // Top-of-page colour of each mobile screenshot, so the drawn iOS status bar continues the product's own background.
 const status: Record<string, [string, string]> = {
-  littlewins: ['#FBF8F3', '#12110F'], fernly: ['#F6F3EA', '#0E1610'], jiwoo: ['#FAF7F2', '#10151F'],
-  smallhours: ['#FBF8F1', '#161412'], tidepool: ['#F5EFE4', '#171513'],
+  littlewins: ['#EBE2D9', '#2A2720'], fernly: ['#EAEFDE', '#132117'], jiwoo: ['#372431', '#3D2433'],
+  smallhours: ['#FBF8F1', '#141210'], tidepool: ['#F5EFE4', '#161412'],
 };
+// Status-bar text colour on top of that background (light text on dark tops).
+const ink = (hex: string) => { const n = parseInt(hex.slice(1), 16); const l = (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; return l < 0.55 ? '#F4F4F5' : '#14151A'; };
 const lock = 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z';
 ---
 <section class="gal-s" id="gallery">
@@ -41,7 +43,7 @@ const lock = 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z';
                   <img class="th-d" src={webp(p.screenshotDark)} width="1200" height="750" alt="" loading="lazy" decoding="async" />
                 </div>
                 {big && (
-                  <div class="gal-ph" aria-hidden="true" style={`--sl:${sl};--sd:${sd}`}>
+                  <div class="gal-ph" aria-hidden="true" style={`--sl:${sl};--sd:${sd};--il:${ink(sl)};--id:${ink(sd)}`}>
                     <IPhone w={150}>
                       <img class="th-l" src={webp(p.screenshotLightMobile)} width="390" height="844" alt="" loading="lazy" decoding="async" />
                       <img class="th-d" src={webp(p.screenshotDarkMobile)} width="390" height="844" alt="" loading="lazy" decoding="async" />

@@ -175,9 +175,9 @@ export const en = {
     items: [
       { category: 'Personal tool', text: 'Habits, a focus timer and a one-line journal, saved to a private link you can share read-only.' },
       { category: 'Launch page', text: 'A bilingual waitlist page for a plant-care app, with referral positions and a secret admin view.' },
-      { category: 'Bookings', text: 'Booking for a solo Korean tutor: live availability in your timezone, confirmation page and calendar file.' },
-      { category: 'Newsletter and blog', text: 'A weekly newsletter with six issues, a subscribe form, RSS and an admin page to write the next one.' },
-      { category: 'Shop', text: 'A small-batch pottery shop with a request-to-buy flow, no card handling, and an orders and stock admin.' },
+      { category: 'Bookings', text: 'Booking for a solo Korean tutor: a week-at-a-glance scheduler in your timezone, confirmation email and calendar file.' },
+      { category: 'Newsletter and blog', text: 'A weekly newsletter with six issues, double opt-in subscribe, RSS and an admin page to write and email the next one.' },
+      { category: 'Shop', text: 'A small-batch pottery shop with request-to-buy (no card handling), email updates and an orders and stock admin.' },
     ],
   },
   bento: { title: 'What your team does', text: 'Each member has a job. You see all of it, and you approve what matters.' },

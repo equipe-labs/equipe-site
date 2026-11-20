@@ -483,12 +483,12 @@ main.home > section.hero { overflow: visible; overflow-x: clip; position: relati
 .gal-url svg { width: 10px; height: 10px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .gal-br img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
 .gal-ph { position: absolute; right: 22px; bottom: -64px; }
-.gal-ph .iph-screen { background: var(--sl); }
+.gal-ph .iph-screen { background: var(--sl); color: var(--il); }
 .gal-ph .iph-content img { display: block; width: 100%; height: auto; }
 .gal .th-d { display: none !important; }
 :root[data-theme='dark'] .gal .th-d { display: block !important; }
 :root[data-theme='dark'] .gal .th-l { display: none !important; }
-:root[data-theme='dark'] .gal-ph .iph-screen { background: var(--sd); color: #F4F4F5; }
+:root[data-theme='dark'] .gal-ph .iph-screen { background: var(--sd); color: var(--id); }
 .gal-t { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px 22px; flex: 1; }
 .gal-k { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; font-size: 12.5px; color: var(--muted); }
 .gal-k span:first-child { color: var(--accent); font-weight: 600; }

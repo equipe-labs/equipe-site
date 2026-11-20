@@ -171,9 +171,9 @@ const ptBR: Messages = {
     items: [
       { category: 'Ferramenta pessoal', text: 'Hábitos, um timer de foco e um diário de uma linha, salvos em um link privado que você pode compartilhar só para leitura.' },
       { category: 'Página de lançamento', text: 'Uma lista de espera bilíngue para um app de cuidado de plantas, com posições por indicação e uma área de admin secreta.' },
-      { category: 'Agendamentos', text: 'Agendamento para uma professora de coreano: horários no seu fuso, página de confirmação e arquivo de calendário.' },
-      { category: 'Newsletter e blog', text: 'Uma newsletter semanal com seis edições, formulário de inscrição, RSS e uma página de admin para escrever a próxima.' },
-      { category: 'Loja', text: 'Uma loja de cerâmica em pequenos lotes com pedido de compra, sem lidar com cartão, e um admin de pedidos e estoque.' },
+      { category: 'Agendamentos', text: 'Agendamento para uma professora de coreano: a semana inteira de relance no seu fuso, email de confirmação e arquivo de calendário.' },
+      { category: 'Newsletter e blog', text: 'Uma newsletter semanal com seis edições, inscrição com confirmação dupla, RSS e uma página de admin para escrever e enviar a próxima.' },
+      { category: 'Loja', text: 'Uma loja de cerâmica em pequenos lotes com pedido de compra (sem lidar com cartão), avisos por email e um admin de pedidos e estoque.' },
     ],
   },
   bento: { title: 'O que seu time faz', text: 'Cada membro tem sua função. Você vê tudo e aprova o que importa.' },

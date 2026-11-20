@@ -171,9 +171,9 @@ const es: Messages = {
     items: [
       { category: 'Herramienta personal', text: 'Hábitos, un temporizador de concentración y un diario de una línea, guardados en un enlace privado que puedes compartir en solo lectura.' },
       { category: 'Página de lanzamiento', text: 'Una lista de espera bilingüe para una app de cuidado de plantas, con puestos por referidos y una vista de admin secreta.' },
-      { category: 'Reservas', text: 'Reservas para una tutora de coreano: disponibilidad en tu zona horaria, página de confirmación y archivo de calendario.' },
-      { category: 'Newsletter y blog', text: 'Un newsletter semanal con seis números, formulario de suscripción, RSS y una página de admin para escribir el siguiente.' },
-      { category: 'Tienda', text: 'Una tienda de cerámica en pequeños lotes con solicitud de compra, sin manejar tarjetas, y un admin de pedidos y stock.' },
+      { category: 'Reservas', text: 'Reservas para una tutora de coreano: agenda semanal de un vistazo en tu zona horaria, email de confirmación y archivo de calendario.' },
+      { category: 'Newsletter y blog', text: 'Un newsletter semanal con seis números, suscripción con doble confirmación, RSS y una página de admin para escribir y enviar el siguiente.' },
+      { category: 'Tienda', text: 'Una tienda de cerámica en pequeños lotes con solicitud de compra (sin manejar tarjetas), avisos por email y un admin de pedidos y stock.' },
     ],
   },
   bento: { title: 'Lo que hace tu equipo', text: 'Cada miembro tiene su tarea. Lo ves todo, y tú apruebas lo importante.' },

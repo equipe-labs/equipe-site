@@ -2,7 +2,7 @@
   {
     "name": "Little Wins",
     "slug": "littlewins",
-    "url": "https://littlewins.showcase.equipe.page",
+    "url": "https://littlewins-showcase.equipe.page",
     "oneLine": "Habits, a focus timer and a one-line journal, saved to a private link you can share read-only.",
     "category": "Personal tool",
     "screenshotLight": "/gallery/littlewins-light.png",
@@ -10,12 +10,12 @@
     "screenshotLightMobile": "/gallery/littlewins-light-mobile.png",
     "screenshotDarkMobile": "/gallery/littlewins-dark-mobile.png",
     "builtWith": "equipe team",
-    "madeIn": "about 20 minutes"
+    "madeIn": "about 35 minutes"
   },
   {
     "name": "Fernly",
     "slug": "fernly",
-    "url": "https://fernly.showcase.equipe.page",
+    "url": "https://fernly-showcase.equipe.page",
     "oneLine": "A bilingual waitlist page for a plant-care app, with referral positions and a secret admin view.",
     "category": "Launch page",
     "screenshotLight": "/gallery/fernly-light.png",
@@ -23,45 +23,45 @@
     "screenshotLightMobile": "/gallery/fernly-light-mobile.png",
     "screenshotDarkMobile": "/gallery/fernly-dark-mobile.png",
     "builtWith": "equipe team",
-    "madeIn": "about 20 minutes"
+    "madeIn": "about 35 minutes"
   },
   {
     "name": "Jiwoo Korean",
     "slug": "jiwoo",
-    "url": "https://jiwoo.showcase.equipe.page",
-    "oneLine": "Booking for a solo Korean tutor: live availability in your timezone, confirmation page and calendar file.",
+    "url": "https://jiwoo-showcase.equipe.page",
+    "oneLine": "Booking for a solo Korean tutor: a week-at-a-glance scheduler in your timezone, confirmation email and calendar file.",
     "category": "Bookings",
     "screenshotLight": "/gallery/jiwoo-light.png",
     "screenshotDark": "/gallery/jiwoo-dark.png",
     "screenshotLightMobile": "/gallery/jiwoo-light-mobile.png",
     "screenshotDarkMobile": "/gallery/jiwoo-dark-mobile.png",
     "builtWith": "equipe team",
-    "madeIn": "about 25 minutes"
+    "madeIn": "about 45 minutes"
   },
   {
     "name": "Small Hours",
     "slug": "smallhours",
-    "url": "https://smallhours.showcase.equipe.page",
-    "oneLine": "A weekly newsletter with six issues, a subscribe form, RSS and an admin page to write the next one.",
+    "url": "https://smallhours-showcase.equipe.page",
+    "oneLine": "A weekly newsletter with six issues, double opt-in subscribe, RSS and an admin page to write and email the next one.",
     "category": "Newsletter and blog",
     "screenshotLight": "/gallery/smallhours-light.png",
     "screenshotDark": "/gallery/smallhours-dark.png",
     "screenshotLightMobile": "/gallery/smallhours-light-mobile.png",
     "screenshotDarkMobile": "/gallery/smallhours-dark-mobile.png",
     "builtWith": "equipe team",
-    "madeIn": "about 20 minutes"
+    "madeIn": "about 35 minutes"
   },
   {
     "name": "Tidepool Ceramics",
     "slug": "tidepool",
-    "url": "https://tidepool.showcase.equipe.page",
-    "oneLine": "A small-batch pottery shop with a request-to-buy flow, no card handling, and an orders and stock admin.",
+    "url": "https://tidepool-showcase.equipe.page",
+    "oneLine": "A small-batch pottery shop with request-to-buy (no card handling), email updates and an orders and stock admin.",
     "category": "Shop",
     "screenshotLight": "/gallery/tidepool-light.png",
     "screenshotDark": "/gallery/tidepool-dark.png",
     "screenshotLightMobile": "/gallery/tidepool-light-mobile.png",
     "screenshotDarkMobile": "/gallery/tidepool-dark-mobile.png",
     "builtWith": "equipe team",
-    "madeIn": "about 20 minutes"
+    "madeIn": "about 40 minutes"
   }
 ]
