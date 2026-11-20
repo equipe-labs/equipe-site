@@ -51,6 +51,7 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
 </form>
 
 <script>
+  import { wirePop } from '../scripts/popover';
   document.querySelectorAll<HTMLFormElement>('[data-idea]').forEach((form) => {
     const ta = form.querySelector('textarea')!;
     const track = (n: string, props?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, props);
@@ -64,7 +65,7 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
     ta.addEventListener('input', fit); fit();
     form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; fit(); ta.focus(); }));
     if (dd) {
-      document.addEventListener('click', (e) => { if (dd.open && !dd.contains(e.target as Node)) dd.open = false; });
+      wirePop(dd);
       const items = () => [...dd.querySelectorAll<HTMLElement>('.pop-i')];
       // Open downward; flip above the pill when the viewport has no room below (e.g. the hero near the fold).
       const pop = dd.querySelector<HTMLElement>('.it-pop')!;
@@ -76,7 +77,6 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
         items()[0]?.focus({ preventScroll: true });
       });
       dd.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && dd.open) { e.preventDefault(); dd.open = false; dd.querySelector('summary')!.focus(); return; }
         if (!dd.open || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;
         e.preventDefault();
         const l = items(), i = l.indexOf(document.activeElement as HTMLElement);

@@ -500,3 +500,21 @@ main.home > section.hero { overflow: visible; overflow-x: clip; position: relati
 .gal-n { margin: 24px auto 0; max-width: 640px; text-align: center; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
 @media (max-width: 1040px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .gal-c, .gal-c.big { grid-column: span 1; } .gal-c.big .gal-v { padding: 24px 24px 0; } .gal-ph { display: none; } }
 @media (max-width: 640px) { .gal { grid-template-columns: 1fr; gap: 16px; } .gal-v { padding: 16px 16px 0; } .gal-c.big .gal-v { padding: 16px 16px 0; } }
+
+/* Prompt toolbar, final geometry: one 36px height for "+", the team pill and send, all centred on one line. */
+main.home .idea.big { --tb: 36px; }
+main.home .idea.big .idea-bar { display: flex; align-items: center; }
+main.home .idea.big .idea-l2 { display: flex; align-items: center; gap: 8px; height: var(--tb); }
+main.home .idea.big :is(.idea-plus, .idea-send) { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: var(--tb); height: var(--tb); margin: 0; padding: 0; vertical-align: top; line-height: 0; flex: none; }
+main.home .idea.big .idea-team { display: flex; align-items: center; height: var(--tb); margin: 0; padding: 0; line-height: 0; flex: none; }
+main.home .idea.big .idea-team > summary { display: flex; align-items: center; box-sizing: border-box; height: var(--tb); min-height: 0; margin: 0; padding: 0 12px 0 4px; gap: 8px; line-height: 20px; }
+main.home .idea.big .it-l { line-height: 20px; }
+main.home .idea.big .it-caret { width: 14px; height: 14px; flex: none; display: block; margin-left: -2px; }
+/* Avatar stack: 22px, 6px overlap (about 73% of each visible), ring in the pill colour, left avatar on top. */
+main.home .idea.big .it-av { display: flex; align-items: center; height: 22px; }
+main.home .idea.big .it-av .rav { position: relative; width: 22px; height: 22px; margin-left: -6px; box-shadow: 0 0 0 2px var(--bg), inset 0 1px 0 rgb(255 255 255 / 0.45); }
+main.home .idea.big .it-av .rav:first-child { margin-left: 0; }
+main.home .idea.big .it-av .rav > svg { width: 13px; height: 13px; }
+main.home .idea.big .it-av .rav:nth-child(1) { z-index: 5; } main.home .idea.big .it-av .rav:nth-child(2) { z-index: 4; } main.home .idea.big .it-av .rav:nth-child(3) { z-index: 3; } main.home .idea.big .it-av .rav:nth-child(4) { z-index: 2; } main.home .idea.big .it-av .rav:nth-child(5) { z-index: 1; }
+/* The left neighbour covers each avatar's left 8px (6px overlap + 2px ring), so glyphs behind it shift right into the visible part. */
+main.home .idea.big .it-av .rav:not(:first-child) > svg { width: 12px; height: 12px; transform: translateX(3px); }

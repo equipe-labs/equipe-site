@@ -187,3 +187,30 @@ details.lang .lm-ck { margin-left: auto; }
 header.site { background: color-mix(in srgb, var(--bg) 72%, transparent); -webkit-backdrop-filter: saturate(1.8) blur(20px); backdrop-filter: saturate(1.8) blur(20px); border-bottom: 0.5px solid var(--line); }
 :is(.pop, header.site .navdd ul.lm, details.lang ul.lm) { background: color-mix(in srgb, var(--surface) 86%, transparent); -webkit-backdrop-filter: saturate(1.8) blur(24px); backdrop-filter: saturate(1.8) blur(24px); border: 0.5px solid var(--line); }
 .btn, .pill, .idea-send, .idea-plus, .theme-t { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); transition-duration: 300ms; }
+
+/* Popover motion (team menu, language menu, Product menu). Open: fade + scale .96 + 4px rise from the trigger, 180ms;
+   rows follow 20ms apart; close: 120ms fade/scale out (src/scripts/popover.ts delays the real close). Reduced motion: fade only. */
+@keyframes pop-in { from { opacity: 0; transform: translateY(var(--pop-dy, 4px)) scale(0.96); } }
+@keyframes pop-out { to { opacity: 0; transform: translateY(var(--pop-dy, 4px)) scale(0.96); } }
+@keyframes pop-row { from { opacity: 0; transform: translateY(3px); } }
+@keyframes pop-fade { from { opacity: 0; } }
+@keyframes pop-fade-out { to { opacity: 0; } }
+:is(.it-pop, .navdd ul.lm, details.lang ul.lm) { transform-origin: top left; }
+details.lang ul.lm { transform-origin: top right; }
+.it-pop.up { --pop-dy: -4px; transform-origin: bottom left; }
+html.mo details[open] > :is(.it-pop, ul.lm), html.mo .navdd[open] ul.lm, html.mo details.lang[open] ul.lm { animation: pop-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+html.mo details[open] :is(.it-pop li, ul.lm > li) { animation: pop-row 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+html.mo details[open] :is(.it-pop li, ul.lm > li):nth-child(2) { animation-delay: 20ms; }
+html.mo details[open] :is(.it-pop li, ul.lm > li):nth-child(3) { animation-delay: 40ms; }
+html.mo details[open] :is(.it-pop li, ul.lm > li):nth-child(4) { animation-delay: 60ms; }
+html.mo details[open] :is(.it-pop li, ul.lm > li):nth-child(n+5) { animation-delay: 80ms; }
+html.mo details.pop-closing[open] > :is(.it-pop, ul.lm), html.mo .navdd.pop-closing ul.lm, html.mo details.lang.pop-closing ul.lm { animation: pop-out 120ms cubic-bezier(0.4, 0, 1, 1) both; }
+html.mo details.pop-closing :is(.it-pop li, ul.lm > li) { animation: none; }
+html:not(.mo) details[open] > :is(.it-pop, ul.lm), html:not(.mo) .navdd[open] ul.lm, html:not(.mo) details.lang[open] ul.lm { animation: pop-fade 120ms linear both; }
+html:not(.mo) details.pop-closing > :is(.it-pop, ul.lm), html:not(.mo) .navdd.pop-closing ul.lm, html:not(.mo) details.lang.pop-closing ul.lm { animation: pop-fade-out 120ms linear both; }
+/* Chevrons turn 180° with the menu, and back as it closes. */
+summary::after { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
+details.pop-closing summary::after { transform: rotate(45deg); }
+.it-caret { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
+.idea-team[open]:not(.pop-closing) .it-caret { transform: rotate(180deg); }
+html:not(.mo) summary::after, html:not(.mo) .it-caret { transition: none; }

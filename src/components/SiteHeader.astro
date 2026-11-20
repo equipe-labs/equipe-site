@@ -55,10 +55,10 @@ const product = [
 </header>
 
 <script>
+  import { wirePop } from '../scripts/popover';
   // Product dropdown: close on Escape or a click outside.
   document.querySelectorAll<HTMLDetailsElement>('[data-navdd]').forEach((d) => {
-    document.addEventListener('click', (e) => { if (d.open && !d.contains(e.target as Node)) d.open = false; });
-    d.addEventListener('keydown', (e) => { if (e.key === 'Escape' && d.open) { d.open = false; d.querySelector('summary')!.focus(); } });
+    wirePop(d);
   });
   // Theme toggle: system (follow the device) -> light -> dark -> system. The choice is remembered by the inline head script (window.__eqTheme).
   document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((b) => {

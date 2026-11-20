@@ -40,13 +40,13 @@ const current = getLocale(locale);
   )
 }
 <script>
+  import { wirePop } from '../scripts/popover';
   // Close on Escape or a click outside; arrow keys move between languages.
   document.querySelectorAll<HTMLDetailsElement>('[data-lang-menu]').forEach((d) => {
     const links = () => [...d.querySelectorAll<HTMLAnchorElement>('.lm a')];
     d.addEventListener('toggle', () => { if (d.open) (links().find((a) => a.getAttribute('aria-current')) ?? links()[0])?.focus({ preventScroll: true }); });
-    document.addEventListener('click', (e) => { if (d.open && !d.contains(e.target as Node)) d.open = false; });
+    wirePop(d);
     d.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && d.open) { d.open = false; d.querySelector('summary')!.focus(); return; }
       if (!d.open || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;
       e.preventDefault();
       const l = links(), i = l.indexOf(document.activeElement as HTMLAnchorElement);
