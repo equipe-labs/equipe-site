@@ -29,7 +29,7 @@ const ko: Messages = {
     themeLight: '밝은 테마',
     themeSystem: '시스템 설정 따르기',
   },
-  nav: { product: '제품', pricing: '요금', security: '보안', about: '소개', how: '어떻게 일하나요', team: '팀 소개', status: '지금 어디까지', faq: '자주 묻는 질문', developers: '개발자용', github: 'GitHub', cta: '시작하기', ctaShort: '시작하기', signIn: '로그인' },
+  nav: { product: '제품', pricing: '요금', security: '보안', about: '소개', how: '어떻게 일하나요', team: '팀 소개', status: '지금 어디까지', faq: '자주 묻는 질문', developers: '개발자용', github: 'GitHub', cta: '시작하기', ctaShort: '시작하기', signIn: '로그인', signInShort: '로그인' },
   hero: {
     badge: '지금 열려 있어요 · 무료로 시작',
     title: '혼자서도,\n스타트업 팀이 생겨요.',
@@ -147,7 +147,7 @@ const ko: Messages = {
     teamHead: '내 팀',
     teamNote: '모두가 함께 요청을 맡아요.',
     teamLines: ['아이디어를 계획으로 바꿔요', '직접 만들어요', '보기 좋게 다듬어요', '제대로 되는지 확인해요', '무엇이 효과 있는지 재요'],
-    note: '무료로 시작해요. $5 크레딧 포함, 카드는 필요 없어요.',
+    note: '무료로 시작 · $5 크레딧 · 카드 필요 없음',
   },
   see: { kicker: '일하는 모습 보기', title: '일하고 있는 내 팀.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

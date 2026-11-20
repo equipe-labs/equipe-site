@@ -29,7 +29,7 @@ const ptBR: Messages = {
     themeLight: 'Tema claro',
     themeSystem: 'Tema do sistema',
   },
-  nav: { product: 'Produto', pricing: 'Preços', security: 'Segurança', about: 'Sobre', how: 'Como funciona', team: 'O time', status: 'Onde estamos', faq: 'FAQ', developers: 'Desenvolvedores', github: 'GitHub', cta: 'Começar', ctaShort: 'Começar', signIn: 'Entrar' },
+  nav: { product: 'Produto', pricing: 'Preços', security: 'Segurança', about: 'Sobre', how: 'Como funciona', team: 'O time', status: 'Onde estamos', faq: 'FAQ', developers: 'Desenvolvedores', github: 'GitHub', cta: 'Começar', ctaShort: 'Começar', signIn: 'Entrar', signInShort: 'Entrar' },
   hero: {
     badge: 'Aberto a todos · comece grátis',
     title: 'Um time de startup para uma pessoa só.',
@@ -147,7 +147,7 @@ const ptBR: Messages = {
     teamHead: 'Seu time',
     teamNote: 'Todos trabalham juntos no seu pedido.',
     teamLines: ['transforma sua ideia em um plano', 'constroem', 'deixa com a cara certa', 'confere se funciona', 'mede o que está dando certo'],
-    note: 'Comece grátis: $5 de crédito incluídos, sem cartão.',
+    note: 'Grátis para começar · $5 de crédito · Sem cartão',
   },
   see: { kicker: 'Veja funcionando', title: 'Seu time, trabalhando.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

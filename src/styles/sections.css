@@ -524,3 +524,43 @@ main.home .idea.big .it-av .rav:not(:first-child) > svg { width: 12px; height: 1
 .pg-free { max-width: 720px; margin-left: auto; margin-right: auto; font-size: 14px; }
 .pg-prose h2 + p { margin-bottom: 28px; }
 .pg-s .pg-prose h2 { font-size: 22px; line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 8px; }
+
+/* Hero foot: one reassurance line, then a quiet "See how it works" pill; 16/24px rhythm. */
+main.home .hero .idea.big .idea-chips { margin-top: 16px; }
+main.home .hero .idea.big .idea-note { margin-top: 16px; font-size: 14px; line-height: 20px; text-wrap: balance; }
+main.home .hero .more { margin: 24px 0 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; font-size: 14px; line-height: 20px; color: var(--muted); text-wrap: balance; }
+main.home .hero .more .cue { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 12px 0 14px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 70%, transparent); color: var(--text); font-weight: 600; font-size: 14px; text-decoration: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+main.home .hero .more .cue:hover { border-color: color-mix(in srgb, var(--text) 24%, transparent); }
+main.home .hero .more .cue svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--muted); }
+@keyframes cue-bob { 0%, 70%, 100% { transform: none; } 35% { transform: translateY(2px); } }
+html.mo main.home .hero .more .cue svg { animation: cue-bob 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+:is(.head.center, .center, .hc) :is(h1, h2, p) { text-wrap: balance; }
+@media (max-width: 560px) {
+  main.home .hero .more .meta { display: none; }
+  main.home .hero .idea.big .idea-note { font-size: 13.5px; }
+  /* Chips scroll sideways: start at the left edge and fade out on the right. */
+  main.home .idea.big .idea-chips { justify-content: flex-start; margin-left: -16px; margin-right: -16px; padding: 2px 16px; -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 48px), transparent); }
+  main.home .idea.big .idea-chips button { flex: none; }
+}
+/* The form is a grid with a 12px gap: chips and note sit 16px apart, the note sits 24px above the cue. */
+main.home .hero .idea.big { row-gap: 0; }
+main.home .hero .idea.big .idea-chips { margin-top: 16px; }
+main.home .hero .idea.big .idea-note { margin-top: 16px; }
+@media (max-width: 560px) {
+  /* The team menu spans the prompt box on phones, so it never runs off the screen. */
+  main.home .idea.big .idea-box { position: relative; }
+  main.home .idea.big .idea-team { position: static; }
+  main.home .idea.big .it-pop { left: 8px; right: 8px; width: auto; min-width: 0; max-width: none; }
+  main.home .hero h1 { overflow-wrap: break-word; hyphens: auto; }
+}
+@media (max-width: 560px) { main.home .idea.big .idea-team, main.home .idea.big .idea-team > summary { min-width: 0; flex-shrink: 1; } main.home .idea.big .idea-l2 { min-width: 0; } main.home .idea.big .it-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; } }
+@media (max-width: 360px) {
+  main.home .idea.big .it-l { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+main.home .hero .hc { grid-template-columns: minmax(0, 1fr); }
+main.home .hero .hc > * { min-width: 0; }
+.it-pop ul, .it-pop .pop-i { min-width: 0; } .it-pop .pop-t { flex: 1; min-width: 0; }
+main.home .final :is(.wrap, .wrap > *, .fbox, .fbox > *) { min-width: 0; } main.home .final .wrap { grid-template-columns: minmax(0, 1fr); }
+details:not([open]) > .it-pop { display: none; }
+@media (max-width: 560px) { main.home .idea.big .idea-team { position: static !important; } }
+@media (max-width: 560px) { main.home .final .idea.big .idea-chips { margin-left: 0; margin-right: 0; padding: 2px 0; } }

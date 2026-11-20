@@ -29,7 +29,7 @@ const zhCN: Messages = {
     themeLight: '浅色主题',
     themeSystem: '跟随系统',
   },
-  nav: { product: '产品', pricing: '价格', security: '安全', about: '关于', how: '工作方式', team: '团队', status: '当前进展', faq: '常见问题', developers: '开发者', github: 'GitHub', cta: '开始使用', ctaShort: '开始使用', signIn: '登录' },
+  nav: { product: '产品', pricing: '价格', security: '安全', about: '关于', how: '工作方式', team: '团队', status: '当前进展', faq: '常见问题', developers: '开发者', github: 'GitHub', cta: '开始使用', ctaShort: '开始使用', signIn: '登录', signInShort: '登录' },
   hero: {
     badge: '现已开放 · 免费开始',
     title: '一个人的创业团队。',
@@ -147,7 +147,7 @@ const zhCN: Messages = {
     teamHead: '你的团队',
     teamNote: '大家一起处理你的需求。',
     teamLines: ['把想法变成计划', '动手开发', '让它好看好用', '检查是否正常运行', '衡量哪些有效'],
-    note: '免费开始，含 $5 额度，无需绑卡。',
+    note: '免费开始 · $5 额度 · 无需绑卡',
   },
   see: { kicker: '看看团队怎么做', title: '你的团队，正在工作。' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

@@ -29,7 +29,7 @@ const de: Messages = {
     themeLight: 'Helles Design',
     themeSystem: 'Systemeinstellung',
   },
-  nav: { product: 'Produkt', pricing: 'Preise', security: 'Sicherheit', about: 'Über uns', how: 'So funktioniert’s', team: 'Das Team', status: 'Stand heute', faq: 'FAQ', developers: 'Entwickler', github: 'GitHub', cta: 'Loslegen', ctaShort: 'Loslegen', signIn: 'Anmelden' },
+  nav: { product: 'Produkt', pricing: 'Preise', security: 'Sicherheit', about: 'Über uns', how: 'So funktioniert’s', team: 'Das Team', status: 'Stand heute', faq: 'FAQ', developers: 'Entwickler', github: 'GitHub', cta: 'Loslegen', ctaShort: 'Loslegen', signIn: 'Anmelden', signInShort: 'Anmelden' },
   hero: {
     badge: 'Jetzt offen · kostenlos starten',
     title: 'Ein Startup-Team für eine Person.',
@@ -147,7 +147,7 @@ const de: Messages = {
     teamHead: 'Dein Team',
     teamNote: 'Alle arbeiten gemeinsam an deiner Anfrage.',
     teamLines: ['macht aus deiner Idee einen Plan', 'bauen es', 'sorgt dafür, dass es gut aussieht', 'prüft, ob es funktioniert', 'misst, was wirkt'],
-    note: 'Kostenlos starten: $5 Guthaben inklusive, keine Karte nötig.',
+    note: 'Kostenlos starten · $5 Guthaben · Keine Karte',
   },
   see: { kicker: 'So arbeitet es', title: 'Dein Team bei der Arbeit.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

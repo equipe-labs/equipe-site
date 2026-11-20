@@ -29,7 +29,7 @@ const ja: Messages = {
     themeLight: 'ライトテーマ',
     themeSystem: 'システム設定に合わせる',
   },
-  nav: { product: 'プロダクト', pricing: '料金', security: 'セキュリティ', about: '会社概要', how: '仕組み', team: 'チーム', status: '現在の状況', faq: 'よくある質問', developers: '開発者の方へ', github: 'GitHub', cta: '始める', ctaShort: '始める', signIn: 'ログイン' },
+  nav: { product: 'プロダクト', pricing: '料金', security: 'セキュリティ', about: '会社概要', how: '仕組み', team: 'チーム', status: '現在の状況', faq: 'よくある質問', developers: '開発者の方へ', github: 'GitHub', cta: '始める', ctaShort: '始める', signIn: 'ログイン', signInShort: 'ログイン' },
   hero: {
     badge: '受付中 · 無料で始められます',
     title: 'ひとりのための、スタートアップチーム。',
@@ -147,7 +147,7 @@ const ja: Messages = {
     teamHead: 'あなたのチーム',
     teamNote: '全員でひとつのリクエストに取り組みます。',
     teamLines: ['アイデアを計画にします', '実際に作ります', '見た目を整えます', 'ちゃんと動くか確かめます', '何が効いているかを測ります'],
-    note: '無料で始められます。$5分のクレジット付き、カード不要。',
+    note: '無料で開始 · $5クレジット · カード不要',
   },
   see: { kicker: '動いているところ', title: '働くあなたのチーム。' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

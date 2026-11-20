@@ -32,7 +32,7 @@ export const en = {
     themeLight: 'Light theme',
     themeSystem: 'System theme',
   },
-  nav: { product: 'Product', pricing: 'Pricing', security: 'Security', about: 'About', how: 'How it works', team: 'The team', status: 'Where we are', faq: 'FAQ', developers: 'Developers', github: 'GitHub', cta: 'Get started', ctaShort: 'Get started', signIn: 'Sign in' },
+  nav: { product: 'Product', pricing: 'Pricing', security: 'Security', about: 'About', how: 'How it works', team: 'The team', status: 'Where we are', faq: 'FAQ', developers: 'Developers', github: 'GitHub', cta: 'Get started', ctaShort: 'Get started', signIn: 'Sign in', signInShort: 'Sign in' },
   // hero.title may contain one \n: a line break kept on wide screens (useful where the language would otherwise break mid-phrase).
   hero: {
     badge: 'Now open · start free',
@@ -151,7 +151,7 @@ export const en = {
     teamHead: 'Your team',
     teamNote: 'Everyone works on your request together.',
     teamLines: ['turns your idea into a plan', 'build it', 'makes it look right', 'checks it works', 'measures what’s working'],
-    note: 'Start free — $5 credit included, no card needed.',
+    note: 'Free to start · $5 credit · No card needed',
   },
   see: { kicker: 'See it work', title: 'Your team, at work.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

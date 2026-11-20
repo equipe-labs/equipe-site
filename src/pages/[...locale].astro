@@ -88,7 +88,7 @@ const tiles = [
         <h1 class="ld" style="--d:0">{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <>{' '}<br class="hb" /></>}{l}</>)}</h1>
         <p class="hsub ld" style="--d:1">{t.hero.approve}</p>
         <div class="hbox ld" style="--d:2"><IdeaBox code={code} id="idea-hero" location="hero" big /></div>
-        <p class="more ld" style="--d:3"><a href="#see">{t.hero.secondary} ↓</a><span>{t.hero.meta}</span><a class="si" href={SITE.login} data-ph="signin_click" data-ph-location="hero">{t.nav.signIn} →</a></p>
+        <div class="more ld" style="--d:3"><a class="cue" href="#see">{t.hero.secondary}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></a></div>
       </div>
     </section>
 

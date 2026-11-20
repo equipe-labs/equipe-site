@@ -214,3 +214,13 @@ details.pop-closing summary::after { transform: rotate(45deg); }
 .it-caret { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
 .idea-team[open]:not(.pop-closing) .it-caret { transform: rotate(180deg); }
 html:not(.mo) summary::after, html:not(.mo) .it-caret { transition: none; }
+
+/* Header on phones: Sign in stays, as a short text link next to Get started. */
+header.site .si-s { display: none; }
+@media (max-width: 560px) {
+  header.site .nav-r .signin { display: inline-flex; border-color: transparent; padding: 0 8px; }
+  header.site .nav-r .signin .si-l { display: none; } header.site .nav-r .signin .si-s { display: inline; }
+  header.site .nav-r .pill.dark { padding: 0 14px; }
+  header.site details.lang summary::after { display: none; }
+}
+@media (max-width: 400px) { header.site .nav-r .theme-t { display: none; } }
