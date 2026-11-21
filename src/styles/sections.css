@@ -564,3 +564,11 @@ main.home .final :is(.wrap, .wrap > *, .fbox, .fbox > *) { min-width: 0; } main.
 details:not([open]) > .it-pop { display: none; }
 @media (max-width: 560px) { main.home .idea.big .idea-team { position: static !important; } }
 @media (max-width: 560px) { main.home .final .idea.big .idea-chips { margin-left: 0; margin-right: 0; padding: 2px 0; } }
+
+/* Tab accepts the placeholder suggestion: a quiet keycap on the placeholder line, desktop pointers only, while focused and empty. */
+.idea-box { position: relative; }
+.idea-tab { display: none; position: absolute; top: 23px; right: 16px; z-index: 1; height: 22px; padding: 0 7px; border-radius: 6px; border: 1px solid var(--line); border-bottom-width: 2px; background: var(--bg); color: var(--muted); font: 600 11.5px/19px var(--sans); letter-spacing: 0.02em; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  main.home .idea.big.empty:has(textarea:focus) .idea-tab { display: inline-block; }
+  main.home .idea.big .idea-box textarea { padding-right: 64px; }
+}

@@ -17,6 +17,7 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
 <form class={`idea${big ? ' big' : ''}`} action={SITE.start} method="get" data-idea data-ph-location={location} data-examples={JSON.stringify(p.examples)}>
   <label class={big ? 'sr-only' : 'idea-l'} for={id}>{p.label}</label>
   <div class="idea-box">
+    {big && <kbd class="idea-tab" aria-hidden="true">Tab</kbd>}
     <textarea id={id} name="idea" rows={big ? 3 : 3} maxlength="2000" placeholder={p.placeholder} enterkeyhint="send"></textarea>
     <div class="idea-bar">
       {big ? (
@@ -61,6 +62,7 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
     const fit = () => {
       if (form.classList.contains('big')) { ta.style.height = 'auto'; const lh = parseFloat(getComputedStyle(ta).lineHeight) || 26; ta.style.height = Math.min(ta.scrollHeight, lh * 6 + 30) + 'px'; }
       send?.classList.toggle('idle', !ta.value.trim());
+      form.classList.toggle('empty', !ta.value);
     };
     ta.addEventListener('input', fit); fit();
     form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; fit(); ta.focus(); }));
@@ -83,6 +85,19 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
         l[e.key === 'Home' ? 0 : e.key === 'End' ? l.length - 1 : (i + (e.key === 'ArrowDown' ? 1 : -1) + l.length) % l.length].focus();
       });
     }
+    // The suggestion currently shown as placeholder (always the full text, never a half-typed frame).
+    const base = ta.placeholder;
+    let suggestion = base;
+    // Tab accepts it, only while the box is empty; otherwise Tab moves focus as usual (no focus trap).
+    ta.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || ta.value || !suggestion) return;
+      e.preventDefault();
+      ta.value = suggestion;
+      ta.placeholder = base;
+      fit();
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      track('idea_tab_accept', { location: form.dataset.phLocation });
+    });
     // Enter sends, Shift+Enter adds a line; never while an input method (Korean, Japanese, Chinese) is composing.
     ta.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); }
@@ -90,13 +105,14 @@ const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'];
     // The placeholder types out example ideas in turn (motion allowed only); it stops while the box has focus or text.
     if (document.documentElement.classList.contains('mo')) {
       const ex: string[] = JSON.parse(form.dataset.examples || '[]');
-      const base = ta.placeholder;
       let i = 0, n = 0, dir = 1, wait = 0, visible = false;
       new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(form);
       setInterval(() => {
-        if (!visible || document.activeElement === ta || ta.value) { if (ta.placeholder !== base && document.activeElement === ta) ta.placeholder = base; return; }
+        // Focused and empty: hold the full suggestion still, so Tab accepts exactly what is shown.
+        if (!visible || document.activeElement === ta || ta.value) { if (document.activeElement === ta && !ta.value && ta.placeholder !== suggestion) ta.placeholder = suggestion; return; }
         if (wait > 0) { wait--; return; }
         const w = ex[i] ?? base;
+        suggestion = w;
         n += dir;
         ta.placeholder = w.slice(0, Math.max(0, n)) + (dir > 0 ? '|' : '');
         if (dir > 0 && n >= w.length) { ta.placeholder = w; dir = -1; wait = 28; }

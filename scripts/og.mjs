@@ -65,7 +65,7 @@ function card(lang, m) {
   .phone { position: absolute; right: 120px; top: 100px; transform: rotate(4deg); }
   .phone .iph { --w: 300px; }
   </style></head><body><div class="grid"></div><div class="glow"></div>
-  <div class="l"><div class="brand"><svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="22" fill="#0A0A0C"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5"/></svg>${WORDMARK}</div>
+  <div class="l"><div class="brand"><svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="22" fill="#2A2B31"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5"/></svg>${WORDMARK}</div>
   <h1>${title.split('\n').map(esc).join('<br>')}</h1><p>${esc(m.hero.approve)}</p></div>
   <div class="team"><span class="rs">${roles}</span><span>${names}</span></div>
   <div class="url">equipe.im</div>
@@ -111,9 +111,9 @@ head.writeUInt16LE(1, 2); // type: icon
 head.writeUInt16LE(1, 4); // one image
 head[6] = 32; // width
 head[7] = 32; // height
-head.writeUInt16LE(1, 12); // planes
-head.writeUInt16LE(32, 14); // bits per pixel
-head.writeUInt32LE(png.length, 14 + 4);
+head.writeUInt16LE(1, 10); // planes
+head.writeUInt16LE(32, 12); // bits per pixel
+head.writeUInt32LE(png.length, 14); // image size
 head.writeUInt32LE(22, 18); // data offset
 await writeFile('public/favicon.ico', Buffer.concat([head, png]));
 console.log('public/favicon.ico 32x32');
