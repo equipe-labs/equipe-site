@@ -1,0 +1,49 @@
+---
+// /facts: citable statements about equipe (src/data/facts.ts). English and Korean; other languages have no page yet.
+import PageShell from '../../components/PageShell.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import '../../styles/blog.css';
+import { SITE } from '../../data/site';
+import { FACTS, FACTS_REVIEWED } from '../../data/facts';
+import { BLOG_UI, blogPath } from '../../data/blog';
+import { getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
+
+export function getStaticPaths() { return (['en', 'ko'] as const).map((c) => ({ params: { locale: getLocale(c).slug || undefined }, props: { code: c } })); }
+const { code } = Astro.props as { code: 'en' | 'ko' };
+const info = getLocale(code as LocaleCode);
+const F = FACTS[code];
+const ui = BLOG_UI[code];
+const t = getMessages(code);
+const url = new URL(subPath(info, 'facts'), Astro.site).href;
+const more = [
+  { href: subPath(info, 'pricing'), label: t.nav.pricing },
+  { href: subPath(info, 'security'), label: t.nav.security },
+  { href: subPath(info, 'about'), label: t.nav.about },
+  { href: subPath(info, 'changelog'), label: t.pages.changelog.h1 },
+  { href: blogPath(code), label: ui.nav },
+  { href: SITE.repo, label: 'GitHub' },
+];
+---
+<PageShell code={code} page="facts" title={F.title} description={F.desc} langs={['en', 'ko']}>
+  <Fragment slot="head">
+    <JsonLd data={{ '@type': 'AboutPage', '@id': `${url}#page`, url, name: F.h1, description: F.desc, inLanguage: info.lang, dateModified: FACTS_REVIEWED, about: { '@id': `${SITE.url}/#organization` }, publisher: { '@id': `${SITE.url}/#organization` } }} />
+    <FaqJsonLd lang={info.lang} faqs={F.faqs.map((f) => ({ question: f.q, answer: f.a }))} />
+  </Fragment>
+  <section class="pg-h blog-h"><div class="wrap"><h1>{F.h1}</h1><p class="pg-lead">{F.lead}</p><p class="post-meta"><span>{F.reviewed.replace('{date}', FACTS_REVIEWED)}</span></p></div></section>
+  <section class="pg-s"><div class="wrap">
+    <div class="post-body" style="max-width:720px;margin:0 auto">
+      {F.groups.map((g, i) => (
+        <section aria-labelledby={`g${i}`}>
+          <h2 id={`g${i}`}>{g.title}</h2>
+          <ul>{g.items.map((x) => <li>{x}</li>)}</ul>
+        </section>
+      ))}
+      <section class="post-faq" aria-labelledby="faq-h">
+        <h2 id="faq-h">{ui.faq}</h2>
+        {F.faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </section>
+      <aside class="post-about" style="margin-top:2.4em"><h2>{F.moreH}</h2><ul>{more.map((m) => <li><a href={m.href}>{m.label}</a></li>)}</ul></aside>
+    </div>
+  </div></section>
+</PageShell>

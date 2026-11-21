@@ -4,6 +4,8 @@
 
 ## Pages
 
+- Facts (short citable statements): https://equipe.im/facts/
+- Blog: https://equipe.im/blog/
 - Pricing: https://equipe.im/pricing/
 - Security: https://equipe.im/security/
 - About (Umbriles Inc.): https://equipe.im/about/

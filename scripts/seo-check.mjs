@@ -220,5 +220,78 @@ section('robots.txt, sitemap, llms.txt');
   check(/text\/plain|text\/markdown/.test(llms.headers.get('content-type') ?? ''), `llms.txt content-type ${llms.headers.get('content-type')}`);
 }
 
+
+// --- Blog, Facts, RSS ------------------------------------------------------------
+section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Facts, llms.txt');
+{
+  const jsonLd = (html) =>
+    [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => {
+      try { return JSON.parse(m[1]); } catch { return null; }
+    });
+  const llmsBody = await (await get(`${CANONICAL}/llms.txt`)).text();
+  check(/## Articles \(blog\)/.test(llmsBody) && /\/facts\//.test(llmsBody), 'llms.txt lists the articles and the Facts page');
+  const slugsByLang = {};
+  for (const [lang, prefix] of [['en', ''], ['ko', '/ko']]) {
+    const url = `${CANONICAL}${prefix}/blog/`;
+    const res = await get(url);
+    const html = res.status === 200 ? await res.text() : '';
+    check(res.status === 200, `${prefix}/blog/ ${res.status}`);
+    check(html.includes(`rel="alternate" type="application/rss+xml"`), `${prefix}/blog/ advertises its RSS feed`);
+    const slugs = [...new Set([...html.matchAll(new RegExp(`href="${prefix}/blog/([a-z0-9-]+)/"`, 'g'))].map((m) => m[1]))];
+    slugsByLang[lang] = slugs;
+    check(slugs.length >= 8, `${prefix}/blog/ lists ${slugs.length} articles (>= 8)`);
+    const rss = await get(`${CANONICAL}${prefix}/blog/rss.xml`);
+    const rssBody = await rss.text();
+    check(rss.status === 200 && /xml/.test(rss.headers.get('content-type') ?? '') && (rssBody.match(/<item>/g) ?? []).length === slugs.length, `${prefix}/blog/rss.xml ${rss.status}, ${(rssBody.match(/<item>/g) ?? []).length} items`);
+    for (const slug of slugs) {
+      const pageUrl = `${CANONICAL}${prefix}/blog/${slug}/`;
+      const pr = await get(pageUrl);
+      const ph = pr.status === 200 ? await pr.text() : '';
+      const tag = `${prefix}/blog/${slug}/`;
+      check(pr.status === 200, `${tag} ${pr.status}`);
+      if (!ph) continue;
+      check(tags(ph, /<link\s[^>]*rel="canonical"[^>]*>/g).map((t) => attr(t, 'href')).join() === pageUrl, `${tag} canonical is itself`);
+      check(!meta(ph, 'robots').some((c) => /noindex/.test(c)), `${tag} indexable`);
+      check(meta(ph, 'og:type')[0] === 'article', `${tag} og:type article`);
+      const og = meta(ph, 'og:image')[0];
+      check(og === `${CANONICAL}/og/blog/${lang}-${slug}.png`, `${tag} own og:image (${og})`);
+      if (og) {
+        const img = await get(og);
+        const buf = Buffer.from(await img.arrayBuffer());
+        check(img.status === 200 && buf.readUInt32BE(16) === 1200 && buf.readUInt32BE(20) === 630, `${tag} og image 200, 1200x630`);
+      }
+      const ld = jsonLd(ph);
+      check(ld.every(Boolean), `${tag} JSON-LD parses`);
+      const types = ld.filter(Boolean).map((x) => x['@type']);
+      check(types.includes('Article') && types.includes('BreadcrumbList'), `${tag} has Article and BreadcrumbList`);
+      const art = ld.find((x) => x?.['@type'] === 'Article');
+      check(art && art.headline && art.datePublished && art.author?.name && art.inLanguage === lang && art.image?.length, `${tag} Article has headline, dates, author, language, image`);
+      const faq = ld.find((x) => x?.['@type'] === 'FAQPage');
+      check(!faq || faq.mainEntity.every((q) => q.name && q.acceptedAnswer?.text), `${tag} FAQ questions have answers`);
+      check(/<h1[ >]/.test(ph) && (ph.match(/<h1[ >]/g) ?? []).length === 1, `${tag} exactly one h1`);
+      check(/href="\/(ko\/)?about\/"/.test(ph) && /href="\/(ko\/)?security\/"/.test(ph) && /github\.com\/equipe-labs\/equipe/.test(ph), `${tag} links About, Security and GitHub`);
+    }
+  }
+  // Translations point at each other (hreflang) and only where both exist.
+  for (const slug of slugsByLang.en ?? []) {
+    const en = await (await get(`${CANONICAL}/blog/${slug}/`)).text();
+    const hasKo = (slugsByLang.ko ?? []).includes(slug);
+    const alts = tags(en, /<link\s[^>]*rel="alternate"[^>]*hreflang[^>]*>/g).map((t) => attr(t, 'hreflang'));
+    check(hasKo ? ['en', 'ko', 'x-default'].every((l) => alts.includes(l)) : !alts.includes('ko'), `/blog/${slug}/ hreflang: ${alts.join(',') || 'none'}`);
+    if (hasKo) {
+      const ko = await (await get(`${CANONICAL}/ko/blog/${slug}/`)).text();
+      check(ko.includes(`href="${CANONICAL}/blog/${slug}/"`), `/ko/blog/${slug}/ points back at the English article`);
+    }
+  }
+  for (const path of ['/facts/', '/ko/facts/']) {
+    const res = await get(CANONICAL + path);
+    const html = res.status === 200 ? await res.text() : '';
+    check(res.status === 200 && jsonLd(html).some((x) => x?.['@type'] === 'AboutPage') && jsonLd(html).some((x) => x?.['@type'] === 'FAQPage'), `${path} ${res.status}, AboutPage and FAQPage JSON-LD`);
+  }
+  const sm = await (await get(`${CANONICAL}/sitemap-0.xml`)).text();
+  const missing = (slugsByLang.en ?? []).filter((s) => !sm.includes(`<loc>${CANONICAL}/blog/${s}/</loc>`));
+  check(missing.length === 0 && sm.includes(`<loc>${CANONICAL}/facts/</loc>`), `sitemap lists every article and /facts/${missing.length ? ` (missing: ${missing.join(', ')})` : ''}`);
+}
+
 console.log(`\n${failures === 0 ? 'All checks passed' : `${failures} check(s) failed`} (${base})`);
 process.exit(failures === 0 ? 0 : 1);

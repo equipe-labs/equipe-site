@@ -1,13 +1,15 @@
 ---
 // "View this page in <language>" suggestion. Never redirects: it only offers a link,
 // and remembers a dismissal (or an explicit language choice) in localStorage.
-import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+import { available as allLocales, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
   locale: LocaleCode;
   subpage?: string;
+  langs?: LocaleCode[];
 }
-const { locale, subpage } = Astro.props;
+const { locale, subpage, langs } = Astro.props;
+const available = langs ? allLocales.filter((l) => langs.includes(l.code)) : allLocales;
 // What to show for each *other* language, written in that language.
 const targets = available
   .filter((l) => l.code !== locale)

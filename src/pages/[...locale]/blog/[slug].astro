@@ -1,0 +1,134 @@
+---
+// /blog/<slug>/ (English) and /ko/blog/<slug>/: one article. Layout: breadcrumb, title, byline, contents, body, FAQ, sources, CTA, about box, related.
+import { render } from 'astro:content';
+import PageShell from '../../../components/PageShell.astro';
+import FaqJsonLd from '../../../components/FaqJsonLd.astro';
+import IdeaBox from '../../../components/IdeaBox.astro';
+import ArticleJsonLd from '../../../components/blog/ArticleJsonLd.astro';
+import '../../../styles/home.css';
+import '../../../styles/blog.css';
+import { SITE } from '../../../data/site';
+import { BLOG_LANGS, BLOG_UI, blogPath, getArticles, languagesOf, readingMinutes, slugOf, wordCount, type BlogLang } from '../../../data/blog';
+import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const out = [];
+  for (const lang of BLOG_LANGS) {
+    const articles = await getArticles(lang);
+    for (const a of articles) out.push({ params: { locale: getLocale(lang).slug || undefined, slug: slugOf(a) }, props: { id: a.id, lang } });
+  }
+  return out;
+}
+const { id, lang } = Astro.props as { id: string; lang: BlogLang };
+const code = lang as LocaleCode;
+const info = getLocale(code);
+const articles = await getArticles(lang);
+const article = articles.find((a) => a.id === id)!;
+const slug = slugOf(article);
+const d = article.data;
+const ui = BLOG_UI[lang];
+const { Content, headings } = await render(article);
+const toc = headings.filter((h) => h.depth === 2);
+const minutes = readingMinutes(article.body ?? '', lang);
+const langs = (await languagesOf(slug)) as LocaleCode[];
+const fmt = (dt: Date) => new Intl.DateTimeFormat(info.lang, { dateStyle: 'long', timeZone: 'UTC' }).format(dt);
+const url = new URL(blogPath(lang, slug), Astro.site).href;
+const image = `/og/blog/${lang}-${slug}.png`;
+const modified = d.updated ?? d.date;
+// Related: same-language articles sharing the most tags, newest first; topped up with the newest others.
+const rel = articles
+  .filter((a) => a.id !== id)
+  .map((a) => ({ a, n: a.data.tags.filter((t) => d.tags.includes(t)).length }))
+  .sort((x, y) => y.n - x.n || y.a.data.date.getTime() - x.a.data.date.getTime())
+  .slice(0, 3)
+  .map((x) => x.a);
+const t = getMessages(code);
+const crumbs = [
+  { name: ui.home, url: new URL(localePath(info), Astro.site).href },
+  { name: ui.nav, url: new URL(blogPath(lang), Astro.site).href },
+  { name: d.title, url },
+];
+const more = [
+  { href: subPath(info, 'facts'), label: ui.facts },
+  { href: subPath(info, 'about'), label: t.nav.about },
+  { href: subPath(info, 'security'), label: t.nav.security },
+  { href: subPath(info, 'pricing'), label: t.nav.pricing },
+  { href: subPath(info, 'changelog'), label: t.pages.changelog.h1 },
+  { href: SITE.repo, label: 'GitHub' },
+];
+---
+<PageShell code={code} page={`blog/${slug}`} title={`${d.title} — equipe`} description={d.description} image={image} imageAlt={d.imageAlt ?? d.title} ogType="article" langs={langs}>
+  <Fragment slot="head">
+    <ArticleJsonLd lang={info.lang} url={url} title={d.title} description={d.description} image={new URL(image, Astro.site).href} published={d.date} modified={modified} words={wordCount(article.body ?? '')} tags={d.tags} author={d.author} aboutUrl={new URL(subPath(info, 'about'), Astro.site).href} crumbs={crumbs} />
+    {d.faqs.length > 0 && <FaqJsonLd lang={info.lang} faqs={d.faqs.map((f) => ({ question: f.q, answer: f.a }))} />}
+    <meta property="article:published_time" content={d.date.toISOString()} />
+    <meta property="article:modified_time" content={modified.toISOString()} />
+    <meta property="article:author" content={d.author} />
+    {d.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <link rel="alternate" type="application/rss+xml" title="equipe blog" href={`${blogPath(lang)}rss.xml`} />
+  </Fragment>
+  <article>
+    <header class="pg-h blog-h"><div class="wrap">
+      <nav class="crumbs" aria-label={ui.breadcrumb}>
+        <ol>
+          <li><a href={localePath(info)}>{ui.home}</a></li>
+          <li><a href={blogPath(lang)}>{ui.nav}</a></li>
+          <li aria-current="page">{d.title}</li>
+        </ol>
+      </nav>
+      <h1>{d.title}</h1>
+      <p class="pg-lead">{d.description}</p>
+      <p class="post-meta">
+        <span>{ui.by} <a href={subPath(info, 'about')}>{d.author}</a></span>
+        <span>{ui.published} <time datetime={d.date.toISOString().slice(0, 10)}>{fmt(d.date)}</time></span>
+        {d.updated && <span>{ui.updated} <time datetime={d.updated.toISOString().slice(0, 10)}>{fmt(d.updated)}</time></span>}
+        <span>{ui.minRead.replace('{n}', String(minutes))}</span>
+      </p>
+    </div></header>
+    <section class="pg-s"><div class="wrap">
+      <div class="post-grid">
+        {toc.length > 2 && (
+          <nav class="toc" aria-label={ui.toc}>
+            <h2>{ui.toc}</h2>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
+        <div>
+          <div class="post-body"><Content /></div>
+          {d.faqs.length > 0 && (
+            <section class="post-faq" aria-labelledby="faq-h">
+              <h2 id="faq-h">{ui.faq}</h2>
+              {d.faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+            </section>
+          )}
+          {d.sources.length > 0 && (
+            <section class="post-src" aria-labelledby="src-h">
+              <h2 id="src-h">{ui.sources}</h2>
+              <ul>{d.sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a>{s.accessed && <> ({ui.accessed.replace('{date}', s.accessed)})</>}</li>)}</ul>
+            </section>
+          )}
+        </div>
+      </div>
+      <div class="post-end">
+        <section class="post-cta" aria-labelledby="cta-h">
+          <h2 id="cta-h">{ui.ctaTitle}</h2>
+          <p>{ui.ctaText}</p>
+          <IdeaBox code={code} id="idea-post" location={`blog_${slug}`} />
+        </section>
+        <aside class="post-about" aria-labelledby="about-h">
+          <h2 id="about-h">{ui.aboutTitle}</h2>
+          <p>{ui.aboutText}</p>
+          <ul>{more.map((m) => <li><a href={m.href}>{m.label}</a></li>)}</ul>
+        </aside>
+        {rel.length > 0 && (
+          <section class="post-rel" aria-labelledby="rel-h">
+            <h2 id="rel-h">{ui.related}</h2>
+            <ul>{rel.map((a) => (
+              <li class="blog-card"><a href={blogPath(lang, slugOf(a))}><h3>{a.data.title}</h3><p>{a.data.description}</p></a></li>
+            ))}</ul>
+          </section>
+        )}
+      </div>
+    </div></section>
+  </article>
+</PageShell>

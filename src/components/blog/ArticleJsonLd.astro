@@ -1,0 +1,47 @@
+---
+// Article + BreadcrumbList for one blog post. The author is the organization ("The equipe team") until a person is named.
+import JsonLd from '../JsonLd.astro';
+import { SITE } from '../../data/site';
+
+interface Props {
+  lang: string;
+  url: string;
+  title: string;
+  description: string;
+  image: string;
+  published: Date;
+  modified: Date;
+  words: number;
+  tags: string[];
+  author: string;
+  aboutUrl: string;
+  crumbs: { name: string; url: string }[];
+}
+const p = Astro.props;
+---
+
+<JsonLd
+  data={{
+    '@type': 'Article',
+    '@id': `${p.url}#article`,
+    headline: p.title,
+    description: p.description,
+    inLanguage: p.lang,
+    url: p.url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': p.url },
+    image: [p.image],
+    datePublished: p.published.toISOString(),
+    dateModified: p.modified.toISOString(),
+    wordCount: p.words,
+    keywords: p.tags.join(', '),
+    author: { '@type': 'Organization', name: p.author, url: p.aboutUrl },
+    publisher: { '@id': `${SITE.url}/#organization` },
+    isPartOf: { '@type': 'Blog', name: 'equipe blog', url: p.crumbs[1]?.url },
+  }}
+/>
+<JsonLd
+  data={{
+    '@type': 'BreadcrumbList',
+    itemListElement: p.crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })),
+  }}
+/>

@@ -12,23 +12,23 @@ import '../styles/site.css';
 import '../styles/pages.css';
 import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
 
-interface Props { code: LocaleCode; page: string; title: string; description: string }
-const { code, page, title, description } = Astro.props;
+interface Props { code: LocaleCode; page: string; title: string; description: string; image?: string; imageAlt?: string; ogType?: 'website' | 'article'; /** Languages this page exists in; all when omitted. */ langs?: LocaleCode[] }
+const { code, page, title, description, image, imageAlt, ogType, langs } = Astro.props;
 const info = getLocale(code);
 const t = getMessages(code);
 const url = new URL(subPath(info, page), Astro.site).href;
 ---
-<Base locale={code} title={title} description={description} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt} subpage={page}>
+<Base locale={code} title={title} description={description} image={image ?? `/og/${info.slug || 'en'}.png`} imageAlt={imageAlt ?? t.meta.ogImageAlt} subpage={page} langs={langs} ogType={ogType}>
   <Fragment slot="head">
     <OrganizationJsonLd />
     <WebSiteJsonLd lang={info.lang} url={url} description={description} />
     <slot name="head" />
   </Fragment>
   <a class="skip" href="#main">{t.ui.skip}</a>
-  <SiteHeader code={code} page={page} />
+  <SiteHeader code={code} page={page} langs={langs} />
   <main id="main" class="pg"><slot /></main>
   <SiteFooter code={code} page={page} />
   <Analytics />
-  <LangBanner locale={code} subpage={page} />
+  <LangBanner locale={code} subpage={page} langs={langs} />
   <ConsentBanner code={code} />
 </Base>

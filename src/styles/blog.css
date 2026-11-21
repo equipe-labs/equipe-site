@@ -1,0 +1,79 @@
+/* Blog: the index and the article layout. Tokens: global.css; chrome: site.css; page basics: pages.css. */
+.blog-h { padding: 72px 0 24px; }
+main.pg .blog-h .wrap { text-align: left; justify-items: start; }
+main.pg .blog-h h1 { max-width: 20ch; font-size: clamp(34px, 4.6vw, 56px); }
+.blog-h .pg-lead { max-width: 40em; margin-top: var(--s-4); text-wrap: pretty; }
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 6px; font-size: 14.5px; color: var(--muted); margin-bottom: var(--s-5); }
+.crumbs li + li::before { content: '/'; margin-right: 6px; opacity: 0.55; }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--text); text-decoration: underline; }
+.crumbs [aria-current] { color: var(--text); }
+.post-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: var(--s-5); font-size: 15px; color: var(--muted); }
+.post-meta a { color: var(--text); font-weight: 600; text-decoration: none; }
+.post-meta span + span::before { content: '·'; margin-right: 14px; opacity: 0.55; }
+
+.post-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+@media (min-width: 1040px) { .post-grid { grid-template-columns: 220px minmax(0, 720px); gap: 64px; justify-content: center; } }
+.toc { font-size: 14.5px; color: var(--muted); }
+main.pg .toc h2 { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); margin-bottom: var(--s-3); }
+.toc ol { display: grid; gap: 8px; }
+.toc a { color: var(--muted); text-decoration: none; line-height: 1.35; display: block; }
+.toc a:hover { color: var(--text); }
+@media (min-width: 1040px) { .toc { position: sticky; top: 88px; align-self: start; } }
+@media (max-width: 1039px) { .toc { border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; background: var(--surface); } }
+
+.post-body { font-size: 18px; line-height: 1.72; min-width: 0; }
+.post-body > * + * { margin-top: 1.1em; }
+main.pg .post-body h2 { font-size: clamp(25px, 2.8vw, 32px); margin-top: 2.1em; scroll-margin-top: 80px; }
+.post-body h3 { font-size: 20px; margin-top: 1.7em; scroll-margin-top: 80px; }
+.post-body ul, .post-body ol { list-style: revert; padding-left: 1.4em; display: grid; gap: 0.5em; }
+.post-body li::marker { color: var(--muted); }
+.post-body strong { font-weight: 650; }
+.post-body blockquote { margin-left: 0; padding: 4px 0 4px 18px; border-left: 3px solid color-mix(in srgb, var(--accent) 55%, transparent); color: var(--muted); }
+.post-body hr { border: 0; border-top: 1px solid var(--line); margin: 2.2em 0; }
+.post-body pre { overflow-x: auto; background: var(--code-bg); border-radius: 12px; padding: 14px 16px; font: 14.5px/1.55 var(--mono); }
+.post-body pre code { background: none; padding: 0; }
+.post-body figure { margin: 1.8em 0; }
+.post-body figure img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+.post-body figcaption { margin-top: 10px; font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+.post-body .tbl { overflow-x: auto; margin: 1.6em 0; -webkit-overflow-scrolling: touch; }
+.post-body table { display: block; overflow-x: auto; border-collapse: collapse; width: 100%; font-size: 15.5px; line-height: 1.45; }
+.post-body th, .post-body td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.post-body th { font-weight: 650; background: color-mix(in srgb, var(--text) 4%, transparent); }
+.post-body .note { padding: 14px 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); font-size: 16.5px; line-height: 1.6; }
+.post-body .answer { font-size: 19px; line-height: 1.6; padding: 16px 20px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+.th-dark { display: none; }
+:root[data-theme='dark'] .th-light { display: none; }
+:root[data-theme='dark'] .th-dark { display: block; }
+
+.post-faq { margin-top: 2.6em; }
+main.pg .post-faq h2 { margin-bottom: var(--s-4); }
+.post-faq details { border-top: 1px solid var(--line); padding: 14px 0; }
+.post-faq details:last-child { border-bottom: 1px solid var(--line); }
+.post-faq summary { cursor: pointer; font-weight: 600; font-size: 18px; line-height: 1.4; }
+.post-faq details p { margin-top: 10px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+.post-src { margin-top: 2.4em; font-size: 15px; color: var(--muted); }
+main.pg .post-src h2 { font-size: 18px; margin-bottom: var(--s-3); }
+.post-src ul { list-style: disc; padding-left: 1.3em; display: grid; gap: 6px; }
+.post-end { max-width: 720px; margin: var(--s-8) auto 0; display: grid; gap: var(--s-6); }
+@media (min-width: 1040px) { .post-end { margin-left: calc(50% - 360px + 142px); margin-right: auto; } }
+.post-cta { padding: 28px; border-radius: 22px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: var(--s-4); }
+main.pg .post-cta h2 { font-size: clamp(22px, 2.4vw, 28px); }
+.post-cta p { color: var(--muted); margin: 0; }
+.post-about { padding: 22px 24px; border-radius: 18px; border: 1px solid var(--line); font-size: 15.5px; line-height: 1.6; color: var(--muted); }
+main.pg .post-about h2 { font-size: 16px; color: var(--text); margin-bottom: 8px; }
+.post-about p { margin: 0 0 10px; }
+.post-about ul { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.post-about a { font-weight: 600; text-decoration: none; }
+main.pg .post-rel h2 { font-size: 22px; margin-bottom: var(--s-4); }
+.post-rel ul { display: grid; gap: 12px; }
+.post-rel a, .blog-card a { text-decoration: none; color: inherit; }
+
+.blog-list { display: grid; gap: 16px; max-width: 800px; margin: 0 auto; }
+.blog-card { border: 1px solid var(--line); border-radius: 20px; background: var(--surface); padding: 24px 26px; transition: border-color 150ms, transform 150ms; }
+@media (hover: hover) { .blog-card:hover { border-color: color-mix(in srgb, var(--text) 30%, transparent); } }
+.blog-card h2 { font-size: 22px; line-height: 1.25; margin: 0; }
+.blog-card p { margin: 8px 0 0; color: var(--muted); font-size: 16.5px; line-height: 1.55; }
+.blog-card .post-meta { margin-top: 12px; font-size: 14px; }
+.blog-card a:focus-visible { outline-offset: 6px; }
+.blog-foot { max-width: 800px; margin: var(--s-6) auto 0; display: flex; gap: 16px; font-size: 15px; color: var(--muted); }

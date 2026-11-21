@@ -3,12 +3,27 @@
 import PageShell from '../../components/PageShell.astro';
 import { SITE } from '../../data/site';
 import { FOUNDER } from '../../data/flags';
-import { available, getLocale, getMessages, type LocaleCode } from '../../i18n';
+import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
+import { BLOG_UI, blogLangFor, blogPath } from '../../data/blog';
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
 const A = getMessages(code).pages.about;
 const lang = getLocale(code).code;
 const [cBefore, cAfter] = A.contact.split('{email}');
+const T = getMessages(code);
+const info = getLocale(code);
+// Facts and the blog exist in English and Korean; other languages link to the English pages.
+const bl = blogLangFor(code);
+const bu = BLOG_UI[bl];
+const factsHref = bl === 'en' ? '/facts/' : `/${bl}/facts/`;
+const links = [
+  { href: subPath(info, 'security'), label: T.nav.security },
+  { href: subPath(info, 'pricing'), label: T.nav.pricing },
+  { href: subPath(info, 'changelog'), label: T.pages.changelog.h1 },
+  { href: factsHref, label: bu.facts },
+  { href: blogPath(bl), label: bu.nav },
+  { href: SITE.repo, label: 'GitHub' },
+];
 ---
 <PageShell code={code} page="about" title={A.title} description={A.desc}>
   <section class="pg-h"><div class="wrap"><h1>{A.h1}</h1></div></section>
@@ -24,6 +39,8 @@ const [cBefore, cAfter] = A.contact.split('{email}');
       )}
       <h2>{A.ossH}</h2>
       <p>{A.oss} <a href={SITE.repo}>github.com/equipe-labs/equipe</a></p>
+      <h2>{bu.links}</h2>
+      <ul class="pg-links">{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
       <h2>{A.contactH}</h2>
       <p>{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
     </div>

@@ -6,6 +6,7 @@ import { SITE } from '../data/site';
 import { SHOW_CJ } from '../data/flags';
 import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 
 interface Props { code: LocaleCode; page: string }
 const { code, page } = Astro.props;
@@ -13,6 +14,9 @@ const info = getLocale(code);
 const t = getMessages(code);
 const f = t.foot;
 const home = page === 'home' ? '' : localePath(info);
+// The blog and facts pages exist in English and Korean; other languages link to the English ones.
+const bl = blogLangFor(code);
+const bu = BLOG_UI[bl];
 ---
 <footer class="site-foot">
   <div class="wrap">
@@ -37,6 +41,8 @@ const home = page === 'home' ? '' : localePath(info);
         <h2>{f.company}</h2>
         <ul>
           <li><a href={subPath(info, 'about')}>{t.nav.about}</a></li>
+          <li><a href={blogPath(bl)}>{bu.nav}</a></li>
+          <li><a href={bl === 'en' ? '/facts/' : `/${bl}/facts/`}>{bu.facts}</a></li>
           <li><a href={subPath(info, 'changelog')}>{t.pages.changelog.h1}</a></li>
           {SHOW_CJ && <li><a href={subPath(info, 'customers/cj')}>CJ</a></li>}
           <li><a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="footer">{t.nav.developers}</a></li>

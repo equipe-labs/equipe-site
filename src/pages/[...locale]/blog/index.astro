@@ -1,0 +1,57 @@
+---
+// /blog/ (English) and /ko/blog/: the article list.
+import PageShell from '../../../components/PageShell.astro';
+import '../../../styles/blog.css';
+import { BLOG_LANGS, BLOG_UI, blogPath, getArticles, readingMinutes, slugOf, type BlogLang } from '../../../data/blog';
+import { getLocale, localePath, type LocaleCode } from '../../../i18n';
+
+export function getStaticPaths() {
+  return BLOG_LANGS.map((l) => ({ params: { locale: getLocale(l).slug || undefined }, props: { lang: l } }));
+}
+const { lang } = Astro.props as { lang: BlogLang };
+const code = lang as LocaleCode;
+const info = getLocale(code);
+const ui = BLOG_UI[lang];
+const articles = await getArticles(lang);
+const fmt = (dt: Date) => new Intl.DateTimeFormat(info.lang, { dateStyle: 'medium', timeZone: 'UTC' }).format(dt);
+const listUrl = new URL(blogPath(lang), Astro.site).href;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'equipe blog',
+  url: listUrl,
+  inLanguage: info.lang,
+  publisher: { '@id': 'https://equipe.im/#organization' },
+  blogPost: articles.map((a) => ({ '@type': 'BlogPosting', headline: a.data.title, url: new URL(blogPath(lang, slugOf(a)), Astro.site).href, datePublished: a.data.date.toISOString() })),
+};
+const crumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui.home, item: new URL(localePath(info), Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: ui.nav, item: listUrl },
+  ],
+};
+---
+<PageShell code={code} page="blog" title={ui.indexTitle} description={ui.indexDesc} langs={[...BLOG_LANGS]}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\\u003c')} />
+    <link rel="alternate" type="application/rss+xml" title="equipe blog" href={`${blogPath(lang)}rss.xml`} />
+  </Fragment>
+  <header class="pg-h blog-h"><div class="wrap"><h1>{ui.h1}</h1><p class="pg-lead">{ui.lead}</p></div></header>
+  <section class="pg-s"><div class="wrap">
+    <ul class="blog-list">
+      {articles.map((a) => (
+        <li class="blog-card">
+          <a href={blogPath(lang, slugOf(a))}>
+            <h2>{a.data.title}</h2>
+            <p>{a.data.description}</p>
+            <p class="post-meta"><span><time datetime={a.data.date.toISOString().slice(0, 10)}>{fmt(a.data.date)}</time></span><span>{ui.minRead.replace('{n}', String(readingMinutes(a.body ?? '', lang)))}</span></p>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="blog-foot"><a href={`${blogPath(lang)}rss.xml`}>{ui.rss}</a></p>
+  </div></section>
+</PageShell>

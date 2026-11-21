@@ -15,6 +15,8 @@ interface Props {
   subpage?: string;
   error?: boolean;
   alternates?: boolean;
+  langs?: LocaleCode[];
+  ogType?: 'website' | 'article';
 }
 const { lang } = getLocale(Astro.props.locale);
 ---

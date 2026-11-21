@@ -1,13 +1,16 @@
 ---
-import { available, getLocale, localePath, subPath, type LocaleCode } from '../i18n';
+import { available as allLocales, getLocale, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
   locale: LocaleCode;
   label: string;
   /** Sub-page to link to in each language; the landing page when omitted. */
   subpage?: string;
+  /** Only these languages (a page that is not translated everywhere). */
+  langs?: LocaleCode[];
 }
-const { locale, label, subpage } = Astro.props;
+const { locale, label, subpage, langs } = Astro.props;
+const available = langs ? allLocales.filter((l) => langs.includes(l.code)) : allLocales;
 const current = getLocale(locale);
 ---
 

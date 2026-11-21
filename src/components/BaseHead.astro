@@ -27,6 +27,8 @@ interface Props {
   error?: boolean;
   /** Emit the hreflang cluster; false for pages that are not meant to be found yet. */
   alternates?: boolean;
+  /** Languages this page exists in (hreflang cluster, og:locale:alternate); all available languages when omitted. For pages with partial translations, e.g. the blog. */
+  langs?: LocaleCode[];
 }
 
 const {
@@ -46,13 +48,15 @@ const {
   subpage,
   error = false,
   alternates: withAlternates = true,
+  langs,
 } = Astro.props;
 
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const current = getLocale(locale);
-const alternates = available.map((l) => ({ lang: l.lang, href: new URL(subpage ? subPath(l, subpage) : localePath(l), Astro.site).href }));
+const pageLocales = langs ? available.filter((l) => langs.includes(l.code)) : available;
+const alternates = pageLocales.map((l) => ({ lang: l.lang, href: new URL(subpage ? subPath(l, subpage) : localePath(l), Astro.site).href }));
 const xDefault = alternates.find((a) => a.lang === getLocale('en').lang)!.href;
-const others = available.filter((l) => l.code !== locale);
+const others = pageLocales.filter((l) => l.code !== locale);
 const imageUrl = image ? new URL(image, Astro.site).href : undefined;
 const imageType = imageUrl
   ? ({ png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif' } as Record<string, string>)[
