@@ -26,3 +26,21 @@ export const DEMO_VIDEO: null | { src: string; poster: string; captions: string 
  * Fill in per-locale lines, e.g. { en: 'Most products spend …', ko: '…' }, to show them under "Estimate before you spend".
  */
 export const TYPICAL_TOTALS: null | Record<string, string> = null;
+
+/**
+ * About page advisers. Facts come only from public sources: Akki's LinkedIn profile (Cartesia, San Francisco, founder of the Queen Mary Consulting Society)
+ * and the VapiCon 2026 agenda (https://vapi.ai/vapicon-2026/agenda, "Head of Voices, Cartesia"). No photo: no public image is clearly his, so the page shows a monogram.
+ */
+export const ADVISERS_HEADING: Record<string, string> = { en: 'Advisers', ko: '어드바이저' };
+export const ADVISERS: { name: string; initials: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
+  {
+    name: 'Akki Shafiqullah',
+    initials: 'AS',
+    role: { en: 'Adviser · Head of Voices at Cartesia', ko: '어드바이저 · Cartesia Head of Voices' },
+    bio: {
+      en: 'Akki Shafiqullah leads Voices at Cartesia, the AI voice company, and is based in San Francisco. He founded the Queen Mary Consulting Society at Queen Mary University of London. He advises equipe.',
+      ko: 'Akki Shafiqullah는 AI 음성 회사 Cartesia에서 Voices를 이끌고, 샌프란시스코에 살아요. 런던 Queen Mary 대학교에서 Queen Mary Consulting Society를 창립했어요. equipe의 어드바이저예요.',
+    },
+    links: { linkedin: 'https://www.linkedin.com/in/akki/' },
+  },
+];

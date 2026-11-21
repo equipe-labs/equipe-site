@@ -1,8 +1,9 @@
 ---
 // /about: who runs equipe and why. The founder block shows only once the owner supplies it (src/data/flags.ts FOUNDER).
 import PageShell from '../../components/PageShell.astro';
+import JsonLd from '../../components/JsonLd.astro';
 import { SITE } from '../../data/site';
-import { FOUNDER } from '../../data/flags';
+import { FOUNDER, ADVISERS, ADVISERS_HEADING } from '../../data/flags';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../../data/blog';
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
@@ -37,6 +38,14 @@ const links = [
           <div class="pg-founder"><picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="120" height="120" /></picture><div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang] ?? FOUNDER.role.en}</p><p>{FOUNDER.story[lang] ?? FOUNDER.story.en}</p><p class="pg-links"><a href={FOUNDER.links.x} rel="me noopener">X</a><a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
         </>
       )}
+      {ADVISERS.length > 0 && (
+        <>
+          <h2>{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
+          {ADVISERS.map((a) => (
+            <div class="pg-founder pg-adviser"><div class="pg-mono" aria-hidden="true">{a.initials}</div><div><p><b>{a.name}</b> · {a.role[lang] ?? a.role.en}</p><p>{a.bio[lang] ?? a.bio.en}</p><p class="pg-links"><a href={a.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
+          ))}
+        </>
+      )}
       <h2>{A.ossH}</h2>
       <p>{A.oss} <a href={SITE.repo}>github.com/equipe-labs/equipe</a></p>
       <h2>{bu.links}</h2>
@@ -45,4 +54,7 @@ const links = [
       <p>{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
     </div>
   </div></section>
+  {ADVISERS.map((a) => (
+    <JsonLd data={{ '@type': 'Person', name: a.name, jobTitle: 'Head of Voices', worksFor: { '@type': 'Organization', name: 'Cartesia' }, affiliation: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [a.links.linkedin] }} />
+  ))}
 </PageShell>
