@@ -62,6 +62,10 @@ Then:
 - [App privacy policy](https://equipe.im/app/privacy/): what the equipe mobile app and relay handle
 - [App support](https://equipe.im/app/support/): pairing the app with `equipe pair`, FAQ, contact
 
+## How the team works
+
+Every piece of work runs through a sprint loop: plan (the PM turns the goal into a sprint), build (engineers and designer), ship (QA checks, the person approves going live), measure (the data analyst looks at real usage), retro (what worked and what did not), next sprint. QA, security and maintenance are part of every sprint. The team keeps notes on the product, its users and the person's preferences, and what it measures and learns in retros feeds the next plan.
+
 ## Example products
 
 Live example products built by equipe teams (the businesses are fictional, made up for the demo; the sites are real):

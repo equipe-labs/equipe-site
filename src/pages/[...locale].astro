@@ -224,6 +224,39 @@ const tiles = [
       </div>
     </section>
 
+    <section class="loop-s" id="process">
+      <div class="wrap">
+        <div class="head center rv">
+          <p class="kicker">{t.loop.kicker}</p>
+          <h2>{t.loop.title}</h2>
+          <p class="sub">{t.loop.text}</p>
+        </div>
+        <div class="loop-c rv">
+          <ol class="loop-steps">
+            {t.loop.steps.map((x, i) => (
+              <li style={`--i:${i}`}><span class="loop-n">{i + 1}</span><h3>{x.name}</h3><p>{x.text}</p></li>
+            ))}
+          </ol>
+          <p class="loop-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" /></svg>{t.loop.repeat}</p>
+          <div class="loop-b">
+            <p class="loop-bt">{t.loop.builtTitle}</p>
+            <ul role="list">{t.loop.built.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+          </div>
+        </div>
+        <div class="smart rv">
+          <div class="smart-t">
+            <h3>{t.loop.smartTitle}</h3>
+            <p>{t.loop.smartText}</p>
+          </div>
+          <ul class="smart-l" role="list">
+            {t.loop.smart.map((x, i) => (
+              <li><span class="smart-i" aria-hidden="true">{i === 0 ? <svg viewBox="0 0 24 24"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-3.5L6 20V5a1 1 0 0 1 1-1z" /></svg> : i === 1 ? <svg viewBox="0 0 24 24"><path d="M4 19h16M7 16v-4M12 16V7M17 16v-6" /></svg> : <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" /></svg>}</span>{x}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section class="compare">
       <div class="wrap">
         <h2 class="rv">{t.compare.title}</h2>
