@@ -34,7 +34,7 @@ const links = [
       {FOUNDER && (
         <>
           <h2>{A.founderH}</h2>
-          <div class="pg-founder"><img src={FOUNDER.photo} alt={FOUNDER.name} width="120" height="120" /><div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang] ?? FOUNDER.role.en}</p><p>{FOUNDER.story[lang] ?? FOUNDER.story.en}</p><p class="pg-links"><a href={FOUNDER.links.x} rel="me noopener">X</a><a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
+          <div class="pg-founder"><picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="120" height="120" /></picture><div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang] ?? FOUNDER.role.en}</p><p>{FOUNDER.story[lang] ?? FOUNDER.story.en}</p><p class="pg-links"><a href={FOUNDER.links.x} rel="me noopener">X</a><a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
         </>
       )}
       <h2>{A.ossH}</h2>

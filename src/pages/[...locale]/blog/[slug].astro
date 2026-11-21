@@ -119,7 +119,7 @@ const more = [
         </section>
         {byFounder && FOUNDER && (
           <aside class="post-author" aria-label={d.author}>
-            <img src={FOUNDER.photo} alt={FOUNDER.name} width="64" height="64" loading="lazy" />
+            <picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="64" height="64" loading="lazy" /></picture>
             <div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang]}</p><p>{FOUNDER.story[lang]}</p><p><a href={FOUNDER.links.x} rel="me noopener">X</a> · <a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a> · <a href={subPath(info, 'about')}>{t.nav.about}</a></p></div>
           </aside>
         )}
