@@ -51,7 +51,8 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
         items: [
           '1 credit equals 1 US dollar. Credit packs are $25, $50, $100 and $250, valid for 12 months. Unused credits are refundable within 14 days.',
           'Free start: $5 of credit when you create your team, plus $10 when you add a card (no charge), including up to 2 hours of team time. No card is needed to start.',
-          'Team plan: $19 per month or $190 per year. It includes 20 hours of team time every month (no rollover), hosting for your sites and storage.',
+          'Team plan: $19 per month or $190 per year. It includes 20 hours of team time every month (no rollover), hosting for your sites and storage. It includes 5 people; each extra editor is $5 per month, up to 10 people per team.',
+          'View-only invites are free. AI credits and team time are shared by the whole team, not counted per person. Free and Hosting only include 2 people.',
           'Extra team time costs $0.25 per hour, paid from credits and metered per minute.',
           'AI work is paid from credits at the model\'s list price plus a margin, shown to the cent for each task.',
           'Hosting only: $19 per month. Your product, sites, domains and storage stay live while the team sleeps.',
@@ -78,7 +79,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
     faqs: [
       { q: 'What is equipe?', a: 'equipe is an AI startup team for people who cannot code: a PM, engineers, a designer, QA and a data analyst, all AI agents, that build, launch and keep improving your product while you approve what matters.' },
       { q: 'Who is behind equipe?', a: 'equipe is operated by Umbriles Inc., a company in the United States. The engine behind the team is open source (MIT) at github.com/equipe-labs/equipe.' },
-      { q: 'How much does equipe cost?', a: 'You can start free with $5 of credit. The Team plan is $19 per month or $190 per year with 20 hours of team time, hosting and storage. Hosting only is $19 per month. AI work is paid from credits, where 1 credit is $1.' },
+      { q: 'How much does equipe cost?', a: 'You can start free with $5 of credit. The Team plan is $19 per month or $190 per year with 20 hours of team time, hosting and storage, for up to 5 people (each extra editor is $5 a month, up to 10). Hosting only is $19 per month. AI work is paid from credits, where 1 credit is $1.' },
       { q: 'Is my data safe with equipe?', a: 'Secrets are stored in a separate encrypted store and never shown to the AI. Each team runs on its own isolated machine. Publishing, messages, purchases and deletions need your approval. Account deletion removes your data within 30 days.' },
     ],
   },
@@ -117,7 +118,8 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
         items: [
           '1크레딧은 1달러예요. 크레딧 묶음은 $25, $50, $100, $250이고 12개월 동안 쓸 수 있어요. 쓰지 않은 크레딧은 14일 안에 환불돼요.',
           '무료 시작: 팀을 만들면 $5 크레딧, 카드를 등록하면 $10 추가(결제되지 않아요). 팀 시간 최대 2시간이 포함돼요. 시작할 때 카드는 필요 없어요.',
-          '팀 플랜: 월 $19 또는 연 $190. 매달 팀 시간 20시간(이월 안 됨), 사이트 호스팅, 저장 공간이 들어 있어요.',
+          '팀 플랜: 월 $19 또는 연 $190. 매달 팀 시간 20시간(이월 안 됨), 사이트 호스팅, 저장 공간이 들어 있고 5명까지 포함돼요. 추가 편집자는 1명당 월 $5이고 한 팀에 최대 10명까지예요.',
+          '보기 전용 초대는 무료예요. AI 크레딧과 팀 시간은 사람마다 따로 계산하지 않고 팀 전체가 함께 써요. 무료와 호스팅 전용은 2명까지예요.',
           '추가 팀 시간은 시간당 $0.25이고, 크레딧으로 내며 분 단위로 계산해요.',
           'AI 작업은 모델 정가에 마진을 더한 금액을 크레딧으로 내요. 작업마다 센트 단위로 보여 줘요.',
           '호스팅 전용: 월 $19. 팀은 쉬고, 제품·사이트·도메인·저장 공간은 계속 운영돼요.',
@@ -144,7 +146,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
     faqs: [
       { q: 'equipe는 무엇인가요?', a: 'equipe는 코딩을 모르는 사람을 위한 AI 스타트업 팀이에요. PM, 엔지니어, 디자이너, QA, 데이터 분석가가 모두 AI 에이전트이고, 제품을 만들고 출시하고 계속 개선해요. 중요한 건 내가 승인해요.' },
       { q: 'equipe는 누가 운영하나요?', a: '미국 회사 Umbriles Inc.가 운영해요. 팀의 엔진은 github.com/equipe-labs/equipe에 MIT 라이선스 오픈소스로 공개돼 있어요.' },
-      { q: 'equipe는 얼마인가요?', a: '$5 크레딧으로 무료로 시작할 수 있어요. 팀 플랜은 월 $19 또는 연 $190이고 팀 시간 20시간, 호스팅, 저장 공간이 들어 있어요. 호스팅 전용은 월 $19예요. AI 작업은 크레딧(1크레딧 = $1)으로 내요.' },
+      { q: 'equipe는 얼마인가요?', a: '$5 크레딧으로 무료로 시작할 수 있어요. 팀 플랜은 월 $19 또는 연 $190이고 팀 시간 20시간, 호스팅, 저장 공간이 들어 있어요. 5명까지 포함되고, 추가 편집자는 1명당 월 $5(팀당 최대 10명)예요. 보기 전용 초대는 무료예요. 호스팅 전용은 월 $19예요. AI 작업은 크레딧(1크레딧 = $1)으로 내요.' },
       { q: 'equipe에 맡긴 데이터는 안전한가요?', a: '비밀 정보는 따로 암호화된 저장소에 보관하고 AI에게는 보이지 않아요. 팀마다 분리된 머신에서 일하고, 공개·메시지·결제·삭제는 내 승인을 기다려요. 계정을 삭제하면 30일 안에 데이터를 지워요.' },
     ],
   },

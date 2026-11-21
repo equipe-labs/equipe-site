@@ -16,6 +16,8 @@ faqs:
     a: "Yes. Every request shows its expected cost first, and you set a monthly cap. You also see the expected total for the month."
   - q: "Are there hidden costs?"
     a: "The costs are the plan, credits for AI work (the model's list price plus a margin, shown to the cent per task), team time beyond the plan, and domains at cost. We do not yet publish a typical monthly total because we do not have enough real usage data."
+  - q: "How much more does it cost when my team grows?"
+    a: "The Team plan includes 5 people. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and AI credits and team time are shared by the whole team, not counted per person."
 ---
 
 "How much will this cost me?" is the first question a non-coder asks, and the vaguest answer in the industry is "it depends". This article gives you the actual line items for a small app run by AI agents, using equipe's real prices (as of 21 November 2026), and shows you how to estimate your own month.
@@ -42,6 +44,8 @@ All amounts are in US dollars. 1 credit equals $1.
 | --- | --- | --- |
 | Free start | $0 | $5 of credit when you create your team, $10 more when you add a card (no charge); up to 2 hours of team time; no card needed |
 | Team plan | $19/month or $190/year | 20 hours of team time every month (no rollover), hosting for your sites, storage, your whole team (PM, engineers, designer, QA, data) |
+| Extra editors | $5/month each | The Team plan includes 5 people; each extra editor is $5 a month, up to 10 people per team. Free and Hosting only include 2 people |
+| View-only invites | Free | Customers, investors or family can look without taking a seat |
 | Hosting only | $19/month | Your product, sites, domains and storage stay live; the team sleeps |
 | Extra team time | $0.25 per hour | Paid from credits, metered per minute |
 | AI work | Model list price plus a margin | Shown to the cent for each task; paid from credits |
@@ -66,6 +70,8 @@ These use only equipe's list prices. The "AI work" line is left as a variable, b
 **2. A product that is live and quiet.** You launched, you are collecting a few sign-ups, and you are not changing anything this month. Choose Hosting only: **$19 a month**. The product, domain and storage stay up. When you want changes, upgrade or add credits to wake the team.
 
 **3. A product you are actively improving.** You are on the Team plan: **$19 a month** (or about $15.83 a month if you pay the $190 yearly price). You use 25 hours of team time in a busy month: the plan covers 20, and the other 5 hours cost 5 × $0.25 = **$1.25** from credits. Fixed cost for the month: **$20.25**, plus the AI work for that month, plus any domain.
+
+**4. A growing team.** Seven people work on one product. The Team plan includes 5, so 2 extra editors cost 2 × $5 = **$10** a month, for **$29** a month in fixed costs before extra team time and AI work. AI credits and team time are shared by the whole team, not counted per person, so adding people does not multiply those. Anyone who only needs to watch can be invited view-only for free.
 
 Notice what dominates. For a small app, the fixed costs are modest. The variable part, the AI work, scales with how much you change. That is the part to watch, and the part you control with the cap.
 
