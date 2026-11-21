@@ -1,8 +1,8 @@
 ---
 title: "코딩 없이 창업 아이디어 검증하기: 인터뷰 질문 12가지"
 description: "비개발자를 위한 고객 인터뷰 가이드예요. 누구를 만날지, 열 명을 어떻게 찾을지, 12가지 질문, 진짜 증거와 예의상 반응을 구분하는 법까지 알려드려요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["validation", "customer-interviews", "guide"]
 imageAlt: "코딩 없이 창업 아이디어 검증하기: 인터뷰 질문 12가지 — equipe 블로그"

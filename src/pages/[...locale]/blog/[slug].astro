@@ -8,6 +8,7 @@ import ArticleJsonLd from '../../../components/blog/ArticleJsonLd.astro';
 import '../../../styles/home.css';
 import '../../../styles/blog.css';
 import { SITE } from '../../../data/site';
+import { FOUNDER } from '../../../data/flags';
 import { BLOG_LANGS, BLOG_UI, blogPath, getArticles, languagesOf, readingMinutes, slugOf, wordCount, type BlogLang } from '../../../data/blog';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../../i18n';
 
@@ -43,6 +44,7 @@ const rel = articles
   .slice(0, 3)
   .map((x) => x.a);
 const t = getMessages(code);
+const byFounder = !!FOUNDER && d.author === FOUNDER.name;
 const crumbs = [
   { name: ui.home, url: new URL(localePath(info), Astro.site).href },
   { name: ui.nav, url: new URL(blogPath(lang), Astro.site).href },
@@ -79,7 +81,7 @@ const more = [
       <h1>{d.title}</h1>
       <p class="pg-lead">{d.description}</p>
       <p class="post-meta">
-        <span>{ui.by} <a href={subPath(info, 'about')}>{d.author}</a></span>
+        <span>{ui.by} <a href={subPath(info, 'about')}>{d.author}</a>{byFounder && FOUNDER ? `, ${FOUNDER.role[lang]}` : ''}</span>
         <span>{ui.published} <time datetime={d.date.toISOString().slice(0, 10)}>{fmt(d.date)}</time></span>
         {d.updated && <span>{ui.updated} <time datetime={d.updated.toISOString().slice(0, 10)}>{fmt(d.updated)}</time></span>}
         <span>{ui.minRead.replace('{n}', String(minutes))}</span>
@@ -115,6 +117,12 @@ const more = [
           <p>{ui.ctaText}</p>
           <IdeaBox code={code} id="idea-post" location={`blog_${slug}`} />
         </section>
+        {byFounder && FOUNDER && (
+          <aside class="post-author" aria-label={d.author}>
+            <img src={FOUNDER.photo} alt={FOUNDER.name} width="64" height="64" loading="lazy" />
+            <div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang]}</p><p>{FOUNDER.story[lang]}</p><p><a href={FOUNDER.links.x} rel="me noopener">X</a> · <a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a> · <a href={subPath(info, 'about')}>{t.nav.about}</a></p></div>
+          </aside>
+        )}
         <aside class="post-about" aria-labelledby="about-h">
           <h2 id="about-h">{ui.aboutTitle}</h2>
           <p>{ui.aboutText}</p>

@@ -1,8 +1,8 @@
 ---
 title: "첫 제품 가격 정하는 법 (감이 아니라 방법으로)"
 description: "첫 제품 가격을 정하는 실전 방법이에요. 고객이 지금 쓰는 대안을 기준으로 삼고, 단순한 구조를 고르고, 일찍 돈을 요청하고, 세 가지 지표로 가격을 테스트해요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["pricing", "startup", "guide"]
 imageAlt: "첫 제품 가격 정하는 법 (감이 아니라 방법으로) — equipe 블로그"

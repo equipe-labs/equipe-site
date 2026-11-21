@@ -1,6 +1,7 @@
 ---
 import JsonLd from './JsonLd.astro';
 import { SITE } from '../data/site';
+import { FOUNDER } from '../data/flags';
 // sameAs lists official profiles only; add social accounts here when they exist.
 ---
 
@@ -16,5 +17,20 @@ import { SITE } from '../data/site';
     email: SITE.supportEmail,
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.supportEmail },
     sameAs: [SITE.repo],
+    ...(FOUNDER ? { founder: { '@id': `${SITE.url}/#founder` } } : {}),
   }}
 />
+{FOUNDER && (
+  <JsonLd
+    data={{
+      '@type': 'Person',
+      '@id': `${SITE.url}/#founder`,
+      name: FOUNDER.name,
+      jobTitle: 'Founder',
+      url: `${SITE.url}/about/`,
+      image: `${SITE.url}${FOUNDER.photo}`,
+      worksFor: { '@id': `${SITE.url}/#organization` },
+      sameAs: [FOUNDER.links.x, FOUNDER.links.linkedin],
+    }}
+  />
+)}

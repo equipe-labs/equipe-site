@@ -2,6 +2,7 @@
 // Article + BreadcrumbList for one blog post. The author is the organization ("The equipe team") until a person is named.
 import JsonLd from '../JsonLd.astro';
 import { SITE } from '../../data/site';
+import { FOUNDER } from '../../data/flags';
 
 interface Props {
   lang: string;
@@ -34,7 +35,7 @@ const p = Astro.props;
     dateModified: p.modified.toISOString(),
     wordCount: p.words,
     keywords: p.tags.join(', '),
-    author: { '@type': 'Organization', name: p.author, url: p.aboutUrl },
+    author: FOUNDER && p.author === FOUNDER.name ? { '@type': 'Person', '@id': `${SITE.url}/#founder`, name: FOUNDER.name, url: p.aboutUrl, sameAs: [FOUNDER.links.x, FOUNDER.links.linkedin] } : { '@type': 'Organization', name: p.author, url: p.aboutUrl },
     publisher: { '@id': `${SITE.url}/#organization` },
     isPartOf: { '@type': 'Blog', name: 'equipe blog', url: p.crumbs[1]?.url },
   }}

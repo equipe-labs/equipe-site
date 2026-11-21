@@ -1,8 +1,8 @@
 ---
 title: "아이디어에서 첫 유료 고객까지: 1인 창업자를 위한 30일 계획"
 description: "코딩을 못 하는 1인 창업자를 위한 주차별 30일 계획이에요. 검증하고, 가장 작은 버전을 만들고, 몇 사람에게 공개한 뒤, 첫 결제를 요청해 보세요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["solo-founder", "validation", "first-customers"]
 imageAlt: "아이디어에서 첫 유료 고객까지: 1인 창업자를 위한 30일 계획 — equipe 블로그"

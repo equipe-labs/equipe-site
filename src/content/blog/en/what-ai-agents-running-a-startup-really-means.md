@@ -1,6 +1,7 @@
 ---
 title: "AI agents that run your startup: what it really means"
 description: "What AI agents can do for a startup today, what still needs a human, how they fail, and eight questions to test any AI cofounder or autopilot claim before you trust it."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["ai-agents", "startup", "approvals"]

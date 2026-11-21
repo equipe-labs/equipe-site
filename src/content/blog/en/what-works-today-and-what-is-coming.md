@@ -1,6 +1,7 @@
 ---
 title: "equipe: what works today and what is still coming (Nov 2026)"
 description: "A dated, checkable list of what equipe does today, what is not shipped yet, and what we do not claim, with how we keep it current and how to tell us we are wrong."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["transparency", "status", "roadmap"]

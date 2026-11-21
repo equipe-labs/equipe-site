@@ -1,8 +1,8 @@
 ---
 title: "equipe 현재 가능한 것과 앞으로 나올 것 (2026년 11월)"
 description: "equipe가 오늘 하는 일, 아직 출시되지 않은 것, 주장하지 않는 것을 날짜와 함께 확인 가능한 목록으로 정리했어요. 목록을 최신으로 유지하는 방법도 밝혀요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["transparency", "status", "roadmap"]
 imageAlt: "equipe 현재 가능한 것과 앞으로 나올 것 (2026년 11월) — equipe 블로그"

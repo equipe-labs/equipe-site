@@ -1,6 +1,7 @@
 ---
 title: "How to validate a startup idea without code: 12 interview questions"
 description: "A customer-interview guide for non-coders: who to talk to, how to find ten people, 12 questions to ask, and how to tell real evidence from politeness."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["validation", "customer-interviews", "guide"]

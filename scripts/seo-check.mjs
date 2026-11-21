@@ -288,6 +288,11 @@ section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Fa
     const html = res.status === 200 ? await res.text() : '';
     check(res.status === 200 && jsonLd(html).some((x) => x?.['@type'] === 'AboutPage') && jsonLd(html).some((x) => x?.['@type'] === 'FAQPage'), `${path} ${res.status}, AboutPage and FAQPage JSON-LD`);
   }
+  {
+    const about = await (await get(`${CANONICAL}/about/`)).text();
+    const person = jsonLd(about).find((x) => x?.['@type'] === 'Person');
+    check(!person || (person.name && person.sameAs?.length >= 2 && about.includes('/brand/founder.jpg')), '/about/ founder Person JSON-LD has name and sameAs, photo shown');
+  }
   const sm = await (await get(`${CANONICAL}/sitemap-0.xml`)).text();
   const missing = (slugsByLang.en ?? []).filter((s) => !sm.includes(`<loc>${CANONICAL}/blog/${s}/</loc>`));
   check(missing.length === 0 && sm.includes(`<loc>${CANONICAL}/facts/</loc>`), `sitemap lists every article and /facts/${missing.length ? ` (missing: ${missing.join(', ')})` : ''}`);

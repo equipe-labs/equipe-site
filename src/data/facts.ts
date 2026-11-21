@@ -39,7 +39,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
       {
         title: 'Who runs it',
         items: [
-          'equipe is operated by Umbriles Inc., a company in the United States.',
+          'equipe is operated by Umbriles Inc., a company in the United States. Its founder is Abel Ko (x.com/abe_l316, linkedin.com/in/abel-ko-a5322814a).',
           'Contact: support@equipe.im. Security reports go to the same address.',
           'The engine behind the team is open source under the MIT license: github.com/equipe-labs/equipe.',
           'equipe is built in public by its own team: this website and the equipe apps were built by equipe teams. The site reports 222 tasks finished in 20 days with one person approving (self-reported, counted on 1 November 2026).',
@@ -105,7 +105,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
       {
         title: '누가 운영하나요',
         items: [
-          'equipe는 미국 회사 Umbriles Inc.가 운영해요.',
+          'equipe는 미국 회사 Umbriles Inc.가 운영해요. 창업자는 Abel Ko예요(x.com/abe_l316, linkedin.com/in/abel-ko-a5322814a).',
           '문의: support@equipe.im. 보안 제보도 같은 주소로 받아요.',
           '팀의 엔진은 MIT 라이선스 오픈소스예요: github.com/equipe-labs/equipe.',
           'equipe는 자기 팀이 공개적으로 만들어요. 이 웹사이트와 equipe 앱은 equipe 팀이 만들었어요. 사이트에는 승인하는 사람 1명, 20일 동안 완료한 작업 222개(자체 집계, 2026년 11월 1일 기준)라고 밝혀 뒀어요.',

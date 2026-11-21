@@ -1,6 +1,7 @@
 ---
 title: "Is it safe? How equipe protects your data, money and product"
 description: "Plain answers on safety when AI agents run your product: approvals, secrets, isolated machines, sign-in, deletion, spending caps, and what we do not claim."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["security", "approvals", "data"]

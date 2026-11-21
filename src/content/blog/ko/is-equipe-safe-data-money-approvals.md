@@ -1,8 +1,8 @@
 ---
 title: "안전한가요? equipe가 데이터, 돈, 제품을 지키는 방법"
 description: "AI 에이전트가 제품을 운영할 때의 안전에 대한 솔직한 답이에요. 승인, 비밀 정보, 분리된 머신, 로그인, 삭제, 지출 한도, 그리고 우리가 주장하지 않는 것까지 정리했어요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["security", "approvals", "data"]
 imageAlt: "안전한가요? equipe가 데이터, 돈, 제품을 지키는 방법 — equipe 블로그"

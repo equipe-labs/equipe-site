@@ -1,6 +1,7 @@
 ---
 title: "From idea to paying customers: a 30-day plan for solo founders"
 description: "A week-by-week 30-day plan for solo founders who cannot code: validate, build the smallest version, launch to a few people, and ask for the first payment."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["solo-founder", "validation", "first-customers"]

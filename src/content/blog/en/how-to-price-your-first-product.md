@@ -1,6 +1,7 @@
 ---
 title: "How to price your first product (without guessing)"
 description: "A practical method for pricing a first product: anchor on what customers do today, pick a simple structure, ask for money early and test price with three metrics."
+author: "Abel Ko"
 lang: en
 date: 2026-11-21
 tags: ["pricing", "startup", "guide"]

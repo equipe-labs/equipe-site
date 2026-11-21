@@ -1,8 +1,8 @@
 ---
 title: "AI 에이전트가 스타트업을 운영한다는 말의 진짜 의미"
 description: "AI 에이전트가 지금 스타트업에서 할 수 있는 일, 사람이 해야 하는 일, 실패하는 방식, 그리고 AI 공동 창업자나 자동 운영 주장을 믿기 전에 던질 여덟 가지 질문을 정리했어요."
+author: "Abel Ko"
 lang: ko
-author: "equipe 팀"
 date: 2026-11-21
 tags: ["ai-agents", "startup", "approvals"]
 imageAlt: "AI 에이전트가 스타트업을 운영한다는 말의 진짜 의미 — equipe 블로그"
