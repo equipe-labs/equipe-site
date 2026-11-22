@@ -64,24 +64,24 @@ const resActive = ['security', 'developers', 'changelog', 'facts', 'blog'].inclu
     </nav>
     <div class="nav-r">
       <a class="si" href={SITE.login} data-ph="signin_click" data-ph-location="header">{t.nav.signIn}</a>
-      <a class="pill dark" href={SITE.start} data-ph="signup_cta_click" data-ph-location="header">{N.start}</a>
+      <a class="pill dark go" href={SITE.start} data-ph="signup_cta_click" data-ph-location="header">{N.start}</a>
       <details class="navdd mnav" data-navdd>
-        <summary aria-label={t.ui.primaryNav}>
-          <svg class="mn-o" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
-          <svg class="mn-x" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
-        </summary>
+        <summary aria-label={t.ui.primaryNav}><span class="mn-b" aria-hidden="true"><i></i><i></i></span></summary>
         <div class="sheet">
-          <ul class="sh-main">
-            <li><a href={how}>{t.nav.how}</a></li>
-            <li><a href={examples}>{N.examples}</a></li>
-            <li><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
-            <li><a href={aboutHref}>{t.nav.about}</a></li>
-          </ul>
-          <p class="sh-h">{N.resources}</p>
-          <ul class="sh-res">{res.map((x) => <li><a href={x.href}>{x.label}</a></li>)}</ul>
-          <div class="sh-foot">
-            <a class="si-m" href={SITE.login} data-ph="signin_click" data-ph-location="menu">{t.nav.signIn}</a>
-            <LangMenu locale={code} label={t.ui.language} subpage={sub} langs={langs} placement="sheet" />
+          <div class="sh-scroll">
+            <ul class="sh-main">
+              <li style="--i:0"><a href={how}>{t.nav.how}</a></li>
+              <li style="--i:1"><a href={examples}>{N.examples}</a></li>
+              <li style="--i:2"><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
+              <li style="--i:3"><a href={aboutHref}>{t.nav.about}</a></li>
+            </ul>
+            <p class="sh-h" style="--i:4">{N.resources}</p>
+            <ul class="sh-res">{res.map((x, i) => <li style={`--i:${i + 5}`}><a href={x.href}>{x.label}</a></li>)}</ul>
+            <div class="sh-act" style="--i:10">
+              <a class="sh-go" href={SITE.start} data-ph="signup_cta_click" data-ph-location="menu">{N.start}</a>
+              <a class="sh-si" href={SITE.login} data-ph="signin_click" data-ph-location="menu">{t.nav.signIn}</a>
+            </div>
+            <div class="sh-lang" style="--i:11"><LangMenu locale={code} label={t.ui.language} subpage={sub} langs={langs} placement="sheet" /></div>
           </div>
         </div>
       </details>
@@ -94,7 +94,11 @@ const resActive = ['security', 'developers', 'changelog', 'facts', 'blog'].inclu
   // Resources menu and mobile menu: close on Escape or a click outside; a link inside the mobile menu closes it.
   document.querySelectorAll<HTMLDetailsElement>('[data-navdd]').forEach((d) => {
     wirePop(d);
-    if (d.classList.contains('mnav')) d.querySelectorAll('.sheet a[href]').forEach((a) => a.addEventListener('click', () => closePop(d)));
+    if (d.classList.contains('mnav')) {
+      d.querySelectorAll('.sheet a[href]').forEach((a) => a.addEventListener('click', () => closePop(d)));
+      // Full-height sheet: keep the page behind it still while it is open.
+      d.addEventListener('toggle', () => { document.documentElement.classList.toggle('sheet-open', d.open); });
+    }
   });
   // The header turns into a translucent, blurred bar once the page scrolls.
   const header = document.querySelector<HTMLElement>('[data-site-header]');
