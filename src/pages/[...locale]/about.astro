@@ -2,6 +2,8 @@
 // /about: who runs equipe and why. The founder block shows only once the owner supplies it (src/data/flags.ts FOUNDER).
 import PageShell from '../../components/PageShell.astro';
 import JsonLd from '../../components/JsonLd.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { ABOUT, FOUNDER_LINE } from '../../data/about';
 import { SITE } from '../../data/site';
 import { FOUNDER, ADVISERS, ADVISERS_HEADING, TEAM, TEAM_HEADING } from '../../data/flags';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
@@ -17,12 +19,7 @@ const info = getLocale(code);
 const bl = blogLangFor(code);
 const bu = BLOG_UI[bl];
 const factsHref = bl === 'en' ? '/facts/' : `/${bl}/facts/`;
-// Origin story: English and Korean; other languages show the English line.
-const ORIGIN: Record<string, [string, string]> = {
-  en: ['equipe started as an open-source project, the equipe engine, and is now a cloud service that gives people who do not code their own AI startup team.', 'github.com/equipe-labs/equipe'],
-  ko: ['equipe는 오픈소스 프로젝트(equipe 엔진)로 시작했고, 지금은 코딩을 모르는 사람에게 자기만의 AI 스타트업 팀을 주는 클라우드 서비스예요.', 'github.com/equipe-labs/equipe'],
-};
-const origin = ORIGIN[lang] ?? ORIGIN.en;
+const C = ABOUT[lang] ?? ABOUT.en;
 const links = [
   { href: subPath(info, 'security'), label: T.nav.security },
   { href: subPath(info, 'pricing'), label: T.nav.pricing },
@@ -33,41 +30,81 @@ const links = [
 ];
 ---
 <PageShell code={code} page="about" title={A.title} description={A.desc}>
-  <section class="pg-h"><div class="wrap"><h1>{A.h1}</h1></div></section>
-  <section class="pg-s"><div class="wrap">
-    <div class="pg-prose">
-      <p class="mission">{A.mission}</p>
-      {A.body.map((p) => <p>{p}</p>)}
-      <p>{origin[0]} <a href={SITE.repo}>{origin[1]}</a></p>
-      {FOUNDER && (
-        <>
-          <h2 id="team">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
-          <div class="pg-founder"><picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="120" height="120" /></picture><div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang] ?? FOUNDER.role.en}</p><p>{FOUNDER.story[lang] ?? FOUNDER.story.en}</p><p class="pg-links"><a href={FOUNDER.links.x} rel="me noopener">X</a><a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
-        </>
-      )}
-      {TEAM.map((m) => (
-        <div class="pg-founder pg-adviser">{m.photo ? <picture><source type="image/webp" srcset={m.photo.replace(/\.jpg$/, '.webp')} /><img src={m.photo} alt={m.name} width="120" height="120" loading="lazy" /></picture> : <div class="pg-mono" aria-hidden="true">{m.initials}</div>}<div><p><b>{m.name}</b> · {m.role[lang] ?? m.role.en}</p><p>{m.bio[lang] ?? m.bio.en}</p><p class="pg-links"><a href={m.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
-      ))}
-      {ADVISERS.length > 0 && (
-        <>
-          <h2 id="advisers">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
-          {ADVISERS.map((a) => (
-            <div class="pg-founder pg-adviser">{a.photo ? <picture><source type="image/webp" srcset="/brand/akki-400.webp" /><img src={a.photo} alt={a.name} width="120" height="120" loading="lazy" /></picture> : <div class="pg-mono" aria-hidden="true">{a.initials}</div>}<div><p><b>{a.name}</b> · {a.role[lang] ?? a.role.en}</p><p>{a.bio[lang] ?? a.bio.en}</p><p class="pg-links"><a href={a.links.linkedin} rel="me noopener">LinkedIn</a><a href={a.links.web} rel="me noopener">Web</a><a href={a.links.github} rel="me noopener">GitHub</a></p></div></div>
-          ))}
-        </>
-      )}
-      <h2>{A.ossH}</h2>
-      <p>{A.oss} <a href={SITE.repo}>github.com/equipe-labs/equipe</a></p>
-      <h2>{bu.links}</h2>
-      <ul class="pg-links">{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
-      <h2>{A.contactH}</h2>
-      <p>{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
-    </div>
-  </div></section>
+  <div class="ab">
+    <section class="pg-h ab-hero"><div class="wrap">
+      <p class="ab-eyebrow ld">{C.eyebrow}</p>
+      <h1 class="ld">{C.h1}</h1>
+      <p class="pg-lead ab-lead ld">{C.lead}</p>
+    </div></section>
+
+    <section class="ab-s"><div class="wrap ab-story">
+      <div class="rv"><h2>{C.storyH}</h2><a class="ab-gh" href={SITE.repo} rel="noopener">{C.gh}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></a></div>
+      <div class="ab-st">
+        {C.story.map((p, i) => <p class="rv" style={`--i:${i + 1}`}>{p}</p>)}
+        <div class="ab-path rv" style="--i:3">
+          <div class="ab-stage"><b>{C.stageA[0]}</b><span>{C.stageA[1]}</span></div>
+          <svg class="ab-arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div class="ab-stage on"><b>{C.stageB[0]}</b><span>{C.stageB[1]}</span></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="ab-s"><div class="wrap">
+      <h2 class="rv">{C.beliefsH}</h2>
+      <div class="ab-bel">
+        {C.beliefs.map((b, i) => <div class="ab-b rv" style={`--i:${i + 1}`}><span class="ab-n">0{i + 1}</span><h3>{b.h}</h3><p>{b.p}</p></div>)}
+      </div>
+    </div></section>
+
+    <section class="ab-s"><div class="wrap">
+      <h2 id="team" class="rv">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
+      <div class="ab-grid">
+        {FOUNDER && <PersonCard i={1} name={FOUNDER.name} role={FOUNDER.role[lang] ?? FOUNDER.role.en} bio={FOUNDER_LINE[lang] ?? FOUNDER_LINE.en} photo={FOUNDER.photoLarge} initials="AK" linkedin={FOUNDER.links.linkedin} extra={[{ label: 'X', href: FOUNDER.links.x }]} />}
+        {TEAM.map((m, i) => <PersonCard i={i + 2} name={m.name} role={m.role[lang] ?? m.role.en} bio={m.bio[lang] ?? m.bio.en} photo={m.photo} initials={m.initials} linkedin={m.links.linkedin} />)}
+      </div>
+    </div></section>
+
+    {ADVISERS.length > 0 && (
+      <section class="ab-s"><div class="wrap">
+        <h2 id="advisers" class="rv">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
+        <div class="ab-grid">
+          {ADVISERS.map((a, i) => <PersonCard i={i + 1} name={a.names?.[lang] ?? a.name} role={a.role[lang] ?? a.role.en} bio={a.bio[lang] ?? a.bio.en} photo={a.photo} initials={a.initials} linkedin={a.links.linkedin} extra={[...(a.links.web ? [{ label: 'Web', href: a.links.web }] : []), ...(a.links.github ? [{ label: 'GitHub', href: a.links.github }] : [])]} />)}
+        </div>
+      </div></section>
+    )}
+
+    <section class="ab-s"><div class="wrap">
+      <div class="ab-cta rv">
+        <h2>{C.ctaH}</h2>
+        <p>{C.ctaP}</p>
+        <div class="ab-ctas"><a class="btn primary" href={SITE.start} data-ph="signup_cta_click" data-ph-location="about_page">{T.nav.cta}</a><a class="btn ghost" href={subPath(info, 'pricing')}>{C.ctaMore}</a></div>
+      </div>
+    </div></section>
+
+    <section class="ab-s ab-end"><div class="wrap">
+      <div class="pg-prose">
+        <h2>{bu.links}</h2>
+        <ul class="pg-links">{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        <h2>{A.contactH}</h2>
+        <p>{cBefore}<a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>{cAfter}</p>
+      </div>
+    </div></section>
+  </div>
   {TEAM.map((m) => (
-    <JsonLd data={{ '@type': 'Person', name: m.name, alternateName: m.fullName, jobTitle: 'Tech', ...(m.photoLarge ? { image: `${SITE.url}${m.photoLarge}` } : {}), worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
+    <JsonLd data={{ '@type': 'Person', name: m.name, alternateName: m.fullName, description: m.bio.en, jobTitle: 'Tech', ...(m.photoLarge ? { image: `${SITE.url}${m.photoLarge}` } : {}), worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
   ))}
   {ADVISERS.map((a) => (
-    <JsonLd data={{ '@type': 'Person', name: a.name, jobTitle: 'Head of Voices', ...(a.photoLarge ? { image: `${SITE.url}${a.photoLarge}` } : {}), worksFor: { '@type': 'Organization', name: 'Cartesia' }, affiliation: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [a.links.linkedin, a.links.web, a.links.github] }} />
+    <JsonLd data={{ '@type': 'Person', name: a.name, ...(a.names?.ko ? { alternateName: a.names.ko } : {}), description: a.bio.en, jobTitle: a.jobTitle, worksFor: { '@type': 'Organization', name: a.worksFor }, ...(a.alumniOf ? { alumniOf: { '@type': 'CollegeOrUniversity', name: a.alumniOf } } : {}), affiliation: { '@id': `${SITE.url}/#organization` }, ...(a.photoLarge ? { image: `${SITE.url}${a.photoLarge}` } : {}), url: `${SITE.url}/about/`, sameAs: Object.values(a.links) }} />
   ))}
 </PageShell>
+
+<script is:inline>
+  // Reveal on scroll (opacity and transform only). Skipped entirely when the visitor prefers reduced motion.
+  (function () {
+    var root = document.querySelector('.ab');
+    if (!root || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.setAttribute('data-rv', '');
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); setTimeout(function () { e.target.classList.add('done'); }, 1500); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    root.querySelectorAll('.rv').forEach(function (n) { io.observe(n); });
+  })();
+</script>

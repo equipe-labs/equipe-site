@@ -28,22 +28,40 @@ export const DEMO_VIDEO: null | { src: string; poster: string; captions: string 
 export const TYPICAL_TOTALS: null | Record<string, string> = null;
 
 /**
- * About page advisers. Facts come only from public sources: Akki's LinkedIn profile (headline "Building Cartesia | Ex-Founder | Ex-Bain", San Francisco)
+ * About page advisers. Facts come only from public sources: Akki's LinkedIn profile (headline "Building Cartesia | Ex-Founder | Ex-Bain", San Francisco); Deokseong Kim: facts from the founder and his LinkedIn profile (imweb, Toss, Hyperconnect, KAIST)
  * and the VapiCon 2026 agenda (https://vapi.ai/vapicon-2026/agenda, "Head of Voices, Cartesia"). Photo: his VapiCon speaker-card portrait as supplied by the founder (public/brand/akki-*.webp|jpg).
  */
 export const ADVISERS_HEADING: Record<string, string> = { en: 'Advisers', ko: '어드바이저' };
-export const ADVISERS: { name: string; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string; web: string; github: string } }[] = [
+export const ADVISERS: { name: string; names?: Record<string, string>; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; jobTitle: string; worksFor: string; alumniOf?: string; links: { linkedin: string; web?: string; github?: string } }[] = [
   {
     name: 'Akki Shafiqullah',
     initials: 'AS',
-    photo: '/brand/akki-400.jpg',
+    photo: '/brand/akki-800.jpg',
     photoLarge: '/brand/akki-800.jpg',
     role: { en: 'Adviser · Head of Voices at Cartesia', ko: '어드바이저 · Cartesia Head of Voices' },
     bio: {
       en: 'Akki Shafiqullah leads Voices at Cartesia, the AI voice company, and is based in San Francisco. A former founder and Bain consultant, he advises equipe.',
       ko: 'Akki Shafiqullah는 AI 음성 회사 Cartesia에서 Voices를 이끌고, 샌프란시스코에 살아요. 창업과 Bain 컨설턴트 경험이 있고, equipe의 어드바이저예요.',
     },
+    jobTitle: 'Head of Voices',
+    worksFor: 'Cartesia',
     links: { linkedin: 'https://www.linkedin.com/in/akki/', web: 'https://www.akki.info', github: 'https://github.com/akki-codes' },
+  },
+  {
+    name: 'Deokseong Kim',
+    names: { ko: '김덕성' },
+    initials: 'DK',
+    photo: '/brand/deokseong-kim-800.jpg',
+    photoLarge: '/brand/deokseong-kim-800.jpg',
+    role: { en: 'Tech adviser', ko: '기술 어드바이저' },
+    bio: {
+      en: 'Deokseong Kim leads the engineering group at imweb. He previously built design-platform tooling at Toss and backend systems at Hyperconnect, and studied Electrical Engineering at KAIST. He advises equipe on engineering.',
+      ko: '김덕성은 아임웹에서 엔지니어링 그룹을 이끌고 있어요. 토스 디자인 플랫폼팀과 하이퍼커넥트에서 일했고, KAIST에서 전기및전자공학을 공부했어요. equipe의 기술 어드바이저예요.',
+    },
+    jobTitle: 'Frontend Chapter Lead',
+    worksFor: 'imweb',
+    alumniOf: 'KAIST',
+    links: { linkedin: 'https://www.linkedin.com/in/zeakd/' },
   },
 ];
 
@@ -57,7 +75,7 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
     name: 'Seongjae (SJ) Seo',
     fullName: 'Seongjae Seo',
     initials: 'SS',
-    photo: '/brand/sj-seo-400.jpg',
+    photo: '/brand/sj-seo-800.jpg',
     photoLarge: '/brand/sj-seo-800.jpg',
     role: { en: 'Tech', ko: 'Tech' },
     bio: {
@@ -70,7 +88,7 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
     name: 'Jason Li',
     fullName: 'Jason Li',
     initials: 'JL',
-    photo: '/brand/jason-li-400.jpg',
+    photo: '/brand/jason-li-800.jpg',
     photoLarge: '/brand/jason-li-800.jpg',
     role: { en: 'Tech', ko: 'Tech' },
     bio: {

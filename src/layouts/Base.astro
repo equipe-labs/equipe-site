@@ -25,9 +25,6 @@ const { lang } = getLocale(Astro.props.locale);
 <html lang={lang}>
   <head>
     <BaseHead {...Astro.props} />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
     {/* No font preloads: San Francisco is the system font on Apple devices, and Inter / Pretendard are fetched only where it is missing. */}
     <slot name="head" />
     <script is:inline>
