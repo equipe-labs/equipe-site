@@ -2,7 +2,9 @@
 // /blog/ (English) and /ko/blog/: the article list.
 import PageShell from '../../../components/PageShell.astro';
 import '../../../styles/blog.css';
-import { BLOG_LANGS, BLOG_UI, blogPath, getArticles, readingMinutes, slugOf, type BlogLang } from '../../../data/blog';
+import BlogIcons from '../../../components/blog/BlogIcons.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
+import { BLOG_LANGS, BLOG_UI, CATEGORIES, blogPath, categoryOf, featuredOf, getArticles, slugOf, type BlogLang } from '../../../data/blog';
 import { getLocale, localePath, type LocaleCode } from '../../../i18n';
 
 export function getStaticPaths() {
@@ -13,7 +15,11 @@ const code = lang as LocaleCode;
 const info = getLocale(code);
 const ui = BLOG_UI[lang];
 const articles = await getArticles(lang);
-const fmt = (dt: Date) => new Intl.DateTimeFormat(info.lang, { dateStyle: 'medium', timeZone: 'UTC' }).format(dt);
+const featured = featuredOf(articles);
+const rest = articles.filter((a) => a !== featured);
+// Topic chips: only topics that have articles, each with its count.
+const counts = Object.fromEntries(CATEGORIES.map((c) => [c, articles.filter((a) => categoryOf(a) === c).length])) as Record<(typeof CATEGORIES)[number], number>;
+const cats = CATEGORIES.filter((c) => counts[c] > 0);
 const listUrl = new URL(blogPath(lang), Astro.site).href;
 const ld = {
   '@context': 'https://schema.org',
@@ -39,19 +45,97 @@ const crumbs = {
     <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\\u003c')} />
     <link rel="alternate" type="application/rss+xml" title="equipe blog" href={`${blogPath(lang)}rss.xml`} />
   </Fragment>
-  <header class="pg-h blog-h"><div class="wrap"><h1>{ui.h1}</h1><p class="pg-lead">{ui.lead}</p></div></header>
-  <section class="pg-s"><div class="wrap">
-    <ul class="blog-list">
-      {articles.map((a) => (
-        <li class="blog-card">
-          <a href={blogPath(lang, slugOf(a))}>
-            <h2>{a.data.title}</h2>
-            <p>{a.data.description}</p>
-            <p class="post-meta"><span><time datetime={a.data.date.toISOString().slice(0, 10)}>{fmt(a.data.date)}</time></span><span>{ui.minRead.replace('{n}', String(readingMinutes(a.body ?? '', lang)))}</span></p>
-          </a>
-        </li>
-      ))}
+  <BlogIcons />
+  <header class="pg-h blog-h bi-h"><div class="wrap">
+    <p class="bi-kick"><span class="bi-dot" aria-hidden="true"></span>{ui.nav}</p>
+    <h1>{ui.h1}</h1>
+    <p class="pg-lead">{ui.lead}</p>
+  </div></header>
+  <section class="pg-s bi-s"><div class="wrap">
+    {featured && (
+      <ul class="bi-feat" data-feat>
+        <BlogCard a={featured} lang={lang} featured />
+      </ul>
+    )}
+    <div class="bi-bar" data-bar hidden>
+      <div class="bi-chips" role="group" aria-label={ui.filter}>
+        <button type="button" class="chip" data-topic="" aria-pressed="true">{ui.allTopics}<span class="chip-n">{articles.length}</span></button>
+        {cats.map((c) => (
+          <button type="button" class="chip" data-topic={c} aria-pressed="false">{ui.cats[c]}<span class="chip-n">{counts[c]}</span></button>
+        ))}
+      </div>
+      <label class="bi-search">
+        <span class="sr-only">{ui.search}</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-search" /></svg>
+        <input type="search" placeholder={ui.search} autocomplete="off" enterkeyhint="search" data-q />
+      </label>
+    </div>
+    <p class="sr-only" aria-live="polite" data-count></p>
+    <ul class="bi-grid" data-grid>
+      {featured && <BlogCard a={featured} lang={lang} dup />}
+      {rest.map((a) => <BlogCard a={a} lang={lang} />)}
     </ul>
-    <p class="blog-foot"><a href={`${blogPath(lang)}rss.xml`}>{ui.rss}</a></p>
+    <div class="bi-empty" data-empty hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-search" /></svg>
+      <p data-empty-t></p>
+      <button type="button" class="pill out" data-clear>{ui.clear}</button>
+    </div>
+    <p class="blog-foot"><a href={`${blogPath(lang)}rss.xml`}><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-rss" /></svg>{ui.rss}</a></p>
   </div></section>
+  <script is:inline type="application/json" id="bi-i18n" set:html={JSON.stringify({ count: ui.count, one: ui.countOne, none: ui.noResults }).replace(/</g, '\\u003c')} />
+  <script>
+    // Topic chips + search: every article is in the HTML (no-JS and crawlers see all of them); this only hides cards.
+    const bar = document.querySelector<HTMLElement>('[data-bar]');
+    const grid = document.querySelector<HTMLElement>('[data-grid]');
+    if (bar && grid) {
+      const t = JSON.parse(document.getElementById('bi-i18n')!.textContent!) as { count: string; one: string; none: string };
+      const feat = document.querySelector<HTMLElement>('[data-feat]');
+      const input = bar.querySelector<HTMLInputElement>('[data-q]')!;
+      const chips = [...bar.querySelectorAll<HTMLButtonElement>('[data-topic]')];
+      const cards = [...grid.querySelectorAll<HTMLElement>('.bc')];
+      const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+      const live = document.querySelector<HTMLElement>('[data-count]')!;
+      const calm = matchMedia('(prefers-reduced-motion: reduce)');
+      let topic = new URLSearchParams(location.search).get('topic') ?? '';
+      if (!chips.some((c) => c.dataset.topic === topic)) topic = '';
+      bar.hidden = false;
+      const apply = (animate: boolean) => {
+        const q = input.value.trim().toLowerCase();
+        const words = q.split(/\s+/).filter(Boolean);
+        const all = !topic && !words.length;
+        if (feat) feat.hidden = !all;
+        let n = 0;
+        for (const c of cards) {
+          const show = all ? !('dup' in c.dataset) : (!topic || c.dataset.cat === topic) && words.every((w) => c.dataset.q!.includes(w));
+          const was = !c.hidden;
+          c.hidden = !show;
+          if (show) {
+            if (animate && !calm.matches && !was) {
+              c.style.setProperty('--i', String(Math.min(n, 8)));
+              c.classList.remove('bc-in');
+              void c.offsetWidth;
+              c.classList.add('bc-in');
+            }
+            n++;
+          }
+        }
+        for (const ch of chips) ch.setAttribute('aria-pressed', String(ch.dataset.topic === topic));
+        empty.hidden = n > 0;
+        if (!n) empty.querySelector('[data-empty-t]')!.textContent = t.none.replace('{q}', input.value.trim() || chips.find((c) => c.dataset.topic === topic)?.firstChild?.textContent || '');
+        live.textContent = n === 1 ? t.one : t.count.replace('{n}', String(n + (all && feat ? 1 : 0)));
+        const url = new URL(location.href);
+        if (topic) url.searchParams.set('topic', topic); else url.searchParams.delete('topic');
+        history.replaceState(history.state, '', url);
+      };
+      chips.forEach((ch) => ch.addEventListener('click', () => {
+        topic = ch.dataset.topic ?? '';
+        ch.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: calm.matches ? 'auto' : 'smooth' });
+        apply(true);
+      }));
+      input.addEventListener('input', () => apply(true));
+      input.addEventListener('keydown', (e) => { if (e.key === 'Escape' && input.value) { input.value = ''; apply(true); } });
+      document.querySelector('[data-clear]')!.addEventListener('click', () => { topic = ''; input.value = ''; apply(true); input.focus(); });
+      if (topic) apply(false);
+    }
+  </script>
 </PageShell>

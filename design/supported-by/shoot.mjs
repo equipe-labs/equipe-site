@@ -7,7 +7,7 @@ for (const w of [1440, 390]) for (const mode of ['light','dark']) for (const opt
   const p = await b.newPage({ viewport: { width: w, height: w > 600 ? 900 : 844 }, deviceScaleFactor: 2, colorScheme: mode, reducedMotion: 'reduce' });
   await p.goto(base + (lang === 'ko' ? '/ko/' : '/'), { waitUntil: 'networkidle' });
   await p.addScriptTag({ url: '/_mock/mock.js' });
-  await p.evaluate(([o, m]) => { document.documentElement.dataset.theme = m; if (o !== 'before') window.__mock(o, m); document.querySelector('astro-dev-toolbar')?.remove(); document.querySelector('.lang-banner')?.remove(); document.querySelectorAll('img[loading=lazy]').forEach(i => i.loading = 'eager'); }, [opt, mode]);
+  await p.evaluate(([o, m]) => { document.documentElement.dataset.theme = m; if (o !== 'before') window.__mock(o, m); document.querySelector('astro-dev-toolbar')?.remove(); document.querySelector('#lang-banner')?.remove(); document.querySelectorAll('img[loading=lazy]').forEach(i => i.loading = 'eager'); }, [opt, mode]);
   await p.waitForTimeout(500);
   const r = await p.evaluate(() => { const Y = e => e.getBoundingClientRect().top + scrollY; const f = document.querySelector('footer');
     return { s0: Y(document.querySelector('.cli .links')) - 32, s1: Y(document.querySelector('#faq')) + 24, f0: Y(f) - 32, f1: Y(f) + f.offsetHeight }; });

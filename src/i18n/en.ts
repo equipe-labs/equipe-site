@@ -22,8 +22,12 @@ export const en = {
     copyCommands: 'Copy commands',
     copyCommand: 'Copy command',
     language: 'Language',
-    // {language} is replaced with the target language's own name, e.g. 한국어.
-    bannerText: 'View this page in {language}',
+    // Language suggestion banner. Title, action and keep are shown when THIS language is the suggested one;
+    // keep's {language} is the current page's language named in this language (Intl.DisplayNames). also is shown in the page's own language, {language} = the suggested language's own name.
+    bannerTitle: 'Read this page in English?',
+    bannerAction: 'View in English',
+    bannerKeep: 'Keep {language}',
+    bannerAlso: 'This page is also available in {language}.',
     bannerClose: 'Dismiss',
     now: 'Works today',
     soon: 'Coming',

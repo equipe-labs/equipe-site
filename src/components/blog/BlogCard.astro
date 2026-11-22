@@ -1,0 +1,50 @@
+---
+// One article on the blog index and in "Keep reading": a CSS-drawn topic cover (follows light/dark, no image bytes),
+// topic and reading time, title, summary and the author row. `featured` is the large split card at the top of the index.
+// Needs <BlogIcons /> once on the page.
+import { FOUNDER } from '../../data/flags';
+import { BLOG_UI, blogPath, categoryOf, readingMinutes, slugOf, type Article, type BlogLang } from '../../data/blog';
+import { getLocale } from '../../i18n';
+
+interface Props { a: Article; lang: BlogLang; featured?: boolean; h?: 'h2' | 'h3'; dup?: boolean }
+const { a, lang, featured = false, h = 'h2', dup = false } = Astro.props;
+const ui = BLOG_UI[lang];
+const slug = slugOf(a);
+const cat = categoryOf(a);
+const minutes = ui.minRead.replace('{n}', String(readingMinutes(a.body ?? '', lang)));
+const date = new Intl.DateTimeFormat(getLocale(lang).lang, { dateStyle: 'medium', timeZone: 'UTC' }).format(a.data.date);
+const byFounder = !!FOUNDER && a.data.author === FOUNDER.name;
+const author = a.data.author === 'The equipe team' ? ui.team : a.data.author;
+// A stable per-article spot for the cover's glow, so neighbouring cards of one topic still look different.
+let hash = 0;
+for (const ch of slug) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+const gx = 20 + (hash % 60);
+const gy = 15 + ((hash >> 8) % 55);
+const H = h;
+const q = [a.data.title, a.data.description, ...a.data.tags, ui.cats[cat]].join(' ').toLowerCase();
+---
+<li class={featured ? 'bc bc-f' : 'bc'} data-cat={cat} data-q={q} data-dup={dup ? '' : undefined} hidden={dup}>
+  <a href={blogPath(lang, slug)}>
+    <div class="cv" data-cat={cat} style={`--gx:${gx}%;--gy:${gy}%`} aria-hidden="true">
+      <span class="cv-k">{a.data.tags.slice(0, 2).map((t) => `#${t}`).join('  ')}</span>
+      <svg class="cv-wm" viewBox="0 0 24 24"><use href={`#bi-${cat}`} /></svg>
+      <svg class="cv-ic" viewBox="0 0 24 24"><use href={`#bi-${cat}`} /></svg>
+      <span class="cv-rt">{minutes}</span>
+    </div>
+    <div class="bc-b">
+      {featured && <p class="bc-fl"><span>{ui.featured}</span></p>}
+      <p class="bc-k"><span class="bc-cat">{ui.cats[cat]}</span><span class="sr-only"> · {minutes}</span></p>
+      <H class="bc-t">{a.data.title}</H>
+      <p class="bc-d">{a.data.description}</p>
+      <div class="bc-by">
+        {byFounder ? (
+          <img class="av" src="/brand/founder-96.webp" alt="" width="32" height="32" loading="lazy" decoding="async" />
+        ) : (
+          <svg class="av" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true"><rect width="100" height="100" rx="50" fill="#2A2B31" /><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z" /><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5" /></svg>
+        )}
+        <span class="bc-m"><b>{author}</b><span><time datetime={a.data.date.toISOString().slice(0, 10)}>{date}</time></span></span>
+        {featured && <span class="bc-go">{ui.readArticle}<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-arrow" /></svg></span>}
+      </div>
+    </div>
+  </a>
+</li>

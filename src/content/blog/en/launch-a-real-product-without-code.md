@@ -1,4 +1,5 @@
 ---
+featured: true
 title: "How to launch a real product without writing code (2026)"
 description: "A step-by-step guide for non-coders: what makes a product real, how to choose a route, and the hosting, database and domain work that stops most first launches."
 author: "Abel Ko"

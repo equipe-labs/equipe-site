@@ -1,6 +1,12 @@
 ---
-// "View this page in <language>" suggestion. Never redirects: it only offers a link,
-// and remembers a dismissal (or an explicit language choice) in localStorage.
+// "View this page in <language>?" suggestion. Never redirects: it only offers a link.
+// Shown only when all of these hold:
+//   - the browser's preferred languages (navigator.languages, in order) name a language this page exists in, other than the page's;
+//   - the visitor never picked a language (language menu, this banner's buttons) and never dismissed the banner (localStorage);
+//   - it has not already been ignored on 2 pages this session (sessionStorage), the consent banner is not up, and it is not a bot.
+// It waits ~1.5 s after load (or the first scroll), never takes focus, announces itself politely, closes on Esc,
+// tucks away while scrolling down on small screens and pads the page so it never covers the end of it.
+// Texts: title + buttons in the suggested language, one small line in the page's own language.
 import { available as allLocales, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
 interface Props {
@@ -9,63 +15,151 @@ interface Props {
   langs?: LocaleCode[];
 }
 const { locale, subpage, langs } = Astro.props;
+const current = getLocale(locale);
 const available = langs ? allLocales.filter((l) => langs.includes(l.code)) : allLocales;
-// What to show for each *other* language, written in that language.
+const base = (lang: string) => lang.split('-')[0];
 const targets = available
   .filter((l) => l.code !== locale)
   .map((l) => {
     const ui = getMessages(l.code).ui;
-    return { lang: l.lang, href: subpage ? subPath(l, subpage) : localePath(l), text: ui.bannerText.replace('{language}', l.name), close: ui.bannerClose };
+    // The page's current language named in the suggested language: "영어", "Englisch", "英語"…
+    const currentName = new Intl.DisplayNames([l.lang], { type: 'language' }).of(base(current.lang)) ?? current.name;
+    return {
+      lang: l.lang,
+      href: subpage ? subPath(l, subpage) : localePath(l),
+      title: ui.bannerTitle,
+      action: ui.bannerAction,
+      keep: ui.bannerKeep.replace('{language}', currentName),
+      close: ui.bannerClose,
+      also: getMessages(locale).ui.bannerAlso.replace('{language}', l.name),
+    };
   });
-const data = JSON.stringify({ current: getLocale(locale).lang, all: available.map((l) => l.lang), targets }).replace(/</g, '\\u003c');
+const data = JSON.stringify({ current: current.lang, all: available.map((l) => l.lang), targets }).replace(/</g, '\\u003c');
 ---
 
 {
   targets.length > 0 && (
     <>
-      <aside class="lang-banner" id="lang-banner" aria-label="Language" hidden>
-        <a id="lang-banner-link" href="/" />
-        <button type="button" id="lang-banner-close" aria-label="Dismiss">
-          ×
-        </button>
-      </aside>
+      <div class="lb-live" aria-live="polite">
+        <aside class="lb" id="lang-banner" aria-labelledby="lb-t" hidden>
+          <span class="lb-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3.2 12h17.6M12 3c2.4 2.6 3.7 5.6 3.7 9s-1.3 6.4-3.7 9c-2.4-2.6-3.7-5.6-3.7-9S9.6 5.6 12 3z" /></svg>
+          </span>
+          <div class="lb-tx">
+            <p class="lb-t" id="lb-t"></p>
+            <p class="lb-s" lang={current.lang}></p>
+          </div>
+          <div class="lb-ac">
+            <button type="button" class="lb-keep"></button>
+            <a class="lb-go" href="/"></a>
+          </div>
+          <button type="button" class="lb-x">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" /></svg>
+          </button>
+        </aside>
+      </div>
       <script is:inline type="application/json" id="lang-banner-data" set:html={data} />
       <script is:inline>
         (function () {
           function track(n, p) { if (window.eqTrack) window.eqTrack(n, p); }
-          var KEY = 'equipe-lang-dismissed';
-          var store = null;
-          try { store = window.localStorage; } catch (e) {}
-          function dismissed() { try { return !!store && store.getItem(KEY) === '1'; } catch (e) { return false; } }
-          function remember() { try { store && store.setItem(KEY, '1'); } catch (e) {} }
-          document.querySelectorAll('[data-lang-choice]').forEach(function (a) { a.addEventListener('click', remember); });
-          if (dismissed()) return;
+          var DISMISSED = 'equipe-lang-dismissed', CHOICE = 'equipe-lang-choice', SEEN = 'equipe-lang-seen';
+          function get(s, k) { try { return window[s].getItem(k); } catch (e) { return null; } }
+          function put(s, k, v) { try { window[s].setItem(k, v); } catch (e) {} }
+          // Any explicit language pick (the header's language menu) silences the suggestion for good.
+          document.querySelectorAll('[data-lang-choice]').forEach(function (a) {
+            a.addEventListener('click', function () { put('localStorage', CHOICE, a.getAttribute('hreflang') || '1'); });
+          });
+          if (get('localStorage', DISMISSED) === '1' || get('localStorage', CHOICE)) return;
+          if (navigator.webdriver) return;
+          var seen = +(get('sessionStorage', SEEN) || 0);
+          if (seen >= 2) return;
           var d = JSON.parse(document.getElementById('lang-banner-data').textContent);
           // Map a browser language tag to one of our hreflang values (or null).
           function match(tag) {
-            tag = String(tag).toLowerCase();
+            tag = String(tag || '').toLowerCase();
             for (var i = 0; i < d.all.length; i++) if (d.all[i].toLowerCase() === tag) return d.all[i];
-            var base = tag.split('-')[0];
-            if (base === 'zh') return /^zh-(hant|tw|hk|mo)/.test(tag) ? null : 'zh-CN';
-            if (base === 'pt') return 'pt-BR';
-            for (var j = 0; j < d.all.length; j++) if (d.all[j].toLowerCase() === base) return d.all[j];
+            var b = tag.split('-')[0];
+            if (b === 'zh') return /^zh-(hant|tw|hk|mo)/.test(tag) ? null : (d.all.indexOf('zh-CN') >= 0 ? 'zh-CN' : null);
+            if (b === 'pt') return d.all.indexOf('pt-BR') >= 0 ? 'pt-BR' : null;
+            for (var j = 0; j < d.all.length; j++) if (d.all[j].toLowerCase() === b) return d.all[j];
             return null;
           }
+          // The first preferred language we have decides; if that is the page's own language, there is nothing to suggest.
           var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
           var want = null;
           for (var k = 0; k < prefs.length && !want; k++) want = match(prefs[k]);
           if (!want || want === d.current) return;
           var t = d.targets.filter(function (x) { return x.lang === want; })[0];
           if (!t) return;
+
           var box = document.getElementById('lang-banner');
-          var link = document.getElementById('lang-banner-link');
-          var close = document.getElementById('lang-banner-close');
-          link.textContent = t.text; link.href = t.href; link.setAttribute('hreflang', t.lang);
-          box.setAttribute('lang', t.lang); box.setAttribute('aria-label', t.text); close.setAttribute('aria-label', t.close);
-          link.addEventListener('click', function () { remember(); track('language_switch', { from: d.current, to: t.lang, source: 'banner' }); });
-          close.addEventListener('click', function () { remember(); box.hidden = true; document.body.classList.remove('has-lang-banner'); track('language_banner_dismissed', { from: d.current, suggested: t.lang }); });
-          box.hidden = false; document.body.classList.add('has-lang-banner');
-          track('language_banner_shown', { from: d.current, suggested: t.lang });
+          var title = box.querySelector('.lb-t'), sub = box.querySelector('.lb-s');
+          var keep = box.querySelector('.lb-keep'), go = box.querySelector('.lb-go'), x = box.querySelector('.lb-x');
+          var calm = matchMedia('(prefers-reduced-motion: reduce)');
+          var small = matchMedia('(max-width: 640px)');
+          var open = false, lastY = 0;
+
+          function pad() { document.body.style.setProperty('--lb-h', box.offsetHeight + 'px'); }
+          function onKey(e) {
+            if (e.key !== 'Escape' || !open) return;
+            var a = document.activeElement;
+            if (box.contains(a) || !a || a === document.body) { e.preventDefault(); close('esc'); }
+          }
+          function onScroll() {
+            var y = window.scrollY, dy = y - lastY;
+            if (Math.abs(dy) <= 8) return;
+            box.classList.toggle('lb-tuck', small.matches && dy > 0 && y > 120);
+            lastY = y;
+          }
+          function hide() {
+            open = false;
+            document.removeEventListener('keydown', onKey);
+            removeEventListener('scroll', onScroll);
+            removeEventListener('resize', pad);
+            document.body.classList.remove('has-lang-banner');
+            box.classList.remove('lb-in');
+            var done = function () { box.hidden = true; };
+            if (calm.matches) done(); else setTimeout(done, 220);
+          }
+          function close(how) {
+            put('localStorage', DISMISSED, '1');
+            track('language_banner_dismissed', { from: d.current, suggested: t.lang, how: how });
+            var hadFocus = box.contains(document.activeElement);
+            hide();
+            if (hadFocus) { var m = document.getElementById('main'); if (m) { m.setAttribute('tabindex', '-1'); m.focus({ preventScroll: true }); } }
+          }
+          function show() {
+            if (open || shown) return;
+            // Wait for the consent banner, if one is up.
+            var cb = document.getElementById('consent');
+            if (cb && !cb.hidden) { setTimeout(show, 1500); return; }
+            shown = true; open = true;
+            title.textContent = t.title; title.setAttribute('lang', t.lang);
+            sub.textContent = t.also;
+            keep.textContent = t.keep; keep.setAttribute('lang', t.lang);
+            go.textContent = t.action; go.href = t.href; go.setAttribute('hreflang', t.lang); go.setAttribute('lang', t.lang);
+            x.setAttribute('aria-label', t.close); x.setAttribute('lang', t.lang);
+            box.hidden = false;
+            pad();
+            document.body.classList.add('has-lang-banner');
+            requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('lb-in'); }); });
+            document.addEventListener('keydown', onKey);
+            lastY = window.scrollY;
+            addEventListener('scroll', onScroll, { passive: true });
+            addEventListener('resize', pad, { passive: true });
+            put('sessionStorage', SEEN, String(seen + 1));
+            track('language_banner_shown', { from: d.current, suggested: t.lang });
+          }
+          var shown = false;
+          go.addEventListener('click', function () { put('localStorage', CHOICE, t.lang); track('language_switch', { from: d.current, to: t.lang, source: 'banner' }); });
+          keep.addEventListener('click', function () { put('localStorage', CHOICE, d.current); track('language_banner_kept', { from: d.current, suggested: t.lang }); hide(); });
+          x.addEventListener('click', function () { close('x'); });
+
+          // ~1.5 s after load, or at the first real scroll (not before 600 ms, so a restored scroll position does not trigger it).
+          var t0 = Date.now();
+          function first() { if (window.scrollY > 80 && Date.now() - t0 > 600) { removeEventListener('scroll', first); show(); } }
+          function arm() { setTimeout(function () { removeEventListener('scroll', first); show(); }, 1500); addEventListener('scroll', first, { passive: true }); }
+          if (document.readyState === 'complete') arm(); else addEventListener('load', arm, { once: true });
         })();
       </script>
     </>

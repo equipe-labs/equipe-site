@@ -41,6 +41,24 @@ export const wordCount = (body: string) => (body.match(/\S+/g) ?? []).length;
 
 export const blogPath = (lang: BlogLang, slug?: string) => `${lang === 'en' ? '' : `/${lang}`}/blog/${slug ? `${slug}/` : ''}`;
 
+/** The featured article: the first one marked `featured: true`, else the newest. */
+export const featuredOf = (list: Article[]) => list.find((a) => a.data.featured) ?? list[0];
+
+/** Index categories, derived from tags (first match wins, in this order), so articles need no extra field. */
+export const CATEGORIES = ['compare', 'money', 'safety', 'grow', 'build', 'basics'] as const;
+export type Category = (typeof CATEGORIES)[number];
+const CATEGORY_TAGS: Record<Exclude<Category, 'basics'>, string[]> = {
+  compare: ['comparison', 'alternatives', 'app-builder'],
+  money: ['pricing', 'cost', 'credits'],
+  safety: ['security', 'privacy'],
+  grow: ['validation', 'metrics', 'analytics', 'build-measure-learn', 'first-customers', 'customer-interviews', 'marketing'],
+  build: ['launch', 'worked-example', 'shop', 'ecommerce', 'booking', 'newsletter', 'domain', 'claude', 'artifact'],
+};
+export function categoryOf(a: Article): Category {
+  for (const c of CATEGORIES) if (c !== 'basics' && a.data.tags.some((t) => CATEGORY_TAGS[c].includes(t))) return c;
+  return 'basics';
+}
+
 export const FACTS_LANGS = ['en', 'ko'] as const satisfies readonly LocaleCode[];
 
 export const BLOG_UI = {
@@ -70,6 +88,21 @@ export const BLOG_UI = {
     all: 'All articles',
     breadcrumb: 'Breadcrumb',
     langNote: 'This blog is available in English and Korean.',
+    search: 'Search articles',
+    filter: 'Filter by topic',
+    featured: 'Featured',
+    readArticle: 'Read article',
+    allTopics: 'All',
+    cats: { compare: 'Comparisons', money: 'Pricing & cost', safety: 'Safety', grow: 'Growth', build: 'Build', basics: 'Basics' },
+    noResults: 'No articles match “{q}”.',
+    clear: 'Show all articles',
+    count: '{n} articles',
+    countOne: '1 article',
+    back: 'All articles',
+    copyLink: 'Copy link',
+    copied: 'Link copied',
+    tagsLabel: 'Topics',
+    team: 'The equipe team',
   },
   ko: {
     nav: '블로그',
@@ -97,5 +130,20 @@ export const BLOG_UI = {
     all: '모든 글',
     breadcrumb: '이동 경로',
     langNote: '블로그는 영어와 한국어로 제공돼요.',
+    search: '글 검색',
+    filter: '주제별로 보기',
+    featured: '추천 글',
+    readArticle: '글 읽기',
+    allTopics: '전체',
+    cats: { compare: '비교', money: '가격·비용', safety: '안전', grow: '성장', build: '만들기', basics: '기초' },
+    noResults: '“{q}”에 맞는 글이 없어요.',
+    clear: '모든 글 보기',
+    count: '글 {n}개',
+    countOne: '글 1개',
+    back: '모든 글',
+    copyLink: '링크 복사',
+    copied: '링크를 복사했어요',
+    tagsLabel: '주제',
+    team: 'equipe 팀',
   },
 } as const;

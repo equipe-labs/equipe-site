@@ -5,11 +5,13 @@ import PageShell from '../../../components/PageShell.astro';
 import FaqJsonLd from '../../../components/FaqJsonLd.astro';
 import IdeaBox from '../../../components/IdeaBox.astro';
 import ArticleJsonLd from '../../../components/blog/ArticleJsonLd.astro';
+import BlogIcons from '../../../components/blog/BlogIcons.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
 import '../../../styles/home.css';
 import '../../../styles/blog.css';
 import { SITE } from '../../../data/site';
 import { FOUNDER } from '../../../data/flags';
-import { BLOG_LANGS, BLOG_UI, blogPath, getArticles, languagesOf, readingMinutes, slugOf, wordCount, type BlogLang } from '../../../data/blog';
+import { BLOG_LANGS, BLOG_UI, blogPath, categoryOf, getArticles, languagesOf, readingMinutes, slugOf, wordCount, type BlogLang } from '../../../data/blog';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../../i18n';
 
 export async function getStaticPaths() {
@@ -44,6 +46,8 @@ const rel = articles
   .slice(0, 3)
   .map((x) => x.a);
 const t = getMessages(code);
+const cat = categoryOf(article);
+const authorName = d.author === 'The equipe team' ? ui.team : d.author;
 const byFounder = !!FOUNDER && d.author === FOUNDER.name;
 const crumbs = [
   { name: ui.home, url: new URL(localePath(info), Astro.site).href },
@@ -69,8 +73,10 @@ const more = [
     {d.tags.map((tag) => <meta property="article:tag" content={tag} />)}
     <link rel="alternate" type="application/rss+xml" title="equipe blog" href={`${blogPath(lang)}rss.xml`} />
   </Fragment>
-  <article>
-    <header class="pg-h blog-h"><div class="wrap">
+  <BlogIcons />
+  <div class="rp" aria-hidden="true"></div>
+  <article class="post">
+    <header class="pg-h blog-h post-h"><div class="wrap">
       <nav class="crumbs" aria-label={ui.breadcrumb}>
         <ol>
           <li><a href={localePath(info)}>{ui.home}</a></li>
@@ -78,29 +84,42 @@ const more = [
           <li aria-current="page">{d.title}</li>
         </ol>
       </nav>
+      <p class="post-k"><a class="post-cat" data-cat={cat} href={`${blogPath(lang)}?topic=${cat}`}><svg viewBox="0 0 24 24" aria-hidden="true"><use href={`#bi-${cat}`} /></svg>{ui.cats[cat]}</a><span>{ui.minRead.replace('{n}', String(minutes))}</span></p>
       <h1>{d.title}</h1>
       <p class="pg-lead">{d.description}</p>
-      <p class="post-meta">
-        <span>{ui.by} <a href={subPath(info, 'about')}>{d.author}</a>{byFounder && FOUNDER ? `, ${FOUNDER.role[lang]}` : ''}</span>
-        <span>{ui.published} <time datetime={d.date.toISOString().slice(0, 10)}>{fmt(d.date)}</time></span>
-        {d.updated && <span>{ui.updated} <time datetime={d.updated.toISOString().slice(0, 10)}>{fmt(d.updated)}</time></span>}
-        <span>{ui.minRead.replace('{n}', String(minutes))}</span>
-      </p>
+      <div class="post-by">
+        {byFounder ? (
+          <img class="av" src="/brand/founder-96.webp" alt="" width="44" height="44" />
+        ) : (
+          <svg class="av" viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><rect width="100" height="100" rx="50" fill="#2A2B31" /><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z" /><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5" /></svg>
+        )}
+        <div class="post-who">
+          <p><span class="sr-only">{ui.by} </span><a href={subPath(info, 'about')}>{authorName}</a>{byFounder && FOUNDER ? <span class="post-role"> · {FOUNDER.role[lang]}</span> : ''}</p>
+          <p>
+            <span>{ui.published} <time datetime={d.date.toISOString().slice(0, 10)}>{fmt(d.date)}</time></span>
+            {d.updated && <span>{ui.updated} <time datetime={d.updated.toISOString().slice(0, 10)}>{fmt(d.updated)}</time></span>}
+          </p>
+        </div>
+        <button type="button" class="post-copy" data-copy data-done={ui.copied}><svg class="i-l" viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-link" /></svg><svg class="i-c" viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-check" /></svg><span data-copy-l aria-live="polite">{ui.copyLink}</span></button>
+      </div>
     </div></header>
-    <section class="pg-s"><div class="wrap">
+    <section class="pg-s post-s"><div class="wrap">
       <div class="post-grid">
         {toc.length > 2 && (
           <nav class="toc" aria-label={ui.toc}>
-            <h2>{ui.toc}</h2>
-            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            <details id="toc-d">
+              <summary><span><span>{ui.toc}</span><span class="toc-cur" data-cur></span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></summary>
+              <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            </details>
+            <script is:inline>(function(){var d=document.getElementById('toc-d');if(d&&matchMedia('(min-width: 1040px)').matches)d.open=true;})();</script>
           </nav>
         )}
-        <div>
+        <div class="post-main">
           <div class="post-body"><Content /></div>
           {d.faqs.length > 0 && (
             <section class="post-faq" aria-labelledby="faq-h">
               <h2 id="faq-h">{ui.faq}</h2>
-              {d.faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+              {d.faqs.map((f) => <details><summary>{f.q}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></summary><p>{f.a}</p></details>)}
             </section>
           )}
           {d.sources.length > 0 && (
@@ -109,34 +128,77 @@ const more = [
               <ul>{d.sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a>{s.accessed && <> ({ui.accessed.replace('{date}', s.accessed)})</>}</li>)}</ul>
             </section>
           )}
+          <div class="post-end">
+            <section class="post-cta" aria-labelledby="cta-h">
+              <h2 id="cta-h">{ui.ctaTitle}</h2>
+              <p>{ui.ctaText}</p>
+              <IdeaBox code={code} id="idea-post" location={`blog_${slug}`} />
+            </section>
+            {byFounder && FOUNDER && (
+              <aside class="post-author" aria-label={d.author}>
+                <picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="64" height="64" loading="lazy" /></picture>
+                <div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang]}</p><p>{FOUNDER.story[lang]}</p><p><a href={FOUNDER.links.x} rel="me noopener">X</a> · <a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a> · <a href={subPath(info, 'about')}>{t.nav.about}</a></p></div>
+              </aside>
+            )}
+            <aside class="post-about" aria-labelledby="about-h">
+              <h2 id="about-h">{ui.aboutTitle}</h2>
+              <p>{ui.aboutText}</p>
+              <ul>{more.map((m) => <li><a href={m.href}>{m.label}</a></li>)}</ul>
+            </aside>
+          </div>
         </div>
       </div>
-      <div class="post-end">
-        <section class="post-cta" aria-labelledby="cta-h">
-          <h2 id="cta-h">{ui.ctaTitle}</h2>
-          <p>{ui.ctaText}</p>
-          <IdeaBox code={code} id="idea-post" location={`blog_${slug}`} />
+      {rel.length > 0 && (
+        <section class="post-rel" aria-labelledby="rel-h">
+          <div class="post-rel-h"><h2 id="rel-h">{ui.related}</h2><a href={blogPath(lang)}>{ui.all}<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#bi-arrow" /></svg></a></div>
+          <ul class="bi-grid">{rel.map((a) => <BlogCard a={a} lang={lang} h="h3" />)}</ul>
         </section>
-        {byFounder && FOUNDER && (
-          <aside class="post-author" aria-label={d.author}>
-            <picture><source type="image/webp" srcset="/brand/founder-400.webp" /><img src={FOUNDER.photo} alt={FOUNDER.name} width="64" height="64" loading="lazy" /></picture>
-            <div><p><b>{FOUNDER.name}</b> · {FOUNDER.role[lang]}</p><p>{FOUNDER.story[lang]}</p><p><a href={FOUNDER.links.x} rel="me noopener">X</a> · <a href={FOUNDER.links.linkedin} rel="me noopener">LinkedIn</a> · <a href={subPath(info, 'about')}>{t.nav.about}</a></p></div>
-          </aside>
-        )}
-        <aside class="post-about" aria-labelledby="about-h">
-          <h2 id="about-h">{ui.aboutTitle}</h2>
-          <p>{ui.aboutText}</p>
-          <ul>{more.map((m) => <li><a href={m.href}>{m.label}</a></li>)}</ul>
-        </aside>
-        {rel.length > 0 && (
-          <section class="post-rel" aria-labelledby="rel-h">
-            <h2 id="rel-h">{ui.related}</h2>
-            <ul>{rel.map((a) => (
-              <li class="blog-card"><a href={blogPath(lang, slugOf(a))}><h3>{a.data.title}</h3><p>{a.data.description}</p></a></li>
-            ))}</ul>
-          </section>
-        )}
-      </div>
+      )}
     </div></section>
   </article>
+  <script>
+    // Contents: highlight the section being read and slide the rail marker to it (21st.dev "Table of Contents" pattern).
+    const toc = document.querySelector<HTMLElement>('.toc');
+    if (toc) {
+      const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+      const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter((h): h is HTMLElement => !!h);
+      const list = toc.querySelector<HTMLElement>('ol')!;
+      const set = (id: string | null) => {
+        let on: HTMLAnchorElement | undefined;
+        for (const a of links) {
+          const hit = !!id && a.hash.slice(1) === id;
+          if (hit) { a.setAttribute('aria-current', 'true'); on = a; } else a.removeAttribute('aria-current');
+        }
+        const cur = toc.querySelector<HTMLElement>('[data-cur]');
+        if (cur && cur.textContent !== (on?.textContent ?? '')) cur.textContent = on?.textContent ?? '';
+        if (on) { const r = on.getBoundingClientRect(); list.style.setProperty('--my', `${r.top - list.getBoundingClientRect().top}px`); list.style.setProperty('--mh', `${r.height}px`); list.classList.add('has-m'); }
+        else list.classList.remove('has-m');
+      };
+      let ticking = false;
+      const pick = () => {
+        ticking = false;
+        const line = Math.min(innerHeight * 0.3, 240);
+        let id: string | null = null;
+        for (const h of heads) { if (h.getBoundingClientRect().top - line <= 0) id = h.id; else break; }
+        set(id);
+      };
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(pick); } }, { passive: true });
+      addEventListener('resize', pick, { passive: true });
+      toc.querySelector('details')?.addEventListener('toggle', pick);
+      // On small screens close the contents after a jump, so the section is not hidden under it.
+      links.forEach((a) => a.addEventListener('click', () => { const d = toc.querySelector('details'); if (d && !matchMedia('(min-width: 1040px)').matches) d.open = false; }));
+      pick();
+    }
+    // Copy link: the canonical URL without the #section.
+    const copy = document.querySelector<HTMLButtonElement>('[data-copy]');
+    copy?.addEventListener('click', async () => {
+      const label = copy.querySelector<HTMLElement>('[data-copy-l]')!;
+      const was = label.dataset.was ?? label.textContent!;
+      label.dataset.was = was;
+      try { await navigator.clipboard.writeText(location.href.split('#')[0]); } catch { return; }
+      copy.classList.add('done');
+      label.textContent = copy.dataset.done!;
+      setTimeout(() => { copy.classList.remove('done'); label.textContent = was; }, 2000);
+    });
+  </script>
 </PageShell>

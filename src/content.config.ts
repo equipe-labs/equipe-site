@@ -23,6 +23,8 @@ const blog = defineCollection({
     sources: z.array(z.object({ title: z.string(), url: z.string().url(), accessed: z.string().optional() })).default([]),
     /** Alt text of the social image. */
     imageAlt: z.string().optional(),
+    /** Shown as the large first card on the blog index (the newest featured article wins). */
+    featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
