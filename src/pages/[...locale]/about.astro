@@ -17,6 +17,12 @@ const info = getLocale(code);
 const bl = blogLangFor(code);
 const bu = BLOG_UI[bl];
 const factsHref = bl === 'en' ? '/facts/' : `/${bl}/facts/`;
+// Origin story: English and Korean; other languages show the English line.
+const ORIGIN: Record<string, [string, string]> = {
+  en: ['equipe started as an open-source project, the equipe engine, and is now a cloud service that gives people who do not code their own AI startup team.', 'github.com/equipe-labs/equipe'],
+  ko: ['equipe는 오픈소스 프로젝트(equipe 엔진)로 시작했고, 지금은 코딩을 모르는 사람에게 자기만의 AI 스타트업 팀을 주는 클라우드 서비스예요.', 'github.com/equipe-labs/equipe'],
+};
+const origin = ORIGIN[lang] ?? ORIGIN.en;
 const links = [
   { href: subPath(info, 'security'), label: T.nav.security },
   { href: subPath(info, 'pricing'), label: T.nav.pricing },
@@ -32,6 +38,7 @@ const links = [
     <div class="pg-prose">
       <p class="mission">{A.mission}</p>
       {A.body.map((p) => <p>{p}</p>)}
+      <p>{origin[0]} <a href={SITE.repo}>{origin[1]}</a></p>
       {FOUNDER && (
         <>
           <h2 id="team">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
