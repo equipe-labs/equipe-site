@@ -44,3 +44,21 @@ export const ADVISERS: { name: string; initials: string; role: Record<string, st
     links: { linkedin: 'https://www.linkedin.com/in/akki/' },
   },
 ];
+
+/**
+ * About page team members besides the founder. SJ Seo: name and role "Tech" confirmed by the founder; no verifiable public profile details were found
+ * (the LinkedIn page is not publicly readable and no web source matched), so the blurb states only the role. Monogram, no photo.
+ */
+export const TEAM_HEADING: Record<string, string> = { en: 'Team', ko: '팀' };
+export const TEAM: { name: string; initials: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
+  {
+    name: 'SJ Seo',
+    initials: 'SS',
+    role: { en: 'Tech', ko: 'Tech' },
+    bio: {
+      en: 'SJ Seo is part of the equipe team and works on its technology.',
+      ko: 'SJ Seo는 equipe 팀의 일원으로, 기술을 맡고 있어요.',
+    },
+    links: { linkedin: 'https://www.linkedin.com/in/sj-seo' },
+  },
+];

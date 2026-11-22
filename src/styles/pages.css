@@ -35,3 +35,4 @@ main.pg h2 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.025em; }
 main.pg .pg-card h2, main.pg .plan-h h2 { font-size: 19px; letter-spacing: -0.015em; }
 .pg-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 16px; }
 .pg-links a { font-weight: 600; text-decoration: none; }
+.pg-prose h2[id] { scroll-margin-top: 90px; }
