@@ -79,6 +79,23 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     worksFor: 'Toss',
     links: { linkedin: 'https://www.linkedin.com/in/alxiom' },
   },
+  {
+    // Facts from the LinkedIn profile the founder shared (shaysehee). Photo: that profile's portrait, cropped square.
+    name: 'Sehee Jung',
+    names: { ko: '정세희' },
+    initials: 'SJ',
+    photo: '/brand/sehee-jung-800.jpg',
+    photoLarge: '/brand/sehee-jung-800.jpg',
+    role: { en: 'Product Designer at Toss, former Design Platform Lead', ko: '토스 프로덕트 디자이너 · 전 디자인 플랫폼 리드' },
+    bio: {
+      en: "Sehee Jung has spent five years leading design at Toss. As leader of the PC Design Platform team, Sehee owned UI and UX quality across Toss's PC products, then led the PC part of Toss's design-system architecture for AI agents and end-to-end design for three financial marketplace products across loans and insurance. Today Sehee designs Toss's Insight Intelligence product. Before Toss, Sehee led the Product System Design team at CLASS101 and designed search at LINE, and studied Visual Communication Design at Yonsei University. Sehee is a design adviser to equipe.",
+      ko: '정세희는 토스에서 5년 넘게 디자인을 이끌어 왔어요. PC 디자인 플랫폼 팀 리더로 토스 PC 제품 전반의 UI·UX 완성도를 책임졌고, AI 에이전트를 위한 디자인 시스템 설계에서 PC 파트를 리드했어요. 대출·보험 등 금융 마켓플레이스 제품 세 개의 디자인을 처음부터 끝까지 이끌었고, 지금은 토스 인사이트 인텔리전스 프로덕트를 디자인해요. 그 전에는 CLASS101에서 프로덕트 시스템 디자인 팀을 이끌었고 LINE에서 검색을 디자인했어요. 연세대학교에서 시각디자인을 공부했어요. equipe의 디자인 어드바이저예요.',
+    },
+    jobTitle: 'Product Designer',
+    worksFor: 'Toss',
+    alumniOf: 'Yonsei University',
+    links: { linkedin: 'https://www.linkedin.com/in/shaysehee' },
+  },
 ];
 
 /**
