@@ -1,8 +1,9 @@
 ---
 // Page chrome for the equipe-design pages (/design, /design/docs, /design/examples): header, page tabs, footer.
 import Base from '../layouts/Base.astro';
-import Mark from './Mark.astro';
-import LangMenu from './LangMenu.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import '../styles/site.css';
 import Analytics from './Analytics.astro';
 import LangBanner from './LangBanner.astro';
 import OrganizationJsonLd from './OrganizationJsonLd.astro';
@@ -34,22 +35,7 @@ const home = localePath(info);
   </Fragment>
 
   <a class="skip" href="#main">{t.ui.skip}</a>
-  <header class="site">
-    <div class="wrap">
-      <a class="brand" href={home}><Mark size={28} /> <span class="bt">equipe</span></a>
-      <nav aria-label={t.ui.primaryNav}>
-        <ul>
-          <li class="opt"><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
-          <li class="opt"><a href={subPath(info, 'developers')}>{t.nav.developers}</a></li>
-          <li><a class="cur" href={subPath(info, 'design')} aria-current="page">{d.menu}</a></li>
-          <li class="opt"><a href={`${home}#faq`}>{t.nav.faq}</a></li>
-          <li class="opt"><a href={SITE.repo}>{t.nav.github}</a></li>
-          <li><LangMenu locale={code} label={t.ui.language} subpage={sub[page]} /></li>
-          <li class="cta"><a class="btn primary sm" href={SITE.desktopDmg} download>{t.dev.macCta}</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader code={code} page={sub[page]} />
 
   <main id="main" class="dz">
     <div class="wrap">
@@ -61,12 +47,7 @@ const home = localePath(info);
     <slot />
   </main>
 
-  <footer>
-    <div class="wrap">
-      <span class="foot-links"><a href={home}>{t.app.nav.home}</a><a href={`${subPath(info, 'design/docs')}#guardrails`}>{d.nav.guidelines}</a><a href={DESIGN_REPO}>{t.nav.github}</a></span>
-      <span>{t.footer.license}</span>
-    </div>
-  </footer>
+  <SiteFooter code={code} page={sub[page]} />
 
   <script is:inline>
     document.querySelectorAll('.copy').forEach((b) =>

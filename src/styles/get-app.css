@@ -41,7 +41,7 @@
 .get-app .acts { display: grid; gap: var(--s-1); justify-items: end; }
 .get-app .acts .btn { min-width: 120px; }
 @media (max-width: 640px) { .get-app .plat > li { grid-template-columns: 1fr; } .get-app .acts { justify-items: start; } }
-.get-app .badge { display: inline-block; line-height: 0; border-radius: var(--r-1); }
+.get-app .badge { display: inline-block; line-height: 0; border-radius: var(--r-1); padding: 0; margin: 0; border: 0; background: none; gap: 0; }
 .get-app .badge img { height: 44px; width: auto; display: block; }
 .get-app .badge.big img { height: 52px; }
 .get-app .qrline { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-4); align-items: center; margin-top: var(--s-5); }
