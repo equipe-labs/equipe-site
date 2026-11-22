@@ -93,6 +93,8 @@ main.pg .ab-d p.ab-bio { padding: 0; }
 .ab-cta p { margin-top: 14px; color: var(--muted); font-size: 19px; }
 .ab-ctas { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .ab-end { padding-bottom: 112px; }
+/* a lone last cell sits in the middle */
+.ab-grid:not(.ab-n2) > :last-child:nth-child(3n + 1) { grid-column: 2; }
 @media (max-width: 900px) { .ab-story { grid-template-columns: 1fr; gap: 24px; } }
 @media (max-width: 640px) {
   .ab-hero { padding: 72px 0 40px; }
@@ -102,7 +104,8 @@ main.pg .ab-d p.ab-bio { padding: 0; }
   .ab-grid, .ab-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
   .ab-grid > *::before { content: none !important; }
   .ab-grid > *:nth-child(2n)::before { content: '' !important; }
-  .ab-bel { grid-template-columns: 1fr; } .ab-bel > *::before { content: none !important; } .ab-bel::before, .ab-bel::after { display: none; }
+  .ab-grid:not(.ab-bel) > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: 50%; }
+  .ab-bel { grid-template-columns: 1fr; } .ab-grid.ab-bel > :nth-child(n)::before { content: none !important; } .ab-bel::before, .ab-bel::after { display: none; }
   .ab-b { padding: 8px 0 20px; }
   .ab-p { padding: 24px 12px 20px; }
   .ab-av { width: 64px; height: 64px; }
