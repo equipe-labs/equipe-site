@@ -1,5 +1,5 @@
 ---
-// One person on /about, in the centered "team grid" pattern: small round avatar, name, role, a short bio that opens on tap or click, and small link icons.
+// One person on /about, in the centered "team grid" pattern: small round avatar, name, role, a short bio, and small link icons.
 interface Props { name: string; role: string; bio: string; photo?: string; initials: string; links: { linkedin: string; web?: string; github?: string; x?: string }; i?: number }
 const { name, role, bio, photo, initials, links, i = 0 } = Astro.props;
 // Avatars are shown at 64-80 px, so the 400 px export covers 2x and 3x screens; the page passes the 800 px path.
@@ -17,8 +17,8 @@ const items = [
 ];
 ---
 <article class="ab-p rv" style={`--i:${i}`}>
-  <details class="ab-d">
-    <summary>
+  <div class="ab-d">
+    <div class="ab-sum">
       <span class="ab-av">
         {photo
           ? <picture><source type="image/webp" srcset={webp} /><img src={small} alt="" width="80" height="80" loading="lazy" decoding="async" /></picture>
@@ -26,9 +26,9 @@ const items = [
       </span>
       <span class="ab-name">{name}</span>
       <span class="ab-role">{role}</span>
-    </summary>
+    </div>
     <p class="ab-bio">{bio}</p>
-  </details>
+  </div>
   <p class="ab-soc">
     {items.map((x) => (
       <a href={x.href} rel="me noopener" aria-label={x.label} title={x.label}><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d={I[x.k as keyof typeof I]} /></svg></a>
