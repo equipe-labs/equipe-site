@@ -26,3 +26,25 @@ const config = JSON.stringify({ key, uiHost, environment, locales }).replace(/</
     </>
   )
 }
+
+<!-- How people found us: first and last touch (utm_*, referrer host, ref codes like the badge's ?ref=badge&site=, which ad
+     click id was there but never its value) are kept in sessionStorage, cookieless, and handed to app.equipe.im in the
+     links as a small `_eqa` parameter, so the sign-up can be traced back. Nothing is sent from here. -->
+<script is:inline>
+  (function () { try {
+    var S = sessionStorage, L = location, q = new URLSearchParams(L.search), o = {};
+    ['source', 'medium', 'campaign', 'content', 'term'].forEach(function (n) { var v = q.get('utm_' + n); if (v) o[n] = v.toLowerCase().slice(0, 80); });
+    var ref = q.get('ref'); if (ref) o.ref = ref.toLowerCase().slice(0, 40);
+    var site = q.get('site'); if (site) o.site = site.toLowerCase().slice(0, 60);
+    ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'ttclid', 'twclid', 'li_fat_id', 'rdt_cid'].forEach(function (c) { if (q.get(c)) o.click = c; });
+    try { var h = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : ''; if (h && !/(^|\.)equipe\.(im|page)$/.test(h) && h !== L.hostname) o.referrer = h.slice(0, 80); } catch (e) {}
+    var landing = L.pathname.slice(0, 100);
+    if (!S.eq_af) S.eq_af = JSON.stringify(Object.assign({}, o, { landing: landing, at: Math.floor(Date.now() / 1000) }));
+    if (Object.keys(o).length) S.eq_al = JSON.stringify(Object.assign({}, o, { landing: landing }));
+    function enc() { var j = JSON.stringify({ f: JSON.parse(S.eq_af), l: JSON.parse(S.eq_al || S.eq_af) }); return btoa(unescape(encodeURIComponent(j))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+    function tag(a) { try { var u = new URL(a.href); if (u.hostname === 'app.equipe.im' && !u.searchParams.has('_eqa')) { u.searchParams.set('_eqa', enc()); a.href = u.toString(); } } catch (e) {} }
+    function all() { [].forEach.call(document.querySelectorAll('a[href*="app.equipe.im"]'), tag); }
+    all(); document.addEventListener('DOMContentLoaded', all);
+    document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a'); if (a) tag(a); }, true);
+  } catch (e) {} })();
+</script>
