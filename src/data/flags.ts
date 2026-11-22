@@ -38,7 +38,7 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     initials: 'AS',
     photo: '/brand/akki-800.jpg',
     photoLarge: '/brand/akki-800.jpg',
-    role: { en: 'Adviser · Head of Voices at Cartesia', ko: '어드바이저 · Cartesia Head of Voices' },
+    role: { en: 'Head of Voices at Cartesia', ko: 'Cartesia Head of Voices' },
     bio: {
       en: 'Akki Shafiqullah leads Voices at Cartesia, the AI voice company, and is based in San Francisco. A former founder and Bain consultant, he advises equipe.',
       ko: 'Akki Shafiqullah는 AI 음성 회사 Cartesia에서 Voices를 이끌고, 샌프란시스코에 살아요. 창업과 Bain 컨설턴트 경험이 있고, equipe의 어드바이저예요.',

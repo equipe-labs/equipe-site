@@ -165,7 +165,7 @@ for (const { lang, path } of LOCALES) {
   const res = await get(`${CANONICAL}/favicon.ico`);
   const buf = Buffer.from(await res.arrayBuffer());
   check(res.status === 200 && buf.readUInt16LE(2) === 1, `favicon.ico ${res.status}, ICO file`);
-  check(buf[6] === 32 && buf[7] === 32, 'favicon.ico 32x32');
+  { const n = buf.readUInt16LE(4); const sizes = Array.from({ length: n }, (_, i) => buf[6 + 16 * i]); check(sizes.includes(32) && sizes.includes(16), `favicon.ico has 16 and 32 px sizes (${sizes.join(', ')})`); }
 
   const nf = await get(`${CANONICAL}/no-such-page-seo-check/`);
   const body = await nf.text();
@@ -291,7 +291,7 @@ section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Fa
   {
     const about = await (await get(`${CANONICAL}/about/`)).text();
     const person = jsonLd(about).find((x) => x?.['@type'] === 'Person');
-    check(!person || (person.name && person.sameAs?.length >= 2 && about.includes('/brand/founder.jpg')), '/about/ founder Person JSON-LD has name and sameAs, photo shown');
+    check(!person || (person.name && person.sameAs?.length >= 2 && about.includes('/brand/founder')), '/about/ founder Person JSON-LD has name and sameAs, photo shown');
   }
   const sm = await (await get(`${CANONICAL}/sitemap-0.xml`)).text();
   const missing = (slugsByLang.en ?? []).filter((s) => !sm.includes(`<loc>${CANONICAL}/blog/${s}/</loc>`));

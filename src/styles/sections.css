@@ -78,7 +78,7 @@ main.home .head.center .kicker::before { display: none; }
 .fsteps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); margin-top: 72px; counter-reset: s; }
 .fsteps::before { content: ''; position: absolute; left: calc(100% / 6); right: calc(100% / 6); top: 21px; height: 2px; background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 30%, var(--line))); }
 .fsteps li { position: relative; text-align: center; padding: 0 var(--s-3); }
-.fn { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); color: var(--accent); font: 600 14px/1 var(--mono); }
+.fn { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); color: var(--accent); font: 600 14px/1 var(--sans); }
 main.home .fsteps h3 { margin-top: var(--s-5); font-size: 21px; }
 .fsteps p { margin: var(--s-3) auto 0; max-width: 330px; font-size: 16.5px; line-height: 1.55; color: var(--muted); }
 .fcta { display: flex; justify-content: center; margin-top: 56px; }

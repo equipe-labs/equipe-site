@@ -7,6 +7,7 @@ import LangMenu from './LangMenu.astro';
 import { DESIGN_LIVE } from '../data/design';
 import { getDesignText } from '../i18n/design';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
+import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
 const { code, page, langs } = Astro.props;
@@ -16,11 +17,14 @@ const dz = getDesignText(code);
 // Off the home page, the section links go back to it.
 const home = page === 'home' ? '' : localePath(info);
 const sub = page === 'home' ? undefined : page;
+const bl = blogLangFor(code);
+const blog = { href: blogPath(bl), label: BLOG_UI[bl].nav };
 const menu = [
   { href: `${home}#how-it-works`, label: t.nav.how },
   { href: subPath(info, 'pricing'), label: t.nav.pricing },
   { href: subPath(info, 'security'), label: t.nav.security },
   { href: subPath(info, 'developers'), label: t.nav.developers },
+  blog,
   { href: `${subPath(info, 'about')}#team`, label: t.nav.about },
 ];
 const product = [
@@ -45,6 +49,7 @@ const product = [
         <li class="opt"><a href={subPath(info, 'security')} aria-current={page === 'security' ? 'page' : undefined}>{t.nav.security}</a></li>
         {DESIGN_LIVE && <li class="opt dz-link"><a href={subPath(info, 'design')} data-ph="design_menu_click">{dz.menu}</a></li>}
         <li class="opt"><a href={subPath(info, 'developers')} aria-current={page === 'developers' ? 'page' : undefined} data-ph="developers_link_click" data-ph-location="header">{t.nav.developers}</a></li>
+        <li class="opt"><a href={blog.href} aria-current={page === 'blog' ? 'page' : undefined}>{blog.label}</a></li>
         <li class="opt"><a href={`${subPath(info, 'about')}#team`} aria-current={page === 'about' ? 'page' : undefined}>{t.nav.about}</a></li>
       </ul>
     </nav>

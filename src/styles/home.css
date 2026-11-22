@@ -54,7 +54,7 @@ main.home .handled h3 { font-size: 15px; font-weight: 600; color: var(--muted); 
 .step { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; align-items: center; }
 .step.rev { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
 .step.rev .txt { order: 2; }
-.step .n { display: block; font: 600 15px/1 var(--mono); color: var(--accent); letter-spacing: 0.04em; }
+.step .n { display: block; font: 600 15px/1 var(--sans); color: var(--accent); letter-spacing: 0.04em; }
 main.home .step h3 { margin-top: var(--s-4); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -0.02em; }
 .step .txt p { margin-top: var(--s-4); font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 460px; }
 .stage { display: grid; place-items: center; padding: 48px 40px; border-radius: 24px; background: var(--sunken); border: 1px solid var(--line); min-height: 380px; }
@@ -215,7 +215,7 @@ main.home .hero .shot { padding-bottom: 120px; }
 .rail li:last-child::before { right: 50%; }
 .rail li.is-soon::before { background: none; border-top: 2px dashed var(--dash); }
 .rail a { display: grid; gap: var(--s-2); text-decoration: none; color: var(--text); padding-right: var(--s-4); }
-.rail .n { position: absolute; top: 0; left: 0; display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font: 600 13px/1 var(--mono); letter-spacing: 0.02em; }
+.rail .n { position: absolute; top: 0; left: 0; display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font: 600 13px/1 var(--sans); letter-spacing: 0; }
 .rail .is-soon .n { background: var(--bg); color: var(--muted); border: 1.5px dashed var(--dash); }
 .rail .t { margin-top: 24px; font-size: 17px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
 .how .steps { margin-top: 96px; }
@@ -236,7 +236,7 @@ main.home .cmp h3 { font-size: 15px; font-weight: 600; letter-spacing: 0; paddin
 .outcome { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4) var(--s-6); margin-top: var(--s-5); padding: var(--s-4) var(--s-5) var(--s-4) var(--s-6); border: 1px solid var(--line); border-radius: 16px; }
 .outcome ul { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); }
 .outcome li { display: flex; align-items: center; gap: var(--s-2); font-size: 15.5px; font-weight: 500; }
-.outcome .on { font: 600 12px/1 var(--mono); color: var(--accent); }
+.outcome .on { font: 600 12px/1 var(--sans); color: var(--accent); }
 
 /* FAQ: a way out for questions the list does not answer */
 .fqh .more { margin-top: var(--s-5); font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 320px; }

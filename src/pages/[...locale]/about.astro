@@ -32,7 +32,6 @@ const links = [
 <PageShell code={code} page="about" title={A.title} description={A.desc}>
   <div class="ab">
     <section class="pg-h ab-hero"><div class="wrap">
-      <p class="ab-eyebrow ld">{C.eyebrow}</p>
       <h1 class="ld">{C.h1}</h1>
       <p class="pg-lead ab-lead ld">{C.lead}</p>
     </div></section>
@@ -50,25 +49,25 @@ const links = [
     </div></section>
 
     <section class="ab-s"><div class="wrap">
-      <h2 class="rv">{C.beliefsH}</h2>
-      <div class="ab-bel">
-        {C.beliefs.map((b, i) => <div class="ab-b rv" style={`--i:${i + 1}`}><span class="ab-n">0{i + 1}</span><h3>{b.h}</h3><p>{b.p}</p></div>)}
+      <h2 class="rv ab-c">{C.beliefsH}</h2>
+      <div class="ab-grid ab-bel">
+        {C.beliefs.map((b, i) => <div class="ab-b rv" style={`--i:${i + 1}`}><h3>{b.h}</h3><p>{b.p}</p></div>)}
       </div>
     </div></section>
 
     <section class="ab-s"><div class="wrap">
-      <h2 id="team" class="rv">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
+      <h2 id="team" class="rv ab-c">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
       <div class="ab-grid">
-        {FOUNDER && <PersonCard i={1} name={FOUNDER.name} role={FOUNDER.role[lang] ?? FOUNDER.role.en} bio={FOUNDER_LINE[lang] ?? FOUNDER_LINE.en} photo={FOUNDER.photoLarge} initials="AK" linkedin={FOUNDER.links.linkedin} extra={[{ label: 'X', href: FOUNDER.links.x }]} />}
-        {TEAM.map((m, i) => <PersonCard i={i + 2} name={m.name} role={m.role[lang] ?? m.role.en} bio={m.bio[lang] ?? m.bio.en} photo={m.photo} initials={m.initials} linkedin={m.links.linkedin} />)}
+        {FOUNDER && <PersonCard i={1} name={FOUNDER.name} role={FOUNDER.role[lang] ?? FOUNDER.role.en} bio={FOUNDER_LINE[lang] ?? FOUNDER_LINE.en} photo={FOUNDER.photoLarge} initials="AK" links={{ linkedin: FOUNDER.links.linkedin, x: FOUNDER.links.x }} />}
+        {TEAM.map((m, i) => <PersonCard i={i + 2} name={m.name} role={m.role[lang] ?? m.role.en} bio={m.bio[lang] ?? m.bio.en} photo={m.photo} initials={m.initials} links={m.links} />)}
       </div>
     </div></section>
 
     {ADVISERS.length > 0 && (
       <section class="ab-s"><div class="wrap">
-        <h2 id="advisers" class="rv">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
-        <div class="ab-grid">
-          {ADVISERS.map((a, i) => <PersonCard i={i + 1} name={a.names?.[lang] ?? a.name} role={a.role[lang] ?? a.role.en} bio={a.bio[lang] ?? a.bio.en} photo={a.photo} initials={a.initials} linkedin={a.links.linkedin} extra={[...(a.links.web ? [{ label: 'Web', href: a.links.web }] : []), ...(a.links.github ? [{ label: 'GitHub', href: a.links.github }] : [])]} />)}
+        <h2 id="advisers" class="rv ab-c">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
+        <div class="ab-grid ab-n2">
+          {ADVISERS.map((a, i) => <PersonCard i={i + 1} name={a.names?.[lang] ?? a.name} role={a.role[lang] ?? a.role.en} bio={a.bio[lang] ?? a.bio.en} photo={a.photo} initials={a.initials} links={a.links} />)}
         </div>
       </div></section>
     )}
