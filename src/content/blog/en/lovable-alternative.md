@@ -87,7 +87,7 @@ For a deeper look at each, see [equipe vs Lovable, Bolt and Base44](/blog/equipe
 
 equipe is an AI startup team for people who cannot code: a PM, engineers, a designer, QA and a data analyst, all AI agents. They build, launch and keep improving your product, and anything that goes live, costs money or reaches customers waits for your one-tap approval. Hosting, database and domain are set up by the team, so you never sign in to a code host or cloud console.
 
-What it costs: Team is $19 a month or $190 a year with 20 hours of team time a month; extra time is $0.25 an hour from credits. You can start free with $5 in credit, and $10 more when you add a card (no charge). Every request shows its expected cost first. See [pricing](/pricing/) and the [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/).
+What it costs: Team is $19 a month or $190 a year with hosting, storage and monthly credits; everything the team does is paid from credits. You can start free with $5 in credit, and $10 more when you add a card (no charge). Every request shows its expected cost first. See [pricing](/pricing/) and the [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/).
 
 Honest limits:
 

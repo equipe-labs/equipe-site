@@ -39,7 +39,7 @@ A good card has five parts. Look for each one.
 | The ask | What exactly will happen if you say yes | If you cannot say it in one sentence, ask for a clearer card |
 | The options | Usually more than yes or no, such as a smaller version | You are choosing a path, not rubber-stamping |
 | The recommendation | What the PM suggests and why | A starting point, not an order |
-| The expected cost | Money or team time the action will use | The number to compare with your monthly cap |
+| The expected cost | Money (credits) the action will use | The number to compare with your monthly cap |
 | One tap | The answer itself | Deciding should take seconds, not a meeting |
 
 The recommendation comes from the PM, the AI role that asks questions first, turns your idea into a plan and brings you only the decisions that are yours. The cost is shown before anything runs. You also set a monthly cap and can see what you have spent this month and the expected total at month end.

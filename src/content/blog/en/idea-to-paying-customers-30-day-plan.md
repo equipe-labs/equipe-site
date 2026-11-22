@@ -87,7 +87,7 @@ Charging is a feature. Taking a first payment, even a small one, teaches you mor
 
 ## What it might cost
 
-If you run this with equipe, the starting credit ($5, and $10 more with a card, no charge) and up to 2 hours of team time are included in the free start. A live product on its own can be kept up for $19 a month with Hosting only, and the Team plan is $19 a month or $190 a year for 20 hours of team time, plus credits for AI work. Every request shows its expected cost first, and you set a monthly cap. Details are on the [pricing page](/pricing/) and in our [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/). Domains are billed at cost.
+If you run this with equipe, the starting credit ($5, and $10 more with a card, no charge) is included in the free start. A live product on its own can be kept up for $19 a month with Hosting only, and the Team plan is $19 a month or $190 a year with hosting, storage and monthly credits, and everything the team does is paid from credits. Every request shows its expected cost first, and you set a monthly cap. Details are on the [pricing page](/pricing/) and in our [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/). Domains are billed at cost.
 
 ## Common traps
 

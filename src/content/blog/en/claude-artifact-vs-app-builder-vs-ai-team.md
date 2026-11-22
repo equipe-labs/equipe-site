@@ -115,7 +115,7 @@ How equipe approaches these questions is in [is equipe safe?](/blog/is-equipe-sa
 
 ## Where equipe fits (and where it does not)
 
-equipe fits if you cannot code, want a real product with a domain and a database, and prefer to approve decisions rather than make every edit. Free start gives $5 of credit at team creation and $10 more when you add a card (no charge), up to 2 hours of team time, no card needed. See [pricing](/pricing/) for the full picture.
+equipe fits if you cannot code, want a real product with a domain and a database, and prefer to approve decisions rather than make every edit. Free start gives $5 of credit at team creation and $10 more when you add a card (no charge), no card needed. See [pricing](/pricing/) for the full picture.
 
 It is not the right fit if:
 - You only want to explore an idea. A Claude artifact is enough and costs nothing extra.

@@ -25,7 +25,7 @@ This guide walks through the whole path, in plain words: what "real" means, the 
 
 ## What "a real product" means
 
-A demo works while you are watching. A real product keeps working while you are asleep. Before you call something launched, check that it has these six things:
+A demo works while you are watching. A real product keeps working while you are away. Before you call something launched, check that it has these six things:
 
 1. **Its own address.** A web address people can visit and share, ideally on your own domain.
 2. **Somewhere to keep data.** Sign-ups, orders, bookings and settings are stored in a database, not in someone's browser tab.
@@ -123,7 +123,7 @@ equipe is an AI startup team for people who cannot code. A PM turns your idea in
 
 What is honest to say about today: the team already builds and ships real products (this website and the equipe apps were built by equipe teams). One-step import from Claude with a database and a domain, and weekly usage reports with proposals, are not shipped yet. Until import ships, you share the code or describe it and the team moves it for you.
 
-You can start free: $5 of credit when you create your team, including up to 2 hours of team time, and no card is needed. The [pricing page](/pricing/) has the full numbers, and [the security page](/security/) explains what the team can and cannot do on its own.
+You can start free: $5 of credit when you create your team, and no card is needed. The [pricing page](/pricing/) has the full numbers, and [the security page](/security/) explains what the team can and cannot do on its own.
 
 ## A pre-launch checklist
 

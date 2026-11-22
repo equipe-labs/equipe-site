@@ -1,30 +1,30 @@
 ---
 title: "How much does it cost to build and run a small app with AI agents?"
-description: "A line-by-line cost breakdown for a small app run by AI agents: plans, credits, team time, hosting and domains, with equipe's real prices and worked examples."
+description: "A line-by-line cost breakdown for a small app run by AI agents: plans, credits, hosting and domains, with equipe's real prices and worked examples."
 lang: en
 date: 2026-11-21
 tags: ["pricing", "cost", "credits"]
 imageAlt: "How much does it cost to build and run a small app with AI agents — equipe blog"
 faqs:
   - q: "What does it cost to start on equipe?"
-    a: "Nothing up front. You get $5 of credit when you create your team and $10 more when you add a card (no charge), including up to 2 hours of team time. No card is needed to start."
+    a: "Nothing up front. You get $5 of credit when you create your team and $10 more when you add a card (no charge). No card is needed to start."
   - q: "What is the monthly cost of keeping a small app live on equipe?"
-    a: "Hosting only is $19 a month: your product, sites, domains and storage stay live while the team sleeps. The Team plan is $19 a month or $190 a year and adds 20 hours of team time every month with your whole team."
-  - q: "What is team time?"
-    a: "The time your team's computer is running: while it builds, tests, deploys or waits for you. After 20 minutes without use it sleeps and the clock stops. Beyond your plan's hours it costs $0.25 an hour, metered per minute."
+    a: "Hosting only is $19 a month: your product, sites, domains and storage stay live, and your team works whenever you have credits. The Team plan is $19 a month or $190 a year and adds your whole team, with monthly credits that roll over for 2 months."
+  - q: "What do credits pay for?"
+    a: "Everything the team does while it works: AI work at the model's list price plus a margin, shown to the cent per task, and the cloud computer it works on. When the team is not working, it costs nothing. A team stops only when its credits run out, and adding credits lets it continue right away."
   - q: "Can I cap what I spend?"
     a: "Yes. Every request shows its expected cost first, and you set a monthly cap. You also see the expected total for the month."
   - q: "Are there hidden costs?"
-    a: "The costs are the plan, credits for AI work (the model's list price plus a margin, shown to the cent per task), team time beyond the plan, and domains at cost. We do not yet publish a typical monthly total because we do not have enough real usage data."
+    a: "The costs are the plan, credits for everything the team does (AI work at the model's list price plus a margin, shown to the cent per task, and the cloud computer it works on), and domains at cost. We do not yet publish a typical monthly total because we do not have enough real usage data."
   - q: "How much more does it cost when my team grows?"
-    a: "The Team plan includes 5 people. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and AI credits and team time are shared by the whole team, not counted per person."
+    a: "The Team plan includes 5 people. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and credits are shared by the whole team, not counted per person."
 ---
 
 "How much will this cost me?" is the first question a non-coder asks, and the vaguest answer in the industry is "it depends". This article gives you the actual line items for a small app run by AI agents, using equipe's real prices (as of 21 November 2026), and shows you how to estimate your own month.
 
 One honest note first: we do not publish a "most products spend $X a month" figure. We do not have enough real usage data yet, and we would rather leave it out than invent one.
 
-<p class="answer"><strong>The short answer.</strong> Keeping a small app live on equipe is $19 a month. Having the whole team work on it is $19 a month (or $190 a year) for 20 hours of team time, plus credits for the AI work. You see each request's expected cost before it runs, and you set a monthly cap.</p>
+<p class="answer"><strong>The short answer.</strong> Keeping a small app live on equipe is $19 a month. Having the whole team work on it is $19 a month (or $190 a year) with monthly credits, plus more credits as the work needs them. You see each request's expected cost before it runs, and you set a monthly cap.</p>
 
 ## The five costs of running a small app
 
@@ -42,38 +42,38 @@ All amounts are in US dollars. 1 credit equals $1.
 
 | Item | Price | Notes |
 | --- | --- | --- |
-| Free start | $0 | $5 of credit when you create your team, $10 more when you add a card (no charge); up to 2 hours of team time; no card needed |
-| Team plan | $19/month or $190/year | 20 hours of team time every month (no rollover), hosting for your sites, storage, your whole team (PM, engineers, designer, QA, data) |
+| Free start | $0 | $5 of credit when you create your team, $10 more when you add a card (no charge); no card needed |
+| Team plan | $19/month or $190/year | Hosting for your sites, storage, monthly credits at $1 = $1 that roll over for 2 months, your whole team (PM, engineers, designer, QA, data) |
 | Extra editors | $5/month each | The Team plan includes 5 people; each extra editor is $5 a month, up to 10 people per team. Free and Hosting only include 2 people |
 | View-only invites | Free | Customers, investors or family can look without taking a seat |
-| Hosting only | $19/month | Your product, sites, domains and storage stay live; the team sleeps |
-| Extra team time | $0.25 per hour | Paid from credits, metered per minute |
+| Hosting only | $19/month | Your product, sites, domains and storage stay live; your team works whenever you have credits |
 | AI work | Model list price plus a margin | Shown to the cent for each task; paid from credits |
+| The team's cloud computer | Part of the work | Drawn from credits only while the team is working; nothing when it is not |
 | Domains | At cost | Paid from credits |
 | Credit packs | $25, $50, $100, $250 | Valid 12 months; unused credits refundable within 14 days |
-| Optional monthly AI credits | Your choice | They roll over for 2 months |
+| Monthly credits | Included in the Team plan | At $1 = $1; they roll over for 2 months |
 
 The yearly Team price of $190 is two months free compared with paying monthly.
 
-## What "team time" means
+## What credits pay for
 
-Team time is the part that confuses people, so here it is in plain terms. Your team works on its own computer in the cloud. **Team time is the time that computer is running:** while it builds, tests, deploys, or waits for your answer. When nobody has used it for 20 minutes, it goes to sleep and the clock stops. It wakes in a few seconds when you open your team, send a message or scheduled work is due.
+There is one concept to learn: credits, where 1 credit is $1. Everything your team does while it works draws from them. That is the AI work (the model's list price plus our margin, shown to the cent for each task) and the cloud computer the team works on. When the team is not working, it costs nothing, so you are not paying while you are away.
 
-So you are not paying while you are away. Sleeping time is free.
+A team stops only when its credits run out. Add credits and it continues right away, and you can set a monthly cap so you decide the ceiling.
 
-## Three worked examples
+## Four worked examples
 
-These use only equipe's list prices. The "AI work" line is left as a variable, because it depends on what you ask for. Each request shows its expected cost before it runs, so you can build your own number.
+These use only equipe's list prices. The credits a request uses are left as a variable, because they depend on what you ask for. Each request shows its expected cost before it runs, so you can build your own number.
 
-**1. Trying an idea.** Create a team: $5 credit, plus $10 more if you add a card. Up to 2 hours of team time are included. When the 2 hours are used, your team rests until you pick a plan or add credits. Fixed cost: **$0**. AI work comes out of your starting credit.
+**1. Trying an idea.** Create a team: $5 credit, plus $10 more if you add a card. When the starting credit is used, your team stops until you pick a plan or add credits. Fixed cost: **$0**. The work comes out of your starting credit.
 
-**2. A product that is live and quiet.** You launched, you are collecting a few sign-ups, and you are not changing anything this month. Choose Hosting only: **$19 a month**. The product, domain and storage stay up. When you want changes, upgrade or add credits to wake the team.
+**2. A product that is live and quiet.** You launched, you are collecting a few sign-ups, and you are not changing anything this month. Choose Hosting only: **$19 a month**. The product, domain and storage stay up. When you want changes, add credits and your team gets to work.
 
-**3. A product you are actively improving.** You are on the Team plan: **$19 a month** (or about $15.83 a month if you pay the $190 yearly price). You use 25 hours of team time in a busy month: the plan covers 20, and the other 5 hours cost 5 × $0.25 = **$1.25** from credits. Fixed cost for the month: **$20.25**, plus the AI work for that month, plus any domain.
+**3. A product you are actively improving.** You are on the Team plan: **$19 a month** (or about $15.83 a month if you pay the $190 yearly price). Your monthly credits cover the work, and you add credits in a busier month. Fixed cost for the month: **$19** (or $15.83), plus any extra credits you choose to add, plus any domain.
 
-**4. A growing team.** Seven people work on one product. The Team plan includes 5, so 2 extra editors cost 2 × $5 = **$10** a month, for **$29** a month in fixed costs before extra team time and AI work. AI credits and team time are shared by the whole team, not counted per person, so adding people does not multiply those. Anyone who only needs to watch can be invited view-only for free.
+**4. A growing team.** Seven people work on one product. The Team plan includes 5, so 2 extra editors cost 2 × $5 = **$10** a month, for **$29** a month in fixed costs before any extra credits. Credits are shared by the whole team, not counted per person, so adding people does not multiply them. Anyone who only needs to watch can be invited view-only for free.
 
-Notice what dominates. For a small app, the fixed costs are modest. The variable part, the AI work, scales with how much you change. That is the part to watch, and the part you control with the cap.
+Notice what dominates. For a small app, the fixed costs are modest. The variable part, the credits the work uses, scales with how much you change. That is the part to watch, and the part you control with the cap.
 
 ## How to cap and predict spending
 
@@ -81,7 +81,7 @@ Three habits keep this predictable:
 
 - **Read the cost before approving.** Every request shows its expected cost first. If it looks high, ask the PM to shrink the scope.
 - **Set a monthly cap.** You choose the ceiling. You also always see the expected total for the month.
-- **Batch your changes.** Several small requests in one sprint use team time more efficiently than a trickle across the whole month.
+- **Batch your changes.** Several small requests in one sprint are easier to estimate and review than a trickle across the whole month.
 
 The app also shows a cost view with what you have spent this month and what is expected by month end, relative to your cap.
 
@@ -104,4 +104,4 @@ Use this list for any AI builder or team, including ours:
 
 ## Where to go from here
 
-If the numbers fit, you can start free and see what a real request costs on your own idea. The [pricing page](/pricing/) keeps the authoritative figures; if this article and that page ever disagree, the pricing page is right. For what the team does with that time, read [what an AI startup team actually does](/blog/what-an-ai-startup-team-does/), and for a plan to reach your first customers within a month, see [the 30-day plan](/blog/idea-to-paying-customers-30-day-plan/).
+If the numbers fit, you can start free and see what a real request costs on your own idea. The [pricing page](/pricing/) keeps the authoritative figures; if this article and that page ever disagree, the pricing page is right. For what the team does with those credits, read [what an AI startup team actually does](/blog/what-an-ai-startup-team-does/), and for a plan to reach your first customers within a month, see [the 30-day plan](/blog/idea-to-paying-customers-30-day-plan/).

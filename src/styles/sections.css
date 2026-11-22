@@ -442,7 +442,7 @@ html.mo .wa-decision.live .wa-ap .l, html.mo .wa-decision.live .wa-ap .ok { anim
 .pop, header.site .navdd ul.lm, details.lang ul.lm, header.site nav details.lang ul.lm { background: var(--surface) !important; }
 .hiw-b .fn { position: static !important; left: auto; }
 
-/* Pricing facts: what team time is, and the estimate-first promise. */
+/* Pricing facts: what happens when credits run out, and the estimate-first promise. */
 .pfacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
 .pfact { display: flex; gap: 14px; align-items: flex-start; padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .pfact > svg { flex: none; width: 22px; height: 22px; margin-top: 1px; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }

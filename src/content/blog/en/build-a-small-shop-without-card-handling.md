@@ -128,4 +128,4 @@ It is not the right fit if you need a full store with real checkout, shipping ru
 4. Launch with request-to-buy to people you know, then check how many ask.
 5. Revisit real checkout after a few weeks of steady requests.
 
-Pricing for products is its own question; see [how to price your first product](/blog/how-to-price-your-first-product/). To start free, you get $5 of credit when you create a team and up to 2 hours of team time, with no card needed; details are on the [pricing page](/pricing/).
+Pricing for products is its own question; see [how to price your first product](/blog/how-to-price-your-first-product/). To start free, you get $5 of credit when you create a team, with no card needed; details are on the [pricing page](/pricing/).

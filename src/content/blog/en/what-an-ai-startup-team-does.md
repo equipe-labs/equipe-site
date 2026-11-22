@@ -115,4 +115,4 @@ An AI startup team makes sense when:
 
 It makes less sense if you enjoy writing the code yourself, or if your project is a one-evening experiment that a chat window can handle.
 
-If it fits, you can start free, with $5 of credit and no card, and tell the PM what you want to build. The [pricing page](/pricing/) explains what team time and credits cost, and our [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through the numbers.
+If it fits, you can start free, with $5 of credit and no card, and tell the PM what you want to build. The [pricing page](/pricing/) explains what credits pay for, and our [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through the numbers.

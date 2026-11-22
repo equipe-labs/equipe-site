@@ -120,4 +120,4 @@ It is not the right fit if you only want a hosted email service with templates a
 4. Add analytics for visits, subscribe rate and returns.
 5. Review the numbers once a week and change one thing.
 
-If you want a team to build this with you, you can start free: $5 of credit when you create a team, up to 2 hours of team time, no card needed. See [pricing](/pricing/) for the details, and [what an AI startup team does](/blog/what-an-ai-startup-team-does/) for how the work is split.
+If you want a team to build this with you, you can start free: $5 of credit when you create a team, no card needed. See [pricing](/pricing/) for the details, and [what an AI startup team does](/blog/what-an-ai-startup-team-does/) for how the work is split.

@@ -28,7 +28,7 @@ This glossary is written for people who cannot code. Each term gets the same fou
 - **What it is:** A computer that is always on and connected to the internet, holding your product so visitors can open it at any hour. Think of it as the shop premises.
 - **Why you care:** If hosting stops, the product is offline, however good it looks.
 - **What can go wrong:** A lapsed payment, a plan that stops publishing, or a service that changes its terms. Free plans sometimes limit who can visit.
-- **How equipe handles it:** The team sets up hosting, one project per customer, on Cloudflare. You never sign in to a code host, hosting service or cloud console. If a product outgrows that, equipe can move it to your own accounts. On the Team plan, hosting for sites is included; the $19-a-month Hosting-only plan keeps product, sites, domains and storage live while the team sleeps. See [pricing](/pricing/).
+- **How equipe handles it:** The team sets up hosting, one project per customer, on Cloudflare. You never sign in to a code host, hosting service or cloud console. If a product outgrows that, equipe can move it to your own accounts. On the Team plan, hosting for sites is included; the $19-a-month Hosting-only plan keeps product, sites, domains and storage live, and your team works whenever you have credits. See [pricing](/pricing/).
 
 ### Backend vs front end
 - **What it is:** The front end is what visitors see and click: pages, buttons, forms. The backend is the part behind the curtain that remembers things, sends emails and checks who is signed in.
