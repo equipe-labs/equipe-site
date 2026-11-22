@@ -33,7 +33,7 @@ const ko: DesignText = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: '버튼·링크' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: '페이지 배경' },
       { token: 'radius.card', value: '12px', swatch: '', use: '카드' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: '본문 글' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: '본문 글' },
     ],
     installTitle: '설치',
     installSub: '한 줄이면 돼요. 내 컴퓨터에서 돌고, 아무것도 올리지 않아요.',

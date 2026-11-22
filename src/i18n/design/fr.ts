@@ -33,7 +33,7 @@ const fr: DesignText = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Boutons et liens' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Fond de page' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Cartes' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: 'Texte courant' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Texte courant' },
     ],
     installTitle: 'Installation',
     installSub: 'Une ligne. Il tourne sur votre machine ; rien n’est envoyé.',

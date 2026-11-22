@@ -33,7 +33,7 @@ const de: DesignText = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Buttons und Links' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Seitenhintergrund' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Karten' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: 'Fließtext' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Fließtext' },
     ],
     installTitle: 'Installation',
     installSub: 'Eine Zeile. Es läuft auf deinem Rechner; nichts wird hochgeladen.',

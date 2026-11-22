@@ -32,8 +32,8 @@ function wrap(text) {
   return lines.map((l) => l.trim());
 }
 
-// San Francisco first, as on the site (drawn by Chrome below), then Inter and the CJK fonts.
-const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display',Inter,'Apple SD Gothic Neo','Hiragino Sans','PingFang SC',system-ui,sans-serif";
+// San Francisco first, as on the site (drawn by Chrome below), then the CJK fonts.
+const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Apple SD Gothic Neo','Hiragino Sans','PingFang SC',system-ui,sans-serif";
 
 // The card: logo, headline, the five roles, and a slice of the shipped app on a phone (iphone.css, same as the site).
 const IPHONE_CSS = await (await import('node:fs/promises')).readFile('src/styles/iphone.css', 'utf8');
@@ -77,7 +77,7 @@ function card(lang, m) {
   </body></html>`;
 }
 
-// Chrome draws the text with the system's San Francisco (librsvg in sharp cannot reach it); without Chrome, sharp renders with Inter or a fallback.
+// Chrome draws the text with the system's San Francisco (librsvg in sharp cannot reach it); without Chrome, sharp renders with a fallback.
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 async function render(svgText, out) {
   if (!existsSync(CHROME)) return void (await sharp(Buffer.from(svgText), { density: 96 }).resize(W, 630).png().toFile(out));

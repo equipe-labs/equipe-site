@@ -33,7 +33,7 @@ const ptBR: DesignText = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Botões e links' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Fundo da página' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Cartões' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: 'Texto do corpo' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Texto do corpo' },
     ],
     installTitle: 'Instalar',
     installSub: 'Uma linha. Roda na sua máquina; nada é enviado.',

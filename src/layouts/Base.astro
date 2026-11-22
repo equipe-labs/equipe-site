@@ -25,7 +25,7 @@ const { lang } = getLocale(Astro.props.locale);
 <html lang={lang}>
   <head>
     <BaseHead {...Astro.props} />
-    {/* No font preloads: San Francisco is the system font on Apple devices, and Inter / Pretendard are fetched only where it is missing. */}
+    {/* No font preloads: San Francisco is the system font on Apple devices, and Pretendard (Korean) is fetched only where Apple SD Gothic Neo is missing. */}
     <slot name="head" />
     <script is:inline>
       document.documentElement.classList.add('js');

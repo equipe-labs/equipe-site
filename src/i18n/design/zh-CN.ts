@@ -33,7 +33,7 @@ const zhCN: DesignText = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: '按钮和链接' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: '页面背景' },
       { token: 'radius.card', value: '12px', swatch: '', use: '卡片' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: '正文' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: '正文' },
     ],
     installTitle: '安装',
     installSub: '一行命令。在你的电脑上运行，不会上传任何内容。',

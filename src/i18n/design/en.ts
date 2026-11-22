@@ -33,7 +33,7 @@ const en = {
       { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Buttons and links' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Page background' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Cards' },
-      { token: 'font.body', value: 'Inter 16/1.5', swatch: '', use: 'Body text' },
+      { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Body text' },
     ],
     installTitle: 'Install',
     installSub: 'One line. It runs on your machine; nothing is uploaded.',

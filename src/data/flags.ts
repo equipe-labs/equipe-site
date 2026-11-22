@@ -32,7 +32,7 @@ export const TYPICAL_TOTALS: null | Record<string, string> = null;
  * and the VapiCon 2026 agenda (https://vapi.ai/vapicon-2026/agenda, "Head of Voices, Cartesia"). Photo: his VapiCon speaker-card portrait as supplied by the founder (public/brand/akki-*.webp|jpg).
  */
 export const ADVISERS_HEADING: Record<string, string> = { en: 'Advisers', ko: '어드바이저' };
-export const ADVISERS: { name: string; names?: Record<string, string>; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; jobTitle: string; worksFor: string; alumniOf?: string; links: { linkedin: string; web?: string; github?: string } }[] = [
+export const ADVISERS: { name: string; names?: Record<string, string>; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; jobTitle: string; worksFor: string; alumniOf?: string; links: { linkedin: string; github?: string } }[] = [
   {
     name: 'Akki Shafiqullah',
     initials: 'AS',
@@ -45,7 +45,7 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     },
     jobTitle: 'Head of Voices',
     worksFor: 'Cartesia',
-    links: { linkedin: 'https://www.linkedin.com/in/akki/', web: 'https://www.akki.info', github: 'https://github.com/akki-codes' },
+    links: { linkedin: 'https://www.linkedin.com/in/akki/', github: 'https://github.com/akki-codes' },
   },
   {
     name: 'Deokseong Kim',
@@ -53,12 +53,12 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     initials: 'DK',
     photo: '/brand/deokseong-kim-800.jpg',
     photoLarge: '/brand/deokseong-kim-800.jpg',
-    role: { en: 'Tech adviser', ko: '기술 어드바이저' },
+    role: { en: 'Leads Engineering Group at imweb', ko: '아임웹 엔지니어링 그룹 리드' },
     bio: {
-      en: 'Deokseong Kim leads the engineering group at imweb. He previously built design-platform tooling at Toss and backend systems at Hyperconnect, and studied Electrical Engineering at KAIST. He advises equipe on engineering.',
-      ko: '김덕성은 아임웹에서 엔지니어링 그룹을 이끌고 있어요. 토스 디자인 플랫폼팀과 하이퍼커넥트에서 일했고, KAIST에서 전기및전자공학을 공부했어요. equipe의 기술 어드바이저예요.',
+      en: 'Deokseong Kim leads the Engineering Group at imweb, where he has extensive enterprise-level backend and infrastructure experience. He previously built design-platform tooling at Toss and backend systems at Hyperconnect, and studied Electrical Engineering at KAIST. He advises equipe on engineering.',
+      ko: '김덕성은 아임웹에서 엔지니어링 그룹을 이끌고 있어요. 아임웹에서 엔터프라이즈 규모의 백엔드와 인프라를 폭넓게 다뤄 왔어요. 토스 디자인 플랫폼팀과 하이퍼커넥트에서 일했고, KAIST에서 전기및전자공학을 공부했어요. equipe의 기술 어드바이저예요.',
     },
-    jobTitle: 'Frontend Chapter Lead',
+    jobTitle: 'Leads the Engineering Group',
     worksFor: 'imweb',
     alumniOf: 'KAIST',
     links: { linkedin: 'https://www.linkedin.com/in/zeakd/' },
@@ -70,12 +70,12 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     initials: 'HK',
     photo: '/brand/hyoungseok-kim-800.jpg',
     photoLarge: '/brand/hyoungseok-kim-800.jpg',
-    role: { en: 'AI research adviser', ko: 'AI 연구 어드바이저' },
+    role: { en: 'AI Researcher at Toss', ko: '토스의 AI 리서처' },
     bio: {
-      en: "HyoungSeok (Alex) Kim is a machine learning engineer at Toss. At NAVER he was a tech lead on HyperCLOVA, Korea's large language model, and co-authored its EMNLP and NAACL papers. He advises equipe on AI.",
-      ko: '김형석은 토스의 머신러닝 엔지니어예요. 네이버에서 한국어 초거대 언어모델 HyperCLOVA의 테크 리드로 학습과 평가를 맡았고, EMNLP·NAACL 논문을 함께 썼어요. equipe의 AI 어드바이저예요.',
+      en: "HyoungSeok (Alex) Kim is an AI researcher at Toss. Previously at NAVER he was a tech lead on HyperCLOVA, Korea's large language model, and co-authored its EMNLP and NAACL papers. He is an AI adviser to equipe.",
+      ko: '김형석은 토스의 AI 리서처예요. 네이버에서 한국어 초거대 언어모델 HyperCLOVA의 테크 리드로 학습과 평가를 맡았고, EMNLP·NAACL 논문을 함께 썼어요. equipe의 AI 어드바이저예요.',
     },
-    jobTitle: 'Machine Learning Engineer',
+    jobTitle: 'AI Researcher',
     worksFor: 'Toss',
     links: { linkedin: 'https://www.linkedin.com/in/alxiom' },
   },
