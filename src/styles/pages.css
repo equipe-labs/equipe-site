@@ -64,7 +64,7 @@ main.pg .ab-hero h1 { font-size: clamp(42px, 7vw, 88px); max-width: 14ch; line-h
 .ab-grid > *:not(:nth-child(3n + 1))::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: var(--ln); }
 .ab-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 66.6%; margin-inline: auto; }
 .ab-n2 > *:not(:nth-child(3n + 1))::before { content: none; }
-.ab-n2 > *:nth-child(2)::before { content: ''; }
+.ab-n2 > *:nth-child(2n)::before { content: ''; }
 .ab-b { padding: 8px 32px 12px; }
 .ab-b h3 { font-size: 20px; letter-spacing: -0.015em; margin: 0 0 8px; }
 .ab-b p { color: var(--muted); font-size: 16px; line-height: 1.55; }

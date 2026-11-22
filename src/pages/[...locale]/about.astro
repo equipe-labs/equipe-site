@@ -66,7 +66,7 @@ const links = [
     {ADVISERS.length > 0 && (
       <section class="ab-s"><div class="wrap">
         <h2 id="advisers" class="rv ab-c">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
-        <div class={`ab-grid${ADVISERS.length === 2 ? ' ab-n2' : ''}`}>
+        <div class={`ab-grid${(ADVISERS.length === 2 || ADVISERS.length === 4) ? ' ab-n2' : ''}`}>
           {ADVISERS.map((a, i) => <PersonCard i={i + 1} name={a.names?.[lang] ?? a.name} role={a.role[lang] ?? a.role.en} bio={a.bio[lang] ?? a.bio.en} photo={a.photo} initials={a.initials} links={a.links} />)}
         </div>
       </div></section>
