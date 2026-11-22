@@ -12,8 +12,8 @@ export const FOUNDER: null | { name: string; photo: string; photoLarge: string; 
   photoLarge: '/brand/founder-800.jpg',
   role: { en: 'Founder of equipe', ko: 'equipe 창업자' },
   story: {
-    en: 'Abel Ko is the founder of equipe, based in San Francisco. He started equipe to give people who cannot code a startup team of their own: AI agents that build, launch and keep improving a product while the person approves what matters.',
-    ko: 'Abel Ko는 equipe의 창업자로, 샌프란시스코에 살아요. 코딩을 모르는 사람도 자기만의 스타트업 팀을 갖도록 equipe를 시작했어요. AI 에이전트가 제품을 만들고, 출시하고, 계속 더 낫게 만들고, 중요한 건 본인이 승인해요.',
+    en: 'Abel Ko is the founder of equipe, based in San Francisco. Before equipe he worked at Toss (Viva Republica), Korea's leading fintech. He started equipe to give people who cannot code a startup team of their own.',
+    ko: 'Abel Ko는 샌프란시스코에 있는 equipe의 창업자예요. equipe 전에는 한국 대표 핀테크인 토스(비바리퍼블리카)에서 일했어요. 코딩을 몰라도 자기만의 스타트업 팀을 가질 수 있도록 equipe를 시작했어요.',
   },
   links: { x: 'https://x.com/abe_l316', linkedin: 'https://www.linkedin.com/in/abel-ko-a5322814a/' },
 };
