@@ -8,15 +8,19 @@ interface Props {
   subpage?: string;
   /** Only these languages (a page that is not translated everywhere). */
   langs?: LocaleCode[];
+  /** 'down' hangs below the trigger (header), 'up' opens upward (footer), 'sheet' lists the languages in the flow (mobile menu). */
+  placement?: 'down' | 'up' | 'sheet';
 }
-const { locale, label, subpage, langs } = Astro.props;
+const { locale, label, subpage, langs, placement = 'down' } = Astro.props;
+// Small muted English names next to each language's own name.
+const EN: Record<string, string> = { en: '', ko: 'Korean', ja: 'Japanese', 'zh-CN': 'Chinese', es: 'Spanish', 'pt-BR': 'Portuguese', de: 'German', fr: 'French' };
 const available = langs ? allLocales.filter((l) => langs.includes(l.code)) : allLocales;
 const current = getLocale(locale);
 ---
 
 {
   available.length > 1 && (
-    <details class="lang" data-lang-menu>
+    <details class={`lang lang-${placement}`} data-lang-menu>
       <summary aria-label={`${current.name}, ${label}`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
@@ -33,8 +37,9 @@ const current = getLocale(locale);
               data-ph-to={l.lang}
               data-ph-source="menu"
             >
-              <span>{l.name}</span>
-              {l.code === locale && <svg class="lm-ck" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>}
+              <span class="lm-c" aria-hidden="true">{l.code === locale && <svg class="lm-ck" viewBox="0 0 24 24" width="14" height="14"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>}</span>
+              <span class="lm-n">{l.name}</span>
+              {EN[l.code] && <span class="lm-e" lang="en">{EN[l.code]}</span>}
             </a>
           </li>
         ))}

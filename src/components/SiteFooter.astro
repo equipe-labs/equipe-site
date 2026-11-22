@@ -2,18 +2,21 @@
 // Footer for the marketing pages: Product / Company / Legal, the support address and the cookie line.
 import Mark from './Mark.astro';
 import Wordmark from './Wordmark.astro';
+import LangMenu from './LangMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { SITE } from '../data/site';
 import { SHOW_CJ } from '../data/flags';
 import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 
-interface Props { code: LocaleCode; page: string }
-const { code, page } = Astro.props;
+interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
+const { code, page, langs } = Astro.props;
 const info = getLocale(code);
 const t = getMessages(code);
 const f = t.foot;
 const home = page === 'home' ? '' : localePath(info);
+const sub = page === 'home' ? undefined : page;
 // The blog and facts pages exist in English and Korean; other languages link to the English ones.
 const bl = blogLangFor(code);
 const bu = BLOG_UI[bl];
@@ -63,8 +66,14 @@ const bu = BLOG_UI[bl];
     </nav>
     <p class="fw rv" aria-hidden="true">equipe</p>
     <div class="fl">
-      <span>{f.engine}</span>
-      <span>© Umbriles Inc. · {t.footer.built}</span>
+      <div class="fl-t">
+        <span>{f.engine}</span>
+        <span>© Umbriles Inc. · {t.footer.built}</span>
+      </div>
+      <div class="fx">
+        <LangMenu locale={code} label={t.ui.language} subpage={sub} langs={langs} placement="up" />
+        <ThemeToggle l={{ system: t.ui.themeSystem, light: t.ui.themeLight, dark: t.ui.themeDark }} />
+      </div>
     </div>
   </div>
 </footer>

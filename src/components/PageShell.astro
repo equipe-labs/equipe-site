@@ -27,7 +27,7 @@ const url = new URL(subPath(info, page), Astro.site).href;
   <a class="skip" href="#main">{t.ui.skip}</a>
   <SiteHeader code={code} page={page} langs={langs} />
   <main id="main" class="pg"><slot /></main>
-  <SiteFooter code={code} page={page} />
+  <SiteFooter code={code} page={page} langs={langs} />
   <Analytics />
   <LangBanner locale={code} subpage={page} langs={langs} />
   <ConsentBanner code={code} />
