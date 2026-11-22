@@ -66,4 +66,17 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
     },
     links: { linkedin: 'https://www.linkedin.com/in/sj-seo' },
   },
+  {
+    name: 'Jason Li',
+    fullName: 'Jason Li',
+    initials: 'JL',
+    photo: '/brand/jason-li-400.jpg',
+    photoLarge: '/brand/jason-li-800.jpg',
+    role: { en: 'Tech', ko: 'Tech' },
+    bio: {
+      en: "Jason Li is a software engineer on equipe's tech team. He builds AI-powered web apps with React, Next.js and TypeScript, and spent three years leading frontend work at TKLABS.",
+      ko: 'Jason Li는 equipe 기술팀의 소프트웨어 엔지니어예요. React, Next.js, TypeScript로 AI 웹 앱을 만들고, TKLABS에서 3년간 프론트엔드 개발을 이끌었어요.',
+    },
+    links: { linkedin: 'https://www.linkedin.com/in/lijason122/' },
+  },
 ];
