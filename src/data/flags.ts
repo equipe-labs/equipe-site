@@ -63,6 +63,22 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     alumniOf: 'KAIST',
     links: { linkedin: 'https://www.linkedin.com/in/zeakd/' },
   },
+  {
+    // LinkedIn URL not supplied: taken from the GitHub profile "alxiom" (Alex, ML Engineer, Toss, Seoul), which links to it. HyperCLOVA authorship checked on arXiv 2109.04650 (EMNLP 2021).
+    name: 'HyoungSeok (Alex) Kim',
+    names: { ko: '김형석' },
+    initials: 'HK',
+    photo: '/brand/hyoungseok-kim-800.jpg',
+    photoLarge: '/brand/hyoungseok-kim-800.jpg',
+    role: { en: 'AI research adviser', ko: 'AI 연구 어드바이저' },
+    bio: {
+      en: "HyoungSeok (Alex) Kim is a machine learning engineer at Toss. At NAVER he was a tech lead on HyperCLOVA, Korea's large language model, and co-authored its EMNLP and NAACL papers. He advises equipe on AI.",
+      ko: '김형석은 토스의 머신러닝 엔지니어예요. 네이버에서 한국어 초거대 언어모델 HyperCLOVA의 테크 리드로 학습과 평가를 맡았고, EMNLP·NAACL 논문을 함께 썼어요. equipe의 AI 어드바이저예요.',
+    },
+    jobTitle: 'Machine Learning Engineer',
+    worksFor: 'Toss',
+    links: { linkedin: 'https://www.linkedin.com/in/alxiom' },
+  },
 ];
 
 /**
