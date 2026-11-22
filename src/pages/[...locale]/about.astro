@@ -39,13 +39,13 @@ const links = [
         </>
       )}
       {TEAM.map((m) => (
-        <div class="pg-founder pg-adviser"><div class="pg-mono" aria-hidden="true">{m.initials}</div><div><p><b>{m.name}</b> · {m.role[lang] ?? m.role.en}</p><p>{m.bio[lang] ?? m.bio.en}</p><p class="pg-links"><a href={m.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
+        <div class="pg-founder pg-adviser">{m.photo ? <picture><source type="image/webp" srcset="/brand/sj-seo-400.webp" /><img src={m.photo} alt={m.name} width="120" height="120" loading="lazy" /></picture> : <div class="pg-mono" aria-hidden="true">{m.initials}</div>}<div><p><b>{m.name}</b> · {m.role[lang] ?? m.role.en}</p><p>{m.bio[lang] ?? m.bio.en}</p><p class="pg-links"><a href={m.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
       ))}
       {ADVISERS.length > 0 && (
         <>
           <h2 id="advisers">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
           {ADVISERS.map((a) => (
-            <div class="pg-founder pg-adviser"><div class="pg-mono" aria-hidden="true">{a.initials}</div><div><p><b>{a.name}</b> · {a.role[lang] ?? a.role.en}</p><p>{a.bio[lang] ?? a.bio.en}</p><p class="pg-links"><a href={a.links.linkedin} rel="me noopener">LinkedIn</a></p></div></div>
+            <div class="pg-founder pg-adviser">{a.photo ? <picture><source type="image/webp" srcset="/brand/akki-400.webp" /><img src={a.photo} alt={a.name} width="120" height="120" loading="lazy" /></picture> : <div class="pg-mono" aria-hidden="true">{a.initials}</div>}<div><p><b>{a.name}</b> · {a.role[lang] ?? a.role.en}</p><p>{a.bio[lang] ?? a.bio.en}</p><p class="pg-links"><a href={a.links.linkedin} rel="me noopener">LinkedIn</a><a href={a.links.web} rel="me noopener">Web</a><a href={a.links.github} rel="me noopener">GitHub</a></p></div></div>
           ))}
         </>
       )}
@@ -58,9 +58,9 @@ const links = [
     </div>
   </div></section>
   {TEAM.map((m) => (
-    <JsonLd data={{ '@type': 'Person', name: m.name, jobTitle: 'Tech', worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
+    <JsonLd data={{ '@type': 'Person', name: m.name, alternateName: m.fullName, jobTitle: 'Tech', ...(m.photoLarge ? { image: `${SITE.url}${m.photoLarge}` } : {}), worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
   ))}
   {ADVISERS.map((a) => (
-    <JsonLd data={{ '@type': 'Person', name: a.name, jobTitle: 'Head of Voices', worksFor: { '@type': 'Organization', name: 'Cartesia' }, affiliation: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [a.links.linkedin] }} />
+    <JsonLd data={{ '@type': 'Person', name: a.name, jobTitle: 'Head of Voices', ...(a.photoLarge ? { image: `${SITE.url}${a.photoLarge}` } : {}), worksFor: { '@type': 'Organization', name: 'Cartesia' }, affiliation: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [a.links.linkedin, a.links.web, a.links.github] }} />
   ))}
 </PageShell>

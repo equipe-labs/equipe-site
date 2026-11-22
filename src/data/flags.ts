@@ -28,36 +28,41 @@ export const DEMO_VIDEO: null | { src: string; poster: string; captions: string 
 export const TYPICAL_TOTALS: null | Record<string, string> = null;
 
 /**
- * About page advisers. Facts come only from public sources: Akki's LinkedIn profile (Cartesia, San Francisco, founder of the Queen Mary Consulting Society)
- * and the VapiCon 2026 agenda (https://vapi.ai/vapicon-2026/agenda, "Head of Voices, Cartesia"). No photo: no public image is clearly his, so the page shows a monogram.
+ * About page advisers. Facts come only from public sources: Akki's LinkedIn profile (headline "Building Cartesia | Ex-Founder | Ex-Bain", San Francisco)
+ * and the VapiCon 2026 agenda (https://vapi.ai/vapicon-2026/agenda, "Head of Voices, Cartesia"). Photo: his VapiCon speaker-card portrait as supplied by the founder (public/brand/akki-*.webp|jpg).
  */
 export const ADVISERS_HEADING: Record<string, string> = { en: 'Advisers', ko: '어드바이저' };
-export const ADVISERS: { name: string; initials: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
+export const ADVISERS: { name: string; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string; web: string; github: string } }[] = [
   {
     name: 'Akki Shafiqullah',
     initials: 'AS',
+    photo: '/brand/akki-400.jpg',
+    photoLarge: '/brand/akki-800.jpg',
     role: { en: 'Adviser · Head of Voices at Cartesia', ko: '어드바이저 · Cartesia Head of Voices' },
     bio: {
-      en: 'Akki Shafiqullah leads Voices at Cartesia, the AI voice company, and is based in San Francisco. He founded the Queen Mary Consulting Society at Queen Mary University of London. He advises equipe.',
-      ko: 'Akki Shafiqullah는 AI 음성 회사 Cartesia에서 Voices를 이끌고, 샌프란시스코에 살아요. 런던 Queen Mary 대학교에서 Queen Mary Consulting Society를 창립했어요. equipe의 어드바이저예요.',
+      en: 'Akki Shafiqullah leads Voices at Cartesia, the AI voice company, and is based in San Francisco. A former founder and Bain consultant, he advises equipe.',
+      ko: 'Akki Shafiqullah는 AI 음성 회사 Cartesia에서 Voices를 이끌고, 샌프란시스코에 살아요. 창업과 Bain 컨설턴트 경험이 있고, equipe의 어드바이저예요.',
     },
-    links: { linkedin: 'https://www.linkedin.com/in/akki/' },
+    links: { linkedin: 'https://www.linkedin.com/in/akki/', web: 'https://www.akki.info', github: 'https://github.com/akki-codes' },
   },
 ];
 
 /**
- * About page team members besides the founder. SJ Seo: name and role "Tech" confirmed by the founder; no verifiable public profile details were found
- * (the LinkedIn page is not publicly readable and no web source matched), so the blurb states only the role. Monogram, no photo.
+ * About page team members besides the founder. Seongjae (SJ) Seo: role "Tech" confirmed by the founder; facts from his LinkedIn profile as supplied by the founder (education, KAIST labs, contest prize).
+ * Photo: his LinkedIn portrait, cropped square (public/brand/sj-seo-*.webp|jpg). The Korean blurb keeps the Latin name because the Hangul spelling is unconfirmed.
  */
 export const TEAM_HEADING: Record<string, string> = { en: 'Team', ko: '팀' };
-export const TEAM: { name: string; initials: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
+export const TEAM: { name: string; fullName: string; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
   {
-    name: 'SJ Seo',
+    name: 'Seongjae (SJ) Seo',
+    fullName: 'Seongjae Seo',
     initials: 'SS',
+    photo: '/brand/sj-seo-400.jpg',
+    photoLarge: '/brand/sj-seo-800.jpg',
     role: { en: 'Tech', ko: 'Tech' },
     bio: {
-      en: 'SJ Seo is part of the equipe team and works on its technology.',
-      ko: 'SJ Seo는 equipe 팀의 일원으로, 기술을 맡고 있어요.',
+      en: 'Seongjae (SJ) Seo leads tech at equipe. He studies Industrial & Systems Engineering at KAIST, where he has done data and AI research in KAIST EE labs, and won the Gold Prize at the KAIST–POSTECH–UNIST Data Science Contest.',
+      ko: 'Seongjae (SJ) Seo는 equipe에서 기술을 맡고 있어요. KAIST 산업및시스템공학과에서 공부하며 KAIST 전기및전자공학부 데이터·AI 연구실에서 연구했고, KAIST–POSTECH–UNIST 데이터 사이언스 경진대회에서 금상을 받았어요.',
     },
     links: { linkedin: 'https://www.linkedin.com/in/sj-seo' },
   },
