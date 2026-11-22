@@ -108,8 +108,8 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
     photoLarge: '/brand/jason-li-800.jpg',
     role: { en: 'Tech', ko: 'Tech' },
     bio: {
-      en: "Jason Li is a software engineer on equipe's tech team. He builds AI-powered web apps with React, Next.js and TypeScript, and spent three years leading frontend work at TKLABS.",
-      ko: 'Jason Li는 equipe 기술팀의 소프트웨어 엔지니어예요. React, Next.js, TypeScript로 AI 웹 앱을 만들고, TKLABS에서 3년간 프론트엔드 개발을 이끌었어요.',
+      en: "Jason Li is a software engineer on equipe's tech team. He has built AI-powered applications and scalable products, and has worked at JPMorgan Chase and Year Up United.",
+      ko: 'Jason Li는 equipe 기술팀의 소프트웨어 엔지니어예요. AI 기반 애플리케이션과 확장 가능한 제품을 만들어 왔고, JPMorgan Chase와 Year Up United에서 일했어요.',
     },
     links: { linkedin: 'https://www.linkedin.com/in/lijason122/' },
   },
