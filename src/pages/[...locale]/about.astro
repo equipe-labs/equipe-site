@@ -57,7 +57,7 @@ const links = [
 
     <section class="ab-s"><div class="wrap">
       <h2 id="team" class="rv ab-c">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
-      <div class="ab-grid">
+      <div class="ab-people">
         {FOUNDER && <PersonCard i={1} name={FOUNDER.name} role={FOUNDER.role[lang] ?? FOUNDER.role.en} bio={FOUNDER_LINE[lang] ?? FOUNDER_LINE.en} photo={FOUNDER.photoLarge} initials="AK" links={{ linkedin: FOUNDER.links.linkedin, x: FOUNDER.links.x }} />}
         {TEAM.map((m, i) => <PersonCard i={i + 2} name={m.name} role={m.role[lang] ?? m.role.en} bio={m.bio[lang] ?? m.bio.en} photo={m.photo} initials={m.initials} links={m.links} />)}
       </div>
@@ -66,7 +66,7 @@ const links = [
     {ADVISERS.length > 0 && (
       <section class="ab-s"><div class="wrap">
         <h2 id="advisers" class="rv ab-c">{ADVISERS_HEADING[lang] ?? ADVISERS_HEADING.en}</h2>
-        <div class={`ab-grid${(ADVISERS.length === 2 || ADVISERS.length === 4) ? ' ab-n2' : ''}`}>
+        <div class="ab-people">
           {ADVISERS.map((a, i) => <PersonCard i={i + 1} name={a.names?.[lang] ?? a.name} role={a.role[lang] ?? a.role.en} bio={a.bio[lang] ?? a.bio.en} photo={a.photo} initials={a.initials} links={a.links} />)}
         </div>
       </div></section>
@@ -90,7 +90,7 @@ const links = [
     </div></section>
   </div>
   {TEAM.map((m) => (
-    <JsonLd data={{ '@type': 'Person', name: m.name, alternateName: m.fullName, description: m.bio.en, jobTitle: 'Tech', ...(m.photoLarge ? { image: `${SITE.url}${m.photoLarge}` } : {}), worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
+    <JsonLd data={{ '@type': 'Person', name: m.name, alternateName: m.fullName, description: m.bio.en, jobTitle: m.role.en, ...(m.photoLarge ? { image: `${SITE.url}${m.photoLarge}` } : {}), worksFor: { '@id': `${SITE.url}/#organization` }, url: `${SITE.url}/about/`, sameAs: [m.links.linkedin] }} />
   ))}
   {ADVISERS.map((a) => (
     <JsonLd data={{ '@type': 'Person', name: a.name, ...(a.names?.ko ? { alternateName: a.names.ko } : {}), description: a.bio.en, jobTitle: a.jobTitle, worksFor: { '@type': 'Organization', name: a.worksFor }, ...(a.alumniOf ? { alumniOf: { '@type': 'CollegeOrUniversity', name: a.alumniOf } } : {}), affiliation: { '@id': `${SITE.url}/#organization` }, ...(a.photoLarge ? { image: `${SITE.url}${a.photoLarge}` } : {}), url: `${SITE.url}/about/`, sameAs: Object.values(a.links) }} />

@@ -55,6 +55,6 @@ export const ABOUT: Record<string, AboutCopy> = {
 
 /** One-line story of the founder per language (English fallback). */
 export const FOUNDER_LINE: Record<string, string> = {
-  en: "Abel Ko is the founder of equipe, based in San Francisco. Before equipe he worked at Toss (Viva Republica), Korea's leading fintech. He started equipe to give people who cannot code a startup team of their own.",
-  ko: 'Abel Ko는 샌프란시스코에 있는 equipe의 창업자예요. equipe 전에는 한국 대표 핀테크인 토스(비바리퍼블리카)에서 일했어요. 코딩을 몰라도 자기만의 스타트업 팀을 가질 수 있도록 equipe를 시작했어요.',
+  en: "Abel Ko is the founder of equipe, based in San Francisco. He spent ten years as a software engineer at startups, including Toss (Viva Republica), and co-founded Ironact. He started equipe to give people who cannot code a startup team of their own.",
+  ko: 'Abel Ko는 샌프란시스코에 있는 equipe의 창업자예요. 10년 동안 토스(비바리퍼블리카) 등 스타트업에서 소프트웨어 엔지니어로 일했고 Ironact를 공동 창업했어요. 코딩을 몰라도 자기만의 스타트업 팀을 가질 수 있도록 equipe를 시작했어요.',
 };

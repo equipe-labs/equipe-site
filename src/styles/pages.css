@@ -62,48 +62,59 @@ main.pg .ab-hero h1 { font-size: clamp(42px, 7vw, 88px); max-width: 14ch; line-h
 .ab-grid::before { left: 0; } .ab-grid::after { right: 0; }
 .ab-grid > * { position: relative; }
 .ab-grid > *:not(:nth-child(3n + 1))::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: var(--ln); }
-.ab-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 66.6%; margin-inline: auto; }
-.ab-n2 > *:not(:nth-child(3n + 1))::before { content: none; }
-.ab-n2 > *:nth-child(2n)::before { content: ''; }
 .ab-b { padding: 8px 32px 12px; }
 .ab-b h3 { font-size: 20px; letter-spacing: -0.015em; margin: 0 0 8px; }
 .ab-b p { color: var(--muted); font-size: 16px; line-height: 1.55; }
-.ab-p { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 32px 24px 28px; }
-.ab-d { width: 100%; flex: 1; }
+/* Team and advisers: one card grid for both sections. Cards wrap as a centered flex row, so any count (1-8) fills
+   whole rows and a short last row sits in the middle instead of leaving an orphan beside empty cells. */
+.ab-people { --cols: 4; --gap: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--gap); }
+.ab-people > * { flex: 0 1 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); }
+.ab-p { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; padding: 32px 24px 18px; border-radius: 20px; background: color-mix(in srgb, var(--text) 3%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent); transition: background-color 250ms, box-shadow 250ms; }
+.ab-d { width: 100%; flex: 1; display: flex; flex-direction: column; align-items: center; }
 .ab-sum { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .ab-av { width: 76px; height: 76px; border-radius: 50%; overflow: hidden; margin-bottom: 12px; background: color-mix(in srgb, var(--text) 8%, var(--bg)); display: block; box-shadow: 0 0 0 1px var(--line); }
 .ab-av img, .ab-av picture { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
 .ab-mono { width: 100%; height: 100%; display: grid; place-items: center; font-size: 24px; font-weight: 600; color: var(--muted); }
-.ab-p { min-width: 0; } .ab-name, .ab-role, .ab-bio { overflow-wrap: anywhere; max-width: 100%; }
-.ab-name { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
-.ab-role { font-size: 14.5px; color: var(--muted); line-height: 1.4; }
-.ab-bio { margin: 14px auto 0; max-width: 30ch; color: var(--muted); font-size: 14.5px; line-height: 1.55; text-align: left; }
-:is(:lang(ko), :lang(ja), :lang(zh-CN)) .ab-bio { max-width: 26em; }
-.ab-soc { margin-top: 16px; display: flex; justify-content: center; gap: 4px; }
+.ab-name, .ab-role, .ab-bio { overflow-wrap: anywhere; max-width: 100%; }
+.ab-name { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance; }
+.ab-role { font-size: 14px; color: var(--muted); line-height: 1.4; text-wrap: balance; }
+.ab-bio { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; text-align: left; text-wrap: pretty; }
+/* links sit on the card's bottom edge, so they line up across a row whatever the bio length */
+.ab-soc { margin: auto 0 0; padding-top: 16px; display: flex; justify-content: center; gap: 4px; }
 .ab-soc a { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; color: var(--muted); transition: color 150ms, background-color 150ms; }
 .ab-soc a:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
+.ab-soc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) { .ab-p:hover { background: color-mix(in srgb, var(--text) 5%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 13%, transparent); } }
+@media (max-width: 1119px) { .ab-people { --cols: 2; max-width: 860px; margin-inline: auto; } }
+/* phones: one column, avatar beside name and role so each card stays short */
+@media (max-width: 600px) {
+  .ab-people { --cols: 1; --gap: 12px; }
+  .ab-p { display: grid; grid-template-columns: 1fr; align-items: start; text-align: left; padding: 20px 20px 12px; border-radius: 18px; }
+  .ab-sum { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; row-gap: 2px; align-items: center; justify-items: start; }
+  .ab-av { width: 56px; height: 56px; margin: 0; grid-row: span 2; }
+  .ab-name { align-self: end; } .ab-role { align-self: start; text-wrap: wrap; }
+  .ab-d { align-items: stretch; } .ab-bio { margin-top: 12px; }
+  .ab-soc { justify-content: flex-start; margin-left: -6px; padding-top: 10px; }
+}
 .ab-cta { text-align: center; padding: 96px 0 24px; }
 .ab-cta h2 { font-size: clamp(30px, 4.4vw, 52px); letter-spacing: -0.03em; max-width: 16ch; margin: 0 auto; text-wrap: balance; }
 .ab-cta p { margin-top: 14px; color: var(--muted); font-size: 19px; }
 .ab-ctas { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .ab-end { padding-bottom: 112px; }
 /* a lone last cell sits in the middle */
-.ab-grid:not(.ab-n2) > :last-child:nth-child(3n + 1) { grid-column: 2; }
+.ab-grid > :last-child:nth-child(3n + 1) { grid-column: 2; }
 @media (max-width: 900px) { .ab-story { grid-template-columns: 1fr; gap: 24px; } }
 @media (max-width: 640px) {
   .ab-hero { padding: 72px 0 40px; }
   .ab-s { padding: 52px 0; }
   .ab-st { font-size: 17.5px; }
   .ab-path { grid-template-columns: 1fr; } .ab-arrow { transform: rotate(90deg); justify-self: center; }
-  .ab-grid, .ab-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
+  .ab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ab-grid > *::before { content: none !important; }
   .ab-grid > *:nth-child(2n)::before { content: '' !important; }
   .ab-grid:not(.ab-bel) > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: 50%; }
   .ab-bel { grid-template-columns: 1fr; } .ab-grid.ab-bel > :nth-child(n)::before { content: none !important; } .ab-bel::before, .ab-bel::after { display: none; }
   .ab-b { padding: 8px 0 20px; }
-  .ab-p { padding: 24px 12px 20px; }
-  .ab-av { width: 64px; height: 64px; }
-  .ab-name { font-size: 16px; } .ab-role { font-size: 13.5px; }
   .ab-cta { padding: 64px 0 8px; }
 }
 @media (prefers-reduced-motion: no-preference) {
