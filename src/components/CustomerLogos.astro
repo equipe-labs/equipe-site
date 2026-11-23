@@ -7,11 +7,15 @@
 // width/height (no layout shift) and turned monochrome with a CSS filter, never redrawn. Sizes are set by visual weight,
 // not by width: a square mark gets more height than a long, thin wordmark.
 import '../styles/trust.css';
-import { getMessages, type LocaleCode } from '../i18n';
+import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
+import { SHOW_CJ } from '../data/flags';
 
-interface Props { code: LocaleCode; id: string; class?: string; style?: string }
-const { code, id, class: cls, style } = Astro.props;
-const t = getMessages(code).trust;
+interface Props { code: LocaleCode; id: string; class?: string; style?: string; /** the customer whose story page this is: its logo is not linked */ current?: string }
+const { code, id, class: cls, style, current } = Astro.props;
+const m = getMessages(code);
+const t = m.trust;
+// Customers with a story page: their logo links to it.
+const stories: Record<string, { href: string; label: string }> = SHOW_CJ ? { cj: { href: subPath(getLocale(code), 'customers/cj'), label: m.pages.cj.title } } : {};
 
 // h: rendered height in CSS px; w follows from the file's aspect ratio. `name` beside the mark only where the official logo is a mark alone.
 const LOGOS = [
@@ -27,7 +31,11 @@ const size = (l: (typeof LOGOS)[number]) => ({ width: Math.round((l.w / l.h) * l
   <ul class="trust-row" aria-labelledby={id}>
     {LOGOS.map((l, i) => (
       <li class={`tl-${l.key}`} style={`--i:${i}`}>
-        <img src={l.src} alt={l.alt} {...size(l)} decoding="async" />
+        {stories[l.key] && l.key !== current ? (
+          <a href={stories[l.key].href} aria-label={stories[l.key].label}><img src={l.src} alt={l.alt} {...size(l)} decoding="async" /></a>
+        ) : (
+          <img src={l.src} alt={l.alt} {...size(l)} decoding="async" />
+        )}
         {'name' in l && <span aria-hidden="true">{l.name}</span>}
       </li>
     ))}

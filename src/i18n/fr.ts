@@ -268,7 +268,7 @@ const fr: Messages = {
     engine: 'Le moteur equipe est open source sous licence MIT.',
     company: 'Entreprise', legal: 'Mentions légales', support: 'Support', noCookies: 'Aucun cookie de suivi', cookieSettings: 'Paramètres des cookies', doNotSell: 'Ne pas vendre ni partager mes informations personnelles', privacy: 'Confidentialité',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: 'Tarifs — equipe',
@@ -312,7 +312,7 @@ const fr: Messages = {
     },
     cj: {
       title: 'CJ — témoignage client equipe',
-      desc: 'Comment CJ utilise une équipe equipe pour du vrai travail.',
+      desc: 'CJ est un client payant. Son équipe utilise equipe pour du vrai travail.',
       h1: 'CJ utilise une équipe equipe pour du vrai travail',
       text: 'CJ est un client payant. Son équipe utilise equipe pour du vrai travail.',
     },

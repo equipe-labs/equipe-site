@@ -272,7 +272,7 @@ export const en = {
     engine: 'The equipe engine is open source under the MIT License.',
     company: 'Company', legal: 'Legal', support: 'Support', noCookies: 'No tracking cookies', cookieSettings: 'Cookie settings', doNotSell: 'Do not sell or share my personal information', privacy: 'Privacy',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: 'Pricing — equipe',
@@ -316,7 +316,7 @@ export const en = {
     },
     cj: {
       title: 'CJ — equipe customer story',
-      desc: 'How CJ uses an equipe team for real work.',
+      desc: 'CJ is a paying customer. Its team uses equipe for real work.',
       h1: 'CJ uses an equipe team for real work',
       text: 'CJ is a paying customer. Its team uses equipe for real work.',
     },

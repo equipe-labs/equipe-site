@@ -267,7 +267,7 @@ const ptBR: Messages = {
     engine: 'O engine do equipe é de código aberto sob a licença MIT.',
     company: 'Empresa', legal: 'Legal', support: 'Suporte', noCookies: 'Sem cookies de rastreamento', cookieSettings: 'Configurações de cookies', doNotSell: 'Não vender nem compartilhar minhas informações pessoais', privacy: 'Privacidade',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: 'Preços — equipe',
@@ -311,7 +311,7 @@ const ptBR: Messages = {
     },
     cj: {
       title: 'CJ — história de cliente do equipe',
-      desc: 'Como a CJ usa um time do equipe para trabalho real.',
+      desc: 'A CJ é uma cliente pagante. O time dela usa o equipe para trabalho real.',
       h1: 'A CJ usa um time do equipe para trabalho real',
       text: 'A CJ é uma cliente pagante. O time dela usa o equipe para trabalho real.',
     },

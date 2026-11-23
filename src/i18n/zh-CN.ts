@@ -267,7 +267,7 @@ const zhCN: Messages = {
     engine: 'equipe 引擎以 MIT 许可证开源。',
     company: '公司', legal: '法律', support: '支持', noCookies: '无跟踪 Cookie', cookieSettings: 'Cookie 设置', doNotSell: '不出售或共享我的个人信息', privacy: '隐私',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: '价格 — equipe',
@@ -311,7 +311,7 @@ const zhCN: Messages = {
     },
     cj: {
       title: 'CJ — equipe 客户故事',
-      desc: 'CJ 如何在实际工作中使用 equipe 团队。',
+      desc: 'CJ 是付费客户，其团队在实际工作中使用 equipe。',
       h1: 'CJ 在实际工作中使用 equipe 团队',
       text: 'CJ 是付费客户，其团队在实际工作中使用 equipe。',
     },

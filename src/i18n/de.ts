@@ -267,7 +267,7 @@ const de: Messages = {
     engine: 'Die equipe-Engine ist Open Source unter der MIT-Lizenz.',
     company: 'Unternehmen', legal: 'Rechtliches', support: 'Support', noCookies: 'Keine Tracking-Cookies', cookieSettings: 'Cookie-Einstellungen', doNotSell: 'Meine personenbezogenen Daten nicht verkaufen oder teilen', privacy: 'Datenschutz',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: 'Preise — equipe',
@@ -311,7 +311,7 @@ const de: Messages = {
     },
     cj: {
       title: 'CJ — equipe Kundengeschichte',
-      desc: 'Wie CJ ein equipe-Team für echte Arbeit nutzt.',
+      desc: 'CJ ist zahlender Kunde. Sein Team nutzt equipe für echte Arbeit.',
       h1: 'CJ nutzt ein equipe-Team für echte Arbeit',
       text: 'CJ ist zahlender Kunde. Sein Team nutzt equipe für echte Arbeit.',
     },

@@ -267,7 +267,7 @@ const ja: Messages = {
     engine: 'equipeのエンジンは、MITライセンスのオープンソースです。',
     company: '会社', legal: '法的情報', support: 'サポート', noCookies: 'トラッキング Cookie なし', cookieSettings: 'Cookie 設定', doNotSell: '個人情報の販売・共有をしない', privacy: 'プライバシー',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: '料金 — equipe',
@@ -311,7 +311,7 @@ const ja: Messages = {
     },
     cj: {
       title: 'CJ — equipe 導入事例',
-      desc: 'CJがequipeのチームを実際の業務で使う方法。',
+      desc: 'CJは有料のお客様です。CJのチームは実際の業務でequipeを使っています。',
       h1: 'CJはequipeのチームを実際の業務で使っています',
       text: 'CJは有料のお客様です。CJのチームは実際の業務でequipeを使っています。',
     },

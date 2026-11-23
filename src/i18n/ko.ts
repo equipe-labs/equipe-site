@@ -267,7 +267,7 @@ const ko: Messages = {
     engine: 'equipe 엔진은 MIT 라이선스 오픈소스예요.',
     company: '회사', legal: '법적 고지', support: '고객 지원', noCookies: '추적 쿠키 없음', cookieSettings: '쿠키 설정', doNotSell: '내 개인정보 판매·공유 거부', privacy: '개인정보 처리방침',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: '요금 — equipe',
@@ -311,7 +311,7 @@ const ko: Messages = {
     },
     cj: {
       title: 'CJ — equipe 고객 이야기',
-      desc: 'CJ가 equipe 팀을 실제 업무에 쓰는 방법.',
+      desc: 'CJ는 유료 고객이에요. CJ 팀은 실제 업무에 equipe를 써요.',
       h1: 'CJ는 equipe 팀을 실제 업무에 써요',
       text: 'CJ는 유료 고객이에요. CJ 팀은 실제 업무에 equipe를 써요.',
     },

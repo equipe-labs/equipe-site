@@ -1,13 +1,30 @@
 ---
-// /customers/cj: CJ's story. Built only with SHOW_CJ=true (src/data/flags.ts) until CJ confirms permission. No invented numbers or quotes.
+// /customers/cj: CJ's story. CJ approved being named (SHOW_CJ in src/data/flags.ts). Only confirmed facts: no invented numbers or quotes.
 import PageShell from '../../../components/PageShell.astro';
+import CustomerLogos from '../../../components/CustomerLogos.astro';
+import '../../../styles/trust.css';
+import { SITE } from '../../../data/site';
 import { SHOW_CJ } from '../../../data/flags';
 import { available, getMessages, type LocaleCode } from '../../../i18n';
 export function getStaticPaths() { return SHOW_CJ ? available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })) : []; }
 const { code } = Astro.props as { code: LocaleCode };
-const C = getMessages(code).pages.cj;
+const t = getMessages(code);
+const C = t.pages.cj;
 ---
 <PageShell code={code} page="customers/cj" title={C.title} description={C.desc}>
-  <section class="pg-h"><div class="wrap"><h1>{C.h1}</h1></div></section>
-  <section class="pg-s"><div class="wrap"><div class="pg-prose"><p>{C.text}</p></div></div></section>
+  <section class="pg-h"><div class="wrap">
+    <img class="case-logo" src="/brand/customers/cj.svg" alt="CJ" width="66" height="56" decoding="async" />
+    <h1>{C.h1}</h1>
+    <p class="pg-lead">{C.text}</p>
+    <p class="case-cta"><a class="btn primary" href={SITE.start} data-ph="signup_cta_click" data-ph-location="customer_cj">{t.nav.cta}</a></p>
+  </div></section>
+  <section class="pg-s"><div class="wrap">
+    <CustomerLogos code={code} id="trust-cj" current="cj" />
+  </div></section>
 </PageShell>
+<style>
+  .case-logo { display: block; margin: 0 auto var(--s-6); filter: brightness(0); opacity: 0.55; }
+  :global(:root[data-theme='dark']) .case-logo { filter: brightness(0) invert(1); opacity: 0.6; }
+  @media (prefers-color-scheme: dark) { :global(:root:not([data-theme])) .case-logo { filter: brightness(0) invert(1); opacity: 0.6; } }
+  .case-cta { margin: var(--s-6) 0 0; }
+</style>

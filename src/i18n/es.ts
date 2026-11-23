@@ -267,7 +267,7 @@ const es: Messages = {
     engine: 'El motor de equipe es de código abierto bajo la licencia MIT.',
     company: 'Empresa', legal: 'Legal', support: 'Soporte', noCookies: 'Sin cookies de rastreo', cookieSettings: 'Configuración de cookies', doNotSell: 'No vender ni compartir mi información personal', privacy: 'Privacidad',
   },
-  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (behind SHOW_CJ).
+  // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
   pages: {
     pricing: {
       title: 'Precios — equipe',
@@ -311,7 +311,7 @@ const es: Messages = {
     },
     cj: {
       title: 'CJ — historia de cliente de equipe',
-      desc: 'Cómo CJ usa un equipo de equipe para trabajo real.',
+      desc: 'CJ es un cliente de pago. Su equipo usa equipe para trabajo real.',
       h1: 'CJ usa un equipo de equipe para trabajo real',
       text: 'CJ es un cliente de pago. Su equipo usa equipe para trabajo real.',
     },

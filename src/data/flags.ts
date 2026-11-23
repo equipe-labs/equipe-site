@@ -1,6 +1,6 @@
 /** Build flags for content that must not go public yet. */
-// The CJ customer story stays hidden until CJ confirms permission: build with SHOW_CJ=true to publish /customers/cj.
-export const SHOW_CJ = process.env.SHOW_CJ === 'true';
+// The CJ customer story (/customers/cj, footer link, logo-row link). CJ approved being named (Nov 2026); build with SHOW_CJ=false to hide it again.
+export const SHOW_CJ = process.env.SHOW_CJ !== 'false';
 
 /**
  * About page founder block, article bylines and Person JSON-LD. Photo: the owner's studio portrait, cropped to head and shoulders (public/brand/founder*.jpg|webp).
