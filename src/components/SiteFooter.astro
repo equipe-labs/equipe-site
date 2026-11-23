@@ -9,6 +9,7 @@ import { SHOW_CJ } from '../data/flags';
 import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
+import '../styles/trust.css';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
 const { code, page, langs } = Astro.props;
@@ -27,6 +28,8 @@ const bu = BLOG_UI[bl];
       <a class="brand" href={localePath(info)} aria-label="equipe"><Mark size={26} /><Wordmark height={19} /></a>
       <p>{f.tagline}</p>
       <p class="fsup"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
+      {/* Infrastructure partner (startup credits), not a customer: Luxor Agent Cloud, formerly Tenki. Official logo from luxor.ai, shown monochrome. */}
+      <p class="supported"><span>{t.footer.supportedBy}</span><a href="https://luxor.ai/?utm_source=equipe.im&utm_medium=referral" rel="noopener" title="Luxor Agent Cloud (formerly Tenki)"><img src="/brand/partners/luxor-agent-cloud.svg" alt="Luxor Agent Cloud" width="92" height="16" loading="lazy" decoding="async" /></a></p>
     </div>
     <nav class="fcols" aria-label="Footer">
       <div>

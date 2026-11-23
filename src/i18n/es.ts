@@ -400,7 +400,9 @@ equipe`,
     phone: { name: 'frontend', verb: 'te pide que confirmes algo', age: 'Pedido hace un momento', where: 'Loop · T-5 Publicar la página de precios · Preguntar', tool: 'CONFIRMAR', action: 'Publicar la página de precios en loop.app/pricing, para todos', once: 'Desde el teléfono, una solicitud se permite una sola vez.', deny: 'Denegar', allow: 'Permitir una vez', close: 'Cerrar' },
   },
   notFound: { title: 'Página no encontrada — equipe', description: 'Esta página no existe.', heading: 'Página no encontrada', text: 'No hay nada en esta dirección. Puede que se haya movido o que el enlace sea incorrecto.', home: 'Ir a la página de inicio' },
-  footer: { license: 'Licencia MIT', built: 'Construido en público por el propio equipo de equipe.' },
+  footer: { license: 'Licencia MIT', built: 'Construido en público por el propio equipo de equipe.', supportedBy: 'Infraestructura con el apoyo de' },
+  // Customer logo row under the hero (and on /pricing).
+  trust: { label: 'Equipos que confían en equipe' },
   app: {
     nav: { get: 'Descargar la app', privacy: 'Política de privacidad de la app', support: 'Soporte de la app', home: 'Inicio de equipe' },
     get: {

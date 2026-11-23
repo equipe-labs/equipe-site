@@ -399,7 +399,9 @@ equipe`,
     phone: { name: 'frontend', verb: 'が確認を求めています', age: 'たった今リクエスト', where: 'Loop · T-5 料金ページを公開 · 確認', tool: '確認', action: '料金ページを loop.app/pricing に全員向けに公開', once: 'iPhoneからは、今回の1回だけ許可されます。', deny: '拒否', allow: '今回のみ許可', close: '閉じる' },
   },
   notFound: { title: 'ページが見つかりません — equipe', description: 'このページは存在しません。', heading: 'ページが見つかりません', text: 'このアドレスには何もありません。移動されたか、リンクが間違っている可能性があります。', home: 'ホームページへ' },
-  footer: { license: 'MITライセンス', built: 'equipe自身のチームが、公開の場で作りました。' },
+  footer: { license: 'MITライセンス', built: 'equipe自身のチームが、公開の場で作りました。', supportedBy: 'インフラ支援' },
+  // Customer logo row under the hero (and on /pricing).
+  trust: { label: 'equipe を使っているチーム' },
   app: {
     nav: { get: 'アプリを入手', privacy: 'アプリのプライバシーポリシー', support: 'アプリのサポート', home: 'equipe ホーム' },
     get: {

@@ -1,0 +1,48 @@
+/* Customer logos ("Trusted by teams at") and the infrastructure partner line. Neutral greys only: each logo is turned into a
+   single-colour silhouette (filter) and set to the muted text tone with opacity, so every mark reads as the same grey. */
+.trust { display: grid; justify-items: center; gap: var(--s-5); text-align: center; }
+.trust-l { margin: 0; font-size: 14px; line-height: 20px; color: var(--muted); font-weight: 500; }
+.trust-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-5) 56px; }
+.trust-row li { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; }
+.trust-row img { display: block; flex: none; max-width: 100%; height: auto; filter: brightness(0); opacity: 0.5; transition: opacity 200ms; }
+.trust-row span { font-size: 15px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: #000; opacity: 0.5; white-space: nowrap; text-align: left; transition: opacity 200ms; }
+/* Golden Boot Academy's official logo is the crest alone, so its name is set beside it in the site's type (the span) */
+@media (hover: hover) { .trust-row li:hover :is(img, span) { opacity: 0.85; } }
+
+:root[data-theme='dark'] .trust-row img { filter: brightness(0) invert(1); opacity: 0.56; }
+:root[data-theme='dark'] .trust-row span { color: #fff; opacity: 0.56; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .trust-row img { filter: brightness(0) invert(1); opacity: 0.56; }
+  :root:not([data-theme]) .trust-row span { color: #fff; opacity: 0.56; }
+}
+@media (hover: hover) { :root[data-theme='dark'] .trust-row li:hover :is(img, span) { opacity: 0.9; } }
+
+/* phones: two by two, so no logo shrinks */
+@media (max-width: 560px) {
+  .trust-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-4); width: 100%; max-width: 360px; justify-items: center; }
+  .trust-row span { font-size: 14px; white-space: normal; max-width: 6.4em; }
+}
+
+/* entry: each logo fades up in turn (only set by the script, never with reduced motion) */
+.trust.wait .trust-row li { opacity: 0; transform: translateY(10px); }
+.trust.wait.in .trust-row li { opacity: 1; transform: none; transition: opacity 600ms var(--ease, cubic-bezier(0.22, 1, 0.36, 1)), transform 600ms var(--ease, cubic-bezier(0.22, 1, 0.36, 1)); transition-delay: calc(var(--i, 0) * 80ms); }
+.trust.wait .trust-l { opacity: 0; }
+.trust.wait.in .trust-l { opacity: 1; transition: opacity 500ms; }
+/* in the hero the row arrives with the rest of the hero copy (html.mo is set only without reduced motion) */
+html.mo .hero .trust .trust-l { animation: trust-in 700ms var(--ease) both 420ms; }
+html.mo .hero .trust .trust-row li { animation: trust-in 700ms var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms + 500ms); }
+@keyframes trust-in { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { .trust .trust-row li, .trust .trust-l { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; } }
+
+/* "Infrastructure supported by": a partner, so it lives in the footer, apart from the customers */
+.supported { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); margin: var(--s-3) 0 0; font-size: 13.5px; color: var(--muted); }
+.supported a { display: inline-flex; align-items: center; min-height: var(--tap); border-radius: var(--s-1); }
+.supported img { display: block; filter: brightness(0); opacity: 0.62; transition: opacity 200ms; }
+.supported a:hover img { opacity: 0.95; }
+:root[data-theme='dark'] .supported img { filter: brightness(0) invert(1); opacity: 0.66; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .supported img { filter: brightness(0) invert(1); opacity: 0.66; } }
+
+/* placements */
+.hero .htrust { width: 100%; margin-top: 52px; }
+.ptrust { margin: var(--s-8) auto; }
+@media (max-width: 560px) { .hero .htrust { margin-top: var(--s-7); } .ptrust { margin: var(--s-7) auto; } }

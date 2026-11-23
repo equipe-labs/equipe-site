@@ -17,6 +17,7 @@ import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 import FaqJsonLd from '../components/FaqJsonLd.astro';
 import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import CustomerLogos from '../components/CustomerLogos.astro';
 import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -89,6 +90,7 @@ const tiles = [
         <p class="hsub ld" style="--d:1">{t.hero.approve}</p>
         <div class="hbox ld" style="--d:2"><IdeaBox code={code} id="idea-hero" location="hero" big /></div>
         <div class="more ld" style="--d:3"><a class="cue" href="#see">{t.hero.secondary}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></a></div>
+        <CustomerLogos code={code} id="trust-hero" class="htrust" />
       </div>
     </section>
 

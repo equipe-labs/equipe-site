@@ -400,7 +400,9 @@ equipe`,
     phone: { name: '프론트엔드', verb: '확인을 요청해요', age: '방금 요청됨', where: 'Loop · T-5 가격 페이지 공개 · 묻기', tool: '확인', action: '가격 페이지를 loop.app/pricing에 모두에게 공개', once: '휴대폰에서는 이번 한 번만 허용돼요.', deny: '거부', allow: '이번만 허용', close: '닫기' },
   },
   notFound: { title: '페이지를 찾을 수 없어요 — equipe', description: '이 페이지는 없어요.', heading: '페이지를 찾을 수 없어요', text: '이 주소에는 아무것도 없어요. 페이지가 옮겨졌거나 링크가 잘못됐을 수 있어요.', home: '홈으로 가기' },
-  footer: { license: 'MIT 라이선스', built: 'equipe 팀이 직접, 공개적으로 만들었어요.' },
+  footer: { license: 'MIT 라이선스', built: 'equipe 팀이 직접, 공개적으로 만들었어요.', supportedBy: '인프라 지원' },
+  // Customer logo row under the hero (and on /pricing).
+  trust: { label: 'equipe와 함께하는 팀' },
   app: {
     nav: { get: '앱 받기', privacy: '앱 개인정보처리방침', support: '앱 지원', home: 'equipe 홈' },
     get: {

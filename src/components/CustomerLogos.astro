@@ -1,0 +1,47 @@
+---
+// "Trusted by teams at": a quiet row of customer logos, adapted from the 21st.dev "Logo Cloud 3" block (hirael, MIT):
+// one centred row, muted marks that brighten on hover, staggered fade-up on entry (none with reduced motion).
+// Logos are the companies' official files in public/brand/customers/ (CJ: the cj.net header logo, prd-cdn.cj.net/static/svg/logo_b.svg;
+// Atinum Investment: the atinuminvest.co.kr header logo; Golden Boot Academy: the goldenbootacademy.com site-logo crest, resized;
+// Ironact: ironact.net/ironact-logo.svg with its viewBox trimmed to the drawing, as in design/assets/partners/), shown as <img> with
+// width/height (no layout shift) and turned monochrome with a CSS filter, never redrawn. Sizes are set by visual weight,
+// not by width: a square mark gets more height than a long, thin wordmark.
+import '../styles/trust.css';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; id: string; class?: string; style?: string }
+const { code, id, class: cls, style } = Astro.props;
+const t = getMessages(code).trust;
+
+// h: rendered height in CSS px; w follows from the file's aspect ratio. `name` beside the mark only where the official logo is a mark alone.
+const LOGOS = [
+  { key: 'cj', alt: 'CJ', src: '/brand/customers/cj.svg', w: 79, h: 67, hh: 42 },
+  { key: 'atinum', alt: 'Atinum Investment', src: '/brand/customers/atinum.svg', w: 327.56, h: 90.2, hh: 31 },
+  { key: 'gba', alt: 'Golden Boot Academy', src: '/brand/customers/golden-boot-academy.webp', w: 102, h: 112, hh: 32, name: 'Golden Boot Academy' },
+  { key: 'ironact', alt: 'Ironact', src: '/brand/customers/ironact.svg', w: 404.91, h: 56.08, hh: 13 },
+] as const;
+const size = (l: (typeof LOGOS)[number]) => ({ width: Math.round((l.w / l.h) * l.hh), height: l.hh });
+---
+<div class:list={['trust', cls]} style={style} data-trust>
+  <p class="trust-l" id={id}>{t.label}</p>
+  <ul class="trust-row" aria-labelledby={id}>
+    {LOGOS.map((l, i) => (
+      <li class={`tl-${l.key}`} style={`--i:${i}`}>
+        <img src={l.src} alt={l.alt} {...size(l)} decoding="async" />
+        {'name' in l && <span aria-hidden="true">{l.name}</span>}
+      </li>
+    ))}
+  </ul>
+</div>
+<script>
+  // Fade the row up when it scrolls into view. Rows already on screen at load are left alone (the hero animates its own),
+  // and nothing moves for visitors who ask for reduced motion.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll<HTMLElement>('[data-trust]').forEach((el) => {
+      if (el.getBoundingClientRect().top < innerHeight) return;
+      el.classList.add('wait');
+      io.observe(el);
+    });
+  }
+</script>

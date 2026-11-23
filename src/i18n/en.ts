@@ -405,7 +405,9 @@ equipe`,
     phone: { name: 'frontend', verb: 'asks you to confirm something', age: 'Asked just now', where: 'Loop · T-5 Publish the pricing page · Ask', tool: 'CONFIRM', action: 'Publish the pricing page at loop.app/pricing, for everyone', once: 'From your phone, a request is allowed once only.', deny: 'Deny', allow: 'Allow once', close: 'Close' },
   },
   notFound: { title: 'Page not found — equipe', description: 'This page does not exist.', heading: 'Page not found', text: 'There is nothing at this address. It may have moved, or the link may be wrong.', home: 'Go to the home page' },
-  footer: { license: 'MIT License', built: 'Built in public by equipe’s own team.' },
+  footer: { license: 'MIT License', built: 'Built in public by equipe’s own team.', supportedBy: 'Infrastructure supported by' },
+  // Customer logo row under the hero (and on /pricing).
+  trust: { label: 'Trusted by teams at' },
   app: {
     nav: { get: 'Get the app', privacy: 'App privacy policy', support: 'App support', home: 'equipe home' },
     // /app/: getting the phone app. `{…}` keeps a phrase on one line.

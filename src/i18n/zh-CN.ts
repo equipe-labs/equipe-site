@@ -399,7 +399,9 @@ equipe`,
     phone: { name: 'frontend', verb: '请你确认一件事', age: '刚刚请求', where: 'Loop · T-5 发布价格页 · 询问', tool: '确认', action: '把价格页发布到 loop.app/pricing，所有人可见', once: '在手机上，请求只允许这一次。', deny: '拒绝', allow: '仅允许一次', close: '关闭' },
   },
   notFound: { title: '页面未找到 — equipe', description: '此页面不存在。', heading: '页面未找到', text: '这个地址下没有内容。页面可能已经移动，或者链接有误。', home: '返回首页' },
-  footer: { license: 'MIT 许可证', built: '由 equipe 自己的团队公开构建。' },
+  footer: { license: 'MIT 许可证', built: '由 equipe 自己的团队公开构建。', supportedBy: '基础设施支持' },
+  // Customer logo row under the hero (and on /pricing).
+  trust: { label: '信任 equipe 的团队' },
   app: {
     nav: { get: '获取应用', privacy: '应用隐私政策', support: '应用支持', home: 'equipe 首页' },
     get: {

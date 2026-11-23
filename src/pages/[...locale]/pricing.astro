@@ -3,6 +3,7 @@
 import PageShell from '../../components/PageShell.astro';
 import WebApplicationJsonLd from '../../components/WebApplicationJsonLd.astro';
 import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import CustomerLogos from '../../components/CustomerLogos.astro';
 import '../../styles/sections.css';
 import { SITE } from '../../data/site';
 import { TYPICAL_TOTALS } from '../../data/flags';
@@ -32,6 +33,7 @@ const cost = t.faq.items[4];
         </li>
       ))}
     </ul>
+    <CustomerLogos code={code} id="trust-pricing" class="ptrust" />
     <div class="pfacts">
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h2>{t.plans.runout.title}</h2><p>{t.plans.runout.text}</p></div></div>
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" /><path d="M3.5 10h17M7 14.5h3" /></svg><div><h2>{t.plans.credits.title}</h2><p>{t.plans.credits.text}</p></div></div>
