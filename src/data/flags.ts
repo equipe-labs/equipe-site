@@ -96,6 +96,22 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     alumniOf: 'Yonsei University',
     links: { linkedin: 'https://www.linkedin.com/in/shaysehee' },
   },
+  {
+    // Facts from the LinkedIn profile the founder shared (tae-hwan-1969b8196); the PM-agent role is as the founder described it. Photo: that profile's portrait, cropped square.
+    name: 'Tae Hwan',
+    initials: 'TH',
+    photo: '/brand/tae-hwan-800.jpg',
+    photoLarge: '/brand/tae-hwan-800.jpg',
+    role: { en: 'Founder & CEO of From September, ex-Toss Product Owner', ko: 'From September 창업자 · CEO, 전 토스 프로덕트 오너' },
+    bio: {
+      en: "Tae Hwan has been a product owner for over a decade. At Toss he spent nearly three and a half years as a product owner, first at Viva Republica and then at Toss Bank, and before that he led product at Mesh Korea (VROONG) for four and a half years, heading its same-day delivery project group and B2B shipper integrations. He was later Global Product Owner at Bucketplace (Ohouse) and now runs From September, which brings AI into the daily work of small businesses. He holds a Master of Mathematics from the University of Oxford with First Class honours. Drawing on what he learned at Toss and these companies, he helps equipe design its PM agent.",
+      ko: '태환은 10년 넘게 프로덕트 오너로 일해 왔어요. 토스에서 비바리퍼블리카와 토스뱅크를 거치며 3년 반 가까이 프로덕트 오너로 일했고, 그 전에는 메쉬코리아(부릉)에서 4년 반 동안 당일배송 프로젝트 그룹과 B2B 화주사 연동을 이끌었어요. 이후 오늘의집(버킷플레이스)에서 글로벌 프로덕트 오너를 맡았고, 지금은 작은 회사와 소상공인의 일상 업무에 AI를 적용하는 From September를 창업해 이끌고 있어요. 옥스퍼드 대학교에서 수학 석사(Master of Mathematics)를 최우등(First Class)으로 마쳤어요. 토스와 여러 회사에서 쌓은 경험을 바탕으로 equipe의 PM 에이전트 설계를 돕고 있어요.',
+    },
+    jobTitle: 'Founder & CEO',
+    worksFor: 'From September',
+    alumniOf: 'University of Oxford',
+    links: { linkedin: 'https://www.linkedin.com/in/tae-hwan-1969b8196/' },
+  },
 ];
 
 /**
