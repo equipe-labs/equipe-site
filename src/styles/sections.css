@@ -597,3 +597,56 @@ details:not([open]) > .it-pop { display: none; }
 .smart-i { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; flex: none; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
 @media (max-width: 1040px) { .loop-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; } .loop-steps::before { display: none; } .smart { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .loop-c, .smart { padding: 20px; } .loop-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; } .loop-r { justify-content: flex-start; } }
+
+/* ======== First screen v2: room to breathe ========
+   The hero fills the first screen and holds only the headline, the line under it, the idea box and its examples.
+   Customer logos sit just below the fold in their own quiet band, so they never squeeze the hero.
+   Sizes follow the viewport height as well as the width, so a 13" laptop (800px tall) keeps the same rhythm as a 27" screen. */
+main.home > section.hero { min-height: clamp(600px, calc(100svh - 64px), 1000px); align-items: center; }
+main.home .hero .hc { padding-top: clamp(40px, 6svh, 88px); padding-bottom: clamp(56px, 9svh, 120px); }
+main.home .hero h1 { max-width: 14ch; font-size: clamp(44px, min(6.4vw, 10.2svh), 96px); line-height: 1.03; letter-spacing: -0.03em; }
+:is(:lang(de), :lang(fr), :lang(es), :lang(pt-BR)) main.home .hero h1 { max-width: 16ch; font-size: clamp(40px, min(5.8vw, 9.4svh), 80px); line-height: 1.04; }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home .hero h1 { font-size: clamp(36px, min(5.4vw, 8.8svh), 72px); line-height: 1.2; letter-spacing: -0.01em; }
+main.home .hero .hsub { margin-top: clamp(18px, 2.8svh, 28px); max-width: 30em; font-size: clamp(18px, min(1.5vw, 2.5svh), 21px); line-height: 1.5; font-weight: 450; }
+main.home .hero .hbox { max-width: 720px; margin-top: clamp(28px, 5.2svh, 52px); }
+main.home .hero .idea.big .idea-chips { margin-top: 18px; }
+/* the reassurance line moves out of the form into one quiet row with the "See how it works" link */
+main.home .hero .idea.big .idea-note { display: none; }
+main.home .hero .more { margin-top: clamp(18px, 3svh, 28px); gap: 6px 18px; font-size: 14px; color: var(--muted); }
+main.home .hero .more .hnote { white-space: normal; }
+main.home .hero .more .cue { height: auto; padding: 0; border: 0; border-radius: 4px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; color: var(--text); font-weight: 500; transition: color 200ms var(--ease); }
+main.home .hero .more .cue:hover { color: var(--accent); }
+main.home .hero .more .cue:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+main.home .hero .more .hnote + .cue::before { content: ''; width: 3px; height: 3px; margin-right: 14px; border-radius: 50%; background: var(--line); }
+@media (max-width: 560px) { main.home .hero .more { flex-direction: column; gap: 10px; } main.home .hero .more .hnote + .cue::before { display: none; } }
+/* phones: start under the header instead of centring in a tall screen */
+@media (max-width: 700px) {
+  main.home > section.hero { min-height: 0; }
+  main.home .hero .hc { padding-top: 48px; padding-bottom: 64px; }
+  main.home .hero .hsub { font-size: 18px; }
+}
+
+/* Customer logos: one quiet band right under the first screen. Smaller marks, generous spacing, a small label. */
+main.home > section.logos { padding: 48px 0 0; }
+main.home .ltrust { gap: 28px; }
+main.home .ltrust .trust-l { font-size: 13px; line-height: 18px; font-weight: 500; letter-spacing: 0.01em; }
+main.home .ltrust .trust-row { gap: 20px 64px; }
+main.home .ltrust .trust-row li { min-height: 36px; }
+main.home .ltrust .trust-row img { width: auto; height: 34px; opacity: 0.42; }
+main.home .ltrust .tl-atinum img { height: 25px; }
+main.home .ltrust .tl-gba img { height: 26px; }
+main.home .ltrust .tl-ironact img { height: 11px; }
+main.home .ltrust .trust-row span { font-size: 14px; opacity: 0.42; }
+:root[data-theme='dark'] main.home .ltrust .trust-row :is(img, span) { opacity: 0.5; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) main.home .ltrust .trust-row :is(img, span) { opacity: 0.5; } }
+@media (hover: hover) { main.home .ltrust .trust-row li:hover :is(img, span) { opacity: 0.85; } }
+main.home > section.logos + section.see { padding-top: 120px; }
+@media (max-width: 700px) { main.home > section.logos { padding: 56px 0 0; } main.home > section.logos + section.see { padding-top: 80px; } }
+
+/* Gallery follows "Day one": a hairline between two sections on the same background, like the others */
+.gal-s { border-top: 1px solid var(--line); }
+/* Japanese: break at phrase boundaries; on phones size the headline so each phrase fits on one line */
+:lang(ja) main.home .hero h1 { word-break: auto-phrase; }
+@media (max-width: 420px) { :lang(ja) main.home .hero h1 { font-size: min(8vw, 32px); } }
+/* Example chips wrap onto a second centred row on wider screens instead of scrolling with cut-off ends (long German/French examples) */
+@media (min-width: 701px) { main.home .idea.big .idea-chips { flex-wrap: wrap; overflow: visible; justify-content: center; row-gap: 8px; } }

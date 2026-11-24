@@ -225,7 +225,7 @@ main.home .hero .shot { padding-bottom: 120px; }
 .cmp { gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
 .cmp > div { border-radius: 0; border: 0; padding: var(--s-6) var(--s-7) var(--s-7); }
 .cmp .cl { background: var(--bg); border: 0; }
-.cmp .cr { background: var(--surface); border: 0; box-shadow: inset 0 3px 0 var(--accent); }
+.cmp .cr { background: color-mix(in srgb, var(--accent) 4%, var(--surface)); border: 0; box-shadow: none; }
 main.home .cmp h3 { font-size: 15px; font-weight: 600; letter-spacing: 0; padding-bottom: 0; border-bottom: 0; min-height: 24px; }
 .cmp .cr h3 { color: var(--text); }
 .cmp ul { gap: 0; margin-top: var(--s-4); }

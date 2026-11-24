@@ -80,14 +80,14 @@ header.site:not([data-site-header]) nav a.cur { color: var(--text); }
 .dz .side a, .dz .toc a { display: flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: var(--r-1); color: var(--muted); font-size: 15px; text-decoration: none; }
 .dz .side a:hover, .dz .toc a:hover { color: var(--text); }
 .dz .side a[aria-current], .dz .toc a[aria-current] { color: var(--text); font-weight: 600; }
-.dz .side a[aria-current] { background: var(--surface); box-shadow: inset 3px 0 0 var(--accent); }
+.dz .side a[aria-current] { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
 .dz .docs .body > h2 { margin-top: var(--s-7); scroll-margin-top: 80px; }
 .dz .docs .body > h2:first-of-type { margin-top: 0; }
 .dz .docs .body p { color: var(--muted); max-width: 640px; }
 .dz .toc { position: sticky; top: 88px; align-self: start; font-size: 14px; color: var(--muted); }
 .dz .toc .lab { margin-bottom: var(--s-2); }
 .dz .lab { font: 600 13px var(--sans); color: var(--muted); }
-.dz .warn { border-left: 3px solid var(--accent); background: var(--surface); padding: 16px 20px; border-radius: 0 var(--r-2) var(--r-2) 0; margin-top: var(--s-3); }
+.dz .warn { border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); padding: 16px 20px; border-radius: var(--r-2); margin-top: var(--s-3); }
 .dz .warn p { margin: 0 0 var(--s-2); }
 .dz .warn ul { margin: 0 0 var(--s-3); padding-left: 1.2em; color: var(--text); }
 .dz .warn li { margin-bottom: var(--s-1); }
