@@ -18,6 +18,7 @@ import FaqJsonLd from '../components/FaqJsonLd.astro';
 import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import CustomerLogos from '../components/CustomerLogos.astro';
+import DayOne from '../components/DayOne.astro';
 import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -150,6 +151,8 @@ const tiles = [
         <div class="fcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
+
+    <DayOne code={code} />
 
     <section class="wedge" id="from-claude">
       <div class="wrap">

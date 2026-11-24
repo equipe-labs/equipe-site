@@ -1,0 +1,61 @@
+---
+// /day-one/: everything the person's AI team delivers from the first launch, in plain words. Copy: src/data/dayone.ts.
+import PageShell from '../../components/PageShell.astro';
+import DayOne from '../../components/DayOne.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { SITE } from '../../data/site';
+import { NAV } from '../../data/nav';
+import { DAY_ONE, FEATURED, LISTED } from '../../data/dayone';
+import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../../i18n';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const t = getMessages(code);
+const c = DAY_ONE[code] ?? DAY_ONE.en;
+const P = c.page;
+const url = new URL(subPath(info, 'day-one'), Astro.site).href;
+const keys = [...FEATURED, ...LISTED];
+---
+<PageShell code={code} page="day-one" title={P.title} description={P.desc}>
+  <Fragment slot="head">
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: P.h1, description: P.desc, inLanguage: info.lang,
+      isPartOf: { '@id': `${url}#website` }, about: { '@id': `${SITE.url}/#organization` },
+      mainEntity: { '@type': 'ItemList', name: c.title, numberOfItems: keys.length, itemListElement: keys.map((k, i) => ({ '@type': 'ListItem', position: i + 1, name: c.items[k].title, description: c.items[k].text })) },
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={P.faq} />
+  </Fragment>
+
+  <section class="d1-hero"><div class="wrap">
+    <p class="kick">{c.kicker}</p>
+    <h1>{P.h1}</h1>
+    <p class="lead">{P.lead}</p>
+    <div class="acts">
+      <a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="day_one_hero">{NAV[code]?.start ?? NAV.en.start}</a>
+      <a class="btn ghost lg" href={`${localePath(info)}#how-it-works`}>{t.nav.how}</a>
+    </div>
+  </div></section>
+
+  <DayOne code={code} page />
+
+  <section class="d1-steps"><div class="wrap">
+    <h2>{P.stepsTitle}</h2>
+    <ol>{P.steps.map((s, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>)}</ol>
+  </div></section>
+
+  <section class="d1-faq"><div class="wrap">
+    <h2>{P.faqTitle}</h2>
+    <div class="faqs">
+      {P.faq.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  <section class="d1-cta"><div class="wrap">
+    <h2>{c.title}</h2>
+    <div class="acts" style="display:flex;justify-content:center;margin-top:var(--s-6)">
+      <a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="day_one_bottom">{NAV[code]?.start ?? NAV.en.start}</a>
+    </div>
+  </div></section>
+</PageShell>

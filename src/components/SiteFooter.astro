@@ -9,6 +9,7 @@ import { SHOW_CJ } from '../data/flags';
 import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
+import { DAY_ONE } from '../data/dayone';
 import '../styles/trust.css';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
@@ -36,6 +37,7 @@ const bu = BLOG_UI[bl];
         <h2>{f.product}</h2>
         <ul>
           <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
+          <li><a href={subPath(info, 'day-one')}>{(DAY_ONE[code] ?? DAY_ONE.en).nav}</a></li>
           <li><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
           <li><a href={`${home}#faq`}>{t.nav.faq}</a></li>
           <li><a href={subPath(info, 'app')}>{t.app.nav.get}</a></li>

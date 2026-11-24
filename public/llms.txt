@@ -8,10 +8,15 @@
 - Blog: https://equipe.im/blog/
 - Pricing: https://equipe.im/pricing/
 - Security: https://equipe.im/security/
+- Day one (what the AI team delivers from the first launch): https://equipe.im/day-one/
 - About (Umbriles Inc.): https://equipe.im/about/
 - Changelog: https://equipe.im/changelog/
 - Sign up: https://app.equipe.im/start · Sign in: https://app.equipe.im/login
 - Brand files: https://equipe.im/brand/ (mark.svg, wordmark.svg, lockup.svg, logo-512.png)
+
+## What the team delivers from the first launch
+
+Every product the team puts live comes with, with no setup by the person: a live site on its own address (plus three custom domain suggestions: best, best value, cheapest; a domain is bought only after the person approves it, at cost); a privacy policy and terms written from the features the product really uses, with booking, minors or health clauses when they apply; a contact page that mails the owner; search and AI visibility (a title and description on every page, sitemap, structured data, share images, llms.txt, IndexNow pings on every deploy, and guided Google Search Console and Bing setup); share-ready posts per platform, Instagram story and post images and one-tap sharing; marketing tools (Google Analytics 4, Google Tag Manager, Meta Pixel, Google Ads, TikTok, LinkedIn) that load only after a visitor accepts the cookie banner; sign-up source tracking, a feedback widget and a one-time "how did you hear about us" question; an admin area for products with sign-in; speed measured on a phone after every release (target 95 or more, a fix is scheduled automatically when it drops); uptime monitoring; a measured before and after when an existing site is improved; and a weekly growth report every Monday. Details: https://equipe.im/day-one/
 
 ## The open-source engine (for developers)
 
