@@ -13,7 +13,7 @@ faqs:
   - q: "Can I use the same domain for my website and my email?"
     a: "Yes, but they use different DNS records, and changing one can break the other. Set up email records first or note them down, and never delete records you do not recognise. If you already receive email on the domain, ask before you move it."
   - q: "How does equipe handle domain purchases?"
-    a: "The team cannot buy a domain by itself. It shows you the domain and price and links to an approval page that only a signed-in member of your team can open. One approval buys once. Domains are charged at cost. You never sign in to a cloud console."
+    a: "The team cannot buy a domain by itself. It shows you the domain and price and links to an approval page that only a signed-in member of your team can open. One approval buys once. Domains are paid from credits, at the yearly price you approve. You never sign in to a cloud console."
 ---
 
 A domain is the name people type to find you, like `yourstudio.com`. Without one, your product lives at an address chosen by your host, which is fine for testing and awkward for customers. Buying and connecting a domain is one of the few launch tasks where a single wrong setting can leave you with a blank page and no error message.
@@ -126,7 +126,7 @@ A domain is paid for a period, commonly a year. If it expires, your site and you
 
 ## Where equipe fits
 
-On equipe, you do not do the steps above yourself. The team sets up hosting, the database and the domain for each customer, and you never sign in to a code host, a hosting service or a cloud console. The team cannot buy a domain by itself. A request shows the domain and its price and links to an approval page that only a signed-in member of your team can open. It is allowed only if approved, not expired, and not above the approved price, and one approval buys once. Domains are charged at cost. The [approval cards explained](/blog/approval-cards-explained/) article shows how this kind of request works, and [the safety article](/blog/is-equipe-safe-data-money-approvals/) covers what the team can and cannot do alone.
+On equipe, you do not do the steps above yourself. The team sets up hosting, the database and the domain for each customer, and you never sign in to a code host, a hosting service or a cloud console. The team cannot buy a domain by itself. A request shows the domain and its price and links to an approval page that only a signed-in member of your team can open. It is allowed only if approved, not expired, and not above the approved price, and one approval buys once. Domains are paid from credits, at the yearly price you approve. The [approval cards explained](/blog/approval-cards-explained/) article shows how this kind of request works, and [the safety article](/blog/is-equipe-safe-data-money-approvals/) covers what the team can and cannot do alone.
 
 Honest limits: this guide is not a promise about every case. For renewals and transfers of your particular domain, ask the PM how renewal is handled for your domain before you rely on it, and set your own reminder anyway. If a product outgrows the setup, we can move it to your own accounts. If you want to do everything yourself, or you need a very specific registrar, a plain registrar and host will serve you equally well.
 

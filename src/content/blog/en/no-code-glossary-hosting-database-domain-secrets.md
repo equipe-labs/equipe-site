@@ -50,7 +50,7 @@ This glossary is written for people who cannot code. Each term gets the same fou
 - **What it is:** Your web address, like yourname.com. You rent it, usually by the year, from a registrar.
 - **Why you care:** It is your brand and your email address base. If it lapses or someone else holds it, you can lose both.
 - **What can go wrong:** Registering it under someone else's account (a freelancer, an agency), forgetting to renew, or buying a lookalike name that confuses customers.
-- **How equipe handles it:** The team cannot buy a domain by itself. A request shows the domain and its price and links to an approval page that only a signed-in member of your team can open. The purchase goes ahead only if it is approved, unexpired and not above the price you approved, and one approval buys once. Domains are billed at cost. A full walk-through is in [buy and connect a domain](/blog/buy-and-connect-a-domain/).
+- **How equipe handles it:** The team cannot buy a domain by itself. A request shows the domain and its price and links to an approval page that only a signed-in member of your team can open. The purchase goes ahead only if it is approved, unexpired and not above the price you approved, and one approval buys once. Domains are paid from credits, at the yearly price you approve. A full walk-through is in [buy and connect a domain](/blog/buy-and-connect-a-domain/).
 
 ### DNS
 - **What it is:** The internet's phone book. DNS records tell the world which hosting a domain should point to, and where its email should go.

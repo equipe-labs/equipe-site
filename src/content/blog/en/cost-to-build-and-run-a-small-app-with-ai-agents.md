@@ -15,7 +15,7 @@ faqs:
   - q: "Can I cap what I spend?"
     a: "Yes. Every request shows its expected cost first, and you set a monthly cap. You also see the expected total for the month."
   - q: "Are there hidden costs?"
-    a: "The costs are the plan, credits for everything the team does (AI work at the model's list price plus a margin, shown to the cent per task, and the cloud computer it works on), and domains at cost. We do not yet publish a typical monthly total because we do not have enough real usage data."
+    a: "The costs are the plan, credits for everything the team does (AI work at the model's list price plus a margin, shown to the cent per task, and the cloud computer it works on), and domains at the yearly price you approve. We do not yet publish a typical monthly total because we do not have enough real usage data."
   - q: "How much more does it cost when my team grows?"
     a: "The Team plan includes 5 people. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and credits are shared by the whole team, not counted per person."
 ---
@@ -49,7 +49,7 @@ All amounts are in US dollars. 1 credit equals $1.
 | Hosting only | $19/month | Your product, sites, domains and storage stay live; your team works whenever you have credits |
 | AI work | Model list price plus a margin | Shown to the cent for each task; paid from credits |
 | The team's cloud computer | Part of the work | Drawn from credits only while the team is working; nothing when it is not |
-| Domains | At cost | Paid from credits |
+| Domains | The yearly price you approve | Paid from credits |
 | Credit packs | $25, $50, $100, $250 | Valid 12 months; unused credits refundable within 14 days |
 | Monthly credits | Included in the Team plan | At $1 = $1; they roll over for 2 months |
 

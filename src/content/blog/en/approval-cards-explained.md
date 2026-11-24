@@ -94,7 +94,7 @@ Buying a domain shows the approval rules in their strictest form. The team canno
 3. The purchase is allowed only if it is approved, not expired and not above the approved price.
 4. One approval buys once. Approving a domain does not authorize a second purchase.
 
-Domains are billed at cost, in credits. Our guide to [buying and connecting a domain](/blog/buy-and-connect-a-domain/) walks through the whole process.
+Domains are paid from credits, at the yearly price shown on the approval page. Our guide to [buying and connecting a domain](/blog/buy-and-connect-a-domain/) walks through the whole process.
 
 ## What happens if you decline
 

@@ -94,7 +94,7 @@ const es: Messages = {
       { lead: 'Ves el costo antes', text: 'Cada propuesta muestra cuánto se espera que cueste, y siempre ves el total esperado del mes.' },
       { lead: 'Paga lo que usa el equipo', text: '1 crédito = $1. Empiezas con $5 gratis, sin tarjeta.' },
     ],
-    note: 'Los informes semanales de uso con propuestas llegarán pronto.',
+    note: 'El informe semanal de crecimiento ya está disponible: visitas, registros y lo que entregó tu equipo, el día y a la hora que elijas, con sugerencias de crecimiento que apruebas con un toque.',
     alt: 'La vista de costos: $38 gastados este mes, unos $64 esperados a fin de mes, por debajo de un tope de $100',
   },
   who: {
@@ -111,8 +111,8 @@ const es: Messages = {
     labels: { now: 'Funciona hoy', early: 'Abierto ya', soon: 'Próximamente' },
     items: [
       { title: 'El equipo en sí', text: 'El PM, los ingenieros, el diseñador, QA y los analistas de datos ya construyen y publican productos reales. Este sitio y nuestras apps los hicieron ellos.' },
-      { title: 'Tu equipo en la nube', text: 'Regístrate, describe tu idea y ten tu propio equipo en más o menos un minuto. Habla con el PM, sigue el trabajo y abre enlaces de vista previa.' },
-      { title: 'Lo que aún falta', text: 'Importación en un paso desde Claude con base de datos y dominio, e informes semanales de uso con propuestas.' },
+      { title: 'Tu equipo en la nube', text: 'Regístrate, describe tu idea y ten tu propio equipo en más o menos un minuto. Habla con el PM, sigue el trabajo y abre enlaces de vista previa. Los informes semanales de crecimiento llegan el día y a la hora que elijas.' },
+      { title: 'Lo que aún falta', text: 'Importación en un paso desde Claude con base de datos y dominio.' },
     ],
   },
   proof: {
@@ -211,7 +211,7 @@ const es: Messages = {
     runout: { title: 'Cuando se acaban los créditos', text: 'Tu equipo solo se detiene cuando se acaban los créditos; añade créditos y continúa enseguida. Cuando el equipo no trabaja no cuesta nada, y puedes fijar un tope mensual.' },
     estimate: { title: 'Calcula antes de gastar', text: 'Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
     yearly: 'o $190 al año (dos meses gratis)',
-    credits: { title: 'Qué pagan los créditos', text: 'Todo lo que hace el equipo mientras trabaja: el trabajo de IA al precio de lista del modelo más nuestro margen, mostrado al céntimo en cada tarea, y el ordenador en la nube donde trabaja. Los dominios, a precio de coste.' },
+    credits: { title: 'Qué pagan los créditos', text: 'Todo lo que hace el equipo mientras trabaja: el trabajo de IA al precio de lista del modelo más nuestro margen, mostrado al céntimo en cada tarea, y el ordenador en la nube donde trabaja. Un dominio solo se compra si apruebas su precio anual.' },
     freeNote: 'Cuando se acaban los créditos gratis, tu equipo se detiene hasta que eliges un plan o añades créditos. Si nadie abre un equipo gratuito en 14 días, te enviamos un email y se borra 7 días después salvo que lo abras; antes puedes descargar tu proyecto.',
     faq: [{ question: '¿Pago mientras no estoy?', answer: 'No. Cuando tu equipo no trabaja, no cuesta nada.' }, { question: '¿Qué pasa cuando se acaban mis créditos?', answer: 'Solo entonces se detiene tu equipo. Añade créditos y continúa enseguida. También puedes fijar un tope mensual.' }, { question: '¿Los créditos mensuales se acumulan?', answer: 'Sí. Los créditos mensuales del plan Equipo se acumulan durante 2 meses.' }, { question: '¿Qué pasa con mis sitios si solo pago hosting?', answer: 'Siguen en vivo, con sus dominios y su almacenamiento.' }, { question: '¿Cuánto más pago si mi equipo crece?', answer: 'El plan Equipo incluye hasta 5 personas. Cada editor extra cuesta $5 al mes, hasta 10 personas por equipo. Las invitaciones de solo lectura son gratis, y los créditos se comparten entre todo el equipo, sin contarse por persona. Gratis y Solo hosting incluyen 2 personas.' }],
   },

@@ -52,7 +52,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'Your own admin area', text: 'See who signed up and what your product stores. Search it, or export it to a spreadsheet.' },
       uptime: { title: 'Watched for downtime', text: 'If your site goes down, you see it right away, with the last 24 hours of uptime at a glance.' },
       compare: { title: 'Before and after, measured', text: 'Improving a site you already have? Old and new are measured side by side: speed, search, AI readiness and security.' },
-      weekly: { title: 'A weekly growth report', text: 'Every Monday morning: visitors, sign-ups, what your team shipped and what comes next.' },
+      weekly: { title: 'A weekly growth report', text: 'On the day and time you choose: visitors, sign-ups, what your team shipped and what comes next.' },
     },
     vis: {
       live: 'Live', siteTag: 'Small habits, every day', siteCta: 'Add a habit', picks: ['Best', 'Value', 'Cheapest'], askFirst: 'Bought only with your OK',
@@ -73,7 +73,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'Questions',
       faq: [
         { question: 'Do I have to set any of this up?', answer: 'No. Your team does it while it builds your product. You only answer what needs you, like whether to buy a domain.' },
-        { question: 'Does it cost extra?', answer: 'No. It comes with every product your team puts live. A domain is the only purchase, at cost, and only after you approve it.' },
+        { question: 'Does it cost extra?', answer: 'Everything on this page comes with your team; there’s no separate fee for it. The team’s work uses your credits, and a domain is only bought if you approve its yearly price.' },
         { question: 'I already have a site. Does this work for me?', answer: 'Yes. Share its address: your team brings it in, improves it and shows you the before and after, measured the same way.' },
         { question: 'Are my visitors tracked without asking?', answer: 'No. The built-in analytics sets no cookies. Marketing tools like Meta Pixel or Google Ads load only after a visitor accepts the cookie banner.' },
       ],
@@ -101,7 +101,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: '나만의 관리자 화면', text: '누가 가입했는지, 제품에 무엇이 저장됐는지 보고 검색하고 스프레드시트로 내려받아요.' },
       uptime: { title: '멈추면 바로 알아요', text: '사이트가 멈추면 바로 보이고, 최근 24시간 가동률도 한눈에 볼 수 있어요.' },
       compare: { title: '이전과 이후를 숫자로', text: '이미 있는 사이트를 개선하나요? 옛 사이트와 새 사이트를 똑같이 재서 나란히 보여 줘요: 속도, 검색, AI 검색 준비, 보안.' },
-      weekly: { title: '매주 성장 리포트', text: '매주 월요일 아침: 방문자, 가입자, 팀이 해낸 일과 다음에 할 일.' },
+      weekly: { title: '매주 성장 리포트', text: '내가 고른 요일과 시간에: 방문자, 가입자, 팀이 해낸 일과 다음에 할 일.' },
     },
     vis: {
       live: '공개 중', siteTag: '작은 습관, 매일', siteCta: '습관 추가', picks: ['추천', '가성비', '최저가'], askFirst: '내가 승인해야만 구매',
@@ -122,7 +122,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: '자주 묻는 질문',
       faq: [
         { question: '이걸 제가 직접 설정해야 하나요?', answer: '아니요. 팀이 제품을 만들면서 함께 해요. 도메인을 살지처럼 나만 정할 수 있는 것만 물어봐요.' },
-        { question: '추가 비용이 있나요?', answer: '아니요. 팀이 공개하는 모든 제품에 포함돼요. 돈이 드는 건 도메인뿐이고, 원가 그대로, 내가 승인한 뒤에만 사요.' },
+        { question: '추가 비용이 있나요?', answer: '이 페이지의 모든 것은 팀에 포함돼 있어서 따로 내는 요금이 없어요. 팀이 일하는 데는 크레딧이 쓰이고, 도메인은 연 가격을 내가 승인할 때만 사요.' },
         { question: '이미 사이트가 있어요. 저도 되나요?', answer: '네. 주소만 알려 주세요. 팀이 가져와서 개선하고, 이전과 이후를 똑같은 방식으로 재서 보여 줘요.' },
         { question: '방문자를 동의 없이 추적하나요?', answer: '아니요. 기본 분석은 쿠키를 쓰지 않아요. Meta 픽셀이나 Google Ads 같은 마케팅 도구는 방문자가 쿠키 배너에서 동의한 뒤에만 불러와요.' },
       ],
@@ -150,7 +150,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'あなた専用の管理画面', text: '誰が登録したか、プロダクトに何が保存されているかを確認。検索も、スプレッドシートへの書き出しも。' },
       uptime: { title: '停止をすぐに把握', text: 'サイトが止まればすぐにわかり、直近24時間の稼働率もひと目で。' },
       compare: { title: 'ビフォー・アフターを数字で', text: '既存のサイトを改善するなら、旧サイトと新サイトを同じ方法で計測して並べます：速度、検索、AI検索への対応、セキュリティ。' },
-      weekly: { title: '毎週の成長レポート', text: '毎週月曜の朝：訪問者、登録者、チームがやったこと、次にやること。' },
+      weekly: { title: '毎週の成長レポート', text: '選んだ曜日と時間に：訪問者、登録者、チームがやったこと、次にやること。' },
     },
     vis: {
       live: '公開中', siteTag: '小さな習慣を、毎日', siteCta: '習慣を追加', picks: ['ベスト', 'コスパ', '最安'], askFirst: '承認したときだけ購入',
@@ -171,7 +171,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'よくある質問',
       faq: [
         { question: '自分で設定する必要はありますか？', answer: 'いいえ。チームがプロダクトを作りながら行います。ドメインを買うかどうかなど、あなたにしか決められないことだけを聞きます。' },
-        { question: '追加料金はかかりますか？', answer: 'いいえ。チームが公開するすべてのプロダクトに含まれます。購入が必要なのはドメインだけで、原価のまま、あなたが承認したときだけです。' },
+        { question: '追加料金はかかりますか？', answer: 'このページにあるものはすべてチームに含まれていて、別料金はありません。チームの作業にはクレジットを使い、ドメインは年間価格をあなたが承認したときだけ購入します。' },
         { question: 'すでにサイトがあります。使えますか？', answer: 'はい。アドレスを伝えてください。チームが取り込んで改善し、ビフォー・アフターを同じ方法で計測して見せます。' },
         { question: '訪問者を同意なく追跡しますか？', answer: 'いいえ。標準の分析はCookieを使いません。MetaピクセルやGoogle広告などのツールは、訪問者がCookieバナーで同意した後にだけ読み込まれます。' },
       ],
@@ -199,7 +199,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: '你自己的管理后台', text: '查看谁注册了、产品存了哪些数据，可以搜索，也可以导出到表格。' },
       uptime: { title: '宕机立刻知道', text: '网站一旦宕机马上就能看到，过去 24 小时的可用率一目了然。' },
       compare: { title: '前后对比，用数据说话', text: '要改进已有的网站？新旧版本用同样的方式测量并排展示：速度、搜索、AI 搜索就绪度和安全。' },
-      weekly: { title: '每周增长报告', text: '每周一早上：访客、注册、团队完成了什么、接下来做什么。' },
+      weekly: { title: '每周增长报告', text: '在你选定的日期和时间：访客、注册、团队完成了什么、接下来做什么。' },
     },
     vis: {
       live: '已上线', siteTag: '小习惯，每一天', siteCta: '添加习惯', picks: ['最佳', '划算', '最便宜'], askFirst: '经你同意才购买',
@@ -220,7 +220,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: '常见问题',
       faq: [
         { question: '这些需要我自己设置吗？', answer: '不需要。团队在打造产品时一并完成。只有需要你决定的事才会问你，比如要不要买域名。' },
-        { question: '要额外付费吗？', answer: '不用。团队上线的每个产品都包含这些。唯一需要购买的是域名，按成本价，并且只在你同意之后。' },
+        { question: '要额外付费吗？', answer: '本页的一切都包含在你的团队里，没有单独收费。团队的工作会使用你的点数，域名只有在你同意其年费后才会购买。' },
         { question: '我已经有网站了，也能用吗？', answer: '可以。告诉我们地址：团队会把它导入、改进，并用同样的方式测量，给你看前后对比。' },
         { question: '会在未经同意的情况下追踪访客吗？', answer: '不会。内置分析不使用 Cookie。Meta Pixel、Google Ads 等营销工具只有在访客接受 Cookie 横幅后才会加载。' },
       ],
@@ -248,7 +248,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'Tu propio panel de administración', text: 'Ve quién se registró y qué guarda tu producto. Búscalo o expórtalo a una hoja de cálculo.' },
       uptime: { title: 'Vigilado contra caídas', text: 'Si tu sitio se cae, lo ves al instante, con la disponibilidad de las últimas 24 horas de un vistazo.' },
       compare: { title: 'Antes y después, medido', text: '¿Mejoras un sitio que ya tienes? El viejo y el nuevo se miden lado a lado: velocidad, búsqueda, preparación para IA y seguridad.' },
-      weekly: { title: 'Un informe semanal de crecimiento', text: 'Cada lunes por la mañana: visitas, registros, lo que tu equipo entregó y lo que viene.' },
+      weekly: { title: 'Un informe semanal de crecimiento', text: 'El día y a la hora que elijas: visitas, registros, lo que tu equipo entregó y lo que viene.' },
     },
     vis: {
       live: 'En línea', siteTag: 'Pequeños hábitos, cada día', siteCta: 'Añadir hábito', picks: ['Mejor', 'Precio', 'Más barato'], askFirst: 'Solo se compra con tu OK',
@@ -269,7 +269,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'Preguntas',
       faq: [
         { question: '¿Tengo que configurar algo de esto?', answer: 'No. Tu equipo lo hace mientras construye tu producto. Solo te pregunta lo que depende de ti, como si comprar un dominio.' },
-        { question: '¿Cuesta algo extra?', answer: 'No. Viene con cada producto que tu equipo pone en línea. Lo único que se compra es el dominio, a precio de coste y solo cuando tú lo apruebas.' },
+        { question: '¿Cuesta algo extra?', answer: 'Todo lo de esta página viene con tu equipo; no hay una tarifa aparte. El trabajo del equipo usa tus créditos, y un dominio solo se compra si apruebas su precio anual.' },
         { question: 'Ya tengo un sitio. ¿Me sirve?', answer: 'Sí. Comparte su dirección: tu equipo lo trae, lo mejora y te enseña el antes y el después, medidos de la misma forma.' },
         { question: '¿Se rastrea a mis visitantes sin preguntar?', answer: 'No. La analítica incluida no usa cookies. Herramientas como Meta Pixel o Google Ads solo se cargan después de que el visitante acepta el aviso de cookies.' },
       ],
@@ -297,7 +297,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'Sua própria área de administração', text: 'Veja quem se cadastrou e o que seu produto guarda. Pesquise ou exporte para uma planilha.' },
       uptime: { title: 'Vigiado contra quedas', text: 'Se o site cair, você vê na hora, com a disponibilidade das últimas 24 horas num relance.' },
       compare: { title: 'Antes e depois, medido', text: 'Vai melhorar um site que já existe? O antigo e o novo são medidos lado a lado: velocidade, busca, preparo para IA e segurança.' },
-      weekly: { title: 'Um relatório semanal de crescimento', text: 'Toda segunda de manhã: visitas, cadastros, o que sua equipe entregou e o que vem a seguir.' },
+      weekly: { title: 'Um relatório semanal de crescimento', text: 'No dia e horário que você escolher: visitas, cadastros, o que sua equipe entregou e o que vem a seguir.' },
     },
     vis: {
       live: 'No ar', siteTag: 'Pequenos hábitos, todo dia', siteCta: 'Adicionar hábito', picks: ['Melhor', 'Custo', 'Mais barato'], askFirst: 'Só compra com o seu OK',
@@ -318,7 +318,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'Perguntas',
       faq: [
         { question: 'Preciso configurar alguma coisa disso?', answer: 'Não. Sua equipe faz isso enquanto constrói o produto. Ela só pergunta o que depende de você, como comprar ou não um domínio.' },
-        { question: 'Tem custo extra?', answer: 'Não. Vem com todo produto que sua equipe coloca no ar. A única compra é o domínio, a preço de custo e só depois da sua aprovação.' },
+        { question: 'Tem custo extra?', answer: 'Tudo nesta página vem com sua equipe; não há cobrança separada. O trabalho da equipe usa seus créditos, e um domínio só é comprado se você aprovar o preço anual.' },
         { question: 'Já tenho um site. Serve para mim?', answer: 'Sim. Envie o endereço: sua equipe traz o site, melhora e mostra o antes e o depois, medidos do mesmo jeito.' },
         { question: 'Meus visitantes são rastreados sem pedir?', answer: 'Não. A análise embutida não usa cookies. Ferramentas como Meta Pixel ou Google Ads só carregam depois que o visitante aceita o aviso de cookies.' },
       ],
@@ -346,7 +346,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'Dein eigener Adminbereich', text: 'Sieh, wer sich angemeldet hat und was dein Produkt speichert. Durchsuchen oder als Tabelle exportieren.' },
       uptime: { title: 'Ausfälle im Blick', text: 'Fällt deine Website aus, siehst du es sofort, mit der Verfügbarkeit der letzten 24 Stunden auf einen Blick.' },
       compare: { title: 'Vorher und nachher, gemessen', text: 'Du verbesserst eine bestehende Website? Alt und neu werden nebeneinander gemessen: Tempo, Suche, KI-Tauglichkeit und Sicherheit.' },
-      weekly: { title: 'Ein wöchentlicher Wachstumsbericht', text: 'Jeden Montagmorgen: Besucher, Anmeldungen, was dein Team geliefert hat und was als Nächstes kommt.' },
+      weekly: { title: 'Ein wöchentlicher Wachstumsbericht', text: 'An dem Tag und zu der Uhrzeit, die du wählst: Besucher, Anmeldungen, was dein Team geliefert hat und was als Nächstes kommt.' },
     },
     vis: {
       live: 'Online', siteTag: 'Kleine Gewohnheiten, jeden Tag', siteCta: 'Gewohnheit hinzufügen', picks: ['Beste', 'Preiswert', 'Günstigste'], askFirst: 'Gekauft nur mit deinem OK',
@@ -367,7 +367,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'Fragen',
       faq: [
         { question: 'Muss ich davon etwas selbst einrichten?', answer: 'Nein. Dein Team erledigt es, während es dein Produkt baut. Gefragt wirst du nur, was dich braucht, etwa ob eine Domain gekauft wird.' },
-        { question: 'Kostet das extra?', answer: 'Nein. Es gehört zu jedem Produkt, das dein Team online bringt. Gekauft wird nur eine Domain, zum Selbstkostenpreis und erst nach deiner Zustimmung.' },
+        { question: 'Kostet das extra?', answer: 'Alles auf dieser Seite gehört zu deinem Team, ohne eigene Gebühr. Die Arbeit des Teams nutzt deine Credits, und eine Domain wird nur gekauft, wenn du ihren Jahrespreis freigibst.' },
         { question: 'Ich habe schon eine Website. Passt das für mich?', answer: 'Ja. Teile ihre Adresse: Dein Team übernimmt sie, verbessert sie und zeigt dir vorher und nachher, gleich gemessen.' },
         { question: 'Werden meine Besucher ungefragt getrackt?', answer: 'Nein. Die eingebaute Analyse setzt keine Cookies. Tools wie Meta Pixel oder Google Ads laden erst, wenn ein Besucher das Cookie-Banner akzeptiert.' },
       ],
@@ -395,7 +395,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       admin: { title: 'Votre espace d’administration', text: 'Voyez qui s’est inscrit et ce que votre produit enregistre. Cherchez-y, ou exportez vers un tableur.' },
       uptime: { title: 'Surveillé contre les pannes', text: 'Si votre site tombe, vous le voyez tout de suite, avec la disponibilité des dernières 24 heures d’un coup d’œil.' },
       compare: { title: 'Avant et après, mesurés', text: 'Vous améliorez un site existant ? L’ancien et le nouveau sont mesurés côte à côte : vitesse, recherche, préparation à l’IA et sécurité.' },
-      weekly: { title: 'Un rapport de croissance hebdomadaire', text: 'Chaque lundi matin : visiteurs, inscriptions, ce que votre équipe a livré et la suite.' },
+      weekly: { title: 'Un rapport de croissance hebdomadaire', text: 'Le jour et à l’heure de votre choix : visiteurs, inscriptions, ce que votre équipe a livré et la suite.' },
     },
     vis: {
       live: 'En ligne', siteTag: 'Petites habitudes, chaque jour', siteCta: 'Ajouter une habitude', picks: ['Meilleur', 'Avantageux', 'Moins cher'], askFirst: 'Acheté seulement avec votre accord',
@@ -416,7 +416,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       faqTitle: 'Questions',
       faq: [
         { question: 'Dois-je configurer quoi que ce soit ?', answer: 'Non. Votre équipe s’en charge en construisant votre produit. Elle ne vous demande que ce qui dépend de vous, comme acheter ou non un domaine.' },
-        { question: 'Est-ce que ça coûte plus cher ?', answer: 'Non. C’est inclus dans chaque produit que votre équipe met en ligne. Le seul achat est le domaine, à prix coûtant et seulement après votre accord.' },
+        { question: 'Est-ce que ça coûte plus cher ?', answer: 'Tout ce qui figure sur cette page est inclus avec votre équipe, sans frais à part. Le travail de l’équipe utilise vos crédits, et un domaine n’est acheté que si vous approuvez son prix annuel.' },
         { question: 'J’ai déjà un site. Est-ce pour moi ?', answer: 'Oui. Partagez son adresse : votre équipe le reprend, l’améliore et vous montre l’avant et l’après, mesurés de la même façon.' },
         { question: 'Mes visiteurs sont-ils suivis sans leur accord ?', answer: 'Non. L’analyse intégrée ne pose aucun cookie. Des outils comme Meta Pixel ou Google Ads ne se chargent qu’après l’acceptation du bandeau cookies.' },
       ],

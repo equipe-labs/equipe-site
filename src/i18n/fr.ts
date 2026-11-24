@@ -95,7 +95,7 @@ const fr: Messages = {
       { lead: 'Vous voyez le coût d’abord', text: 'Chaque proposition affiche son coût prévu, et vous voyez toujours le total prévu pour le mois.' },
       { lead: 'Vous payez ce que l’équipe utilise', text: '1 crédit = $1. Vous commencez avec $5 offerts, sans carte.' },
     ],
-    note: 'Les rapports d’usage hebdomadaires avec propositions arrivent bientôt.',
+    note: 'Le rapport de croissance hebdomadaire est disponible : visiteurs, inscriptions et ce que votre équipe a livré, le jour et à l’heure de votre choix, avec des suggestions de croissance à approuver d’un geste.',
     alt: 'La vue des coûts : 38 $ dépensés ce mois-ci, environ 64 $ prévus d’ici la fin du mois, sous un plafond de 100 $',
   },
   who: {
@@ -112,8 +112,8 @@ const fr: Messages = {
     labels: { now: 'Disponible', early: 'Ouvert', soon: 'Bientôt' },
     items: [
       { title: 'L’équipe elle-même', text: 'Le PM, les ingénieurs, le designer, la QA et l’analyste de données construisent et lancent déjà de vrais produits. Ce site et nos applis ont été construits par eux.' },
-      { title: 'Votre équipe dans le cloud', text: 'Inscrivez-vous, décrivez votre idée et obtenez votre propre équipe en une minute environ. Discutez avec le PM, suivez le travail et ouvrez les liens d’aperçu.' },
-      { title: 'Encore à venir', text: 'Import en une étape depuis Claude avec base de données et domaine, et rapports d’usage hebdomadaires avec propositions.' },
+      { title: 'Votre équipe dans le cloud', text: 'Inscrivez-vous, décrivez votre idée et obtenez votre propre équipe en une minute environ. Discutez avec le PM, suivez le travail et ouvrez les liens d’aperçu. Les rapports de croissance hebdomadaires arrivent le jour et à l’heure de votre choix.' },
+      { title: 'Encore à venir', text: 'Import en une étape depuis Claude avec base de données et domaine.' },
     ],
   },
   proof: {
@@ -212,7 +212,7 @@ const fr: Messages = {
     runout: { title: 'Quand les crédits sont épuisés', text: 'Votre équipe ne s’arrête que lorsque les crédits sont épuisés ; ajoutez des crédits et elle reprend aussitôt. Quand l’équipe ne travaille pas, cela ne coûte rien, et vous pouvez fixer un plafond mensuel.' },
     estimate: { title: 'Une estimation avant de dépenser', text: 'Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
     yearly: 'ou $190 par an (deux mois offerts)',
-    credits: { title: 'Ce que paient les crédits', text: 'Tout ce que fait l’équipe quand elle travaille : le travail d’IA au prix catalogue du modèle plus notre marge, affiché au centime pour chaque tâche, et l’ordinateur cloud sur lequel elle travaille. Les domaines à prix coûtant.' },
+    credits: { title: 'Ce que paient les crédits', text: 'Tout ce que fait l’équipe quand elle travaille : le travail d’IA au prix catalogue du modèle plus notre marge, affiché au centime pour chaque tâche, et l’ordinateur cloud sur lequel elle travaille. Un domaine n’est acheté que si vous approuvez son prix annuel.' },
     freeNote: 'Quand le crédit gratuit est utilisé, votre équipe s’arrête jusqu’à ce que vous choisissiez une offre ou ajoutiez des crédits. Les équipes gratuites que personne n’ouvre pendant 14 jours reçoivent un e-mail et sont supprimées 7 jours plus tard si vous ne les ouvrez pas ; vous pouvez d’abord télécharger votre projet.',
     faq: [{ question: 'Est-ce que je paie quand je ne suis pas là ?', answer: 'Non. Quand votre équipe ne travaille pas, cela ne coûte rien.' }, { question: 'Que se passe-t-il quand mes crédits sont épuisés ?', answer: 'Votre équipe ne s’arrête qu’à ce moment-là. Ajoutez des crédits et elle reprend aussitôt. Vous pouvez aussi fixer un plafond mensuel.' }, { question: 'Les crédits mensuels sont-ils reportés ?', answer: 'Oui. Les crédits mensuels de l’offre Équipe sont reportés pendant 2 mois.' }, { question: 'Que deviennent mes sites si je ne paie que l’hébergement ?', answer: 'Ils restent en ligne, avec leurs domaines et leur stockage.' }, { question: 'Combien de plus quand mon équipe grandit ?', answer: 'Le forfait Équipe inclut jusqu\'à 5 personnes. Chaque éditeur supplémentaire coûte 5 $ par mois, jusqu\'à 10 personnes par équipe. Les invitations en lecture seule sont gratuites, et les crédits sont partagés par toute l\'équipe, sans compter par personne. Gratuit et Hébergement seul incluent 2 personnes.' }],
   },

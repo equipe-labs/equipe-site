@@ -33,7 +33,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
           'You can start from an idea, a description, or something you already made in Claude or a similar tool, such as an artifact, a prototype or its code.',
           'equipe is not an app builder that stops at the first version. The team also puts the product live, keeps it running and proposes the next improvement from how people use it.',
           'Anything that goes live, costs money or reaches your customers waits for your approval.',
-          'Not shipped yet, as of the review date: one-step import from Claude with a database and a domain, and weekly usage reports with proposals. Until import ships, you share the code or describe it and the team moves it for you.',
+          'Not shipped yet, as of the review date: one-step import from Claude with a database and a domain. Weekly growth reports are live: the person picks the day and time. Until import ships, you share the code or describe it and the team moves it for you.',
         ],
       },
       {
@@ -58,7 +58,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
           'Hosting only: $19 per month. Your product, sites, domains and storage stay live, and your team works whenever you have credits.',
           'A team stops only when its credits run out. Adding credits lets it continue right away.',
           'Every request shows its expected cost first, and you set a monthly spending cap.',
-          'Domains are billed at cost.',
+          'A domain is bought only after the person approves its yearly price; it is paid from credits.',
         ],
       },
       {
@@ -100,7 +100,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
           '아이디어, 설명, 또는 Claude 같은 도구로 이미 만든 것(아티팩트, 프로토타입, 코드)에서 시작할 수 있어요.',
           'equipe는 첫 버전에서 멈추는 앱 빌더가 아니에요. 팀이 제품을 서비스로 띄우고, 계속 운영하고, 사람들이 쓰는 모습을 보고 다음 개선을 제안해요.',
           '서비스를 공개하거나, 돈이 들거나, 고객에게 닿는 일은 내 승인을 기다려요.',
-          '점검일 기준 아직 없는 것: 데이터베이스와 도메인까지 한 번에 붙이는 Claude 가져오기, 제안이 담긴 주간 사용 리포트. 가져오기가 나오기 전에는 코드를 공유하거나 설명해 주면 팀이 옮겨 줘요.',
+          '점검일 기준 아직 없는 것: 데이터베이스와 도메인까지 한 번에 붙이는 Claude 가져오기. 주간 성장 리포트는 이미 나와 있고, 요일과 시간은 직접 골라요. 가져오기가 나오기 전에는 코드를 공유하거나 설명해 주면 팀이 옮겨 줘요.',
         ],
       },
       {
@@ -125,7 +125,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
           '호스팅 전용: 월 $19. 제품·사이트·도메인·저장 공간은 계속 운영되고, 크레딧이 있으면 팀은 언제든 일해요.',
           '팀은 크레딧이 떨어질 때만 멈춰요. 크레딧을 추가하면 바로 이어서 일해요.',
           '요청마다 예상 비용을 먼저 보여 주고, 월 지출 한도는 직접 정해요.',
-          '도메인은 원가로 청구해요.',
+          '도메인은 연 가격을 승인해야만 사고, 크레딧으로 결제돼요.',
         ],
       },
       {

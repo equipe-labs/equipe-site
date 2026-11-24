@@ -94,7 +94,7 @@ const ptBR: Messages = {
       { lead: 'Você vê o custo antes', text: 'Cada proposta mostra quanto deve custar, e você sempre vê o total esperado do mês.' },
       { lead: 'Pague pelo que o time usa', text: '1 crédito = $1. Você começa com $5 grátis, sem cartão.' },
     ],
-    note: 'Relatórios semanais de uso com propostas chegam em breve.',
+    note: 'O relatório semanal de crescimento já está no ar: visitas, cadastros e o que sua equipe entregou, no dia e horário que você escolher, com sugestões de crescimento que você aprova com um toque.',
     alt: 'A tela de custos: $38 gastos neste mês, cerca de $64 previstos até o fim do mês, abaixo de um limite de $100',
   },
   who: {
@@ -111,8 +111,8 @@ const ptBR: Messages = {
     labels: { now: 'Funciona hoje', early: 'Aberto agora', soon: 'Em breve' },
     items: [
       { title: 'O próprio time', text: 'O PM, os engenheiros, o designer, o QA e os analistas de dados já constroem e publicam produtos de verdade. Este site e os nossos apps foram feitos por eles.' },
-      { title: 'Seu time na nuvem', text: 'Cadastre-se, descreva sua ideia e tenha seu próprio time em cerca de um minuto. Converse com o PM, acompanhe o trabalho e abra links de prévia.' },
-      { title: 'Ainda por vir', text: 'Importação em um passo do Claude com banco de dados e domínio, e relatórios semanais de uso com propostas.' },
+      { title: 'Seu time na nuvem', text: 'Cadastre-se, descreva sua ideia e tenha seu próprio time em cerca de um minuto. Converse com o PM, acompanhe o trabalho e abra links de prévia. Os relatórios semanais de crescimento chegam no dia e horário que você escolher.' },
+      { title: 'Ainda por vir', text: 'Importação em um passo do Claude com banco de dados e domínio.' },
     ],
   },
   proof: {
@@ -211,7 +211,7 @@ const ptBR: Messages = {
     runout: { title: 'Quando os créditos acabam', text: 'Seu time só para quando os créditos acabam; adicione créditos e ele continua na hora. Quando o time não está trabalhando, não custa nada, e você pode definir um limite mensal.' },
     estimate: { title: 'Estimativa antes de gastar', text: 'Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
     yearly: 'ou $190 por ano (dois meses grátis)',
-    credits: { title: 'O que os créditos pagam', text: 'Tudo o que o time faz enquanto trabalha: o trabalho de IA ao preço de lista do modelo mais nossa margem, mostrado ao centavo em cada tarefa, e o computador na nuvem em que ele trabalha. Domínios a preço de custo.' },
+    credits: { title: 'O que os créditos pagam', text: 'Tudo o que o time faz enquanto trabalha: o trabalho de IA ao preço de lista do modelo mais nossa margem, mostrado ao centavo em cada tarefa, e o computador na nuvem em que ele trabalha. Um domínio só é comprado se você aprovar o preço anual.' },
     freeNote: 'Quando o crédito grátis acaba, seu time para até você escolher um plano ou adicionar créditos. Times gratuitos que ninguém abre por 14 dias recebem um email e são apagados 7 dias depois, a menos que você os abra; antes disso você pode baixar seu projeto.',
     faq: [{ question: 'Eu pago enquanto estou fora?', answer: 'Não. Quando seu time não está trabalhando, não custa nada.' }, { question: 'O que acontece quando meus créditos acabam?', answer: 'Só então seu time para. Adicione créditos e ele continua na hora. Você também pode definir um limite mensal.' }, { question: 'Os créditos mensais acumulam?', answer: 'Sim. Os créditos mensais do plano Time acumulam por 2 meses.' }, { question: 'O que acontece com meus sites se eu pagar só a hospedagem?', answer: 'Eles continuam no ar, com seus domínios e armazenamento.' }, { question: 'Quanto a mais pago quando minha equipe cresce?', answer: 'O plano Equipe inclui até 5 pessoas. Cada editor extra custa $5 por mês, até 10 pessoas por equipe. Convites somente para visualizar são grátis, e os créditos são compartilhados por toda a equipe, sem contar por pessoa. Grátis e Só hospedagem incluem 2 pessoas.' }],
   },

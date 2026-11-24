@@ -94,7 +94,7 @@ const de: Messages = {
       { lead: 'Du siehst zuerst die Kosten', text: 'Jeder Vorschlag zeigt die erwarteten Kosten, und du siehst immer die erwartete Summe für den Monat.' },
       { lead: 'Du zahlst, was das Team nutzt', text: '1 Credit = $1. Du startest mit $5 gratis, ohne Karte.' },
     ],
-    note: 'Wöchentliche Nutzungsberichte mit Vorschlägen kommen bald.',
+    note: 'Der wöchentliche Wachstumsbericht ist da: Besucher, Anmeldungen und was dein Team geliefert hat, an dem Tag und zu der Uhrzeit, die du wählst, mit Wachstumsvorschlägen, die du mit einem Tipp freigibst.',
     alt: 'Die Kostenübersicht: 38 $ diesen Monat ausgegeben, etwa 64 $ bis Monatsende erwartet, unter einem Limit von 100 $',
   },
   who: {
@@ -111,8 +111,8 @@ const de: Messages = {
     labels: { now: 'Läuft heute', early: 'Jetzt offen', soon: 'Kommt' },
     items: [
       { title: 'Das Team selbst', text: 'PM, Engineers, Designer, QA und Datenanalyst bauen und veröffentlichen schon echte Produkte. Diese Website und unsere Apps hat das Team gebaut.' },
-      { title: 'Dein Team in der Cloud', text: 'Melde dich an, beschreib deine Idee und bekomm in etwa einer Minute dein eigenes Team. Chatte mit dem PM, verfolge die Arbeit und öffne Vorschau-Links.' },
-      { title: 'Was noch kommt', text: 'Import aus Claude in einem Schritt mit Datenbank und Domain und wöchentliche Nutzungsberichte mit Vorschlägen.' },
+      { title: 'Dein Team in der Cloud', text: 'Melde dich an, beschreib deine Idee und bekomm in etwa einer Minute dein eigenes Team. Chatte mit dem PM, verfolge die Arbeit und öffne Vorschau-Links. Wöchentliche Wachstumsberichte kommen an dem Tag und zu der Uhrzeit, die du wählst.' },
+      { title: 'Was noch kommt', text: 'Import aus Claude in einem Schritt mit Datenbank und Domain.' },
     ],
   },
   proof: {
@@ -211,7 +211,7 @@ const de: Messages = {
     runout: { title: 'Wenn die Credits aufgebraucht sind', text: 'Dein Team stoppt nur, wenn die Credits aufgebraucht sind; mit neuen Credits geht es sofort weiter. Solange das Team nicht arbeitet, kostet es nichts, und du kannst ein Monatslimit setzen.' },
     estimate: { title: 'Erst schätzen, dann ausgeben', text: 'Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
     yearly: 'oder $190 im Jahr (zwei Monate gratis)',
-    credits: { title: 'Wofür Credits bezahlen', text: 'Alles, was das Team während der Arbeit tut: KI-Arbeit zum Listenpreis des Modells plus unsere Marge, auf den Cent genau pro Aufgabe, und der Cloud-Rechner, auf dem es arbeitet. Domains zum Selbstkostenpreis.' },
+    credits: { title: 'Wofür Credits bezahlen', text: 'Alles, was das Team während der Arbeit tut: KI-Arbeit zum Listenpreis des Modells plus unsere Marge, auf den Cent genau pro Aufgabe, und der Cloud-Rechner, auf dem es arbeitet. Eine Domain wird nur gekauft, wenn du ihren Jahrespreis freigibst.' },
     freeNote: 'Sind die Gratis-Credits verbraucht, stoppt dein Team, bis du einen Plan wählst oder Credits hinzufügst. Kostenlose Teams, die 14 Tage niemand öffnet, bekommen eine E-Mail und werden 7 Tage später gelöscht, wenn du sie nicht öffnest; vorher kannst du dein Projekt herunterladen.',
     faq: [{ question: 'Zahle ich, während ich weg bin?', answer: 'Nein. Solange dein Team nicht arbeitet, kostet es nichts.' }, { question: 'Was passiert, wenn meine Credits aufgebraucht sind?', answer: 'Erst dann stoppt dein Team. Mit neuen Credits geht es sofort weiter. Du kannst auch ein Monatslimit setzen.' }, { question: 'Werden Monats-Credits übertragen?', answer: 'Ja. Die Monats-Credits im Team-Plan bleiben 2 Monate erhalten.' }, { question: 'Was passiert mit meinen Seiten, wenn ich nur Hosting zahle?', answer: 'Sie bleiben live, mit ihren Domains und ihrem Speicher.' }, { question: 'Wie viel kostet es mehr, wenn mein Team wächst?', answer: 'Der Team-Tarif enthält bis zu 5 Personen. Jede weitere Bearbeitung kostet $5 im Monat, bis zu 10 Personen pro Team. Einladungen nur zum Ansehen sind kostenlos. Credits werden nicht pro Person gezählt, sondern vom ganzen Team geteilt. Kostenlos und Nur Hosting enthalten 2 Personen.' }],
   },

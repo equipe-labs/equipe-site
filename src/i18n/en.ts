@@ -99,7 +99,7 @@ export const en = {
       { lead: 'You see the cost first', text: 'Every proposal shows what it is expected to cost, and you always see the expected total for the month.' },
       { lead: 'Pay for what the team uses', text: '1 credit = $1. You start with $5 free, no card needed.' },
     ],
-    note: 'Weekly usage reports with proposals are coming.',
+    note: 'Weekly growth report, live now: visitors, sign-ups and what your team shipped, on the day and time you choose, with growth suggestions you approve with one tap.',
     alt: 'The cost view: $38 spent this month, about $64 expected by the end of the month, under a $100 cap',
   },
   who: {
@@ -116,8 +116,8 @@ export const en = {
     labels: { now: 'Works today', early: 'Open now', soon: 'Coming' },
     items: [
       { title: 'The team itself', text: 'The PM, engineers, designer, QA and data roles already build and ship real products. This site and our apps were built by them.' },
-      { title: 'Your team in the cloud', text: 'Sign up, describe your idea and get your own team in about a minute. Chat with the PM, follow the work and open preview links.' },
-      { title: 'Still coming', text: 'One-step import from Claude with a database and a domain, and weekly usage reports with proposals.' },
+      { title: 'Your team in the cloud', text: 'Sign up, describe your idea and get your own team in about a minute. Chat with the PM, follow the work and open preview links. Weekly growth reports arrive on the day and time you choose.' },
+      { title: 'Still coming', text: 'One-step import from Claude with a database and a domain.' },
     ],
   },
   proof: {
@@ -216,7 +216,7 @@ export const en = {
     runout: { title: 'When credits run out', text: 'Your team stops only when credits run out; add credits and it continues right away. When the team is not working it costs nothing, and you can set a monthly cap.' },
     estimate: { title: 'Estimate before you spend', text: 'Every request shows its expected cost first, and you set a monthly cap.' },
     yearly: 'or $190 a year (two months free)',
-    credits: { title: 'What credits pay for', text: 'Everything the team does while it works: AI work at the model’s list price plus our margin, shown to the cent for each task, and the cloud computer it works on. Domains are at cost.' },
+    credits: { title: 'What credits pay for', text: 'Everything the team does while it works: AI work at the model’s list price plus our margin, shown to the cent for each task, and the cloud computer it works on. A domain is bought only if you approve its yearly price.' },
     freeNote: 'Free teams stop when the free credit is used, until you choose a plan or add credits. Free teams nobody opens for 14 days get an email and are deleted 7 days later unless you open them; you can download your project first.',
     faq: [{ question: 'Do I pay while I’m away?', answer: 'No. When your team is not working, it costs nothing.' }, { question: 'What happens when my credits run out?', answer: 'Your team stops only then. Add credits and it continues right away. You can also set a monthly cap.' }, { question: 'Do monthly credits carry over?', answer: 'Yes. The monthly credits on the Team plan roll over for 2 months.' }, { question: 'What happens to my sites if I only pay for hosting?', answer: 'They stay live, with their domains and storage.' }, { question: 'How much more when my team grows?', answer: 'Up to 5 people are included in the Team plan. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and credits are shared by the whole team, not counted per person. Free and Hosting only include 2 people.' }],
   },
