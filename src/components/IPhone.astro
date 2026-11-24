@@ -1,33 +1,41 @@
 ---
-// A realistic iPhone (16 Pro proportions, 393 x 852 points) drawn in CSS: titanium frame, side buttons, Dynamic Island,
-// iOS status bar, optional Safari compact address bar, home indicator. Everything inside scales with --w.
-// Used by the home page (the app the team shipped) and /developers (the approval screen).
-interface Props { w?: number; url?: string; class?: string; label?: string }
-const { w = 260, url, class: cls = '', label } = Astro.props;
+// A realistic iPhone (Pro class: a 393 x 852 pt screen) drawn in CSS + inline SVG, used for every phone on the site.
+// Everything scales from --u, one iOS point: the device is 425 pt wide (393 pt screen + a 16 pt band on each side: 5.5 pt of
+// metal, 10.5 pt of black glass), screen corners 58 pt, Dynamic Island 126 x 37 pt at 11 pt from the top, iOS status bar
+// (17 pt semibold time; signal, Wi-Fi and battery drawn as vectors), side buttons (action, volume, side, Camera Control),
+// optional Safari address bar, home indicator. Silver metal on the light theme, graphite on the dark one.
+//
+// `w`: device width in px (the page can override it with --w, e.g. tied to a container width).
+// `full`: the slot is a full-screen picture (a 1179 x 2556 screenshot, 3x) and the status bar and Safari bar float over it,
+//         like a real phone; without it the status bar sits above the slot (drawn UIs such as the Stride app).
+// The status bar, home indicator and Safari bar take their ink from the screen's `color` (set by the page for dark screens).
+interface Props { w?: number; url?: string; class?: string; label?: string; full?: boolean }
+const { w = 260, url, class: cls = '', label, full = false } = Astro.props;
 ---
-<figure class={`iph ${cls}`.trim()} style={`--w:${w}px`} role={label ? 'img' : undefined} aria-label={label}>
-  <div class="iph-frame" aria-hidden={label ? 'true' : undefined}>
-    <i class="iph-btn iph-act"></i><i class="iph-btn iph-vup"></i><i class="iph-btn iph-vdn"></i><i class="iph-btn iph-pwr"></i>
+<figure class={`iph${full ? ' iph-full' : ''} ${cls}`.trim()} style={`--w:${w}px`} role={label ? 'img' : undefined} aria-label={label}>
+  <div class="iph-dev" aria-hidden={label ? 'true' : undefined}>
+    <i class="iph-btn iph-act"></i><i class="iph-btn iph-vup"></i><i class="iph-btn iph-vdn"></i><i class="iph-btn iph-pwr"></i><i class="iph-btn iph-cam"></i>
+    <div class="iph-frame"></div>
     <div class="iph-screen">
       <div class="iph-status">
         <span class="iph-time">9:41</span>
-        <span class="iph-island"></span>
         <span class="iph-glyphs">
-          <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="0.8" /><rect x="5" y="5.5" width="3" height="6.5" rx="0.8" /><rect x="10" y="3" width="3" height="9" rx="0.8" /><rect x="15" y="0" width="3" height="12" rx="0.8" /></svg>
-          <svg viewBox="0 0 16 12"><path d="M8 11.2l2.2-2.6a3.2 3.2 0 0 0-4.4 0z" /><path d="M8 5.3a6.6 6.6 0 0 1 4.6 1.9l1.2-1.4a8.5 8.5 0 0 0-11.6 0l1.2 1.4A6.6 6.6 0 0 1 8 5.3z" /><path d="M8 1.6a10.3 10.3 0 0 1 7.1 2.8L16 3.1a12.2 12.2 0 0 0-16 0l.9 1.3A10.3 10.3 0 0 1 8 1.6z" /></svg>
-          <svg viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="23" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-opacity="0.4" /><rect x="2" y="2" width="18" height="8" rx="2" /><path d="M25 4v4a2 2 0 0 0 0-4z" fill-opacity="0.45" /></svg>
+          <svg class="iph-sig" viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="7.6" width="3.2" height="4.4" rx="0.9" /><rect x="4.9" y="5.2" width="3.2" height="6.8" rx="0.9" /><rect x="9.8" y="2.7" width="3.2" height="9.3" rx="0.9" /><rect x="14.7" y="0" width="3.2" height="12" rx="0.9" /></svg>
+          <svg class="iph-wifi" viewBox="0 0 16 12" aria-hidden="true"><path d="M8 11.6c-.3 0-.5-.1-.7-.3L5.6 9.6a.6.6 0 0 1 0-.9 3.5 3.5 0 0 1 4.8 0 .6.6 0 0 1 0 .9l-1.7 1.7c-.2.2-.4.3-.7.3z" /><path d="M3.3 7.2a.6.6 0 0 1-.4-.2L1.9 6a.6.6 0 0 1 0-.9 8.8 8.8 0 0 1 12.2 0 .6.6 0 0 1 0 .9l-1 1a.6.6 0 0 1-.9 0 6.6 6.6 0 0 0-8.4 0 .6.6 0 0 1-.5.2z" opacity="1" /><path d="M.7 4.6a.6.6 0 0 1-.5-.2l-.1-.1a.6.6 0 0 1 0-.9 11.8 11.8 0 0 1 15.8 0 .6.6 0 0 1 0 .9l-.1.1a.6.6 0 0 1-.9 0 10 10 0 0 0-13.8 0 .6.6 0 0 1-.4.2z" /></svg>
+          <svg class="iph-bat" viewBox="0 0 28 13" aria-hidden="true"><rect class="iph-bo" x="0.6" y="0.6" width="23.8" height="11.8" rx="3.6" /><rect x="2.2" y="2.2" width="20.6" height="8.6" rx="2.2" /><path class="iph-bn" d="M25.8 4.4v4.2a2.3 2.3 0 0 0 0-4.2z" /></svg>
         </span>
       </div>
       <div class="iph-content"><slot /></div>
       {url && (
         <div class="iph-safari">
           <span class="iph-aa">AA</span>
-          <span class="iph-url"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z" /></svg>{url}</span>
-          <svg class="iph-rl" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" /></svg>
+          <span class="iph-url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 11V8.5a4.5 4.5 0 0 1 9 0V11M6 11h12v9H6z" /></svg>{url}</span>
+          <svg class="iph-rl" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4.7h-4.7" /></svg>
         </div>
       )}
+      <i class="iph-island"></i>
       <i class="iph-home"></i>
+      <i class="iph-glare"></i>
     </div>
-    <i class="iph-glare"></i>
   </div>
 </figure>
