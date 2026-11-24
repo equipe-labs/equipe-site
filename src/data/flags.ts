@@ -96,11 +96,6 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     alumniOf: 'Yonsei University',
     links: { linkedin: 'https://www.linkedin.com/in/shaysehee' },
   },
-    jobTitle: 'Product adviser',
-    worksFor: 'equipe',
-    alumniOf: 'University of Oxford',
-    links: { linkedin: 'https://www.linkedin.com/in/tae-hwan-1969b8196/' },
-  },
 ];
 
 /**
