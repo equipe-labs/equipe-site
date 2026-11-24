@@ -130,8 +130,8 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
     photoLarge: '/brand/alex-chung-800.jpg',
     role: { en: 'Head of Business', ko: 'Head of Business' },
     bio: {
-      en: "Alex Hee Kyun Chung is equipe's Head of Business, a product leader who builds AI-powered growth engines across the US, Korea, Japan and Southeast Asia. Alex started at Bain, moved to Google to help small-business advertisers grow, and took MADUP's ad-tech platform from $240K to $8M ARR. At Toss, Alex led machine-learning products and growth, taking MAU to 3.5M in eight months, and at Bucketplace (Ohouse) built Ohouse Japan from zero to a scaled commerce business. Alex studied Political Economy at UC Berkeley.",
-      ko: '정희균(Alex)은 equipe의 Head of Business예요. 미국·한국·일본·동남아에서 AI 기반 성장 엔진을 만들어 온 프로덕트 리더예요. 베인에서 시작해 구글에서 중소 광고주의 성장을 도왔고, 매드업에서 애드테크 플랫폼을 연 매출 24만 달러에서 800만 달러로 키웠어요. 토스에서는 머신러닝 프로덕트와 그로스를 이끌며 8개월 만에 MAU를 350만으로 늘렸고, 오늘의집(버킷플레이스)에서는 일본 사업을 0에서 규모 있는 커머스로 키웠어요. UC 버클리에서 정치경제학을 공부했어요.',
+      en: "Alex Hee Kyun Chung is equipe's Head of Business, a product leader who builds AI-powered growth across the US and Asia. Alex worked at Bain and Google, grew MADUP's ad-tech platform to $8M ARR, led ML products at Toss and built Ohouse Japan from zero.",
+      ko: '정희균(Alex)은 equipe의 Head of Business예요. 베인과 구글을 거쳐 매드업 애드테크 플랫폼을 연 매출 800만 달러로 키웠어요. 토스에서 머신러닝 프로덕트를 이끌었고, 오늘의집 일본 사업을 처음부터 만들었어요.',
     },
     links: { linkedin: 'https://www.linkedin.com/in/alex-hee-kyun-chung/' },
   },
