@@ -57,7 +57,7 @@ const links = [
 
     <section class="ab-s"><div class="wrap">
       <h2 id="team" class="rv ab-c">{TEAM_HEADING[lang] ?? TEAM_HEADING.en}</h2>
-      <div class="ab-people">
+      <div class={`ab-people${TEAM.length + (FOUNDER ? 1 : 0) === 5 || TEAM.length + (FOUNDER ? 1 : 0) === 6 ? ' ab-c3' : ''}`}>
         {FOUNDER && <PersonCard i={1} name={FOUNDER.name} role={FOUNDER.role[lang] ?? FOUNDER.role.en} bio={FOUNDER_LINE[lang] ?? FOUNDER_LINE.en} photo={FOUNDER.photoLarge} initials="AK" links={{ linkedin: FOUNDER.links.linkedin, x: FOUNDER.links.x }} />}
         {TEAM.map((m, i) => <PersonCard i={i + 2} name={m.name} role={m.role[lang] ?? m.role.en} bio={m.bio[lang] ?? m.bio.en} photo={m.photo} initials={m.initials} links={m.links} />)}
       </div>

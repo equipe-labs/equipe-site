@@ -96,18 +96,6 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     alumniOf: 'Yonsei University',
     links: { linkedin: 'https://www.linkedin.com/in/shaysehee' },
   },
-  {
-    // Facts from the LinkedIn profile the founder shared (tae-hwan-1969b8196). Moved from the team to advisers by the founder (2026-11-24). Photo: that profile's portrait, cropped square.
-    name: 'Tae Hwan',
-    names: { ko: '태환' },
-    initials: 'TH',
-    photo: '/brand/tae-hwan-800.jpg',
-    photoLarge: '/brand/tae-hwan-800.jpg',
-    role: { en: 'Product adviser · ex-Toss, Ohouse', ko: '프로덕트 어드바이저 · 전 토스·오늘의집' },
-    bio: {
-      en: "Tae Hwan advises equipe on product and on the design of its PM agent. A product owner for over a decade, Tae Hwan worked at Toss (Viva Republica, Toss Bank), Mesh Korea (VROONG) and Bucketplace (Ohouse), and founded From September. Tae Hwan holds a First Class MMath from Oxford.",
-      ko: '태환은 equipe의 프로덕트와 PM 에이전트 설계를 자문해요. 10년 넘게 프로덕트 오너로 토스(비바리퍼블리카·토스뱅크), 메쉬코리아(부릉), 오늘의집(버킷플레이스)에서 일했고 From September를 창업했어요. 옥스퍼드 수학 석사를 최우등으로 마쳤어요.',
-    },
     jobTitle: 'Product adviser',
     worksFor: 'equipe',
     alumniOf: 'University of Oxford',
@@ -134,6 +122,20 @@ export const TEAM: { name: string; fullName: string; initials: string; photo?: s
       ko: '정희균(Alex)은 equipe의 Head of Business예요. 베인과 구글을 거쳐 매드업 애드테크 플랫폼을 연 매출 800만 달러로 키웠어요. 토스에서 머신러닝 프로덕트를 이끌었고, 오늘의집 일본 사업을 처음부터 만들었어요.',
     },
     links: { linkedin: 'https://www.linkedin.com/in/alex-hee-kyun-chung/' },
+  },
+  {
+    // Facts from the LinkedIn profile the founder shared (tae-hwan-1969b8196); his equipe role is as the founder described it. Back on the team per the founder (2026-11-24). Photo: that profile's portrait, cropped square.
+    name: 'Tae Hwan',
+    fullName: 'Tae Hwan',
+    initials: 'TH',
+    photo: '/brand/tae-hwan-800.jpg',
+    photoLarge: '/brand/tae-hwan-800.jpg',
+    role: { en: 'Product · PM agent design', ko: 'Product · PM 에이전트 설계' },
+    bio: {
+      en: "Tae Hwan leads the design of equipe's PM agent. A product owner for over a decade, Tae Hwan worked at Toss (Viva Republica, Toss Bank), Mesh Korea (VROONG) and Bucketplace (Ohouse), founded From September, and holds a First Class MMath from Oxford.",
+      ko: '태환은 equipe의 PM 에이전트 설계를 이끌어요. 10년 넘게 프로덕트 오너로 토스(비바리퍼블리카·토스뱅크), 메쉬코리아(부릉), 오늘의집에서 일했고 From September를 창업했어요. 옥스퍼드 수학 석사를 최우등으로 마쳤어요.',
+    },
+    links: { linkedin: 'https://www.linkedin.com/in/tae-hwan-1969b8196/' },
   },
   {
     name: 'Seongjae (SJ) Seo',
