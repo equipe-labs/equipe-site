@@ -97,7 +97,7 @@ What that means in practice:
 - Anything that goes live, costs money or reaches customers waits for your approval, shown as a short card with options, a recommendation and the expected cost. One tap answers it. See [approval cards explained](/blog/approval-cards-explained/).
 - The team sets up hosting, the database and the domain, one project per customer on Cloudflare. You never sign in to a code host or cloud console. A domain purchase needs an approval only a signed-in member of your team can give.
 - Analytics for the product you build are cookie-free and store no IP address.
-- Pricing: Team is $19 a month or $190 a year, with hosting, storage and monthly credits; everything the team does is paid from credits, with AI work shown to the cent per task. You set a monthly cap. There is a free start with a $5 credit, no card needed. Details on [the pricing page](/pricing/).
+- Pricing: The Team plan starts at $19 a month ($190 a year) to keep your product live, and you choose a monthly credit amount on top; most teams start with $50 of credits for $69 a month, with hosting and storage included; everything the team does is paid from credits, with AI work shown to the cent per task. You set a monthly cap. There is a free start with a $5 credit, no card needed. Details on [the pricing page](/pricing/).
 
 ## Where equipe is weaker
 

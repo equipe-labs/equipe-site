@@ -14,7 +14,7 @@ faqs:
   - q: "Is it better to charge monthly or one time?"
     a: "Monthly suits a product people use again and again, because your costs repeat too. A one-time price suits a single result, like a template or a report. Choose the one that matches how the customer gets value, and keep it to one price at first."
   - q: "How does equipe price its own product?"
-    a: "equipe uses a two-part model: a flat Team plan at $19 a month or $190 a year, plus AI work paid from credits at the model list price plus a margin, shown to the cent per task. That is one example of a structure, not proof that this model fits yours."
+    a: "equipe uses a two-part model: a Team plan from $19 a month ($190 a year), with a monthly credit amount you choose on top, plus AI work paid from credits at the model list price plus a margin, shown to the cent per task. That is one example of a structure, not proof that this model fits yours."
 ---
 
 Most first-time founders set the price last, in a hurry, by looking at a competitor or choosing a number that feels safe. That is guessing. A price is a statement about how much value you think you deliver, and it is also the cleanest signal you will ever get about whether someone wants what you made.
@@ -133,7 +133,7 @@ Once money is involved, a mistake costs real people real money.
 
 equipe is an AI startup team for people who cannot code: a PM, engineers, a designer, QA and a data analyst. It can build the page that shows your price and a pre-order step, and it can count visits and sign-ups without cookies. Anything that goes live, costs money or reaches customers waits for your approval.
 
-As an honest example of a structure, equipe's own pricing is a two-part model: a flat Team plan at $19 a month or $190 a year, plus AI work paid from credits at the model list price plus a margin, shown to the cent per task, with domains at the yearly price you approve. We use it as an illustration, not as proof it suits your product. The [pricing page](/pricing/) has the full terms, and [the cost article](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through what running a small app costs. We do not publish a "typical monthly spend", because we do not have real usage data yet. For a 30-day path from idea to first payments, see [the 30-day plan](/blog/idea-to-paying-customers-30-day-plan/).
+As an honest example of a structure, equipe's own pricing is a two-part model: a Team plan from $19 a month ($190 a year), with a monthly credit amount you choose on top, plus AI work paid from credits at the model list price plus a margin, shown to the cent per task, with domains at the yearly price you approve. We use it as an illustration, not as proof it suits your product. The [pricing page](/pricing/) has the full terms, and [the cost article](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through what running a small app costs. We do not publish a "typical monthly spend", because we do not have real usage data yet. For a 30-day path from idea to first payments, see [the 30-day plan](/blog/idea-to-paying-customers-30-day-plan/).
 
 ## A pricing checklist
 

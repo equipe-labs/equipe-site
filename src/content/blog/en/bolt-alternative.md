@@ -96,7 +96,7 @@ If any of these matter to you, ask Bolt before paying.
 
 equipe is an AI startup team for people who cannot code: a PM, engineers, a designer, QA and a data analyst, all AI agents. They build, launch and keep improving your product. Anything that goes live, costs money or reaches customers waits for your approval on a short card with options, a recommendation and the expected cost.
 
-Team is $19 a month or $190 a year with hosting, storage and monthly credits; everything the team does is paid from credits. Start free with $5 in credit, plus $10 when you add a card (no charge). See [pricing](/pricing/) and the [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/).
+The Team plan starts at $19 a month ($190 a year) to keep your product live, and you choose a monthly credit amount on top; most teams start with $50 of credits for $69 a month; hosting and storage are included, and everything the team does is paid from credits. Start free with $5 in credit, plus $10 when you add a card (no charge). See [pricing](/pricing/) and the [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/).
 
 Limits, plainly:
 

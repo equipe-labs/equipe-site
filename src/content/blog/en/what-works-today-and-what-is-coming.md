@@ -69,7 +69,7 @@ These things are true as of 21 November 2026.
 You can use these today, without waiting for anything on the roadmap:
 
 - Start free at app.equipe.im/start: $5 of credit when you create a team, plus $10 when you add a card (no charge), no card needed to begin.
-- The Team plan is $19 a month or $190 a year, with hosting, storage, monthly credits and 5 people included (each extra editor is $5 a month, up to 10; view-only invites are free). Hosting only is $19 a month. All details are on the [pricing page](/pricing/), and [the cost article](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through them.
+- The Team plan starts at $19 a month ($190 a year) to keep your product live, with hosting, storage and 5 people included (each extra editor is $5 a month, up to 10; view-only invites are free). You choose a monthly credit amount on top; most teams start with $50 of credits for $69 a month. All details are on the [pricing page](/pricing/), and [the cost article](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/) walks through them.
 - The desktop and Mac app and the command line tool are the open-source engine, under the MIT licence, at github.com/equipe-labs/equipe. They are for developers, and they work with Claude Code and Codex engines.
 
 ## What is still coming

@@ -15,7 +15,7 @@ faqs:
   - q: "What is the difference between a prototype and a real product?"
     a: "A prototype works while you are watching. A real product has its own web address, stores data safely, keeps working when you are not looking, and shows you how people use it, so you can fix and improve it."
   - q: "How much does it cost to launch without code?"
-    a: "It depends on the route. Many AI builders start at about $16 to $25 a month. On equipe you can start free with $5 of credit, and the Team plan is $19 a month plus AI work paid from credits. The article on cost walks through the numbers."
+    a: "It depends on the route. Many AI builders start at about $16 to $25 a month. On equipe you can start free with $5 of credit, and the Team plan runs from $19 a month (keep it live) to $69 a month with $50 of monthly credits, with AI work paid from credits. The article on cost walks through the numbers."
 ---
 
 You do not need to know how to code to launch a real product in 2026. AI tools can now write, test and run the code for a small product. What they cannot do for you is decide what is worth building, who it is for, and what you are willing to put in front of customers.

@@ -20,6 +20,7 @@ import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import CustomerLogos from '../components/CustomerLogos.astro';
 import DayOne from '../components/DayOne.astro';
+import PlanCards from '../components/PlanCards.astro';
 import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -158,19 +159,7 @@ const faqMore = t.faq.more.split('{email}');
           <h2>{t.control.title}</h2>
           <p class="sub">{t.plans.text}</p>
         </div>
-        <ul class="plans">
-          {t.plans.items.map((p, i) => (
-            <li class={`plan rv${i === 1 ? ' featured' : ''}`} style={`--i:${i}`}>
-              <p class="plan-fit">{p.fit}</p>
-              <div class="plan-h"><h3>{p.name}</h3>{i === 1 && <span class="plan-b">{t.plans.featured}</span>}</div>
-              <p class="plan-d">{p.text}</p>
-              <p class="plan-p"><b>{p.price}</b><span>{p.per}</span></p>
-          {i === 1 && <p class="plan-y">{t.plans.yearly}</p>}
-              <ul class="plan-f">{p.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
-              <a class={`btn ${i === 1 ? 'primary' : 'ghost'} plan-a`} href={SITE.start} data-ph="signup_cta_click" data-ph-location={`pricing_${i}`}>{p.cta}</a>
-            </li>
-          ))}
-        </ul>
+        <PlanCards t={t} level="h3" loc="pricing" reveal />
         <div class="pwhich rv"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
         <div class="pfacts rv">
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h3>{t.plans.runout.title}</h3><p>{t.plans.runout.text}</p></div></div>

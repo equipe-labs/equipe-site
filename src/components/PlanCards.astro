@@ -1,0 +1,198 @@
+---
+// The two pricing cards (home page and /pricing): "Start free" and the one paid plan, "Team".
+// Team = hosting + storage + 5 people + a monthly amount of credits the person picks; the big number is the TOTAL for that amount.
+// Prices come only from src/data/plan.ts. The default tier is server-rendered, so the card reads correctly without JavaScript.
+// The picker is two custom radiogroups (billing cycle, credit amount): roving tabindex, arrow/Home/End keys, 44px targets,
+// a gliding indicator and a rolling price; prefers-reduced-motion turns all of that motion off.
+import { SITE } from '../data/site';
+import { TIERS, DEFAULT_TIER, usd } from '../data/plan';
+import type { Messages } from '../i18n';
+
+interface Props {
+  t: Messages;
+  /** Heading level of the plan names: h2 on /pricing, h3 inside the home page's pricing section. */
+  level: 'h2' | 'h3';
+  /** Prefix for analytics locations and element ids ("pricing" on the home page, "pricing_page" on /pricing). */
+  loc: string;
+  /** Add the home page's scroll-reveal class. */
+  reveal?: boolean;
+}
+const { t, level, loc, reveal = false } = Astro.props;
+const H = level;
+const P = t.plans;
+const K = P.picker;
+const def = TIERS[DEFAULT_TIER];
+const check = 'M5 12.5l4.5 4.5L19 7.5';
+const includes = (credits: number) => (credits === 0 ? K.keepLive : K.includes.replace('{credits}', usd(credits)));
+const hint = (i: number) => (i === 0 ? K.stop0 : i === DEFAULT_TIER ? K.popular : '');
+const id = `tp-${loc}`;
+const data = JSON.stringify({
+  tiers: TIERS.map((x, i) => ({ m: usd(x.month), y: usd(x.year), inc: includes(x.credits), hint: hint(i) })),
+  perMonth: K.perMonth,
+  perYear: K.perYear,
+});
+---
+<ul class="plans plans-2">
+  <li class={`plan${reveal ? ' rv' : ''}`} style="--i:0">
+    <p class="plan-fit">{P.free.fit}</p>
+    <div class="plan-h"><H>{P.free.name}</H></div>
+    <p class="plan-d">{P.free.text}</p>
+    <p class="plan-p"><b>{P.free.price}</b><span>{P.free.per}</span></p>
+    <ul class="plan-f">{P.free.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+    <a class="btn ghost plan-a" href={SITE.start} data-ph="signup_cta_click" data-ph-location={`${loc}_0`}>{P.free.cta}</a>
+  </li>
+  <li class={`plan featured tp${reveal ? ' rv' : ''}`} style="--i:1" data-tp={data}>
+    <p class="plan-fit">{P.team.fit}</p>
+    <div class="plan-h"><H>{P.team.name}</H><span class="plan-b">{P.featured}</span></div>
+    <p class="plan-d">{P.team.text}</p>
+    <div class="tp-price" aria-live="polite" aria-atomic="true">
+      <p class="plan-p"><b class="tp-num"><span class="tp-roll" data-total>{usd(def.month)}</span></b><span data-per>{K.perMonth}</span></p>
+      <p class="tp-inc" data-inc>{includes(def.credits)}</p>
+    </div>
+    <div class="tp-ctl">
+      <div class="tp-cycle">
+        <div class="seg" role="radiogroup" aria-label={K.billing} data-group="cycle" style="--sel:0;--n:2">
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button type="button" role="radio" aria-checked="true" tabindex="0" data-v="m">{K.monthly}</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="-1" data-v="y">{K.yearly}</button>
+        </div>
+        <span class="tp-save" data-save>{K.save}</span>
+      </div>
+      <p class="tp-label" id={`${id}-l`}>{K.credits}</p>
+      <div class="seg seg-tiers" role="radiogroup" aria-labelledby={`${id}-l`} data-group="tier" style={`--sel:${DEFAULT_TIER};--n:${TIERS.length}`}>
+        <span class="seg-ind" aria-hidden="true"></span>
+        {TIERS.map((x, i) => (
+          <button type="button" role="radio" aria-checked={i === DEFAULT_TIER ? 'true' : 'false'} tabindex={i === DEFAULT_TIER ? 0 : -1} data-v={i}>
+            {usd(x.credits)}{i === DEFAULT_TIER && <i class="tp-dot" aria-hidden="true"></i>}
+          </button>
+        ))}
+      </div>
+      <p class="tp-hint" data-hint>{hint(DEFAULT_TIER)}</p>
+      <p class="tp-help"><b>{K.helpTitle}</b> {K.helpText}</p>
+    </div>
+    <ul class="plan-f">{P.team.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
+    <a class="btn primary plan-a" href={SITE.start} data-ph="signup_cta_click" data-ph-location={`${loc}_1`}>{P.team.cta}</a>
+  </li>
+</ul>
+
+<style is:global>
+  /* Two cards: Start free is the narrower one. */
+  .plans.plans-2 { grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); max-width: 940px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 900px) { .plans.plans-2 { grid-template-columns: 1fr; max-width: 560px; } }
+  @media (max-width: 480px) { .plans.plans-2 .plan { padding: 22px; } }
+
+  .tp-price p, .tp-ctl p { margin: 0; }
+  .tp-price { display: grid; gap: 8px; margin-top: 4px; }
+  .tp-price .plan-p { margin: 0; }
+  .tp-num { display: inline-grid; overflow: hidden; padding: 0.08em 0; margin: -0.08em 0; }
+  .plan-p .tp-num > span { grid-area: 1 / 1; white-space: nowrap; font-size: inherit; color: inherit; }
+  .tp-inc { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); text-wrap: pretty; min-height: 1.45em; }
+
+  .tp-ctl { display: grid; gap: 10px; margin-top: 2px; }
+  .tp-cycle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .tp-save { font-size: 13px; font-weight: 600; color: var(--accent); transition: opacity 220ms cubic-bezier(0.2, 0.7, 0.2, 1); opacity: 0.72; }
+  .tp[data-cycle='y'] .tp-save { opacity: 1; }
+  .tp-label { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.005em; }
+
+  /* Segmented control: equal columns, one indicator that glides to the checked option (--sel), server-rendered for no-JS. */
+  .seg { position: relative; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); padding: 3px; border-radius: 14px;
+    background: color-mix(in srgb, var(--text) 5%, var(--bg)); box-shadow: inset 0 0 0 1px var(--line); isolation: isolate; }
+  .tp-cycle .seg { min-width: min(184px, 100%); }
+  .seg-ind { position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / var(--n)); border-radius: 11px;
+    background: var(--surface); box-shadow: 0 1px 2px rgb(10 10 12 / 0.12), 0 3px 10px -4px rgb(10 10 12 / 0.18), 0 0 0 0.5px var(--line);
+    transform: translateX(calc(var(--sel) * 100%)); transition: transform 280ms cubic-bezier(0.25, 0.9, 0.3, 1); }
+  .seg-tiers .seg-ind { background: var(--accent); box-shadow: 0 2px 10px -3px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .seg button { position: relative; min-height: 44px; min-width: 0; padding: 0 6px; border: 0; border-radius: 11px; background: none; cursor: pointer;
+    font: 600 15px/1.2 var(--sans); letter-spacing: -0.01em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    -webkit-tap-highlight-color: transparent; transition: color 220ms cubic-bezier(0.2, 0.7, 0.2, 1); font-variant-numeric: tabular-nums; }
+  .seg button[aria-checked='true'] { color: var(--text); }
+  .seg-tiers button[aria-checked='true'] { color: var(--on-accent); }
+  .seg button:hover:not([aria-checked='true']) { color: var(--text); }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; z-index: 1; }
+  .seg-tiers button:focus-visible { outline-offset: 3px; }
+  .tp-dot { position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
+  .seg-tiers button[aria-checked='true'] .tp-dot { background: var(--on-accent); }
+  .tp-hint { margin: 0; min-height: 1.4em; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--accent); transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .tp-hint:empty { opacity: 0; }
+  .tp-help { margin: 2px 0 0; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--text) 4%, var(--surface));
+    font-size: 14px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+  .tp-help b { display: block; margin-bottom: 2px; color: var(--text); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seg-ind, .seg button, .tp-save, .tp-hint { transition: none; }
+  }
+</style>
+
+<script>
+  // One price table per card (data-tp). The billing and credit groups are radiogroups with roving tabindex.
+  const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EASE = 'cubic-bezier(0.2, 0.75, 0.25, 1)';
+
+  function roll(box: HTMLElement, next: string, up: boolean) {
+    const cur = box.querySelector<HTMLElement>('[data-total]:not([data-leaving])');
+    if (!cur || cur.textContent === next) return;
+    if (reduce() || !cur.animate) { cur.textContent = next; return; }
+    box.querySelectorAll('[data-leaving]').forEach((n) => n.remove());
+    const el = cur.cloneNode() as HTMLElement;
+    el.textContent = next;
+    cur.dataset.leaving = '';
+    cur.setAttribute('aria-hidden', 'true');
+    box.append(el);
+    const d = up ? 1 : -1;
+    cur.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(${-45 * d}%)`, opacity: 0 }], { duration: 240, easing: EASE, fill: 'forwards' })
+      .finished.then(() => cur.remove(), () => cur.remove());
+    el.animate([{ transform: `translateY(${45 * d}%)`, opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 280, easing: EASE });
+  }
+
+  function fade(el: HTMLElement, text: string) {
+    if (el.textContent === text) return;
+    el.textContent = text;
+    if (!reduce() && el.animate) el.animate([{ opacity: 0, transform: 'translateY(3px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: EASE });
+  }
+
+  for (const card of document.querySelectorAll<HTMLElement>('[data-tp]')) {
+    const cfg = JSON.parse(card.dataset.tp!) as { tiers: { m: string; y: string; inc: string; hint: string }[]; perMonth: string; perYear: string };
+    const num = card.querySelector<HTMLElement>('.tp-num')!;
+    const per = card.querySelector<HTMLElement>('[data-per]')!;
+    const inc = card.querySelector<HTMLElement>('[data-inc]')!;
+    const hint = card.querySelector<HTMLElement>('[data-hint]')!;
+    const groups = { cycle: card.querySelector<HTMLElement>('[data-group="cycle"]')!, tier: card.querySelector<HTMLElement>('[data-group="tier"]')! };
+    const state = { cycle: 0, tier: Number(groups.tier.style.getPropertyValue('--sel')) || 0 };
+    const value = (cycle: number, tier: number) => (cycle ? cfg.tiers[tier].y : cfg.tiers[tier].m);
+
+    const select = (name: 'cycle' | 'tier', i: number, focus: boolean) => {
+      const g = groups[name];
+      const btns = [...g.querySelectorAll<HTMLButtonElement>('[role="radio"]')];
+      i = Math.max(0, Math.min(btns.length - 1, i));
+      const before = value(state.cycle, state.tier);
+      state[name] = i;
+      btns.forEach((b, j) => { b.setAttribute('aria-checked', String(j === i)); b.tabIndex = j === i ? 0 : -1; });
+      if (focus) btns[i].focus();
+      g.style.setProperty('--sel', String(i));
+      const after = value(state.cycle, state.tier);
+      const n = (s: string) => Number(s.replace(/[^0-9.]/g, ''));
+      roll(num, after, n(after) > n(before));
+      per.textContent = state.cycle ? cfg.perYear : cfg.perMonth;
+      fade(inc, cfg.tiers[state.tier].inc);
+      hint.textContent = cfg.tiers[state.tier].hint;
+      card.dataset.cycle = state.cycle ? 'y' : 'm';
+    };
+
+    (Object.keys(groups) as ('cycle' | 'tier')[]).forEach((name) => {
+      const g = groups[name];
+      g.addEventListener('click', (e) => {
+        const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[role="radio"]');
+        if (b) select(name, [...g.querySelectorAll('[role="radio"]')].indexOf(b), false);
+      });
+      g.addEventListener('keydown', (e) => {
+        const last = g.querySelectorAll('[role="radio"]').length - 1;
+        const k = e.key;
+        const i = state[name];
+        const next = k === 'ArrowRight' || k === 'ArrowDown' ? (i === last ? 0 : i + 1) : k === 'ArrowLeft' || k === 'ArrowUp' ? (i === 0 ? last : i - 1) : k === 'Home' ? 0 : k === 'End' ? last : k === ' ' || k === 'Enter' ? i : -1;
+        if (next < 0) return;
+        e.preventDefault();
+        select(name, next, true);
+      });
+    });
+  }
+</script>

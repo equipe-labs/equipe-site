@@ -9,7 +9,7 @@ faqs:
   - q: "What does it cost to start on equipe?"
     a: "Nothing up front. You get $5 of credit when you create your team and $10 more when you add a card (no charge). No card is needed to start."
   - q: "What is the monthly cost of keeping a small app live on equipe?"
-    a: "Hosting only is $19 a month: your product, sites, domains and storage stay live, and your team works whenever you have credits. The Team plan is $19 a month or $190 a year and adds your whole team, with monthly credits that roll over for 2 months."
+    a: "The Team plan with $0 of monthly credits is $19 a month ($190 a year): your product, sites, domains and storage stay live, and your team works whenever you add credits. You can choose a monthly credit amount on top; most teams start with $50 of credits for $69 a month, and plan credits roll over for 2 months."
   - q: "What do credits pay for?"
     a: "Everything the team does while it works: AI work at the model's list price plus a margin, shown to the cent per task, and the cloud computer it works on. When the team is not working, it costs nothing. A team stops only when its credits run out, and adding credits lets it continue right away."
   - q: "Can I cap what I spend?"
@@ -24,7 +24,7 @@ faqs:
 
 One honest note first: we do not publish a "most products spend $X a month" figure. We do not have enough real usage data yet, and we would rather leave it out than invent one.
 
-<p class="answer"><strong>The short answer.</strong> Keeping a small app live on equipe is $19 a month. Having the whole team work on it is $19 a month (or $190 a year) with monthly credits, plus more credits as the work needs them. You see each request's expected cost before it runs, and you set a monthly cap.</p>
+<p class="answer"><strong>The short answer.</strong> Keeping a small app live on equipe is $19 a month on the Team plan with no monthly credits. Having the whole team work on it most often means $69 a month (or $690 a year) with $50 of monthly credits, plus more credits as the work needs them. You see each request's expected cost before it runs, and you set a monthly cap.</p>
 
 ## The five costs of running a small app
 
@@ -43,17 +43,16 @@ All amounts are in US dollars. 1 credit equals $1.
 | Item | Price | Notes |
 | --- | --- | --- |
 | Free start | $0 | $5 of credit when you create your team, $10 more when you add a card (no charge); no card needed |
-| Team plan | $19/month or $190/year | Hosting for your sites, storage, monthly credits at $1 = $1 that roll over for 2 months, your whole team (PM, engineers, designer, QA, data) |
-| Extra editors | $5/month each | The Team plan includes 5 people; each extra editor is $5 a month, up to 10 people per team. Free and Hosting only include 2 people |
+| Team plan | $19/month with no credits (keep it live); $44, $69, $119 or $269 a month with $25, $50, $100 or $250 of monthly credits; yearly is 10x monthly | Hosting for your sites, storage, the monthly credits you choose at $1 = $1 that roll over for 2 months, your whole team (PM, engineers, designer, QA, data) |
+| Extra editors | $5/month each | The Team plan includes 5 people; each extra editor is $5 a month, up to 10 people per team. Free includes 2 people |
 | View-only invites | Free | Customers, investors or family can look without taking a seat |
-| Hosting only | $19/month | Your product, sites, domains and storage stay live; your team works whenever you have credits |
 | AI work | Model list price plus a margin | Shown to the cent for each task; paid from credits |
 | The team's cloud computer | Part of the work | Drawn from credits only while the team is working; nothing when it is not |
 | Domains | The yearly price you approve | Paid from credits |
 | Credit packs | $25, $50, $100, $250 | Valid 12 months; unused credits refundable within 14 days |
-| Monthly credits | Included in the Team plan | At $1 = $1; they roll over for 2 months |
+| Monthly credits | The amount you choose on the Team plan | At $1 = $1; they roll over for 2 months, and arrive every month on yearly billing too |
 
-The yearly Team price of $190 is two months free compared with paying monthly.
+Yearly Team billing is 10x the monthly total at any credit amount, so two months are free compared with paying monthly.
 
 ## What credits pay for
 
@@ -67,11 +66,11 @@ These use only equipe's list prices. The credits a request uses are left as a va
 
 **1. Trying an idea.** Create a team: $5 credit, plus $10 more if you add a card. When the starting credit is used, your team stops until you pick a plan or add credits. Fixed cost: **$0**. The work comes out of your starting credit.
 
-**2. A product that is live and quiet.** You launched, you are collecting a few sign-ups, and you are not changing anything this month. Choose Hosting only: **$19 a month**. The product, domain and storage stay up. When you want changes, add credits and your team gets to work.
+**2. A product that is live and quiet.** You launched, you are collecting a few sign-ups, and you are not changing anything this month. Choose the Team plan with $0 of credits: **$19 a month**. The product, domain and storage stay up. When you want changes, add credits and your team gets to work.
 
-**3. A product you are actively improving.** You are on the Team plan: **$19 a month** (or about $15.83 a month if you pay the $190 yearly price). Your monthly credits cover the work, and you add credits in a busier month. Fixed cost for the month: **$19** (or $15.83), plus any extra credits you choose to add, plus any domain.
+**3. A product you are actively improving.** You are on the Team plan with $50 of monthly credits: **$69 a month** (or $690 a year, about $57.50 a month). Your monthly credits cover the work, and you add credits in a busier month. Fixed cost for the month: **$69** (or $57.50), plus any extra credits you choose to add, plus any domain.
 
-**4. A growing team.** Seven people work on one product. The Team plan includes 5, so 2 extra editors cost 2 × $5 = **$10** a month, for **$29** a month in fixed costs before any extra credits. Credits are shared by the whole team, not counted per person, so adding people does not multiply them. Anyone who only needs to watch can be invited view-only for free.
+**4. A growing team.** Seven people work on one product. The Team plan includes 5, so 2 extra editors cost 2 × $5 = **$10** a month, for **$79** a month on the Team plan with $50 of monthly credits ($29 with no monthly credits). Credits are shared by the whole team, not counted per person, so adding people does not multiply them. Anyone who only needs to watch can be invited view-only for free.
 
 Notice what dominates. For a small app, the fixed costs are modest. The variable part, the credits the work uses, scales with how much you change. That is the part to watch, and the part you control with the cap.
 
@@ -96,7 +95,7 @@ A freelancer or agency usually charges per project or per hour; every change aft
 Use this list for any AI builder or team, including ours:
 
 1. What is included in the monthly price, and what is metered on top?
-2. What happens to my product if I stop paying? (On equipe, Hosting only keeps it live; free teams nobody opens for 14 days get an email and are deleted 7 days later unless opened, and you can download your project first.)
+2. What happens to my product if I stop paying? (On equipe, the Team plan at $19 a month keeps it live; free teams nobody opens for 14 days get an email and are deleted 7 days later unless opened, and you can download your project first.)
 3. Can I see the cost of a request before it runs?
 4. Can I set a hard cap?
 5. Who owns the code and the data, and can I export them?

@@ -1,7 +1,9 @@
 // /facts: short, self-contained statements about equipe, written to be quoted by people and by AI answers.
 // Every line must be true today and match the pages it summarizes (pricing: equipe-launch/pricing-copy.md, security: /security, product: the home page).
-// When something changes, change it here and bump FACTS_REVIEWED. No statistics, quotes or customers beyond those the site already publishes.
-export const FACTS_REVIEWED = '2026-11-21';
+// When something changes, change it here and bump FACTS_REVIEWED. Plan prices are {{tokens}} filled from src/data/plan.ts (the one price table). No statistics, quotes or customers beyond those the site already publishes.
+import { fillPlanDeep } from './plan';
+
+export const FACTS_REVIEWED = '2026-11-25';
 
 interface Group { title: string; items: string[] }
 interface Facts {
@@ -15,7 +17,7 @@ interface Facts {
   moreH: string;
 }
 
-export const FACTS: Record<'en' | 'ko', Facts> = {
+export const FACTS: Record<'en' | 'ko', Facts> = fillPlanDeep({
   en: {
     title: 'equipe facts — what it is, who runs it, pricing, data handling',
     desc: 'Short, citable facts about equipe: an AI startup team for people who cannot code. Operated by Umbriles Inc. Pricing, security and data handling in plain statements.',
@@ -51,11 +53,13 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
         items: [
           '1 credit equals 1 US dollar. Credit packs are $25, $50, $100 and $250, valid for 12 months. Unused credits are refundable within 14 days.',
           'Free start: $5 of credit when you create your team, plus $10 when you add a card (no charge). No card is needed to start.',
-          'Team plan: $19 per month or $190 per year. It includes hosting for your sites, storage and monthly credits at $1 = $1 that roll over for 2 months. It includes 5 people; each extra editor is $5 per month, up to 10 people per team.',
-          'View-only invites are free. Credits are shared by the whole team, not counted per person. Free and Hosting only include 2 people.',
+          'equipe has one paid plan, the Team plan: hosting for your sites, storage, 5 people and a monthly amount of credits the person chooses. The price shown is the total for that amount.',
+          'Team plan prices per month: {{m0}} with no credits (keeps the product live), {{m1}} with {{c1}} of credits, {{m2}} with {{c2}}, {{m3}} with {{c3}}, {{m4}} with {{c4}}. Yearly is 10 times the monthly price ({{y0}} to {{y4}} a year), so 2 months are free, and credits still arrive every month.',
+          'Plan credits are used at $1 = $1 and roll over for 2 months. The Team plan includes 5 people; each extra editor is $5 per month, up to 10 people per team.',
+          'View-only invites are free. Credits are shared by the whole team, not counted per person. Free includes 2 people.',
           'Everything the team does while it works is paid from credits: AI work and the cloud computer it works on. When the team is not working, it costs nothing.',
           'AI work is paid from credits at the model\'s list price plus a margin, shown to the cent for each task.',
-          'Hosting only: $19 per month. Your product, sites, domains and storage stay live, and your team works whenever you have credits.',
+          'With no monthly credits, the Team plan ({{m0}} per month) keeps your product, sites, domains and storage live, and your team works whenever you add credits.',
           'A team stops only when its credits run out. Adding credits lets it continue right away.',
           'Every request shows its expected cost first, and you set a monthly spending cap.',
           'A domain is bought only after the person approves its yearly price; it is paid from credits.',
@@ -79,7 +83,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
     faqs: [
       { q: 'What is equipe?', a: 'equipe is an AI startup team for people who cannot code: a PM, engineers, a designer, QA and a data analyst, all AI agents, that build, launch and keep improving your product while you approve what matters.' },
       { q: 'Who is behind equipe?', a: 'equipe is operated by Umbriles Inc., a company in the United States. The engine behind the team is open source (MIT) at github.com/equipe-labs/equipe.' },
-      { q: 'How much does equipe cost?', a: 'You can start free with $5 of credit. The Team plan is $19 per month or $190 per year with hosting, storage and monthly credits, for up to 5 people (each extra editor is $5 a month, up to 10). Hosting only is $19 per month. Everything the team does is paid from credits, where 1 credit is $1.' },
+      { q: 'How much does equipe cost?', a: 'You can start free with $5 of credit. The Team plan includes hosting, storage and 5 people (each extra editor is $5 a month, up to 10) plus the monthly credits you choose: {{m0}} a month to keep your product live, or {{m2}} a month with {{c2}} of credits, where most teams start. Everything the team does is paid from credits, where 1 credit is $1.' },
       { q: 'Is my data safe with equipe?', a: 'Secrets are stored in a separate encrypted store and never shown to the AI. Each team runs on its own isolated machine. Publishing, messages, purchases and deletions need your approval. Account deletion removes your data within 30 days.' },
     ],
   },
@@ -118,11 +122,13 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
         items: [
           '1크레딧은 1달러예요. 크레딧 묶음은 $25, $50, $100, $250이고 12개월 동안 쓸 수 있어요. 쓰지 않은 크레딧은 14일 안에 환불돼요.',
           '무료 시작: 팀을 만들면 $5 크레딧, 카드를 등록하면 $10 추가(결제되지 않아요). 시작할 때 카드는 필요 없어요.',
-          '팀 플랜: 월 $19 또는 연 $190. 사이트 호스팅, 저장 공간, $1 = $1로 쓰는 월 크레딧(2개월 이월)이 들어 있고 5명까지 포함돼요. 추가 편집자는 1명당 월 $5이고 한 팀에 최대 10명까지예요.',
-          '보기 전용 초대는 무료예요. 크레딧은 사람마다 따로 계산하지 않고 팀 전체가 함께 써요. 무료와 호스팅 전용은 2명까지예요.',
+          'equipe의 유료 플랜은 팀 플랜 하나예요. 사이트 호스팅, 저장 공간, 5명 자리에 매달 받을 크레딧 양을 직접 골라 더해요. 보이는 가격은 그 양을 포함한 총액이에요.',
+          '팀 플랜 월 요금: 크레딧 없이 {{m0}}(제품은 계속 운영돼요), {{c1}} 크레딧과 함께 {{m1}}, {{c2}} 크레딧과 함께 {{m2}}, {{c3}} 크레딧과 함께 {{m3}}, {{c4}} 크레딧과 함께 {{m4}}. 연간 요금은 월 요금의 10배(연 {{y0}}~{{y4}})라서 두 달이 무료이고, 크레딧은 매달 들어와요.',
+          '플랜 크레딧은 $1 = $1로 쓰고 2개월 동안 이월돼요. 팀 플랜에는 5명까지 포함되고, 추가 편집자는 1명당 월 $5, 한 팀에 최대 10명까지예요.',
+          '보기 전용 초대는 무료예요. 크레딧은 사람마다 따로 계산하지 않고 팀 전체가 함께 써요. 무료는 2명까지예요.',
           '팀이 일하는 동안 하는 모든 것은 크레딧으로 내요. AI 작업과 팀이 쓰는 클라우드 컴퓨터가 해당돼요. 팀이 일하지 않을 때는 비용이 들지 않아요.',
           'AI 작업은 모델 정가에 마진을 더한 금액을 크레딧으로 내요. 작업마다 센트 단위로 보여 줘요.',
-          '호스팅 전용: 월 $19. 제품·사이트·도메인·저장 공간은 계속 운영되고, 크레딧이 있으면 팀은 언제든 일해요.',
+          '월 크레딧 없이 쓰는 팀 플랜(월 {{m0}})으로도 제품·사이트·도메인·저장 공간은 계속 운영되고, 크레딧을 추가하면 팀은 언제든 일해요.',
           '팀은 크레딧이 떨어질 때만 멈춰요. 크레딧을 추가하면 바로 이어서 일해요.',
           '요청마다 예상 비용을 먼저 보여 주고, 월 지출 한도는 직접 정해요.',
           '도메인은 연 가격을 승인해야만 사고, 크레딧으로 결제돼요.',
@@ -146,8 +152,8 @@ export const FACTS: Record<'en' | 'ko', Facts> = {
     faqs: [
       { q: 'equipe는 무엇인가요?', a: 'equipe는 코딩을 모르는 사람을 위한 AI 스타트업 팀이에요. PM, 엔지니어, 디자이너, QA, 데이터 분석가가 모두 AI 에이전트이고, 제품을 만들고 출시하고 계속 개선해요. 중요한 건 내가 승인해요.' },
       { q: 'equipe는 누가 운영하나요?', a: '미국 회사 Umbriles Inc.가 운영해요. 팀의 엔진은 github.com/equipe-labs/equipe에 MIT 라이선스 오픈소스로 공개돼 있어요.' },
-      { q: 'equipe는 얼마인가요?', a: '$5 크레딧으로 무료로 시작할 수 있어요. 팀 플랜은 월 $19 또는 연 $190이고 호스팅, 저장 공간, 월 크레딧이 들어 있어요. 5명까지 포함되고, 추가 편집자는 1명당 월 $5(팀당 최대 10명)예요. 보기 전용 초대는 무료예요. 호스팅 전용은 월 $19예요. 팀이 하는 모든 일은 크레딧(1크레딧 = $1)으로 내요.' },
+      { q: 'equipe는 얼마인가요?', a: '$5 크레딧으로 무료로 시작할 수 있어요. 팀 플랜에는 호스팅, 저장 공간, 5명 자리가 들어 있고(추가 편집자는 1명당 월 $5, 팀당 최대 10명), 매달 받을 크레딧 양은 직접 골라요. 제품만 켜 두는 월 {{m0}} 요금부터 시작하고, 많은 팀이 {{c2}} 크레딧이 들어 있는 월 {{m2}} 요금으로 시작해요. 보기 전용 초대는 무료예요. 팀이 하는 모든 일은 크레딧(1크레딧 = $1)으로 내요.' },
       { q: 'equipe에 맡긴 데이터는 안전한가요?', a: '비밀 정보는 따로 암호화된 저장소에 보관하고 AI에게는 보이지 않아요. 팀마다 분리된 머신에서 일하고, 공개·메시지·결제·삭제는 내 승인을 기다려요. 계정을 삭제하면 30일 안에 데이터를 지워요.' },
     ],
   },
-};
+});

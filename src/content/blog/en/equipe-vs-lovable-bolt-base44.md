@@ -28,7 +28,7 @@ faqs:
   - q: "What is the difference between equipe and Lovable, Bolt or Base44?"
     a: "Lovable, Bolt and Base44 are AI app builders: you prompt, they generate and host an app. equipe is an AI startup team (PM, engineers, designer, QA, data analyst) that builds, launches and keeps improving the product, with you approving what goes live. Builders are strong at fast first versions; equipe's focus is what happens after."
   - q: "Which is cheapest?"
-    a: "On the entry paid plans we read on 21 November 2026: Base44 Starter at $16 a month billed annually, Lovable Pro and Bolt Pro at $25 a month, and equipe Team at $19 a month ($190 a year). The plans include different things and meter usage differently, so the sticker price alone is not a comparison."
+    a: "On the entry paid plans we read on 21 November 2026: Base44 Starter at $16 a month billed annually, Lovable Pro and Bolt Pro at $25 a month, and equipe Team from $19 a month ($190 a year), or $69 a month with $50 of monthly credits. The plans include different things and meter usage differently, so the sticker price alone is not a comparison."
   - q: "Can I take my code with me?"
     a: "Lovable documents two-way GitHub sync on all plans. Base44 lists two-way GitHub sync on Builder and above. Bolt documents GitHub backups; its export options were not clear from the pages we read. equipe hosts each customer as its own project and can move a product that outgrows it to your own accounts; the engine behind it is open source (MIT)."
   - q: "Is this comparison neutral?"
@@ -52,7 +52,7 @@ The first three are builders you drive prompt by prompt. equipe is a team you di
 
 | | Lovable | Bolt | Base44 | equipe |
 | --- | --- | --- | --- | --- |
-| Entry paid plan | Pro, $25/month | Pro, $25/month | Starter, $16/month billed annually | Team, $19/month or $190/year |
+| Entry paid plan | Pro, $25/month | Pro, $25/month | Starter, $16/month billed annually | Team, from $19/month ($190/year); $69/month with $50 of monthly credits |
 | Free plan | 5 credits a day, up to 30 a month; publishing is invite-only | 1M tokens a month, 300K a day; Bolt branding on sites | 25 message credits a month, up to 5 apps | $5 credit at sign-up, $10 more with a card (no charge) |
 | How usage is metered | Credits (shared by building, hosting and in-app AI) | Tokens | Message credits and integration credits | Credits ($1 = 1 credit) for everything the team does: AI work and the cloud computer it works on |
 | Code export / GitHub | Two-way GitHub sync on all plans; download on paid plans | GitHub backup commits; plan and download options unclear from the pages | Two-way GitHub sync on Builder and above | Hosted as one project per customer; can be moved to your own accounts. Engine is open source (MIT) |

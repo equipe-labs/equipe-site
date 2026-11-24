@@ -1,5 +1,6 @@
 import { en, type Messages } from './en';
 import { LOCALES, DEFAULT_LOCALE, type LocaleCode, type LocaleInfo } from './locales';
+import { fillPlanDeep } from '../data/plan';
 
 export { LOCALES, DEFAULT_LOCALE };
 export type { Messages, LocaleCode, LocaleInfo };
@@ -23,7 +24,8 @@ function diff(source: unknown, target: unknown, path: string, out: string[]) {
   }
 }
 
-const messages = new Map<LocaleCode, Messages>([[DEFAULT_LOCALE, en]]);
+// Prices are written as {{tokens}} (src/data/plan.ts) and filled here, so every locale reads the one price table.
+const messages = new Map<LocaleCode, Messages>([[DEFAULT_LOCALE, fillPlanDeep(en)]]);
 for (const info of LOCALES) {
   if (info.code === DEFAULT_LOCALE) continue;
   const mod = files[`./${info.code}.ts`];
@@ -31,7 +33,7 @@ for (const info of LOCALES) {
   const problems: string[] = [];
   diff(en, mod.default, info.code, problems);
   if (problems.length) throw new Error(`src/i18n/${info.code}.ts does not match en.ts:\n  ${problems.join('\n  ')}`);
-  messages.set(info.code, mod.default);
+  messages.set(info.code, fillPlanDeep(mod.default));
 }
 
 /** Locales that have a translation file (en always first), in LOCALES order. */

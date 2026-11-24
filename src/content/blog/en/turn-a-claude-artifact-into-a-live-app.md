@@ -13,7 +13,7 @@ faqs:
   - q: "Does equipe import a Claude artifact in one step?"
     a: "Not yet. One-step import with a database and a domain is on our list but has not shipped. Today you share the artifact's code or describe it, and the equipe team moves it for you and sets up hosting, a database and a domain."
   - q: "What will it cost to host my artifact as a real app?"
-    a: "A simple static page can be very cheap to host. Once you add a database, a domain and ongoing changes, plan for a monthly fee. On equipe, the Team plan is $19 a month and Hosting only is $19 a month; see the pricing page for details."
+    a: "A simple static page can be very cheap to host. Once you add a database, a domain and ongoing changes, plan for a monthly fee. On equipe, the Team plan is $19 a month to keep it live, or $69 a month with $50 of monthly credits for changes; see the pricing page for details."
 ---
 
 If you have built something useful in a Claude chat, you are closer to a real product than you may think, and further than it feels. The interface works. You can click through it. But a chat window is not a place customers can find, trust or rely on.
