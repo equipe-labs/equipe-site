@@ -96,6 +96,23 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
     alumniOf: 'Yonsei University',
     links: { linkedin: 'https://www.linkedin.com/in/shaysehee' },
   },
+  {
+    // Facts from the LinkedIn profile the founder shared (tae-hwan-1969b8196). Moved from the team to advisers by the founder (2026-11-24). Photo: that profile's portrait, cropped square.
+    name: 'Tae Hwan',
+    names: { ko: '태환' },
+    initials: 'TH',
+    photo: '/brand/tae-hwan-800.jpg',
+    photoLarge: '/brand/tae-hwan-800.jpg',
+    role: { en: 'Product adviser · ex-Toss, Ohouse', ko: '프로덕트 어드바이저 · 전 토스·오늘의집' },
+    bio: {
+      en: "Tae Hwan advises equipe on product and on the design of its PM agent. A product owner for over a decade, Tae Hwan worked at Toss (Viva Republica, Toss Bank), Mesh Korea (VROONG) and Bucketplace (Ohouse), and founded From September. Tae Hwan holds a First Class MMath from Oxford.",
+      ko: '태환은 equipe의 프로덕트와 PM 에이전트 설계를 자문해요. 10년 넘게 프로덕트 오너로 토스(비바리퍼블리카·토스뱅크), 메쉬코리아(부릉), 오늘의집(버킷플레이스)에서 일했고 From September를 창업했어요. 옥스퍼드 수학 석사를 최우등으로 마쳤어요.',
+    },
+    jobTitle: 'Product adviser',
+    worksFor: 'equipe',
+    alumniOf: 'University of Oxford',
+    links: { linkedin: 'https://www.linkedin.com/in/tae-hwan-1969b8196/' },
+  },
 ];
 
 /**
@@ -105,18 +122,18 @@ export const ADVISERS: { name: string; names?: Record<string, string>; initials:
 export const TEAM_HEADING: Record<string, string> = { en: 'Team', ko: '팀' };
 export const TEAM: { name: string; fullName: string; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; links: { linkedin: string } }[] = [
   {
-    // Facts from the LinkedIn profile the founder shared (tae-hwan-1969b8196); his equipe role is as the founder described it. Photo: that profile's portrait, cropped square.
-    name: 'Tae Hwan',
-    fullName: 'Tae Hwan',
-    initials: 'TH',
-    photo: '/brand/tae-hwan-800.jpg',
-    photoLarge: '/brand/tae-hwan-800.jpg',
-    role: { en: 'Product · PM agent design', ko: 'Product · PM 에이전트 설계' },
+    // Facts from the LinkedIn profile the founder shared (alex-hee-kyun-chung); role "Head of Business" as the founder set it. Photo: supplied by the founder, cropped square.
+    name: 'Alex Hee Kyun Chung',
+    fullName: 'Alex Hee Kyun Chung',
+    initials: 'AC',
+    photo: '/brand/alex-chung-800.jpg',
+    photoLarge: '/brand/alex-chung-800.jpg',
+    role: { en: 'Head of Business', ko: 'Head of Business' },
     bio: {
-      en: "Tae Hwan leads the design of equipe's PM agent. A product owner for over a decade, he worked at Toss (Viva Republica, Toss Bank), Mesh Korea (VROONG) and Bucketplace (Ohouse), and founded From September. He holds a First Class MMath from Oxford.",
-      ko: '태환은 equipe의 PM 에이전트 설계를 이끌어요. 10년 넘게 프로덕트 오너로 토스(비바리퍼블리카·토스뱅크), 메쉬코리아(부릉), 오늘의집(버킷플레이스)에서 일했고 From September를 창업했어요. 옥스퍼드 수학 석사를 최우등으로 마쳤어요.',
+      en: "Alex Hee Kyun Chung is equipe's Head of Business, a product leader who builds AI-powered growth engines across the US, Korea, Japan and Southeast Asia. Alex started at Bain, moved to Google to help small-business advertisers grow, and took MADUP's ad-tech platform from $240K to $8M ARR. At Toss, Alex led machine-learning products and growth, taking MAU to 3.5M in eight months, and at Bucketplace (Ohouse) built Ohouse Japan from zero to a scaled commerce business. Alex studied Political Economy at UC Berkeley.",
+      ko: '정희균(Alex)은 equipe의 Head of Business예요. 미국·한국·일본·동남아에서 AI 기반 성장 엔진을 만들어 온 프로덕트 리더예요. 베인에서 시작해 구글에서 중소 광고주의 성장을 도왔고, 매드업에서 애드테크 플랫폼을 연 매출 24만 달러에서 800만 달러로 키웠어요. 토스에서는 머신러닝 프로덕트와 그로스를 이끌며 8개월 만에 MAU를 350만으로 늘렸고, 오늘의집(버킷플레이스)에서는 일본 사업을 0에서 규모 있는 커머스로 키웠어요. UC 버클리에서 정치경제학을 공부했어요.',
     },
-    links: { linkedin: 'https://www.linkedin.com/in/tae-hwan-1969b8196/' },
+    links: { linkedin: 'https://www.linkedin.com/in/alex-hee-kyun-chung/' },
   },
   {
     name: 'Seongjae (SJ) Seo',
