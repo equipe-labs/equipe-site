@@ -24,6 +24,7 @@ const cost = t.faq.items[4];
     <ul class="plans">
       {t.plans.items.map((p, i) => (
         <li class={`plan${i === 1 ? ' featured' : ''}`}>
+          <p class="plan-fit">{p.fit}</p>
           <div class="plan-h"><h2>{p.name}</h2>{i === 1 && <span class="plan-b">{t.plans.featured}</span>}</div>
           <p class="plan-d">{p.text}</p>
           <p class="plan-p"><b>{p.price}</b><span>{p.per}</span></p>
@@ -33,6 +34,7 @@ const cost = t.faq.items[4];
         </li>
       ))}
     </ul>
+    <div class="pwhich"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
     <CustomerLogos code={code} id="trust-pricing" class="ptrust" />
     <div class="pfacts">
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h2>{t.plans.runout.title}</h2><p>{t.plans.runout.text}</p></div></div>

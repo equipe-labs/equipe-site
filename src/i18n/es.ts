@@ -142,7 +142,7 @@ const es: Messages = {
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
     label: '¿Qué quieres crear?',
-    placeholder: 'Un rastreador de hábitos con rachas diarias',
+    placeholder: 'Describe tu idea con tus propias palabras…',
     examples: ['Un rastreador de hábitos con rachas diarias', 'Publicar lo que hice en Claude', 'Una página de reservas para mi estudio'],
     submit: 'Empezar',
     team: 'Todo el equipo',
@@ -204,10 +204,12 @@ const es: Messages = {
     text: '1 crédito = $1. Paquetes: $25, $50, $100 o $250. Los créditos duran 12 meses; los no usados se reembolsan en un plazo de 14 días.',
     featured: 'Recomendado',
     items: [
-      { name: 'Empieza gratis', price: '$0', per: 'para empezar', text: '$5 de crédito al crear tu equipo, +$10 al añadir una tarjeta (sin cargo).', points: ['1 crédito = $1', 'Los créditos pagan todo lo que hace el equipo', 'Sin tarjeta para empezar', '2 personas en el equipo'], cta: 'Empezar gratis' },
-      { name: 'Equipo', price: '$19', per: '/mes', text: 'Para un producto que sigues haciendo crecer.', points: ['Hosting para tus sitios y almacenamiento', 'Créditos mensuales a $1 = $1, acumulables 2 meses', 'Todo el equipo: PM, ingenieros, diseño, QA, datos', '5 personas incluidas; cada editor extra cuesta $5 al mes (hasta 10)', 'Las invitaciones de solo lectura son gratis', 'Los créditos se comparten entre todo el equipo'], cta: 'Empezar' },
-      { name: 'Solo hosting', price: '$19', per: '/mes', text: 'Tu producto sigue en vivo, y tu equipo trabaja siempre que tengas créditos.', points: ['Tu producto, sitios y dominios siguen en vivo', 'El almacenamiento se mantiene', 'Añade créditos y tu equipo se pone a trabajar', '2 personas en el equipo'], cta: 'Empezar' },
+      { name: 'Empieza gratis', fit: 'Para probar', price: '$0', per: 'para empezar', text: '$5 de crédito al crear tu equipo, +$10 al añadir una tarjeta (sin cargo).', points: ['1 crédito = $1', 'Los créditos pagan todo lo que hace el equipo', 'Sin tarjeta para empezar', '2 personas en el equipo'], cta: 'Empezar gratis' },
+      { name: 'Equipo', fit: 'Para seguir construyendo cada mes', price: '$19', per: '/mes', text: 'Para un producto que sigues haciendo crecer.', points: ['Hosting para tus sitios y almacenamiento', 'Créditos mensuales a $1 = $1, acumulables 2 meses', 'Todo el equipo: PM, ingenieros, diseño, QA, datos', '5 personas incluidas; cada editor extra cuesta $5 al mes (hasta 10)', 'Las invitaciones de solo lectura son gratis', 'Los créditos se comparten entre todo el equipo'], cta: 'Empezar' },
+      { name: 'Solo hosting', fit: 'Para un producto terminado', price: '$19', per: '/mes', text: 'Tu producto sigue en vivo, y tu equipo trabaja siempre que tengas créditos.', points: ['Tu producto, sitios y dominios siguen en vivo', 'El almacenamiento se mantiene', 'Añade créditos y tu equipo se pone a trabajar', '2 personas en el equipo'], cta: 'Empezar' },
     ],
+    whichTitle: 'Mismo precio, distinto trabajo.',
+    whichText: 'Equipo es para mientras sigues construyendo: créditos mensuales para el trabajo de tu equipo y 5 personas. Solo hosting es para un producto terminado: sigue en línea y compras créditos solo cuando quieres un cambio.',
     runout: { title: 'Cuando se acaban los créditos', text: 'Tu equipo solo se detiene cuando se acaban los créditos; añade créditos y continúa enseguida. Cuando el equipo no trabaja no cuesta nada, y puedes fijar un tope mensual.' },
     estimate: { title: 'Calcula antes de gastar', text: 'Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
     yearly: 'o $190 al año (dos meses gratis)',

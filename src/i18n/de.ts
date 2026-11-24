@@ -142,7 +142,7 @@ const de: Messages = {
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
     label: 'Was möchtest du bauen?',
-    placeholder: 'Ein Gewohnheits-Tracker mit täglichen Serien',
+    placeholder: 'Beschreib deine Idee in einfachen Worten …',
     examples: ['Ein Gewohnheits-Tracker mit täglichen Serien', 'Mein Claude-Projekt live bringen', 'Eine Buchungsseite für mein Studio'],
     submit: 'Loslegen',
     team: 'Ganzes Team',
@@ -204,10 +204,12 @@ const de: Messages = {
     text: '1 Credit = $1. Pakete: $25, $50, $100 oder $250. Credits gelten 12 Monate; ungenutzte Credits werden innerhalb von 14 Tagen erstattet.',
     featured: 'Empfohlen',
     items: [
-      { name: 'Kostenlos starten', price: '$0', per: 'zum Start', text: '$5 Guthaben, wenn du dein Team anlegst, +$10 mit hinterlegter Karte (ohne Abbuchung).', points: ['1 Credit = $1', 'Credits bezahlen alles, was das Team tut', 'Zum Start keine Karte nötig', '2 Personen im Team'], cta: 'Kostenlos starten' },
-      { name: 'Team', price: '$19', per: '/Monat', text: 'Für ein Produkt, das du weiter wachsen lässt.', points: ['Hosting für deine Seiten und Speicher', 'Monats-Credits zu $1 = $1, 2 Monate übertragbar', 'Dein ganzes Team: PM, Engineering, Design, QA, Daten', '5 Personen inklusive; jede weitere Bearbeiterin bzw. jeder weitere Bearbeiter kostet $5 im Monat (bis 10)', 'Einladungen nur zum Ansehen sind kostenlos', 'Credits teilt sich das ganze Team'], cta: 'Loslegen' },
-      { name: 'Nur Hosting', price: '$19', per: '/Monat', text: 'Dein Produkt bleibt live, und dein Team arbeitet, sobald du Credits hast.', points: ['Produkt, Seiten und Domains bleiben live', 'Der Speicher bleibt erhalten', 'Credits dazu, und dein Team legt sofort los', '2 Personen im Team'], cta: 'Loslegen' },
+      { name: 'Kostenlos starten', fit: 'Zum Ausprobieren', price: '$0', per: 'zum Start', text: '$5 Guthaben, wenn du dein Team anlegst, +$10 mit hinterlegter Karte (ohne Abbuchung).', points: ['1 Credit = $1', 'Credits bezahlen alles, was das Team tut', 'Zum Start keine Karte nötig', '2 Personen im Team'], cta: 'Kostenlos starten' },
+      { name: 'Team', fit: 'Wenn du jeden Monat weiterbaust', price: '$19', per: '/Monat', text: 'Für ein Produkt, das du weiter wachsen lässt.', points: ['Hosting für deine Seiten und Speicher', 'Monats-Credits zu $1 = $1, 2 Monate übertragbar', 'Dein ganzes Team: PM, Engineering, Design, QA, Daten', '5 Personen inklusive; jede weitere Bearbeiterin bzw. jeder weitere Bearbeiter kostet $5 im Monat (bis 10)', 'Einladungen nur zum Ansehen sind kostenlos', 'Credits teilt sich das ganze Team'], cta: 'Loslegen' },
+      { name: 'Nur Hosting', fit: 'Für ein fertiges Produkt', price: '$19', per: '/Monat', text: 'Dein Produkt bleibt live, und dein Team arbeitet, sobald du Credits hast.', points: ['Produkt, Seiten und Domains bleiben live', 'Der Speicher bleibt erhalten', 'Credits dazu, und dein Team legt sofort los', '2 Personen im Team'], cta: 'Loslegen' },
     ],
+    whichTitle: 'Gleicher Preis, andere Aufgabe.',
+    whichText: 'Team ist für die Zeit, in der du weiterbaust: monatliche Credits für die Arbeit deines Teams und 5 Personen. Nur Hosting ist für ein fertiges Produkt: Es bleibt online, und Credits kaufst du nur, wenn du etwas ändern willst.',
     runout: { title: 'Wenn die Credits aufgebraucht sind', text: 'Dein Team stoppt nur, wenn die Credits aufgebraucht sind; mit neuen Credits geht es sofort weiter. Solange das Team nicht arbeitet, kostet es nichts, und du kannst ein Monatslimit setzen.' },
     estimate: { title: 'Erst schätzen, dann ausgeben', text: 'Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
     yearly: 'oder $190 im Jahr (zwei Monate gratis)',

@@ -143,7 +143,7 @@ const fr: Messages = {
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
     label: 'Que voulez-vous créer ?',
-    placeholder: 'Un suivi d’habitudes avec des séries quotidiennes',
+    placeholder: 'Décrivez votre idée avec vos mots…',
     examples: ['Un suivi d’habitudes avec des séries quotidiennes', 'Mettre en ligne ce que j’ai fait dans Claude', 'Une page de réservation pour mon studio'],
     submit: 'Commencer',
     team: 'Toute l’équipe',
@@ -205,10 +205,12 @@ const fr: Messages = {
     text: '1 crédit = $1. Packs : $25, $50, $100 ou $250. Les crédits sont valables 12 mois ; les crédits non utilisés sont remboursables sous 14 jours.',
     featured: 'Recommandé',
     items: [
-      { name: 'Gratuit pour commencer', price: '$0', per: 'pour démarrer', text: '$5 de crédit à la création de votre équipe, +$10 en ajoutant une carte (sans débit).', points: ['1 crédit = $1', 'Les crédits paient tout ce que fait l’équipe', 'Pas de carte pour commencer', '2 personnes dans l\'équipe'], cta: 'Commencer gratuitement' },
-      { name: 'Équipe', price: '$19', per: '/mois', text: 'Pour un produit que vous continuez à faire grandir.', points: ['Hébergement de vos sites et stockage', 'Crédits mensuels à $1 = $1, reportés 2 mois', 'Toute l’équipe : PM, ingénieurs, design, QA, données', '5 personnes incluses ; chaque éditeur en plus coûte 5 $ par mois (jusqu\'à 10)', 'Les invitations en lecture seule sont gratuites', 'Les crédits sont partagés par toute l\'équipe'], cta: 'Commencer' },
-      { name: 'Hébergement seul', price: '$19', per: '/mois', text: 'Votre produit reste en ligne, et votre équipe travaille dès que vous avez des crédits.', points: ['Votre produit, vos sites et domaines restent en ligne', 'Le stockage est conservé', 'Ajoutez des crédits et votre équipe se met au travail', '2 personnes dans l\'équipe'], cta: 'Commencer' },
+      { name: 'Gratuit pour commencer', fit: 'Pour essayer', price: '$0', per: 'pour démarrer', text: '$5 de crédit à la création de votre équipe, +$10 en ajoutant une carte (sans débit).', points: ['1 crédit = $1', 'Les crédits paient tout ce que fait l’équipe', 'Pas de carte pour commencer', '2 personnes dans l\'équipe'], cta: 'Commencer gratuitement' },
+      { name: 'Équipe', fit: 'Pour construire chaque mois', price: '$19', per: '/mois', text: 'Pour un produit que vous continuez à faire grandir.', points: ['Hébergement de vos sites et stockage', 'Crédits mensuels à $1 = $1, reportés 2 mois', 'Toute l’équipe : PM, ingénieurs, design, QA, données', '5 personnes incluses ; chaque éditeur en plus coûte 5 $ par mois (jusqu\'à 10)', 'Les invitations en lecture seule sont gratuites', 'Les crédits sont partagés par toute l\'équipe'], cta: 'Commencer' },
+      { name: 'Hébergement seul', fit: 'Pour un produit terminé', price: '$19', per: '/mois', text: 'Votre produit reste en ligne, et votre équipe travaille dès que vous avez des crédits.', points: ['Votre produit, vos sites et domaines restent en ligne', 'Le stockage est conservé', 'Ajoutez des crédits et votre équipe se met au travail', '2 personnes dans l\'équipe'], cta: 'Commencer' },
     ],
+    whichTitle: 'Même prix, rôle différent.',
+    whichText: 'Équipe, c’est pendant que vous continuez à construire : des crédits mensuels pour le travail de votre équipe, et 5 personnes. Hébergement seul, c’est pour un produit terminé : il reste en ligne, et vous achetez des crédits seulement quand vous voulez un changement.',
     runout: { title: 'Quand les crédits sont épuisés', text: 'Votre équipe ne s’arrête que lorsque les crédits sont épuisés ; ajoutez des crédits et elle reprend aussitôt. Quand l’équipe ne travaille pas, cela ne coûte rien, et vous pouvez fixer un plafond mensuel.' },
     estimate: { title: 'Une estimation avant de dépenser', text: 'Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
     yearly: 'ou $190 par an (deux mois offerts)',

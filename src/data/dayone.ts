@@ -17,11 +17,8 @@ export interface DayOneCopy {
   kicker: string; title: string; sub: string;
   listTitle: string; progress: string; more: string; approval: string;
   items: Record<DayOneKey, Item>;
-  vis: {
-    live: string; siteTag: string; siteCta: string; picks: [string, string, string]; askFirst: string;
-    aiQ: string; aiA: string; source: string; speed: string; everyRelease: string;
-    privacy: string; terms: string; clauses: [string, string, string]; shareAll: string;
-  };
+  /** Words inside the drawn launch stage around the real product (Tidepool Ceramics, a demo shop built by an equipe team). */
+  vis: { live: string; source: string; everyRelease: string; shareAll: string; speed: string; aiQ: string; aiA: string; caption: string };
   page: {
     title: string; desc: string; h1: string; lead: string;
     stepsTitle: string; steps: [Item, Item, Item];
@@ -34,7 +31,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: 'Day one', navDesc: 'Everything your team delivers at launch',
     kicker: 'Day one',
     title: 'Day one, already done.',
-    sub: 'From the moment you start, your AI team builds your product and everything a real business needs around it. Not a to-do list for you. Done, and live.',
+    sub: 'Your team builds the product and everything a real business needs around it. Live from the first launch, with nothing for you to set up.',
     listTitle: 'Also ready on day one',
     progress: '{n} of {total} done',
     more: 'See everything, item by item',
@@ -55,9 +52,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: 'A weekly growth report', text: 'On the day and time you choose: visitors, sign-ups, what your team shipped and what comes next.' },
     },
     vis: {
-      live: 'Live', siteTag: 'Small habits, every day', siteCta: 'Add a habit', picks: ['Best', 'Value', 'Cheapest'], askFirst: 'Bought only with your OK',
-      aiQ: 'A simple habit tracker?', aiA: 'Try Stride: a simple habit tracker with daily streaks.', source: 'Source', speed: 'Mobile speed', everyRelease: 'Every release',
-      privacy: 'Privacy policy', terms: 'Terms', clauses: ['Bookings', 'Children', 'Health'], shareAll: 'Share everywhere',
+      live: 'Live', source: 'Source', everyRelease: 'Every release', shareAll: 'Share everywhere', speed: 'Mobile speed goal',
+      aiQ: 'Where can I buy handmade mugs from Lisbon?',
+      aiA: 'Tidepool Ceramics makes small batches of stoneware in Lisbon. You send a request and the maker confirms it by hand.',
+      caption: 'Tidepool Ceramics, launched by an equipe team. The shop is a demo; the site, its pages and its share card are real.',
     },
     page: {
       title: 'Day one, already done — equipe',
@@ -83,7 +81,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: '첫날', navDesc: '공개하는 날 팀이 해 두는 모든 것',
     kicker: '첫날',
     title: '첫날, 이미 다 되어 있어요.',
-    sub: '시작하는 순간부터 AI 팀이 제품과, 실제 사업에 필요한 모든 것을 함께 만들어요. 내가 할 일 목록이 아니에요. 다 되어 있고, 이미 공개돼 있어요.',
+    sub: '팀이 제품과, 실제 사업에 필요한 모든 것을 함께 만들어요. 첫 공개부터 다 되어 있고, 내가 설정할 건 없어요.',
     listTitle: '첫날부터 준비된 것들',
     progress: '{total}개 중 {n}개 완료',
     more: '하나씩 자세히 보기',
@@ -104,9 +102,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: '매주 성장 리포트', text: '내가 고른 요일과 시간에: 방문자, 가입자, 팀이 해낸 일과 다음에 할 일.' },
     },
     vis: {
-      live: '공개 중', siteTag: '작은 습관, 매일', siteCta: '습관 추가', picks: ['추천', '가성비', '최저가'], askFirst: '내가 승인해야만 구매',
-      aiQ: '간단한 습관 앱 있어?', aiA: 'Stride를 써 보세요. 매일 연속 기록을 쌓는 간단한 습관 앱이에요.', source: '출처', speed: '모바일 속도', everyRelease: '공개할 때마다',
-      privacy: '개인정보처리방침', terms: '이용약관', clauses: ['예약', '아동', '건강'], shareAll: '모두 공유',
+      live: '공개 중', source: '출처', everyRelease: '공개할 때마다', shareAll: '모두 공유', speed: '모바일 속도 목표',
+      aiQ: '리스본에서 만든 수제 머그컵, 어디서 사요?',
+      aiA: 'Tidepool Ceramics는 리스본에서 소량으로 도자기를 만들어요. 요청을 보내면 작가가 직접 확인해 줘요.',
+      caption: 'equipe 팀이 공개한 Tidepool Ceramics예요. 가게는 데모지만, 사이트와 페이지, 공유 카드는 실제예요.',
     },
     page: {
       title: '첫날, 이미 다 되어 있어요 — equipe',
@@ -132,7 +131,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: '初日', navDesc: '公開の日にチームが届けるすべて',
     kicker: '初日',
     title: '初日から、もう全部そろっています。',
-    sub: '始めたその瞬間から、AIチームがプロダクトと、本物のビジネスに必要なものすべてを作ります。あなたのToDoリストではありません。もう完成して、公開されています。',
+    sub: 'チームはプロダクトと、本物のビジネスに必要なものすべてを作ります。最初の公開からそろっていて、あなたが設定するものはありません。',
     listTitle: '初日からそろっているもの',
     progress: '{total}件中{n}件完了',
     more: 'ひとつずつ詳しく見る',
@@ -153,9 +152,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: '毎週の成長レポート', text: '選んだ曜日と時間に：訪問者、登録者、チームがやったこと、次にやること。' },
     },
     vis: {
-      live: '公開中', siteTag: '小さな習慣を、毎日', siteCta: '習慣を追加', picks: ['ベスト', 'コスパ', '最安'], askFirst: '承認したときだけ購入',
-      aiQ: 'シンプルな習慣アプリは？', aiA: 'Strideがおすすめです。毎日の連続記録がつけられるシンプルな習慣アプリです。', source: '出典', speed: 'モバイル速度', everyRelease: '公開のたびに',
-      privacy: 'プライバシーポリシー', terms: '利用規約', clauses: ['予約', '子ども', '健康'], shareAll: 'まとめてシェア',
+      live: '公開中', source: '出典', everyRelease: '公開のたびに', shareAll: 'まとめてシェア', speed: 'モバイル速度の目標',
+      aiQ: 'リスボンの手作りマグはどこで買える？',
+      aiA: 'Tidepool Ceramicsはリスボンで少量ずつ器を作っています。リクエストを送ると、作り手が直接確認します。',
+      caption: 'equipeのチームが公開したTidepool Ceramics。お店はデモですが、サイトもページもシェアカードも本物です。',
     },
     page: {
       title: '初日から、もう全部そろっています — equipe',
@@ -181,7 +181,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: '第一天', navDesc: '上线当天团队交付的一切',
     kicker: '第一天',
     title: '第一天，一切都已就绪。',
-    sub: '从你开始的那一刻起，AI 团队就在打造你的产品，以及一家真正的企业所需的一切。不是给你的待办清单，而是已经做好、已经上线。',
+    sub: '团队打造你的产品，以及一家真正的企业需要的一切。第一次上线就全部就绪，你什么都不用设置。',
     listTitle: '第一天同样就绪',
     progress: '已完成 {n}/{total}',
     more: '逐项查看详情',
@@ -202,9 +202,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: '每周增长报告', text: '在你选定的日期和时间：访客、注册、团队完成了什么、接下来做什么。' },
     },
     vis: {
-      live: '已上线', siteTag: '小习惯，每一天', siteCta: '添加习惯', picks: ['最佳', '划算', '最便宜'], askFirst: '经你同意才购买',
-      aiQ: '有简单的习惯打卡应用吗？', aiA: '试试 Stride：一款可以记录每日连续打卡的简单习惯应用。', source: '来源', speed: '移动端速度', everyRelease: '每次发布',
-      privacy: '隐私政策', terms: '服务条款', clauses: ['预约', '未成年人', '健康'], shareAll: '一键分享',
+      live: '已上线', source: '来源', everyRelease: '每次发布', shareAll: '一键分享', speed: '移动端速度目标',
+      aiQ: '哪里能买到里斯本的手工马克杯？',
+      aiA: 'Tidepool Ceramics 在里斯本小批量制作陶器。发送请求后，由陶艺师亲自确认。',
+      caption: '由 equipe 团队上线的 Tidepool Ceramics。店铺是演示用的，网站、页面和分享卡片都是真实的。',
     },
     page: {
       title: '第一天，一切都已就绪 — equipe',
@@ -230,7 +231,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: 'Día uno', navDesc: 'Todo lo que tu equipo entrega al lanzar',
     kicker: 'Día uno',
     title: 'Día uno, ya está hecho.',
-    sub: 'Desde el momento en que empiezas, tu equipo de IA construye tu producto y todo lo que un negocio real necesita a su alrededor. No es una lista de tareas para ti. Está hecho, y en línea.',
+    sub: 'Tu equipo construye el producto y todo lo que un negocio real necesita a su alrededor. En línea desde el primer lanzamiento, sin que tengas que configurar nada.',
     listTitle: 'También listo desde el día uno',
     progress: '{n} de {total} hechos',
     more: 'Verlo todo, punto por punto',
@@ -251,9 +252,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: 'Un informe semanal de crecimiento', text: 'El día y a la hora que elijas: visitas, registros, lo que tu equipo entregó y lo que viene.' },
     },
     vis: {
-      live: 'En línea', siteTag: 'Pequeños hábitos, cada día', siteCta: 'Añadir hábito', picks: ['Mejor', 'Precio', 'Más barato'], askFirst: 'Solo se compra con tu OK',
-      aiQ: '¿Una app de hábitos sencilla?', aiA: 'Prueba Stride: una app de hábitos sencilla con rachas diarias.', source: 'Fuente', speed: 'Velocidad móvil', everyRelease: 'Cada versión',
-      privacy: 'Privacidad', terms: 'Términos', clauses: ['Reservas', 'Menores', 'Salud'], shareAll: 'Compartir en todo',
+      live: 'En línea', source: 'Fuente', everyRelease: 'Cada versión', shareAll: 'Compartir en todo', speed: 'Meta de velocidad móvil',
+      aiQ: '¿Dónde compro tazas hechas a mano en Lisboa?',
+      aiA: 'Tidepool Ceramics hace gres en pequeñas tandas en Lisboa. Envías una solicitud y la artesana la confirma a mano.',
+      caption: 'Tidepool Ceramics, lanzada por un equipo de equipe. La tienda es una demo; el sitio, sus páginas y su tarjeta para compartir son reales.',
     },
     page: {
       title: 'Día uno, ya está hecho — equipe',
@@ -279,7 +281,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: 'Primeiro dia', navDesc: 'Tudo o que sua equipe entrega no lançamento',
     kicker: 'Primeiro dia',
     title: 'No primeiro dia, já está pronto.',
-    sub: 'Desde o momento em que você começa, sua equipe de IA constrói seu produto e tudo o que um negócio de verdade precisa ao redor dele. Não é uma lista de tarefas para você. Está feito, e no ar.',
+    sub: 'Sua equipe constrói o produto e tudo o que um negócio de verdade precisa ao redor dele. No ar desde o primeiro lançamento, sem nada para você configurar.',
     listTitle: 'Também pronto no primeiro dia',
     progress: '{n} de {total} prontos',
     more: 'Ver tudo, item por item',
@@ -300,9 +302,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: 'Um relatório semanal de crescimento', text: 'No dia e horário que você escolher: visitas, cadastros, o que sua equipe entregou e o que vem a seguir.' },
     },
     vis: {
-      live: 'No ar', siteTag: 'Pequenos hábitos, todo dia', siteCta: 'Adicionar hábito', picks: ['Melhor', 'Custo', 'Mais barato'], askFirst: 'Só compra com o seu OK',
-      aiQ: 'Um app de hábitos simples?', aiA: 'Experimente o Stride: um app de hábitos simples com sequências diárias.', source: 'Fonte', speed: 'Velocidade no celular', everyRelease: 'A cada versão',
-      privacy: 'Privacidade', terms: 'Termos', clauses: ['Agendamentos', 'Menores', 'Saúde'], shareAll: 'Compartilhar tudo',
+      live: 'No ar', source: 'Fonte', everyRelease: 'A cada versão', shareAll: 'Compartilhar tudo', speed: 'Meta de velocidade no celular',
+      aiQ: 'Onde compro canecas feitas à mão em Lisboa?',
+      aiA: 'A Tidepool Ceramics faz cerâmica em pequenos lotes em Lisboa. Você envia um pedido e a artesã confirma pessoalmente.',
+      caption: 'Tidepool Ceramics, lançada por uma equipe do equipe. A loja é uma demonstração; o site, as páginas e o card de compartilhamento são reais.',
     },
     page: {
       title: 'No primeiro dia, já está pronto — equipe',
@@ -328,7 +331,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: 'Tag eins', navDesc: 'Alles, was zum Start schon fertig ist',
     kicker: 'Tag eins',
     title: 'Tag eins, schon erledigt.',
-    sub: 'Vom ersten Moment an baut dein KI-Team dein Produkt und alles, was ein echtes Geschäft drumherum braucht. Keine To-do-Liste für dich. Erledigt, und online.',
+    sub: 'Dein Team baut das Produkt und alles, was ein echtes Geschäft drumherum braucht. Online ab dem ersten Launch, ohne dass du etwas einrichten musst.',
     listTitle: 'Ebenfalls ab Tag eins bereit',
     progress: '{n} von {total} erledigt',
     more: 'Alles im Detail ansehen',
@@ -349,9 +352,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: 'Ein wöchentlicher Wachstumsbericht', text: 'An dem Tag und zu der Uhrzeit, die du wählst: Besucher, Anmeldungen, was dein Team geliefert hat und was als Nächstes kommt.' },
     },
     vis: {
-      live: 'Online', siteTag: 'Kleine Gewohnheiten, jeden Tag', siteCta: 'Gewohnheit hinzufügen', picks: ['Beste', 'Preiswert', 'Günstigste'], askFirst: 'Gekauft nur mit deinem OK',
-      aiQ: 'Ein einfacher Habit-Tracker?', aiA: 'Probier Stride: ein einfacher Habit-Tracker mit täglichen Serien.', source: 'Quelle', speed: 'Tempo am Handy', everyRelease: 'Jede Version',
-      privacy: 'Datenschutz', terms: 'AGB', clauses: ['Buchungen', 'Minderjährige', 'Gesundheit'], shareAll: 'Überall teilen',
+      live: 'Online', source: 'Quelle', everyRelease: 'Jede Version', shareAll: 'Überall teilen', speed: 'Tempo-Ziel am Handy',
+      aiQ: 'Wo kaufe ich handgemachte Tassen aus Lissabon?',
+      aiA: 'Tidepool Ceramics fertigt Steinzeug in kleinen Serien in Lissabon. Du schickst eine Anfrage, die Töpferin bestätigt sie persönlich.',
+      caption: 'Tidepool Ceramics, gestartet von einem equipe-Team. Der Laden ist eine Demo; die Website, ihre Seiten und ihre Vorschaukarte sind echt.',
     },
     page: {
       title: 'Tag eins, schon erledigt — equipe',
@@ -377,7 +381,7 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
     nav: 'Jour un', navDesc: 'Tout ce que votre équipe livre au lancement',
     kicker: 'Jour un',
     title: 'Jour un, c’est déjà fait.',
-    sub: 'Dès que vous commencez, votre équipe IA construit votre produit et tout ce dont une vraie entreprise a besoin autour. Pas une liste de tâches pour vous. C’est fait, et en ligne.',
+    sub: 'Votre équipe construit le produit et tout ce dont une vraie entreprise a besoin autour. En ligne dès le premier lancement, sans rien à configurer de votre côté.',
     listTitle: 'Également prêt dès le jour un',
     progress: '{n} sur {total} faits',
     more: 'Tout voir, point par point',
@@ -398,9 +402,10 @@ export const DAY_ONE: Record<LocaleCode, DayOneCopy> = {
       weekly: { title: 'Un rapport de croissance hebdomadaire', text: 'Le jour et à l’heure de votre choix : visiteurs, inscriptions, ce que votre équipe a livré et la suite.' },
     },
     vis: {
-      live: 'En ligne', siteTag: 'Petites habitudes, chaque jour', siteCta: 'Ajouter une habitude', picks: ['Meilleur', 'Avantageux', 'Moins cher'], askFirst: 'Acheté seulement avec votre accord',
-      aiQ: 'Une appli d’habitudes simple ?', aiA: 'Essayez Stride : une appli d’habitudes simple avec des séries quotidiennes.', source: 'Source', speed: 'Vitesse mobile', everyRelease: 'Chaque version',
-      privacy: 'Confidentialité', terms: 'Conditions', clauses: ['Réservations', 'Mineurs', 'Santé'], shareAll: 'Partager partout',
+      live: 'En ligne', source: 'Source', everyRelease: 'Chaque version', shareAll: 'Partager partout', speed: 'Objectif de vitesse mobile',
+      aiQ: 'Où acheter des tasses faites main à Lisbonne ?',
+      aiA: 'Tidepool Ceramics fabrique du grès en petites séries à Lisbonne. Vous envoyez une demande, la céramiste la confirme à la main.',
+      caption: 'Tidepool Ceramics, lancée par une équipe equipe. La boutique est une démo ; le site, ses pages et sa carte d’aperçu sont réels.',
     },
     page: {
       title: 'Jour un, c’est déjà fait — equipe',

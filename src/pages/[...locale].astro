@@ -1,12 +1,13 @@
 ---
 // The home page, for non-developers: a startup team for one person, in the cloud. Developer content lives on /developers.
+// Ten blocks, each saying one thing once: hero, customer logos, the team at work, how it works, day one, real products,
+// from Claude, pricing, where we are today (the one place that lists what is still coming), FAQ, start.
 // Section patterns were studied on 21st.dev (workflow hero, bento grid, how-it-works rail, marquee, pricing with a featured plan,
 // call-to-action) and rewritten here as plain Astro + CSS with our tokens: no React, no new dependencies.
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Mark from '../components/Mark.astro';
-import RoleIcon from '../components/RoleIcon.astro';
 import WebApp from '../components/WebApp.astro';
 import IdeaBox from '../components/IdeaBox.astro';
 import Gallery from '../components/Gallery.astro';
@@ -41,26 +42,8 @@ const s = t.scene;
 const pageUrl = new URL(localePath(info), Astro.site).href;
 // Where we are: one state per item.
 const statusState = ['now', 'early', 'soon'] as const;
-const roleKeys = ['pm', 'eng', 'design', 'qa', 'data'] as const;
-// What each member is doing right now in the team section: a task from the app scene, and its state.
-const roleNow = [
-  { text: s.decision.label, st: 'next' },
-  { text: s.activity.tasks[0], st: 'working' },
-  { text: s.activity.tasks[2], st: 'done' },
-  { text: s.activity.tasks[3], st: 'working' },
-  { text: s.activity.tasks[4], st: 'next' },
-] as const;
-const stateName = (st: string) => (s.activity.states as Record<string, string>)[st];
 const check = 'M5 12.5l4.5 4.5L19 7.5';
 const faqMore = t.faq.more.split('{email}');
-// Bento tiles: a scene, a title and a line. Reuses the how-it-works and cost strings.
-const tiles = [
-  { k: 'chat', title: t.how.steps[0].title, text: t.how.steps[0].caption, alt: t.how.steps[0].alt, cls: 'b-a' },
-  { k: 'team', title: t.how.steps[1].title, text: t.how.steps[1].caption, alt: t.how.steps[1].alt, cls: 'b-b' },
-  { k: 'decision', title: t.how.steps[2].title, text: t.how.steps[2].caption, alt: t.how.steps[2].alt, cls: 'b-c' },
-  { k: 'growth', title: t.how.steps[3].title, text: t.how.steps[3].caption, alt: t.how.steps[3].alt, cls: 'b-d', soon: true },
-  { k: 'cost', title: t.control.points[1].lead, text: t.control.points[1].text, alt: t.control.alt, cls: 'b-e' },
-] as const;
 ---
 
 <Base locale={code} title={t.meta.title} description={t.meta.description} ogTitle={t.meta.ogTitle} ogDescription={t.meta.ogDescription} image={`/og/${info.slug || 'en'}.png`} imageAlt={t.meta.ogImageAlt}>
@@ -115,18 +98,6 @@ const tiles = [
       </div>
     </section>
 
-    <section class="ideas" aria-label={t.marquee.label}>
-      <p class="ideas-l">{t.marquee.label}</p>
-      <div class="mq" tabindex="0">
-        <ul class="mq-track">
-          {t.marquee.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" /></svg>{x}</li>)}
-        </ul>
-        <ul class="mq-track" aria-hidden="true">
-          {t.marquee.items.map((x) => <li><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" /></svg>{x}</li>)}
-        </ul>
-      </div>
-    </section>
-
     <section class="flow" id="how-it-works">
       <div class="wrap">
         <div class="head center rv">
@@ -177,111 +148,6 @@ const tiles = [
           </div>
           <p class="never">{t.wedge.never}</p>
         </div>
-        <p class="honest rv"><span class="soon">{t.ui.soon}</span><span>{t.wedge.note}</span></p>
-      </div>
-    </section>
-
-    <section class="bento-s" id="what">
-      <div class="wrap">
-        <div class="head rv">
-          <h2>{t.bento.title}</h2>
-          <p class="sub">{t.bento.text}</p>
-        </div>
-        <div class="bento">
-          {tiles.map((x, i) => (
-            <article class={`tile ${x.cls} rv`} style={`--i:${i}`}>
-              <div class="tile-vis"><WebApp k={x.k} s={s} alt={x.alt} /></div>
-              <div class="tile-t">
-                <h3>{x.title}{'soon' in x && x.soon && <span class="soon">{t.ui.soon}</span>}</h3>
-                <p>{x.text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="team" id="team">
-      <div class="wrap">
-        <div class="head rv">
-          <p class="kicker">{t.nav.team}</p>
-          <h2>{t.team.title}</h2>
-          <p class="sub">{t.team.text}</p>
-        </div>
-        <div class="flowmap rv">
-          <i class="px px-tl" aria-hidden="true"></i><i class="px px-tr" aria-hidden="true"></i><i class="px px-bl" aria-hidden="true"></i><i class="px px-br" aria-hidden="true"></i>
-          <ol class="nodes">
-            {t.team.roles.map((r, i) => (
-              <li class={`node r-${roleKeys[i]}`} style={`--i:${i}`}>
-                {i < 4 && (
-                  <svg class="conn" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
-                    <path class="base" d={i % 2 ? 'M0 50 C 45 50, 55 10, 100 10' : 'M0 10 C 45 10, 55 50, 100 50'} />
-                    <path class="flow" d={i % 2 ? 'M0 50 C 45 50, 55 10, 100 10' : 'M0 10 C 45 10, 55 50, 100 50'} />
-                  </svg>
-                )}
-                <div class="nd">
-                  <span class="ri" aria-hidden="true"><RoleIcon r={roleKeys[i]} /><i class="pulse"></i></span>
-                  <h3>{r.name}</h3>
-                  <p>{r.text}</p>
-                  <span class={`nd-now st-${roleNow[i].st}`}><em>{stateName(roleNow[i].st)}</em>{roleNow[i].text}</span>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="loop-s" id="process">
-      <div class="wrap">
-        <div class="head center rv">
-          <p class="kicker">{t.loop.kicker}</p>
-          <h2>{t.loop.title}</h2>
-          <p class="sub">{t.loop.text}</p>
-        </div>
-        <div class="loop-c rv">
-          <ol class="loop-steps">
-            {t.loop.steps.map((x, i) => (
-              <li style={`--i:${i}`}><span class="loop-n">{i + 1}</span><h3>{x.name}</h3><p>{x.text}</p></li>
-            ))}
-          </ol>
-          <p class="loop-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" /></svg>{t.loop.repeat}</p>
-          <div class="loop-b">
-            <p class="loop-bt">{t.loop.builtTitle}</p>
-            <ul role="list">{t.loop.built.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
-          </div>
-        </div>
-        <div class="smart rv">
-          <div class="smart-t">
-            <h3>{t.loop.smartTitle}</h3>
-            <p>{t.loop.smartText}</p>
-          </div>
-          <ul class="smart-l" role="list">
-            {t.loop.smart.map((x, i) => (
-              <li><span class="smart-i" aria-hidden="true">{i === 0 ? <svg viewBox="0 0 24 24"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-3.5L6 20V5a1 1 0 0 1 1-1z" /></svg> : i === 1 ? <svg viewBox="0 0 24 24"><path d="M4 19h16M7 16v-4M12 16V7M17 16v-6" /></svg> : <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" /></svg>}</span>{x}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="compare">
-      <div class="wrap">
-        <h2 class="rv">{t.compare.title}</h2>
-        <div class="cmp rv">
-          <div class="cl">
-            <h3>{t.compare.left.name}</h3>
-            <ul>{t.compare.left.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" /></svg>{x}</li>)}</ul>
-          </div>
-          <div class="cr">
-            <h3><Mark size={22} />{t.compare.right.name}</h3>
-            <ul>{t.compare.right.items.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
-          </div>
-        </div>
-        <div class="outcome rv">
-          <ul>{t.compare.outcome.map((o, i) => <li><span class="on" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{o}</li>)}</ul>
-          <a class="btn primary" href={SITE.start} data-ph="signup_cta_click" data-ph-location="compare">{t.hero.cta}</a>
-        </div>
       </div>
     </section>
 
@@ -295,6 +161,7 @@ const tiles = [
         <ul class="plans">
           {t.plans.items.map((p, i) => (
             <li class={`plan rv${i === 1 ? ' featured' : ''}`} style={`--i:${i}`}>
+              <p class="plan-fit">{p.fit}</p>
               <div class="plan-h"><h3>{p.name}</h3>{i === 1 && <span class="plan-b">{t.plans.featured}</span>}</div>
               <p class="plan-d">{p.text}</p>
               <p class="plan-p"><b>{p.price}</b><span>{p.per}</span></p>
@@ -304,6 +171,7 @@ const tiles = [
             </li>
           ))}
         </ul>
+        <div class="pwhich rv"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
         <div class="pfacts rv">
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h3>{t.plans.runout.title}</h3><p>{t.plans.runout.text}</p></div></div>
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" /><path d="M3.5 10h17M7 14.5h3" /></svg><div><h3>{t.plans.credits.title}</h3><p>{t.plans.credits.text}</p></div></div>
@@ -311,16 +179,6 @@ const tiles = [
         </div>
         <ul class="pts rv">
           {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
-        </ul>
-        <p class="honest center rv"><span class="soon">{t.status.labels.now}</span><span>{t.control.note}</span></p>
-      </div>
-    </section>
-
-    <section class="who">
-      <div class="wrap">
-        <h2 class="rv">{t.who.title}</h2>
-        <ul class="wcards rv">
-          {t.who.items.map((w) => <li><h3>{w.title}</h3><p>{w.text}</p></li>)}
         </ul>
       </div>
     </section>

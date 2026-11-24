@@ -54,9 +54,12 @@ const p = m.prompt;
     };
     ta.addEventListener('input', fit); fit();
     form.querySelectorAll<HTMLButtonElement>('[data-ex]').forEach((b) => b.addEventListener('click', () => { ta.value = b.dataset.ex!; fit(); ta.focus(); }));
-    // The suggestion currently shown as placeholder (always the full text, never a half-typed frame).
+    // The resting placeholder is a plain prompt ("Describe your idea…"), never an example: the examples live on the chips.
+    // `suggestion` is the example currently typed into the placeholder (always the full text, never a half-typed frame);
+    // empty until the typing starts, so Tab never pastes the plain prompt and the Tab hint stays hidden.
     const base = ta.placeholder;
-    let suggestion = base;
+    let suggestion = '';
+    const setSug = (v: string) => { suggestion = v; form.classList.toggle('sug', !!v); };
     // Tab accepts it, only while the box is empty; otherwise Tab moves focus as usual (no focus trap).
     ta.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab' || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || ta.value || !suggestion) return;
@@ -78,10 +81,10 @@ const p = m.prompt;
       new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(form);
       setInterval(() => {
         // Focused and empty: hold the full suggestion still, so Tab accepts exactly what is shown.
-        if (!visible || document.activeElement === ta || ta.value) { if (document.activeElement === ta && !ta.value && ta.placeholder !== suggestion) ta.placeholder = suggestion; return; }
+        if (!visible || document.activeElement === ta || ta.value) { if (document.activeElement === ta && !ta.value && suggestion && ta.placeholder !== suggestion) ta.placeholder = suggestion; return; }
         if (wait > 0) { wait--; return; }
         const w = ex[i] ?? base;
-        suggestion = w;
+        setSug(w);
         n += dir;
         ta.placeholder = w.slice(0, Math.max(0, n)) + (dir > 0 ? '|' : '');
         if (dir > 0 && n >= w.length) { ta.placeholder = w; dir = -1; wait = 28; }

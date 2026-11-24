@@ -147,7 +147,7 @@ export const en = {
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
     label: 'What do you want to build?',
-    placeholder: 'A habit tracker with daily streaks',
+    placeholder: 'Describe your idea in plain words…',
     examples: ['A habit tracker with daily streaks', 'Take my Claude artifact live', 'A booking page for my studio'],
     submit: 'Start',
     team: 'Whole team',
@@ -209,10 +209,12 @@ export const en = {
     text: '1 credit = $1. Packs: $25, $50, $100 or $250. Credits last 12 months; unused credits are refundable within 14 days.',
     featured: 'Recommended',
     items: [
-      { name: 'Start free', price: '$0', per: 'to start', text: '$5 of credit when you create your team, +$10 when you add a card (no charge).', points: ['1 credit = $1', 'Credits pay for everything the team does', 'No card needed to start', '2 people on the team'], cta: 'Start free' },
-      { name: 'Team', price: '$19', per: '/month', text: 'For a product you keep growing.', points: ['Hosting for your sites, and storage', 'Monthly credits at $1 = $1, rolling over for 2 months', 'Your whole team: PM, engineers, designer, QA, data', '5 people included; each extra editor $5/month (up to 10)', 'View-only invites are free', 'Credits are shared by the whole team'], cta: 'Get started' },
-      { name: 'Hosting only', price: '$19', per: '/month', text: 'Your product stays live, and your team works whenever you have credits.', points: ['Your product, sites and domains stay live', 'Storage is kept', 'Add credits any time and your team gets to work', '2 people on the team'], cta: 'Get started' },
+      { name: 'Start free', fit: 'For trying it out', price: '$0', per: 'to start', text: '$5 of credit when you create your team, +$10 when you add a card (no charge).', points: ['1 credit = $1', 'Credits pay for everything the team does', 'No card needed to start', '2 people on the team'], cta: 'Start free' },
+      { name: 'Team', fit: 'For building every month', price: '$19', per: '/month', text: 'For a product you keep growing.', points: ['Hosting for your sites, and storage', 'Monthly credits at $1 = $1, rolling over for 2 months', 'Your whole team: PM, engineers, designer, QA, data', '5 people included; each extra editor $5/month (up to 10)', 'View-only invites are free', 'Credits are shared by the whole team'], cta: 'Get started' },
+      { name: 'Hosting only', fit: 'For a finished product', price: '$19', per: '/month', text: 'Your product stays live, and your team works whenever you have credits.', points: ['Your product, sites and domains stay live', 'Storage is kept', 'Add credits any time and your team gets to work', '2 people on the team'], cta: 'Get started' },
     ],
+    whichTitle: 'Same price, different job.',
+    whichText: 'Team is for while you keep building: monthly credits for your team’s work, and 5 people. Hosting only is for a finished product: it stays live, and you buy credits only when you want a change.',
     runout: { title: 'When credits run out', text: 'Your team stops only when credits run out; add credits and it continues right away. When the team is not working it costs nothing, and you can set a monthly cap.' },
     estimate: { title: 'Estimate before you spend', text: 'Every request shows its expected cost first, and you set a monthly cap.' },
     yearly: 'or $190 a year (two months free)',

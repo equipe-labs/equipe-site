@@ -1,11 +1,18 @@
 ---
 // "Day one, already done": what the person's AI team delivers from the first launch. Copy: src/data/dayone.ts (8 languages).
-// Home (`page` false): a section with its own heading and a link to /day-one/. /day-one/ (`page` true): the same grid under the page's h1.
-// Pattern studied on 21st.dev (bento feature grid with small drawn UIs per tile; scroll-revealed checklist), rewritten as plain
-// Astro + CSS with the site tokens. Every scene is drawn in HTML/CSS (no images). Motion is opt-in (see the script) and the static
-// state is the finished one: every item checked, every scene complete.
+// Home (`page` false): a section with its own heading and a link to /day-one/. /day-one/ (`page` true): the same stage under the
+// page's h1, plus every deliverable explained in full.
+//
+// The stage is a real product, not a drawing: Tidepool Ceramics, a demo shop an equipe team launched (tidepool-showcase.equipe.page).
+// Its home page and privacy page are screenshots (light + dark), the share card is the site's own og.png, and the search result
+// uses the site's real title and description. Around it, small cards show what came with the launch. The caption says the shop
+// is a demo. Patterns studied on 21st.dev (device-mockup hero with floating UI cards, onboarding checklist that ticks off with a
+// progress count); references: equipe-launch/ref/day-one-21st-v2.md. Plain Astro + CSS, no new dependencies.
+// Motion is opt-in (see the script); the static state is the finished one.
+import IPhone from './IPhone.astro';
 import { DAY_ONE, FEATURED, LISTED, type DayOneKey } from '../data/dayone';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/iphone.css';
 import '../styles/dayone.css';
 
 interface Props { code: LocaleCode; page?: boolean }
@@ -13,9 +20,8 @@ const { code, page = false } = Astro.props;
 const info = getLocale(code);
 const c = DAY_ONE[code] ?? DAY_ONE.en;
 const v = c.vis;
-const TileH = page ? 'h2' : 'h3';
-const ItemH = page ? 'h3' : 'h4';
 const ListH = page ? 'h2' : 'h3';
+const ItemH = page ? 'h3' : 'h4';
 const total = LISTED.length;
 const [pre, mid, post] = (() => {
   // "{n} of {total} done" in any word order: split around the two placeholders.
@@ -41,6 +47,10 @@ const I: Record<DayOneKey, string> = {
 const check = 'M6 12.5l4 4 8-9';
 const lock = 'M7.5 11V8.5a4.5 4.5 0 0 1 9 0V11M6 11h12v9H6z';
 const R = 34; const C = 2 * Math.PI * R;
+// The real product on the stage: its address, and the title and description its pages carry.
+const host = 'tidepool-showcase.equipe.page';
+const siteTitle = 'Tidepool Ceramics: small-batch stoneware from Lisbon';
+const siteDesc = 'Hand-thrown mugs, bowls, vases and planters made in tiny batches in Lisbon. Send a request and Mara confirms by hand.';
 ---
 <section class={`d1${page ? ' d1-page' : ''}`} id={page ? undefined : 'day-one'} data-d1>
   <div class="wrap">
@@ -52,82 +62,90 @@ const R = 34; const C = 2 * Math.PI * R;
       </div>
     )}
 
-    <ul class="d1-bento" role="list">
-      {FEATURED.map((k, i) => (
-        <li class={`d1-t d1-${k} d1-rv`} style={`--i:${i}`}>
-          <div class="d1-vis" aria-hidden="true">
-            {k === 'site' && (
-              <div class="sc-site">
-                <div class="sc-win">
-                  <div class="sc-bar"><span class="sc-dots"><b></b><b></b><b></b></span><span class="sc-url"><svg viewBox="0 0 24 24"><path d={lock} /></svg>stride.equipe.page</span><span class="sc-live"><i></i>{v.live}</span></div>
-                  <div class="sc-pg"><span class="sc-brand"><span class="sc-logo"></span>Stride</span><b class="sc-h">{v.siteTag}</b><span class="sc-btn">{v.siteCta}</span></div>
-                </div>
-                <ul class="sc-picks">
-                  {[['getstride.com', v.picks[0]], ['stride.co', v.picks[1]], ['trystride.app', v.picks[2]]].map(([d, tag], j) => (
-                    <li style={`--j:${j}`}><span class="sc-dn">{d}</span><span class={`sc-tag${j === 0 ? ' best' : ''}`}>{tag}</span></li>
-                  ))}
-                </ul>
-                <p class="sc-ask"><svg viewBox="0 0 24 24"><path d={lock} /></svg>{v.askFirst}</p>
-              </div>
-            )}
-            {k === 'found' && (
-              <div class="sc-found">
-                <div class="sc-serp">
-                  <span class="sc-g"><span class="sc-fav">S</span>stride.equipe.page</span>
-                  <b class="sc-st">Stride — {v.siteTag}</b>
-                  <i class="sc-ln"></i><i class="sc-ln short"></i>
-                </div>
-                <div class="sc-ai">
-                  <p class="sc-q">{v.aiQ}</p>
-                  <div class="sc-a">
-                    <span class="sc-spark"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" /></svg></span>
-                    <div><p>{v.aiA}</p><span class="sc-src">{v.source} · stride.equipe.page</span></div>
-                  </div>
-                </div>
-              </div>
-            )}
-            {k === 'share' && (
-              <div class="sc-share">
-                <div class="sc-card"><span class="sc-brand"><span class="sc-logo"></span>Stride</span><b>{v.siteTag}</b><span class="sc-cu">stride.equipe.page</span></div>
-                <div class="sc-row">
-                  <span class="sc-plats">
-                    <i><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg></i>
-                    <i><svg viewBox="0 0 24 24"><path d="M7 10v7M7 7v.01M11 17v-7M11 13a3 3 0 0 1 6 0v4" /></svg></i>
-                    <i><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4" /><circle cx="12" cy="12" r="3.2" /></svg></i>
-                    <i><svg viewBox="0 0 24 24"><path d="M5 19l1.2-3.6A7 7 0 1 1 9 18.2L5 19z" /></svg></i>
-                    <i><svg viewBox="0 0 24 24"><path d="M4.5 6.5h15v11h-15zM4.5 7.5l7.5 5.5 7.5-5.5" /></svg></i>
-                  </span>
-                  <span class="sc-btn sm">{v.shareAll}</span>
-                </div>
-              </div>
-            )}
-            {k === 'fast' && (
-              <div class="sc-fast">
-                <svg class="sc-ring" viewBox="0 0 80 80" style={`--c:${C.toFixed(1)}`}>
-                  <circle class="t" cx="40" cy="40" r={R} />
-                  <circle class="v" cx="40" cy="40" r={R} stroke-dasharray={C.toFixed(1)} stroke-dashoffset={(C * 0.02).toFixed(1)} />
-                  <text x="40" y="47" text-anchor="middle">98</text>
-                </svg>
-                <div class="sc-fx"><b>{v.speed}</b><span>{v.everyRelease}</span><span class="sc-bars"><i style="--h:.62"></i><i style="--h:.74"></i><i style="--h:.7"></i><i style="--h:.88"></i><i style="--h:.96"></i></span></div>
-              </div>
-            )}
-            {k === 'legal' && (
-              <div class="sc-legal">
-                <div class="sc-doc"><b>{v.privacy}</b><i></i><i class="s"></i><b>{v.terms}</b><i></i><i class="s"></i></div>
-                <ul class="sc-cl">{v.clauses.map((x, j) => <li style={`--j:${j}`}><svg viewBox="0 0 24 24"><path d={check} /></svg>{x}</li>)}</ul>
-              </div>
-            )}
+    <figure class="d1-stage d1-rv" data-d1-stage>
+      <div class="st-in">
+        <div class="st-f st-site" style="--k:0">
+          <span class="st-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></i>{c.items.site.title}</span>
+          <div class="st-win" aria-hidden="true">
+            <div class="st-bar"><span class="st-dots"><b></b><b></b><b></b></span><span class="st-url"><svg viewBox="0 0 24 24"><path d={lock} /></svg>{host}</span><span class="st-live"><i></i>{v.live}</span></div>
+            <div class="st-shot">
+              <img class="th-l" src="/gallery/tidepool-light.webp" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+              <img class="th-d" src="/gallery/tidepool-dark.webp" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            </div>
           </div>
-          <div class="d1-tt">
-            <span class="d1-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={I[k]} /></svg></span>
-            <TileH>{c.items[k].title}</TileH>
-            <p>{c.items[k].text}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+        </div>
 
-    <div class="d1-list d1-rv" data-d1-list>
+        <div class="st-f st-serp" style="--k:1">
+          <span class="st-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></i>{c.items.found.title}</span>
+          <div class="st-card st-res" aria-hidden="true">
+            <span class="st-g"><span class="st-fav">T</span><span class="st-gs"><b>Tidepool Ceramics</b><span>{host}</span></span></span>
+            <b class="st-rt" lang="en">{siteTitle}</b>
+            <p class="st-rd" lang="en">{siteDesc}</p>
+          </div>
+        </div>
+
+        <div class="st-f st-ai" style="--k:5" aria-hidden="true">
+          <p class="st-q">{v.aiQ}</p>
+          <div class="st-card st-a">
+            <span class="st-spark"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" /></svg></span>
+            <div><p>{v.aiA}</p><span class="st-src">{v.source} · {host}</span></div>
+          </div>
+        </div>
+
+        <div class="st-f st-phone" style="--k:2">
+          <div class="st-ph" aria-hidden="true">
+            <IPhone w={200}>
+              <img class="th-l" src="/day-one/tidepool-privacy-light.webp" width="390" height="844" alt="" loading="lazy" decoding="async" />
+              <img class="th-d" src="/day-one/tidepool-privacy-dark.webp" width="390" height="844" alt="" loading="lazy" decoding="async" />
+            </IPhone>
+          </div>
+          <span class="st-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></i>{c.items.legal.title}</span>
+        </div>
+
+        <div class="st-f st-speed" style="--k:3">
+          <span class="st-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></i>{c.items.fast.title}</span>
+          <div class="st-card st-spd" aria-hidden="true">
+            <svg class="st-ring" viewBox="0 0 80 80" style={`--c:${C.toFixed(1)}`}>
+              <circle class="t" cx="40" cy="40" r={R} />
+              <circle class="v" cx="40" cy="40" r={R} stroke-dasharray={C.toFixed(1)} stroke-dashoffset={(C * 0.05).toFixed(1)} />
+              <text x="40" y="46.5" text-anchor="middle">95+</text>
+            </svg>
+            <span class="st-sx"><b>{v.speed}</b><span>{v.everyRelease}</span></span>
+          </div>
+        </div>
+
+        <div class="st-f st-share" style="--k:4">
+          <span class="st-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></i>{c.items.share.title}</span>
+          <div class="st-card st-sh" aria-hidden="true">
+            <img src="/day-one/tidepool-share.webp" width="600" height="315" alt="" loading="lazy" decoding="async" />
+            <div class="st-shm"><b lang="en">{siteTitle}</b><span>{host}</span></div>
+            <div class="st-shr">
+              <span class="st-plats">
+                <i><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg></i>
+                <i><svg viewBox="0 0 24 24"><path d="M7 10v7M7 7v.01M11 17v-7M11 13a3 3 0 0 1 6 0v4" /></svg></i>
+                <i><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4" /><circle cx="12" cy="12" r="3.2" /></svg></i>
+              </span>
+              <span class="st-btn">{v.shareAll}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption class="st-cap"><a href={`https://${host}/`} target="_blank" rel="noopener" data-ph="day_one_stage_open" data-ph-location={page ? 'day_one' : 'home'}>{v.caption}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L16 8M9.5 8H16v6.5" /></svg></a></figcaption>
+    </figure>
+
+    {page && (
+      <ul class="d1-legend" role="list">
+        {FEATURED.map((k, i) => (
+          <li class="d1-rv" style={`--i:${i}`}>
+            <span class="d1-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={I[k]} /></svg></span>
+            <h2>{c.items[k].title}</h2>
+            <p>{c.items[k].text}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class={`d1-list d1-rv${page ? ' full' : ''}`} data-d1-list>
       <div class="d1-lh">
         <ListH>{c.listTitle}</ListH>
         <p class="d1-prog"><span class="d1-pb" aria-hidden="true"><i data-d1-bar></i></span><span class="d1-pt">{pre}{nFirst ? <><b data-d1-count>{total}</b>{mid}{total}</> : <>{total}{mid}<b data-d1-count>{total}</b></>}{post}</span></p>
@@ -138,7 +156,7 @@ const R = 34; const C = 2 * Math.PI * R;
             <span class="d1-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={check} /></svg></span>
             <div>
               <ItemH><svg class="d1-li" viewBox="0 0 24 24" aria-hidden="true"><path d={I[k]} /></svg>{c.items[k].title}</ItemH>
-              <p>{c.items[k].text}</p>
+              <p class={page ? undefined : 'sr-only'}>{c.items[k].text}</p>
             </div>
           </li>
         ))}
@@ -153,9 +171,9 @@ const R = 34; const C = 2 * Math.PI * R;
 </section>
 
 <script>
-  // Motion, only when the visitor allows it: blocks fade up as they arrive, scenes play once, and the checklist ticks off
-  // one item at a time while its counter climbs. Anything already on screen at load is left as it is (no flash).
-  // Without this script, or with reduced motion, everything shows its finished state.
+  // Motion, only when the visitor allows it: blocks fade up as they arrive, the stage's cards settle in one after another,
+  // and the checklist ticks off one item at a time while its counter climbs. Anything already on screen at load is left as it
+  // is (no flash). Without this script, or with reduced motion, everything shows its finished state.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
     document.querySelectorAll<HTMLElement>('[data-d1]').forEach((sec) => {
       const vh = innerHeight;
@@ -170,8 +188,10 @@ const R = 34; const C = 2 * Math.PI * R;
       items.forEach((li) => li.classList.toggle('on', ticked));
       if (!ticked) { count.textContent = '0'; bar.style.transform = 'scaleX(0)'; }
       sec.classList.add('d1-mo');
-      const reveal = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      const reveal = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
       rvs.forEach((el) => { if (!el.classList.contains('in')) reveal.observe(el); });
+      const done = () => { rvs.forEach((el) => el.classList.add('in')); items.forEach((li) => li.classList.add('on')); count.textContent = String(items.length); bar.style.transform = ''; };
+      addEventListener('beforeprint', done);
       if (ticked) return;
       const tick = new IntersectionObserver((es) => {
         if (!es.some((e) => e.isIntersecting)) return;
@@ -180,10 +200,9 @@ const R = 34; const C = 2 * Math.PI * R;
           li.classList.add('on');
           count.textContent = String(i + 1);
           bar.style.transform = `scaleX(${(i + 1) / items.length})`;
-        }, 350 + i * 210));
+        }, 300 + i * 160));
       }, { threshold: 0.35 });
       tick.observe(list);
-      addEventListener('beforeprint', () => { rvs.forEach((el) => el.classList.add('in')); items.forEach((li) => li.classList.add('on')); count.textContent = String(items.length); bar.style.transform = ''; });
     });
   }
 </script>

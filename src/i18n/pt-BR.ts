@@ -142,7 +142,7 @@ const ptBR: Messages = {
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
     label: 'O que você quer criar?',
-    placeholder: 'Um app de hábitos com sequências diárias',
+    placeholder: 'Descreva sua ideia com suas palavras…',
     examples: ['Um app de hábitos com sequências diárias', 'Colocar no ar o que fiz no Claude', 'Uma página de agendamento para meu estúdio'],
     submit: 'Começar',
     team: 'Time todo',
@@ -204,10 +204,12 @@ const ptBR: Messages = {
     text: '1 crédito = $1. Pacotes: $25, $50, $100 ou $250. Os créditos valem por 12 meses; créditos não usados podem ser reembolsados em até 14 dias.',
     featured: 'Recomendado',
     items: [
-      { name: 'Comece grátis', price: '$0', per: 'para começar', text: '$5 de crédito ao criar seu time, +$10 ao adicionar um cartão (sem cobrança).', points: ['1 crédito = $1', 'Os créditos pagam tudo o que o time faz', 'Sem cartão para começar', '2 pessoas na equipe'], cta: 'Começar grátis' },
-      { name: 'Time', price: '$19', per: '/mês', text: 'Para um produto que você continua fazendo crescer.', points: ['Hospedagem dos seus sites e armazenamento', 'Créditos mensais a $1 = $1, acumulam por 2 meses', 'O time todo: PM, engenharia, design, QA, dados', '5 pessoas incluídas; cada editor extra custa $5 por mês (até 10)', 'Convites somente para visualizar são grátis', 'Os créditos são compartilhados por toda a equipe'], cta: 'Começar' },
-      { name: 'Só hospedagem', price: '$19', per: '/mês', text: 'Seu produto continua no ar, e seu time trabalha sempre que você tiver créditos.', points: ['Seu produto, sites e domínios continuam no ar', 'O armazenamento é mantido', 'Adicione créditos e seu time começa a trabalhar', '2 pessoas na equipe'], cta: 'Começar' },
+      { name: 'Comece grátis', fit: 'Para experimentar', price: '$0', per: 'para começar', text: '$5 de crédito ao criar seu time, +$10 ao adicionar um cartão (sem cobrança).', points: ['1 crédito = $1', 'Os créditos pagam tudo o que o time faz', 'Sem cartão para começar', '2 pessoas na equipe'], cta: 'Começar grátis' },
+      { name: 'Time', fit: 'Para continuar construindo todo mês', price: '$19', per: '/mês', text: 'Para um produto que você continua fazendo crescer.', points: ['Hospedagem dos seus sites e armazenamento', 'Créditos mensais a $1 = $1, acumulam por 2 meses', 'O time todo: PM, engenharia, design, QA, dados', '5 pessoas incluídas; cada editor extra custa $5 por mês (até 10)', 'Convites somente para visualizar são grátis', 'Os créditos são compartilhados por toda a equipe'], cta: 'Começar' },
+      { name: 'Só hospedagem', fit: 'Para um produto pronto', price: '$19', per: '/mês', text: 'Seu produto continua no ar, e seu time trabalha sempre que você tiver créditos.', points: ['Seu produto, sites e domínios continuam no ar', 'O armazenamento é mantido', 'Adicione créditos e seu time começa a trabalhar', '2 pessoas na equipe'], cta: 'Começar' },
     ],
+    whichTitle: 'Mesmo preço, funções diferentes.',
+    whichText: 'O Time é para enquanto você continua construindo: créditos mensais para o trabalho da equipe e 5 pessoas. O Só hospedagem é para um produto pronto: ele continua no ar e você compra créditos só quando quiser uma mudança.',
     runout: { title: 'Quando os créditos acabam', text: 'Seu time só para quando os créditos acabam; adicione créditos e ele continua na hora. Quando o time não está trabalhando, não custa nada, e você pode definir um limite mensal.' },
     estimate: { title: 'Estimativa antes de gastar', text: 'Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
     yearly: 'ou $190 por ano (dois meses grátis)',
