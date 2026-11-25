@@ -1,0 +1,65 @@
+---
+// /privacy/ and /terms/: one layout for both. Copy: src/data/legal.ts (+ src/data/legal/<code>.ts), 8 languages.
+// Head: title, short summary card, contents; then the sections. Internal links in the copy get the page's language prefix.
+import PageShell from '../PageShell.astro';
+import JsonLd from '../JsonLd.astro';
+import { SITE } from '../../data/site';
+import { LEGAL_UPDATED, legalCopy, type Block } from '../../data/legal';
+import { getLocale, localePath, subPath, type LocaleCode } from '../../i18n';
+import '../../styles/legal.css';
+
+interface Props { code: LocaleCode; kind: 'privacy' | 'terms' }
+const { code, kind } = Astro.props;
+const info = getLocale(code);
+const L = legalCopy(code);
+const doc = L[kind];
+const url = new URL(subPath(info, kind), Astro.site).href;
+const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+const prefix = localePath(info).replace(/\/$/, '');
+const md = (s: string) => esc(s)
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, t: string, u: string) => {
+    const href = u.startsWith('/') ? `${prefix}${u}` : u;
+    const ext = /^https?:/.test(u) ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return `<a href="${href}"${ext}>${t}</a>`;
+  });
+const date = new Intl.DateTimeFormat(info.lang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(`${LEGAL_UPDATED}T00:00:00Z`));
+const other = kind === 'privacy' ? 'terms' : 'privacy';
+const isList = (b: Block): b is { ul: string[] } => typeof b !== 'string';
+---
+<PageShell code={code} page={kind} title={doc.title} description={doc.desc}>
+  <JsonLd slot="head" data={{
+    '@type': 'WebPage', '@id': `${url}#page`, url, name: doc.h1, description: doc.desc, inLanguage: info.lang,
+    dateModified: LEGAL_UPDATED, isPartOf: { '@id': `${url}#website` }, publisher: { '@id': `${SITE.url}/#organization` },
+  }} />
+  <section class="lg-h"><div class="wrap">
+    <h1>{doc.h1}</h1>
+    <p class="lg-date">{L.ui.updated.replace('{date}', date)} · Umbriles Inc.</p>
+  </div></section>
+  <section class="lg-s"><div class="wrap lg-in">
+    <aside class="lg-side">
+      <nav aria-label={L.ui.toc}>
+        <p class="lg-toc-h">{L.ui.toc}</p>
+        <ol>{doc.sections.map((s) => <li><a href={`#${s.id}`}>{s.h}</a></li>)}</ol>
+      </nav>
+      <p class="lg-other"><a href={subPath(info, other)}>{L.ui[other]}</a>{kind === 'privacy' && <> · <a href={subPath(info, 'app/privacy')}>{L.ui.appPolicy}</a></>}</p>
+    </aside>
+    <article class="lg-body">
+      <details class="lg-mtoc">
+        <summary>{L.ui.toc}</summary>
+        <ol>{doc.sections.map((s) => <li><a href={`#${s.id}`}>{s.h}</a></li>)}</ol>
+      </details>
+      <div class="lg-sum">
+        <h2>{doc.summaryTitle}</h2>
+        <ul>{doc.summary.map((x) => <li set:html={md(x)} />)}</ul>
+      </div>
+      <p class="lg-note">{L.ui.notAdvice}{code !== 'en' && <> {L.ui.prevails}</>}</p>
+      {doc.sections.map((s) => (
+        <section id={s.id} aria-labelledby={`h-${s.id}`}>
+          <h2 id={`h-${s.id}`}>{s.h}</h2>
+          {s.body.map((b) => isList(b) ? <ul>{b.ul.map((x) => <li set:html={md(x)} />)}</ul> : <p set:html={md(b)} />)}
+        </section>
+      ))}
+    </article>
+  </div></section>
+</PageShell>

@@ -1,0 +1,30 @@
+/* /privacy/ and /terms/: a reading page. Contents on the side (sticky on wide screens), one column of prose, a summary card
+   with a full border. Tokens: global.css; chrome: pages.css. No uppercase labels, one accent. */
+main.pg .lg-h { padding: 96px 0 24px; }
+main.pg .lg-h h1 { max-width: none; }
+.lg-date { margin-top: 16px !important; color: var(--muted); font-size: 15.5px; }
+main.pg section.lg-s { padding: 32px 0 112px; }
+.lg-in { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 56px; align-items: start; }
+.lg-side { position: sticky; top: 96px; max-height: calc(100vh - 120px); overflow: auto; font-size: 14.5px; }
+.lg-toc-h { font-weight: 600; margin-bottom: 10px !important; }
+.lg-side ol { display: grid; gap: 2px; counter-reset: t; }
+.lg-side nav a, .lg-mtoc a { min-height: 0; font-size: 14.5px; }
+.lg-side li a, .lg-mtoc li a { display: block; padding: 5px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; line-height: 1.4; }
+.lg-mtoc { display: none; }
+.lg-side li a:hover, .lg-mtoc li a:hover { color: var(--text); background: color-mix(in srgb, var(--text) 5%, transparent); }
+.lg-other { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); }
+.lg-other a { font-weight: 600; text-decoration: none; }
+.lg-body { max-width: 720px; font-size: 17px; line-height: 1.7; }
+.lg-body section { scroll-margin-top: 90px; }
+main.pg .lg-body h2 { font-size: 23px; letter-spacing: -0.016em; margin: 44px 0 12px; }
+.lg-body p { margin: 0 0 14px !important; }
+.lg-body ul { display: grid; gap: 10px; margin: 6px 0 16px !important; }
+.lg-body li { position: relative; padding-left: 20px; }
+.lg-body li::before { content: ''; position: absolute; left: 3px; top: 0.72em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.lg-body a { overflow-wrap: anywhere; }
+.lg-sum { padding: 24px 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+main.pg .lg-sum h2 { margin: 0 0 12px; font-size: 19px; }
+.lg-sum ul { margin: 0 !important; }
+.lg-note { margin-top: 20px !important; font-size: 15px; color: var(--muted); }
+@media (max-width: 900px) { .lg-in { grid-template-columns: minmax(0, 1fr); gap: 0; } .lg-side { display: none; } .lg-mtoc { display: block; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); } .lg-mtoc summary { font-size: 15.5px; } .lg-mtoc ol { display: grid; gap: 0; padding: 0 8px 10px !important; margin: 0 !important; } .lg-mtoc li { padding: 0; } .lg-mtoc li::before { display: none; } .lg-mtoc li a { color: var(--muted); text-decoration: none; } }
+@media (max-width: 560px) { main.pg .lg-h { padding: 56px 0 16px; } .lg-sum { padding: 20px; } .lg-body { font-size: 16.5px; } }

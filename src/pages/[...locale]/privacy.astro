@@ -1,0 +1,8 @@
+---
+// /privacy/: equipe's Privacy Policy in 8 languages. Layout: src/components/legal/LegalPage.astro; copy: src/data/legal.ts.
+import LegalPage from '../../components/legal/LegalPage.astro';
+import { available, type LocaleCode } from '../../i18n';
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+---
+<LegalPage code={code} kind="privacy" />
