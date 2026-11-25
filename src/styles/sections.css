@@ -155,7 +155,7 @@ main.home .hero h1 { margin: 0; max-width: 14ch; font-size: clamp(46px, 7.2vw, 9
 @media (max-width: 560px) { .hero .more .si { display: inline; } }
 
 /* the big idea box */
-.idea.big .idea-box { border-radius: 26px; border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); background: color-mix(in srgb, var(--surface) 92%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 30px 70px -30px rgb(20 40 110 / 0.35), 0 8px 20px -10px rgb(16 18 24 / 0.15); }
+.idea.big .idea-box { border-radius: 26px; border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); background: color-mix(in srgb, var(--surface) 92%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 30px 70px -30px rgb(20 40 110 / 0.35), 0 8px 20px -10px rgb(16 18 24 / 0.15); }
 :root[data-theme='dark'] .idea.big .idea-box { background: color-mix(in srgb, var(--surface) 88%, transparent); box-shadow: 0 30px 70px -30px rgb(0 0 0 / 0.7); border-color: #FFFFFF1F; }
 .idea.big textarea { font-size: 19px; min-height: 104px; padding: 22px 24px 4px; }
 .idea.big .idea-bar { align-items: center; padding: 10px 12px 12px 14px; }
@@ -463,7 +463,7 @@ main.home .idea.big .it-l { line-height: 20px; }
 main.home .idea.big .it-caret { width: 14px; height: 14px; flex: none; display: block; margin-left: -2px; }
 /* Avatar stack: 22px, 6px overlap (about 73% of each visible), ring in the pill colour, left avatar on top. */
 main.home .idea.big .it-av { display: flex; align-items: center; height: 22px; }
-main.home .idea.big .it-av .rav { position: relative; width: 22px; height: 22px; margin-left: -6px; box-shadow: 0 0 0 2px var(--bg), inset 0 1px 0 rgb(255 255 255 / 0.45); }
+main.home .idea.big .it-av .rav { position: relative; width: 22px; height: 22px; margin-left: -6px; box-shadow: 0 0 0 2px var(--bg); }
 main.home .idea.big .it-av .rav:first-child { margin-left: 0; }
 main.home .idea.big .it-av .rav > svg { width: 13px; height: 13px; }
 main.home .idea.big .it-av .rav:nth-child(1) { z-index: 5; } main.home .idea.big .it-av .rav:nth-child(2) { z-index: 4; } main.home .idea.big .it-av .rav:nth-child(3) { z-index: 3; } main.home .idea.big .it-av .rav:nth-child(4) { z-index: 2; } main.home .idea.big .it-av .rav:nth-child(5) { z-index: 1; }
@@ -517,7 +517,7 @@ details:not([open]) > .it-pop { display: none; }
 
 /* Tab accepts the placeholder suggestion: a quiet keycap on the placeholder line, desktop pointers only, while focused and empty. */
 .idea-box { position: relative; }
-.idea-tab { display: none; position: absolute; top: 23px; right: 16px; z-index: 1; height: 22px; padding: 0 7px; border-radius: 6px; border: 1px solid var(--line); border-bottom-width: 2px; background: var(--bg); color: var(--muted); font: 600 11.5px/19px var(--sans); letter-spacing: 0.02em; pointer-events: none; }
+.idea-tab { display: none; position: absolute; top: 23px; right: 16px; z-index: 1; height: 22px; padding: 0 7px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); font: 600 11.5px/20px var(--sans); pointer-events: none; }
 @media (hover: hover) and (pointer: fine) {
   main.home .idea.big.empty.sug:has(textarea:focus) .idea-tab { display: inline-block; }
   main.home .idea.big .idea-box textarea { padding-right: 64px; }

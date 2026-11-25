@@ -228,13 +228,13 @@ details.lang .lm-ck { margin-left: auto; }
 
 /* ---- role avatars, Apple-style: soft vertical gradient, top highlight, white glyph; one look everywhere ---- */
 :root { --av-pm-t: #5B86FF; --av-pm-b: #2F57D8; --av-eng-t: #4FC3D9; --av-eng-b: #1E8FA8; --av-design-t: #8E7CFF; --av-design-b: #5B45E0; --av-qa-t: #4CD787; --av-qa-b: #22A35A; --av-data-t: #FFB54D; --av-data-b: #F08A1C; }
-.rav, .wa .wa-av, .nd .ri { --t: var(--av-pm-t); --b: var(--av-pm-b); --cut: var(--b); background: linear-gradient(180deg, var(--t), var(--b)) !important; color: #fff !important; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), inset 0 -1px 0 rgb(0 0 0 / 0.12); border-radius: 50%; }
+.rav, .wa .wa-av, .nd .ri { --t: var(--av-pm-t); --b: var(--av-pm-b); --cut: var(--b); background: linear-gradient(180deg, var(--t), var(--b)) !important; color: #fff !important; border-radius: 50%; }
 :is(.rav, .wa .wa-av, .nd .ri) > svg { width: 62%; height: 62%; }
 :is(.rav-eng, .wa .wa-av.eng, .node.r-eng .ri) { --t: var(--av-eng-t); --b: var(--av-eng-b); }
 :is(.rav-design, .wa .wa-av.design, .node.r-design .ri) { --t: var(--av-design-t); --b: var(--av-design-b); }
 :is(.rav-qa, .wa .wa-av.qa, .node.r-qa .ri) { --t: var(--av-qa-t); --b: var(--av-qa-b); }
 :is(.rav-data, .wa .wa-av.data, .node.r-data .ri) { --t: var(--av-data-t); --b: var(--av-data-b); }
-.it-av .rav { box-shadow: 0 0 0 2px var(--bg), inset 0 1px 0 rgb(255 255 255 / 0.45); }
+.it-av .rav { box-shadow: 0 0 0 2px var(--bg); }
 
 /* ---- Apple-like finish: materials on header and popovers, hairlines, soft shadows, spring easing ---- */
 header.site { background: color-mix(in srgb, var(--bg) 72%, transparent); -webkit-backdrop-filter: saturate(1.8) blur(20px); backdrop-filter: saturate(1.8) blur(20px); border-bottom: 0.5px solid var(--line); }
