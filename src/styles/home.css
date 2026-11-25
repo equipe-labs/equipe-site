@@ -100,7 +100,7 @@ main.home .control .pts h3 { font-size: 18px; }
 /* 7 who */
 .who { border-top: 1px solid var(--line); }
 .wcards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); margin-top: 64px; }
-.wcards li { padding-top: var(--s-5); border-top: 2px solid var(--text); }
+.wcards li { padding-top: var(--s-5); border-top: 1px solid var(--line); }
 main.home .wcards h3 { font-size: 24px; letter-spacing: -0.02em; }
 .wcards p { margin-top: var(--s-3); font-size: 17px; line-height: 1.55; color: var(--muted); }
 

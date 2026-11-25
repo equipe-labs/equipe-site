@@ -190,18 +190,15 @@ main.pg section.post-s { padding-top: 8px; }
 .toc ol { position: relative; display: grid; gap: 0; padding: 0 12px 12px 16px; }
 .toc details[open] ol { animation: toc-in 260ms var(--ease); }
 @keyframes toc-in { from { opacity: 0; transform: translateY(-4px); } }
-.toc a { display: block; padding: 7px 0 7px 14px; color: var(--muted); text-decoration: none; line-height: 1.38; border-left: 2px solid var(--line); transition: color 200ms var(--ease); overflow-wrap: anywhere; }
+.toc a { display: block; padding: 7px 0; color: var(--muted); text-decoration: none; line-height: 1.38; transition: color 200ms var(--ease); overflow-wrap: anywhere; }
 .toc a:hover { color: var(--text); }
 .toc a[aria-current] { color: var(--text); font-weight: 600; }
-.toc ol::before { content: ''; position: absolute; left: 16px; top: 0; width: 2px; height: var(--mh, 0); transform: translateY(var(--my, 0)); background: var(--accent); border-radius: 2px; opacity: 0; transition: transform 260ms var(--ease), height 260ms var(--ease), opacity 200ms var(--ease); }
-.toc ol.has-m::before { opacity: 1; }
 @media (min-width: 1040px) {
   .toc { position: sticky; top: 92px; align-self: start; max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
   .toc details { border: 0; background: none; }
   .toc summary { cursor: default; pointer-events: none; padding: 0; min-height: 0; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--muted); }
   .toc details > summary > svg, .toc-cur { display: none; }
   .toc ol { padding: 0; }
-  .toc ol::before { left: 0; }
 }
 @media (max-width: 1039px) { .toc { position: sticky; top: 72px; z-index: 3; } .toc details { box-shadow: 0 6px 18px -14px rgb(0 0 0 / 0.3); } .toc details[open] ol { max-height: min(60vh, 420px); overflow-y: auto; overscroll-behavior: contain; } .toc details:not([open]) { background: color-mix(in srgb, var(--surface) 95%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); } }
 
@@ -274,7 +271,7 @@ main.pg .post-rel h2 { font-size: clamp(22px, 2.4vw, 28px); }
 .post-rel-h a:hover svg { transform: translateX(3px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .bc > a, .cv-ic, .cv-wm, .cv::after, .chip, .toc ol::before, .toc summary svg, .post-faq summary svg, .post-copy, .bi-search input { transition: none; }
+  .bc > a, .cv-ic, .cv-wm, .cv::after, .chip, .toc summary svg, .post-faq summary svg, .post-copy, .bi-search input { transition: none; }
   .bc > a:hover, .bc > a:active { transform: none; }
   .bc > a:hover .cv-ic, .bc > a:hover .cv-wm { transform: none; }
   .bc-in, .bi-empty, .toc details[open] ol, .post-faq details[open] p, .post-copy.done .i-c { animation: none; }
