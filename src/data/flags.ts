@@ -34,6 +34,22 @@ export const TYPICAL_TOTALS: null | Record<string, string> = null;
 export const ADVISERS_HEADING: Record<string, string> = { en: 'Advisers', ko: '어드바이저' };
 export const ADVISERS: { name: string; names?: Record<string, string>; initials: string; photo?: string; photoLarge?: string; role: Record<string, string>; bio: Record<string, string>; jobTitle: string; worksFor: string; alumniOf?: string; links: { linkedin: string; github?: string } }[] = [
   {
+    name: 'Jinhyuk Jung',
+    names: { ko: '정진혁' },
+    initials: 'JJ',
+    photo: '/brand/jinhyuk-jung-800.jpg',
+    photoLarge: '/brand/jinhyuk-jung-800.jpg',
+    role: { en: 'Venture Capitalist at Atinum Investment', ko: '아티넘인베스트먼트 벤처캐피탈리스트' },
+    bio: {
+      en: "Jinhyuk Jung is a venture capitalist at Atinum Investment, investing in AI companies. Before Atinum, Jinhyuk was a venture analyst at Mirae Asset Capital, and studied software engineering at Chung-Ang University and strategy at Seoul National University. Jinhyuk advises equipe.",
+      ko: '정진혁은 아티넘인베스트먼트에서 AI 분야에 투자하는 벤처캐피탈리스트예요. 미래에셋캐피탈에서 벤처 애널리스트로 일했고, 중앙대학교에서 소프트웨어를, 서울대학교 경영대학원에서 전략을 공부했어요. equipe의 어드바이저예요.',
+    },
+    jobTitle: 'Venture Capitalist',
+    worksFor: 'Atinum Investment',
+    alumniOf: 'Seoul National University',
+    links: { linkedin: 'https://www.linkedin.com/in/jhjung96/' },
+  },
+  {
     name: 'Akki Shafiqullah',
     initials: 'AS',
     photo: '/brand/akki-800.jpg',
