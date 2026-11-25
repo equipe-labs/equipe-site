@@ -26,7 +26,7 @@ This article walks through building one with AI and no code, in the order you wo
 
 Jiwoo Korean is a made-up business: a solo Korean tutor who takes lesson bookings. The business is invented for the demo, but the site is real and live, and an equipe team built it in about 45 minutes. It has a week-at-a-glance scheduler that shows times in your timezone, and after you book it sends a confirmation email and a calendar file.
 
-<figure><picture><img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="Jiwoo Korean, an example booking site for a solo Korean tutor, with a week-at-a-glance scheduler" /><img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Jiwoo Korean, a demo business built by an equipe team in about 45 minutes. The tutor is made up; <a href="https://jiwoo-showcase.equipe.page">the site is real and live</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="Jiwoo Korean, an example booking site for a solo Korean tutor, with a week-at-a-glance scheduler" /><img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Jiwoo Korean, a demo business built by an equipe team in about 45 minutes. The tutor is made up; <a href="https://jiwoo.equipe.page">the site is real and live</a>.</figcaption></figure>
 
 We list only what we know the demo does. When this article talks about cancellations, reminders, payments or anything else, that is advice on what to consider, not a description of Jiwoo.
 

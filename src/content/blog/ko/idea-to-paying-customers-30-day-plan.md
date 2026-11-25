@@ -58,7 +58,7 @@ faqs:
     <img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="Jiwoo Korean, equipe 팀이 만든 예시 예약 페이지: 1인 과외 선생님을 위한 한 주 일정 한눈에 보기" />
     <img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" />
   </picture>
-  <figcaption>Jiwoo Korean: equipe 팀이 약 45분 만에 만든, 1인 과외 선생님을 위한 예시 예약 페이지예요. 사업은 데모를 위해 지어낸 것이지만, <a href="https://jiwoo-showcase.equipe.page">사이트는 실제로 라이브 상태</a>예요.</figcaption>
+  <figcaption>Jiwoo Korean: equipe 팀이 약 45분 만에 만든, 1인 과외 선생님을 위한 예시 예약 페이지예요. 사업은 데모를 위해 지어낸 것이지만, <a href="https://jiwoo.equipe.page">사이트는 실제로 라이브 상태</a>예요.</figcaption>
 </figure>
 
 ## 3주차 (15~21일): 열 사람에게 직접 공개하세요

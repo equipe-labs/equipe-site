@@ -78,7 +78,7 @@ equipe.im의 예시 제품 다섯 개는 쓸모 있는 첫 버전이 얼마나 �
     <img class="th-light" src="/gallery/littlewins-light.webp" width="1200" height="750" loading="lazy" alt="equipe 팀이 만든 예시 습관 트래커 Little Wins: 습관, 집중 타이머, 한 줄 일기" />
     <img class="th-dark" src="/gallery/littlewins-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" />
   </picture>
-  <figcaption>equipe 팀이 약 35분 만에 만든 다섯 가지 예시 제품 중 하나인 Little Wins예요. 사업은 데모를 위해 지어낸 것이지만, <a href="https://littlewins-showcase.equipe.page">사이트는 실제로 운영 중이에요</a>.</figcaption>
+  <figcaption>equipe 팀이 약 35분 만에 만든 다섯 가지 예시 제품 중 하나인 Little Wins예요. 사업은 데모를 위해 지어낸 것이지만, <a href="https://littlewins.equipe.page">사이트는 실제로 운영 중이에요</a>.</figcaption>
 </figure>
 
 ## 4단계: 라이브로 올리기 (아무도 보여주지 않는 부분)

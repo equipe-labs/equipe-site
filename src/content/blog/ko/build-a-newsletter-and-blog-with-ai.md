@@ -34,7 +34,7 @@ Small Hours는 가상의 사업이에요. 작은 뉴스레터 제품이 어떤 �
 
 equipe 팀이 약 35분 만에 만들었어요. 한 번에 이해할 수 있을 만큼 작아서 예시로 골랐어요. 독자와의 약속 하나, 폼 하나, 아카이브 하나, 관리 화면 하나예요.
 
-<figure><picture><img class="th-light" src="/gallery/smallhours-light.webp" width="1200" height="750" loading="lazy" alt="equipe 팀이 만든 예시 주간 뉴스레터 사이트 Small Hours: 이메일 구독 입력창과 최신 호가 보이는 첫 화면" /><img class="th-dark" src="/gallery/smallhours-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>데모 뉴스레터 Small Hours. 데모를 위해 만든 가상의 사업이에요. <a href="https://smallhours-showcase.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/smallhours-light.webp" width="1200" height="750" loading="lazy" alt="equipe 팀이 만든 예시 주간 뉴스레터 사이트 Small Hours: 이메일 구독 입력창과 최신 호가 보이는 첫 화면" /><img class="th-dark" src="/gallery/smallhours-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>데모 뉴스레터 Small Hours. 데모를 위해 만든 가상의 사업이에요. <a href="https://smallhours.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
 
 ## 왜 이중 확인일까요
 

@@ -78,7 +78,7 @@ Five example products on equipe.im show how small a useful first version can be:
     <img class="th-light" src="/gallery/littlewins-light.webp" width="1200" height="750" loading="lazy" alt="Little Wins, an example habit tracker built by an equipe team: habits, a focus timer and a one-line journal" />
     <img class="th-dark" src="/gallery/littlewins-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" />
   </picture>
-  <figcaption>Little Wins, one of five example products built by equipe teams in about 35 minutes. The business is made up for the demo; <a href="https://littlewins-showcase.equipe.page">the site is real and live</a>.</figcaption>
+  <figcaption>Little Wins, one of five example products built by equipe teams in about 35 minutes. The business is made up for the demo; <a href="https://littlewins.equipe.page">the site is real and live</a>.</figcaption>
 </figure>
 
 ## Step 4: put it live (the part nobody shows you)

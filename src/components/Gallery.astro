@@ -14,8 +14,8 @@ const webp = (p: string) => p.replace(/\.png$/, '.webp');
 const mins = (s: string) => s.match(/\d+/)?.[0] ?? '';
 // Top-of-page colour of each mobile screenshot, so the drawn iOS status bar continues the product's own background.
 const status: Record<string, [string, string]> = {
-  littlewins: ['#EBE2D9', '#2A2720'], fernly: ['#EAEFDE', '#132117'], jiwoo: ['#372431', '#3D2433'],
-  smallhours: ['#FBF8F1', '#141210'], tidepool: ['#F5EFE4', '#161412'],
+  littlewins: ['#FFF6E6', '#1C1712'], fernly: ['#F6F7F2', '#0B0F0D'], jiwoo: ['#F5F8F7', '#0C1516'],
+  smallhours: ['#F3EEE4', '#0E1013'], tidepool: ['#E3DDD3', '#100F0E'],
 };
 // Status-bar text colour on top of that background (light text on dark tops).
 const ink = (hex: string) => { const n = parseInt(hex.slice(1), 16); const l = (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; return l < 0.55 ? '#F4F4F5' : '#14151A'; };

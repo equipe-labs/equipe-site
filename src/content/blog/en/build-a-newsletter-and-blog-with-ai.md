@@ -33,7 +33,7 @@ Small Hours is a made-up business, built as a demo so you can see what a small n
 
 An equipe team built it in about 35 minutes. We use it here because it is small enough to understand in one sitting: one reader promise, one form, one archive, one admin screen.
 
-<figure><picture><img class="th-light" src="/gallery/smallhours-light.webp" width="1200" height="750" loading="lazy" alt="Small Hours, an example weekly newsletter site built by an equipe team: the home page with an email subscribe form and the latest issue" /><img class="th-dark" src="/gallery/smallhours-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Small Hours, a demo newsletter. The business is made up for the demo; <a href="https://smallhours-showcase.equipe.page">the site is real and live</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/smallhours-light.webp" width="1200" height="750" loading="lazy" alt="Small Hours, an example weekly newsletter site built by an equipe team: the home page with an email subscribe form and the latest issue" /><img class="th-dark" src="/gallery/smallhours-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Small Hours, a demo newsletter. The business is made up for the demo; <a href="https://smallhours.equipe.page">the site is real and live</a>.</figcaption></figure>
 
 ## Why double opt-in
 

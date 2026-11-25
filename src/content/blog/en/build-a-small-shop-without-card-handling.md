@@ -33,7 +33,7 @@ Tidepool Ceramics is a made-up small-batch pottery business. The site is real an
 
 Pottery is a good test case. Each piece is limited, so stock matters. Customers often have questions before buying. And the owner makes a few things at a time, so a short back-and-forth by email is natural.
 
-<figure><picture><img class="th-light" src="/gallery/tidepool-light.webp" width="1200" height="750" loading="lazy" alt="Tidepool Ceramics, an example small-batch pottery shop built by an equipe team: the home page with the headline Made slowly, to be used every day, a mug and a bowl, and a Browse the shop button" /><img class="th-dark" src="/gallery/tidepool-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Tidepool Ceramics, a demo shop. The business is made up for the demo; <a href="https://tidepool-showcase.equipe.page">the site is real and live</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/tidepool-light.webp" width="1200" height="750" loading="lazy" alt="Tidepool Ceramics, an example small-batch pottery shop built by an equipe team: the home page with the headline Made slowly, to be used every day, a mug and a bowl, and a Browse the shop button" /><img class="th-dark" src="/gallery/tidepool-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Tidepool Ceramics, a demo shop. The business is made up for the demo; <a href="https://tidepool.equipe.page">the site is real and live</a>.</figcaption></figure>
 
 ## Why start with request-to-buy
 

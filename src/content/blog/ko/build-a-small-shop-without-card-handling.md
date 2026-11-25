@@ -34,7 +34,7 @@ Tidepool Ceramics는 가상의 소량 생산 도자기 가게예요. 사이트�
 
 도자기는 좋은 시험 사례예요. 작품마다 수량이 한정돼 있어서 재고가 중요하고, 고객이 사기 전에 질문하는 일이 많아요. 주인도 한 번에 몇 점씩만 만드니까 이메일로 짧게 주고받는 게 자연스러워요.
 
-<figure><picture><img class="th-light" src="/gallery/tidepool-light.webp" width="1200" height="750" loading="lazy" alt="equipe 팀이 만든 예시 소량 생산 도예 가게 Tidepool Ceramics: 손으로 천천히 만들어 매일 쓰는 그릇이라는 문구, 머그와 그릇 그림, 가게 둘러보기 버튼이 있는 첫 화면" /><img class="th-dark" src="/gallery/tidepool-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>데모 쇼핑몰 Tidepool Ceramics. 데모를 위해 만든 가상의 사업이에요. <a href="https://tidepool-showcase.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/tidepool-light.webp" width="1200" height="750" loading="lazy" alt="equipe 팀이 만든 예시 소량 생산 도예 가게 Tidepool Ceramics: 손으로 천천히 만들어 매일 쓰는 그릇이라는 문구, 머그와 그릇 그림, 가게 둘러보기 버튼이 있는 첫 화면" /><img class="th-dark" src="/gallery/tidepool-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>데모 쇼핑몰 Tidepool Ceramics. 데모를 위해 만든 가상의 사업이에요. <a href="https://tidepool.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
 
 ## 왜 구매 요청으로 시작할까요
 

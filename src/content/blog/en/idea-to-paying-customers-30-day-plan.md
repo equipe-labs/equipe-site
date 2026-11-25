@@ -58,7 +58,7 @@ Small products are genuinely small. The example products on equipe.im, a booking
     <img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="Jiwoo Korean, an example booking page built by an equipe team: a week-at-a-glance scheduler for a solo tutor" />
     <img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" />
   </picture>
-  <figcaption>Jiwoo Korean: an example booking page for a solo tutor, built by an equipe team in about 45 minutes. The business is made up for the demo; <a href="https://jiwoo-showcase.equipe.page">the site is real and live</a>.</figcaption>
+  <figcaption>Jiwoo Korean: an example booking page for a solo tutor, built by an equipe team in about 45 minutes. The business is made up for the demo; <a href="https://jiwoo.equipe.page">the site is real and live</a>.</figcaption>
 </figure>
 
 ## Week 3 (days 15 to 21): launch to ten, personally

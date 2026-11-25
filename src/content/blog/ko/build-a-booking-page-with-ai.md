@@ -27,7 +27,7 @@ faqs:
 
 Jiwoo Korean은 가상의 사업이에요. 레슨 예약을 받는 1인 한국어 튜터예요. 사업은 데모를 위해 지어낸 것이지만 사이트는 실제로 열려 있고, equipe 팀이 약 45분 만에 만들었어요. 한 주를 한눈에 보여주는 스케줄러가 여러분의 타임존으로 시간을 보여주고, 예약하면 확인 이메일과 캘린더 파일을 보내줘요.
 
-<figure><picture><img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="한 주를 한눈에 보여주는 스케줄러가 있는, 1인 한국어 튜터의 예시 예약 사이트 Jiwoo Korean" /><img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>equipe 팀이 약 45분 만에 만든 데모 사업 Jiwoo Korean이에요. 튜터는 지어낸 인물이고, <a href="https://jiwoo-showcase.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
+<figure><picture><img class="th-light" src="/gallery/jiwoo-light.webp" width="1200" height="750" loading="lazy" alt="한 주를 한눈에 보여주는 스케줄러가 있는, 1인 한국어 튜터의 예시 예약 사이트 Jiwoo Korean" /><img class="th-dark" src="/gallery/jiwoo-dark.webp" width="1200" height="750" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>equipe 팀이 약 45분 만에 만든 데모 사업 Jiwoo Korean이에요. 튜터는 지어낸 인물이고, <a href="https://jiwoo.equipe.page">사이트는 실제로 열려 있어요</a>.</figcaption></figure>
 
 데모가 하는 일로 확실히 아는 것만 적었어요. 이 글에서 취소, 알림, 결제 등을 이야기한다면, 그건 고려해 볼 만한 조언이지 Jiwoo에 대한 설명이 아니에요.
 
