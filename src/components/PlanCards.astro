@@ -5,8 +5,10 @@
 // The picker is two custom radiogroups (billing cycle, credit amount): roving tabindex, arrow/Home/End keys, 44px targets,
 // a gliding indicator and a rolling price; prefers-reduced-motion turns all of that motion off.
 import { SITE } from '../data/site';
-import { TIERS, DEFAULT_TIER, usd } from '../data/plan';
+import { TIERS, DEFAULT_TIER, usd, YEARLY, PROMO, promoLive, perMonth } from '../data/plan';
+import { PROMO_WORDS, fillP } from '../i18n/promo';
 import type { Messages } from '../i18n';
+import type { LocaleCode } from '../i18n/locales';
 
 interface Props {
   t: Messages;
@@ -16,8 +18,15 @@ interface Props {
   loc: string;
   /** Add the home page's scroll-reveal class. */
   reveal?: boolean;
+  /** The page's locale (the promotion's words). */
+  code?: LocaleCode;
 }
-const { t, level, loc, reveal = false } = Astro.props;
+const { t, level, loc, reveal = false, code = 'en' } = Astro.props;
+// Yearly = the base fee once a year (shown a month, the real monthly price struck through); the credits stay monthly.
+// During the promotion its first-year price; the page switches back to the standard price by itself at the end.
+const W = PROMO_WORDS[code] || PROMO_WORDS.en;
+const live = promoLive();
+const endLabel = (() => { try { return new Intl.DateTimeFormat(code, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles', timeZoneName: 'short' }).format(new Date(PROMO.endsAt - 1000)); } catch { return W.endFallback; } })();
 const H = level;
 const P = t.plans;
 const K = P.picker;
@@ -26,10 +35,13 @@ const check = 'M5 12.5l4.5 4.5L19 7.5';
 const includes = (credits: number) => (credits === 0 ? K.keepLive : K.includes.replace('{credits}', usd(credits)));
 const hint = (i: number) => (i === 0 ? K.stop0 : i === DEFAULT_TIER ? K.popular : '');
 const id = `tp-${loc}`;
+const yv = { first: usd(PROMO.firstYear), year: usd(YEARLY.usd) };
 const data = JSON.stringify({
-  tiers: TIERS.map((x, i) => ({ m: usd(x.month), y: usd(x.year), inc: includes(x.credits), hint: hint(i) })),
+  tiers: TIERS.map((x, i) => ({ m: usd(x.month), y: usd(x.year), inc: includes(x.credits), hint: hint(i), plus: x.credits ? fillP(W.plus, { credits: usd(x.credits) }) : '' })),
   perMonth: K.perMonth,
   perYear: K.perYear,
+  yearly: { mo: perMonth(PROMO.firstYear), moStd: perMonth(YEARLY.usd), billed: fillP(W.billedPromo, yv), billedStd: fillP(W.billedStd, yv), save: K.save, badge: W.badge },
+  promoEnd: PROMO.endsAt,
 });
 ---
 <ul class="plans plans-2">
@@ -41,12 +53,12 @@ const data = JSON.stringify({
     <ul class="plan-f">{P.free.points.map((x) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{x}</li>)}</ul>
     <a class="btn ghost plan-a" href={SITE.start} data-ph="signup_cta_click" data-ph-location={`${loc}_0`}>{P.free.cta}</a>
   </li>
-  <li class={`plan featured tp${reveal ? ' rv' : ''}`} style="--i:1" data-tp={data}>
+  <li class={`plan featured tp${reveal ? ' rv' : ''}`} style="--i:1" data-tp={data} id={id}>
     <p class="plan-fit">{P.team.fit}</p>
     <div class="plan-h"><H>{P.team.name}</H><span class="plan-b">{P.featured}</span></div>
     <p class="plan-d">{P.team.text}</p>
     <div class="tp-price" aria-live="polite" aria-atomic="true">
-      <p class="plan-p"><b class="tp-num"><span class="tp-roll" data-total>{usd(def.month)}</span></b><span data-per>{K.perMonth}</span></p>
+      <p class="plan-p"><s class="tp-was" data-was hidden>{usd(YEARLY.baseMonth)}</s><b class="tp-num"><span class="tp-roll" data-total>{usd(def.month)}</span></b><span data-per>{K.perMonth}</span></p>
       <p class="tp-inc" data-inc>{includes(def.credits)}</p>
     </div>
     <div class="tp-ctl">
@@ -56,7 +68,7 @@ const data = JSON.stringify({
           <button type="button" role="radio" aria-checked="true" tabindex="0" data-v="m">{K.monthly}</button>
           <button type="button" role="radio" aria-checked="false" tabindex="-1" data-v="y">{K.yearly}</button>
         </div>
-        <span class="tp-save" data-save>{K.save}</span>
+        <span class={`tp-save${live ? ' bf' : ''}`} data-save>{live ? W.badge : K.save}</span>
       </div>
       <p class="tp-label" id={`${id}-l`}>{K.credits}</p>
       <div class="seg seg-tiers" role="radiogroup" aria-labelledby={`${id}-l`} data-group="tier" style={`--sel:${DEFAULT_TIER};--n:${TIERS.length}`}>
@@ -74,6 +86,7 @@ const data = JSON.stringify({
     <a class="btn primary plan-a" href={SITE.start} data-ph="signup_cta_click" data-ph-location={`${loc}_1`}>{P.team.cta}</a>
   </li>
 </ul>
+{live && <p class="tp-terms" data-bf-until={PROMO.endsAt}>{fillP(W.terms, { first: usd(PROMO.firstYear), year: usd(YEARLY.usd), pct: PROMO.bonusPct, cap: usd(PROMO.bonusCap), date: endLabel })}</p>}
 
 <style is:global>
   /* Two cards: Start free is the narrower one. */
@@ -91,6 +104,10 @@ const data = JSON.stringify({
   .tp-ctl { display: grid; gap: 10px; margin-top: 2px; }
   .tp-cycle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
   .tp-save { font-size: 13px; font-weight: 600; color: var(--accent); transition: opacity 220ms cubic-bezier(0.2, 0.7, 0.2, 1); opacity: 0.72; }
+  .tp-save.bf { padding: 3px 10px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 12%, transparent); opacity: 1; }
+  .plan-p .tp-was { align-self: center; margin-right: 10px; font-size: 24px; font-weight: 500; color: var(--muted); text-decoration-thickness: 2px; font-variant-numeric: tabular-nums; }
+  .plan-p .tp-was[hidden] { display: none; }
+  .tp-terms { max-width: 940px; margin: 20px auto 0; font-size: 13px; line-height: 1.55; color: var(--muted); text-align: center; text-wrap: pretty; }
   .tp[data-cycle='y'] .tp-save { opacity: 1; }
   .tp-label { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.005em; }
 
@@ -151,14 +168,20 @@ const data = JSON.stringify({
   }
 
   for (const card of document.querySelectorAll<HTMLElement>('[data-tp]')) {
-    const cfg = JSON.parse(card.dataset.tp!) as { tiers: { m: string; y: string; inc: string; hint: string }[]; perMonth: string; perYear: string };
+    const cfg = JSON.parse(card.dataset.tp!) as { tiers: { m: string; y: string; inc: string; hint: string; plus: string }[]; perMonth: string; perYear: string; yearly: { mo: string; moStd: string; billed: string; billedStd: string; save: string; badge: string }; promoEnd: number };
+    const promo = () => Date.now() < cfg.promoEnd;
+    const was = card.querySelector<HTMLElement>('[data-was]')!;
+    const save = card.querySelector<HTMLElement>('[data-save]')!;
+    // A page built during the promotion and opened after it: the standard yearly price, the usual label.
+    if (!promo()) { save.textContent = cfg.yearly.save; save.classList.remove('bf'); document.querySelectorAll('[data-bf-until]').forEach((n) => n.remove()); }
     const num = card.querySelector<HTMLElement>('.tp-num')!;
     const per = card.querySelector<HTMLElement>('[data-per]')!;
     const inc = card.querySelector<HTMLElement>('[data-inc]')!;
     const hint = card.querySelector<HTMLElement>('[data-hint]')!;
     const groups = { cycle: card.querySelector<HTMLElement>('[data-group="cycle"]')!, tier: card.querySelector<HTMLElement>('[data-group="tier"]')! };
     const state = { cycle: 0, tier: Number(groups.tier.style.getPropertyValue('--sel')) || 0 };
-    const value = (cycle: number, tier: number) => (cycle ? cfg.tiers[tier].y : cfg.tiers[tier].m);
+    const value = (cycle: number, tier: number) => (cycle ? (promo() ? cfg.yearly.mo : cfg.yearly.moStd) : cfg.tiers[tier].m);
+    const yinc = (tier: number) => `${promo() ? cfg.yearly.billed : cfg.yearly.billedStd}${cfg.tiers[tier].plus ? ` ${cfg.tiers[tier].plus}` : ''}`;
 
     const select = (name: 'cycle' | 'tier', i: number, focus: boolean) => {
       const g = groups[name];
@@ -172,8 +195,9 @@ const data = JSON.stringify({
       const after = value(state.cycle, state.tier);
       const n = (s: string) => Number(s.replace(/[^0-9.]/g, ''));
       roll(num, after, n(after) > n(before));
-      per.textContent = state.cycle ? cfg.perYear : cfg.perMonth;
-      fade(inc, cfg.tiers[state.tier].inc);
+      per.textContent = cfg.perMonth;
+      was.hidden = !state.cycle;
+      fade(inc, state.cycle ? yinc(state.tier) : cfg.tiers[state.tier].inc);
       hint.textContent = cfg.tiers[state.tier].hint;
       card.dataset.cycle = state.cycle ? 'y' : 'm';
     };

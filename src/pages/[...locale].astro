@@ -21,6 +21,7 @@ import ConsentBanner from '../components/ConsentBanner.astro';
 import CustomerLogos from '../components/CustomerLogos.astro';
 import DayOne from '../components/DayOne.astro';
 import PlanCards from '../components/PlanCards.astro';
+import PromoBanner from '../components/PromoBanner.astro';
 import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -159,7 +160,8 @@ const faqMore = t.faq.more.split('{email}');
           <h2>{t.control.title}</h2>
           <p class="sub">{t.plans.text}</p>
         </div>
-        <PlanCards t={t} level="h3" loc="pricing" reveal />
+        <PromoBanner code={code} lang={info.lang} target="tp-pricing" />
+        <PlanCards t={t} level="h3" loc="pricing" reveal code={code} />
         <div class="pwhich rv"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
         <div class="pfacts rv">
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h3>{t.plans.runout.title}</h3><p>{t.plans.runout.text}</p></div></div>

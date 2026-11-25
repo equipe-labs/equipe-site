@@ -5,6 +5,7 @@ import WebApplicationJsonLd from '../../components/WebApplicationJsonLd.astro';
 import FaqJsonLd from '../../components/FaqJsonLd.astro';
 import CustomerLogos from '../../components/CustomerLogos.astro';
 import PlanCards from '../../components/PlanCards.astro';
+import PromoBanner from '../../components/PromoBanner.astro';
 import '../../styles/sections.css';
 import { TYPICAL_TOTALS } from '../../data/flags';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
@@ -20,7 +21,8 @@ const cost = t.faq.items[4];
   <FaqJsonLd slot="head" lang={info.lang} faqs={[cost, ...t.plans.faq]} />
   <section class="pg-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>
   <section class="pg-s"><div class="wrap">
-    <PlanCards t={t} level="h2" loc="pricing_page" />
+    <PromoBanner code={code} lang={info.lang} target="tp-pricing_page" />
+    <PlanCards t={t} level="h2" loc="pricing_page" code={code} />
     <p class="pg-note tp-existing">{t.plans.existing}</p>
     <div class="pwhich"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
     <CustomerLogos code={code} id="trust-pricing" class="ptrust" />

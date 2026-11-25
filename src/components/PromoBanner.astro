@@ -1,0 +1,86 @@
+---
+// The Black Friday banner (home page pricing section and /pricing): one calm card in the site's tokens, equipe blue as
+// the only accent, a full border, a live countdown to the real end (Dec 1, 11:59 PM Pacific) shown in the visitor's
+// own time zone, and Hide. Hidden once = hidden for good on this browser (localStorage + the same `eq_px` cookie the
+// app uses). Gone at the end, also on a page built before it. The offer itself is enforced by app.equipe.im.
+import { PROMO, promoLive, perMonth, usd } from '../data/plan';
+import { PROMO_WORDS, fillP } from '../i18n/promo';
+import type { LocaleCode } from '../i18n/locales';
+
+interface Props { code: LocaleCode; target: string; lang: string }
+const { code, target, lang } = Astro.props;
+const w = PROMO_WORDS[code] || PROMO_WORDS.en;
+const live = promoLive();
+const v = { first: usd(PROMO.firstYear), mo: perMonth(PROMO.firstYear), month: usd(PROMO.listMonth), pct: PROMO.bonusPct };
+---
+{live && (
+  <aside class="bfb" data-bf={PROMO.id} data-end={PROMO.endsAt} data-lang={lang} data-cd-d={w.cdD} data-cd-h={w.cdH} data-tpl={w.endsIn} aria-label={w.label}>
+    <span class="bfb-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8M2.5 7.5h19v4.5h-19zM12 21V7.5M12 7.5H8.2a2.3 2.3 0 1 1 0-4.6C11 2.9 12 7.5 12 7.5zM12 7.5h3.8a2.3 2.3 0 1 0 0-4.6C13 2.9 12 7.5 12 7.5z" /></svg></span>
+    <div class="bfb-t">
+      <b>{fillP(w.title, v)}</b>
+      <span>{fillP(w.text, v)}</span>
+      <small class="bfb-cd"><time datetime={new Date(PROMO.endsAt).toISOString()}>{fillP(w.endsAt, { date: w.endFallback })}</time></small>
+    </div>
+    <div class="bfb-act">
+      <a class="btn ghost bfb-go" href={`#${target}`} data-bf-go={target}>{w.cta}</a>
+      <button type="button" class="bfb-x" data-bf-x aria-label={w.hide} title={w.hide}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg></button>
+    </div>
+  </aside>
+)}
+
+<style is:global>
+  .bfb { display: flex; align-items: flex-start; gap: 16px; max-width: 940px; margin: 0 auto 40px; padding: 20px 20px 20px 22px; border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line)); border-radius: 20px;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface)); color: var(--text); text-align: left; overflow: hidden; animation: bfbIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .bfb-ic { flex: none; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); }
+  .bfb-ic svg, .bfb-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .bfb-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .bfb-t b { font-size: 17px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; text-wrap: pretty; }
+  .bfb-t span { font-size: 15px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+  .bfb-cd { font-size: 13.5px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .bfb-act { flex: none; display: flex; align-items: center; gap: 8px; }
+  .bfb-go { white-space: nowrap; }
+  .bfb-x { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center; background: transparent; color: var(--muted); cursor: pointer; }
+  .bfb-x:hover { background: color-mix(in srgb, var(--text) 7%, transparent); color: var(--text); }
+  .bfb-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .bfb.out { animation: bfbOut 320ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  @keyframes bfbIn { from { opacity: 0; transform: translateY(-6px); } }
+  @keyframes bfbOut { to { opacity: 0; transform: translateY(-6px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; border-width: 0; } }
+  @media (max-width: 620px) { .bfb { flex-wrap: wrap; padding: 18px; } .bfb-t { flex-basis: calc(100% - 60px); } .bfb-act { width: 100%; } .bfb-go { flex: 1; justify-content: center; } }
+  @media (prefers-reduced-motion: reduce) { .bfb, .bfb.out { animation: none; } }
+</style>
+
+<script>
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ids = () => { const m = document.cookie.match(/(?:^|;\s*)eq_px=([^;]+)/); return m ? decodeURIComponent(m[1]).split('.').filter(Boolean) : []; };
+  const hidden = (id: string) => { try { if (localStorage.getItem('eq_px:' + id)) return true; } catch {} return ids().includes(id); };
+  const gone = (b: HTMLElement) => { if (RM) { b.remove(); return; } b.style.maxHeight = b.offsetHeight + 'px'; b.classList.add('out'); b.addEventListener('animationend', () => b.remove(), { once: true }); };
+  for (const b of document.querySelectorAll<HTMLElement>('[data-bf]')) {
+    const id = b.dataset.bf!, end = Number(b.dataset.end);
+    if (hidden(id) || Date.now() >= end) { b.remove(); continue; }
+    const el = b.querySelector('time')!;
+    try { el.title = new Intl.DateTimeFormat(b.dataset.lang, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(end - 1000)); } catch {}
+    const tick = () => {
+      const s = Math.floor((end - Date.now()) / 1000);
+      if (s <= 0) { gone(b); return false; }
+      const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+      el.textContent = b.dataset.tpl!.replace('{time}', (d ? b.dataset.cdD! : b.dataset.cdH!).replace('{d}', String(d)).replace('{h}', String(h)).replace('{m}', String(m)));
+      return true;
+    };
+    if (!tick()) continue;
+    const iv = setInterval(() => { if (!b.isConnected || !tick()) clearInterval(iv); }, 15000);
+    b.querySelector('[data-bf-x]')?.addEventListener('click', () => {
+      try { localStorage.setItem('eq_px:' + id, '1'); } catch {}
+      const l = ids(); if (!l.includes(id)) l.push(id);
+      document.cookie = `eq_px=${encodeURIComponent(l.join('.'))};path=/;max-age=${Math.max(60, Math.round((end - Date.now()) / 1000) + 86400)};samesite=lax${location.protocol === 'https:' ? ';secure' : ''}`;
+      gone(b);
+    });
+    const go = b.querySelector<HTMLAnchorElement>('[data-bf-go]');
+    go?.addEventListener('click', (e) => {
+      const card = document.getElementById(go.dataset.bfGo!);
+      if (!card) return;
+      e.preventDefault();
+      card.querySelector<HTMLButtonElement>('[data-group="cycle"] [data-v="y"]')?.click();
+      card.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
+    });
+  }
+</script>
