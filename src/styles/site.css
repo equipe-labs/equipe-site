@@ -54,7 +54,7 @@ footer.site-foot .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); paddin
 footer.site-foot .fb .brand { color: var(--text); font-size: 18px; }
 footer.site-foot .fb p { margin: var(--s-2) 0 0; }
 footer.site-foot .fcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6); }
-footer.site-foot h2 { font-size: 13px; letter-spacing: 0.02em; color: var(--text); font-weight: 600; margin: 0 0 var(--s-3); }
+footer.site-foot h2 { font-size: 13px; letter-spacing: 0; color: var(--text); font-weight: 600; margin: 0 0 var(--s-3); }
 footer.site-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
 footer.site-foot a { color: var(--muted); text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
 footer.site-foot .fl { display: flex; flex-direction: column; gap: var(--s-4); padding-top: var(--s-5); border-top: 1px solid var(--line); font-size: 13.5px; }

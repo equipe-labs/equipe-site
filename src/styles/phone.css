@@ -15,7 +15,7 @@
 .phone .sec { color: var(--sec); font-size: 0.86em; }
 .phone .who + .sec { margin-top: -6px; }
 .phone .wh { font-size: 1em; }
-.phone .tool { margin-bottom: -6px; color: var(--sec2); font-size: 0.82em; font-weight: 600; letter-spacing: 0.1em; }
+.phone .tool { margin-bottom: -6px; color: var(--sec2); font-size: 0.86em; font-weight: 600; }
 .phone .act { padding: 9px 10px; border-radius: 9px; background: var(--fill); font-size: 0.95em; }
 .phone .fn { font-size: 0.9em; color: var(--sec2); }
 .phone .bar { display: flex; gap: 10px; padding: 10px 14px 6px; border-top: 0.5px solid var(--sep); }

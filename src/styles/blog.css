@@ -198,7 +198,7 @@ main.pg section.post-s { padding-top: 8px; }
 @media (min-width: 1040px) {
   .toc { position: sticky; top: 92px; align-self: start; max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
   .toc details { border: 0; background: none; }
-  .toc summary { cursor: default; pointer-events: none; padding: 0; min-height: 0; margin-bottom: 12px; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .toc summary { cursor: default; pointer-events: none; padding: 0; min-height: 0; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--muted); }
   .toc details > summary > svg, .toc-cur { display: none; }
   .toc ol { padding: 0; }
   .toc ol::before { left: 0; }

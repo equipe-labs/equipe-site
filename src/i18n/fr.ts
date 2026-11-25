@@ -398,7 +398,7 @@ equipe`,
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'vous demande de confirmer quelque chose', age: 'Demandé à l’instant', where: 'Loop · T-5 Publier la page des tarifs · Demander', tool: 'CONFIRMER', action: 'Publier la page des tarifs sur loop.app/pricing, pour tout le monde', once: 'Depuis le téléphone, une demande n’est autorisée qu’une seule fois.', deny: 'Refuser', allow: 'Autoriser une fois', close: 'Fermer' },
+    phone: { name: 'frontend', verb: 'vous demande de confirmer quelque chose', age: 'Demandé à l’instant', where: 'Loop · T-5 Publier la page des tarifs · Demander', tool: 'Confirmer', action: 'Publier la page des tarifs sur loop.app/pricing, pour tout le monde', once: 'Depuis le téléphone, une demande n’est autorisée qu’une seule fois.', deny: 'Refuser', allow: 'Autoriser une fois', close: 'Fermer' },
   },
   notFound: { title: 'Page introuvable — equipe', description: 'Cette page n’existe pas.', heading: 'Page introuvable', text: 'Il n’y a rien à cette adresse. La page a peut-être été déplacée, ou le lien est erroné.', home: 'Aller à la page d’accueil' },
   footer: { license: 'Licence MIT', built: 'Construit en public par l’équipe d’equipe elle-même.', supportedBy: 'Infrastructure soutenue par' },

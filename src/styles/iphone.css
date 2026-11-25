@@ -58,7 +58,7 @@
 /* ---- Stride, the example app (habit tracker) ---- */
 .st { --s-ac: #FF5A36; --s-ac2: #FF8A3D; height: 100%; display: flex; flex-direction: column; gap: calc(var(--u) * 14); padding: calc(var(--u) * 8) calc(var(--u) * 20) calc(var(--u) * 14); background: #FBFAF8; }
 .st-top { display: flex; align-items: flex-end; justify-content: space-between; }
-.st-date { display: block; font-size: calc(var(--u) * 13); font-weight: 600; color: #8A8C93; text-transform: uppercase; letter-spacing: 0.04em; }
+.st-date { display: block; font-size: calc(var(--u) * 13); font-weight: 600; color: #8A8C93; }
 .st-greet { display: block; font-size: calc(var(--u) * 26); line-height: 1.12; font-weight: 700; letter-spacing: -0.025em; margin-top: calc(var(--u) * 2); max-width: calc(var(--u) * 260); }
 .st-me { width: calc(var(--u) * 38); height: calc(var(--u) * 38); border-radius: 50%; display: grid; place-items: center; flex: none; font-size: calc(var(--u) * 15); font-weight: 700; color: #fff; background: linear-gradient(135deg, #7C6CF6, #3FB6F0); }
 .st-streak { border-radius: calc(var(--u) * 22); padding: calc(var(--u) * 16) calc(var(--u) * 16) calc(var(--u) * 14); color: #fff; background: radial-gradient(120% 140% at 0% 0%, var(--s-ac2) 0%, var(--s-ac) 55%, #E4442A 100%); box-shadow: 0 calc(var(--u) * 10) calc(var(--u) * 24) calc(var(--u) * -10) rgb(255 90 54 / 0.6); }
@@ -104,7 +104,7 @@
 .ap2-av svg { width: calc(var(--u) * 22); height: calc(var(--u) * 22); fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .ap2-wn { display: grid; gap: calc(var(--u) * 4); }
 .ap2-wn b { font-size: calc(var(--u) * 18); }
-.ap2-chip { justify-self: start; font-size: calc(var(--u) * 11); font-weight: 700; letter-spacing: 0.06em; color: #A04610; background: #FCEBDD; padding: calc(var(--u) * 2) calc(var(--u) * 8); border-radius: 99px; }
+.ap2-chip { justify-self: start; font-size: calc(var(--u) * 12); font-weight: 600; color: #A04610; background: #FCEBDD; padding: calc(var(--u) * 2) calc(var(--u) * 8); border-radius: 99px; }
 .ap2-q { margin: calc(var(--u) * 4) 0 0; font-size: calc(var(--u) * 22); line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
 .ap2-where { margin: 0; font-size: calc(var(--u) * 13); color: #6A6C73; }
 .ap2-card { margin-top: calc(var(--u) * 4); padding: calc(var(--u) * 14) calc(var(--u) * 16); border-radius: calc(var(--u) * 18); background: #fff; box-shadow: inset 0 0 0 calc(var(--u) * 0.6) rgb(20 21 26 / 0.08), 0 calc(var(--u) * 1) calc(var(--u) * 3) rgb(20 21 26 / 0.05); display: grid; gap: calc(var(--u) * 10); }

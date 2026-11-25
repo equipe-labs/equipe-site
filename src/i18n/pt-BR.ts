@@ -397,7 +397,7 @@ equipe`,
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'pede que você confirme algo', age: 'Pedido agora há pouco', where: 'Loop · T-5 Publicar a página de preços · Perguntar', tool: 'CONFIRMAR', action: 'Publicar a página de preços em loop.app/pricing, para todos', once: 'Pelo celular, um pedido é permitido uma única vez.', deny: 'Negar', allow: 'Permitir uma vez', close: 'Fechar' },
+    phone: { name: 'frontend', verb: 'pede que você confirme algo', age: 'Pedido agora há pouco', where: 'Loop · T-5 Publicar a página de preços · Perguntar', tool: 'Confirmar', action: 'Publicar a página de preços em loop.app/pricing, para todos', once: 'Pelo celular, um pedido é permitido uma única vez.', deny: 'Negar', allow: 'Permitir uma vez', close: 'Fechar' },
   },
   notFound: { title: 'Página não encontrada — equipe', description: 'Esta página não existe.', heading: 'Página não encontrada', text: 'Não há nada neste endereço. Ela pode ter sido movida, ou o link pode estar errado.', home: 'Ir para a página inicial' },
   footer: { license: 'Licença MIT', built: 'Construído em público pelo próprio time do equipe.', supportedBy: 'Infraestrutura com apoio de' },

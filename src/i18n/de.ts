@@ -397,7 +397,7 @@ equipe`,
   },
   // Text drawn inside the phone illustration (the iOS approval sheet, drawn in code).
   demo: {
-    phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Fragen', tool: 'BESTÄTIGEN', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
+    phone: { name: 'frontend', verb: 'bittet dich um Bestätigung', age: 'Gerade angefragt', where: 'Loop · T-5 Preisseite veröffentlichen · Fragen', tool: 'Bestätigen', action: 'Preisseite auf loop.app/pricing für alle veröffentlichen', once: 'Vom Smartphone aus wird eine Anfrage nur einmal erlaubt.', deny: 'Ablehnen', allow: 'Einmal erlauben', close: 'Schließen' },
   },
   notFound: { title: 'Seite nicht gefunden — equipe', description: 'Diese Seite gibt es nicht.', heading: 'Seite nicht gefunden', text: 'Unter dieser Adresse gibt es nichts. Vielleicht wurde die Seite verschoben, oder der Link ist falsch.', home: 'Zur Startseite' },
   footer: { license: 'MIT-Lizenz', built: 'Öffentlich gebaut vom eigenen equipe-Team.', supportedBy: 'Infrastruktur unterstützt von' },

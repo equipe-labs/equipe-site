@@ -257,7 +257,7 @@ main.home .idea.big .idea-bar { display: flex; align-items: center; justify-cont
 main.home .hero .hbox, main.home .final .fbox { position: relative; z-index: 10; }
 .it-list { display: none; }
 .it-pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 30; width: 300px; animation: lm-in 120ms cubic-bezier(0.2, 0.7, 0.2, 1); }
-.pop-h { margin: 4px 8px 6px; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+.pop-h { margin: 4px 8px 6px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
 .it-pop ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .pop-i { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 4px 8px; border-radius: 8px; outline: none; }
 .pop-i:hover, .pop-i:focus-visible { background: color-mix(in srgb, var(--accent) 9%, transparent); }
@@ -535,7 +535,7 @@ details:not([open]) > .it-pop { display: none; }
 .loop-r { display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin: 16px 0 0; font-size: 13px; font-weight: 600; color: var(--accent); }
 .loop-r svg, .smart-i svg, .loop-b svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 .loop-b { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 24px; padding-top: 20px; border-top: 0.5px solid var(--line); }
-.loop-bt { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--muted); }
+.loop-bt { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
 .loop-b ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .loop-b li { display: inline-flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--text); }
 .loop-b li svg { color: var(--accent); }
