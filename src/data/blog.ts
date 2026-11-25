@@ -52,7 +52,7 @@ const CATEGORY_TAGS: Record<Exclude<Category, 'basics'>, string[]> = {
   money: ['pricing', 'cost', 'credits'],
   safety: ['security', 'privacy'],
   grow: ['validation', 'metrics', 'analytics', 'build-measure-learn', 'first-customers', 'customer-interviews', 'marketing'],
-  build: ['launch', 'worked-example', 'shop', 'ecommerce', 'booking', 'newsletter', 'domain', 'claude', 'artifact'],
+  build: ['launch', 'worked-example', 'ai-features', 'chatbot', 'shop', 'ecommerce', 'booking', 'newsletter', 'domain', 'claude', 'artifact'],
 };
 export function categoryOf(a: Article): Category {
   for (const c of CATEGORIES) if (c !== 'basics' && a.data.tags.some((t) => CATEGORY_TAGS[c].includes(t))) return c;

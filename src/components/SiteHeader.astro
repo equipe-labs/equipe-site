@@ -9,6 +9,7 @@ import { NAV } from '../data/nav';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 import { DAY_ONE } from '../data/dayone';
+import { aiCopy } from '../data/productai';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
 const { code, page, langs } = Astro.props;
@@ -24,8 +25,10 @@ const how = `${home}#how-it-works`;
 const examples = `${home}#gallery`;
 const aboutHref = `${subPath(info, 'about')}#team`;
 const D1 = DAY_ONE[code] ?? DAY_ONE.en;
+const AI = aiCopy(code);
 const I = {
   'day-one': 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l2.8 2.8L16.5 9.5',
+  'features/ai': 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z',
   blog: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4zM9 9h6M9 13h6',
   security: 'M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3zM9.5 12l2 2 3.5-4',
   facts: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
@@ -34,13 +37,14 @@ const I = {
 };
 const res = [
   { k: 'day-one', href: subPath(info, 'day-one'), label: D1.nav, d: D1.navDesc },
+  { k: 'features/ai', href: subPath(info, 'features/ai'), label: AI.nav, d: AI.navDesc },
   { k: 'blog', href: blogPath(bl), label: bu.nav, d: N.desc.blog },
   { k: 'security', href: subPath(info, 'security'), label: t.nav.security, d: N.desc.security },
   { k: 'facts', href: bl === 'en' ? '/facts/' : `/${bl}/facts/`, label: bu.facts, d: N.desc.facts },
   { k: 'changelog', href: subPath(info, 'changelog'), label: t.pages.changelog.h1, d: N.desc.changelog },
   { k: 'developers', href: subPath(info, 'developers'), label: t.nav.developers, d: N.desc.developers },
 ] as const;
-const resActive = ['day-one', 'security', 'developers', 'changelog', 'facts', 'blog'].includes(page);
+const resActive = ['day-one', 'features/ai', 'security', 'developers', 'changelog', 'facts', 'blog'].includes(page);
 ---
 <header class="site" data-site-header>
   <div class="wrap">
@@ -81,11 +85,11 @@ const resActive = ['day-one', 'security', 'developers', 'changelog', 'facts', 'b
             </ul>
             <p class="sh-h" style="--i:4">{N.resources}</p>
             <ul class="sh-res">{res.map((x, i) => <li style={`--i:${i + 5}`}><a href={x.href}>{x.label}</a></li>)}</ul>
-            <div class="sh-act" style="--i:11">
+            <div class="sh-act" style="--i:12">
               <a class="sh-go" href={SITE.start} data-ph="signup_cta_click" data-ph-location="menu">{N.start}</a>
               <a class="sh-si" href={SITE.login} data-ph="signin_click" data-ph-location="menu">{t.nav.signIn}</a>
             </div>
-            <div class="sh-lang" style="--i:12"><LangMenu locale={code} label={t.ui.language} subpage={sub} langs={langs} placement="sheet" /></div>
+            <div class="sh-lang" style="--i:13"><LangMenu locale={code} label={t.ui.language} subpage={sub} langs={langs} placement="sheet" /></div>
           </div>
         </div>
       </details>

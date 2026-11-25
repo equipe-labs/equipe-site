@@ -11,6 +11,7 @@
 // Motion is opt-in (see the script); the static state is the finished one.
 import IPhone from './IPhone.astro';
 import { DAY_ONE, FEATURED, LISTED, type DayOneKey } from '../data/dayone';
+import { aiCopy } from '../data/productai';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
 import '../styles/iphone.css';
 import '../styles/dayone.css';
@@ -20,6 +21,7 @@ const { code, page = false } = Astro.props;
 const info = getLocale(code);
 const c = DAY_ONE[code] ?? DAY_ONE.en;
 const v = c.vis;
+const A = aiCopy(code);
 const ListH = page ? 'h2' : 'h3';
 const ItemH = page ? 'h3' : 'h4';
 const total = LISTED.length;
@@ -178,6 +180,12 @@ const siteDesc = 'Hand-thrown mugs, bowls, vases and planters made in tiny batch
       <p class="d1-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={lock} /></svg>{c.approval}</p>
       {!page && <a class="d1-more" href={subPath(info, 'day-one')} data-ph="day_one_link_click" data-ph-location="home">{c.more}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>}
     </div>
+
+    <a class="d1-ai d1-rv" href={subPath(info, 'features/ai')} data-ph="ai_features_click" data-ph-location={page ? 'day_one' : 'home'}>
+      <span class="d1-ai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z" /></svg></span>
+      <span class="d1-ai-t"><b>{A.home.title}</b><span>{A.home.text}</span></span>
+      <span class="d1-ai-l">{A.home.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+    </a>
   </div>
 </section>
 

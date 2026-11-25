@@ -399,6 +399,18 @@ html.mo .wa-decision.live .wa-ap .l, html.mo .wa-decision.live .wa-ap .ok { anim
 .pfact > svg { flex: none; width: 22px; height: 22px; margin-top: 1px; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .pfact h2, .pfact h3 { margin: 0 0 4px; font-size: 16px; line-height: 1.35; font-weight: 600; letter-spacing: -0.005em; }
 .pfact p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+/* /pricing: AI in the product (paid from credits, monthly limit per product), linking to /features/ai/ */
+.pai { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px 16px; align-items: center; margin-top: 16px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text); text-decoration: none; transition: border-color 250ms; }
+.pai-i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 11%, var(--surface)); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
+.pai svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pai-t { display: grid; gap: 4px; }
+.pai-t b { font-size: 16px; font-weight: 600; }
+.pai-t span { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.pai-l { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.pai-l svg { width: 16px; height: 16px; stroke-width: 2; transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1); }
+@media (hover: hover) { .pai:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); } .pai:hover .pai-l svg { transform: translateX(3px); } }
+@media (max-width: 640px) { .pai { grid-template-columns: auto minmax(0, 1fr); } .pai-l { grid-column: 2; } }
+@media (prefers-reduced-motion: reduce) { .pai-l svg { transition: none; } .pai:hover .pai-l svg { transform: none; } }
 .pfact .pfact-x { margin-top: 8px; color: var(--text); }
 @media (max-width: 720px) { .pfacts { grid-template-columns: 1fr; } }
 

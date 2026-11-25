@@ -10,6 +10,8 @@ import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 import { DAY_ONE } from '../data/dayone';
+import { aiCopy } from '../data/productai';
+import { legalCopy } from '../data/legal';
 import '../styles/trust.css';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
@@ -38,6 +40,7 @@ const bu = BLOG_UI[bl];
         <ul>
           <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
           <li><a href={subPath(info, 'day-one')}>{(DAY_ONE[code] ?? DAY_ONE.en).nav}</a></li>
+          <li><a href={subPath(info, 'features/ai')}>{aiCopy(code).nav}</a></li>
           <li><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
           <li><a href={`${home}#faq`}>{t.nav.faq}</a></li>
           <li><a href={subPath(info, 'app')}>{t.app.nav.get}</a></li>
@@ -61,8 +64,9 @@ const bu = BLOG_UI[bl];
         <h2>{f.legal}</h2>
         <ul>
           <li><a href={subPath(info, 'security')}>{t.nav.security}</a></li>
-          <li><a href={subPath(info, 'app/privacy')}>{f.privacy}</a></li>
-          <li><a href={`${subPath(info, 'app/privacy')}#cookies`}>{f.noCookies}</a></li>
+          <li><a href={subPath(info, 'privacy')}>{f.privacy}</a></li>
+          <li><a href={subPath(info, 'terms')}>{legalCopy(code).ui.terms}</a></li>
+          <li><a href={`${subPath(info, 'privacy')}#cookies`}>{f.noCookies}</a></li>
           {CONSENT_REQUIRED && <li><a href="#consent" data-consent-open>{f.cookieSettings}</a></li>}
           {CONSENT_REQUIRED && <li><a href="#consent" data-consent-open>{f.doNotSell}</a></li>}
           <li><a href={subPath(info, 'app/support')}>{f.support}</a></li>

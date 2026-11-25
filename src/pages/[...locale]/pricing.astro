@@ -8,6 +8,7 @@ import PlanCards from '../../components/PlanCards.astro';
 import PromoBanner from '../../components/PromoBanner.astro';
 import '../../styles/sections.css';
 import { TYPICAL_TOTALS } from '../../data/flags';
+import { aiCopy } from '../../data/productai';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
@@ -15,6 +16,7 @@ const info = getLocale(code);
 const t = getMessages(code);
 const P = t.pages.pricing;
 const cost = t.faq.items[4];
+const AI = aiCopy(code).pricingNote;
 ---
 <PageShell code={code} page="pricing" title={P.title} description={P.desc}>
   <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
@@ -31,6 +33,11 @@ const cost = t.faq.items[4];
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" /><path d="M3.5 10h17M7 14.5h3" /></svg><div><h2>{t.plans.credits.title}</h2><p>{t.plans.credits.text}</p></div></div>
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5h16M7 15V11M12 15V7M17 15v-2.5" /></svg><div><h2>{t.plans.estimate.title}</h2><p>{t.plans.estimate.text}</p>{TYPICAL_TOTALS?.[code] && <p class="pfact-x">{TYPICAL_TOTALS[code]}</p>}</div></div>
         </div>
+    <a class="pai" href={subPath(info, 'features/ai')} data-ph="ai_features_click" data-ph-location="pricing">
+      <span class="pai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z" /></svg></span>
+      <span class="pai-t"><b>{AI.title}</b><span>{AI.text}</span></span>
+      <span class="pai-l">{AI.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+    </a>
     <p class="pg-note">{t.plans.text}</p>
     <p class="pg-note pg-free">{t.plans.freeNote}</p>
     <div class="pg-prose" style="margin-top:64px">

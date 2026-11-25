@@ -163,6 +163,18 @@
 .d1-more svg { width: 17px; height: 17px; stroke-width: 2; transition: transform 200ms var(--e); }
 @media (hover: hover) { .d1-more:hover svg { transform: translateX(3px); } }
 
+/* 5. AI in the product: a card that leads to /features/ai/ (what the team can add later, on request) */
+.d1-ai { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; margin-top: 32px; padding: 22px 26px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); color: var(--text); text-decoration: none; transition: border-color 250ms var(--e), transform 300ms var(--e); }
+.d1-ai-i { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: color-mix(in srgb, var(--accent) 11%, var(--surface)); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
+.d1-ai-i svg { width: 22px; height: 22px; }
+.d1-ai-t { display: grid; gap: 4px; }
+.d1-ai-t b { font-size: 18px; letter-spacing: -0.012em; }
+.d1-ai-t span { font-size: 15.5px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+.d1-ai-l { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.d1-ai-l svg { width: 17px; height: 17px; stroke-width: 2; transition: transform 200ms var(--e); }
+@media (hover: hover) { .d1-ai:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); } .d1-ai:hover .d1-ai-l svg { transform: translateX(3px); } }
+@media (max-width: 640px) { .d1-ai { grid-template-columns: auto minmax(0, 1fr); padding: 20px; } .d1-ai-l { grid-column: 2; } }
+
 @media (max-width: 1100px) { .d1-list ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } .d1-list li:nth-child(n + 3) { border-top: 1px solid var(--line); } }
 @media (max-width: 640px) {
   .d1-list { padding: 18px 18px 4px; border-radius: 20px; }
@@ -200,7 +212,7 @@
 .d1-mo .d1-list li:not(.on) .d1-ck { background: transparent; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--text) 22%, transparent); transform: scale(0.88); }
 .d1-mo .d1-list li:not(.on) .d1-ck svg { stroke-dashoffset: 20; }
 .d1-mo .d1-list li:not(.on) > div { opacity: 0.45; }
-@media (prefers-reduced-motion: reduce) { .d1 *, .d1 *::before { transition: none !important; } .d1-more:hover svg, .st-cap a:hover svg { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .d1 *, .d1 *::before { transition: none !important; } .d1-more:hover svg, .st-cap a:hover svg, .d1-ai:hover .d1-ai-l svg { transform: none; } }
 @media print { .d1-mo .d1-rv, .d1-mo .st-f, .d1-mo .d1-list li > div { opacity: 1 !important; transform: none !important; } }
 
 /* /day-one/ page around the section */
