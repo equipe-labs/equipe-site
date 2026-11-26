@@ -19,7 +19,7 @@ const P = t.pages.pricing;
 const cost = t.faq.items[4];
 const AI = aiCopy(code).pricingNote;
 ---
-<PageShell code={code} page="pricing" title={P.title} description={P.desc}>
+<PageShell code={code} page="pricing" title={P.title} description={P.desc} image={`/og/v2/pricing-${info.slug || 'en'}.png`} imageAlt={`equipe — ${P.lead}`}>
   <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
   <FaqJsonLd slot="head" lang={info.lang} faqs={[cost, ...t.plans.faq]} />
   <section class="pg-h pr-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>

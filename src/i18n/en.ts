@@ -10,7 +10,7 @@ export const en = {
     ogTitle: 'equipe — A startup team for one person',
     ogDescription:
       'Take what you built in Claude to a real service. A PM, engineers, a designer, QA and a data analyst build, ship and grow it. You approve.',
-    ogImageAlt: 'equipe — A startup team for one person. You approve. The team builds, ships and grows it.',
+    ogImageAlt: 'equipe — Your AI team runs your business. Set the goal. The team builds, launches and grows it. No coding needed.',
   },
   ui: {
     skip: 'Skip to content',

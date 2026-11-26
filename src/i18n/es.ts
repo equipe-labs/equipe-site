@@ -8,7 +8,7 @@ const es: Messages = {
     ogTitle: 'equipe — Un equipo de startup para una sola persona',
     ogDescription:
       'Lleva lo que hiciste en Claude a un servicio real. Un PM, ingenieros, un diseñador, QA y un analista de datos lo construyen, lo publican y lo hacen crecer. Tú apruebas.',
-    ogImageAlt: 'equipe — Un equipo de startup para una sola persona. Tú apruebas. El equipo lo construye, lo publica y lo hace crecer.',
+    ogImageAlt: 'equipe — Tu equipo de IA lleva tu negocio. Tú pones la meta. El equipo construye, lanza y hace crecer. Sin programar.',
   },
   ui: {
     skip: 'Saltar al contenido',

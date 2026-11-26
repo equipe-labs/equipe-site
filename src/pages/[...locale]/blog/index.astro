@@ -39,7 +39,7 @@ const crumbs = {
   ],
 };
 ---
-<PageShell code={code} page="blog" title={ui.indexTitle} description={ui.indexDesc} langs={[...BLOG_LANGS]}>
+<PageShell code={code} page="blog" title={ui.indexTitle} description={ui.indexDesc} image={`/og/v2/blog-${info.slug || 'en'}.png`} imageAlt={`${ui.h1} — ${ui.lead}`} langs={[...BLOG_LANGS]}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />
     <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\\u003c')} />
