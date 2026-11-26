@@ -22,7 +22,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 const br = (s) => esc(s).replace(/\n/g, '<br>');
 const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Apple SD Gothic Neo','Pretendard Variable','Hiragino Sans','PingFang SC',system-ui,sans-serif";
 const WORDMARK = (await readFile('public/brand/wordmark.svg', 'utf8')).replace('<svg ', '<svg height="38" ').replace(/<title>.*?<\/title>/, '');
-const MARK = `<svg viewBox="0 0 100 100" width="52" height="52" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#2A2B31"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5"/></svg>`;
+const MARK = `<svg viewBox="0 0 100 100" width="52" height="52" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#2A2B31"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#2F5BEA"/></svg>`;
 // The web app's role marks (equipe-cloud runtime/agent/brand-assets.js ROLE_GLYPHS): 24px line icons.
 const GLYPHS = {
   pm: '<circle cx="12" cy="12" r="9.5"/><path d="m15.8 8.2-1.6 4.9a1.8 1.8 0 0 1-1.1 1.1l-4.9 1.6 1.6-4.9a1.8 1.8 0 0 1 1.1-1.1z"/>',
@@ -54,11 +54,11 @@ function page(lang, m, { h, sub, right, css = '' }) {
   .tiles { display: inline-flex; gap: 6px; }
   .tile { width: 38px; height: 38px; border-radius: 30%; display: grid; place-items: center; background: #FFFFFF; color: #363636; box-shadow: inset 0 0 0 1px #0000001A; }
   .tile svg { width: 21px; height: 21px; }
-  .tile.pm, .av.pm { background: #2F5BEA14; color: #2852DC; box-shadow: inset 0 0 0 1px #2F5BEA33; }
+  .tile.pm, .av.pm { background: #2F5BEA14; color: #2550D6; box-shadow: inset 0 0 0 1px #2F5BEA33; }
   .card { position: absolute; left: 640px; top: 60px; width: 488px; box-sizing: border-box; border-radius: 22px; background: #FFFFFF; box-shadow: 0 24px 60px -24px #15161A40, 0 2px 8px #15161A12, 0 0 0 1px #0000001A; }
   .av { width: 32px; height: 32px; flex: none; border-radius: 30%; display: grid; place-items: center; background: #F4F4F4; color: #363636; box-shadow: inset 0 0 0 1px #0000001A; }
   .av svg { width: 18px; height: 18px; }
-  .btn { flex: none; font-size: 15px; font-weight: 600; color: #FFFFFF; background: #2F5BEA; padding: 8px 15px; border-radius: 10px; box-shadow: 0 1px 2px #1E3A8A33; }
+  .btn { flex: none; font-size: 15px; font-weight: 600; color: #FFFFFF; background: #2F5BEA; padding: 8px 15px; border-radius: 10px; box-shadow: 0 1px 2px #1E44C433; }
   .mu { color: #5D5D5D; }
   ${css}
   </style></head><body>

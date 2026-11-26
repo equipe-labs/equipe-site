@@ -30,7 +30,7 @@ const ja: DesignText = {
     tableSub: 'equipe.im 自身のトークンのサンプルです。エンジン公開までは数値は仮のものです。',
     th: ['トークン', '値', '使う場所'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'ボタンとリンク' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: 'ボタンとリンク' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'ページ背景' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'カード' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: '本文' },

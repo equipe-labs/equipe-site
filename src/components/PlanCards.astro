@@ -107,7 +107,7 @@ const data = JSON.stringify({
 
   .tp-ctl { display: grid; gap: 10px; margin-top: 2px; }
   .tp-cycle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-  .tp-save { font-size: 13px; font-weight: 600; color: var(--accent); transition: opacity 220ms cubic-bezier(0.2, 0.7, 0.2, 1); opacity: 0.72; }
+  .tp-save { font-size: 13px; font-weight: 600; color: var(--accent-text); transition: opacity 220ms cubic-bezier(0.2, 0.7, 0.2, 1); opacity: 0.72; }
   .tp-save.bf { padding: 3px 10px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 12%, transparent); opacity: 1; }
   .plan-p .tp-was { align-self: center; margin-right: 10px; font-size: 24px; font-weight: 500; color: var(--muted); text-decoration-thickness: 2px; font-variant-numeric: tabular-nums; }
   .plan-p .tp-was[hidden] { display: none; }
@@ -129,11 +129,11 @@ const data = JSON.stringify({
   .seg button[aria-checked='true'] { color: var(--text); }
   .seg-tiers button[aria-checked='true'] { color: var(--on-accent); }
   .seg button:hover:not([aria-checked='true']) { color: var(--text); }
-  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; z-index: 1; }
+  .seg button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; z-index: 1; }
   .seg-tiers button:focus-visible { outline-offset: 3px; }
   .tp-dot { position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
   .seg-tiers button[aria-checked='true'] .tp-dot { background: var(--on-accent); }
-  .tp-hint { margin: 0; min-height: 1.4em; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--accent); transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .tp-hint { margin: 0; min-height: 1.4em; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--accent-text); transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
   .tp-hint:empty { opacity: 0; }
   .tp-help { margin: 2px 0 0; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--text) 4%, var(--surface));
     font-size: 14px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }

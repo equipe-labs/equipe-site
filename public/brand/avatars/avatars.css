@@ -1,9 +1,9 @@
 /* equipe role avatars (Apple-style): a circle with a soft vertical gradient, a 1px top highlight, a faint bottom shade, a white glyph centred.
    Sizes 20/28/40/64 via --eq-av-size. Glyphs: roles.svg (symbols eq-role-*). */
-.eq-av { --t: #5B86FF; --b: #2F57D8; --cut: var(--b); display: inline-flex; align-items: center; justify-content: center; width: var(--eq-av-size, 28px); height: var(--eq-av-size, 28px); border-radius: 50%; flex: none; line-height: 0;
+.eq-av { --t: #6D8CF0; --b: #2F5BEA; --cut: var(--b); display: inline-flex; align-items: center; justify-content: center; width: var(--eq-av-size, 28px); height: var(--eq-av-size, 28px); border-radius: 50%; flex: none; line-height: 0;
   background: linear-gradient(180deg, var(--t), var(--b)); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), inset 0 -1px 0 rgb(0 0 0 / 0.12); }
 .eq-av > svg { width: 60%; height: 60%; display: block; }
-.eq-av--pm { --t: #5B86FF; --b: #2F57D8; }
+.eq-av--pm { --t: #6D8CF0; --b: #2F5BEA; }
 .eq-av--engineer { --t: #4FC3D9; --b: #1E8FA8; }
 .eq-av--designer { --t: #8E7CFF; --b: #5B45E0; }
 .eq-av--qa { --t: #4CD787; --b: #22A35A; }

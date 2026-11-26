@@ -13,7 +13,7 @@ const only = process.argv[2];
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Apple SD Gothic Neo','Hiragino Sans','PingFang SC',system-ui,sans-serif";
 const WORDMARK = (await readFile('public/brand/wordmark.svg', 'utf8')).replace('<svg ', '<svg height="46" ');
-const MARK = `<svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="22" fill="#2A2B31"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#3F6FF5"/></svg>`;
+const MARK = `<svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="22" fill="#2A2B31"/><path fill="#EFEDE7" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="#2F5BEA"/></svg>`;
 
 function card(lang, title, kicker, tags) {
   const cjk = lang === 'ko';
@@ -22,9 +22,9 @@ function card(lang, title, kicker, tags) {
   html, body { margin: 0; width: ${W}px; height: ${H}px; overflow: hidden; }
   body { font-family: ${SANS}; color: #15161A; background: #F6F5F1; position: relative; -webkit-font-smoothing: antialiased; }
   .grid { position: absolute; inset: 0; background-image: linear-gradient(to right, #0A0A0C12 1px, transparent 1px), linear-gradient(to bottom, #0A0A0C12 1px, transparent 1px); background-size: 30px 30px; -webkit-mask-image: radial-gradient(80% 90% at 20% 30%, #000, transparent 75%); }
-  .glow { position: absolute; right: -120px; top: -160px; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(closest-side, #1D4ED81F, transparent); }
+  .glow { position: absolute; right: -120px; top: -160px; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(closest-side, #2F5BEA1F, transparent); }
   .brand { position: absolute; left: 72px; top: 60px; display: flex; align-items: center; gap: 16px; }
-  .k { position: absolute; right: 72px; top: 70px; font: 600 22px ui-monospace, 'SF Mono', Menlo, monospace; color: #1D4ED8; }
+  .k { position: absolute; right: 72px; top: 70px; font: 600 22px ui-monospace, 'SF Mono', Menlo, monospace; color: #2F5BEA; }
   h1 { position: absolute; left: 72px; right: 72px; top: 190px; margin: 0; font-size: ${size}px; line-height: ${cjk ? 1.22 : 1.06}; letter-spacing: ${cjk ? '-0.02em' : '-0.04em'}; font-weight: 700; word-break: keep-all; text-wrap: balance; }
   .t { position: absolute; left: 72px; bottom: 56px; display: flex; gap: 10px; }
   .t span { font-size: 22px; font-weight: 600; color: #4F5159; border: 1.5px solid #0A0A0C2E; border-radius: 99px; padding: 6px 16px; }

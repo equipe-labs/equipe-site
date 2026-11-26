@@ -30,7 +30,7 @@ const de: DesignText = {
     tableSub: 'Ein Muster: die Tokens von equipe.im selbst. Die Zahlen sind Platzhalter, bis die Engine erscheint.',
     th: ['Token', 'Wert', 'Verwendet für'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Buttons und Links' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: 'Buttons und Links' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Seitenhintergrund' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Karten' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Fließtext' },

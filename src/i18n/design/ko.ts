@@ -30,7 +30,7 @@ const ko: DesignText = {
     tableSub: 'equipe.im 자체 토큰 샘플이에요. 엔진이 나오기 전까지 숫자는 자리표시예요.',
     th: ['토큰', '값', '쓰는 곳'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: '버튼·링크' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: '버튼·링크' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: '페이지 배경' },
       { token: 'radius.card', value: '12px', swatch: '', use: '카드' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: '본문 글' },

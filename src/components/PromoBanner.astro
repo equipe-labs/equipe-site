@@ -31,17 +31,17 @@ const v = { first: usd(PROMO.firstYear), mo: perMonth(PROMO.firstYear), month: u
 <style is:global>
   .bfb { display: flex; align-items: flex-start; gap: 16px; max-width: 940px; margin: 0 auto 40px; padding: 20px 20px 20px 22px; border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line)); border-radius: 20px;
     background: color-mix(in srgb, var(--accent) 6%, var(--surface)); color: var(--text); text-align: left; overflow: hidden; animation: bfbIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-  .bfb-ic { flex: none; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); }
+  .bfb-ic { flex: none; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent-text); }
   .bfb-ic svg, .bfb-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .bfb-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
   .bfb-t b { font-size: 17px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; text-wrap: pretty; }
   .bfb-t span { font-size: 15px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
-  .bfb-cd { font-size: 13.5px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .bfb-cd { font-size: 13.5px; font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
   .bfb-act { flex: none; display: flex; align-items: center; gap: 8px; }
   .bfb-go { white-space: nowrap; }
   .bfb-x { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center; background: transparent; color: var(--muted); cursor: pointer; }
   .bfb-x:hover { background: color-mix(in srgb, var(--text) 7%, transparent); color: var(--text); }
-  .bfb-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .bfb-x:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
   .bfb.out { animation: bfbOut 320ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
   @keyframes bfbIn { from { opacity: 0; transform: translateY(-6px); } }
   @keyframes bfbOut { to { opacity: 0; transform: translateY(-6px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; border-width: 0; } }

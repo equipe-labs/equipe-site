@@ -30,7 +30,7 @@ const zhCN: DesignText = {
     tableSub: 'equipe.im 自己的令牌示例。引擎发布前，数值都是占位。',
     th: ['令牌', '值', '用在哪'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: '按钮和链接' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: '按钮和链接' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: '页面背景' },
       { token: 'radius.card', value: '12px', swatch: '', use: '卡片' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: '正文' },

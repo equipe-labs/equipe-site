@@ -30,7 +30,7 @@ const es: DesignText = {
     tableSub: 'Un ejemplo: los tokens de equipe.im. Los números son provisionales hasta que salga el motor.',
     th: ['Token', 'Valor', 'Se usa en'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Botones y enlaces' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: 'Botones y enlaces' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Fondo de página' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Tarjetas' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Texto de cuerpo' },

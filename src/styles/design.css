@@ -13,7 +13,7 @@ header.site:not([data-site-header]) nav a.cur { color: var(--text); }
 /* hover, as on the home header (landing.css T-266 #20): pointer-only */
 @media (hover: hover) {
   .btn { transition: background-color 150ms, border-color 150ms, color 150ms; }
-  .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--text)); border-color: color-mix(in srgb, var(--accent) 86%, var(--text)); color: var(--on-accent); }
+  .btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); }
   header.site:not([data-site-header]) nav a:not(.btn):hover { color: var(--text); text-decoration: underline; text-decoration-thickness: 1.5px; }
 }
 .dz { padding-bottom: var(--section-y); }
@@ -23,7 +23,7 @@ header.site:not([data-site-header]) nav a.cur { color: var(--text); }
 .dz-tabs a { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 var(--s-4); border: var(--bw-1) solid var(--line); border-radius: 99px; background: var(--surface); color: var(--text); font: 500 15px var(--sans); text-decoration: none; }
 .dz-tabs a[aria-current='page'] { background: var(--text); color: var(--bg); border-color: var(--text); }
 .dz-note { margin: var(--s-4) 0 0; font: 400 14px/1.5 var(--sans); color: var(--muted); max-width: none; }
-.dz-note strong { color: var(--accent); font-weight: 600; }
+.dz-note strong { color: var(--accent-text); font-weight: 600; }
 
 .dz { word-break: keep-all; overflow-wrap: anywhere; }
 :lang(ko) .dz { line-height: 1.65; }
@@ -35,7 +35,7 @@ header.site:not([data-site-header]) nav a.cur { color: var(--text); }
 .dz h1.sm { font-size: clamp(32px, 4.2vw, 48px); }
 .dz h2 { font-size: 30px; line-height: 1.2; margin-bottom: var(--s-2); }
 @media (max-width: 640px) { .dz h2 { font-size: 25px; } }
-.dz .eb { font: 600 14px var(--sans); color: var(--accent); margin-bottom: var(--s-4); }
+.dz .eb { font: 600 14px var(--sans); color: var(--accent-text); margin-bottom: var(--s-4); }
 .dz .lead { color: var(--muted); font-size: 19px; max-width: 640px; margin-bottom: var(--s-5); }
 @media (max-width: 640px) { .dz .lead { font-size: 17px; } }
 .dz .sub { color: var(--muted); max-width: 640px; margin-bottom: var(--s-5); }
@@ -45,7 +45,7 @@ header.site:not([data-site-header]) nav a.cur { color: var(--text); }
 
 .dz .card { background: var(--surface); border-radius: 14px; padding: 22px; border: var(--bw-1) solid var(--line); }
 .dz .card p { margin: 0; color: var(--muted); font-size: 15px; }
-.dz .n { font: 700 14px var(--sans); color: var(--accent); margin-bottom: 10px; }
+.dz .n { font: 700 14px var(--sans); color: var(--accent-text); margin-bottom: 10px; }
 .dz .flow { display: grid; grid-template-columns: 1fr 36px 1fr 36px 1fr; align-items: stretch; }
 .dz .ar { display: grid; place-items: center; color: var(--muted); font-size: 22px; }
 @media (max-width: 700px) { .dz .flow { grid-template-columns: 1fr; } .dz .ar { transform: rotate(90deg); height: 28px; } }

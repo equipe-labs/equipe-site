@@ -20,7 +20,7 @@ main.pg .blog-h h1 { max-width: 20ch; font-size: clamp(34px, 4.6vw, 56px); overf
 .post-meta span + span::before { content: '·'; margin-right: 14px; opacity: 0.55; }
 
 /* ---- Topic colours (covers, chips) ------------------------------------------------------ */
-[data-cat='compare'] { --cv: #3F6FF5; }
+[data-cat='compare'] { --cv: #2F5BEA; }
 [data-cat='money'] { --cv: #D98324; }
 [data-cat='safety'] { --cv: #23966A; }
 [data-cat='grow'] { --cv: #7C5CE6; }
@@ -206,7 +206,7 @@ main.pg .post-body h2 { font-size: clamp(25px, 2.8vw, 32px); margin-top: 2.1em; 
 .post-body h3 { font-size: 20px; margin-top: 1.7em; scroll-margin-top: 140px; }
 @media (min-width: 1040px) { main.pg .post-body h2, .post-body h3 { scroll-margin-top: 88px; } }
 .post-body a { text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); transition: text-decoration-color 180ms var(--ease); }
-.post-body a:hover { text-decoration-color: var(--accent); }
+.post-body a:hover { text-decoration-color: var(--accent-text); }
 .post-body ul, .post-body ol { list-style: revert; padding-left: 1.4em; display: grid; gap: 0.5em; }
 .post-body li::marker { color: var(--muted); }
 .post-body strong { font-weight: 650; }

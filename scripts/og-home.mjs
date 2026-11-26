@@ -4,7 +4,7 @@
 //   Right: the web app's team chat, bleeding off the edge: the progress strip (Plan, Make, Check, Live), the PM's reply
 //   and the plan card with each member's steps. The shop is Tidepool Ceramics, the live demo at tidepool.equipe.page;
 //   the words are an example and carry no numbers.
-// Colours are the web app's light tokens (equipe-cloud web/src STYLE :root): action #2F5BEA, accent #2852DC, text
+// Colours are the web app's light tokens (equipe-cloud web/src STYLE :root): action #2F5BEA, accent #2550D6, text
 // #0D0D0D, muted #5D5D5D, line #0000001A. Role marks: runtime/agent/brand-assets.js ROLE_GLYPHS, neutral, PM in blue.
 // Product words (strip steps, role names, "n of m") follow runtime/agent/locales/*.json.
 // Chrome draws at 2x and the result is scaled down to 1200x630, so text stays crisp and the file stays small enough for
@@ -59,7 +59,7 @@ function home(lang, m, c) {
   html, body { margin: 0; width: ${W}px; height: ${H}px; overflow: hidden; }
   * { box-sizing: border-box; }
   body { font-family: ${SANS}; color: #FFFFFF; position: relative; -webkit-font-smoothing: antialiased; letter-spacing: -0.011em;
-    background: radial-gradient(120% 90% at 85% 0%, #4A72F0 0%, ${BLUE} 45%, #2A52DC 100%); }
+    background: radial-gradient(120% 90% at 85% 0%, #4E74ED 0%, ${BLUE} 45%, #2550D6 100%); }
   .brand { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 14px; }
   .l { position: absolute; left: 72px; top: 170px; width: 470px; }
   h1 { margin: 0; font-size: 76px; line-height: ${cjk ? 1.14 : 1.0}; font-weight: 700; letter-spacing: ${cjk ? '-0.03em' : '-0.045em'}; word-break: ${lang === 'ja' ? 'auto-phrase' : 'keep-all'}; text-wrap: balance; }
@@ -71,13 +71,13 @@ function home(lang, m, c) {
   .bar b { margin-left: 16px; font-size: 18px; font-weight: 600; }
   .tile { width: 30px; height: 30px; flex: none; border-radius: 30%; display: grid; place-items: center; background: #F4F4F4; color: #363636; box-shadow: inset 0 0 0 1px #0000001A; }
   .tile svg { width: 17px; height: 17px; }
-  .tile.pm { background: #EEF2FD; color: #2852DC; box-shadow: inset 0 0 0 1px #2852DC40; }
+  .tile.pm { background: #EEF2FD; color: #2550D6; box-shadow: inset 0 0 0 1px #2550D640; }
   .prog { padding: 16px 24px; border-bottom: 1px solid #0000001A; }
   .prog .t { font-size: 16px; font-weight: 600; } .prog .s { font-size: 14px; color: #5D5D5D; margin: 2px 0 14px; }
   .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .seg i { display: block; height: 4px; border-radius: 4px; background: #0000001A; }
-  .seg.on i { background: #2852DCAA; } .seg.cur i { background: linear-gradient(90deg, #2852DCAA, ${BLUE}); }
-  .seg span { display: block; margin-top: 7px; font-size: 13.5px; color: #5D5D5D; } .seg.cur span { color: #2852DC; font-weight: 600; }
+  .seg.on i { background: #2550D6AA; } .seg.cur i { background: linear-gradient(90deg, #2550D6AA, ${BLUE}); }
+  .seg span { display: block; margin-top: 7px; font-size: 13.5px; color: #5D5D5D; } .seg.cur span { color: #2550D6; font-weight: 600; }
   .body { padding: 20px 24px; }
   .who { display: flex; align-items: center; gap: 9px; margin: 0 0 6px; font-size: 15px; } .who b, .mr b { font-weight: 600; } .r { color: #5D5D5D; }
   .msg { font-size: 15.5px; line-height: 1.45; margin: 0 0 16px; max-width: 470px; word-break: keep-all; }
@@ -91,7 +91,7 @@ function home(lang, m, c) {
   .step.now { background: #2F5BEA14; color: #0D0D0D; font-weight: 600; }
   .ck, .sp, .ring { width: 18px; height: 18px; flex: none; margin-left: 6px; display: grid; place-items: center; border-radius: 50%; }
   .ck { background: #F4F4F4; box-shadow: inset 0 0 0 1px #0000001A; color: #363636; } .ck svg { width: 11px; height: 11px; }
-  .sp { border: 2px solid #2852DC33; border-top-color: ${BLUE}; transform: rotate(30deg); }
+  .sp { border: 2px solid #2550D633; border-top-color: ${BLUE}; transform: rotate(30deg); }
   .ring { border: 1.6px solid #5D5D5D; }
   </style></head><body>
   <div class="brand">${MARK}${WORDMARK}</div>

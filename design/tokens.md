@@ -4,6 +4,20 @@
 
 사이트는 `tokens.json`의 역할 일부를 `src/styles/global.css`의 CSS 변수로 옮겨 쓴다. 새 역할은 여기 먼저 적고, 값은 `tokens.json`에서 그대로 가져온다(사이트용 값을 따로 만들지 않는다).
 
+### 브랜드 파랑 `--accent`·`--accent-text` (2026-11-27)
+
+equipe의 브랜드 색은 하나, `#2F5BEA`(app.equipe.im 충전 버튼의 파랑). 앱(equipe-cloud `runtime/agent/theme.js` BRAND)·ui.equipe.im·모바일과 같은 값.
+
+| 변수 | 라이트 | 다크 | 쓰임 |
+| --- | --- | --- | --- |
+| `--accent` | `#2F5BEA` | `#2F5BEA` | 채운 버튼·배지·점·진행 막대. 위 글자는 `--on-accent` `#FFFFFF`(5.5:1) |
+| `--accent-hover` / `--accent-press` | `#2550D6` / `#1E44C4` | 같음 | 채운 버튼의 hover·눌림 |
+| `--accent-text` | `#2F5BEA` (`--bg` 위 5.0:1, `--surface` 위 5.5:1) | `#97ADF4` (모든 다크 면 위 5:1 이상) | 글자·링크·아이콘·포커스 링 |
+| `--accent-bg` / `--accent-bg-strong` | `#2F5BEA` 8% / 14% | `#2F5BEA` 24% / 36% | 옅은 강조 배경 |
+
+- 다크에서 `#2F5BEA` 글자는 3.2:1로 작은 글자 기준 미달 — 글자는 `--accent-text`를 쓴다.
+- 다른 파랑(`#1D4ED8`·`#3F6FF5`·`#8FB0FF`·`#6F93FF` 등)은 쓰지 않는다. 고객 제품 예시(Stride 등)와 OS 화면 흉내(iOS·Android 기본색)는 예외.
+
 ### 오류색 `--err` (T-774)
 
 입력 오류 문구·잘못된 입력칸 테두리·대비 미달 표시처럼 "잘못됨·파괴적"을 알리는 글자와 선에 쓴다. 정본은 공용 시스템의 `color.err`.

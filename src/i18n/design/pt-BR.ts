@@ -30,7 +30,7 @@ const ptBR: DesignText = {
     tableSub: 'Um exemplo: os tokens do próprio equipe.im. Os números são provisórios até o motor sair.',
     th: ['Token', 'Valor', 'Usado em'],
     rows: [
-      { token: 'color.action.primary', value: '#1D4ED8', swatch: '#1D4ED8', use: 'Botões e links' },
+      { token: 'color.action.primary', value: '#2F5BEA', swatch: '#2F5BEA', use: 'Botões e links' },
       { token: 'color.bg.page', value: '#F6F5F1', swatch: '#F6F5F1', use: 'Fundo da página' },
       { token: 'radius.card', value: '12px', swatch: '', use: 'Cartões' },
       { token: 'font.body', value: 'SF Pro 16/1.5', swatch: '', use: 'Texto do corpo' },
