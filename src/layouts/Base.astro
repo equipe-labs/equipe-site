@@ -24,10 +24,10 @@ const { lang } = getLocale(Astro.props.locale);
 <!doctype html>
 <html lang={lang}>
   <head>
+    <BaseHead {...Astro.props} />
     {/* No broken pictures: a picture that does not load shows a soft placeholder in its own box (the same script equipe products get from the launch kit). */}
     <style is:inline data-eq-img set:html={"img[data-eq-x]{object-fit:fill!important;object-position:center!important}"} />
     <script is:inline data-eq-img set:html={"(function(d){if(d.__eqx)return;d.__eqx=1;function S(c,k,w,h){return'data:image/svg+xml,'+encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"'+(w||'100%')+'\" height=\"'+(h||'100%')+'\" fill=\"none\" stroke=\"'+c+'\"><rect width=\"100%\" height=\"100%\" fill=\"'+c+'\" opacity=\".08\"/><svg x=\"50%\" y=\"50%\" overflow=\"visible\"><g transform=\"scale('+k+')translate(-12-12)\" stroke-width=\"1.6\" opacity=\".45\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-5-5L5 21\"/></g></svg></svg>')}function X(i){var r=i.getBoundingClientRect(),w=r.width|0,h=r.height|0,c=getComputedStyle(i).color,k=Math.min(1,Math.max(.3,Math.min(w,h)/48))||1,p=i.parentNode;i.setAttribute('data-eq-x','');i.removeAttribute('srcset');p&&p.tagName=='PICTURE'&&[].forEach.call(p.children,function(e){e.removeAttribute('srcset')});w&&i.addEventListener('load',function(){r=i.getBoundingClientRect();if(Math.abs(r.width-w)+Math.abs(r.height-h)>2)i.src=S(c,k,w,h)},{once:1});i.src=S(c,k)}d.addEventListener('error',function(e){var i=e.target,s=i.src;i.tagName=='IMG'&&i.getAttribute('data-fb')!='under'&&setTimeout(function(){i.isConnected&&i.src==s&&!i.naturalWidth&&X(i)})},!0);function V(){[].forEach.call(d.images,function(i){i.complete&&!i.naturalWidth&&i.getAttribute('src')&&i.decode&&i.decode().catch(function(){i.naturalWidth||X(i)})})}d.addEventListener('DOMContentLoaded',V);addEventListener('load',V)})(document)"} />
-    <BaseHead {...Astro.props} />
     {/* No font preloads: San Francisco is the system font on Apple devices, and Pretendard (Korean) is fetched only where Apple SD Gothic Neo is missing. */}
     <slot name="head" />
     <script is:inline>
