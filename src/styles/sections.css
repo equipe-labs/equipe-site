@@ -130,19 +130,6 @@ main.home .hero .shot { padding-bottom: 200px; }
 
 /* ======== First screen, Lovable-like in our brand: a soft colour field, a centred headline, the idea box as the main element ======== */
 main.home > section.hero { padding: 0; overflow: hidden; isolation: isolate; min-height: min(860px, calc(100svh - 64px)); display: grid; align-items: center; }
-.field { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--bg); }
-.field i { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
-.field .f1 { width: 1100px; height: 700px; left: 50%; bottom: -380px; margin-left: -550px; background: radial-gradient(closest-side, #3F6FF5 0%, rgb(63 111 245 / 0.55) 45%, transparent 100%); opacity: 0.55; }
-.field .f2 { width: 700px; height: 520px; left: 8%; bottom: -260px; background: radial-gradient(closest-side, #8FB0FF, transparent); opacity: 0.55; }
-.field .f3 { width: 760px; height: 560px; right: 4%; bottom: -300px; background: radial-gradient(closest-side, #F2D9B8, transparent); opacity: 0.7; }
-:root[data-theme='dark'] .field .f1 { opacity: 0.42; } :root[data-theme='dark'] .field .f2 { background: radial-gradient(closest-side, #2B4A9E, transparent); opacity: 0.6; } :root[data-theme='dark'] .field .f3 { background: radial-gradient(closest-side, #3A3550, transparent); opacity: 0.7; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme]) .field .f1 { opacity: 0.42; } }
-html.mo .field .f1 { animation: drift1 22s ease-in-out infinite alternate; }
-html.mo .field .f2 { animation: drift2 26s ease-in-out infinite alternate; }
-html.mo .field .f3 { animation: drift3 30s ease-in-out infinite alternate; }
-@keyframes drift1 { to { transform: translate(60px, -40px) scale(1.08); } }
-@keyframes drift2 { to { transform: translate(120px, -60px) scale(1.12); } }
-@keyframes drift3 { to { transform: translate(-110px, -50px) scale(1.06); } }
 .hero .hc { display: grid; justify-items: center; text-align: center; padding-top: 72px; padding-bottom: 96px; }
 main.home .hero h1 { margin: 0; max-width: 14ch; font-size: clamp(46px, 7.2vw, 92px); line-height: 0.98; letter-spacing: -0.045em; }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home .hero h1 { max-width: 15em; font-size: clamp(40px, 6vw, 76px); line-height: 1.12; letter-spacing: -0.03em; }
@@ -303,7 +290,6 @@ main.home .hero .hbox, main.home .final .fbox { position: relative; z-index: 10;
 .st-prog > i > i { background: linear-gradient(90deg, #4F5FE8, #6D8BFF) !important; }
 .wa .wa-pi, .wa-stride-web .sw-logo i { background: radial-gradient(120% 140% at 0% 0%, #6D7CF7, #4F5FE8 55%, #3343C7) !important; }
 /* the colour field fades into the page instead of ending on a hard line */
-.field { -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
 
 /* ---- "See it work" composition: the window is the base; the phone overlaps its left edge by a fixed 64px and starts
    below the sidebar links; the metrics card hangs 24px below the window's right corner. Nothing crosses another card.
@@ -620,3 +606,89 @@ main.home > section.logos + section.see { padding-top: 120px; }
 /* Example chips wrap onto a second centred row on wider screens instead of scrolling with cut-off ends (long German/French examples) */
 @media (min-width: 701px) { main.home .idea.big .idea-chips { flex-wrap: wrap; overflow: visible; justify-content: center; row-gap: 8px; } }
 
+
+/* ======== First screen v3: calm ========
+   One headline, one line under it, the idea box, four goals and one quiet line of what the team does next. Nothing else
+   competes above the fold: no glow, no blur, no second note row. One 8 px rhythm: 24 between headline and line, 48 to the
+   box, 16 to the goals, 32 to the next-steps line. The box and the goal grid share one width and one left edge.
+   Composition after ui.equipe.im "Prompt Hero" (headline, prompt bar, suggestions) and 21st.dev "Suggestions"
+   (chatcn: cards in a two-column grid that stagger in once), restyled to equipe: full hairline borders, brand blue only
+   for focus and the picked goal. Light mode is white; dark keeps the soft palette. */
+:root:has(main.home):not([data-theme='dark']) { --bg: #FFFFFF; }
+@media (prefers-color-scheme: dark) { :root:has(main.home):not([data-theme]) { --bg: #17181C; } }
+html main.home > section.hero { min-height: clamp(560px, calc(100svh - 64px), 920px); display: flex; align-items: center; padding: 0; background: var(--bg); }
+main.home > section.hero > .hc { width: 100%; padding-top: clamp(24px, 3svh, 48px); padding-bottom: clamp(64px, 10svh, 112px); }
+main.home .hero h1 { max-width: 13ch; font-size: clamp(40px, min(5.4vw, 8.4svh), 80px); line-height: 1.04; letter-spacing: -0.032em; font-weight: 700; }
+:is(:lang(de), :lang(fr), :lang(es), :lang(pt-BR)) main.home .hero h1 { max-width: 15ch; font-size: clamp(36px, min(4.8vw, 7.6svh), 68px); }
+:is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home .hero h1 { max-width: 14em; font-size: clamp(34px, min(4.6vw, 7.4svh), 64px); line-height: 1.22; letter-spacing: -0.01em; }
+main.home .hero .hsub { margin-top: 24px; max-width: 31em; font-size: clamp(17px, 1.35vw, 19px); line-height: 1.55; font-weight: 400; color: var(--muted); }
+main.home .hero .hbox { max-width: 680px; margin-top: 48px; }
+
+/* the box: a full hairline, one soft shadow, no blur */
+main.home .idea.big { row-gap: 0; }
+main.home .idea.big .idea-box { border-radius: 24px; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 1px 2px rgb(16 18 24 / 0.04), 0 12px 32px -18px rgb(16 18 24 / 0.18); transition: border-color 160ms var(--ease), box-shadow 200ms var(--ease); }
+main.home .idea.big .idea-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent), 0 12px 32px -18px rgb(16 18 24 / 0.18); }
+:root[data-theme='dark'] main.home .idea.big .idea-box { background: var(--surface); border-color: #FFFFFF1F; box-shadow: 0 12px 32px -18px rgb(0 0 0 / 0.6); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) main.home .idea.big .idea-box { background: var(--surface); border-color: #FFFFFF1F; box-shadow: 0 12px 32px -18px rgb(0 0 0 / 0.6); } }
+main.home .idea.big textarea { min-height: 96px; padding: 20px 22px 4px; font-size: 18px; }
+main.home .idea.big .idea-ph { padding: 20px 22px 0; font-size: 18px; }
+main.home .idea.big .idea-tab { top: 21px; }
+main.home .idea.big .idea-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px 12px 14px; }
+main.home .idea.big .idea-l2 { min-width: 0; }
+.idea-r { display: flex; align-items: center; gap: 12px; flex: none; }
+.idea-free { display: inline-flex; align-items: center; font-size: 13px; line-height: 18px; color: var(--muted); white-space: nowrap; }
+.idea-free > span + span::before { content: '·'; margin: 0 6px; opacity: 0.7; }
+main.home .idea.big .idea-plus { width: 36px; height: 36px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); transition: color 160ms, border-color 160ms, background-color 160ms; }
+main.home .idea.big .idea-plus:hover { color: var(--text); border-color: color-mix(in srgb, var(--text) 28%, transparent); background: var(--surface); }
+main.home .idea.big .idea-send { width: 36px; height: 36px; }
+main.home .idea.big .idea-send.idle { background: color-mix(in srgb, var(--text) 10%, transparent); color: var(--muted); }
+
+/* goals: a 2 x 2 grid on the box's width, each a full-bordered button; the picked one turns brand blue */
+main.home .idea.big .idea-goals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+main.home .idea.big .idea-goal { display: flex; flex-direction: row; align-items: center; gap: 10px; min-width: 0; min-height: 48px; padding: 12px 16px 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: none; color: var(--text); font: 500 15px/1.35 var(--sans); letter-spacing: -0.005em; text-align: left; transition: border-color 160ms var(--ease), background-color 160ms var(--ease), transform 120ms var(--ease); }
+main.home .idea.big .idea-goal span { min-width: 0; text-wrap: pretty; }
+main.home .idea.big .idea-goal svg { width: 18px; height: 18px; stroke: var(--muted); }
+main.home .idea.big .idea-goal:hover { border-color: color-mix(in srgb, var(--text) 26%, transparent); background: color-mix(in srgb, var(--text) 3%, var(--surface)); }
+main.home .idea.big .idea-goal:active { transform: scale(0.985); }
+main.home .idea.big .idea-goal[aria-pressed='true'] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); box-shadow: inset 0 0 0 1px var(--accent); }
+main.home .idea.big .idea-goal[aria-pressed='true'] svg { stroke: var(--accent); }
+html.mo main.home .idea.big .idea-goal { animation: goal-in 420ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: calc(var(--i, 0) * 40ms + 300ms); }
+@keyframes goal-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* what the team does next: one quiet centred line */
+main.home .idea.big .idea-next { justify-content: center; gap: 4px 8px; margin: 32px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+main.home .idea.big .idea-next .nl { margin-right: 2px; color: var(--text); font-weight: 500; }
+main.home .idea.big .idea-next .sep { width: 13px; height: 13px; stroke: color-mix(in srgb, var(--muted) 65%, transparent); stroke-width: 2; }
+
+/* phones: start under the header, the goals stay a 2 x 2 grid (two lines each at most), the note keeps its first and last parts */
+@media (max-width: 700px) {
+  html main.home > section.hero { min-height: 0; display: block; padding: 0; }
+  main.home > section.hero > .hc { padding-top: 32px; padding-bottom: 56px; }
+  main.home .hero h1 { font-size: clamp(36px, 10.4vw, 44px); line-height: 1.06; }
+  :is(:lang(de), :lang(fr), :lang(es), :lang(pt-BR)) main.home .hero h1 { font-size: clamp(32px, 9vw, 40px); }
+  :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.home .hero h1 { font-size: clamp(30px, 8.6vw, 36px); }
+  main.home .hero .hsub { margin-top: 16px; font-size: 17px; }
+  main.home .hero .hbox { margin-top: 32px; }
+  main.home .idea.big textarea { min-height: 84px; padding: 16px 16px 4px; font-size: 17px; }
+  main.home .idea.big .idea-ph { padding: 16px 16px 0; font-size: 17px; }
+  main.home .idea.big .idea-bar { padding: 8px 10px 10px 12px; }
+  main.home .idea.big .idea-goals { margin-top: 12px; }
+  main.home .idea.big .idea-goal { gap: 10px; min-height: 60px; padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.35; }
+  main.home .idea.big .idea-goal span { text-wrap: wrap; }
+  main.home .idea.big .idea-goal svg { width: 16px; height: 16px; }
+  main.home .idea.big .idea-next { justify-content: center; margin-top: 24px; font-size: 13px; }
+  main.home .idea.big .idea-next .nl { flex-basis: 100%; text-align: center; margin: 0 0 2px; }
+  main.home .idea.big .idea-bar .idea-gslot { order: 0; }
+  .idea-free > span:nth-child(2) { display: none; }
+  /* a picked goal (or anything else beside +) takes the room the note had */
+  .idea-bar:has(.idea-gchip, .idea-l2 > :nth-child(3)) .idea-free { display: none; }
+}
+@media (max-width: 359px) { .idea-free { display: none; } }
+@media (prefers-reduced-motion: reduce) { main.home .idea.big .idea-goal, main.home .idea.big .idea-box { animation: none; transition: none; } }
+/* the closing band is dark in both themes: its goals and next-steps line keep light text */
+main.home .final .idea.big .idea-goal { color: #EFEDE7; background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }
+main.home .final .idea.big .idea-goal svg { stroke: #B9BAC0; }
+main.home .final .idea.big .idea-goal:hover { border-color: rgb(255 255 255 / 0.32); background: rgb(255 255 255 / 0.09); }
+main.home .final .idea.big .idea-goal[aria-pressed='true'] { border-color: #8FB0FF; background: rgb(143 176 255 / 0.14); box-shadow: inset 0 0 0 1px #8FB0FF; }
+main.home .final .idea.big .idea-goal[aria-pressed='true'] svg { stroke: #8FB0FF; }
+main.home .final .idea.big .idea-next, main.home .final .idea.big .idea-next .nl { color: #B9BAC0; }

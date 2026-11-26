@@ -145,7 +145,7 @@ const ja: Messages = {
     placeholder: "高い弁護士に頼まずにO-1ビザを申請できるよう手伝うサービス",
     examples: ["高い弁護士に頼まずにO-1ビザを申請できるよう手伝うサービス", "私のピラティススタジオの予約と会員制", "うちのベーカリーのケーキを店頭受け取りで販売", "営業電話をフォローアップメールに変える有料ツール"],
     goalsLabel: "または目標から始める",
-    goals: [{ key: "local", label: "地元のお店のお客さんを増やす", starter: "私のお店は" }, { key: "service", label: "自分のサービスをオンラインで売る", starter: "オンラインで売りたいサービスは" }, { key: "app", label: "有料アプリを出す", starter: "出したい有料アプリは" }, { key: "expert", label: "自分の専門知識を商品にする", starter: "私が詳しい分野は" }],
+    goals: [{ key: "service", label: "自分のサービスをオンラインで売る", starter: "オンラインで売りたいサービスは" }, { key: "app", label: "有料アプリを出す", starter: "出したい有料アプリは" }, { key: "store", label: "ネットショップを開く", starter: "ネットショップで売りたいものは" }, { key: "expert", label: "自分の専門知識を商品にする", starter: "私が詳しい分野は" }],
     siteGoal: "今のサイトを持ってくる",
     goalLine: "目標：{goal}",
     goalRemove: "目標を外す",

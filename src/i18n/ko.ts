@@ -145,7 +145,7 @@ const ko: Messages = {
     placeholder: "비싼 변호사 없이 O-1 비자 신청을 돕는 서비스",
     examples: ["비싼 변호사 없이 O-1 비자 신청을 돕는 서비스", "내 필라테스 스튜디오의 예약과 회원권", "우리 빵집 케이크를 픽업 주문으로 판매", "영업 통화를 후속 이메일로 바꿔 주는 유료 도구"],
     goalsLabel: "또는 목표에서 시작하기",
-    goals: [{ key: "local", label: "우리 동네 가게 손님 늘리기", starter: "제 가게는 " }, { key: "service", label: "내 서비스를 온라인으로 팔기", starter: "온라인으로 팔고 싶은 서비스는 " }, { key: "app", label: "유료 앱 출시하기", starter: "출시하고 싶은 유료 앱은 " }, { key: "expert", label: "내 전문 지식을 상품으로 만들기", starter: "제가 잘 아는 분야는 " }],
+    goals: [{ key: "service", label: "내 서비스를 온라인으로 팔기", starter: "온라인으로 팔고 싶은 서비스는 " }, { key: "app", label: "유료 앱 출시하기", starter: "출시하고 싶은 유료 앱은 " }, { key: "store", label: "온라인 스토어 열기", starter: "제 스토어에서 팔고 싶은 건 " }, { key: "expert", label: "내 전문 지식을 상품으로 만들기", starter: "제가 잘 아는 분야는 " }],
     siteGoal: "지금 사이트 가져오기",
     goalLine: "목표: {goal}",
     goalRemove: "목표 빼기",

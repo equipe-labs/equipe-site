@@ -150,7 +150,7 @@ export const en = {
     placeholder: "A service that helps people apply for O-1 visas without expensive lawyers",
     examples: ["A service that helps people apply for O-1 visas without expensive lawyers", "Bookings and memberships for my pilates studio", "Sell my bakery’s cakes for pickup", "A paid tool that turns sales calls into follow-up emails"],
     goalsLabel: "Or start from a goal",
-    goals: [{ key: "local", label: "Get more customers for my local business", starter: "My local business is " }, { key: "service", label: "Sell my service online", starter: "The service I want to sell online is " }, { key: "app", label: "Launch a paid app", starter: "I want to launch a paid app that " }, { key: "expert", label: "Turn my expertise into a product", starter: "I know a lot about " }],
+    goals: [{ key: "service", label: "Sell my service online", starter: "The service I want to sell online is " }, { key: "app", label: "Launch a paid app", starter: "I want to launch a paid app that " }, { key: "store", label: "Open an online store", starter: "In my store I want to sell " }, { key: "expert", label: "Turn my expertise into a product", starter: "I know a lot about " }],
     siteGoal: "Bring my existing site",
     goalLine: "Goal: {goal}",
     goalRemove: "Remove goal",

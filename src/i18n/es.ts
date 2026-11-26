@@ -145,7 +145,7 @@ const es: Messages = {
     placeholder: "Un servicio que ayuda a pedir la visa O-1 sin abogados caros",
     examples: ["Un servicio que ayuda a pedir la visa O-1 sin abogados caros", "Reservas y membresías para mi estudio de pilates", "Vender las tartas de mi panadería para recoger", "Una herramienta de pago que convierte llamadas de venta en correos de seguimiento"],
     goalsLabel: "O empieza con un objetivo",
-    goals: [{ key: "local", label: "Conseguir más clientes para mi negocio local", starter: "Mi negocio local es " }, { key: "service", label: "Vender mi servicio en línea", starter: "El servicio que quiero vender en línea es " }, { key: "app", label: "Lanzar una app de pago", starter: "Quiero lanzar una app de pago que " }, { key: "expert", label: "Convertir lo que sé en un producto", starter: "Sé mucho de " }],
+    goals: [{ key: "service", label: "Vender mi servicio en línea", starter: "El servicio que quiero vender en línea es " }, { key: "app", label: "Lanzar una app de pago", starter: "Quiero lanzar una app de pago que " }, { key: "store", label: "Abrir una tienda online", starter: "En mi tienda online quiero vender " }, { key: "expert", label: "Convertir lo que sé en un producto", starter: "Sé mucho de " }],
     siteGoal: "Traer mi sitio actual",
     goalLine: "Objetivo: {goal}",
     goalRemove: "Quitar objetivo",
