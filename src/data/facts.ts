@@ -52,7 +52,7 @@ export const FACTS: Record<'en' | 'ko', Facts> = fillPlanDeep({
         title: 'Pricing',
         items: [
           '1 credit equals 1 US dollar. Credit packs are $25, $50, $100 and $250, valid for 12 months. Unused credits are refundable within 14 days.',
-          'Free start: $5 of credit when you create your team, plus $10 when you add a card (no charge). No card is needed to start.',
+          'Free start: $5 of credit when you create your team, plus $10 when you add a card (no charge). No card is needed to start. Your first version is on us: if it needs more than that credit, equipe covers the rest.',
           'equipe has one paid plan, the Team plan: hosting for your sites, storage, 5 people and a monthly amount of credits the person chooses. The price shown is the total for that amount.',
           'Team plan prices per month: {{m0}} with no credits (keeps the product live), {{m1}} with {{c1}} of credits, {{m2}} with {{c2}}, {{m3}} with {{c3}}, {{m4}} with {{c4}}. Yearly applies to the base fee only: {{fromYear}} a year instead of {{m0}} a month (2 months free); the credits stay monthly at $1 = $1 and roll over for 3 months on a yearly plan.',
           'Plan credits are used at $1 = $1 and roll over for 2 months. The Team plan includes 5 people; each extra editor is $5 per month, up to 10 people per team.',

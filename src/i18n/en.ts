@@ -215,7 +215,7 @@ export const en = {
     title: 'Simple pricing',
     text: '1 credit = $1. Packs: $25, $50, $100 or $250, or $990 for $1,100 of credits. Credits last 12 months; unused credits are refundable within 14 days.',
     featured: 'Recommended',
-    free: { name: 'Start free', fit: 'For trying it out', price: '$0', per: 'to start', text: '$5 of credit when you create your team, +$10 when you add a card (no charge).', points: ['1 credit = $1', 'Credits pay for everything the team does', 'No card needed to start', '2 people on the team'], cta: 'Start free' },
+    free: { name: 'Start free', fit: 'For trying it out', price: '$0', per: 'to start', text: '$5 of credit when you create your team, +$10 when you add a card (no charge). Your first version is on us.', points: ['1 credit = $1', 'Credits pay for everything the team does', 'No card needed to start', '2 people on the team'], cta: 'Start free' },
     team: { name: 'Team', fit: 'For a product you keep live and growing', text: 'Hosting, storage and 5 people, plus the credits you choose each month.', points: ['Hosting for your sites, and storage', 'Your whole team: PM, engineers, designer, QA, data', '5 people included; each extra editor $5/month (up to 10)', 'View-only invites are free', 'Plan credits at $1 = $1, rolling over for 2 months', 'Credits are shared by the whole team'], cta: 'Get started' },
     whichTitle: 'One plan, your amount of credits.',
     whichText: 'Every Team plan keeps your product live with hosting, storage and 5 people. You choose how many credits arrive each month: none, to keep it live for {{m0}} a month, or {{c2}} for {{m2}} a month while you keep building. Change it any time.',
