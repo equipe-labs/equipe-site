@@ -152,6 +152,8 @@ const es: Messages = {
     ref: { toggle: "Como esta app", title: "Empezar desde una referencia", ph: "Enlace de App Store, Google Play o un sitio web", add: "Añadir", bad: "Pega el enlace de una app o un sitio web.", what: "¿Qué debe ser diferente?", whatPh: "Una versión en español para iglesias pequeñas", note: "Tu equipo crea un producto original con el mismo tipo de funciones, nunca con su nombre, logo o textos.", remove: "Quitar {name}", fail: "Sin vista previa, pero tu equipo lo leerá igual.", reading: "Leyendo el enlace…", max: "Hasta 4 referencias.", close: "Cerrar" },
     nextLabel: "Después, tu equipo",
     steps: ["Investigar", "Planear", "Construir y lanzar", "Primeros clientes"],
+    // One short line under each step in the hero step strip (same order as steps).
+    stepNotes: ["Mercado y competencia", "El PM escribe el plan", "En línea en tu dirección", "Posts, anuncios y análisis"],
     submit: 'Empezar',
     team: 'Todo el equipo',
     import: 'Importar un proyecto',

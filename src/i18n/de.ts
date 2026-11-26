@@ -152,6 +152,8 @@ const de: Messages = {
     ref: { toggle: "Wie diese App", title: "Mit einer Vorlage starten", ph: "Link aus App Store, Google Play oder einer Website", add: "Hinzufügen", bad: "Füge einen Link zu einer App oder Website ein.", what: "Was soll anders sein?", whatPh: "Eine deutsche Version für kleine Gemeinden", note: "Dein Team baut ein eigenes Produkt mit ähnlichen Funktionen, nie mit ihrem Namen, Logo oder Text.", remove: "{name} entfernen", fail: "Keine Vorschau, dein Team liest ihn trotzdem.", reading: "Link wird gelesen…", max: "Bis zu 4 Vorlagen.", close: "Schließen" },
     nextLabel: "Dann macht dein Team",
     steps: ["Recherche", "Plan", "Bauen & starten", "Erste Kunden"],
+    // One short line under each step in the hero step strip (same order as steps).
+    stepNotes: ["Markt und Konkurrenz", "Der PM schreibt den Plan", "Live unter deiner Adresse", "Posts, Anzeigen, Analysen"],
     submit: 'Loslegen',
     team: 'Ganzes Team',
     import: 'Projekt importieren',

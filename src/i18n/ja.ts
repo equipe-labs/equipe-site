@@ -152,6 +152,8 @@ const ja: Messages = {
     ref: { toggle: "このアプリのように", title: "参考のアプリやサイトから始める", ph: "App Store、Google Play、またはサイトのリンク", add: "追加", bad: "アプリかサイトのリンクを貼り付けてください。", what: "何を変えますか？", whatPh: "小さな教会向けの日本語版", note: "チームは同じ種類の機能を持つオリジナル製品を作ります。名前、ロゴ、文章は使いません。", remove: "{name}を外す", fail: "プレビューはありませんが、チームが読み込みます。", reading: "リンクを読み込み中…", max: "参考リンクは4つまでです。", close: "閉じる" },
     nextLabel: "そのあとチームがすること",
     steps: ["調査", "計画", "作って公開", "最初のお客さん"],
+    // One short line under each step in the hero step strip (same order as steps).
+    stepNotes: ["市場と競合を調べる", "PMが計画を立てる", "自分のアドレスで公開", "投稿・広告・分析まで"],
     submit: '始める',
     team: 'チーム全員',
     import: 'プロジェクトを取り込む',

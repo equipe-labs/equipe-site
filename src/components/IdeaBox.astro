@@ -75,7 +75,17 @@ const like = `<button type="button" class="idea-like" aria-expanded="false" aria
   <div class="idea-goals" role="group" aria-label={p.goalsLabel}>
     {p.goals.map((g, i) => <button type="button" class="idea-goal" data-goal={g.key} aria-pressed="false" style={`--i:${i}`}><Fragment set:html={GI[g.key]} /><span>{g.label}</span></button>)}
   </div>
-  <p class="idea-next"><span class="nl">{p.nextLabel}</span>{p.steps.map((s, i) => <>{i > 0 && <svg class="sep" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>}<span>{s}</span></>)}</p>
+  {location === 'hero' ? (
+    /* The hero's step strip: four numbered steps on one connector; the brand fill runs along it and lights each step in turn. */
+    <div class="flow" role="group" aria-labelledby={`${id}-flow`}>
+      <p class="flow-h" id={`${id}-flow`}>{p.nextLabel}</p>
+      <ol class="flow-s">
+        {p.steps.map((s, i) => <li style={`--i:${i}`}><span class="fm" aria-hidden="true">{i + 1}</span><span class="ft"><b>{s}</b><small>{p.stepNotes[i]}</small></span></li>)}
+      </ol>
+    </div>
+  ) : (
+    <p class="idea-next"><span class="nl">{p.nextLabel}</span>{p.steps.map((s, i) => <>{i > 0 && <svg class="sep" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>}<span>{s}</span></>)}</p>
+  )}
   {!big && <p class="idea-note">{p.note}</p>}
 </form>
 

@@ -692,3 +692,86 @@ main.home .final .idea.big .idea-goal:hover { border-color: rgb(255 255 255 / 0.
 main.home .final .idea.big .idea-goal[aria-pressed='true'] { border-color: #97ADF4; background: rgb(47 91 234 / 0.24); box-shadow: inset 0 0 0 1px #97ADF4; }
 main.home .final .idea.big .idea-goal[aria-pressed='true'] svg { stroke: #97ADF4; }
 main.home .final .idea.big .idea-next, main.home .final .idea.big .idea-next .nl { color: #B9BAC0; }
+
+/* ---- hero glow: a soft equipe-blue light under the idea box (radial gradients only: no images, no blur filter).
+   The mask fades it in from the top and out before the hero ends, so it never shows an edge. ---- */
+main.home > section.hero { position: relative; isolation: isolate; }
+main.home > section.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(42% 40% at 50% 70%, rgb(47 91 234 / 0.20), transparent 72%),
+    radial-gradient(28% 32% at 18% 74%, rgb(151 173 244 / 0.26), transparent 70%),
+    radial-gradient(28% 32% at 82% 68%, rgb(47 91 234 / 0.12), transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 72%, transparent 100%);
+}
+:root[data-theme='dark'] main.home > section.hero::before {
+  background:
+    radial-gradient(42% 40% at 50% 70%, rgb(47 91 234 / 0.32), transparent 72%),
+    radial-gradient(28% 32% at 18% 74%, rgb(47 91 234 / 0.18), transparent 70%),
+    radial-gradient(28% 32% at 82% 68%, rgb(151 173 244 / 0.09), transparent 70%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) main.home > section.hero::before {
+    background:
+      radial-gradient(42% 40% at 50% 70%, rgb(47 91 234 / 0.32), transparent 72%),
+      radial-gradient(28% 32% at 18% 74%, rgb(47 91 234 / 0.18), transparent 70%),
+      radial-gradient(28% 32% at 82% 68%, rgb(151 173 244 / 0.09), transparent 70%);
+  }
+}
+@media (max-width: 640px) { main.home > section.hero::before { background-size: 160% 100%; background-position: 50% 0; } }
+/* It breathes slowly (opacity only, so the compositor does the work); reduced motion keeps it still. */
+html.mo main.home > section.hero::before { animation: hero-glow 9s ease-in-out infinite alternate; }
+@keyframes hero-glow { from { opacity: 0.72; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { html.mo main.home > section.hero::before { animation: none; } }
+
+/* ---- hero step strip: what the team does next, four numbered steps on one connector ----
+   Pattern from ui.equipe.im (features/how-it-works-steps: numbered markers on a shared line) and 21st.dev "Steps"
+   (adit-firdaus: a track whose fill grows step by step, the current marker carries a halo). */
+main.home .idea.big .flow { margin: 32px 0 0; padding: 18px 20px 20px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--surface) 72%, transparent); -webkit-backdrop-filter: saturate(1.2); backdrop-filter: saturate(1.2); }
+main.home .flow-h { margin: 0 0 16px; font-size: 13px; line-height: 18px; font-weight: 500; color: var(--muted); text-align: center; }
+main.home .flow-s { --mk: 28px; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+/* The connector: a hairline track from the first marker's centre to the last one's, and the brand fill over it. */
+main.home .flow-s::before, main.home .flow-s::after { content: ''; position: absolute; top: calc(var(--mk) / 2 - 1px); left: 12.5%; right: 12.5%; height: 2px; border-radius: 2px; }
+main.home .flow-s::before { background: var(--line); }
+main.home .flow-s::after { background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent-text))); transform-origin: 0 50%; }
+main.home .flow-s li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; text-align: center; }
+main.home .flow .fm { position: relative; z-index: 1; display: grid; place-items: center; width: var(--mk); height: var(--mk); border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); background: var(--surface); color: var(--accent-text); font: 600 12.5px/1 var(--sans); font-variant-numeric: tabular-nums; transition: background-color 300ms, color 300ms, box-shadow 300ms; }
+main.home .flow .ft { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+main.home .flow .ft b { font-size: 14px; line-height: 19px; font-weight: 600; color: var(--text); letter-spacing: -0.005em; }
+main.home .flow .ft small { font-size: 12.5px; line-height: 17px; color: var(--muted); }
+/* Motion: the fill runs the line in 6 s, each marker lights for its quarter of the 8 s loop. Without motion the line is
+   simply full and every marker shows the brand tint. */
+main.home .flow-s::after { transform: scaleX(1); }
+html.mo main.home .flow-s::after { animation: flow-fill 8s linear infinite; }
+@keyframes flow-fill { 0% { transform: scaleX(0); opacity: 1; } 75% { transform: scaleX(1); opacity: 1; } 92% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+html.mo main.home .flow .fm { animation: flow-on 8s linear infinite; animation-delay: calc(var(--i) * 2s); }
+html.mo main.home .flow .ft b { animation: flow-text 8s linear infinite; animation-delay: calc(var(--i) * 2s); }
+@keyframes flow-on {
+  0%, 24% { background: var(--accent); color: var(--on-accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-bg-strong); }
+  31%, 100% { background: var(--surface); color: var(--accent-text); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes flow-text { 0%, 24% { color: var(--accent-text); } 31%, 100% { color: var(--text); } }
+@media (prefers-reduced-motion: reduce) {
+  html.mo main.home .flow-s::after, html.mo main.home .flow .fm, html.mo main.home .flow .ft b { animation: none; }
+}
+/* Phones: two by two, marker beside the words, no connector (the numbers carry the order). */
+@media (max-width: 640px) {
+  main.home .idea.big .flow { margin-top: 24px; padding: 16px; border-radius: 16px; }
+  main.home .flow-h { margin-bottom: 14px; }
+  main.home .flow-s { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; --mk: 26px; }
+  main.home .flow-s::before, main.home .flow-s::after { display: none; }
+  main.home .flow-s li { flex-direction: row; align-items: flex-start; gap: 10px; text-align: left; }
+  main.home .flow .fm { flex: none; font-size: 12px; }
+  main.home .flow .ft { padding-top: 3px; }
+  main.home .flow .ft b { font-size: 13.5px; line-height: 18px; }
+  main.home .flow .ft small { font-size: 12px; line-height: 16px; }
+}
+
+/* ---- the brand CTAs: the header's Start, the menu's Start and the idea box's send are equipe blue ---- */
+header.site .pill.dark.go, header.site .mnav .sheet a.sh-go { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+header.site .pill.dark.go:hover, header.site .mnav .sheet a.sh-go:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); }
+header.site .pill.dark.go:active, header.site .mnav .sheet a.sh-go:active { background: var(--accent-press); border-color: var(--accent-press); }
+.idea-send:not(.idle) { background: var(--accent); color: var(--on-accent); }
+.idea-send:not(.idle):hover { background: var(--accent-hover); color: var(--on-accent); }
+.idea-send:not(.idle):active { background: var(--accent-press); }

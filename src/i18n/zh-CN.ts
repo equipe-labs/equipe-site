@@ -152,6 +152,8 @@ const zhCN: Messages = {
     ref: { toggle: "像这个应用", title: "从参考应用或网站开始", ph: "App Store、Google Play 或网站链接", add: "添加", bad: "请粘贴应用或网站的链接。", what: "哪里要不一样？", whatPh: "面向小型教会的中文版", note: "团队会做一个功能类似的原创产品，不使用它的名称、标志或文字。", remove: "移除{name}", fail: "没有预览，但团队仍会读取它。", reading: "正在读取链接…", max: "最多 4 个参考链接。", close: "关闭" },
     nextLabel: "接下来团队会做的事",
     steps: ["调研", "规划", "构建并上线", "第一批顾客"],
+    // One short line under each step in the hero step strip (same order as steps).
+    stepNotes: ["了解市场和对手", "PM 写好计划", "在你的网址上线", "发帖、广告和数据分析"],
     submit: '开始',
     team: '整个团队',
     import: '导入项目',

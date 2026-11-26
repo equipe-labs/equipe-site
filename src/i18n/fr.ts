@@ -153,6 +153,8 @@ const fr: Messages = {
     ref: { toggle: "Comme cette app", title: "Partir d’une référence", ph: "Lien App Store, Google Play ou d’un site", add: "Ajouter", bad: "Collez le lien d’une app ou d’un site.", what: "Qu’est-ce qui doit changer ?", whatPh: "Une version française pour les petites églises", note: "Votre équipe crée un produit original aux fonctions similaires, jamais avec son nom, son logo ou ses textes.", remove: "Retirer {name}", fail: "Pas d’aperçu, mais votre équipe le lira quand même.", reading: "Lecture du lien…", max: "Jusqu’à 4 références.", close: "Fermer" },
     nextLabel: "Ensuite, votre équipe",
     steps: ["Recherche", "Plan", "Création et lancement", "Premiers clients"],
+    // One short line under each step in the hero step strip (same order as steps).
+    stepNotes: ["Marché et concurrents", "Le PM écrit le plan", "En ligne à votre adresse", "Posts, pubs et analyses"],
     submit: 'Commencer',
     team: 'Toute l’équipe',
     import: 'Importer un projet',
