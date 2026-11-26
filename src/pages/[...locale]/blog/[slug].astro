@@ -36,7 +36,7 @@ const minutes = readingMinutes(article.body ?? '', lang);
 const langs = (await languagesOf(slug)) as LocaleCode[];
 const fmt = (dt: Date) => new Intl.DateTimeFormat(info.lang, { dateStyle: 'long', timeZone: 'UTC' }).format(dt);
 const url = new URL(blogPath(lang, slug), Astro.site).href;
-const image = `/og/blog/${lang}-${slug}.png`;
+const image = `/og/blog/v2/${lang}-${slug}.png`;
 const modified = d.updated ?? d.date;
 // Related: same-language articles sharing the most tags, newest first; topped up with the newest others.
 const rel = articles

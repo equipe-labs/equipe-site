@@ -254,7 +254,7 @@ section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Fa
       check(!meta(ph, 'robots').some((c) => /noindex/.test(c)), `${tag} indexable`);
       check(meta(ph, 'og:type')[0] === 'article', `${tag} og:type article`);
       const og = meta(ph, 'og:image')[0];
-      check(og === `${CANONICAL}/og/blog/${lang}-${slug}.png`, `${tag} own og:image (${og})`);
+      check(og === `${CANONICAL}/og/blog/v2/${lang}-${slug}.png`, `${tag} own og:image (${og})`);
       if (og) {
         const img = await get(og);
         const buf = Buffer.from(await img.arrayBuffer());
