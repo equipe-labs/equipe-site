@@ -154,6 +154,7 @@ export const en = {
     siteGoal: "Bring my existing site",
     goalLine: "Goal: {goal}",
     goalRemove: "Remove goal",
+    ref: { toggle: "Like this app", title: "Start from a reference", ph: "App Store, Google Play or website link", add: "Add", bad: "Paste a link to an app or a website.", what: "What should be different?", whatPh: "A Korean version for small churches", note: "Your team builds an original product with the same kind of features, never its name, logo or words.", remove: "Remove {name}", fail: "No preview, but your team will still read it.", reading: "Reading the link…", max: "Up to 4 references.", close: "Close" },
     nextLabel: "Your team then",
     steps: ["Research", "Plan", "Build & launch", "First customers"],
     submit: 'Start',

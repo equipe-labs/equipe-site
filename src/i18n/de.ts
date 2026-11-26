@@ -149,6 +149,7 @@ const de: Messages = {
     siteGoal: "Meine bestehende Website mitbringen",
     goalLine: "Ziel: {goal}",
     goalRemove: "Ziel entfernen",
+    ref: { toggle: "Wie diese App", title: "Mit einer Vorlage starten", ph: "Link aus App Store, Google Play oder einer Website", add: "Hinzufügen", bad: "Füge einen Link zu einer App oder Website ein.", what: "Was soll anders sein?", whatPh: "Eine deutsche Version für kleine Gemeinden", note: "Dein Team baut ein eigenes Produkt mit ähnlichen Funktionen, nie mit ihrem Namen, Logo oder Text.", remove: "{name} entfernen", fail: "Keine Vorschau, dein Team liest ihn trotzdem.", reading: "Link wird gelesen…", max: "Bis zu 4 Vorlagen.", close: "Schließen" },
     nextLabel: "Dann macht dein Team",
     steps: ["Recherche", "Plan", "Bauen & starten", "Erste Kunden"],
     submit: 'Loslegen',

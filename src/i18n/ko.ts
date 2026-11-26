@@ -149,6 +149,7 @@ const ko: Messages = {
     siteGoal: "지금 사이트 가져오기",
     goalLine: "목표: {goal}",
     goalRemove: "목표 빼기",
+    ref: { toggle: "이 앱처럼", title: "참고할 앱이나 사이트로 시작", ph: "App Store, Google Play 또는 웹사이트 링크", add: "추가", bad: "앱이나 웹사이트 링크를 붙여 넣어 주세요.", what: "무엇을 다르게 할까요?", whatPh: "작은 교회를 위한 한국어 버전", note: "팀은 같은 종류의 기능을 갖춘 새 제품을 만들어요. 이름, 로고, 문구는 가져오지 않아요.", remove: "{name} 빼기", fail: "미리보기는 없지만 팀이 읽어 볼 거예요.", reading: "링크를 읽는 중…", max: "참고 링크는 4개까지 돼요.", close: "닫기" },
     nextLabel: "그다음 팀이 하는 일",
     steps: ["조사", "계획", "만들고 출시", "첫 고객"],
     submit: '시작하기',

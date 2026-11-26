@@ -149,6 +149,7 @@ const ptBR: Messages = {
     siteGoal: "Trazer meu site atual",
     goalLine: "Objetivo: {goal}",
     goalRemove: "Remover objetivo",
+    ref: { toggle: "Como este app", title: "Começar por uma referência", ph: "Link da App Store, Google Play ou de um site", add: "Adicionar", bad: "Cole o link de um app ou de um site.", what: "O que deve ser diferente?", whatPh: "Uma versão em português para igrejas pequenas", note: "Seu time cria um produto original com o mesmo tipo de recursos, nunca com o nome, a logo ou os textos dele.", remove: "Remover {name}", fail: "Sem prévia, mas seu time vai ler mesmo assim.", reading: "Lendo o link…", max: "Até 4 referências.", close: "Fechar" },
     nextLabel: "Depois, seu time",
     steps: ["Pesquisa", "Plano", "Construir e lançar", "Primeiros clientes"],
     submit: 'Começar',

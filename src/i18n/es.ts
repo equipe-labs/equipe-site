@@ -149,6 +149,7 @@ const es: Messages = {
     siteGoal: "Traer mi sitio actual",
     goalLine: "Objetivo: {goal}",
     goalRemove: "Quitar objetivo",
+    ref: { toggle: "Como esta app", title: "Empezar desde una referencia", ph: "Enlace de App Store, Google Play o un sitio web", add: "Añadir", bad: "Pega el enlace de una app o un sitio web.", what: "¿Qué debe ser diferente?", whatPh: "Una versión en español para iglesias pequeñas", note: "Tu equipo crea un producto original con el mismo tipo de funciones, nunca con su nombre, logo o textos.", remove: "Quitar {name}", fail: "Sin vista previa, pero tu equipo lo leerá igual.", reading: "Leyendo el enlace…", max: "Hasta 4 referencias.", close: "Cerrar" },
     nextLabel: "Después, tu equipo",
     steps: ["Investigar", "Planear", "Construir y lanzar", "Primeros clientes"],
     submit: 'Empezar',
