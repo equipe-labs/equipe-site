@@ -70,12 +70,10 @@ const faqMore = t.faq.more.split('{email}');
 
   <main id="main" class="home">
     <section class="hero">
-      <div class="field" aria-hidden="true"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div>
       <div class="wrap hc">
         <h1 class="ld" style="--d:0">{t.hero.title.split('\n').map((l, i) => <>{i > 0 && <>{' '}<br class="hb" /></>}{l}</>)}</h1>
         <p class="hsub ld" style="--d:1">{t.hero.approve}</p>
         <div class="hbox ld" style="--d:2"><IdeaBox code={code} id="idea-hero" location="hero" big /></div>
-        <div class="more ld" style="--d:3"><span class="hnote">{t.prompt.note}</span><a class="cue" href="#see">{t.hero.secondary}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg></a></div>
       </div>
     </section>
 

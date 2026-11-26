@@ -145,7 +145,7 @@ const zhCN: Messages = {
     placeholder: "帮人申请 O-1 签证、不用请昂贵律师的服务",
     examples: ["帮人申请 O-1 签证、不用请昂贵律师的服务", "我的普拉提工作室的预约和会员", "让顾客预订我面包店的蛋糕、到店自取", "把销售电话变成跟进邮件的付费工具"],
     goalsLabel: "或者从一个目标开始",
-    goals: [{ key: "local", label: "为我的本地店铺带来更多顾客", starter: "我的店是" }, { key: "service", label: "在网上卖我的服务", starter: "我想在网上卖的服务是" }, { key: "app", label: "推出一个付费应用", starter: "我想推出的付费应用是" }, { key: "expert", label: "把我的专业知识变成产品", starter: "我很懂的领域是" }],
+    goals: [{ key: "service", label: "在网上卖我的服务", starter: "我想在网上卖的服务是" }, { key: "app", label: "推出一个付费应用", starter: "我想推出的付费应用是" }, { key: "store", label: "开一家网店", starter: "我想在网店里卖" }, { key: "expert", label: "把我的专业知识变成产品", starter: "我很懂的领域是" }],
     siteGoal: "带上我现有的网站",
     goalLine: "目标：{goal}",
     goalRemove: "移除目标",

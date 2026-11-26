@@ -145,7 +145,7 @@ const de: Messages = {
     placeholder: "Ein Service, der Menschen ohne teure Anwälte zum O-1-Visum verhilft",
     examples: ["Ein Service, der Menschen ohne teure Anwälte zum O-1-Visum verhilft", "Buchungen und Mitgliedschaften für mein Pilates-Studio", "Die Torten meiner Bäckerei zur Abholung verkaufen", "Ein bezahltes Tool, das aus Verkaufsgesprächen Follow-up-Mails macht"],
     goalsLabel: "Oder starte mit einem Ziel",
-    goals: [{ key: "local", label: "Mehr Kunden für mein lokales Geschäft", starter: "Mein lokales Geschäft ist " }, { key: "service", label: "Meine Dienstleistung online verkaufen", starter: "Online verkaufen möchte ich " }, { key: "app", label: "Eine bezahlte App starten", starter: "Ich möchte eine bezahlte App starten, die " }, { key: "expert", label: "Mein Fachwissen zu einem Produkt machen", starter: "Ich kenne mich sehr gut aus mit " }],
+    goals: [{ key: "service", label: "Meine Dienstleistung online verkaufen", starter: "Online verkaufen möchte ich " }, { key: "app", label: "Eine bezahlte App starten", starter: "Ich möchte eine bezahlte App starten, die " }, { key: "store", label: "Einen Onlineshop eröffnen", starter: "In meinem Onlineshop möchte ich verkaufen: " }, { key: "expert", label: "Mein Fachwissen zu einem Produkt machen", starter: "Ich kenne mich sehr gut aus mit " }],
     siteGoal: "Meine bestehende Website mitbringen",
     goalLine: "Ziel: {goal}",
     goalRemove: "Ziel entfernen",

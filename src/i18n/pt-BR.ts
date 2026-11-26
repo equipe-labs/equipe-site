@@ -145,7 +145,7 @@ const ptBR: Messages = {
     placeholder: "Um serviço que ajuda a tirar o visto O-1 sem advogados caros",
     examples: ["Um serviço que ajuda a tirar o visto O-1 sem advogados caros", "Agendamentos e planos para o meu estúdio de pilates", "Vender os bolos da minha confeitaria para retirada", "Uma ferramenta paga que transforma ligações de venda em e-mails de follow-up"],
     goalsLabel: "Ou comece por um objetivo",
-    goals: [{ key: "local", label: "Mais clientes para o meu negócio local", starter: "Meu negócio local é " }, { key: "service", label: "Vender meu serviço online", starter: "O serviço que quero vender online é " }, { key: "app", label: "Lançar um app pago", starter: "Quero lançar um app pago que " }, { key: "expert", label: "Transformar o que sei em um produto", starter: "Entendo muito de " }],
+    goals: [{ key: "service", label: "Vender meu serviço online", starter: "O serviço que quero vender online é " }, { key: "app", label: "Lançar um app pago", starter: "Quero lançar um app pago que " }, { key: "store", label: "Abrir uma loja online", starter: "Na minha loja online quero vender " }, { key: "expert", label: "Transformar o que sei em um produto", starter: "Entendo muito de " }],
     siteGoal: "Trazer meu site atual",
     goalLine: "Objetivo: {goal}",
     goalRemove: "Remover objetivo",

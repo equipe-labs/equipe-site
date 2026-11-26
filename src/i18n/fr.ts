@@ -146,7 +146,7 @@ const fr: Messages = {
     placeholder: "Un service qui aide à obtenir un visa O-1 sans avocats hors de prix",
     examples: ["Un service qui aide à obtenir un visa O-1 sans avocats hors de prix", "Réservations et abonnements pour mon studio de Pilates", "Vendre les gâteaux de ma boulangerie à emporter", "Un outil payant qui transforme les appels commerciaux en e-mails de suivi"],
     goalsLabel: "Ou partez d’un objectif",
-    goals: [{ key: "local", label: "Attirer plus de clients dans mon commerce local", starter: "Mon commerce local, c’est " }, { key: "service", label: "Vendre mon service en ligne", starter: "Le service que je veux vendre en ligne : " }, { key: "app", label: "Lancer une application payante", starter: "Je veux lancer une application payante qui " }, { key: "expert", label: "Transformer mon expertise en produit", starter: "Je m’y connais très bien en " }],
+    goals: [{ key: "service", label: "Vendre mon service en ligne", starter: "Le service que je veux vendre en ligne : " }, { key: "app", label: "Lancer une application payante", starter: "Je veux lancer une application payante qui " }, { key: "store", label: "Ouvrir une boutique en ligne", starter: "Dans ma boutique en ligne, je veux vendre " }, { key: "expert", label: "Transformer mon expertise en produit", starter: "Je m’y connais très bien en " }],
     siteGoal: "Apporter mon site existant",
     goalLine: "Objectif : {goal}",
     goalRemove: "Retirer l’objectif",
