@@ -30,7 +30,7 @@ const more = [
     <JsonLd data={{ '@type': 'AboutPage', '@id': `${url}#page`, url, name: F.h1, description: F.desc, inLanguage: info.lang, dateModified: FACTS_REVIEWED, about: { '@id': `${SITE.url}/#organization` }, publisher: { '@id': `${SITE.url}/#organization` } }} />
     <FaqJsonLd lang={info.lang} faqs={F.faqs.map((f) => ({ question: f.q, answer: f.a }))} />
   </Fragment>
-  <section class="pg-h blog-h"><div class="wrap"><h1>{F.h1}</h1><p class="pg-lead">{F.lead}</p><p class="post-meta"><span>{F.reviewed.replace('{date}', FACTS_REVIEWED)}</span></p></div></section>
+  <section class="pg-h blog-h pr-h" style="--hw:720px;--hw-sm:720px"><div class="wrap"><h1>{F.h1}</h1><p class="pg-lead">{F.lead}</p><p class="post-meta"><span>{F.reviewed.replace('{date}', FACTS_REVIEWED)}</span></p></div></section>
   <section class="pg-s"><div class="wrap">
     <div class="post-body" style="max-width:720px;margin:0 auto">
       {F.groups.map((g, i) => (

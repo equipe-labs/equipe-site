@@ -5,19 +5,20 @@ main.pg .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 var(
 /* Page hero: left aligned on the page's own background, no glow; the headline and lead share the content's left edge. */
 .pg-h { position: relative; padding: 96px 0 48px; }
 .pg-h .wrap { text-align: left; display: grid; justify-items: start; }
-/* Pricing: the hero shares the left edge of the plan cards under it (940 px, 560 px once they stack). */
-.pr-h .wrap { justify-items: center; }
-main.pg .pr-h .wrap > * { width: min(100%, 940px); max-width: none; }
-@media (max-width: 900px) { main.pg .pr-h .wrap > * { width: min(100%, 560px); } }
+/* A hero over a centred column shares that column's left edge: pricing's plan cards (940 px, 560 px once they
+   stack) by default, other widths through --hw / --hw-sm (the Facts page's 720 px article). */
+main.pg .pg-h.pr-h .wrap { justify-items: center; }
+main.pg .pr-h .wrap > * { width: min(100%, var(--hw, 940px)); max-width: none; }
+@media (max-width: 900px) { main.pg .pr-h .wrap > * { width: min(100%, var(--hw-sm, 560px)); } }
 main.pg h1 { font-size: clamp(40px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -0.04em; max-width: 16ch; }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.pg h1 { line-height: 1.2; letter-spacing: -0.02em; }
 .pg-lead { margin-top: var(--s-5); max-width: 36em; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
 main.pg section.pg-s { padding: 48px 0 112px; }
 main.pg h2 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.025em; }
 .pg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-.pg-card { padding: 26px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); }
-.pg-card .ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); margin-bottom: 16px; }
-.pg-card .ic svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.pg-card { padding: 26px; border-radius: var(--r-2); border: 1px solid var(--line); background: var(--surface); }
+.pg-card .ic { display: grid; place-items: start; color: var(--muted); margin-bottom: 14px; }
+.pg-card .ic svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .pg-card h2, .pg-card h3 { font-size: 19px; letter-spacing: -0.015em; margin: 0; }
 .pg-card p { margin-top: 8px; color: var(--muted); font-size: 16px; line-height: 1.55; }
 .pg-note { margin-top: 32px; text-align: center; color: var(--muted); font-size: 15.5px; }
