@@ -22,7 +22,7 @@ const AI = aiCopy(code).pricingNote;
 <PageShell code={code} page="pricing" title={P.title} description={P.desc}>
   <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
   <FaqJsonLd slot="head" lang={info.lang} faqs={[cost, ...t.plans.faq]} />
-  <section class="pg-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>
+  <section class="pg-h pr-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>
   <section class="pg-s"><div class="wrap">
     <PromoBanner code={code} lang={info.lang} target="tp-pricing_page" />
     <PlanCards t={t} level="h2" loc="pricing_page" code={code} />
@@ -36,7 +36,7 @@ const AI = aiCopy(code).pricingNote;
         </div>
     <PackStrip code={code} />
     <a class="pai" href={subPath(info, 'features/ai')} data-ph="ai_features_click" data-ph-location="pricing">
-      <span class="pai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 3.5V16H4z" /></svg></span>
+      <span class="pai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>
       <span class="pai-t"><b>{AI.title}</b><span>{AI.text}</span></span>
       <span class="pai-l">{AI.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
     </a>

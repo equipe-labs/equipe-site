@@ -165,8 +165,8 @@
 
 /* 5. AI in the product: a card that leads to /features/ai/ (what the team can add later, on request) */
 .d1-ai { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; margin-top: 32px; padding: 22px 26px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); color: var(--text); text-decoration: none; transition: border-color 250ms var(--e), transform 300ms var(--e); }
-.d1-ai-i { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: color-mix(in srgb, var(--accent) 11%, var(--surface)); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
-.d1-ai-i svg { width: 22px; height: 22px; }
+.d1-ai-i { display: grid; place-items: center; align-self: start; padding-top: 2px; color: var(--muted); }
+.d1-ai-i svg { width: 22px; height: 22px; stroke-width: 1.75; }
 .d1-ai-t { display: grid; gap: 4px; }
 .d1-ai-t b { font-size: 18px; letter-spacing: -0.012em; }
 .d1-ai-t span { font-size: 15.5px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }

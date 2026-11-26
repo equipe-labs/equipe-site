@@ -401,8 +401,8 @@ html.mo .wa-decision.live .wa-ap .l, html.mo .wa-decision.live .wa-ap .ok { anim
 .pfact p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
 /* /pricing: AI in the product (paid from credits, monthly limit per product), linking to /features/ai/ */
 .pai { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px 16px; align-items: center; margin-top: 16px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text); text-decoration: none; transition: border-color 250ms; }
-.pai-i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 11%, var(--surface)); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
-.pai svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pai-i { display: grid; place-items: center; align-self: start; padding-top: 1px; color: var(--muted); }
+.pai svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .pai-t { display: grid; gap: 4px; }
 .pai-t b { font-size: 16px; font-weight: 600; }
 .pai-t span { font-size: 15px; line-height: 1.5; color: var(--muted); }

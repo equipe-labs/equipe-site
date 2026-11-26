@@ -2,12 +2,16 @@
 main.pg .wrap { max-width: calc(var(--wrap-w) + 2 * var(--s-6)); padding: 0 var(--s-6); }
 :where(main.pg) :where(ul, ol) { list-style: none; margin: 0; padding: 0; }
 :where(main.pg) :where(p) { margin: 0; }
-.pg-h { position: relative; padding: 104px 0 56px; overflow: hidden; isolation: isolate; }
-.pg-h::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 80% at 50% 120%, color-mix(in srgb, #3F6FF5 22%, transparent), transparent 70%); }
-.pg-h .wrap { text-align: center; display: grid; justify-items: center; }
+/* Page hero: left aligned on the page's own background, no glow; the headline and lead share the content's left edge. */
+.pg-h { position: relative; padding: 96px 0 48px; }
+.pg-h .wrap { text-align: left; display: grid; justify-items: start; }
+/* Pricing: the hero shares the left edge of the plan cards under it (940 px, 560 px once they stack). */
+.pr-h .wrap { justify-items: center; }
+main.pg .pr-h .wrap > * { width: min(100%, 940px); max-width: none; }
+@media (max-width: 900px) { main.pg .pr-h .wrap > * { width: min(100%, 560px); } }
 main.pg h1 { font-size: clamp(40px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -0.04em; max-width: 16ch; }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.pg h1 { line-height: 1.2; letter-spacing: -0.02em; }
-.pg-lead { margin-top: var(--s-5); max-width: 36em; font-size: 20px; line-height: 1.5; color: var(--muted); text-wrap: balance; }
+.pg-lead { margin-top: var(--s-5); max-width: 36em; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
 main.pg section.pg-s { padding: 48px 0 112px; }
 main.pg h2 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.025em; }
 .pg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
@@ -38,7 +42,6 @@ main.pg .pg-card h2, main.pg .plan-h h2 { font-size: 19px; letter-spacing: -0.01
 
 /* ---- /about (v3): plain hero, story, principles and people in a centered grid with thin gradient dividers (SF type only). Motion is opacity/transform and off for reduced motion. ---- */
 .ab-hero { padding: 128px 0 72px; }
-.ab-hero::before { display: none; }
 main.pg .ab-hero h1 { font-size: clamp(42px, 7vw, 88px); max-width: 14ch; line-height: 1.04; text-wrap: balance; font-weight: 700; }
 :is(:lang(ko), :lang(ja), :lang(zh-CN)) main.pg .ab-hero h1 { max-width: 12ch; line-height: 1.2; }
 .ab-lead { font-size: clamp(19px, 2.2vw, 26px); max-width: 24em; color: var(--muted); }

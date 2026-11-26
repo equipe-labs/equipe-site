@@ -37,7 +37,8 @@ export interface AiVis {
   describe: { notes: string; out: string; use: string };
   reply: { incoming: string; draft: string; use: string };
   image: { prompt: string; use: string };
-  leads: { msg: string; tag: string; next: string };
+  /** The first inquiry (marked hot) and two more, marked warm and cold. */
+  leads: { msg: string; tag: string; next: string; more: [[string, string], [string, string]] };
   moderation: { rows: [string, string][]; };
 }
 
@@ -79,7 +80,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: 'Start building', ctaHow: 'See how it works',
     featuresTitle: '11 ready-made AI features',
     featuresSub: 'Your team picks the ones that fit your product and fills them with your own facts: your prices, hours, catalog and policies.',
-    illuNote: 'Small drawings of each feature, not screenshots.',
+    illuNote: 'Illustrations of each feature with sample data.',
     groups: {
       site: { title: 'On your site', text: 'For your visitors.' },
       admin: { title: 'In your admin', text: 'For you and your staff.' },
@@ -108,7 +109,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: 'handmade, 350 ml, dishwasher safe', out: 'A hand-thrown mug that holds a generous 350 ml and goes straight in the dishwasher.', use: 'Use this' },
       reply: { incoming: 'Do you have a table for six on Saturday?', draft: 'Hi! Yes, we can seat six at 7 pm. [check: deposit]', use: 'Use draft' },
       image: { prompt: 'An autumn latte on a wooden table', use: 'Add to post' },
-      leads: { msg: 'A quote for 40 guests on June 12?', tag: 'Hot', next: 'Next: call today' },
+      leads: { msg: 'A quote for 40 guests on June 12?', tag: 'Hot', next: 'Next: call today', more: [['Do you ship abroad?', 'Warm'], ['Just looking, thanks', 'Cold']] },
       moderation: { rows: [['Lovely service, thank you!', 'Fine'], ['Is this open on Mondays??', 'Fine'], ['Cheap followers, click here', 'Blocked']] },
     },
     how: {
@@ -188,7 +189,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: '만들기 시작하기', ctaHow: '어떻게 되는지 보기',
     featuresTitle: '바로 쓰는 AI 기능 11가지',
     featuresSub: '팀이 제품에 맞는 기능을 고르고, 내 정보로 채워요: 가격, 영업시간, 상품 목록, 운영 정책.',
-    illuNote: '기능마다 그린 작은 그림이에요. 실제 화면은 아니에요.',
+    illuNote: '기능마다 예시 데이터로 그린 그림이에요.',
     groups: {
       site: { title: '사이트에서', text: '방문자를 위해.' },
       admin: { title: '관리자 화면에서', text: '나와 직원을 위해.' },
@@ -217,7 +218,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: '수제, 350ml, 식기세척기 가능', out: '손으로 빚은 머그컵이에요. 350ml로 넉넉하고, 식기세척기에 바로 넣어도 돼요.', use: '이걸로 쓰기' },
       reply: { incoming: '토요일에 6명 자리 있나요?', draft: '안녕하세요! 네, 저녁 7시에 6명 앉으실 수 있어요. [확인: 예약금]', use: '초안 쓰기' },
       image: { prompt: '나무 테이블 위 가을 라테', use: '게시물에 넣기' },
-      leads: { msg: '6월 12일, 40명 견적 받을 수 있을까요?', tag: '뜨거움', next: '다음: 오늘 전화' },
+      leads: { msg: '6월 12일, 40명 견적 받을 수 있을까요?', tag: '뜨거움', next: '다음: 오늘 전화', more: [['해외 배송도 되나요?', '미지근함'], ['그냥 둘러보는 중이에요', '차가움']] },
       moderation: { rows: [['서비스 너무 좋았어요, 감사해요!', '괜찮음'], ['월요일에도 여나요??', '괜찮음'], ['팔로워 싸게 팔아요, 여기 클릭', '차단']] },
     },
     how: {
@@ -297,7 +298,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: '作りはじめる', ctaHow: '仕組みを見る',
     featuresTitle: 'すぐ使える11のAI機能',
     featuresSub: 'チームがプロダクトに合う機能を選び、あなたの情報で中身を埋めます：料金、営業時間、商品一覧、ポリシー。',
-    illuNote: '各機能を描いた小さなイラストです。スクリーンショットではありません。',
+    illuNote: '各機能をサンプルデータで描いたイラストです。',
     groups: {
       site: { title: 'サイトで', text: '訪問者のために。' },
       admin: { title: '管理画面で', text: 'あなたとスタッフのために。' },
@@ -326,7 +327,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: '手作り、350ml、食洗機対応', out: '手びねりのマグ。たっぷり350ml入り、そのまま食洗機に入れられます。', use: 'これを使う' },
       reply: { incoming: '土曜に6名の席はありますか？', draft: 'こんにちは。はい、19時に6名でご案内できます。[確認：予約金]', use: '下書きを使う' },
       image: { prompt: '木のテーブルに秋のラテ', use: '投稿に追加' },
-      leads: { msg: '6月12日、40名の見積もりは可能ですか？', tag: 'ホット', next: '次：今日電話' },
+      leads: { msg: '6月12日、40名の見積もりは可能ですか？', tag: 'ホット', next: '次：今日電話', more: [['海外発送はできますか？', 'ウォーム'], ['見ているだけです', 'コールド']] },
       moderation: { rows: [['素敵なサービスをありがとう！', '問題なし'], ['月曜も営業してますか？？', '問題なし'], ['格安フォロワー、ここをクリック', 'ブロック']] },
     },
     how: {
@@ -406,7 +407,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: '开始打造', ctaHow: '看看怎么做',
     featuresTitle: '11 个现成的 AI 功能',
     featuresSub: '团队会挑选适合你产品的功能，并填入你自己的信息：价格、营业时间、商品目录和政策。',
-    illuNote: '每个功能的示意小图，不是截图。',
+    illuNote: '用示例数据绘制的各功能示意图。',
     groups: {
       site: { title: '在你的网站上', text: '为访客服务。' },
       admin: { title: '在你的管理后台', text: '为你和员工服务。' },
@@ -435,7 +436,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: '手工制作，350 ml，可用洗碗机', out: '手工拉坯马克杯，容量足足 350 ml，可直接放进洗碗机。', use: '使用这段' },
       reply: { incoming: '周六有六人桌吗？', draft: '你好！有的，晚上 7 点可以安排六位。[核实：订金]', use: '使用草稿' },
       image: { prompt: '木桌上的一杯秋日拿铁', use: '加到帖子' },
-      leads: { msg: '6 月 12 日 40 人，能报个价吗？', tag: '热', next: '下一步：今天致电' },
+      leads: { msg: '6 月 12 日 40 人，能报个价吗？', tag: '热', next: '下一步：今天致电', more: [['可以寄到国外吗？', '温'], ['只是看看，谢谢', '冷']] },
       moderation: { rows: [['服务很棒，谢谢！', '正常'], ['周一营业吗？？', '正常'], ['低价买粉，点这里', '已拦截']] },
     },
     how: {
@@ -515,7 +516,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: 'Empieza a crear', ctaHow: 'Mira cómo funciona',
     featuresTitle: '11 funciones de IA listas para usar',
     featuresSub: 'Tu equipo elige las que encajan con tu producto y las llena con tus propios datos: tus precios, horarios, catálogo y políticas.',
-    illuNote: 'Pequeños dibujos de cada función, no capturas de pantalla.',
+    illuNote: 'Ilustraciones de cada función con datos de ejemplo.',
     groups: {
       site: { title: 'En tu sitio', text: 'Para tus visitantes.' },
       admin: { title: 'En tu panel de administración', text: 'Para ti y tu personal.' },
@@ -544,7 +545,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: 'hecha a mano, 350 ml, apta para lavavajillas', out: 'Una taza torneada a mano, con unos generosos 350 ml, que va directa al lavavajillas.', use: 'Usar esto' },
       reply: { incoming: '¿Tienen mesa para seis el sábado?', draft: '¡Hola! Sí, tenemos mesa para seis a las 19:00. [comprobar: depósito]', use: 'Usar borrador' },
       image: { prompt: 'Un latte otoñal sobre una mesa de madera', use: 'Añadir a la publicación' },
-      leads: { msg: '¿Presupuesto para 40 invitados el 12 de junio?', tag: 'Caliente', next: 'Siguiente: llamar hoy' },
+      leads: { msg: '¿Presupuesto para 40 invitados el 12 de junio?', tag: 'Caliente', next: 'Siguiente: llamar hoy', more: [['¿Envían al extranjero?', 'Tibia'], ['Solo estoy mirando, gracias', 'Fría']] },
       moderation: { rows: [['¡Un servicio encantador, gracias!', 'Bien'], ['¿Abren los lunes??', 'Bien'], ['Seguidores baratos, haz clic aquí', 'Bloqueado']] },
     },
     how: {
@@ -624,7 +625,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: 'Comece a criar', ctaHow: 'Veja como funciona',
     featuresTitle: '11 recursos de IA prontos',
     featuresSub: 'Seu time escolhe os que combinam com seu produto e preenche com as suas informações: seus preços, horários, catálogo e políticas.',
-    illuNote: 'Pequenos desenhos de cada recurso, não capturas de tela.',
+    illuNote: 'Ilustrações de cada recurso com dados de exemplo.',
     groups: {
       site: { title: 'No seu site', text: 'Para seus visitantes.' },
       admin: { title: 'Na sua área de administração', text: 'Para você e seus funcionários.' },
@@ -653,7 +654,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: 'feita à mão, 350 ml, vai na lava-louças', out: 'Uma caneca torneada à mão, com generosos 350 ml, que vai direto para a lava-louças.', use: 'Usar este' },
       reply: { incoming: 'Tem mesa para seis no sábado?', draft: 'Oi! Temos, sim: mesa para seis às 19h. [conferir: sinal]', use: 'Usar rascunho' },
       image: { prompt: 'Um latte de outono numa mesa de madeira', use: 'Adicionar ao post' },
-      leads: { msg: 'Orçamento para 40 convidados em 12 de junho?', tag: 'Quente', next: 'Próximo: ligar hoje' },
+      leads: { msg: 'Orçamento para 40 convidados em 12 de junho?', tag: 'Quente', next: 'Próximo: ligar hoje', more: [['Vocês entregam no exterior?', 'Morno'], ['Só dando uma olhada, obrigado', 'Frio']] },
       moderation: { rows: [['Atendimento ótimo, obrigada!', 'Ok'], ['Abre às segundas??', 'Ok'], ['Seguidores baratos, clique aqui', 'Bloqueado']] },
     },
     how: {
@@ -733,7 +734,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: 'Loslegen', ctaHow: 'So funktioniert’s',
     featuresTitle: '11 fertige KI-Funktionen',
     featuresSub: 'Dein Team wählt die passenden für dein Produkt aus und füllt sie mit deinen eigenen Fakten: deinen Preisen, Öffnungszeiten, deinem Sortiment und deinen Regeln.',
-    illuNote: 'Kleine Zeichnungen der Funktionen, keine Screenshots.',
+    illuNote: 'Illustrationen der Funktionen mit Beispieldaten.',
     groups: {
       site: { title: 'Auf deiner Website', text: 'Für deine Besucher.' },
       admin: { title: 'In deinem Adminbereich', text: 'Für dich und deine Leute.' },
@@ -762,7 +763,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: 'handgemacht, 350 ml, spülmaschinenfest', out: 'Eine handgedrehte Tasse mit großzügigen 350 ml, die direkt in die Spülmaschine darf.', use: 'Übernehmen' },
       reply: { incoming: 'Habt ihr Samstag einen Tisch für sechs?', draft: 'Hallo! Ja, um 19 Uhr haben wir Platz für sechs. [prüfen: Anzahlung]', use: 'Entwurf nutzen' },
       image: { prompt: 'Ein Herbst-Latte auf einem Holztisch', use: 'Zum Beitrag' },
-      leads: { msg: 'Ein Angebot für 40 Gäste am 12. Juni?', tag: 'Heiß', next: 'Als Nächstes: heute anrufen' },
+      leads: { msg: 'Ein Angebot für 40 Gäste am 12. Juni?', tag: 'Heiß', next: 'Als Nächstes: heute anrufen', more: [['Liefert ihr auch ins Ausland?', 'Warm'], ['Ich schaue nur, danke', 'Kalt']] },
       moderation: { rows: [['Toller Service, danke!', 'In Ordnung'], ['Habt ihr montags offen??', 'In Ordnung'], ['Billige Follower, hier klicken', 'Blockiert']] },
     },
     how: {
@@ -842,7 +843,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ctaStart: 'Commencer à créer', ctaHow: 'Voir comment ça marche',
     featuresTitle: '11 fonctions IA prêtes à l’emploi',
     featuresSub: 'Votre équipe choisit celles qui conviennent à votre produit et les remplit avec vos propres informations : vos tarifs, horaires, catalogue et conditions.',
-    illuNote: 'De petits dessins de chaque fonction, pas des captures d’écran.',
+    illuNote: 'Illustrations de chaque fonction avec des données d’exemple.',
     groups: {
       site: { title: 'Sur votre site', text: 'Pour vos visiteurs.' },
       admin: { title: 'Dans votre espace d’administration', text: 'Pour vous et votre personnel.' },
@@ -871,7 +872,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       describe: { notes: 'fait main, 350 ml, va au lave-vaisselle', out: 'Une tasse tournée à la main, d’une belle contenance de 350 ml, qui passe directement au lave-vaisselle.', use: 'Utiliser' },
       reply: { incoming: 'Avez-vous une table pour six samedi ?', draft: 'Bonjour ! Oui, nous pouvons accueillir six personnes à 19 h. [vérifier : acompte]', use: 'Utiliser le brouillon' },
       image: { prompt: 'Un latte d’automne sur une table en bois', use: 'Ajouter au post' },
-      leads: { msg: 'Un devis pour 40 invités le 12 juin ?', tag: 'Chaude', next: 'Suite : appeler aujourd’hui' },
+      leads: { msg: 'Un devis pour 40 invités le 12 juin ?', tag: 'Chaude', next: 'Suite : appeler aujourd’hui', more: [['Vous livrez à l’étranger ?', 'Tiède'], ['Je regarde seulement, merci', 'Froide']] },
       moderation: { rows: [['Service adorable, merci !', 'Conforme'], ['C’est ouvert le lundi ??', 'Conforme'], ['Followers pas chers, cliquez ici', 'Bloqué']] },
     },
     how: {
