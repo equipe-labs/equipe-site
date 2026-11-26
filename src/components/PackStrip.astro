@@ -1,0 +1,54 @@
+---
+// The credit packs on /pricing: the four plain packs and the bulk pack ($990 buys $1,100 of credits, "Best value").
+// Prices come only from src/data/plan.ts (PACKS). Buying happens in the app (app.equipe.im/billing).
+import { SITE } from '../data/site';
+import { PACKS, usd } from '../data/plan';
+import { packWords } from '../i18n/packs';
+import type { LocaleCode } from '../i18n/locales';
+
+interface Props { code?: LocaleCode }
+const { code = 'en' } = Astro.props;
+const W = packWords(code);
+const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? `{${k}}`);
+---
+<section class="pk" aria-labelledby="pk-title">
+  <div class="pk-h"><h2 id="pk-title">{W.title}</h2><p>{W.text}</p></div>
+  <ul class="pk-list">
+    {PACKS.map((p, i) => (
+      <li class={`pk-card${p.bonus ? ' best' : ''}`} style={`--i:${i}`}>
+        {p.bonus ? <span class="pk-badge">{fill(W.best, { extra: usd(p.bonus) })}</span> : p.popular ? <span class="pk-badge soft">{W.popular}</span> : null}
+        <b class="pk-price">{usd(p.usd)}</b>
+        <span class="pk-gets">{fill(W.gets, { credits: usd(p.usd + (p.bonus || 0)) })}</span>
+      </li>
+    ))}
+  </ul>
+  <div class="pk-f"><p>{W.note}</p><a class="btn ghost" href={`${SITE.app}/billing`} data-ph="packs_cta_click" data-ph-location="pricing_page">{W.cta}</a></div>
+</section>
+
+<style>
+  .pk { max-width: 940px; margin: 48px auto 0; display: grid; gap: 20px; }
+  .pk-h { display: grid; gap: 6px; }
+  .pk-h h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; }
+  .pk-h p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .pk-list { list-style: none; margin: 0; padding: 12px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .pk-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 112px;
+    padding: 22px 12px 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); text-align: center;
+    animation: pk-in 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both; animation-delay: calc(var(--i) * 40ms); }
+  .pk-card.best { border-color: transparent; background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+    box-shadow: 0 0 0 1.5px var(--accent), 0 10px 28px -14px color-mix(in srgb, var(--accent) 55%, transparent); }
+  .pk-price { font-size: 30px; line-height: 1.1; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .pk-gets { font-size: 13.5px; line-height: 1.35; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pk-card.best .pk-gets { color: var(--accent); font-weight: 600; }
+  .pk-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 8px); padding: 3px 10px; border-radius: 99px;
+    background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pk-badge.soft { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); }
+  .pk-f { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .pk-f p { margin: 0; flex: 1; min-width: 240px; font-size: 13.5px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+  @keyframes pk-in { from { opacity: 0; transform: translateY(8px); } }
+  @media (max-width: 760px) {
+    .pk-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+    .pk-card.best { grid-column: 1 / -1; }
+    .pk-f .btn { width: 100%; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pk-card { animation: none; } }
+</style>

@@ -59,6 +59,7 @@ const data = JSON.stringify({
     <p class="plan-d">{P.team.text}</p>
     <div class="tp-price" aria-live="polite" aria-atomic="true">
       <p class="plan-p"><s class="tp-was" data-was hidden>{usd(YEARLY.baseMonth)}</s><b class="tp-num"><span class="tp-roll" data-total>{usd(def.month)}</span></b><span data-per>{K.perMonth}</span></p>
+      <p class="tp-billed" data-billed hidden>{live ? fillP(W.billedPromo, yv) : fillP(W.billedStd, yv)}</p>
       <p class="tp-inc" data-inc>{includes(def.credits)}</p>
     </div>
     <div class="tp-ctl">
@@ -99,6 +100,9 @@ const data = JSON.stringify({
   .tp-price .plan-p { margin: 0; }
   .tp-num { display: inline-grid; overflow: hidden; padding: 0.08em 0; margin: -0.08em 0; }
   .plan-p .tp-num > span { grid-area: 1 / 1; white-space: nowrap; font-size: inherit; color: inherit; }
+  .tp-billed { margin: -4px 0 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--text); font-variant-numeric: tabular-nums; text-wrap: pretty; }
+  .tp-billed[hidden] { display: none; }
+  .tp[data-cycle='y'] .tp-inc { font-size: 14px; }
   .tp-inc { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); text-wrap: pretty; min-height: 1.45em; }
 
   .tp-ctl { display: grid; gap: 10px; margin-top: 2px; }
@@ -181,7 +185,10 @@ const data = JSON.stringify({
     const groups = { cycle: card.querySelector<HTMLElement>('[data-group="cycle"]')!, tier: card.querySelector<HTMLElement>('[data-group="tier"]')! };
     const state = { cycle: 0, tier: Number(groups.tier.style.getPropertyValue('--sel')) || 0 };
     const value = (cycle: number, tier: number) => (cycle ? (promo() ? cfg.yearly.mo : cfg.yearly.moStd) : cfg.tiers[tier].m);
-    const yinc = (tier: number) => `${promo() ? cfg.yearly.billed : cfg.yearly.billedStd}${cfg.tiers[tier].plus ? ` ${cfg.tiers[tier].plus}` : ''}`;
+    // Yearly: the price a month first and big ("$15.83/mo", $11.42 in the promotion), "Billed $190 a year." right under it,
+    // then only what the monthly credits add. Monthly: the month total.
+    const billed = card.querySelector<HTMLElement>('[data-billed]')!;
+    const yinc = (tier: number) => cfg.tiers[tier].plus || cfg.tiers[tier].inc;
 
     const select = (name: 'cycle' | 'tier', i: number, focus: boolean) => {
       const g = groups[name];
@@ -197,6 +204,8 @@ const data = JSON.stringify({
       roll(num, after, n(after) > n(before));
       per.textContent = cfg.perMonth;
       was.hidden = !state.cycle;
+      billed.hidden = !state.cycle;
+      if (state.cycle) fade(billed, promo() ? cfg.yearly.billed : cfg.yearly.billedStd);
       fade(inc, state.cycle ? yinc(state.tier) : cfg.tiers[state.tier].inc);
       hint.textContent = cfg.tiers[state.tier].hint;
       card.dataset.cycle = state.cycle ? 'y' : 'm';

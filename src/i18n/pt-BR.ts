@@ -201,7 +201,7 @@ const ptBR: Messages = {
   bento: { title: 'O que seu time faz', text: 'Cada membro tem sua função. Você vê tudo e aprova o que importa.' },
   plans: {
     title: 'Preços simples',
-    text: '1 crédito = $1. Pacotes: $25, $50, $100 ou $250. Os créditos valem por 12 meses; créditos não usados podem ser reembolsados em até 14 dias.',
+    text: '1 crédito = $1. Pacotes: $25, $50, $100 ou $250, ou $990 por $1,100 em créditos. Os créditos valem por 12 meses; créditos não usados podem ser reembolsados em até 14 dias.',
     featured: 'Recomendado',
     free: { name: 'Comece grátis', fit: 'Para experimentar', price: '$0', per: 'para começar', text: '$5 de crédito ao criar seu time, +$10 ao adicionar um cartão (sem cobrança).', points: ['1 crédito = $1', 'Os créditos pagam tudo o que o time faz', 'Sem cartão para começar', '2 pessoas na equipe'], cta: 'Começar grátis' },
     team: { name: 'Time', fit: 'Para um produto que fica no ar e cresce', text: 'Hospedagem, armazenamento e 5 pessoas, mais os créditos que você escolhe todo mês.', points: ['Hospedagem dos seus sites e armazenamento', 'O time todo: PM, engenharia, design, QA, dados', '5 pessoas incluídas; cada editor extra custa $5 por mês (até 10)', 'Convites somente para visualizar são grátis', 'Créditos do plano a $1 = $1, acumulam por 2 meses', 'Os créditos são compartilhados por todo o time'], cta: 'Começar' },

@@ -201,7 +201,7 @@ const es: Messages = {
   bento: { title: 'Lo que hace tu equipo', text: 'Cada miembro tiene su tarea. Lo ves todo, y tú apruebas lo importante.' },
   plans: {
     title: 'Precios sencillos',
-    text: '1 crédito = $1. Paquetes: $25, $50, $100 o $250. Los créditos duran 12 meses; los no usados se reembolsan en un plazo de 14 días.',
+    text: '1 crédito = $1. Paquetes: $25, $50, $100 o $250, o $990 por $1,100 en créditos. Los créditos duran 12 meses; los no usados se reembolsan en un plazo de 14 días.',
     featured: 'Recomendado',
     free: { name: 'Empieza gratis', fit: 'Para probar', price: '$0', per: 'para empezar', text: '$5 de crédito al crear tu equipo, +$10 al añadir una tarjeta (sin cargo).', points: ['1 crédito = $1', 'Los créditos pagan todo lo que hace el equipo', 'Sin tarjeta para empezar', '2 personas en el equipo'], cta: 'Empezar gratis' },
     team: { name: 'Equipo', fit: 'Para un producto que sigue en vivo y crece', text: 'Hosting, almacenamiento y 5 personas, más los créditos que eliges cada mes.', points: ['Hosting para tus sitios y almacenamiento', 'Todo el equipo: PM, ingenieros, diseño, QA, datos', '5 personas incluidas; cada editor extra cuesta $5 al mes (hasta 10)', 'Las invitaciones de solo lectura son gratis', 'Créditos del plan a $1 = $1, acumulables 2 meses', 'Los créditos se comparten entre todo el equipo'], cta: 'Empezar' },

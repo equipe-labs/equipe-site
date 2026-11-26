@@ -36,6 +36,12 @@ export const promoLive = (now = Date.now()) => now >= PROMO.startsAt && now < PR
 /** "$11.42": a yearly amount as a month, to the cent. */
 export const perMonth = (usdYear: number) => `$${(Math.round((usdYear / 12) * 100) / 100).toFixed(2)}`;
 
+/**
+ * Credit packs, bought once (the app's pricing.js `packs`: equipe-cloud web/src/pricing.js). The bulk pack adds a volume
+ * bonus: $990 buys $1,100 of credits. A promotion's bonus and the volume bonus never stack (the larger one applies).
+ */
+export const PACKS: { usd: number; bonus?: number; popular?: boolean }[] = [{ usd: 25 }, { usd: 50 }, { usd: 100, popular: true }, { usd: 250 }, { usd: 990, bonus: 110 }];
+
 /** The tier selected by default (server-rendered, "Most teams start here"). */
 export const DEFAULT_TIER = 2;
 
