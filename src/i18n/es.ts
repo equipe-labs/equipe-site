@@ -141,9 +141,16 @@ const es: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: '¿Qué quieres crear?',
-    placeholder: 'Describe tu idea con tus propias palabras…',
-    examples: ['Un rastreador de hábitos con rachas diarias', 'Publicar lo que hice en Claude', 'Una página de reservas para mi estudio'],
+    label: "¿Qué negocio quieres montar?",
+    placeholder: "Un servicio que ayuda a pedir la visa O-1 sin abogados caros",
+    examples: ["Un servicio que ayuda a pedir la visa O-1 sin abogados caros", "Reservas y membresías para mi estudio de pilates", "Vender las tartas de mi panadería para recoger", "Una herramienta de pago que convierte llamadas de venta en correos de seguimiento"],
+    goalsLabel: "O empieza con un objetivo",
+    goals: [{ key: "local", label: "Conseguir más clientes para mi negocio local", starter: "Mi negocio local es " }, { key: "service", label: "Vender mi servicio en línea", starter: "El servicio que quiero vender en línea es " }, { key: "app", label: "Lanzar una app de pago", starter: "Quiero lanzar una app de pago que " }, { key: "expert", label: "Convertir lo que sé en un producto", starter: "Sé mucho de " }],
+    siteGoal: "Traer mi sitio actual",
+    goalLine: "Objetivo: {goal}",
+    goalRemove: "Quitar objetivo",
+    nextLabel: "Después, tu equipo",
+    steps: ["Investigar", "Planear", "Construir y lanzar", "Primeros clientes"],
     submit: 'Empezar',
     team: 'Todo el equipo',
     import: 'Importar un proyecto',
@@ -215,7 +222,7 @@ const es: Messages = {
     freeNote: 'Cuando se acaban los créditos gratis, tu equipo se detiene hasta que eliges un plan o añades créditos. Si nadie abre un equipo gratuito en 14 días, te enviamos un email y se borra 7 días después salvo que lo abras; antes puedes descargar tu proyecto.',
     faq: [{ question: '¿Pago mientras no estoy?', answer: 'No. Cuando tu equipo no trabaja, no cuesta nada.' }, { question: '¿Qué pasa cuando se acaban mis créditos?', answer: 'Solo entonces se detiene tu equipo. Añade créditos y continúa enseguida. También puedes fijar un tope mensual.' }, { question: '¿Los créditos mensuales se acumulan?', answer: 'Sí. Los créditos del plan Equipo se acumulan durante 2 meses.' }, { question: '¿Cuánto cuesta el plan Equipo?', answer: 'Depende de los créditos que elijas cada mes: {{m0}} al mes sin créditos (tu producto sigue en vivo), {{m1}} con {{c1}} en créditos, {{m2}} con {{c2}}, {{m3}} con {{c3}} o {{m4}} con {{c4}}. El pago anual es solo para la base de {{m0}}: {{fromYear}} al año, así que 2 meses son gratis; los créditos que elijas se siguen cobrando cada mes a $1 = $1 y se acumulan 3 meses.' }, { question: '¿Puedo mantener mi producto en vivo sin seguir construyendo?', answer: 'Sí. Elige cero créditos al mes y el plan Equipo cuesta {{m0}} al mes: tus sitios, dominios y almacenamiento siguen en vivo. Añade créditos cuando quieras un cambio.' }, { question: '¿Cuánto más pago si mi equipo crece?', answer: 'El plan Equipo incluye hasta 5 personas. Cada editor extra cuesta $5 al mes, hasta 10 personas por equipo. Las invitaciones de solo lectura son gratis, y los créditos se comparten entre todo el equipo, sin contarse por persona. Gratis incluye 2 personas.' }],
   },
-  band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué quieres crear. Tu equipo está listo en más o menos un minuto.' },
+  band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué negocio quieres montar. Tu equipo está listo en más o menos un minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Equipo', decisions: 'Decisiones', usage: 'Uso' },

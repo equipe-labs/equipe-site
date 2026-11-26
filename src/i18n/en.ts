@@ -146,9 +146,16 @@ export const en = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: 'What do you want to build?',
-    placeholder: 'Describe your idea in plain words…',
-    examples: ['A habit tracker with daily streaks', 'Take my Claude artifact live', 'A booking page for my studio'],
+    label: "What business do you want to run?",
+    placeholder: "A service that helps people apply for O-1 visas without expensive lawyers",
+    examples: ["A service that helps people apply for O-1 visas without expensive lawyers", "Bookings and memberships for my pilates studio", "Sell my bakery’s cakes for pickup", "A paid tool that turns sales calls into follow-up emails"],
+    goalsLabel: "Or start from a goal",
+    goals: [{ key: "local", label: "Get more customers for my local business", starter: "My local business is " }, { key: "service", label: "Sell my service online", starter: "The service I want to sell online is " }, { key: "app", label: "Launch a paid app", starter: "I want to launch a paid app that " }, { key: "expert", label: "Turn my expertise into a product", starter: "I know a lot about " }],
+    siteGoal: "Bring my existing site",
+    goalLine: "Goal: {goal}",
+    goalRemove: "Remove goal",
+    nextLabel: "Your team then",
+    steps: ["Research", "Plan", "Build & launch", "First customers"],
     submit: 'Start',
     team: 'Whole team',
     import: 'Import a project',
@@ -220,7 +227,7 @@ export const en = {
     freeNote: 'Free teams stop when the free credit is used, until you choose a plan or add credits. Free teams nobody opens for 14 days get an email and are deleted 7 days later unless you open them; you can download your project first.',
     faq: [{ question: 'Do I pay while I’m away?', answer: 'No. When your team is not working, it costs nothing.' }, { question: 'What happens when my credits run out?', answer: 'Your team stops only then. Add credits and it continues right away. You can also set a monthly cap.' }, { question: 'Do monthly credits carry over?', answer: 'Yes. Credits from the Team plan roll over for 2 months.' }, { question: 'What does the Team plan cost?', answer: 'It depends on the credits you choose each month: {{m0}} a month with no credits (your product stays live), {{m1}} with {{c1}} of credits, {{m2}} with {{c2}}, {{m3}} with {{c3}}, or {{m4}} with {{c4}}. Paying yearly applies to the {{m0}} base only: {{fromYear}} a year, so 2 months are free; the credits you choose stay monthly at $1 = $1 and roll over for 3 months.' }, { question: 'Can I keep my product live without building?', answer: 'Yes. Choose no monthly credits and the Team plan is {{m0}} a month: your sites, domains and storage stay live. Add credits whenever you want a change.' }, { question: 'How much more when my team grows?', answer: 'Up to 5 people are included in the Team plan. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and credits are shared by the whole team, not counted per person. Free includes 2 people.' }],
   },
-  band: { title: 'Start with your idea.', text: 'Tell the PM what you want to build. Your team is ready in about a minute.' },
+  band: { title: 'Start with your idea.', text: 'Tell the PM about the business you want to run. Your team is ready in about a minute.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Team', decisions: 'Decisions', usage: 'Usage' },

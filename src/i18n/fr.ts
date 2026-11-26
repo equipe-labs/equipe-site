@@ -142,9 +142,16 @@ const fr: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: 'Que voulez-vous créer ?',
-    placeholder: 'Décrivez votre idée avec vos mots…',
-    examples: ['Un suivi d’habitudes avec des séries quotidiennes', 'Mettre en ligne ce que j’ai fait dans Claude', 'Une page de réservation pour mon studio'],
+    label: "Quelle activité voulez-vous lancer ?",
+    placeholder: "Un service qui aide à obtenir un visa O-1 sans avocats hors de prix",
+    examples: ["Un service qui aide à obtenir un visa O-1 sans avocats hors de prix", "Réservations et abonnements pour mon studio de Pilates", "Vendre les gâteaux de ma boulangerie à emporter", "Un outil payant qui transforme les appels commerciaux en e-mails de suivi"],
+    goalsLabel: "Ou partez d’un objectif",
+    goals: [{ key: "local", label: "Attirer plus de clients dans mon commerce local", starter: "Mon commerce local, c’est " }, { key: "service", label: "Vendre mon service en ligne", starter: "Le service que je veux vendre en ligne : " }, { key: "app", label: "Lancer une application payante", starter: "Je veux lancer une application payante qui " }, { key: "expert", label: "Transformer mon expertise en produit", starter: "Je m’y connais très bien en " }],
+    siteGoal: "Apporter mon site existant",
+    goalLine: "Objectif : {goal}",
+    goalRemove: "Retirer l’objectif",
+    nextLabel: "Ensuite, votre équipe",
+    steps: ["Recherche", "Plan", "Création et lancement", "Premiers clients"],
     submit: 'Commencer',
     team: 'Toute l’équipe',
     import: 'Importer un projet',
@@ -216,7 +223,7 @@ const fr: Messages = {
     freeNote: 'Quand le crédit gratuit est utilisé, votre équipe s’arrête jusqu’à ce que vous choisissiez une offre ou ajoutiez des crédits. Les équipes gratuites que personne n’ouvre pendant 14 jours reçoivent un e-mail et sont supprimées 7 jours plus tard si vous ne les ouvrez pas ; vous pouvez d’abord télécharger votre projet.',
     faq: [{ question: 'Est-ce que je paie quand je ne suis pas là ?', answer: 'Non. Quand votre équipe ne travaille pas, cela ne coûte rien.' }, { question: 'Que se passe-t-il quand mes crédits sont épuisés ?', answer: 'Votre équipe ne s’arrête qu’à ce moment-là. Ajoutez des crédits et elle reprend aussitôt. Vous pouvez aussi fixer un plafond mensuel.' }, { question: 'Les crédits mensuels sont-ils reportés ?', answer: 'Oui. Les crédits de l’offre Équipe sont reportés pendant 2 mois.' }, { question: 'Combien coûte l’offre Équipe ?', answer: 'Cela dépend des crédits que vous choisissez chaque mois : {{m0}} par mois sans crédits (votre produit reste en ligne), {{m1}} avec {{c1}} de crédits, {{m2}} avec {{c2}}, {{m3}} avec {{c3}} ou {{m4}} avec {{c4}}. L’annuel ne concerne que la base de {{m0}} : {{fromYear}} par an, donc 2 mois offerts ; les crédits choisis restent mensuels à $1 = $1 et se reportent sur 3 mois.' }, { question: 'Puis-je garder mon produit en ligne sans continuer à construire ?', answer: 'Oui. Choisissez zéro crédit mensuel : l’offre Équipe coûte alors {{m0}} par mois, et vos sites, domaines et stockage restent en ligne. Ajoutez des crédits dès que vous voulez un changement.' }, { question: 'Combien de plus quand mon équipe grandit ?', answer: 'Le forfait Équipe inclut jusqu\'à 5 personnes. Chaque éditeur supplémentaire coûte 5 $ par mois, jusqu\'à 10 personnes par équipe. Les invitations en lecture seule sont gratuites, et les crédits sont partagés par toute l\'équipe, sans compter par personne. Gratuit inclut 2 personnes.' }],
   },
-  band: { title: 'Commencez par votre idée.', text: 'Dites au PM ce que vous voulez créer. Votre équipe est prête en une minute environ.' },
+  band: { title: 'Commencez par votre idée.', text: 'Parlez au PM de l’activité que vous voulez lancer. Votre équipe est prête en une minute environ.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Équipe', decisions: 'Décisions', usage: 'Usage' },

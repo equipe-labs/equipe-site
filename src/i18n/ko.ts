@@ -141,9 +141,16 @@ const ko: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: '무엇을 만들고 싶나요?',
-    placeholder: '만들고 싶은 걸 평소 말로 적어 보세요…',
-    examples: ['매일 연속 기록이 쌓이는 습관 트래커', 'Claude로 만든 아티팩트를 서비스로', '공방 예약 페이지'],
+    label: "어떤 사업을 하고 싶으세요?",
+    placeholder: "비싼 변호사 없이 O-1 비자 신청을 돕는 서비스",
+    examples: ["비싼 변호사 없이 O-1 비자 신청을 돕는 서비스", "내 필라테스 스튜디오의 예약과 회원권", "우리 빵집 케이크를 픽업 주문으로 판매", "영업 통화를 후속 이메일로 바꿔 주는 유료 도구"],
+    goalsLabel: "또는 목표에서 시작하기",
+    goals: [{ key: "local", label: "우리 동네 가게 손님 늘리기", starter: "제 가게는 " }, { key: "service", label: "내 서비스를 온라인으로 팔기", starter: "온라인으로 팔고 싶은 서비스는 " }, { key: "app", label: "유료 앱 출시하기", starter: "출시하고 싶은 유료 앱은 " }, { key: "expert", label: "내 전문 지식을 상품으로 만들기", starter: "제가 잘 아는 분야는 " }],
+    siteGoal: "지금 사이트 가져오기",
+    goalLine: "목표: {goal}",
+    goalRemove: "목표 빼기",
+    nextLabel: "그다음 팀이 하는 일",
+    steps: ["조사", "계획", "만들고 출시", "첫 고객"],
     submit: '시작하기',
     team: '팀 전체',
     import: '프로젝트 가져오기',
@@ -215,7 +222,7 @@ const ko: Messages = {
     freeNote: '무료 크레딧을 다 쓰면 플랜을 고르거나 크레딧을 추가할 때까지 팀이 멈춰요. 14일 동안 아무도 열지 않은 무료 팀에는 이메일을 보내고, 그 뒤 7일 안에 열지 않으면 삭제돼요. 그전에 프로젝트를 내려받을 수 있어요.',
     faq: [{ question: '자리를 비운 동안에도 돈이 드나요?', answer: '아니요. 팀이 일하지 않을 때는 비용이 들지 않아요.' }, { question: '크레딧이 떨어지면 어떻게 되나요?', answer: '그때만 팀이 멈춰요. 크레딧을 추가하면 바로 이어서 일해요. 월 한도도 정할 수 있어요.' }, { question: '월 크레딧은 이월되나요?', answer: '네. 팀 플랜으로 받은 크레딧은 2개월 동안 이월돼요.' }, { question: '팀 플랜은 얼마인가요?', answer: '매달 받을 크레딧 양에 따라 달라요. 크레딧 없이 월 {{m0}}(제품은 계속 운영돼요), {{c1}} 크레딧과 함께 월 {{m1}}, {{c2}} 크레딧과 함께 월 {{m2}}, {{c3}} 크레딧과 함께 월 {{m3}}, {{c4}} 크레딧과 함께 월 {{m4}} 요금이에요. 연간 결제는 기본료 {{m0}}에만 적용돼요. 연 {{fromYear}}라서 두 달이 무료이고, 고른 크레딧은 지금처럼 매달 $1 = $1로 결제되며 3개월 이월돼요.' }, { question: '더 만들지 않고 제품만 계속 켜 둘 수 있나요?', answer: '네. 매달 받을 크레딧을 없음으로 고르면 팀 플랜은 월 {{m0}} 요금이고, 사이트·도메인·저장 공간은 계속 운영돼요. 바꾸고 싶을 때 크레딧을 추가하면 돼요.' }, { question: '팀이 커지면 요금이 얼마나 늘어요?', answer: '팀 플랜에는 5명까지 포함돼 있어요. 편집자를 더 초대하면 1명당 월 $5이고, 한 팀에 최대 10명까지예요. 보기 전용 초대는 무료예요. 크레딧은 사람마다 따로 계산하지 않고 팀 전체가 함께 써요. 무료는 2명까지예요.' }],
   },
-  band: { title: '아이디어로 시작하세요.', text: 'PM에게 만들고 싶은 걸 말해 주세요. 팀은 1분 안팎이면 준비돼요.' },
+  band: { title: '아이디어로 시작하세요.', text: '하고 싶은 사업을 PM에게 말해 주세요. 팀은 1분 안팎이면 준비돼요.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: '팀', decisions: '결정', usage: '사용량' },

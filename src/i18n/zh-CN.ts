@@ -141,9 +141,16 @@ const zhCN: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: '你想做什么？',
-    placeholder: '用平常的话描述你的想法…',
-    examples: ['每天连续打卡的习惯应用', '把我在 Claude 里做的东西上线', '工作室的预约页面'],
+    label: "你想经营什么生意？",
+    placeholder: "帮人申请 O-1 签证、不用请昂贵律师的服务",
+    examples: ["帮人申请 O-1 签证、不用请昂贵律师的服务", "我的普拉提工作室的预约和会员", "让顾客预订我面包店的蛋糕、到店自取", "把销售电话变成跟进邮件的付费工具"],
+    goalsLabel: "或者从一个目标开始",
+    goals: [{ key: "local", label: "为我的本地店铺带来更多顾客", starter: "我的店是" }, { key: "service", label: "在网上卖我的服务", starter: "我想在网上卖的服务是" }, { key: "app", label: "推出一个付费应用", starter: "我想推出的付费应用是" }, { key: "expert", label: "把我的专业知识变成产品", starter: "我很懂的领域是" }],
+    siteGoal: "带上我现有的网站",
+    goalLine: "目标：{goal}",
+    goalRemove: "移除目标",
+    nextLabel: "接下来团队会做的事",
+    steps: ["调研", "规划", "构建并上线", "第一批顾客"],
     submit: '开始',
     team: '整个团队',
     import: '导入项目',
@@ -215,7 +222,7 @@ const zhCN: Messages = {
     freeNote: '免费点数用完后，团队会停下，直到你选择套餐或加点数。连续 14 天没人打开的免费团队会收到邮件，之后 7 天内仍未打开就会被删除；删除前可以下载你的项目。',
     faq: [{ question: '我不在的时候也要付钱吗？', answer: '不用。团队不工作时不产生任何费用。' }, { question: '点数用完会怎样？', answer: '只有那时团队才会停下。加点数后马上继续。你也可以设定每月上限。' }, { question: '月度点数会结转吗？', answer: '会。团队套餐的点数可结转 2 个月。' }, { question: '团队套餐多少钱？', answer: '取决于你每月选择的点数：不含点数每月 {{m0}}（产品保持在线），含 {{c1}} 点数每月 {{m1}}，含 {{c2}} 每月 {{m2}}，含 {{c3}} 每月 {{m3}}，含 {{c4}} 每月 {{m4}}。按年付只适用于 {{m0}} 的基础费：每年 {{fromYear}}，相当于免两个月；所选点数仍按月以 $1 = $1 计费，可结转 3 个月。' }, { question: '不再继续开发，只让产品保持在线可以吗？', answer: '可以。把每月点数选为零，团队套餐每月 {{m0}}，网站、域名和存储都保持在线。想改动时再加点数即可。' }, { question: '团队变大后会多收多少?', answer: '团队方案含 5 人。每增加一位编辑者每月 $5,每个团队最多 10 人。仅查看的邀请免费。点数不按人计算,由整个团队共用。免费版含 2 人。' }],
   },
-  band: { title: '从你的想法开始。', text: '告诉 PM 你想做什么，团队大约一分钟就能就绪。' },
+  band: { title: '从你的想法开始。', text: '告诉 PM 你想经营什么生意，团队大约一分钟就能就绪。' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: '团队', decisions: '决定', usage: '用量' },

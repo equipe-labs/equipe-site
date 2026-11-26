@@ -206,6 +206,13 @@ main.home > section.see { overflow-x: clip; }
 .final .fbox { width: 100%; margin-top: var(--s-6); text-align: left; }
 .final .idea-note { color: #B9BAC0; }
 .final .idea-chips button { color: #EFEDE7; background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }
+.final .idea-goal { color: #EFEDE7; background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }
+.final .idea-goal svg { stroke: #B9BAC0; }
+.final .idea-goal:hover { border-color: rgb(255 255 255 / 0.32); }
+.final .idea-goal[aria-pressed='true'] { border-color: #8FB0FF; background: rgb(143 176 255 / 0.14); box-shadow: inset 0 0 0 1px #8FB0FF; }
+.final .idea-goal[aria-pressed='true'] svg { stroke: #8FB0FF; }
+.final .idea-gl, .final .idea-next { color: #B9BAC0; }
+.final .idea-next .sep { stroke: #6E7079; }
 
 /* chat scene: user bubble = soft accent tint, agent text without a bubble, round avatars with centred icons */
 .wa .wa-msgs .me { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--text); border-radius: 16px 16px 4px 16px; border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
@@ -612,3 +619,4 @@ main.home > section.logos + section.see { padding-top: 120px; }
 @media (max-width: 420px) { :lang(ja) main.home .hero h1 { font-size: min(8vw, 32px); } }
 /* Example chips wrap onto a second centred row on wider screens instead of scrolling with cut-off ends (long German/French examples) */
 @media (min-width: 701px) { main.home .idea.big .idea-chips { flex-wrap: wrap; overflow: visible; justify-content: center; row-gap: 8px; } }
+

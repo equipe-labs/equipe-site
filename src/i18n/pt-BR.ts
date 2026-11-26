@@ -141,9 +141,16 @@ const ptBR: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: 'O que você quer criar?',
-    placeholder: 'Descreva sua ideia com suas palavras…',
-    examples: ['Um app de hábitos com sequências diárias', 'Colocar no ar o que fiz no Claude', 'Uma página de agendamento para meu estúdio'],
+    label: "Que negócio você quer montar?",
+    placeholder: "Um serviço que ajuda a tirar o visto O-1 sem advogados caros",
+    examples: ["Um serviço que ajuda a tirar o visto O-1 sem advogados caros", "Agendamentos e planos para o meu estúdio de pilates", "Vender os bolos da minha confeitaria para retirada", "Uma ferramenta paga que transforma ligações de venda em e-mails de follow-up"],
+    goalsLabel: "Ou comece por um objetivo",
+    goals: [{ key: "local", label: "Mais clientes para o meu negócio local", starter: "Meu negócio local é " }, { key: "service", label: "Vender meu serviço online", starter: "O serviço que quero vender online é " }, { key: "app", label: "Lançar um app pago", starter: "Quero lançar um app pago que " }, { key: "expert", label: "Transformar o que sei em um produto", starter: "Entendo muito de " }],
+    siteGoal: "Trazer meu site atual",
+    goalLine: "Objetivo: {goal}",
+    goalRemove: "Remover objetivo",
+    nextLabel: "Depois, seu time",
+    steps: ["Pesquisa", "Plano", "Construir e lançar", "Primeiros clientes"],
     submit: 'Começar',
     team: 'Time todo',
     import: 'Importar um projeto',
@@ -215,7 +222,7 @@ const ptBR: Messages = {
     freeNote: 'Quando o crédito grátis acaba, seu time para até você escolher um plano ou adicionar créditos. Times gratuitos que ninguém abre por 14 dias recebem um email e são apagados 7 dias depois, a menos que você os abra; antes disso você pode baixar seu projeto.',
     faq: [{ question: 'Eu pago enquanto estou fora?', answer: 'Não. Quando seu time não está trabalhando, não custa nada.' }, { question: 'O que acontece quando meus créditos acabam?', answer: 'Só então seu time para. Adicione créditos e ele continua na hora. Você também pode definir um limite mensal.' }, { question: 'Os créditos mensais acumulam?', answer: 'Sim. Os créditos do plano Time acumulam por 2 meses.' }, { question: 'Quanto custa o plano Time?', answer: 'Depende dos créditos que você escolhe todo mês: {{m0}} por mês sem créditos (seu produto continua no ar), {{m1}} com {{c1}} em créditos, {{m2}} com {{c2}}, {{m3}} com {{c3}} ou {{m4}} com {{c4}}. O anual vale só para a base de {{m0}}: {{fromYear}} por ano, então 2 meses saem grátis; os créditos que você escolher continuam mensais a $1 = $1 e acumulam por 3 meses.' }, { question: 'Posso manter meu produto no ar sem continuar construindo?', answer: 'Sim. Escolha zero créditos por mês e o plano Time custa {{m0}} por mês: seus sites, domínios e armazenamento continuam no ar. Adicione créditos quando quiser uma mudança.' }, { question: 'Quanto a mais pago quando minha equipe cresce?', answer: 'O plano Time inclui até 5 pessoas. Cada editor extra custa $5 por mês, até 10 pessoas por equipe. Convites somente para visualizar são grátis, e os créditos são compartilhados por toda a equipe, sem contar por pessoa. Grátis inclui 2 pessoas.' }],
   },
-  band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM o que você quer criar. Seu time fica pronto em cerca de um minuto.' },
+  band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM que negócio você quer montar. Seu time fica pronto em cerca de um minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Time', decisions: 'Decisões', usage: 'Uso' },

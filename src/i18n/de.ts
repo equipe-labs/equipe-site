@@ -141,9 +141,16 @@ const de: Messages = {
   },
   // The idea box (hero and closing band): it opens app.equipe.im/start?idea=<text>.
   prompt: {
-    label: 'Was möchtest du bauen?',
-    placeholder: 'Beschreib deine Idee in einfachen Worten …',
-    examples: ['Ein Gewohnheits-Tracker mit täglichen Serien', 'Mein Claude-Projekt live bringen', 'Eine Buchungsseite für mein Studio'],
+    label: "Welches Business willst du führen?",
+    placeholder: "Ein Service, der Menschen ohne teure Anwälte zum O-1-Visum verhilft",
+    examples: ["Ein Service, der Menschen ohne teure Anwälte zum O-1-Visum verhilft", "Buchungen und Mitgliedschaften für mein Pilates-Studio", "Die Torten meiner Bäckerei zur Abholung verkaufen", "Ein bezahltes Tool, das aus Verkaufsgesprächen Follow-up-Mails macht"],
+    goalsLabel: "Oder starte mit einem Ziel",
+    goals: [{ key: "local", label: "Mehr Kunden für mein lokales Geschäft", starter: "Mein lokales Geschäft ist " }, { key: "service", label: "Meine Dienstleistung online verkaufen", starter: "Online verkaufen möchte ich " }, { key: "app", label: "Eine bezahlte App starten", starter: "Ich möchte eine bezahlte App starten, die " }, { key: "expert", label: "Mein Fachwissen zu einem Produkt machen", starter: "Ich kenne mich sehr gut aus mit " }],
+    siteGoal: "Meine bestehende Website mitbringen",
+    goalLine: "Ziel: {goal}",
+    goalRemove: "Ziel entfernen",
+    nextLabel: "Dann macht dein Team",
+    steps: ["Recherche", "Plan", "Bauen & starten", "Erste Kunden"],
     submit: 'Loslegen',
     team: 'Ganzes Team',
     import: 'Projekt importieren',
@@ -215,7 +222,7 @@ const de: Messages = {
     freeNote: 'Sind die Gratis-Credits verbraucht, stoppt dein Team, bis du einen Plan wählst oder Credits hinzufügst. Kostenlose Teams, die 14 Tage niemand öffnet, bekommen eine E-Mail und werden 7 Tage später gelöscht, wenn du sie nicht öffnest; vorher kannst du dein Projekt herunterladen.',
     faq: [{ question: 'Zahle ich, während ich weg bin?', answer: 'Nein. Solange dein Team nicht arbeitet, kostet es nichts.' }, { question: 'Was passiert, wenn meine Credits aufgebraucht sind?', answer: 'Erst dann stoppt dein Team. Mit neuen Credits geht es sofort weiter. Du kannst auch ein Monatslimit setzen.' }, { question: 'Werden Monats-Credits übertragen?', answer: 'Ja. Credits aus dem Team-Plan bleiben 2 Monate erhalten.' }, { question: 'Was kostet der Team-Plan?', answer: 'Das hängt von den Credits ab, die du jeden Monat wählst: {{m0}} im Monat ohne Credits (dein Produkt bleibt live), {{m1}} mit {{c1}} an Credits, {{m2}} mit {{c2}}, {{m3}} mit {{c3}} oder {{m4}} mit {{c4}}. Jährlich gilt nur für die Grundgebühr von {{m0}}: {{fromYear}} im Jahr, also 2 Monate gratis; die gewählten Credits bleiben monatlich zu $1 = $1 und werden 3 Monate übertragen.' }, { question: 'Kann ich mein Produkt live halten, ohne weiterzubauen?', answer: 'Ja. Wähl keine monatlichen Credits, dann kostet der Team-Plan {{m0}} im Monat, und deine Seiten, Domains und dein Speicher bleiben live. Credits fügst du hinzu, sobald du etwas ändern willst.' }, { question: 'Wie viel kostet es mehr, wenn mein Team wächst?', answer: 'Der Team-Tarif enthält bis zu 5 Personen. Jede weitere Bearbeitung kostet $5 im Monat, bis zu 10 Personen pro Team. Einladungen nur zum Ansehen sind kostenlos. Credits werden nicht pro Person gezählt, sondern vom ganzen Team geteilt. Kostenlos enthält 2 Personen.' }],
   },
-  band: { title: 'Fang mit deiner Idee an.', text: 'Sag dem PM, was du bauen willst. Dein Team ist in etwa einer Minute bereit.' },
+  band: { title: 'Fang mit deiner Idee an.', text: 'Erzähl dem PM von dem Business, das du führen willst. Dein Team ist in etwa einer Minute bereit.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Team', decisions: 'Entscheidungen', usage: 'Nutzung' },
