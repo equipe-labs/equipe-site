@@ -8,7 +8,7 @@ const de: Messages = {
     ogTitle: 'equipe — Ein Startup-Team für eine Person',
     ogDescription:
       'Aus deinem Claude-Projekt wird ein echter Dienst. Ein PM, Engineers, Designer, QA und ein Datenanalyst bauen, veröffentlichen und entwickeln ihn weiter. Du gibst frei.',
-    ogImageAlt: 'equipe — Dein KI-Team führt dein Business. Du setzt das Ziel. Das Team baut, startet und lässt es wachsen. Ohne Programmieren.',
+    ogImageAlt: 'equipe — Dein KI-Startup-Team. Baut es. Lässt es wachsen. Ohne Programmieren. Daneben der Team-Chat: der Plan des PM für einen Keramik-Shop, mit den Schritten von Entwickler und Designer.',
   },
   ui: {
     skip: 'Zum Inhalt springen',

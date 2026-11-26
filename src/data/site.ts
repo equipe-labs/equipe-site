@@ -28,8 +28,8 @@ export const SITE = {
   architecture: 'https://github.com/equipe-labs/equipe/blob/main/docs/ARCHITECTURE.md',
   supportEmail: 'support@equipe.im',
   issues: 'https://github.com/equipe-labs/equipe/issues',
-  /** Fallback social image (English); each language page uses /og/v2/<slug>.png (scripts/og.mjs). */
-  ogImage: '/og/v2/en.png',
+  /** Fallback social image (English); each language page uses /og/v3/<slug>.png (scripts/og-home.mjs). */
+  ogImage: '/og/v3/en.png',
   themeColor: '#F6F5F1',
   themeColorDark: '#17181C',
 };

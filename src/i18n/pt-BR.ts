@@ -8,7 +8,7 @@ const ptBR: Messages = {
     ogTitle: 'equipe — Um time de startup para uma pessoa só',
     ogDescription:
       'Leve o que você fez no Claude a um serviço de verdade. Um PM, engenheiros, um designer, QA e um analista de dados constroem, publicam e fazem crescer. Você aprova.',
-    ogImageAlt: 'equipe — Seu time de IA toca o seu negócio. Você define a meta. O time constrói, lança e faz crescer. Sem programar.',
+    ogImageAlt: 'equipe — Seu time de startup com IA. Constrói. Faz crescer. Sem programar. Ao lado, o chat do time: o plano do PM para uma loja de cerâmica, com os passos do engenheiro e do designer.',
   },
   ui: {
     skip: 'Ir para o conteúdo',

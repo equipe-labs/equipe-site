@@ -11,6 +11,7 @@
     "test": "astro check",
     "build": "astro check && astro build && node scripts/llms-articles.mjs",
     "preview": "astro preview",
+    "og:home": "node scripts/og-home.mjs",
     "og:blog": "node scripts/og-blog.mjs",
     "og:ai": "node scripts/og-ai.mjs"
   },

@@ -1,16 +1,14 @@
-// Export the social images (1200x630 PNG, also the twitter:image) into public/og/v2/:
-//   <slug>.png          home and every page without its own image, one per language (English is `en`):
-//                       "Your AI team runs your business." beside a goal card for a demo business (Tidepool Ceramics,
-//                       the live demo at tidepool.equipe.page) with the team's latest work and a decision to approve.
+// Export the /pricing and /blog social images (1200x630 PNG, also the twitter:image) into public/og/v2/
+// (the home image, used by every other page, comes from scripts/og-home.mjs into public/og/v3/):
 //   pricing-<slug>.png  /pricing: the free start and the Team plan's lowest price (src/data/plan.ts).
 //   blog-<slug>.png     /blog: the latest three articles (English and Korean only, like the blog).
-// The card parts follow the web app: the growth target card, the role marks (runtime/agent/brand-assets.js in
+// The card parts follow the web app: the role marks (runtime/agent/brand-assets.js in
 // equipe-cloud, drawn in one neutral tone with the PM in equipe blue) and the primary button.
-// public/og.png stays as a copy of the English image for links already shared. The folder name (v2) busts social caches;
+// The folder name (v2) busts social caches;
 // bump it when the look changes. Also writes public/favicon.ico (32x32 PNG in an ICO container) from public/favicon.svg.
 // Run: node scripts/og.mjs   (needs sharp and Google Chrome; Chrome draws the text with the Mac's system fonts)
 import sharp from 'sharp';
-import { copyFile, mkdir, readFile, readdir, writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -37,19 +35,7 @@ const ROLE_KEYS = ['pm', 'engineer', 'designer', 'qa', 'data']; // the order of 
 const glyph = (k, w = 2) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GLYPHS[k]}</svg>`;
 const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 
-// The home card's words. The business is made up (the demo site is real); the numbers are an example.
-const HOME = {
-  en: { h: 'Your AI team runs your business.', sub: 'Set the goal. The team builds, launches and grows it. No coding needed.', goal: 'Goal this month', unit: 'orders', a: ['Added photos of every glaze', 'Instagram brought 9 of 14 orders', 'Next: an offer for past buyers'], ok: 'Approve' },
-  ko: { h: 'AI 팀이\n내 사업을 운영해요.', sub: '목표만 정하세요. 만들고, 출시하고, 키우는 건 팀이 해요. 코딩은 몰라도 돼요.', goal: '이번 달 목표', unit: '주문', a: ['유약마다 사진을 올렸어요', '주문 14건 중 9건이 인스타그램에서 왔어요', '다음: 지난 구매자에게 새 작품 소식 메일 보내기'], ok: '승인' },
-  ja: { h: 'AIチームが、\nあなたのビジネスを回す。', sub: '目標を決めるだけ。作る、公開する、伸ばすのはチーム。コードは要りません。', goal: '今月の目標', unit: '件の注文', a: ['すべての釉薬に写真を追加', '注文14件のうち9件はInstagramから', '次：過去の購入者に新作をご案内'], ok: '承認' },
-  'zh-CN': { h: 'AI 团队\n帮你经营生意。', sub: '定好目标就行。开发、上线和增长都交给团队。不用写代码。', goal: '本月目标', unit: '笔订单', a: ['为每种釉色都配上了照片', '14 笔订单中有 9 笔来自 Instagram', '下一步：给老顾客发邮件介绍新品'], ok: '批准' },
-  es: { h: 'Tu equipo de IA lleva tu negocio.', sub: 'Tú pones la meta. El equipo construye, lanza y hace crecer. Sin programar.', goal: 'Meta del mes', unit: 'pedidos', a: ['Añadió fotos de cada esmalte', 'Instagram trajo 9 de 14 pedidos', 'Siguiente: una oferta para antiguos clientes'], ok: 'Aprobar' },
-  'pt-BR': { h: 'Seu time de IA toca o seu negócio.', sub: 'Você define a meta. O time constrói, lança e faz crescer. Sem programar.', goal: 'Meta do mês', unit: 'pedidos', a: ['Adicionou fotos de cada esmalte', 'O Instagram trouxe 9 de 14 pedidos', 'Próximo: uma oferta para quem já comprou'], ok: 'Aprovar' },
-  de: { h: 'Dein KI\u2011Team führt dein Business.', sub: 'Du setzt das Ziel. Das Team baut, startet und lässt es wachsen. Ohne Programmieren.', goal: 'Ziel diesen Monat', unit: 'Bestellungen', a: ['Fotos zu jeder Glasur ergänzt', 'Instagram brachte 9 von 14 Bestellungen', 'Als Nächstes: ein Angebot für Stammkunden'], ok: 'Freigeben' },
-  fr: { h: 'Votre équipe IA fait tourner votre activité.', sub: 'Vous fixez l’objectif. L’équipe construit, lance et fait grandir. Sans coder.', goal: 'Objectif du mois', unit: 'commandes', a: ['Photos ajoutées pour chaque émail', 'Instagram a apporté 9 commandes sur 14', 'Ensuite\u00a0: une offre pour les anciens clients'], ok: 'Approuver' },
-};
 const CJK = (lang) => /^(ko|ja|zh)/.test(lang);
-const TIDEPOOL = `data:image/png;base64,${(await sharp('public/gallery/tidepool-light.png').extract({ left: 40, top: 60, width: 1360, height: 560 }).resize(272, 112).png().toBuffer()).toString('base64')}`;
 
 // The frame every card shares: paper background, logo, a left column (headline, line under it), the team, a right panel.
 // The headline shrinks until the left column fits above the team row (long languages).
@@ -89,38 +75,6 @@ function page(lang, m, { h, sub, right, css = '' }) {
   </script></body></html>`;
 }
 
-function homeCard(lang, m, c) {
-  const roles = m.team.roles;
-  const bars = [3, 4, 4, 6, 5, 8, 7, 9, 11, 14];
-  const row = (k, name, text, tail = '') => `<li><span class="av${k === 'pm' ? ' pm' : ''}">${glyph(k, 2.2)}</span><span class="rt"><b>${esc(name)}</b><span>${esc(text)}</span></span>${tail}</li>`;
-  const right = `<div class="card hc">
-    <div class="biz"><span class="thumb"></span><span class="bn"><b>Tidepool Ceramics</b><span class="addr">${LOCK}tidepool.equipe.page</span></span></div>
-    <div class="goal mu">${esc(c.goal)}</div>
-    <div class="big"><b>14</b><span>/ 20 ${esc(c.unit)}</span></div>
-    <div class="prog"><i></i></div>
-    <div class="chart">${bars.map((v) => `<i style="height:${Math.round((v / 14) * 100)}%"></i>`).join('')}</div>
-    <ul>${row('designer', roles[2].name, c.a[0])}${row('data', roles[4].name, c.a[1])}${row('pm', roles[0].name, c.a[2], `<span class="btn">${esc(c.ok)}</span>`)}</ul>
-  </div>`;
-  const css = `
-  .hc { padding: 22px 26px 20px; }
-  .biz { display: flex; align-items: center; gap: 14px; }
-  .thumb { width: 68px; height: 28px; border-radius: 7px; background: #F3EEE6 url(${TIDEPOOL}) center / cover; box-shadow: inset 0 0 0 1px #0000001A; flex: none; }
-  .bn { display: grid; gap: 1px; } .bn b { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
-  .addr { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; color: #5D5D5D; font-weight: 500; } .addr svg { width: 11px; height: 11px; }
-  .goal { margin-top: 20px; font-size: 17px; font-weight: 500; }
-  .big { display: flex; align-items: baseline; gap: 10px; margin-top: 2px; white-space: nowrap; }
-  .big b { font-size: 72px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
-  .big span { font-size: 25px; color: #5D5D5D; font-weight: 600; letter-spacing: -0.015em; }
-  .prog { margin-top: 16px; height: 10px; border-radius: 9px; background: #0000000F; overflow: hidden; } .prog i { display: block; height: 100%; width: 70%; border-radius: 9px; background: #2F5BEA; }
-  .chart { margin-top: 16px; display: flex; align-items: flex-end; gap: 8px; height: 40px; }
-  .chart i { flex: 1; border-radius: 5px 5px 2px 2px; background: #2F5BEA24; } .chart i:last-child { background: #2F5BEA; }
-  ul { list-style: none; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid #0000001A; display: grid; gap: 12px; }
-  li { display: flex; align-items: center; gap: 12px; }
-  .rt { flex: 1; min-width: 0; display: grid; gap: 1px; font-size: 16px; line-height: 1.3; color: #363636; }
-  .rt b { font-size: 13.5px; font-weight: 600; color: #5D5D5D; }
-  .rt span { text-wrap: balance; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }`;
-  return page(lang, m, { h: c.h, sub: c.sub, right, css });
-}
 
 function pricingCard(lang, m) {
   const P = m.pages.pricing, pl = m.plans;
@@ -189,8 +143,6 @@ for (const l of LOCALES) {
   if (!msgs && l.code !== 'en') continue; // no translation, no page, no image
   const m = msgs ?? (await import('../src/i18n/en.ts')).en;
   const name = l.slug || 'en';
-  const home = `${DIR}/${name}.png`;
-  await render(homeCard(l.lang, m, HOME[l.code] ?? HOME.en), home); await report(home);
   const pricing = `${DIR}/pricing-${name}.png`;
   await render(pricingCard(l.lang, m), pricing); await report(pricing);
   if (BLOG_LANGS.includes(l.code) && existsSync(`src/content/blog/${l.code}`)) {
@@ -200,7 +152,6 @@ for (const l of LOCALES) {
     await render(blogCard(l.lang, m, blogUi(l.code), posts.slice(0, 3)), blog); await report(blog);
   }
 }
-await copyFile(`${DIR}/en.png`, 'public/og.png');
 
 // favicon.ico: one 32x32 PNG image inside an ICO header.
 const png = await sharp('public/favicon.svg', { density: 384 }).resize(32, 32).png().toBuffer();

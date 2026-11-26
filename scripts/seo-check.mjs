@@ -149,7 +149,7 @@ for (const { lang, path } of LOCALES) {
   const html = pages.get(CANONICAL + path);
   const src = html && meta(html, 'og:image')[0];
   const slug = path === '/' ? 'en' : path.replaceAll('/', '');
-  check(src === `${CANONICAL}/og/v2/${slug}.png`, `${path} og:image is its own language image (${src})`);
+  check(src === `${CANONICAL}/og/v3/${slug}.png`, `${path} og:image is its own language image (${src})`);
   if (!src) continue;
   check(meta(html, 'og:image:width')[0] === '1200' && meta(html, 'og:image:height')[0] === '630', `${path} og:image size meta 1200x630`);
   const res = await get(src);

@@ -8,7 +8,7 @@ const zhCN: Messages = {
     ogTitle: 'equipe — 一个人的创业团队',
     ogDescription:
       '把你在 Claude 里做的东西变成真正的服务。PM、工程师、设计师、QA 和数据分析师负责开发、上线和增长。你只需批准。',
-    ogImageAlt: 'equipe — AI 团队帮你经营生意。定好目标就行。开发、上线和增长都交给团队。不用写代码。',
+    ogImageAlt: 'equipe — 你的 AI 创业团队。帮你做出来，帮你做大。不用写代码。旁边是团队聊天：PM 搭建陶瓷店的计划，以及工程师和设计师的步骤。',
   },
   ui: {
     skip: '跳到正文',

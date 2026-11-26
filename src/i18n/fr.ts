@@ -9,7 +9,7 @@ const fr: Messages = {
     ogTitle: 'equipe — Une équipe de startup pour une seule personne',
     ogDescription:
       'Faites de votre projet Claude un vrai service. Un PM, des ingénieurs, un designer, la QA et un analyste de données le construisent, le lancent et le font grandir. Vous approuvez.',
-    ogImageAlt: 'equipe — Votre équipe IA fait tourner votre activité. Vous fixez l’objectif. L’équipe construit, lance et fait grandir. Sans coder.',
+    ogImageAlt: 'equipe — Votre équipe de startup IA. Elle construit. Elle fait grandir. Sans coder. À côté, la discussion de l’équipe : le plan du PM pour une boutique de céramique, avec les étapes de l’ingénieur et du designer.',
   },
   ui: {
     skip: 'Aller au contenu',
