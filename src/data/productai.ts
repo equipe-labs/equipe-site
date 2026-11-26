@@ -134,7 +134,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: 'One place to look', text: 'Product › AI shows each feature with a small live demo and a rough monthly cost, then what each product spent, a 30-day trend and the most used features.' },
       ],
       models: 'Your team picks the model for each job automatically: a fast, inexpensive one for chat and short summaries, and a stronger one only when the job needs it.',
-      panelAlt: 'The AI panel in equipe: two products with their spending this month against their limits, a 30-day trend, the most used features and the monthly limit choices',
+      panelAlt: 'The AI panel in equipe for one product: what it spent this month against its limit, a 30-day trend, the most used features and the monthly limit choices',
       panelCaption: 'Product › AI in your product, with sample numbers.',
     },
     security: {
@@ -243,7 +243,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: '한곳에서 확인해요', text: '제품 › 제품 속 AI에서 기능마다 작은 실시간 데모와 대략적인 월 비용을 보여 주고, 이어서 제품별 사용액, 30일 추이, 많이 쓰인 기능을 보여 줘요.' },
       ],
       models: '팀이 일마다 모델을 자동으로 골라요. 채팅과 짧은 요약에는 빠르고 저렴한 모델을, 꼭 필요할 때만 더 강한 모델을 써요.',
-      panelAlt: 'equipe의 AI 패널: 두 제품의 이번 달 사용액과 한도, 30일 추이, 많이 쓰인 기능, 월 한도 선택지',
+      panelAlt: 'equipe의 AI 패널: 한 제품의 이번 달 사용액과 한도, 30일 추이, 많이 쓰인 기능, 월 한도 선택지',
       panelCaption: '제품 › 제품 속 AI 화면이에요. 숫자는 예시예요.',
     },
     security: {
@@ -352,7 +352,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: '確認はひとつの場所で', text: 'プロダクト › プロダクトのAIでは、各機能を小さなライブデモとおおよその月額で表示し、続いてプロダクトごとの利用額、30日間の推移、よく使われている機能を表示します。' },
       ],
       models: 'チームは仕事ごとにモデルを自動で選びます。チャットや短い要約には速くて安価なモデルを、必要なときだけより強力なモデルを使います。',
-      panelAlt: 'equipeのAIパネル：2つのプロダクトの今月の利用額と上限、30日間の推移、よく使われている機能、月の上限の選択肢',
+      panelAlt: 'equipeのAIパネル：1つのプロダクトの今月の利用額と上限、30日間の推移、よく使われている機能、月の上限の選択肢',
       panelCaption: 'プロダクト › プロダクトのAI（数字はサンプルです）。',
     },
     security: {
@@ -461,7 +461,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: '一处查看', text: '在“产品 › 产品中的 AI”里，每个功能都有一个小型实时演示和大致的月费用，下面是每个产品的花费、30 天趋势和最常用的功能。' },
       ],
       models: '团队会为每项工作自动选择模型：聊天和简短摘要用快速、便宜的模型，只有工作需要时才用更强的模型。',
-      panelAlt: 'equipe 的 AI 面板：两个产品本月的花费与上限、30 天趋势、最常用的功能和每月上限选项',
+      panelAlt: 'equipe 的 AI 面板：一个产品本月的花费与上限、30 天趋势、最常用的功能和每月上限选项',
       panelCaption: '产品 › 产品中的 AI，数字为示例。',
     },
     security: {
@@ -570,7 +570,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: 'Todo en un solo lugar', text: 'Producto › IA en tu producto muestra cada función con una pequeña demo en vivo y un costo mensual aproximado, y luego lo que gastó cada producto, la tendencia de 30 días y las funciones más usadas.' },
       ],
       models: 'Tu equipo elige automáticamente el modelo para cada tarea: uno rápido y económico para el chat y los resúmenes cortos, y uno más potente solo cuando la tarea lo necesita.',
-      panelAlt: 'El panel de IA en equipe: dos productos con su gasto de este mes frente a sus límites, una tendencia de 30 días, las funciones más usadas y las opciones de límite mensual',
+      panelAlt: 'El panel de IA en equipe para un producto: su gasto de este mes frente a su límite, una tendencia de 30 días, las funciones más usadas y las opciones de límite mensual',
       panelCaption: 'Producto › IA en tu producto, con cifras de ejemplo.',
     },
     security: {
@@ -679,7 +679,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: 'Tudo num só lugar', text: 'Produto › IA no seu produto mostra cada recurso com uma pequena demonstração ao vivo e um custo mensal aproximado, depois quanto cada produto gastou, a tendência de 30 dias e os recursos mais usados.' },
       ],
       models: 'Seu time escolhe automaticamente o modelo de cada tarefa: um rápido e barato para chat e resumos curtos, e um mais forte só quando a tarefa pede.',
-      panelAlt: 'O painel de IA no equipe: dois produtos com o gasto deste mês em relação aos limites, uma tendência de 30 dias, os recursos mais usados e as opções de limite mensal',
+      panelAlt: 'O painel de IA no equipe para um produto: o gasto deste mês em relação ao limite, uma tendência de 30 dias, os recursos mais usados e as opções de limite mensal',
       panelCaption: 'Produto › IA no seu produto, com números de exemplo.',
     },
     security: {
@@ -788,7 +788,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: 'Alles an einem Ort', text: 'Produkt › KI in deinem Produkt zeigt jede Funktion mit einer kleinen Live-Demo und groben Monatskosten, dann, was jedes Produkt ausgegeben hat, einen 30-Tage-Verlauf und die meistgenutzten Funktionen.' },
       ],
       models: 'Dein Team wählt das Modell für jede Aufgabe automatisch: ein schnelles, günstiges für Chat und kurze Zusammenfassungen und ein stärkeres nur, wenn die Aufgabe es braucht.',
-      panelAlt: 'Das KI-Panel in equipe: zwei Produkte mit ihren Ausgaben in diesem Monat im Vergleich zum Limit, ein 30-Tage-Verlauf, die meistgenutzten Funktionen und die Auswahl für das Monatslimit',
+      panelAlt: 'Das KI-Panel in equipe für ein Produkt: die Ausgaben in diesem Monat im Vergleich zum Limit, ein 30-Tage-Verlauf, die meistgenutzten Funktionen und die Auswahl für das Monatslimit',
       panelCaption: 'Produkt › KI in deinem Produkt, mit Beispielzahlen.',
     },
     security: {
@@ -897,7 +897,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
         { title: 'Tout au même endroit', text: 'Produit › L’IA dans votre produit montre chaque fonction avec une petite démo en direct et un coût mensuel approximatif, puis les dépenses de chaque produit, la tendance sur 30 jours et les fonctions les plus utilisées.' },
       ],
       models: 'Votre équipe choisit automatiquement le modèle pour chaque tâche : un modèle rapide et économique pour le chat et les résumés courts, et un plus puissant seulement quand la tâche l’exige.',
-      panelAlt: 'Le panneau IA dans equipe : deux produits avec leurs dépenses du mois face à leurs limites, une tendance sur 30 jours, les fonctions les plus utilisées et les choix de limite mensuelle',
+      panelAlt: 'Le panneau IA dans equipe pour un produit : ses dépenses du mois face à sa limite, une tendance sur 30 jours, les fonctions les plus utilisées et les choix de limite mensuelle',
       panelCaption: 'Produit › L’IA dans votre produit, avec des chiffres d’exemple.',
     },
     security: {

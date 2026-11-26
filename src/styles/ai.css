@@ -65,12 +65,23 @@ main.pg .ai-feats, main.pg .ai-how, main.pg .ai-price, main.pg .ai-sec { padding
 .v-reviews li::before { content: ''; position: absolute; left: 1px; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .v-describe .out, .v-reply .draft { padding: 9px 11px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
 .ai-vis .use { align-self: flex-end; padding: 4px 12px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; }
-.v-image .pic { position: relative; height: 66px; border-radius: 10px; overflow: hidden; background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 22%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 8%, var(--surface)) 55%, color-mix(in srgb, var(--text) 16%, var(--surface)) 56%, color-mix(in srgb, var(--text) 10%, var(--surface)) 100%); border: 1px solid var(--line); }
-.v-image .cup { position: absolute; left: 50%; bottom: 12px; width: 34px; height: 24px; margin-left: -17px; border-radius: 3px 3px 12px 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
-.v-image .cup::after { content: ''; position: absolute; right: -9px; top: 4px; width: 9px; height: 11px; border: 2px solid var(--surface); border-left: 0; border-radius: 0 7px 7px 0; }
-.v-image .steam { position: absolute; left: 50%; bottom: 40px; width: 12px; height: 14px; margin-left: -6px; border-left: 2px solid color-mix(in srgb, var(--surface) 80%, transparent); border-radius: 50%; }
-.v-image .use { position: absolute; right: 16px; bottom: 16px; }
-.v-image .pic { margin-bottom: 26px; }
+.v-image .pic { display: block; width: 100%; height: 96px; flex: none; fill: none; stroke: none; border-radius: 10px; border: 1px solid var(--line); --p-wall1: #E9EEF8; --p-wall2: #F7F4EF; --p-light: #FFFFFF; --p-table: #DCD3C8; --p-grain: #CFC5B8; --p-cup: #FFFFFF; --p-coffee: #B99A7C; --p-foam: #F3E9DD; --p-shadow: #0A0A0C14; --p-edge: #0A0A0C1F; }
+:root[data-theme='dark'] .v-image .pic { --p-wall1: #2A3040; --p-wall2: #262422; --p-light: #3A4255; --p-table: #47403A; --p-grain: #3D3732; --p-cup: #ECEAE4; --p-coffee: #8C6F55; --p-foam: #D9CBBB; --p-shadow: #00000059; --p-edge: #FFFFFF1F; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .v-image .pic { --p-wall1: #2A3040; --p-wall2: #262422; --p-light: #3A4255; --p-table: #47403A; --p-grain: #3D3732; --p-cup: #ECEAE4; --p-coffee: #8C6F55; --p-foam: #D9CBBB; --p-shadow: #00000059; --p-edge: #FFFFFF1F; } }
+.v-image .p-wall1 { stop-color: var(--p-wall1); } .v-image .p-wall2 { stop-color: var(--p-wall2); } .v-image .p-light { stop-color: var(--p-light); stop-opacity: .9; } .v-image .p-light0 { stop-color: var(--p-light); stop-opacity: 0; }
+.v-image .p-table { fill: var(--p-table); } .v-image .p-grain { fill: none; stroke: var(--p-grain); stroke-width: 1.2; } .v-image .p-shadow { fill: var(--p-shadow); }
+.v-image .p-saucer, .v-image .p-cup { fill: var(--p-cup); stroke: var(--p-edge); stroke-width: 1; } .v-image .p-handle { fill: none; stroke: var(--p-cup); stroke-width: 5; stroke-linecap: round; }
+.v-image .p-coffee { fill: var(--p-coffee); } .v-image .p-foam { fill: var(--p-foam); } .v-image .p-steam { fill: none; stroke: var(--p-cup); stroke-width: 2.2; stroke-linecap: round; opacity: .75; }
+.v-image .use { position: absolute; right: 24px; bottom: 24px; box-shadow: 0 2px 8px rgb(10 10 12 / 0.18); }
+.v-leads .inbox { display: grid; gap: 6px; }
+.v-leads .row { padding: 9px 11px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.v-leads .row.hot { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.v-leads .msg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v-leads .tagrow { margin-top: 6px !important; }
+.v-leads .row.ghost { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 11px; opacity: .7; }
+.v-leads .row.ghost i { display: block; height: 7px; border-radius: 99px; background: color-mix(in srgb, var(--text) 10%, transparent); }
+.v-leads .row.ghost i:first-child { flex: 1; max-width: 62%; } .v-leads .row.ghost i:last-child { width: 38px; margin-left: auto; }
+.v-leads .row.ghost + .row.ghost i:first-child { max-width: 48%; }
 .v-leads .tagrow { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--muted); }
 .v-leads .tag { padding: 3px 11px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 12px; }
 .v-moderation ul { display: grid; gap: 6px; }
@@ -97,6 +108,8 @@ main.pg .ai-feats, main.pg .ai-how, main.pg .ai-price, main.pg .ai-sec { padding
 .ai-shot .th-dark { display: none; }
 :root[data-theme='dark'] .ai-shot .th-dark { display: block; }
 :root[data-theme='dark'] .ai-shot .th-light { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .ai-shot .th-dark { display: block; } :root:not([data-theme]) .ai-shot .th-light { display: none; } }
+.ai-shot picture img { display: block; width: 100%; height: auto; }
 .ai-shot figcaption { margin-top: 14px; font-size: 14px; line-height: 1.5; color: var(--muted); }
 
 /* Pricing */

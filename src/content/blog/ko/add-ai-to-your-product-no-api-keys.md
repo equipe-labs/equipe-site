@@ -34,7 +34,7 @@ equipe에서는 이 과정을 모두 건너뛰어요.
 3. **페이지에 채팅을 넣어요.** 떠 있는 채팅 버튼이나 채팅 전용 페이지로요. 제품 디자인에 맞춰, 라이트·다크 모드 모두, 방문자의 언어로요. 답변은 써지는 대로 바로 보여요.
 4. **실제 질문으로 테스트하고 보여 줘요.**
 
-<figure><picture><img class="th-light" src="/screens/ai/widget-light.webp" width="1200" height="1108" loading="lazy" alt="데모 여행사 사이트에 들어간 기본 채팅 위젯이 예약 취소에 대한 질문에 답하는 모습" /><img class="th-dark" src="/screens/ai/widget-dark.webp" width="1200" height="1108" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Sunny Days Travel에 들어간 기본 채팅 위젯이에요. 여행사는 데모용으로 지어낸 곳이고, 답변은 실제 서비스에서 나왔어요.</figcaption></figure>
+<figure><picture><img class="th-light" src="/screens/ai/widget-light.webp" width="1520" height="1120" loading="lazy" alt="데모 여행사 사이트에 들어간 기본 채팅 위젯이 예약 취소에 대한 질문에 답하는 모습" /><img class="th-dark" src="/screens/ai/widget-dark.webp" width="1520" height="1120" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Sunny Days Travel에 들어간 기본 채팅 위젯이에요. 여행사는 데모용으로 지어낸 곳이고, 답변은 실제 서비스에서 나왔어요.</figcaption></figure>
 
 ## 넣을 수 있는 기능
 
@@ -55,7 +55,7 @@ equipe에서는 이 과정을 모두 건너뛰어요.
 - **방문자별 한도.** 한 사람이나 스크립트 하나가 1분에 메시지 수백 개를 보낼 수 없어요.
 - **한곳에서 확인.** AI 패널에서 제품마다 이번 달 사용액과 한도, 30일 추이, 들어온 요청 수, 가장 많이 쓰인 기능을 보여 줘요. 모델 이름 없이 쉬운 말로요.
 
-<figure><picture><img class="th-light" src="/screens/ai/panel-light.webp" width="1200" height="1065" loading="lazy" alt="equipe의 AI 패널: 두 제품의 이번 달 사용액과 한도, 30일 추이, 많이 쓰인 기능, 월 한도 선택지" /><img class="th-dark" src="/screens/ai/panel-dark.webp" width="1200" height="1065" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>제품 › 제품 속 AI 화면이에요. 숫자는 예시예요.</figcaption></figure>
+<figure><picture><img class="th-light" src="/screens/ai/panel-light.webp" width="1040" height="1078" loading="lazy" alt="equipe의 AI 패널: 한 제품의 이번 달 사용액과 한도, 30일 추이, 많이 쓰인 기능, 월 한도 선택지" /><img class="th-dark" src="/screens/ai/panel-dark.webp" width="1040" height="1078" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>제품 › 제품 속 AI 화면이에요. 숫자는 예시예요.</figcaption></figure>
 
 ## 비용
 

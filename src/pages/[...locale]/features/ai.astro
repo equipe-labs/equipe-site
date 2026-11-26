@@ -93,8 +93,8 @@ const arrow = 'M5 12h14M13 6l6 6-6 6';
                 {k === 'reviews' && <><p class="cnt"><span class="stars">★★★★★</span>{v.reviews.count}</p><ul>{v.reviews.lines.map((l) => <li>{l}</li>)}</ul></>}
                 {k === 'describe' && <><p class="paste">{v.describe.notes}</p><p class="out">{v.describe.out}</p><p class="use">{v.describe.use}</p></>}
                 {k === 'reply' && <><p class="b them">{v.reply.incoming}</p><p class="draft">{v.reply.draft}</p><p class="use">{v.reply.use}</p></>}
-                {k === 'image' && <><p class="field"><svg viewBox="0 0 24 24"><path d={spark} /></svg>{v.image.prompt}</p><div class="pic"><i class="cup"></i><i class="steam"></i></div><p class="use">{v.image.use}</p></>}
-                {k === 'leads' && <><p class="b them">{v.leads.msg}</p><p class="tagrow"><span class="tag">{v.leads.tag}</span><span>{v.leads.next}</span></p></>}
+                {k === 'image' && <><p class="field"><svg viewBox="0 0 24 24"><path d={spark} /></svg>{v.image.prompt}</p><svg class="pic" viewBox="0 0 480 120" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id={`pw-${code}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="p-wall1" /><stop offset="1" class="p-wall2" /></linearGradient><radialGradient id={`pl-${code}`} cx=".7" cy="0" r=".6"><stop offset="0" class="p-light" /><stop offset="1" class="p-light0" /></radialGradient></defs><rect width="480" height="120" fill={`url(#pw-${code})`} /><rect width="480" height="120" fill={`url(#pl-${code})`} /><rect y="82" width="480" height="38" class="p-table" /><path d="M0 95h480M0 108h480" class="p-grain" /><ellipse cx="240" cy="92" rx="46" ry="7" class="p-shadow" /><ellipse cx="240" cy="88" rx="40" ry="8" class="p-saucer" /><path d="M214 54h52l-5 30a6 6 0 0 1-6 5h-30a6 6 0 0 1-6-5z" class="p-cup" /><path d="M266 60c10 0 12 14 0 16" class="p-handle" /><ellipse cx="240" cy="54" rx="26" ry="5" class="p-coffee" /><path d="M234 53c3-2 9-2 12 0-3 2-9 2-12 0z" class="p-foam" /><path d="M232 44c-4-5 4-8 0-14M246 44c-4-5 4-8 0-14" class="p-steam" /></svg><p class="use">{v.image.use}</p></>}
+                {k === 'leads' && <><div class="inbox"><div class="row hot"><p class="msg">{v.leads.msg}</p><p class="tagrow"><span class="tag">{v.leads.tag}</span><span>{v.leads.next}</span></p></div><div class="row ghost"><i></i><i></i></div><div class="row ghost"><i></i><i></i></div></div></>}
                 {k === 'moderation' && <ul>{v.moderation.rows.map(([t, s], n) => <li class={n === 2 ? 'no' : undefined}><span>{t}</span><b>{s}</b></li>)}</ul>}
               </div>
               <h4>{c.features[k].title}</h4>
@@ -119,8 +119,8 @@ const arrow = 'M5 12h14M13 6l6 6-6 6';
       </div>
       <figure class="ai-shot ai-rv">
         <div class="ai-frame">
-          <img class="th-light" src="/screens/ai/widget-light.webp" width="1200" height="1108" loading="lazy" decoding="async" alt={c.how.shotAlt} />
-          <img class="th-dark" src="/screens/ai/widget-dark.webp" width="1200" height="1108" loading="lazy" decoding="async" alt="" />
+          <picture class="th-light"><source media="(max-width: 600px)" srcset="/screens/ai/widget-phone-light.webp" width="864" height="1024" /><img src="/screens/ai/widget-light.webp" width="1520" height="1120" loading="lazy" decoding="async" alt={c.how.shotAlt} /></picture>
+          <picture class="th-dark"><source media="(max-width: 600px)" srcset="/screens/ai/widget-phone-dark.webp" width="864" height="1024" /><img src="/screens/ai/widget-dark.webp" width="1520" height="1120" loading="lazy" decoding="async" alt="" /></picture>
         </div>
         <figcaption>{c.how.shotCaption}</figcaption>
       </figure>
@@ -136,8 +136,8 @@ const arrow = 'M5 12h14M13 6l6 6-6 6';
       </ul>
       <figure class="ai-shot ai-rv">
         <div class="ai-frame">
-          <img class="th-light" src="/screens/ai/panel-light.webp" width="1200" height="1065" loading="lazy" decoding="async" alt={c.pricing.panelAlt} />
-          <img class="th-dark" src="/screens/ai/panel-dark.webp" width="1200" height="1065" loading="lazy" decoding="async" alt="" />
+          <img class="th-light" src="/screens/ai/panel-light.webp" width="1040" height="1078" loading="lazy" decoding="async" alt={c.pricing.panelAlt} />
+          <img class="th-dark" src="/screens/ai/panel-dark.webp" width="1040" height="1078" loading="lazy" decoding="async" alt="" />
         </div>
         <figcaption>{c.pricing.panelCaption}</figcaption>
       </figure>

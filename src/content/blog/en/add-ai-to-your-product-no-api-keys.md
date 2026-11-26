@@ -33,7 +33,7 @@ You write something like "add a chatbot that answers questions about my packages
 3. **They add the chat to your pages.** A floating chat button, or a full page for it, in your product's look, light and dark, in your visitors' language. Replies appear as they are written.
 4. **They test it with real questions and show you.**
 
-<figure><picture><img class="th-light" src="/screens/ai/widget-light.webp" width="1200" height="1108" loading="lazy" alt="The ready-made chat widget on a demo travel agency site, answering a question about cancelling a booking" /><img class="th-dark" src="/screens/ai/widget-dark.webp" width="1200" height="1108" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>The ready-made chat widget on Sunny Days Travel. The travel agency is made up for the demo; the answers came from the live service.</figcaption></figure>
+<figure><picture><img class="th-light" src="/screens/ai/widget-light.webp" width="1520" height="1120" loading="lazy" alt="The ready-made chat widget on a demo travel agency site, answering a question about cancelling a booking" /><img class="th-dark" src="/screens/ai/widget-dark.webp" width="1520" height="1120" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>The ready-made chat widget on Sunny Days Travel. The travel agency is made up for the demo; the answers came from the live service.</figcaption></figure>
 
 ## What you can add
 
@@ -54,7 +54,7 @@ Your product's visitors use the AI and your team pays, so the protection is buil
 - **Limits per visitor.** One person, or one script, can't send hundreds of messages a minute.
 - **One place to look.** The AI panel shows what each product spent this month against its limit, a 30-day trend, how many requests came in and which features are used most. In plain words, no model names.
 
-<figure><picture><img class="th-light" src="/screens/ai/panel-light.webp" width="1200" height="1065" loading="lazy" alt="The AI panel in equipe: two products with what they spent this month against their limits, a 30-day trend, the most used features and the monthly limit choices" /><img class="th-dark" src="/screens/ai/panel-dark.webp" width="1200" height="1065" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Product › AI in your product, with sample numbers.</figcaption></figure>
+<figure><picture><img class="th-light" src="/screens/ai/panel-light.webp" width="1040" height="1078" loading="lazy" alt="The AI panel in equipe for one product: what it spent this month against its limit, a 30-day trend, the most used features and the monthly limit choices" /><img class="th-dark" src="/screens/ai/panel-dark.webp" width="1040" height="1078" loading="lazy" alt="" aria-hidden="true" /></picture><figcaption>Product › AI in your product, with sample numbers.</figcaption></figure>
 
 ## What it costs
 
