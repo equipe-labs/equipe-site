@@ -5,6 +5,7 @@ import PageShell from '../../../../components/PageShell.astro';
 import JsonLd from '../../../../components/JsonLd.astro';
 import Calculator from '../../../../components/costcalc/Calculator.astro';
 import Method from '../../../../components/costcalc/Method.astro';
+import RelatedTools from '../../../../components/RelatedTools.astro';
 import { SITE } from '../../../../data/site';
 import { TYPES, DEFAULT_PICK } from '../../../../data/costcalc/model';
 import { costCopy } from '../../../../data/costcalc/copy';
@@ -50,6 +51,8 @@ const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 
   </div></section>
 
   <Method code={code} />
+
+  <RelatedTools code={code} current="app-cost-calculator" />
 
   <section class="cc-cta"><div class="wrap">
     <h2>{c.cta.title}</h2>
