@@ -107,6 +107,7 @@ const frame = `${id}-frame`;
 <script>
   type W = Record<string, any>;
   const own = (k: string, t: string, f?: string) => { const w = window as unknown as { eqOwn?: (k: string, t: string, f?: string) => void }; try { w.eqOwn?.(k, t, f); } catch { /* counting never breaks the page */ } };
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const ph = (n: string, p?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, p);
   const once = new Set<string>();
   const kb = (n: number) => (n < 1024 ? `${n} B` : `${Math.max(1, Math.round(n / 1024))} KB`);
@@ -200,7 +201,7 @@ const frame = `${id}-frame`;
       if (bytes(v) > Wd.max) { say(Wd.errBig); nudge(box); return; }
       if (!force && v === last) return;
       last = v; say(''); setNotes([]); meta.hidden = true;
-      if (!once.has('paste')) { once.add('paste'); own('fn', 'tool_paste'); tag('tool_paste'); ph('tool_paste', { page: Wd.src }); }
+      if (!once.has('paste')) { once.add('paste'); own('fn', 'tool_paste'); ft('paste'); tag('tool_paste'); ph('tool_paste', { page: Wd.src }); }
       setState('busy'); started = performance.now(); pending++;
       pcode.value = v;
       pf.submit();
@@ -217,7 +218,7 @@ const frame = `${id}-frame`;
         meta.textContent = [d.title, kind].filter(Boolean).join(' · '); meta.hidden = !meta.textContent;
         const w: string[] = d.warnings || [];
         setNotes([d.storage ? Wd.noteStorage : '', w.includes('claude_api') ? Wd.noteClaudeApi : '', w.includes('gemini_firebase') ? Wd.noteFirebase : '', w.includes('packages_cdn') ? Wd.noteCdn : ''].filter(Boolean));
-        if (!once.has('preview')) { once.add('preview'); own('fn', 'tool_preview'); tag('tool_preview'); ph('tool_preview', { page: Wd.src, kind: d.kind, ms: Math.round(performance.now() - started) }); }
+        if (!once.has('preview')) { once.add('preview'); own('fn', 'tool_preview'); ft('preview'); tag('tool_preview'); ph('tool_preview', { page: Wd.src, kind: d.kind, ms: Math.round(performance.now() - started) }); }
         if (!once.has(`kind:${d.kind}`)) { once.add(`kind:${d.kind}`); own('ev', `tool_kind:${String(d.kind).slice(0, 12)}`); }
       } else if (d.t === 'fail') {
         pending = 0; setState('err');
@@ -275,7 +276,7 @@ const frame = `${id}-frame`;
       if (!params.get('utm_source')) { add('utm_source', 'equipe.im'); add('utm_medium', 'tool'); add('utm_campaign', 'ai-to-website'); }
       add('utm_content', String(Wd.src).slice(0, 60));
       try { const enc = (window as unknown as { __eqaEnc?: () => string }).__eqaEnc?.(); if (enc) add('_eqa', enc); } catch { /* no hand-off */ }
-      own('fn', 'tool_real'); own('fn', 'cta'); own('fn', 'signup_start'); tag('tool_real');
+      own('fn', 'tool_real'); ft('signup'); own('fn', 'cta'); own('fn', 'signup_start'); tag('tool_real');
       ph('tool_real', { page: Wd.src, previewed: once.has('preview'), arm });
       real.classList.add('busy'); real.setAttribute('aria-busy', 'true'); realLabel.textContent = Wd.sending;
       setTimeout(() => extra.forEach((h) => h.remove()), 0);

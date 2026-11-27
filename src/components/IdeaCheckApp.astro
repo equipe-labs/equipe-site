@@ -67,6 +67,7 @@ const data = {
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; __eqaEnc?: () => string; turnstile?: Json; onEqTs?: () => void };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
   const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
   const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -216,7 +217,7 @@ const data = {
         const idea = ta.value.trim();
         if (idea.replace(/[^\p{L}\p{N}]+/gu, '').length < 10) { say(FM.errShort); ta.focus(); return; }
         btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-        own('fn', 'tool_run'); track('idea_check_run', { length: idea.length });
+        own('fn', 'tool_run'); ft('start'); track('idea_check_run', { length: idea.length });
         const tok = await token();
         rep!.hidden = true; startSteps();
         run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
@@ -231,10 +232,10 @@ const data = {
         if (!res || !res.ok || !g || !g.id) {
           const e = g?.error;
           const m = e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
-          track('idea_check_error', { error: e || (res ? `http_${res.status}` : 'network') });
+          ft('error'); track('idea_check_error', { error: e || (res ? `http_${res.status}` : 'network') });
           say(m); return;
         }
-        own('fn', 'tool_result'); own('ev', 'idea_verdict', String(g.verdict));
+        own('fn', 'tool_result'); ft('done'); own('ev', 'idea_verdict', String(g.verdict));
         track('idea_check_result', { verdict: g.verdict, competitors: (g.competitors || []).length, cached: !!g.cached });
         draw(g);
         try { history.replaceState(null, '', sharePath(g.id)); } catch { /* fine */ }
@@ -258,7 +259,7 @@ const data = {
       out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
       fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
         if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`; return; }
-        track('idea_check_shared_view', { verdict: g.verdict }); draw(g);
+        ft('shared_view'); track('idea_check_shared_view', { verdict: g.verdict }); draw(g);
       }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
     } else if (D.mode === 'shared') {
       out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`;

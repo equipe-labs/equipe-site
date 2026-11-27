@@ -5,9 +5,15 @@
 //   steps   view, scroll25/50/75/100, idea_focus, idea_type, idea_submit, cta, signup_start, pricing
 //   counts  idea_len, idea_lang, chip:<goal>, click:<data-ph>:<location>, sec:<section>, lang_switch, device, locale,
 //           browser_lang (first page of a tab), time (seconds on the page, bucketed)
+//   features (cloud docs/analytics.md "Feature usage"): window.eqFeat(step, props?) counts `<feature>:<step>` once per tab
+//           (eqOwn 'ft') and sends PostHog `feature_<step>` { feature }. The feature comes from the page's path (the same
+//           rules as cloud web/src/features.js siteFeatureOf). `view` and `signup` (a sign-up link, the idea box) are
+//           automatic; tools call start, done and their key clicks.
+import { available } from '../i18n';
+const LOCS = available.map((l) => l.slug).filter(Boolean);
 ---
 
-<script is:inline>
+<script is:inline define:vars={{ LOCS }}>
   (function () {
     var w = window, d = document, t0 = Date.now(), pv = location.pathname, gone = 0;
     function own(k, t, f) { if (w.eqOwn) w.eqOwn(k, t, f); }
@@ -17,6 +23,26 @@
     function bucket(n, cuts) { for (var i = 0; i < cuts.length; i++) if (n <= cuts[i]) return (i ? cuts[i - 1] + 1 : 0) + '-' + cuts[i]; return cuts[cuts.length - 1] + '+'; }
     fn('view');
     if (/\/pricing\/?$/.test(pv)) fn('pricing');
+    // Features: which one this page is, then its steps (each once per tab here and in the collector).
+    var base = pv.toLowerCase().replace(new RegExp('^/(' + LOCS.join('|') + ')(?=/|$)'), '') || '/';
+    var FEAT = [[/^\/?$/, 'home'], [/^\/pricing\/?$/, 'pricing'], [/^\/grader(\/|$)/, 'grader'], [/^\/ai-visibility(\/|$)/, 'ai_visibility'],
+      [/^\/tools\/app-cost-calculator(\/|$)/, 'cost_calculator'], [/^\/business-name-generator(\/|$)/, 'name_generator'],
+      [/^\/tools\/booking-page(\/|$)/, 'booking_page'], [/^\/tools\/idea-validator(\/|$)/, 'idea_validator'],
+      [/^\/tools\/privacy-policy-generator(\/|$)/, 'privacy_policy'], [/^\/tools\/?$/, 'tools_hub'],
+      [/^\/(from-[a-z0-9-]+|publish-html)(\/|$)/, 'ai_to_site'], [/^\/migrate(\/|$)/, 'migrate'], [/^\/websites(\/|$)/, 'industry_pages'],
+      [/^\/(vs|alternatives)(\/|$)/, 'comparisons'], [/^\/blog(\/|$)/, 'blog']];
+    var feat = '';
+    for (var fi = 0; fi < FEAT.length; fi++) if (FEAT[fi][0].test(base)) { feat = FEAT[fi][1]; break; }
+    var fsent = {};
+    // quiet: own collector only (a tagged click already reaches PostHog under its own data-ph name).
+    function featStep(step, props, quiet) {
+      if (!feat || !/^[a-z0-9_]{1,24}$/.test(step) || fsent[step]) return;
+      fsent[step] = 1;
+      own('ft', feat + ':' + step);
+      if (w.eqTrack && !quiet) { var p = { feature: feat }; for (var k in props || {}) p[k] = props[k]; w.eqTrack('feature_' + step, p); }
+    }
+    w.eqFeat = function (step, props) { featStep(step, props, false); };
+    w.eqFeat('view');
     var first = 1; try { first = !sessionStorage.getItem('eq_own_m'); sessionStorage.setItem('eq_own_m', '1'); } catch (e) {}
     if (first) {
       ev('device', matchMedia('(max-width: 640px)').matches ? 'mobile' : matchMedia('(max-width: 1024px)').matches ? 'tablet' : 'desktop');
@@ -43,13 +69,13 @@
     // The idea box: clicked into, started typing, sent (with its length and script only).
     function box(e) { return e.target && e.target.closest && e.target.closest('[data-idea]'); }
     d.addEventListener('focusin', function (e) { if (box(e) && e.target.tagName === 'TEXTAREA') fn('idea_focus'); });
-    d.addEventListener('input', function (e) { if (box(e) && e.target.tagName === 'TEXTAREA' && e.target.value.trim()) fn('idea_type'); });
+    d.addEventListener('input', function (e) { if (box(e) && e.target.tagName === 'TEXTAREA' && e.target.value.trim()) { fn('idea_type'); w.eqFeat('idea_type'); } });
     var typed = '';
     d.addEventListener('submit', function (e) { var f = box(e), ta = f && f.querySelector('textarea'); typed = ta ? ta.value.trim() : ''; }, true);
     d.addEventListener('submit', function (e) {
       if (!box(e) || e.defaultPrevented) return;
       var v = typed;
-      fn('idea_submit'); fn('signup_start');
+      fn('idea_submit'); fn('signup_start'); w.eqFeat('idea_submit'); w.eqFeat('signup');
       ev('idea_len', v ? bucket(v.length, [20, 60, 200]) : 'empty');
       ev('idea_lang', !v ? 'none' : /[가-힣]/.test(v) ? 'korean' : /[぀-ヿ]/.test(v) ? 'japanese' : /[一-鿿]/.test(v) ? 'chinese' : /[a-zÀ-ɏ]/i.test(v) ? 'latin' : 'other');
     });
@@ -61,11 +87,14 @@
       if (t) {
         var ph = t.getAttribute('data-ph'), loc = t.getAttribute('data-ph-location') || '';
         ev('click:' + ph + (loc ? ':' + loc : ''));
-        if (ph === 'signup_cta_click') fn('cta');
+        if (ph === 'signup_cta_click') { fn('cta'); w.eqFeat('signup'); }
+        // Every tagged button is a key click of its page's feature (its data-ph name); a plan's button on /pricing starts it.
+        if (ph && ph !== 'signup_cta_click' && ph !== 'signin_click') featStep(String(ph).toLowerCase().replace(/[^a-z0-9_]/g, '_').slice(0, 24), null, true);
+        if (feat === 'pricing' && ph === 'signup_cta_click' && /_\d$/.test(loc)) w.eqFeat('plan_click');
         if (/pricing/.test(loc)) fn('pricing');
       }
       if (a && a.hasAttribute('data-lang-choice')) ev('lang_switch', (d.documentElement.lang || '') + '>' + (a.getAttribute('hreflang') || ''));
-      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup)/.test(a.href)) fn('signup_start');
+      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup|import)/.test(a.href)) { fn('signup_start'); w.eqFeat('signup'); }
       if (a && /\/pricing\/?(#|$)/.test(a.pathname || '') && a.host === location.host) fn('pricing');
     }, true);
     // Time on the page, once, when it is hidden or left.

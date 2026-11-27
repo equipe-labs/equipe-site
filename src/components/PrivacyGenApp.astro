@@ -148,6 +148,7 @@ const chip = (group: string, value: string, label: string, kind: 'multi' | 'one'
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; __eqaEnc?: () => string };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
   const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: string) => s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
   // Each language's words load only when that language is picked (the page's own language is already in the page).
   const kits = import.meta.glob<{ default: Record<string, string> }>('../data/privacygen/policy/kit-*.json');
@@ -213,7 +214,7 @@ const chip = (group: string, value: string, label: string, kind: 'multi' | 'one'
       try { localStorage.setItem(KEY, JSON.stringify({ ...a, payOther: input('payOther').value, lang })); } catch { /* fine */ }
     }
     const changed = () => {
-      if (!started) { started = true; own('fn', 'tool_run'); track('privacy_gen_start', {}); }
+      if (!started) { started = true; own('fn', 'tool_run'); ft('start'); track('privacy_gen_start', {}); }
       render();
     };
 
@@ -235,7 +236,7 @@ const chip = (group: string, value: string, label: string, kind: 'multi' | 'one'
     form.addEventListener('input', () => { clearTimeout(tm); tm = window.setTimeout(changed, 120); });
     form.addEventListener('submit', (e) => e.preventDefault());
 
-    const done = (kind: string) => { own('fn', 'tool_result'); own('ev', 'privacy_gen_out', kind); };
+    const done = (kind: string) => { own('fn', 'tool_result'); ft('done'); own('ev', 'privacy_gen_out', kind); };
     const copyBtn = document.querySelector<HTMLButtonElement>('[data-pg-copy]')!;
     copyBtn.addEventListener('click', async () => {
       if (!last) await render();

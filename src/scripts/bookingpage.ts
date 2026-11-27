@@ -16,6 +16,7 @@ import { hourRows, serviceRows } from '../data/bookingpage/editor';
 type W = Window & { eqOwn?: (k: string, t: string, f?: unknown) => void; eqTrack?: (n: string, p?: unknown) => void };
 const w = window as W;
 const own = (name: string) => { try { w.eqOwn?.('ev', name); } catch { /* counting never breaks the page */ } };
+const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
 const track = (name: string, p?: Record<string, unknown>) => { try { w.eqTrack?.(name, p); } catch { /* same */ } };
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -80,8 +81,8 @@ export function initBookingPage() {
 
   // A change by the visitor: the first one is the "run", the first one that makes it their own business is the "result".
   const changed = (what: string) => {
-    if (!ran) { ran = true; own('booking:run'); track('booking_run', { what }); }
-    if (!result && (what === 'n' || what.startsWith('sv'))) { result = true; own('booking:result'); track('booking_result', { what }); }
+    if (!ran) { ran = true; own('booking:run'); ft('start'); track('booking_run', { what }); }
+    if (!result && (what === 'n' || what.startsWith('sv'))) { result = true; own('booking:result'); ft('done'); track('booking_result', { what }); }
     soon();
   };
 
@@ -280,12 +281,12 @@ export function initBookingPage() {
     if (!ok) { try { history.replaceState(null, '', url); ok = true; } catch { /* nothing else to do */ } }
     shareL.textContent = c.pv.copied; shareBtn.classList.add('done');
     clearTimeout(shareT); shareT = window.setTimeout(() => { shareL.textContent = c.pv.share; shareBtn.classList.remove('done'); }, 2200);
-    own('booking:share'); track('booking_share', { services: s.sv.length, theme: s.th });
+    own('booking:share'); ft('share'); track('booking_share', { services: s.sv.length, theme: s.th });
   });
 
   live.addEventListener('click', () => {
     live.href = startHref();
-    own('booking:live'); track('booking_live', { services: s.sv.filter((x) => x.n.trim()).length, theme: s.th, edited: ran });
+    own('booking:live'); ft('signup'); track('booking_live', { services: s.sv.filter((x) => x.n.trim()).length, theme: s.th, edited: ran });
   });
 
   // ---- on phones: a small "Live preview" pill while the preview is out of sight -------------------------------------------
@@ -305,7 +306,7 @@ export function initBookingPage() {
   if (hash) {
     decodeShare(hash[1], s).then((r) => {
       if (r === 'expired') { say(c.pv.expired); own('booking:expired'); }
-      else if (r) { s = clean(r, s); fillForm(); draw(); say(c.pv.shared); own('booking:open_shared'); }
+      else if (r) { s = clean(r, s); fillForm(); draw(); say(c.pv.shared); own('booking:open_shared'); ft('shared_view'); }
       history.replaceState(null, '', location.pathname + location.search);
     });
   }

@@ -56,6 +56,7 @@ const data = {
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
   const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
   const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -173,7 +174,7 @@ const data = {
       if (url && !urlish(url)) { say(FM.errUrl); f('url').setAttribute('aria-invalid', 'true'); f('url').focus(); return; }
       if (!url && !(place && category)) { say(FM.errMore); (place ? f('category') : f('place')).focus(); return; }
       btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-      own('fn', 'tool_run'); track('aivis_run', { has_url: !!url, has_place: !!place, has_category: !!category });
+      own('fn', 'tool_run'); ft('start'); track('aivis_run', { has_url: !!url, has_place: !!place, has_category: !!category });
       const tok = await token();
       rep.hidden = true; startSteps();
       run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
@@ -188,10 +189,10 @@ const data = {
       if (!res || !res.ok || !g || !g.id) {
         const e = g?.error;
         const m = e === 'name' ? FM.errName : e === 'more' ? FM.errMore : e === 'bad_url' ? FM.errUrl : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
-        track('aivis_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        ft('error'); track('aivis_error', { error: e || (res ? `http_${res.status}` : 'network') });
         say(m); return;
       }
-      own('fn', 'tool_result'); own('ev', 'aivis_named', `${g.mentioned ?? 0}/${g.asked ?? 0}`);
+      own('fn', 'tool_result'); ft('done'); own('ev', 'aivis_named', `${g.mentioned ?? 0}/${g.asked ?? 0}`);
       track('aivis_result', { score: g.score, mentioned: g.mentioned, asked: g.asked, cited: g.cited, cached: !!g.cached });
       draw(g);
       try { history.replaceState(null, '', `${D.base}?r=${g.id}`); } catch { /* fine */ }
@@ -212,7 +213,7 @@ const data = {
       out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
       fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
         if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
-        track('aivis_shared_view', { score: g.score }); draw(g);
+        ft('shared_view'); track('aivis_shared_view', { score: g.score }); draw(g);
       }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
     }
   }

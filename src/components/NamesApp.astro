@@ -92,6 +92,7 @@ const data = {
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
   const track = (n: string, p?: Json) => { try { w.eqTrack?.(n, p); } catch { /* never breaks the page */ } };
   const own = (k: string, t: string, f?: string) => { try { w.eqOwn?.(k, t, f); } catch { /* never breaks the page */ } };
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
   const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -240,7 +241,7 @@ const data = {
         msg.hidden = false;
         btn.disabled = e === 'rate' || e === 'budget' || e === 'off';
         btn.querySelector('span')!.textContent = R.logo;
-        track('names_logo_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        ft('error'); track('names_logo_error', { error: e || (res ? `http_${res.status}` : 'network') });
         return;
       }
       const n = cur.names[i]; n.logos = j.logos;
@@ -280,7 +281,7 @@ const data = {
       out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
       fetch(`${D.api}/${id}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
         if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
-        track('names_shared_view', { count: (g.names || []).length }); draw(g);
+        ft('shared_view'); track('names_shared_view', { count: (g.names || []).length }); draw(g);
       }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
     };
 
@@ -327,7 +328,7 @@ const data = {
         if (a.length < 3) { say(FM.errAbout); about.setAttribute('aria-invalid', 'true'); about.focus(); return; }
         btn.disabled = true; btn.setAttribute('aria-busy', 'true');
         const body = { about: a, kind: picked('kind'), vibe: picked('vibe'), place: place.value.trim(), style: picked('style') || 'english', lang: D.code };
-        own('fn', 'tool_run'); track('names_run', { kind: body.kind, vibe: body.vibe, has_place: !!body.place, style: body.style });
+        own('fn', 'tool_run'); ft('start'); track('names_run', { kind: body.kind, vibe: body.vibe, has_place: !!body.place, style: body.style });
         const tok = await token();
         rep.hidden = true; startSteps();
         run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
@@ -342,10 +343,10 @@ const data = {
         if (!res || !res.ok || !g || !g.id) {
           const e = g?.error;
           const m = e === 'about' ? FM.errAbout : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'busy' ? FM.errBusy : FM.errFailed;
-          track('names_error', { error: e || (res ? `http_${res.status}` : 'network') });
+          ft('error'); track('names_error', { error: e || (res ? `http_${res.status}` : 'network') });
           say(m); return;
         }
-        own('fn', 'tool_result'); own('ev', 'names_com_free', String((g.names || []).filter((n: Json) => n.com === 'free').length));
+        own('fn', 'tool_result'); ft('done'); own('ev', 'names_com_free', String((g.names || []).filter((n: Json) => n.com === 'free').length));
         track('names_result', { count: (g.names || []).length, com_free: (g.names || []).filter((n: Json) => n.com === 'free').length, by: g.by, cached: !!g.cached });
         draw(g);
         try { history.replaceState(null, '', `${D.base}?r=${g.id}`); } catch { /* fine */ }

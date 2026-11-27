@@ -56,6 +56,7 @@ const data = {
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
   const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
   const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -181,7 +182,7 @@ const data = {
       input.removeAttribute('aria-invalid');
       btn.disabled = true; btn.setAttribute('aria-busy', 'true');
       rep.hidden = true;
-      own('fn', 'tool_run'); track('grader_run', { location: D.mode });
+      own('fn', 'tool_run'); ft('start'); track('grader_run', { location: D.mode });
       startSteps();
       run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
       let res: Response | null = null, g: Json | null = null;
@@ -194,10 +195,10 @@ const data = {
       if (!res || !res.ok || !g || !g.id) {
         const e = g?.error;
         const m = e === 'bad_url' ? C.form.errUrl : e === 'unreachable' ? C.form.errUnreachable : e === 'rate' ? C.form.errRate : e === 'busy' ? C.form.errBusy : C.form.errFailed;
-        track('grader_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        ft('error'); track('grader_error', { error: e || (res ? `http_${res.status}` : 'network') });
         say(m); return;
       }
-      own('fn', 'tool_result'); own('ev', 'grader_score', g.score == null ? 'none' : g.score >= 90 ? '90-100' : g.score >= 70 ? '70-89' : g.score >= 50 ? '50-69' : '0-49');
+      own('fn', 'tool_result'); ft('done'); own('ev', 'grader_score', g.score == null ? 'none' : g.score >= 90 ? '90-100' : g.score >= 70 ? '70-89' : g.score >= 50 ? '50-69' : '0-49');
       track('grader_result', { score: g.score, cached: !!g.cached, fixes: (g.fixes || []).length });
       draw(g);
       try { history.replaceState(null, '', `${D.base}r/${g.id}/`); } catch { /* fine */ }
@@ -223,7 +224,7 @@ const data = {
         out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
         fetch(`${D.api}/${id}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
           if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
-          track('grader_shared_view', { score: g.score }); draw(g);
+          ft('shared_view'); track('grader_shared_view', { score: g.score }); draw(g);
         }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
       }
     } else if (q.get('url')) {
