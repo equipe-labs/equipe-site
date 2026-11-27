@@ -1,0 +1,112 @@
+---
+// Home block 2, "See it work": the product demo.
+// With DEMO_VIDEO set (src/data/flags.ts), a poster-first player after the ui.equipe.im "Hero Video Dialog" pattern
+// (videos/hero-video-dialog, dillionverma): a still with a play button; the video file is only fetched when someone
+// opens the dialog (preload="none", src set on open), so the page stays as light as before. Native <dialog> gives the
+// focus trap, Esc and the backdrop. Without it, the drawn illustration of the web app with example data.
+import WebApp from './WebApp.astro';
+import { DEMO_VIDEO } from '../data/flags';
+import { HOME } from '../data/home';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const t = getMessages(code);
+const d = HOME[code].demo;
+const v = DEMO_VIDEO;
+---
+<section class="see demo" id="see">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">{d.kicker}</p>
+      <h2>{v ? d.title : t.see.title}</h2>
+      <p class="sub">{v ? d.sub : t.hero.lead}</p>
+    </div>
+    {v ? (
+      <div class="dv rv" data-dv>
+        <button type="button" class="dv-poster" data-dv-open data-ph="demo_video_play" data-ph-location="home" aria-haspopup="dialog">
+          <img src={v.poster} width={v.width} height={v.height} alt="" loading="lazy" decoding="async" />
+          <span class="dv-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" /></svg></span></span>
+          <span class="dv-label"><b>{d.play}</b><span>{d.length}</span></span>
+        </button>
+        <p class="cap">{d.caption}</p>
+        <dialog class="dv-dialog" aria-label={d.title}>
+          <div class="dv-frame">
+            <video data-src={v.src} poster={v.poster} width={v.width} height={v.height} controls playsinline preload="none">
+              {v.captions && <track kind="captions" src={v.captions} srclang="en" label="English" />}
+            </video>
+          </div>
+          <button type="button" class="dv-x" data-dv-close aria-label={d.close}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg></button>
+        </dialog>
+      </div>
+    ) : (
+      <div class="shot rv">
+        <WebApp k="hero" s={t.scene} alt={t.hero.shotAlt} />
+        <p class="cap">{t.hero.caption}</p>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-dv]').forEach((box) => {
+    const dlg = box.querySelector('dialog')!;
+    const video = dlg.querySelector('video')!;
+    const open = () => {
+      if (!video.src) video.src = video.dataset.src!;
+      dlg.showModal();
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      (window as unknown as { eqOwn?: (k: string, t: string) => void }).eqOwn?.('ev', 'demo_video_open');
+    };
+    box.querySelector('[data-dv-open]')!.addEventListener('click', open);
+    dlg.querySelector('[data-dv-close]')!.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', () => video.pause());
+  });
+</script>
+
+<style is:global>
+  main.home .demo .head { margin: 0 auto; text-align: center; }
+  main.home .demo .head .sub { margin-left: auto; margin-right: auto; }
+  main.home .demo .shot { margin-top: 64px; }
+  main.home .demo .cap { margin-top: var(--s-4); text-align: center; font-size: 14px; color: var(--muted); }
+  .dv { max-width: 1040px; margin: 64px auto 0; }
+  .dv-poster { position: relative; display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--surface); cursor: pointer;
+    box-shadow: 0 30px 60px -30px rgb(10 10 12 / 0.35), 0 2px 8px -2px rgb(10 10 12 / 0.08); transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 320ms; }
+  .dv-poster img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: filter 320ms; }
+  .dv-play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .dv-play > span { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+    box-shadow: 0 0 0 12px color-mix(in srgb, var(--accent) 18%, transparent), 0 16px 32px -12px rgb(10 10 12 / 0.4); transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .dv-play svg { width: 34px; height: 34px; margin-left: 4px; fill: currentColor; }
+  .dv-label { position: absolute; left: 20px; bottom: 20px; display: inline-flex; align-items: baseline; gap: 10px; padding: 10px 16px; border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text); font-size: 15px; }
+  .dv-label span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  @media (hover: hover) {
+    .dv-poster:hover { transform: translateY(-2px); box-shadow: 0 40px 70px -30px rgb(10 10 12 / 0.4), 0 2px 8px -2px rgb(10 10 12 / 0.08); }
+    .dv-poster:hover .dv-play > span { transform: scale(1.06); }
+  }
+  .dv-dialog { width: min(1200px, calc(100vw - 32px)); max-width: none; padding: 0; border: 0; border-radius: 18px; background: #000; overflow: visible; }
+  .dv-dialog::backdrop { background: rgb(10 10 12 / 0.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .dv-dialog[open] { animation: dvIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .dv-dialog[open]::backdrop { animation: dvFade 300ms ease both; }
+  .dv-frame { border-radius: 18px; overflow: hidden; }
+  .dv-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+  .dv-x { position: absolute; top: -52px; right: 0; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgb(255 255 255 / 0.16); color: #fff; cursor: pointer; }
+  .dv-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .dv-x:hover { background: rgb(255 255 255 / 0.26); }
+  @keyframes dvIn { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+  @keyframes dvFade { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 640px) {
+    .dv { margin-top: 40px; }
+    .dv-poster { border-radius: 16px; }
+    .dv-play > span { width: 64px; height: 64px; box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 18%, transparent); }
+    .dv-play svg { width: 26px; height: 26px; }
+    .dv-label { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 13.5px; }
+    main.home .demo .shot { margin-top: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dv-poster, .dv-poster img, .dv-play > span { transition: none; }
+    .dv-dialog[open], .dv-dialog[open]::backdrop { animation: none; }
+  }
+</style>

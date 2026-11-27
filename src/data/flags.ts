@@ -18,8 +18,13 @@ export const FOUNDER: null | { name: string; photo: string; photoLarge: string; 
   links: { x: 'https://x.com/abe_l316', linkedin: 'https://www.linkedin.com/in/abel-ko-a5322814a/' },
 };
 
-/** "See it work" demo video: set to a path under /public (with a .vtt captions file next to it) once the video exists. */
-export const DEMO_VIDEO: null | { src: string; poster: string; captions: string } = null;
+/**
+ * Home "See it work" demo video (src/components/HomeDemo.astro). null = the drawn illustration of the web app.
+ * The video waits for the owner's OK before it goes on the live home page: it lives on the branch site/landing-demo
+ * (a preview deploy), which sets this to { src: '/video/equipe-demo-720.mp4', poster: '/video/equipe-demo-poster.webp', ... }.
+ * `captions` is an optional .vtt file; the current cut has English captions burned in.
+ */
+export const DEMO_VIDEO: null | { src: string; poster: string; width: number; height: number; captions?: string } = null;
 
 /**
  * Pricing: typical monthly totals ("most products spend $X–$Y a month"). Hidden until there is real usage data.

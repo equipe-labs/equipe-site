@@ -32,13 +32,13 @@ const ptBR: Messages = {
     themeLight: 'Tema claro',
     themeSystem: 'Tema do sistema',
   },
-  nav: { product: 'Produto', pricing: 'Preços', security: 'Segurança', about: 'Sobre', how: 'Como funciona', team: 'O time', status: 'Onde estamos', faq: 'FAQ', developers: 'Desenvolvedores', github: 'GitHub', cta: 'Começar', ctaShort: 'Começar', signIn: 'Entrar', signInShort: 'Entrar' },
+  nav: { product: 'Produto', pricing: 'Preços', security: 'Segurança', about: 'Sobre', how: 'Como funciona', team: 'O time', status: 'Onde estamos', faq: 'FAQ', developers: 'Desenvolvedores', github: 'GitHub', cta: 'Começar grátis', ctaShort: 'Começar grátis', signIn: 'Entrar', signInShort: 'Entrar' },
   hero: {
     badge: 'Aberto a todos · comece grátis',
     title: 'Um time de startup para uma pessoa só.',
     lead: 'Traga uma ideia, ou algo que você já fez no Claude. Um PM, engenheiros, um designer, QA e um analista de dados colocam isso no ar como um serviço de verdade e depois continuam melhorando.',
     approve: 'Você não precisa saber programar. Seu time de startup com IA constrói, lança e melhora.',
-    cta: 'Começar',
+    cta: 'Começar grátis',
     secondary: 'Ver como funciona',
     meta: 'Funciona no seu navegador. Nada para instalar, nenhum código para escrever.',
     shotAlt: 'O app web do equipe: um chat com o PM, o que cada membro está fazendo, uma decisão esperando sua aprovação e o app que o time publicou, num celular',
@@ -111,7 +111,7 @@ const ptBR: Messages = {
     labels: { now: 'Funciona hoje', early: 'Aberto agora', soon: 'Em breve' },
     items: [
       { title: 'O próprio time', text: 'O PM, os engenheiros, o designer, o QA e os analistas de dados já constroem e publicam produtos de verdade. Este site e os nossos apps foram feitos por eles.' },
-      { title: 'Seu time na nuvem', text: 'Cadastre-se, descreva sua ideia e tenha seu próprio time em cerca de um minuto. Converse com o PM, acompanhe o trabalho e abra links de prévia. Os relatórios semanais de crescimento chegam no dia e horário que você escolher.' },
+      { title: 'Seu time na nuvem', text: 'Cadastre-se, descreva sua ideia e tenha seu próprio time em menos de um minuto. Converse com o PM, acompanhe o trabalho e abra links de prévia. Os relatórios semanais de crescimento chegam no dia e horário que você escolher.' },
       { title: 'Ainda por vir', text: 'Importação em um passo do Claude com banco de dados e domínio.' },
     ],
   },
@@ -133,7 +133,7 @@ const ptBR: Messages = {
       { question: 'Quem cuida da hospedagem, do banco de dados e do domínio?', answer: 'Nós, com um projeto por cliente, então não há nada para você configurar nem nenhum lugar para entrar. Se o seu produto crescer além disso, podemos passá-lo para as suas próprias contas.' },
       { question: 'Quanto custa?', answer: 'Você paga com créditos: 100 créditos = $1. Você ganha 500 créditos ao criar seu time (+1.000 créditos ao adicionar um cartão). O plano Time inclui hospedagem, armazenamento e 5 pessoas, mais o valor de créditos mensais que você escolher: a partir de {{m0}} por mês para manter seu produto no ar, ou {{m2}} por mês com {{c2}} créditos, onde a maioria dos times começa. Os créditos do plano acumulam por 2 meses. Tudo o que seu time faz enquanto trabalha, o trabalho de IA e o computador na nuvem em que ele trabalha, sai dos créditos. Cada pedido mostra primeiro o custo esperado, e você define um limite mensal.' },
       { question: 'O que significa “você aprova”?', answer: 'Tudo o que vai ao ar, custa dinheiro ou chega aos seus clientes espera o seu OK. Você recebe um cartão curto com opções e uma recomendação e responde com um toque.' },
-      { question: 'Como eu começo?', answer: 'Cadastre-se em app.equipe.im e descreva sua ideia. Seu time fica pronto em cerca de um minuto, com 500 créditos grátis e sem cartão.' },
+      { question: 'Como eu começo?', answer: 'Cadastre-se em app.equipe.im e descreva sua ideia. Seu time fica pronto em menos de um minuto, com 500 créditos grátis e sem cartão.' },
       { question: 'Sou desenvolvedor. Posso rodar por conta própria?', answer: 'Pode. O engine por trás do time é de código aberto e roda na sua própria máquina. A página para desenvolvedores tem o app para Mac e a ferramenta de linha de comando.' },
     ],
     devLink: 'Ir para a página para desenvolvedores',
@@ -229,7 +229,7 @@ const ptBR: Messages = {
     nonprofit: { title: 'Programa para organizações sem fins lucrativos e de interesse público', text: 'Nos primeiros 3 meses após a aprovação, organizações sem fins lucrativos e projetos de interesse público ganham 50% a mais em créditos bônus em cada compra de créditos, recarga automática e crédito mensal do plano: compre 2.500 créditos e ganhe mais 1.250. Até 25.000 créditos bônus por time.', link: 'Solicitar em Faturamento', faq: { question: 'Existe um programa para organizações sem fins lucrativos?', answer: 'Sim. Organizações sem fins lucrativos e projetos de interesse público podem se inscrever no app, em Faturamento. Nos primeiros 3 meses após a aprovação, cada compra de créditos, recarga automática e crédito mensal do plano rende 50% a mais em créditos bônus (compre 2.500 créditos e ganhe mais 1.250), até 25.000 créditos bônus por time no total. Os créditos bônus terminam quando terminam os 3 meses. O formulário pede o nome, o site e o país da organização, um número de registro se você tiver, e uma breve descrição. Uma pessoa do equipe analisa cada inscrição, e seu time recebe um e-mail em qualquer caso.' } },
     faq: [{ question: 'Eu pago enquanto estou fora?', answer: 'Não. Quando seu time não está trabalhando, não custa nada.' }, { question: 'O que acontece quando meus créditos acabam?', answer: 'Só então seu time para. Adicione créditos e ele continua na hora. Você também pode definir um limite mensal.' }, { question: 'Os créditos mensais acumulam?', answer: 'Sim. Os créditos do plano Time acumulam por 2 meses.' }, { question: 'Quanto custa o plano Time?', answer: 'Depende dos créditos que você escolhe todo mês: {{m0}} por mês sem créditos (seu produto continua no ar), {{m1}} com {{c1}} créditos, {{m2}} com {{c2}}, {{m3}} com {{c3}} ou {{m4}} com {{c4}}. O anual vale só para a base de {{m0}}: {{fromYear}} por ano, então 2 meses saem grátis; os créditos que você escolher continuam mensais a 100 créditos = $1 e acumulam por 3 meses.' }, { question: 'Posso manter meu produto no ar sem continuar construindo?', answer: 'Sim. Escolha zero créditos por mês e o plano Time custa {{m0}} por mês: seus sites, domínios e armazenamento continuam no ar. Adicione créditos quando quiser uma mudança.' }, { question: 'Quanto a mais pago quando minha equipe cresce?', answer: 'O plano Time inclui até 5 pessoas. Cada editor extra custa $5 por mês, até 10 pessoas por equipe. Convites somente para visualizar são grátis, e os créditos são compartilhados por toda a equipe, sem contar por pessoa. Grátis inclui 2 pessoas.' }],
   },
-  band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM que negócio você quer montar. Seu time fica pronto em cerca de um minuto.' },
+  band: { title: 'Comece pela sua ideia.', text: 'Conte ao PM que negócio você quer montar. Seu time fica pronto em menos de um minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Time', decisions: 'Decisões', usage: 'Uso' },
