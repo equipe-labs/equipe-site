@@ -13,8 +13,8 @@
  */
 export type ToolId = 'from-claude' | 'from-chatgpt' | 'from-gemini' | 'from-v0' | 'from-lovable' | 'from-cursor' | 'from-replit' | 'publish-html';
 export const TOOL_IDS: ToolId[] = ['from-claude', 'from-chatgpt', 'from-gemini', 'from-v0', 'from-lovable', 'from-cursor', 'from-replit', 'publish-html'];
-/** The pages this template builds. /from-claude/ has its own page (src/pages/[...locale]/from-claude.astro) and stays as it is. */
-export const PAGE_IDS: ToolId[] = TOOL_IDS.filter((t) => t !== 'from-claude');
+/** The pages this template builds: every tool page, /from-claude/ included (since 2026-11-28 it has the live preview too). */
+export const PAGE_IDS: ToolId[] = TOOL_IDS;
 
 /** One way to get work out of an AI app, named the way that app labels it. */
 export interface ExportWay { name: string; text: string }
@@ -77,6 +77,29 @@ export interface ToolShared {
   /** {date} and {tool}: "Checked on {date} on {tool}'s own help pages." */
   checked: string; sourcesLabel: string;
   compareTitle: string; compareSub: string;
+  /** v2 (2026-11-28): computer/phone preview, progress, address, what you get, link help, sharing. */
+  v2: ToolV2;
+}
+
+export interface ToolV2 {
+  /** The preview size switch. */
+  devLabel: string; devDesktop: string; devPhone: string;
+  /** Progress while the preview builds; {s} is seconds. */
+  progSend: string; progBuild: string; progSlow: string; progVerySlow: string; builtIn: string;
+  /** The address the product gets. {host} is e.g. mortgage-calculator.equipe.page. */
+  hostLabel: string; hostNote: string;
+  /** "What you get", next to the button. */
+  getTitle: string; getNow: [string, string, string, string]; getLaterTitle: string; getLater: [string, string, string, string, string];
+  /** A whole chat was pasted and the code block was kept. {n} is lines. */
+  detectChat: string;
+  /** Paste from the clipboard (one tap on phones). */
+  paste: string; pasteDenied: string;
+  /** How to copy the code out of Claude (shown for a claude.ai link, or from the "How do I copy it?" link). */
+  helpOpen: string; helpTitle: string; helpWhy: string; helpDesktop: string; helpDesktopSteps: [string, string, string];
+  helpPhone: string; helpPhoneSteps: [string, string, string]; helpClose: string;
+  /** Sharing a preview: the code travels in the link (#code=), nothing is stored. */
+  share: string; shareCopied: string; shareBig: string; shareNote: string;
+  sharedTitle: string; sharedText: string; sharedRun: string;
 }
 
 export interface ToolLocale {

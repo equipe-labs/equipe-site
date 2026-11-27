@@ -3,16 +3,29 @@
 // "Make it a real site" goes to sign-up and the import continues by itself (app.equipe.im/import with go=1).
 //
 // Safety: pasted code never runs on equipe.im. The preview form posts the code into an <iframe> at sandbox.equipe.im
-// (cloud platform/src/artifact/sandbox.js), whose answer is always CSP-sandboxed to an opaque origin; the iframe has no
-// allow-same-origin either. The page only listens to that frame's postMessage (ready / error / fail).
+// (cloud platform/src/artifact/sandbox.js), whose answer is always CSP-sandboxed to an opaque origin; the iframes have no
+// allow-same-origin either. The page only listens to those frames' postMessage (ready / error / fail).
+//
+// v2 (2026-11-28):
+// - two frames, computer and phone (the site's IPhone.astro); only the one on screen is built, the other on switch;
+// - progress words and the measured build time; the address the product gets (<name>.equipe.page, the import's own
+//   appName rule) in the address bars and next to the button, with "what you get";
+// - smart paste: a whole chat copied from Claude/ChatGPT/Gemini keeps only its biggest code block; a claude.ai link
+//   opens "how to copy it" (desktop and phone) instead of an error; a Paste button for phones;
+// - "Share preview": the code travels compressed in the link's #code= (nothing stored anywhere). A shared link never
+//   runs by itself: the visitor sees whose code it is and presses "Show the preview".
 //
 // Funnel (cloud docs/analytics.md "equipe's own landing funnel"): steps tool_paste, tool_preview, tool_real (+ cta,
-// signup_start), and the same as click:<step>:<page>.<locale> per page and language; tool_fail:<code> when a preview fails.
+// signup_start), and the same as click:<step>:<page>.<locale> per page and language; tool_fail:<code> when a preview fails;
+// v2 events: tool_detect:chat, tool_link:claude|other, click:tool_help|tool_device|tool_share|tool_shared_open|
+// tool_shared_run|tool_paste_btn:<page>.<locale>; feature steps (eqFeat) start, done, sample, share, device, help.
 // A/B test `tool`: the button reads `real` (a) or `realB` (b).
+import IPhone from './IPhone.astro';
 import { toolCopy, SANDBOX_URL, SANDBOX_ORIGIN, SAMPLE, type ToolId } from '../data/aitool';
 import { IMPORT_SRC } from '../data/aitool/facts';
 import { IMPORT_EXTS, IMPORT_MAX_BYTES, IMPORT_URL } from '../data/fromclaude';
 import { getLocale, type LocaleCode } from '../i18n';
+import '../styles/iphone.css';
 import '../styles/aitool.css';
 
 interface Props { code: LocaleCode; tool: ToolId; id?: string }
@@ -20,20 +33,37 @@ const { code, tool, id = 'tool' } = Astro.props;
 const info = getLocale(code);
 const L = toolCopy(code);
 const S = L.shared;
+const V = S.v2;
 const P = L.pages[tool];
 const src = `${tool}.${(info.slug || 'en').toLowerCase()}`;
 // The import knows a fixed set of page names; newer pages send a neutral one and keep their own in utm_content.
 const importSrc = `${IMPORT_SRC[tool]}.${(info.slug || 'en').toLowerCase()}`;
 const free = S.free.split(' · ');
+const claude = tool === 'from-claude';
 const words = {
   lines: S.lines, remove: S.remove, sending: S.sending, building: S.building, working: S.working,
   errSyntax: S.errSyntax, errSyntaxLine: S.errSyntaxLine, errNoComponent: S.errNoComponent, errBig: S.errBig, errRate: S.errRate,
   errType: S.errType, errRead: S.errRead, errGeneric: S.errGeneric, errLinkClaude: S.errLinkClaude, errLinkOther: S.errLinkOther,
   runtimeErr: S.runtimeErr, noteStorage: S.noteStorage, noteClaudeApi: S.noteClaudeApi, noteFirebase: S.noteFirebase, noteCdn: S.noteCdn,
   kinds: S.kinds, real: S.real, realB: S.realB,
-  exts: IMPORT_EXTS, max: IMPORT_MAX_BYTES, lang: info.lang, src, sandbox: SANDBOX_ORIGIN, sample: SAMPLE,
+  progSend: V.progSend, progBuild: V.progBuild, progSlow: V.progSlow, progVerySlow: V.progVerySlow, builtIn: V.builtIn,
+  detectChat: V.detectChat, pasteDenied: V.pasteDenied, shareCopied: V.shareCopied, shareBig: V.shareBig, share: V.share,
+  exts: IMPORT_EXTS, max: IMPORT_MAX_BYTES, lang: info.lang, src, sandbox: SANDBOX_ORIGIN, sample: SAMPLE, help: claude,
 };
 const frame = `${id}-frame`;
+const host = 'your-name.equipe.page';
+const sv = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const I = {
+  monitor: sv('<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/>'),
+  phone: sv('<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>'),
+  share: sv('<path d="M9 15 21 3M15 3h6v6"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/>'),
+  paste: sv('<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>'),
+  check: sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
+  plus: sv('<path d="M12 5v14M5 12h14"/>'),
+  lock: sv('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+  help: sv('<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>'),
+  x: sv('<path d="M18 6 6 18M6 6l12 12"/>'),
+};
 ---
 <div class="tl" data-tool data-words={JSON.stringify(words)}>
   <div class="tl-grid">
@@ -42,6 +72,7 @@ const frame = `${id}-frame`;
         <label class="tl-l" for={`${id}-code`}>{S.codeLabel}</label>
         <span class="tl-count" data-count></span>
         <button type="button" class="tl-clear" data-clear hidden>{S.clear}</button>
+        <button type="button" class="tl-pbtn" data-paste-btn hidden><Fragment set:html={I.paste} />{V.paste}</button>
       </div>
       <textarea id={`${id}-code`} rows="12" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder={P.placeholder} data-code></textarea>
       <div class="tl-bar">
@@ -53,50 +84,98 @@ const frame = `${id}-frame`;
         <span class="tl-chip" data-chip hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /></svg>
           <b data-chip-name></b>
-          <button type="button" aria-label={S.remove} title={S.remove} data-chip-x><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg></button>
+          <button type="button" aria-label={S.remove} title={S.remove} data-chip-x><Fragment set:html={I.x} /></button>
         </span>
+        <button type="button" class="tl-link tl-msample" data-sample>{S.sample}</button>
+        {claude && <button type="button" class="tl-hlink" data-help-open aria-expanded="false" aria-controls={`${id}-help`}><Fragment set:html={I.help} />{V.helpOpen}</button>}
       </div>
       <div class="tl-over" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M12 15V3" /><path d="m7 8 5-5 5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg>{S.dropHere}</span></div>
     </div>
 
-    <div class="tl-view" data-state="idle" data-view>
+    <div class="tl-view" data-state="idle" data-dev="desktop" data-view>
       <div class="tl-chrome">
         <span class="tl-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="tl-addr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><span>your-name.equipe.page</span></span>
+        <span class="tl-addr"><Fragment set:html={I.lock} /><span data-host>{host}</span></span>
         <span class="tl-pill" data-pill>{S.previewLabel}</span>
         <button type="button" class="tl-icon" aria-label={S.refresh} title={S.refresh} data-refresh hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8" /><path d="M21 3v5h-5" /></svg></button>
+        <button type="button" class="tl-icon tl-share" aria-label={V.share} title={V.share} data-share hidden><Fragment set:html={I.share} /></button>
       </div>
       <div class="tl-stage">
-        <iframe name={frame} title={S.previewLabel} sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" loading="lazy" tabindex="-1" data-frame></iframe>
+        <iframe name={frame} title={S.previewLabel} sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" loading="lazy" tabindex="-1" data-frame="desktop"></iframe>
+        <div class="tl-phone" aria-hidden="true" data-phone>
+          <IPhone w={268} url={host} class="tl-iph">
+            <div class="tl-pscr"><iframe name={`${frame}-ph`} title={S.previewLabel} sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" loading="lazy" tabindex="-1" data-frame="phone"></iframe></div>
+          </IPhone>
+        </div>
         <div class="tl-empty" data-empty>
           <span class="tl-eic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M3 9h18" /><path d="m10 13-2 2 2 2M14 13l2 2-2 2" /></svg></span>
           <b>{S.previewIdle}</b>
           <p>{S.previewIdleSub}</p>
           <button type="button" class="btn ghost tl-sample" data-sample>{S.sample}</button>
         </div>
-        <div class="tl-busy" aria-hidden="true"><span class="tl-spin"></span><span>{S.building}</span></div>
+        <div class="tl-shared" data-shared hidden>
+          <span class="tl-eic" aria-hidden="true"><Fragment set:html={I.share} /></span>
+          <b>{V.sharedTitle}</b>
+          <p>{V.sharedText}</p>
+          <button type="button" class="btn primary tl-sample" data-shared-run>{V.sharedRun}</button>
+        </div>
+        <div class="tl-busy" aria-hidden="true"><span class="tl-spin"></span><span data-prog>{V.progSend}</span><small data-elapsed></small></div>
       </div>
-      <p class="tl-meta" data-meta hidden></p>
+      <div class="tl-foot">
+        <p class="tl-meta" data-meta></p>
+        <div class="tl-seg" role="radiogroup" aria-label={V.devLabel} data-dev-seg>
+          <span class="tl-segpill" aria-hidden="true"></span>
+          <button type="button" role="radio" aria-checked="true" aria-label={V.devDesktop} title={V.devDesktop} data-dev-v="desktop"><Fragment set:html={I.monitor} /><span>{V.devDesktop}</span></button>
+          <button type="button" role="radio" aria-checked="false" aria-label={V.devPhone} title={V.devPhone} tabindex="-1" data-dev-v="phone"><Fragment set:html={I.phone} /><span>{V.devPhone}</span></button>
+        </div>
+      </div>
     </div>
   </div>
+
+  {claude && (
+    <section class="tl-help" id={`${id}-help`} data-help hidden aria-labelledby={`${id}-help-t`}>
+      <div class="tl-help-h">
+        <h3 id={`${id}-help-t`}>{V.helpTitle}</h3>
+        <button type="button" class="tl-icon" aria-label={V.helpClose} title={V.helpClose} data-help-x><Fragment set:html={I.x} /></button>
+      </div>
+      <p class="tl-help-why">{V.helpWhy}</p>
+      <div class="tl-help-cols">
+        <div><h4><Fragment set:html={I.monitor} />{V.helpDesktop}</h4><ol>{V.helpDesktopSteps.map((s) => <li>{s}</li>)}</ol></div>
+        <div><h4><Fragment set:html={I.phone} />{V.helpPhone}</h4><ol>{V.helpPhoneSteps.map((s) => <li>{s}</li>)}</ol></div>
+      </div>
+      <div class="tl-help-f">
+        <button type="button" class="btn ghost tl-sample" data-sample>{S.sample}</button>
+        <button type="button" class="btn primary" data-help-x>{V.helpClose}</button>
+      </div>
+    </section>
+  )}
 
   <p class="tl-msg" role="status" aria-live="polite" data-msg hidden></p>
   <ul class="tl-notes" data-notes hidden></ul>
 
-  <form class="tl-go" action={IMPORT_URL} method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-real-form>
-    <input type="hidden" name="code" data-real-code />
-    <input type="hidden" name="filename" value="" disabled data-filename />
-    <input type="hidden" name="lang" value={info.lang} />
-    <input type="hidden" name="src" value={importSrc} />
-    <input type="hidden" name="go" value="1" />
-    <button class="btn primary lg tl-real" type="submit" disabled data-real>
-      <span class="tl-rl" data-real-label>{S.real}</span>
-      <span class="tl-spin" aria-hidden="true"></span>
-      <svg class="tl-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-    </button>
-    <span class="tl-free">{free.map((f) => <span>{f}</span>)}</span>
-    <p class="tl-note">{S.realNote}</p>
-  </form>
+  <div class="tl-act">
+    <form class="tl-go" action={IMPORT_URL} method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-real-form>
+      <input type="hidden" name="code" data-real-code />
+      <input type="hidden" name="filename" value="" disabled data-filename />
+      <input type="hidden" name="lang" value={info.lang} />
+      <input type="hidden" name="src" value={importSrc} />
+      <input type="hidden" name="go" value="1" />
+      <p class="tl-host" data-host-row hidden><span>{V.hostLabel}</span><b data-host-big>{host}</b><small>{V.hostNote}</small></p>
+      <button class="btn primary lg tl-real" type="submit" disabled data-real>
+        <span class="tl-rl" data-real-label>{S.real}</span>
+        <span class="tl-spin" aria-hidden="true"></span>
+        <svg class="tl-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </button>
+      <span class="tl-free">{free.map((f) => <span>{f}</span>)}</span>
+      <p class="tl-note">{S.realNote}</p>
+    </form>
+    <aside class="tl-get" aria-label={V.getTitle}>
+      <h3>{V.getTitle}</h3>
+      <ul class="tl-gl">{V.getNow.map((g) => <li><Fragment set:html={I.check} />{g}</li>)}</ul>
+      <h3>{V.getLaterTitle}</h3>
+      <ul class="tl-gl tl-later">{V.getLater.map((g) => <li><Fragment set:html={I.plus} />{g}</li>)}</ul>
+    </aside>
+  </div>
 
   <form class="tl-pf" action={SANDBOX_URL} method="post" target={frame} enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" aria-hidden="true" data-preview-form>
     <textarea name="code" tabindex="-1" data-pcode></textarea>
@@ -114,6 +193,37 @@ const frame = `${id}-frame`;
   const bytes = (s: string) => new Blob([s]).size;
   const UTM = ['utm_source', 'utm_medium', 'utm_campaign'] as const;
   const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SHARE_MAX = 24000; // characters of #code= (about 18 KB compressed): fits every chat app and browser.
+
+  // The import's own name rule (equipe-cloud runtime/agent/import/artifact.mjs appName): the title, lower-case ASCII words.
+  const appName = (title: string) => {
+    const s = String(title || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const cut = s.slice(0, 30).replace(/-+$/, '');
+    return cut.length >= 2 ? cut : '';
+  };
+
+  // A whole chat pasted (Claude's, ChatGPT's or Gemini's "Copy" of an answer): keep only its biggest code block.
+  // A paste that is one fenced block, or code with no prose around it, is left alone (the build reads it as it is).
+  const CODE_LANG = /^(jsx|tsx|js|javascript|ts|typescript|react|html|htm|svg|xml|mermaid|mmd|vue)?$/;
+  const fromChat = (text: string): { code: string; n: number } | null => {
+    const t = text.replace(/\r\n?/g, '\n');
+    const blocks = [...t.matchAll(/(^|\n)```([\w+-]*)[^\n]*\n([\s\S]*?)\n```/g)].map((m) => ({ lang: m[2].toLowerCase(), code: m[3] }));
+    const good = blocks.filter((b) => CODE_LANG.test(b.lang) && b.code.split('\n').length >= 6);
+    let best = good.sort((a, b) => b.code.length - a.code.length)[0]?.code;
+    if (!best) {
+      const m = t.match(/<!doctype html[\s\S]*?<\/html>/i) || t.match(/<html[\s>][\s\S]*?<\/html>/i);
+      if (m && m[0].length < t.trim().length - 40) best = m[0];
+    }
+    if (!best || best.trim().length > t.trim().length - 20) return null;
+    return { code: best.replace(/\n+$/, '') + '\n', n: best.split('\n').length };
+  };
+
+  // #code= links: deflate-raw + base64url, so a preview can be sent without storing anything anywhere.
+  const canShare = typeof CompressionStream === 'function' && typeof DecompressionStream === 'function';
+  const toB64u = (u8: Uint8Array) => { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode(...u8.subarray(i, i + 0x8000)); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+  const fromB64u = (b: string) => { const s = atob(b.replace(/-/g, '+').replace(/_/g, '/')); const u8 = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u8[i] = s.charCodeAt(i); return u8; };
+  const pack = async (s: string) => toB64u(new Uint8Array(await new Response(new Blob([s]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer()));
+  const unpack = async (b: string) => new Response(new Blob([fromB64u(b) as BlobPart]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();
 
   // A/B test "tool": which words the button uses, kept for the tab. The landing hands its arms on at sign-up (_eqa).
   const ab = (window as unknown as { __eqAB?: Record<string, string> });
@@ -130,18 +240,26 @@ const frame = `${id}-frame`;
   document.querySelectorAll<HTMLElement>('[data-tool]').forEach((root) => {
     const Wd: W = JSON.parse(root.dataset.words || '{}');
     const $ = <T extends Element>(s: string) => root.querySelector(s) as T;
+    const $$ = <T extends Element>(s: string) => [...root.querySelectorAll(s)] as T[];
     const ta = $<HTMLTextAreaElement>('[data-code]');
     const box = $<HTMLElement>('[data-drop]');
     const count = $<HTMLElement>('[data-count]');
     const clear = $<HTMLButtonElement>('[data-clear]');
+    const pasteBtn = $<HTMLButtonElement>('[data-paste-btn]');
     const fileIn = $<HTMLInputElement>('[data-file]');
     const row = $<HTMLElement>('[data-file-row]');
     const chip = $<HTMLElement>('[data-chip]');
     const view = $<HTMLElement>('[data-view]');
     const pill = $<HTMLElement>('[data-pill]');
-    const frame = $<HTMLIFrameElement>('[data-frame]');
+    const frames = { desktop: $<HTMLIFrameElement>('[data-frame="desktop"]'), phone: $<HTMLIFrameElement>('[data-frame="phone"]') };
     const meta = $<HTMLElement>('[data-meta]');
+    const prog = $<HTMLElement>('[data-prog]');
+    const elapsed = $<HTMLElement>('[data-elapsed]');
     const refreshBtn = $<HTMLButtonElement>('[data-refresh]');
+    const shareBtn = $<HTMLButtonElement>('[data-share]');
+    const shared = $<HTMLElement>('[data-shared]');
+    const help = root.querySelector<HTMLElement>('[data-help]');
+    const helpOpen = root.querySelector<HTMLButtonElement>('[data-help-open]');
     const msg = $<HTMLElement>('[data-msg]');
     const notes = $<HTMLUListElement>('[data-notes]');
     const pf = $<HTMLFormElement>('[data-preview-form]');
@@ -152,10 +270,17 @@ const frame = `${id}-frame`;
     const realForm = $<HTMLFormElement>('[data-real-form]');
     const realCode = $<HTMLInputElement>('[data-real-code]');
     const fname = $<HTMLInputElement>('[data-filename]');
+    const hostRow = $<HTMLElement>('[data-host-row]');
+    const hostBig = $<HTMLElement>('[data-host-big]');
+    const seg = $<HTMLElement>('[data-dev-seg]');
+    const iphUrl = root.querySelector<HTMLElement>('.tl-iph .iph-url');
+    const frameName = { desktop: frames.desktop.name, phone: frames.phone.name };
     const tag = (step: string) => own('ev', `click:${step}:${Wd.src}`);
     if (arm === 'b') realLabel.textContent = Wd.realB;
     const idleLabel = realLabel.textContent || '';
+    const defaultHost = $<HTMLElement>('[data-host]').textContent || '';
     root.classList.add('ready');
+    if (navigator.clipboard && typeof navigator.clipboard.readText === 'function') pasteBtn.hidden = false;
 
     const say = (text: string, kind: 'err' | 'info' = 'err') => {
       msg.textContent = text; msg.hidden = !text; msg.dataset.kind = kind;
@@ -163,10 +288,30 @@ const frame = `${id}-frame`;
     };
     const nudge = (el: HTMLElement) => { if (!motion) return; el.classList.remove('nudge'); void el.offsetWidth; el.classList.add('nudge'); };
     const setNotes = (list: string[]) => { notes.replaceChildren(...list.map((t) => { const li = document.createElement('li'); li.textContent = t; return li; })); notes.hidden = !list.length; };
+    const setHost = (title: string) => {
+      const name = appName(title);
+      const h = name ? `${name}.equipe.page` : defaultHost;
+      $$<HTMLElement>('[data-host]').forEach((el) => { el.textContent = h; });
+      if (iphUrl) { const last = iphUrl.lastChild; if (last && last.nodeType === 3) last.textContent = h; }
+      hostBig.textContent = h; hostRow.hidden = !name;
+    };
+    let ticker = 0;
     const setState = (s: 'idle' | 'busy' | 'ok' | 'err') => {
       view.dataset.state = s;
       pill.textContent = s === 'busy' ? Wd.building.replace(/…$/, '') : s === 'ok' ? Wd.working : pill.dataset.idle || pill.textContent || '';
       refreshBtn.hidden = s === 'idle';
+      shareBtn.hidden = !(s === 'ok' && canShare);
+      clearInterval(ticker);
+      if (s === 'busy') {
+        const t0 = performance.now();
+        prog.textContent = Wd.progSend; elapsed.textContent = '';
+        ticker = window.setInterval(() => {
+          const sec = (performance.now() - t0) / 1000;
+          prog.textContent = sec < 0.6 ? Wd.progSend : sec < 4 ? Wd.progBuild : sec < 12 ? Wd.progSlow : Wd.progVerySlow;
+          elapsed.textContent = sec >= 1 ? `${sec.toFixed(1)} s` : '';
+        }, 100);
+      }
+      if (s === 'idle') { setHost(''); meta.textContent = ''; }
     };
     pill.dataset.idle = pill.textContent || '';
     const setFile = (name: string, size: number) => {
@@ -179,8 +324,18 @@ const frame = `${id}-frame`;
       const n = v ? v.replace(/\n$/, '').split('\n').length : 0;
       count.textContent = v.trim() ? Wd.lines.replace('{n}', n.toLocaleString(document.documentElement.lang || undefined)) : '';
       clear.hidden = !v.trim();
+      pasteBtn.classList.toggle('gone', !!v.trim());
       real.disabled = !v.trim();
       root.classList.toggle('has-code', !!v.trim());
+    };
+    const showHelp = (on: boolean, how: 'link' | 'click' = 'click') => {
+      if (!help) return;
+      help.hidden = !on; helpOpen?.setAttribute('aria-expanded', String(on));
+      if (on) {
+        if (motion) { help.classList.remove('pop'); void help.offsetWidth; help.classList.add('pop'); }
+        own('ev', `click:tool_help:${Wd.src}`); ft('help');
+        if (how === 'click') help.scrollIntoView({ behavior: motion ? 'smooth' : 'auto', block: 'nearest' });
+      }
     };
 
     // A link instead of code: say how to get the code (a share link alone holds no code we may read).
@@ -190,38 +345,67 @@ const frame = `${id}-frame`;
       try { const u = new URL(/^https?:\/\//.test(t) ? t : `https://${t}`); if (/(^|\.)claude\.ai$/i.test(u.hostname)) return 'claude'; if (/(^|\.)(chatgpt\.com|openai\.com|gemini\.google\.com|g\.co)$/i.test(u.hostname)) return 'other'; } catch { /* not a link */ }
       return '';
     };
+    const onLink = (lk: string) => {
+      if (!once.has(`link:${lk}`)) { once.add(`link:${lk}`); own('ev', `tool_link:${lk}`); }
+      if (lk === 'claude' && help) { say(''); showHelp(true, 'link'); }
+      else say(lk === 'claude' ? Wd.errLinkClaude : Wd.errLinkOther, 'info');
+      nudge(box);
+    };
 
+    let dev: 'desktop' | 'phone' = 'desktop';
+    const built: Record<string, string> = { desktop: '', phone: '' };
     let last = '', timer = 0, pending = 0, started = 0;
     const preview = (force = false) => {
       const v = ta.value;
       clearTimeout(timer);
-      if (!v.trim()) { setState('idle'); frame.removeAttribute('src'); last = ''; setNotes([]); meta.hidden = true; return; }
+      if (!v.trim()) { setState('idle'); frames.desktop.removeAttribute('src'); frames.phone.removeAttribute('src'); last = ''; built.desktop = built.phone = ''; setNotes([]); return; }
       const lk = linkKind(v);
-      if (lk) { say(lk === 'claude' ? Wd.errLinkClaude : Wd.errLinkOther, 'info'); nudge(box); return; }
+      if (lk) { onLink(lk); return; }
       if (bytes(v) > Wd.max) { say(Wd.errBig); nudge(box); return; }
-      if (!force && v === last) return;
-      last = v; say(''); setNotes([]); meta.hidden = true;
-      if (!once.has('paste')) { once.add('paste'); own('fn', 'tool_paste'); ft('paste'); tag('tool_paste'); ph('tool_paste', { page: Wd.src }); }
+      if (!force && v === last && built[dev] === v) return;
+      if (v !== last) { built.desktop = built.phone = ''; }
+      last = v; say(''); setNotes([]); shared.hidden = true;
+      if (help && !help.hidden) showHelp(false);
+      if (!once.has('paste')) { once.add('paste'); own('fn', 'tool_paste'); ft('paste'); ft('start'); tag('tool_paste'); ph('tool_paste', { page: Wd.src }); }
       setState('busy'); started = performance.now(); pending++;
       pcode.value = v;
+      pf.target = frameName[dev];
+      built[dev] = v;
       pf.submit();
     };
     const soon = (ms: number) => { clearTimeout(timer); timer = window.setTimeout(() => preview(), ms); };
 
+    // Computer or phone: the chosen frame shows; it is built on first sight of new code.
+    const setDev = (d: 'desktop' | 'phone', user = true) => {
+      dev = d; view.dataset.dev = d; seg.dataset.v = d;
+      seg.querySelectorAll<HTMLButtonElement>('[data-dev-v]').forEach((b) => { const on = b.dataset.devV === d; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+      if (user) { own('ev', `click:tool_device:${Wd.src}`); if (!once.has(`dev:${d}`)) { once.add(`dev:${d}`); own('ev', `tool_device:${d}`); ft('device'); } }
+      if (ta.value.trim() && built[d] !== ta.value && view.dataset.state !== 'idle') preview(true);
+    };
+    seg.addEventListener('click', (e) => { const b = (e.target as Element).closest<HTMLButtonElement>('[data-dev-v]'); if (b) setDev(b.dataset.devV as 'desktop' | 'phone'); });
+    seg.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); setDev(dev === 'desktop' ? 'phone' : 'desktop'); seg.querySelector<HTMLButtonElement>(`[data-dev-v="${dev}"]`)!.focus(); } });
+    // Phones see their own size first.
+    if (matchMedia('(max-width: 640px)').matches) setDev('phone', false);
+
     addEventListener('message', (e: MessageEvent) => {
-      if (e.source !== frame.contentWindow || !e.data || e.data.eq !== 'preview') return;
+      const fromFrame = e.source === frames.desktop.contentWindow ? 'desktop' : e.source === frames.phone.contentWindow ? 'phone' : '';
+      if (!fromFrame || !e.data || e.data.eq !== 'preview') return;
+      if (fromFrame !== dev) return; // the frame off screen
       const d = e.data;
       if (d.t === 'ready') {
         if (!pending) return; pending = 0;
         setState('ok');
+        const ms = Math.round(performance.now() - started);
         const kind = Wd.kinds[d.kind] || '';
-        meta.textContent = [d.title, kind].filter(Boolean).join(' · '); meta.hidden = !meta.textContent;
+        const secs = (ms / 1000).toLocaleString(document.documentElement.lang || undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+        meta.textContent = [d.title, kind, Wd.builtIn.replace('{s}', secs)].filter(Boolean).join(' · ');
+        setHost(d.title || '');
         const w: string[] = d.warnings || [];
         setNotes([d.storage ? Wd.noteStorage : '', w.includes('claude_api') ? Wd.noteClaudeApi : '', w.includes('gemini_firebase') ? Wd.noteFirebase : '', w.includes('packages_cdn') ? Wd.noteCdn : ''].filter(Boolean));
-        if (!once.has('preview')) { once.add('preview'); own('fn', 'tool_preview'); ft('preview'); tag('tool_preview'); ph('tool_preview', { page: Wd.src, kind: d.kind, ms: Math.round(performance.now() - started) }); }
+        if (!once.has('preview')) { once.add('preview'); own('fn', 'tool_preview'); ft('done'); tag('tool_preview'); ph('tool_preview', { page: Wd.src, kind: d.kind, ms, dev }); }
         if (!once.has(`kind:${d.kind}`)) { once.add(`kind:${d.kind}`); own('ev', `tool_kind:${String(d.kind).slice(0, 12)}`); }
       } else if (d.t === 'fail') {
-        pending = 0; setState('err');
+        pending = 0; setState('err'); built[dev] = ''; meta.textContent = ''; setHost('');
         const c = String(d.code || 'failed');
         say(c === 'syntax' ? (d.line ? Wd.errSyntaxLine.replace('{line}', String(d.line)) : Wd.errSyntax) : c === 'no_component' ? Wd.errNoComponent : c === 'too_big' ? Wd.errBig : c === 'rate' ? Wd.errRate : Wd.errGeneric);
         if (!once.has(`fail:${c}`)) { once.add(`fail:${c}`); own('ev', `tool_fail:${c.slice(0, 20)}`); }
@@ -232,12 +416,56 @@ const frame = `${id}-frame`;
       }
     });
 
-    ta.addEventListener('paste', () => setTimeout(() => preview(), 0));
+    // What arrives in the box: a link (help), a whole chat (keep its code), or code.
+    const take = (text: string) => {
+      const lk = linkKind(text);
+      if (lk) { onLink(lk); return; }
+      const chat = fromChat(text);
+      if (chat) { ta.value = chat.code; refresh(); }
+      preview();
+      if (chat) {
+        say(Wd.detectChat.replace('{n}', chat.n.toLocaleString(document.documentElement.lang || undefined)), 'info');
+        if (!once.has('detect')) { once.add('detect'); own('ev', 'tool_detect:chat'); }
+      }
+    };
+    ta.addEventListener('paste', () => setTimeout(() => take(ta.value), 0));
     ta.addEventListener('input', () => { refresh(); if (!ta.value.trim()) { setFile('', 0); preview(); } else soon(900); if (msg.dataset.kind === 'err') say(''); });
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); if (!real.disabled) realForm.requestSubmit(); } });
     clear.addEventListener('click', () => { ta.value = ''; setFile('', 0); refresh(); preview(); say(''); ta.focus(); });
     refreshBtn.addEventListener('click', () => preview(true));
-    root.querySelector('[data-sample]')!.addEventListener('click', () => { ta.value = Wd.sample; setFile('', 0); refresh(); own('ev', `click:tool_sample:${Wd.src}`); preview(true); });
+    pasteBtn.addEventListener('click', async () => {
+      tag('tool_paste_btn');
+      try {
+        const t = await navigator.clipboard.readText();
+        if (!t.trim()) { ta.focus(); return; }
+        ta.value = t; setFile('', 0); refresh(); take(t);
+      } catch { say(Wd.pasteDenied, 'info'); ta.focus(); }
+    });
+    $$<HTMLButtonElement>('[data-sample]').forEach((b) => b.addEventListener('click', () => {
+      ta.value = Wd.sample; setFile('', 0); refresh(); say('');
+      own('ev', `click:tool_sample:${Wd.src}`); ft('sample');
+      preview(true);
+      if (matchMedia('(max-width: 900px)').matches) view.scrollIntoView({ behavior: motion ? 'smooth' : 'auto', block: 'center' });
+    }));
+    helpOpen?.addEventListener('click', () => showHelp(!!help?.hidden));
+    $$<HTMLButtonElement>('[data-help-x]').forEach((b) => b.addEventListener('click', () => { showHelp(false); ta.focus({ preventScroll: true }); }));
+
+    // Share: the code, compressed, in the link's #code=. Nothing leaves the browser until the person sends the link.
+    let shareReset = 0;
+    shareBtn.addEventListener('click', async () => {
+      const v = ta.value;
+      if (!v.trim()) return;
+      let packed = '';
+      try { packed = await pack(v); } catch { return; }
+      if (packed.length > SHARE_MAX) { say(Wd.shareBig, 'info'); return; }
+      const url = `${location.origin}${location.pathname}#code=${packed}`;
+      own('ev', `click:tool_share:${Wd.src}`); ft('share'); ph('tool_share', { page: Wd.src, chars: packed.length });
+      const coarse = matchMedia('(pointer: coarse)').matches;
+      if (coarse && typeof navigator.share === 'function') { try { await navigator.share({ url, title: document.title }); return; } catch { /* closed: copy instead */ } }
+      try { await navigator.clipboard.writeText(url); } catch { window.prompt(Wd.share, url); return; }
+      shareBtn.classList.add('done'); say(Wd.shareCopied, 'info');
+      clearTimeout(shareReset); shareReset = window.setTimeout(() => { shareBtn.classList.remove('done'); if (msg.textContent === Wd.shareCopied) say(''); }, 2600);
+    });
 
     // Files are read here, in the browser. Nothing leaves it until the preview (sandbox) or the button.
     const readFile = (f: File | undefined | null) => {
@@ -266,24 +494,35 @@ const frame = `${id}-frame`;
       const v = ta.value;
       if (!v.trim()) { e.preventDefault(); ta.focus(); nudge(box); return; }
       const lk = linkKind(v);
-      if (lk) { e.preventDefault(); say(lk === 'claude' ? Wd.errLinkClaude : Wd.errLinkOther, 'info'); return; }
+      if (lk) { e.preventDefault(); onLink(lk); return; }
       if (bytes(v) > Wd.max) { e.preventDefault(); say(Wd.errBig); return; }
       realCode.value = v;
       const params = new URLSearchParams(location.search);
       const extra: HTMLInputElement[] = [];
       const add = (k: string, val: string) => { const h = document.createElement('input'); h.type = 'hidden'; h.name = k; h.value = val; realForm.appendChild(h); extra.push(h); };
       UTM.forEach((k) => { const val = params.get(k); if (val) add(k, val.slice(0, 60)); });
-      if (!params.get('utm_source')) { add('utm_source', 'equipe.im'); add('utm_medium', 'tool'); add('utm_campaign', 'ai-to-website'); }
+      if (!params.get('utm_source')) { add('utm_source', once.has('sharedview') ? 'shared-preview' : 'equipe.im'); add('utm_medium', 'tool'); add('utm_campaign', 'ai-to-website'); }
       add('utm_content', String(Wd.src).slice(0, 60));
       try { const enc = (window as unknown as { __eqaEnc?: () => string }).__eqaEnc?.(); if (enc) add('_eqa', enc); } catch { /* no hand-off */ }
       own('fn', 'tool_real'); ft('signup'); own('fn', 'cta'); own('fn', 'signup_start'); tag('tool_real');
-      ph('tool_real', { page: Wd.src, previewed: once.has('preview'), arm });
+      ph('tool_real', { page: Wd.src, previewed: once.has('preview'), arm, dev, shared: once.has('sharedview') });
       real.classList.add('busy'); real.setAttribute('aria-busy', 'true'); realLabel.textContent = Wd.sending;
       setTimeout(() => extra.forEach((h) => h.remove()), 0);
     });
     addEventListener('pageshow', () => { real.classList.remove('busy'); real.removeAttribute('aria-busy'); realLabel.textContent = idleLabel; refresh(); });
     refresh();
-    if (ta.value.trim()) preview(); // restored by the browser (back button)
+
+    // A shared preview (#code=): fill the box, say whose code it is, and run only when the visitor asks.
+    const hash = location.hash.match(/^#code=([A-Za-z0-9_-]{8,40000})$/);
+    if (hash && canShare) {
+      unpack(hash[1]).then((code) => {
+        if (!code.trim() || bytes(code) > Wd.max) return;
+        ta.value = code; refresh();
+        once.add('sharedview'); shared.hidden = false; view.dataset.state = 'shared';
+        own('ev', `click:tool_shared_open:${Wd.src}`);
+      }).catch(() => { /* a broken link: the empty tool */ });
+      $<HTMLButtonElement>('[data-shared-run]').addEventListener('click', () => { tag('tool_shared_run'); preview(true); });
+    } else if (ta.value.trim()) preview(); // restored by the browser (back button)
   });
 
   // "Paste your code" links elsewhere on the page scroll to the box and put the caret in it.

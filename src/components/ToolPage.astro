@@ -1,6 +1,6 @@
 ---
-// One page of the free AI-to-website tool (/from-chatgpt/, /from-gemini/, /from-v0/, /from-lovable/, /from-cursor/,
-// /from-replit/, /publish-html/; /from-claude/ has its own page). Copy: src/data/aitool/<locale>.ts; facts and sources:
+// One page of the free AI-to-website tool (/from-claude/, /from-chatgpt/, /from-gemini/, /from-v0/, /from-lovable/,
+// /from-cursor/, /from-replit/, /publish-html/). Copy: src/data/aitool/<locale>.ts; facts and sources:
 // src/data/aitool/facts.ts. The paste box (AiTool.astro) previews on sandbox.equipe.im before any sign-up.
 // Other apps are named in text only: no logos, no colours, and the page closes with the "not affiliated" line.
 import PageShell from './PageShell.astro';
@@ -30,7 +30,7 @@ const name = F.name;
 const t = (s: string) => fill(s, { tool: name });
 const date = new Intl.DateTimeFormat(info.lang, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${F.checked}T00:00:00Z`));
 const GAPS: GapKey[] = ['hosting', 'domain', 'database', 'login'];
-const others = PAGE_IDS.filter((x) => x !== tool);
+const others = PAGE_IDS.filter((x) => x !== tool && x !== 'from-claude');
 const fc = FROM_CLAUDE[code] ?? FROM_CLAUDE.en;
 const V = vsCopy(code);
 // The comparisons that fit this page: the same product's /vs/ page first, then the rest.
@@ -158,7 +158,7 @@ const up = sv('<path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>');
     <h2 class="fc-rv">{S.othersTitle}</h2>
     <p class="fc-sub fc-rv">{S.othersSub}</p>
     <ul class="tp-others">
-      <li class="fc-rv"><a href={subPath(info, 'from-claude')} data-ph="tool_other_click" data-ph-location={tool}><b>{fc.nav}<Fragment set:html={arrow} /></b><span>{fc.navDesc}</span></a></li>
+      {tool !== 'from-claude' && <li class="fc-rv"><a href={subPath(info, 'from-claude')} data-ph="tool_other_click" data-ph-location={tool}><b>{fc.nav}<Fragment set:html={arrow} /></b><span>{fc.navDesc}</span></a></li>}
       {others.map((o, i) => (
         <li class="fc-rv" style={`transition-delay:${((i + 1) % 3) * 60}ms`}><a href={subPath(info, o)} data-ph="tool_other_click" data-ph-location={tool}><b>{L.pages[o].nav}<Fragment set:html={arrow} /></b><span>{L.pages[o].navDesc}</span></a></li>
       ))}
