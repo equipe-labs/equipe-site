@@ -8,7 +8,10 @@
 import { bookingCopy } from '../../data/bookingpage';
 import { sampleState, renderPage, ideaText, THEMES, PALETTES } from '../../data/bookingpage/model';
 import { serviceRows, hourRows } from '../../data/bookingpage/editor';
+import { hostFor } from '../../data/bookingpage/model';
+import IPhone from '../IPhone.astro';
 import { getLocale, type LocaleCode } from '../../i18n';
+import '../../styles/iphone.css';
 import '../../styles/bookingpage.css';
 
 interface Props { code: LocaleCode }
@@ -19,6 +22,7 @@ const c = bookingCopy(code);
 const E = c.ed;
 const s = sampleState(c);
 const html = renderPage(c, s, lang);
+const host = hostFor(s.n);
 const loc = (info.slug || 'en').toLowerCase();
 const startHref = `https://app.equipe.im/start?${new URLSearchParams({ idea: ideaText(c, s, lang), utm_source: 'equipe.im', utm_medium: 'tool', utm_campaign: 'booking-page', utm_content: `booking-page.${loc}`, ref: 'booking-page' })}`;
 // Only the words the browser needs (not the FAQ or the page copy).
@@ -89,10 +93,25 @@ const free = c.live.free.split(' · ');
           <button type="button" role="radio" aria-checked="false" data-dev-v="desktop" tabindex="-1">{c.pv.desktop}</button>
         </div>
       </div>
-      <div class="bp-stage" data-stage data-device="phone">
-        <div class="bp-dev">
-          <iframe class="on" title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" srcdoc={html} data-frame></iframe>
-          <iframe title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" data-frame></iframe>
+      <div class="bp-stage" data-stage data-device="phone" data-th={s.th}>
+        <div class="bp-phone" data-dev-box="phone">
+          <IPhone w={340} url={host} class="bp-iph">
+            <div class="bp-scr">
+              <iframe class="on" title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" srcdoc={html} data-frame="phone"></iframe>
+              <iframe title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" data-frame="phone"></iframe>
+            </div>
+          </IPhone>
+        </div>
+        <div class="bp-win" data-dev-box="desktop" aria-hidden="true">
+          <div class="bp-wbar">
+            <span class="bp-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="bp-addr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><span data-host>{host}</span></span>
+            <span class="bp-wsp" aria-hidden="true"></span>
+          </div>
+          <div class="bp-wscr">
+            <iframe class="on" title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1" data-frame="desktop"></iframe>
+            <iframe title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" data-frame="desktop"></iframe>
+          </div>
         </div>
       </div>
       <div class="bp-share">
