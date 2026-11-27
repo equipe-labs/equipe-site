@@ -1,0 +1,198 @@
+---
+// One page of the free AI-to-website tool (/from-chatgpt/, /from-gemini/, /from-v0/, /from-lovable/, /from-cursor/,
+// /from-replit/, /publish-html/; /from-claude/ has its own page). Copy: src/data/aitool/<locale>.ts; facts and sources:
+// src/data/aitool/facts.ts. The paste box (AiTool.astro) previews on sandbox.equipe.im before any sign-up.
+// Other apps are named in text only: no logos, no colours, and the page closes with the "not affiliated" line.
+import PageShell from './PageShell.astro';
+import AiTool from './AiTool.astro';
+import FaqJsonLd from './FaqJsonLd.astro';
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+import { toolCopy, PAGE_IDS, type ToolId, type GapKey } from '../data/aitool';
+import { FACTS } from '../data/aitool/facts';
+import { VS_IDS, VS, vsCopy, fill } from '../data/vs';
+import { MIGRATE, migrateHref } from '../data/migrate';
+import { FROM_CLAUDE } from '../data/fromclaude';
+import { fillPlanDeep } from '../data/plan';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/fromclaude.css';
+import '../styles/aitool.css';
+
+interface Props { code: LocaleCode; tool: ToolId }
+const { code, tool } = Astro.props;
+const info = getLocale(code);
+const L = toolCopy(code);
+const S = L.shared;
+const P = fillPlanDeep(L.pages[tool], code);
+const F = FACTS[tool];
+const url = new URL(subPath(info, tool), Astro.site).href;
+const name = F.name;
+const t = (s: string) => fill(s, { tool: name });
+const date = new Intl.DateTimeFormat(info.lang, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${F.checked}T00:00:00Z`));
+const GAPS: GapKey[] = ['hosting', 'domain', 'database', 'login'];
+const others = PAGE_IDS.filter((x) => x !== tool);
+const fc = FROM_CLAUDE[code] ?? FROM_CLAUDE.en;
+const V = vsCopy(code);
+// The comparisons that fit this page: the same product's /vs/ page first, then the rest.
+const vsFor = tool.replace('from-', '');
+const vsList = [...VS_IDS].sort((a, b) => Number(b === vsFor) - Number(a === vsFor)).slice(0, 4);
+const projectHref = migrateHref(`${tool}-${info.slug || 'en'}`);
+const sv = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const ICON = {
+  yes: sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
+  partial: sv('<path d="M6 12h12"/>'),
+  no: sv('<path d="M7 7l10 10M17 7 7 17"/>'),
+};
+const arrow = sv('<path d="M5 12h14M13 6l6 6-6 6"/>');
+const up = sv('<path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>');
+---
+<PageShell code={code} page={tool} title={P.title} description={P.desc}>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://sandbox.equipe.im" crossorigin />
+    <script is:inline>
+      // A/B test "tool": the button's words (AiTool reads it). Drawn once per tab, like the landing's arms.
+      (function (w) { try { var a = w.__eqAB || (w.__eqAB = {}); if (a.tool !== 'a' && a.tool !== 'b') { var s = JSON.parse(sessionStorage.getItem('eq_ab') || '{}') || {}; a.tool = s.tool === 'a' || s.tool === 'b' ? s.tool : Math.random() < 0.5 ? 'a' : 'b'; s.tool = a.tool; sessionStorage.setItem('eq_ab', JSON.stringify(s)); } document.documentElement.setAttribute('data-ab-tool', a.tool); } catch (e) {} })(window);
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__fcrv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: P.ogTitle, description: P.desc, inLanguage: info.lang,
+      dateModified: F.checked, about: { '@id': `${SITE.url}/#organization` },
+      mainEntity: { '@type': 'HowTo', name: P.h1, step: P.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) },
+    }} />
+    <JsonLd data={{
+      '@type': 'WebApplication', name: P.ogTitle, url, applicationCategory: 'WebApplication', operatingSystem: 'Any', inLanguage: info.lang,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#organization` },
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={P.faq} />
+  </Fragment>
+
+  <section class="tp-hero"><div class="wrap">
+    <div class="head">
+      <h1>{P.h1}</h1>
+      <p class="tp-lead">{P.lead}</p>
+    </div>
+    <div class="tp-tool" id="paste"><AiTool code={code} tool={tool} id={`tool-${tool}`} /></div>
+    {P.project && (
+      <a class="tp-proj" href={projectHref} data-ph="tool_project_click" data-ph-location={tool}>
+        <span class="tp-proj-t"><b>{P.project.title}</b><span>{P.project.text}</span></span>
+        <span class="btn ghost tp-proj-b">{P.project.button}<Fragment set:html={arrow} /></span>
+      </a>
+    )}
+  </div></section>
+
+  <section class="fc-sec" id="short"><div class="wrap">
+    <h2 class="fc-rv">{S.shortTitle}</h2>
+    <ul class="tp-short">{P.short.map((s, i) => <li class="fc-rv" style={`transition-delay:${(i % 2) * 70}ms`}>{s}</li>)}</ul>
+    <p class="tp-measured fc-rv">{S.measured}</p>
+  </div></section>
+
+  {P.exports && (
+    <section class="fc-sec" id="export"><div class="wrap">
+      <h2 class="fc-rv">{t(S.exportTitle)}</h2>
+      <p class="fc-sub fc-rv">{t(S.exportSub)}</p>
+      <ol class="tp-ways">
+        {P.exports.map((w, i) => (
+          <li class="fc-rv" style={`transition-delay:${(i % 2) * 70}ms`}>
+            <span class="n" aria-hidden="true">{i + 1}</span>
+            <div><h3>{w.name}</h3><p>{w.text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div></section>
+  )}
+
+  {P.gaps && F.status && (
+    <section class="fc-sec" id="gaps"><div class="wrap">
+      <h2 class="fc-rv">{t(S.gapsTitle)}</h2>
+      <p class="fc-sub fc-rv">{t(S.gapsSub)}</p>
+      {P.builtIn && <p class="tp-built fc-rv">{P.builtIn}</p>}
+      <div class="tp-gaps fc-rv" role="table" aria-label={t(S.gapsTitle)}>
+        <div class="tp-gr tp-gh" role="row">
+          <span role="columnheader"></span>
+          <span role="columnheader">{name}</span>
+          <span role="columnheader">{S.equipeCol}</span>
+        </div>
+        {GAPS.map((k) => (
+          <div class="tp-gr" role="row">
+            <b role="rowheader">{S.gapNames[k]}</b>
+            <span role="cell" class="tp-gc" data-s={F.status![k]} data-col={name}>
+              <span class="tp-st"><Fragment set:html={ICON[F.status![k]]} />{S.status[F.status![k]]}</span>
+              <span class="tp-gt">{P.gaps![k]}</span>
+            </span>
+            <span role="cell" class="tp-gc" data-s="yes" data-col={S.equipeCol}>
+              <span class="tp-st"><Fragment set:html={ICON.yes} />{S.status.yes}</span>
+              <span class="tp-gt">{S.equipeGaps[k]}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div></section>
+  )}
+
+  <section class="fc-sec fc-how" id="how"><div class="wrap">
+    <h2 class="fc-rv">{S.howTitle}</h2>
+    <ol class="fc-steps">
+      {P.steps.map((s, i) => (
+        <li class="fc-rv" style={`transition-delay:${i * 80}ms`}>
+          <span class="n" aria-hidden="true">{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+    <h3 class="tp-wt fc-rv">{S.worksTitle}</h3>
+    <ul class="tp-works fc-rv">{P.works.map((w) => <li>{w}</li>)}</ul>
+  </div></section>
+
+  <section class="fc-sec fc-faq" id="faq"><div class="wrap">
+    <h2 class="fc-rv">{S.faqTitle}</h2>
+    <div class="faqs fc-rv">
+      {P.faq.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  <section class="fc-sec" id="others"><div class="wrap">
+    <h2 class="fc-rv">{S.othersTitle}</h2>
+    <p class="fc-sub fc-rv">{S.othersSub}</p>
+    <ul class="tp-others">
+      <li class="fc-rv"><a href={subPath(info, 'from-claude')} data-ph="tool_other_click" data-ph-location={tool}><b>{fc.nav}<Fragment set:html={arrow} /></b><span>{fc.navDesc}</span></a></li>
+      {others.map((o, i) => (
+        <li class="fc-rv" style={`transition-delay:${((i + 1) % 3) * 60}ms`}><a href={subPath(info, o)} data-ph="tool_other_click" data-ph-location={tool}><b>{L.pages[o].nav}<Fragment set:html={arrow} /></b><span>{L.pages[o].navDesc}</span></a></li>
+      ))}
+      <li class="fc-rv"><a href={subPath(info, 'migrate')} data-ph="migrate_link_click" data-ph-location={tool}><b>{(MIGRATE[code] ?? MIGRATE.en).nav}<Fragment set:html={arrow} /></b><span>{(MIGRATE[code] ?? MIGRATE.en).page.lead}</span></a></li>
+    </ul>
+    <h3 class="tp-wt fc-rv">{S.compareTitle}</h3>
+    <p class="fc-sub fc-rv">{S.compareSub}</p>
+    <ul class="tp-vs fc-rv">
+      {vsList.map((v) => <li><a href={subPath(info, `vs/${v}`)} data-ph="vs_link_click" data-ph-location={tool}>{fill(V.shared.vs.h1, { name: VS[v].name }).replace(/[.。．]$/, '')}</a></li>)}
+    </ul>
+  </div></section>
+
+  <section class="fc-cta"><div class="wrap">
+    <h2 class="fc-rv">{S.ctaTitle}</h2>
+    <a class="btn primary lg fc-rv" href="#paste" data-tool-focus data-ph="tool_cta_click" data-ph-location={tool}><Fragment set:html={up} />{S.ctaButton}</a>
+  </div></section>
+
+  <aside class="fc-legal"><div class="wrap">
+    {F.sources.length > 0 && (
+      <>
+        <p>{fill(S.checked, { date, tool: name })}</p>
+        <p class="tp-src"><span>{S.sourcesLabel}:</span> {F.sources.map((s, i) => <>{i > 0 && ' · '}<a href={s.url} rel="nofollow noopener" target="_blank">{s.title}</a></>)}</p>
+      </>
+    )}
+    {P.disclaimer && <p>{P.disclaimer}</p>}
+  </div></aside>
+
+  <script>
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
+      (window as unknown as { __fcrv: boolean }).__fcrv = true;
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.fc-rv').forEach((el) => io.observe(el));
+      addEventListener('beforeprint', () => document.querySelectorAll('.fc-rv').forEach((el) => el.classList.add('in')));
+    }
+  </script>
+</PageShell>

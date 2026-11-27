@@ -1,0 +1,192 @@
+---
+// The comparison pages: /vs/<x>/ ("<x> vs equipe") and /alternatives/<x>/ ("<x> alternatives"). Copy:
+// src/data/vs/<locale>.ts; facts and sources: src/data/vs/facts.ts. Fair by design: dated, sourced, and each page says
+// where the other product is better and where equipe is weaker. Names in text only: no logos, no colours.
+import PageShell from './PageShell.astro';
+import FaqJsonLd from './FaqJsonLd.astro';
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+import { VS, VS_IDS, ROWS, SHORT_ROWS, EQUIPE_SOURCES, vsCopy, fill, tryHref, type VsId } from '../data/vs';
+import { fillPlanDeep } from '../data/plan';
+import { toolCopy, type ToolId } from '../data/aitool';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/vs.css';
+
+interface Props { code: LocaleCode; id: VsId; mode: 'vs' | 'alt' }
+const { code, id, mode } = Astro.props;
+const info = getLocale(code);
+const C = fillPlanDeep(vsCopy(code), code);
+const S = C.shared;
+const X = C.products[id];
+const F = VS[id];
+const name = F.name;
+const date = new Intl.DateTimeFormat(info.lang, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${F.checked}T00:00:00Z`));
+const dateOf = (d: string) => new Intl.DateTimeFormat(info.lang, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${d}T00:00:00Z`));
+const v = { name, date, owner: F.owner };
+const f = (s: string) => fill(s, v);
+const page = mode === 'vs' ? `vs/${id}` : `alternatives/${id}`;
+const campaign = `${mode}-${id}`;
+const url = new URL(subPath(info, page), Astro.site).href;
+const H = mode === 'vs' ? S.vs : S.alt;
+const faqs = [
+  { question: f(S.faqCheaper), answer: X.cheaper },
+  { question: f(S.faqMove), answer: X.move },
+  { question: f(S.faqNonCoder.question), answer: f(S.faqNonCoder.answer) },
+  { question: f(S.faqNeutral.question), answer: f(S.faqNeutral.answer) },
+];
+const rows = mode === 'vs' ? ROWS : SHORT_ROWS;
+const options = VS_IDS.filter((o) => o !== id);
+const guide = F.guide ? toolCopy(code).pages[F.guide as ToolId] : null;
+const sv = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const arrow = sv('<path d="M5 12h14M13 6l6 6-6 6"/>');
+const check = sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>');
+const dot = sv('<circle cx="12" cy="12" r="3"/>');
+---
+<PageShell code={code} page={page} title={f(H.title)} description={f(H.desc)}>
+  <Fragment slot="head">
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__vsrv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: f(H.h1), description: f(H.desc), inLanguage: info.lang,
+      dateModified: F.checked, about: [{ '@id': `${SITE.url}/#organization` }, { '@type': 'Thing', name }],
+      citation: F.sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={faqs} />
+  </Fragment>
+
+  <section class="vs-hero"><div class="wrap">
+    <p class="vs-kick">{f(S.kicker)}</p>
+    <h1>{f(H.h1)}</h1>
+    <p class="vs-lead">{f(H.lead)}</p>
+    {mode === 'vs' && <p class="vs-answer">{X.answer}</p>}
+    <div class="vs-go">
+      <a class="btn primary lg" href={tryHref(campaign, 'hero')} data-vs-try data-ph="vs_try_click" data-ph-location={`${campaign}-hero`}>{S.cta}<Fragment set:html={arrow} /></a>
+      <span class="vs-free">{S.ctaNote.split(' · ').map((x) => <span>{x}</span>)}</span>
+    </div>
+  </div></section>
+
+  {mode === 'alt' && (
+    <section class="vs-sec" id="why"><div class="wrap">
+      <h2 class="vs-rv">{f(S.reasonsTitle)}</h2>
+      <ul class="vs-list vs-rv">{X.reasons.map((r) => <li><Fragment set:html={dot} />{r}</li>)}</ul>
+    </div></section>
+  )}
+
+  {mode === 'alt' && (
+    <section class="vs-sec" id="options"><div class="wrap">
+      <h2 class="vs-rv">{S.optionsTitle}</h2>
+      <p class="vs-sub vs-rv">{S.optionsSub}</p>
+      <ul class="vs-opts">
+        <li class="vs-rv vs-us">
+          <div class="vs-oh"><b>equipe</b><span class="vs-tag">{S.us}</span></div>
+          <p>{S.equipe.who}</p>
+          <a class="btn primary" href={tryHref(campaign, 'options')} data-vs-try data-ph="vs_try_click" data-ph-location={`${campaign}-options`}>{S.cta}<Fragment set:html={arrow} /></a>
+        </li>
+        <li class="vs-rv">
+          <div class="vs-oh"><b>{name}</b></div>
+          <p>{X.bestFor}</p>
+          <a class="vs-link" href={subPath(info, `vs/${id}`)} data-ph="vs_link_click" data-ph-location={campaign}>{S.compare}<Fragment set:html={arrow} /></a>
+        </li>
+        {options.map((o, i) => (
+          <li class="vs-rv" style={`transition-delay:${(i % 2) * 60}ms`}>
+            <div class="vs-oh"><b>{VS[o].name}</b></div>
+            <p>{C.products[o].bestFor}</p>
+            <a class="vs-link" href={subPath(info, `vs/${o}`)} data-ph="vs_link_click" data-ph-location={campaign}>{S.compare}<Fragment set:html={arrow} /></a>
+          </li>
+        ))}
+      </ul>
+    </div></section>
+  )}
+
+  <section class="vs-sec" id="table"><div class="wrap">
+    <h2 class="vs-rv">{S.tableTitle}</h2>
+    <p class="vs-sub vs-rv">{f(S.tableSub)}</p>
+    <div class="vs-table vs-rv">
+      <table>
+        <thead><tr><th scope="col"><span class="vh">{S.tableTitle}</span></th><th scope="col">{name}</th><th scope="col" class="vs-eq">{S.colEquipe}</th></tr></thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row">{S.rowNames[r]}</th>
+              <td data-col={name}>{X.rows[r]}</td>
+              <td data-col={S.colEquipe} class="vs-eq">{S.equipe[r]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div></section>
+
+  <section class="vs-sec" id="fair"><div class="wrap">
+    <div class="vs-cols">
+      <div class="vs-col vs-rv">
+        <h2>{f(S.betterTitle)}</h2>
+        <ul class="vs-list">{X.better.map((r) => <li><Fragment set:html={check} />{r}</li>)}</ul>
+      </div>
+      <div class="vs-col vs-rv">
+        <h2>{S.differentTitle}</h2>
+        <ul class="vs-list">{X.different.map((r) => <li><Fragment set:html={check} />{r}</li>)}</ul>
+      </div>
+    </div>
+    {mode === 'vs' && (
+      <div class="vs-col vs-weak vs-rv">
+        <h2>{S.weakerTitle}</h2>
+        <ul class="vs-list">{S.weaker.map((r) => <li><Fragment set:html={dot} />{r}</li>)}</ul>
+      </div>
+    )}
+  </div></section>
+
+  {mode === 'vs' && (
+    <section class="vs-sec" id="pick"><div class="wrap">
+      <h2 class="vs-rv">{S.pickTitle}</h2>
+      <div class="vs-picks">
+        <div class="vs-pick vs-rv"><b>{f(S.pickThem)}</b><p>{X.bestFor}</p></div>
+        <div class="vs-pick vs-rv vs-us"><b>{S.pickUs}</b><p>{S.pickUsText}</p></div>
+      </div>
+    </div></section>
+  )}
+
+  <section class="vs-sec vs-faq" id="faq"><div class="wrap">
+    <h2 class="vs-rv">{S.faqTitle}</h2>
+    <div class="faqs vs-rv">
+      {faqs.map((q, i) => <details open={i === 0}><summary><h3>{q.question}</h3></summary><p>{q.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  <section class="vs-cta"><div class="wrap">
+    <h2 class="vs-rv">{S.ctaTitle}</h2>
+    <p class="vs-sub vs-rv">{S.ctaSub}</p>
+    <a class="btn primary lg vs-rv" href={tryHref(campaign, 'final')} data-vs-try data-ph="vs_try_click" data-ph-location={`${campaign}-final`}>{S.cta}<Fragment set:html={arrow} /></a>
+    <nav class="vs-more vs-rv" aria-label={S.others}>
+      {guide && <a href={subPath(info, F.guide!)}>{guide.nav}</a>}
+      {mode === 'vs' ? <a href={subPath(info, `alternatives/${id}`)}>{f(S.alt.h1).replace(/[?？]$/, '')}</a> : <a href={subPath(info, `vs/${id}`)}>{f(S.vs.h1).replace(/[.。．]$/, '')}</a>}
+      {options.slice(0, 3).map((o) => <a href={subPath(info, `vs/${o}`)}>{fill(S.vs.h1, { name: VS[o].name }).replace(/[.。．]$/, '')}</a>)}
+      <a href={subPath(info, 'publish-html')}>{toolCopy(code).pages['publish-html'].nav}</a>
+    </nav>
+  </div></section>
+
+  <aside class="vs-legal"><div class="wrap">
+    <p>{f(S.checked)}</p>
+    <p class="vs-src"><span>{S.sourcesLabel}:</span> {[...F.sources, ...EQUIPE_SOURCES].map((s, i) => <>{i > 0 && ' · '}<a href={s.url} rel="nofollow noopener" target="_blank">{s.title}</a>{'accessed' in s && s.accessed ? ` (${fill(S.accessedOn, { date: dateOf(s.accessed) })})` : ''}</>)}</p>
+    <p>{F.owner ? f(S.disclaimerOwner) : f(S.disclaimer)}</p>
+  </div></aside>
+
+  <script is:inline define:vars={{ tag: `${campaign}.${info.slug || 'en'}` }}>
+      // equipe's own landing funnel (cloud docs/analytics.md): a "Try equipe free" click is a cta and a sign-up start,
+      // and click:vs_try:<page>.<locale> says which comparison sent it. PostHog gets vs_try_click from data-ph.
+      document.querySelectorAll('[data-vs-try]').forEach(function (a) { a.addEventListener('click', function () { try { var o = window.eqOwn; if (o) { o('fn', 'cta'); o('fn', 'signup_start'); o('ev', 'click:vs_try:' + tag); } } catch (e) {} }); });
+  </script>
+  <script>
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
+      (window as unknown as { __vsrv: boolean }).__vsrv = true;
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.vs-rv').forEach((el) => io.observe(el));
+      addEventListener('beforeprint', () => document.querySelectorAll('.vs-rv').forEach((el) => el.classList.add('in')));
+    }
+  </script>
+</PageShell>

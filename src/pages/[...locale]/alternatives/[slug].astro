@@ -1,0 +1,13 @@
+---
+// /alternatives/<x>/ for Lovable, Base44, Bolt, Wix, v0 and Replit, in every language. Everything is in
+// src/components/VsPage.astro and src/data/vs/.
+import VsPage from '../../../components/VsPage.astro';
+import { VS_IDS, type VsId } from '../../../data/vs';
+import { available, type LocaleCode } from '../../../i18n';
+
+export function getStaticPaths() {
+  return available.flatMap((l) => VS_IDS.map((id) => ({ params: { locale: l.slug || undefined, slug: id }, props: { code: l.code, id } })));
+}
+const { code, id } = Astro.props as { code: LocaleCode; id: VsId };
+---
+<VsPage code={code} id={id} mode="alt" />
