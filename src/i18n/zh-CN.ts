@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const zhCN: Messages = {
   meta: {
-    title: 'equipe — 一个人的创业团队',
+    title: 'equipe — 你的 AI 创业团队，无需写代码',
     description:
       'equipe AI 是一个人的创业团队：PM、工程师、设计师、QA 和数据分析师把你的想法上线，并持续改进。你只需批准。',
-    ogTitle: 'equipe — 一个人的创业团队',
+    ogTitle: 'equipe — 你的 AI 创业团队，无需写代码',
     ogDescription:
       '把你在 Claude 里做的东西变成真正的服务。PM、工程师、设计师、QA 和数据分析师负责开发、上线和增长。你只需批准。',
     ogImageAlt: 'equipe — 你的 AI 创业团队。帮你做出来，帮你做大。不用写代码。旁边是团队聊天：PM 搭建陶瓷店的计划，以及工程师和设计师的步骤。',
@@ -279,6 +279,8 @@ const zhCN: Messages = {
     developers: '开发者',
     phone: '手机应用',
     engine: 'equipe 引擎以 MIT 许可证开源。',
+    entity: "equipe（equipe AI）是为不会写代码的人打造的 AI 创业团队，由旧金山的 Umbriles Inc. 运营。",
+    press: "媒体与品牌",
     company: '公司', legal: '法律', support: '支持', noCookies: '无跟踪 Cookie', cookieSettings: 'Cookie 设置', doNotSell: '不出售或共享我的个人信息', privacy: '隐私',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

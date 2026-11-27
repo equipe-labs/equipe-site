@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const ja: Messages = {
   meta: {
-    title: 'equipe — ひとりのためのスタートアップチーム',
+    title: 'equipe — コード不要、あなたのAIスタートアップチーム',
     description:
       'equipe AIは、ひとりのためのスタートアップチーム。PM、エンジニア、デザイナー、QA、データ分析担当がアイデアを公開し、改善し続けます。あなたは承認するだけ。',
-    ogTitle: 'equipe — ひとりのためのスタートアップチーム',
+    ogTitle: 'equipe — コード不要、あなたのAIスタートアップチーム',
     ogDescription:
       'Claudeで作ったものを、本物のサービスに。PM、エンジニア、デザイナー、QA、データ分析担当が、作って、公開して、育てます。あなたは承認するだけ。',
     ogImageAlt: 'equipe — あなたのAIスタートアップチーム。作る。伸ばす。コードは要りません。横にはチームのチャット：陶器ショップを作るPMの計画と、エンジニアとデザイナーのステップ。',
@@ -279,6 +279,8 @@ const ja: Messages = {
     developers: '開発者の方へ',
     phone: 'スマホアプリ',
     engine: 'equipeのエンジンは、MITライセンスのオープンソースです。',
+    entity: "equipe(equipe AI)は、コードを書かない人のためのAIスタートアップチームです。サンフランシスコのUmbriles Inc.が運営しています。",
+    press: "プレス・ブランド",
     company: '会社', legal: '法的情報', support: 'サポート', noCookies: 'トラッキング Cookie なし', cookieSettings: 'Cookie 設定', doNotSell: '個人情報の販売・共有をしない', privacy: 'プライバシー',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

@@ -65,6 +65,7 @@ const bu = BLOG_UI[bl];
           <li><a href={blogPath(bl)}>{bu.nav}</a></li>
           <li><a href={bl === 'en' ? '/facts/' : `/${bl}/facts/`}>{bu.facts}</a></li>
           <li><a href={subPath(info, 'changelog')}>{t.pages.changelog.h1}</a></li>
+          <li><a href="/about/press/">{f.press}</a></li>
           {SHOW_CJ && <li><a href={subPath(info, 'customers/cj')}>CJ</a></li>}
           <li><a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="footer">{t.nav.developers}</a></li>
           <li><a href={SITE.repo} data-ph="cta_github_click" data-ph-location="footer">{t.nav.github}</a></li>
@@ -86,6 +87,7 @@ const bu = BLOG_UI[bl];
     <p class="fw rv" aria-hidden="true">equipe</p>
     <div class="fl">
       <div class="fl-t">
+        <span>{f.entity}</span>
         <span>{f.engine}</span>
         <span>© Umbriles Inc. · {t.footer.built}</span>
       </div>

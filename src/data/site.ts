@@ -33,3 +33,26 @@ export const SITE = {
   themeColor: '#F6F5F1',
   themeColorDark: '#17181C',
 };
+
+/**
+ * The brand entity, one source for structured data, the press page and llms.txt wording.
+ * "equipe" is the product; "equipe AI" is how the company and brand are named next to it, so search engines can tell
+ * it apart from the French word "équipe" (team) and from other companies called Equipe. Umbriles Inc. is the legal entity.
+ * sameAs lists only official profiles that exist (checked 2026-11-28): add X, Product Hunt, Crunchbase or Wikidata here
+ * when they are created.
+ */
+export const BRAND = {
+  product: 'equipe',
+  name: 'equipe AI',
+  legalName: 'Umbriles Inc.',
+  /** The open-source engine's first public commit (github.com/equipe-labs/equipe, 2026-09-10). */
+  foundingDate: '2026-09',
+  location: 'San Francisco, CA, US',
+  oneLiner: 'equipe is an AI startup team for people who do not code: it builds your product, puts it live and keeps improving it, while you approve what matters.',
+  logo: { png: '/brand/logo-512.png', svg: '/brand/mark.svg', wordmark: '/brand/wordmark.svg', lockup: '/brand/lockup.svg' },
+  sameAs: [
+    'https://www.linkedin.com/company/equipe-labs/',
+    'https://github.com/equipe-labs',
+    'https://apps.apple.com/us/app/equipe-ai-squad/id6822702958',
+  ],
+} as const;

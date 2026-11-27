@@ -3,10 +3,10 @@ import type { Messages } from './en';
 // French typography: U+202F (narrow no-break space) before ; ? ! : and inside « », written as   below.
 const fr: Messages = {
   meta: {
-    title: 'equipe — Une équipe de startup pour une seule personne',
+    title: 'equipe — votre équipe de startup IA, sans coder',
     description:
       'equipe AI est une équipe de startup pour une seule personne : un PM, des ingénieurs, un designer, la QA et un analyste mettent votre idée en ligne et l’améliorent. Vous approuvez.',
-    ogTitle: 'equipe — Une équipe de startup pour une seule personne',
+    ogTitle: 'equipe — votre équipe de startup IA, sans coder',
     ogDescription:
       'Faites de votre projet Claude un vrai service. Un PM, des ingénieurs, un designer, la QA et un analyste de données le construisent, le lancent et le font grandir. Vous approuvez.',
     ogImageAlt: 'equipe — Votre équipe de startup IA. Elle construit. Elle fait grandir. Sans coder. À côté, la discussion de l’équipe : le plan du PM pour une boutique de céramique, avec les étapes de l’ingénieur et du designer.',
@@ -280,6 +280,8 @@ const fr: Messages = {
     developers: 'Développeurs',
     phone: 'Appli mobile',
     engine: 'Le moteur equipe est open source sous licence MIT.',
+    entity: "equipe (equipe AI) est une équipe de startup IA pour celles et ceux qui ne codent pas, éditée par Umbriles Inc. à San Francisco.",
+    press: "Presse et marque",
     company: 'Entreprise', legal: 'Mentions légales', support: 'Support', noCookies: 'Aucun cookie de suivi', cookieSettings: 'Paramètres des cookies', doNotSell: 'Ne pas vendre ni partager mes informations personnelles', privacy: 'Confidentialité',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

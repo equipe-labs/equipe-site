@@ -1,7 +1,7 @@
 ---
 // The hosted product for the home page and /pricing: equipe in the browser (app.equipe.im), with the Mac and iPhone apps.
 import JsonLd from './JsonLd.astro';
-import { SITE } from '../data/site';
+import { SITE, BRAND } from '../data/site';
 
 interface Props { lang: string; url: string; description: string; featureList?: string[] }
 const { lang, url, description, featureList } = Astro.props;
@@ -12,7 +12,9 @@ const { lang, url, description, featureList } = Astro.props;
     '@type': 'SoftwareApplication',
     '@id': `${url}#app`,
     name: SITE.name,
-    alternateName: 'equipe AI',
+    alternateName: BRAND.name,
+    image: `${SITE.url}${BRAND.logo.png}`,
+    brand: { '@type': 'Brand', name: SITE.name },
     url,
     inLanguage: lang,
     description,
@@ -21,5 +23,6 @@ const { lang, url, description, featureList } = Astro.props;
     ...(featureList ? { featureList } : {}),
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Start free with 500 credits (100 credits = $1); no card needed.', url: `${SITE.url}/pricing/` },
     publisher: { '@id': `${SITE.url}/#organization` },
+    sameAs: [SITE.appStore],
   }}
 />

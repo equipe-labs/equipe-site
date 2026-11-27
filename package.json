@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "test": "astro check",
-    "build": "astro check && astro build && node scripts/llms-articles.mjs",
+    "build": "astro check && astro build && node scripts/llms-articles.mjs && node scripts/sitemaps.mjs",
     "preview": "astro preview",
     "og:home": "node scripts/og-home.mjs",
     "og:blog": "node scripts/og-blog.mjs",

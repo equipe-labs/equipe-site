@@ -51,6 +51,16 @@ const {
   langs,
 } = Astro.props;
 
+// One brand on every result: titles without the name get " — equipe" when it still fits in a search result
+// (about 60 Latin characters; CJK characters count about double). " | equipe" becomes " — equipe" so every page ends the same way.
+const width = (s: string) => [...s].reduce((n, ch) => n + (/[\u1100-\u11ff\u2e80-\ua4cf\uac00-\ud7af\uf900-\ufaff\uff00-\uffef]/.test(ch) ? 1.8 : 1), 0);
+const brandTitle = (t: string) => {
+  const s = t.replace(/\s+\|\s+equipe$/, ' — equipe');
+  if (error || /equipe/i.test(s)) return s;
+  const withBrand = `${s} — ${SITE.name}`;
+  return width(withBrand) <= 62 ? withBrand : s;
+};
+const docTitle = brandTitle(title);
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 const current = getLocale(locale);
 const pageLocales = langs ? available.filter((l) => langs.includes(l.code)) : available;
@@ -67,7 +77,7 @@ const imageType = imageUrl
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{title}</title>
+<title>{docTitle}</title>
 <meta name="description" content={description} />
 {!error && <link rel="canonical" href={canonical} />}
 {!error && withAlternates && alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
