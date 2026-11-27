@@ -21,6 +21,7 @@ const data = {
   c: { result: c.result, areas: c.areas, fixes: c.fixes, checks: c.checks, form: c.form, progress: c.progress },
 };
 ---
+<div class={`tl-flow tl-flow-${mode}`}>
 {mode === 'shared' && <section class="tl-shared-h"><div class="wrap"><h1>{c.share.pageTitle}</h1></div></section>}
 <section class={mode === 'run' ? 'tl-hero' : 'tl-hero tl-again'} data-g-hero><div class="wrap">
   {mode === 'run' ? <h1>{c.page.h1}</h1> : <h2 class="tl-again-h">{c.page.h1}</h2>}
@@ -46,6 +47,7 @@ const data = {
 </section>
 
 <section class="tl-report" hidden data-g-report tabindex="-1"><div class="wrap" data-g-out></div></section>
+</div>
 
 <script type="application/json" data-g-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
 
