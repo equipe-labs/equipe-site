@@ -7,7 +7,7 @@ import { MODEL, FEATURES, decodePick, encodePick, type Pick, type TypeKey, type 
 import { view, signupHref, measured, usdN, usdRange, num, fillT } from '../data/costcalc/render';
 import type { CostCopy } from '../data/costcalc/copy';
 
-type W = Window & { eqOwn?: (k: string, t: string, f?: unknown) => void; eqTrack?: (n: string, p?: unknown) => void };
+type W = Window & { eqOwn?: (k: string, t: string, f?: unknown) => void; eqTrack?: (n: string, p?: unknown) => void; eqFeat?: (step: string, p?: Record<string, unknown>) => void };
 const w = window as W;
 const own = (name: string) => w.eqOwn?.('ev', name);
 const track = (name: string, p?: Record<string, unknown>) => w.eqTrack?.(name, p);
@@ -94,6 +94,8 @@ function init(root: HTMLElement) {
     pick = sharePick;
     history.replaceState(null, '', `${location.pathname}?${encodePick(pick, !cfg.lockType)}${location.hash}`);
     paint(true);
+    // Shared feature events (OwnFunnel eqFeat, once per tab): start on the first input, done once its result is shown.
+    w.eqFeat?.('start', { type: pick.type }); w.eqFeat?.('done', { type: pick.type });
     if (!ran) { ran = true; own('costcalc:run'); track('costcalc_run', { placement: cfg.placement }); }
     if (!seen.has(pick.type)) { seen.add(pick.type); own(`costcalc:result:${pick.type}`); track('costcalc_result', { type: pick.type, placement: cfg.placement }); }
   }
