@@ -22,6 +22,8 @@ This article walks through building one with AI and no code, in the order you wo
 
 <p class="answer"><strong>The short answer.</strong> Define one kind of person and one flow: pick a time, confirm, done. Store slots and bookings in a real database. Decide the edge cases before building: double booking, timezones, confirmation emails, cancellations. Test with two browsers and a phone, then invite ten real people, and count completed bookings.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## The worked example: Jiwoo Korean
 
 Jiwoo Korean is a made-up business: a solo Korean tutor who takes lesson bookings. The business is invented for the demo, but the site is real and live, and an equipe team built it in about 45 minutes. It has a week-at-a-glance scheduler that shows times in your timezone, and after you book it sends a confirmation email and a calendar file.

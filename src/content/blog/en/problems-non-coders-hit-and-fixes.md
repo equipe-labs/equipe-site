@@ -22,6 +22,8 @@ This article names seven of them, explains why each happens, and gives you steps
 
 <p class="answer"><strong>The short answer.</strong> Most non-coder problems are one of seven: a first version that never ships, a vague brief, data that disappears, hosting and domain confusion, secrets pasted into chat, nothing measured, and fear of breaking things. Each has a plain fix: define done, write a clear brief, store data properly, simplify the plumbing, protect keys, count what matters, and work on previews.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## The seven problems at a glance
 
 The whole article in one table; each row gets a section below.

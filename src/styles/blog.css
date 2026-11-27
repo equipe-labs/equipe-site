@@ -224,6 +224,8 @@ main.pg .post-body h2 { font-size: clamp(25px, 2.8vw, 32px); margin-top: 2.1em; 
 .post-body th { font-weight: 650; background: color-mix(in srgb, var(--text) 4%, transparent); }
 .post-body .note { padding: 14px 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); font-size: 16.5px; line-height: 1.6; }
 .post-body .answer { font-size: 19px; line-height: 1.6; padding: 16px 20px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+.post-body .series { margin: 16px 0 28px; font-size: 16px; line-height: 1.6; color: var(--muted); }
+.post-body .series a { color: var(--text); }
 /* Light and dark pictures: the figure rule above sets display on every img, so these name the img too. */
 .th-dark, .post-body figure img.th-dark { display: none; }
 :root[data-theme='dark'] .th-light, :root[data-theme='dark'] .post-body figure img.th-light { display: none; }

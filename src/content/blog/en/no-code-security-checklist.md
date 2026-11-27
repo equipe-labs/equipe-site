@@ -27,6 +27,8 @@ This checklist has fifteen questions. Use it two ways: to compare AI builders an
 
 <p class="answer"><strong>The short answer.</strong> Ask fifteen questions across ten areas: secrets, sign-in, permissions, personal data, payments, backups, deletion, isolation, certifications and logs. Good providers answer plainly and in writing. If an answer is missing or vague, treat it as not guaranteed. Certifications such as SOC 2 are useful evidence, not a guarantee, and their absence is worth knowing about.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## How to use this checklist
 
 Send the questions to the provider's support or sales address and keep the replies. A published page is fine too; note the date you read it, because pages change. For your own product, ask whoever runs it (a builder tool, a freelancer or an AI team) the same questions.

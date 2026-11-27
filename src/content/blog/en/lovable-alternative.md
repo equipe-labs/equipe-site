@@ -37,6 +37,8 @@ We make equipe, so we have a stake in the answer. That is why every fact about L
 
 <p class="answer"><strong>The short answer.</strong> Lovable is a strong builder for turning a description into a working web app quickly, and many people should stay on it. Look elsewhere if you want someone else to run the product after launch, propose what to build next, or you need security paperwork it does not state. A team like equipe fits that second case.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What Lovable does well
 
 Lovable's docs describe it as "a full-stack AI development platform for building, iterating on, and deploying web applications." Taking that at face value, here is what is genuinely good, based on its docs and pricing page.

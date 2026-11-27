@@ -22,6 +22,8 @@ This guide walks through the whole thing in plain words, using a small worked ex
 
 <p class="answer"><strong>The short answer.</strong> Pick one reader and one weekly slot. Use a sign-up that confirms by email (double opt-in), add an RSS feed if you also publish posts, and write a few issues ahead. Let AI help draft, but you approve everything sent to subscribers. Measure visits, subscribe rate and returns.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## The worked example: Small Hours
 
 Small Hours is a made-up business, built as a demo so you can see what a small newsletter product looks like. It is a real, live site, not a mock-up. It has:

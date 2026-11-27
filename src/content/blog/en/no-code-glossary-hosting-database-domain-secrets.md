@@ -22,6 +22,8 @@ This glossary is written for people who cannot code. Each term gets the same fou
 
 <p class="answer"><strong>The short answer.</strong> A product needs a place to live (hosting), a place to keep data (database), an address (domain), secret passwords between services (keys), a safe way to ship changes (deployment), and a way to see what happens (analytics). If you can answer who owns and watches each of those six, you understand your product better than most first-time founders.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## Where your product lives
 
 ### Hosting

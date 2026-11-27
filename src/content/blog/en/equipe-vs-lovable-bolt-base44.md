@@ -42,6 +42,8 @@ We make equipe, so you should read this comparison knowing we have a stake. To k
 
 <p class="answer"><strong>The short answer.</strong> Lovable, Bolt and Base44 are strong tools for getting a first version of an app generated and published quickly. equipe is a different shape: an AI startup team that also puts the product live, runs it, and proposes what to improve next, with you approving. If you want to prompt and steer, a builder fits. If you want someone else to keep the product moving, look at a team.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What each one says it is
 
 - **Lovable** describes itself in its docs as "a full-stack AI development platform for building, iterating on, and deploying web applications."

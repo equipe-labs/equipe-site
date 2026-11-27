@@ -23,6 +23,8 @@ This is a plan for a solo founder who cannot code. It does not promise customers
 
 <p class="answer"><strong>The short answer.</strong> Week 1: talk to people and write one sentence of proof. Week 2: build the smallest version. Week 3: launch to ten people, personally. Week 4: fix the biggest drop-off and ask for the first payment.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## Before day 1: choose a narrow target
 
 Pick a specific person with a specific problem you can reach. "Small business owners" is not specific. "Solo yoga teachers in my city who take bookings by text" is. You need to be able to name ten of them, or know where they gather.

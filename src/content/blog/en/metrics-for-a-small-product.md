@@ -22,6 +22,8 @@ Three numbers cover almost everything a young product needs to know: how many pe
 
 <p class="answer"><strong>The short answer.</strong> Track visits (people who arrived), activation (people who did the one thing your product exists for) and return (people who came back later). Read them as a set: low visits is a reach problem, low activation is a first-experience problem, low return is a usefulness problem. Change one thing a week.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## The three numbers, defined precisely
 
 Vague metrics cannot be acted on, so write each definition down before you launch.

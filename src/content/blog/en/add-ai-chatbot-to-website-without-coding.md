@@ -24,6 +24,8 @@ This guide walks through those decisions in order. It works whatever tool you us
 
 <p class="answer"><strong>The short answer.</strong> Decide the one job the chatbot does, usually answering questions about your business. Write down the facts it may use: offer, prices, hours, policies and FAQ. Put it where people get stuck, set a monthly spending limit, keep any AI key on a server and never in the page, then test it with twenty real questions before you switch it on.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## Step 1: give the chatbot one job
 
 "A chatbot" can mean many things. Pick one job for the first version:

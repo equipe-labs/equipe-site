@@ -22,6 +22,8 @@ The roles below are the ones equipe uses. The same ideas apply if you run a team
 
 <p class="answer"><strong>The short answer.</strong> An AI startup team is five roles (PM, engineers, designer, QA, data analyst) working from one shared board of tickets, each in its own workspace, with you approving anything that goes live, costs money or reaches customers.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## Why a team and not one assistant
 
 A single AI assistant is excellent at one task in one conversation. A product is many tasks over many weeks: decide what to build, build it, make it usable, test it, ship it, measure it, change it. If one assistant does all of that, it forgets, it grades its own homework, and you become the project manager.

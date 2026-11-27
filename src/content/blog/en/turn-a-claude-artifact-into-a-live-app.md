@@ -22,6 +22,8 @@ This guide explains the gap between "it works in Claude" and "customers can use 
 
 <p class="answer"><strong>The short answer.</strong> Copy out the code, replace everything the artifact was pretending (data, sign-in, keys), put it on hosting with a database and your own domain, test it on a phone, and add basic analytics. Then launch to a handful of real people.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What a Claude artifact is, and what it is not
 
 An artifact is a self-contained piece of software Claude produces next to a conversation: a page, a small tool, a calculator, a tracker. It runs inside Claude, so you and the people you share a link with can use it without installing anything.

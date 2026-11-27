@@ -24,6 +24,8 @@ This guide walks through the whole path, in plain words: what "real" means, the 
 
 <p class="answer"><strong>The short answer.</strong> Pick one person with one problem. Build the smallest version that solves it. Put it on its own web address with a real database. Watch what people do. Change one thing a week. Anything beyond that is optional.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What "a real product" means
 
 A demo works while you are watching. A real product keeps working while you are away. Before you call something launched, check that it has these six things:

@@ -36,6 +36,8 @@ Bolt를 계속 쓸지 고민한다는 건 보통 둘 중 하나예요. Bolt가 �
 
 <p class="answer"><strong>짧은 답.</strong> Bolt는 대화만으로 동작하는 앱을 만드는 데 능숙한 빌더예요. 내장 데이터베이스, Bolt 도메인의 무료 호스팅, 명시된 SOC 2 Type 2 인증이 있어요. 출시 후 제품을 운영하고 다음 개선을 정해 줄 누군가가 필요하다면 다른 곳을 보세요. equipe 같은 팀은 바로 그걸 위해 만들어졌어요.</p>
 
+<p class="series">이 글은 <a href="/ko/blog/build-a-website-or-app-without-coding/">코딩 없이 웹사이트·앱 만들기</a> 가이드의 일부예요.</p>
+
 ## Bolt가 잘하는 것
 
 Bolt 홈페이지는 "Create stunning apps & websites by chatting with AI."(AI와 대화하며 멋진 앱과 웹사이트를 만드세요)라고 말해요. 요금제, 도움말, 보안 페이지에서 눈에 띄는 점이에요.

@@ -22,6 +22,8 @@ This article explains what an approval card is, how to read one in a few seconds
 
 <p class="answer"><strong>The short answer.</strong> An approval card is a short message that asks you to decide before the AI team does something that goes live, costs money, reaches customers or deletes. It states the ask, the options, a recommendation and the expected cost, and you answer with one tap. Declining is safe: the work simply stays out of your product.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## What an approval card is
 
 Think of a manager who asks you to sign off before an expense or a press release. The card is that sign-off request, shaped so you can answer fast.

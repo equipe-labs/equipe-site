@@ -38,6 +38,8 @@ Lovable을 계속 쓸지 고민 중이라면 아마 두 부류 중 하나일 거
 
 <p class="answer"><strong>짧은 답.</strong> Lovable은 설명한 내용을 빠르게 동작하는 웹 앱으로 바꿔 주는 탄탄한 빌더라서, 많은 분들은 계속 써도 좋아요. 출시 후 제품 운영, 다음에 무엇을 만들지 제안, 또는 Lovable이 밝히지 않은 보안 서류가 필요하다면 다른 곳을 살펴보세요. 두 번째 경우에는 equipe 같은 팀이 맞아요.</p>
 
+<p class="series">이 글은 <a href="/ko/blog/build-a-website-or-app-without-coding/">코딩 없이 웹사이트·앱 만들기</a> 가이드의 일부예요.</p>
+
 ## Lovable이 잘하는 것
 
 Lovable 문서는 스스로를 "a full-stack AI development platform for building, iterating on, and deploying web applications."(웹 애플리케이션을 만들고, 반복하고, 배포하는 풀스택 AI 개발 플랫폼)이라고 소개해요. 그 말을 그대로 받아들이고, 문서와 요금제 페이지를 바탕으로 정말 좋은 점을 정리하면 이래요.

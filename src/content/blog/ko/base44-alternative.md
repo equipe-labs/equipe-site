@@ -34,6 +34,8 @@ Base44를 계속 쓸지 고민하고 계신다면, 어떤 한계에 부딪혔거
 
 <p class="answer"><strong>짧은 답.</strong> Base44는 가격이 낮고 탄탄한 빌더예요. 원하는 앱을 말하면 만들고 호스팅해 주고, SOC 2 Type II와 ISO 27001을 명시해요. 앱을 직접 이끌고 싶다면 계속 쓰세요. 출시 뒤에도 에이전트가 계획하고, 테스트하고, 개선을 제안하길 원하고(승인은 직접), 그 인증이 필요 없다면 equipe 같은 팀을 살펴보세요.</p>
 
+<p class="series">이 글은 <a href="/ko/blog/build-a-website-or-app-without-coding/">코딩 없이 웹사이트·앱 만들기</a> 가이드의 일부예요.</p>
+
 ## Base44는 무엇이고, 무엇을 잘하나요
 
 Base44 홈페이지는 "Build your own apps, websites, products and AI agents on Base44 using your own words."(당신의 말로 직접 앱, 웹사이트, 제품, AI 에이전트를 만드세요)라고 해요. 문서에서는 "a no-code AI platform for building full-stack apps, websites, and AI agents."(풀스택 앱, 웹사이트, AI 에이전트를 만드는 노코드 AI 플랫폼)라고 불러요. 쉽게 말해 **빌더**예요. 원하는 걸 입력하면 작동하는 앱이 나오고, 바꾸고 싶으면 계속 입력해요.

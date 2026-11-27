@@ -22,6 +22,8 @@ This guide explains a gentler start, called request-to-buy, using a demo pottery
 
 <p class="answer"><strong>The short answer.</strong> Start with request-to-buy: customers ask for an item, you confirm by email and arrange payment yourself, so your site never handles card details. Keep orders and stock in one admin page, write clear policies, and add real checkout only once requests are steady and you trust your process.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## The worked example: Tidepool Ceramics
 
 Tidepool Ceramics is a made-up small-batch pottery business. The site is real and live, built by an equipe team in about 40 minutes as a demo. It has:
