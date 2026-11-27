@@ -15,8 +15,10 @@ export const migrateHref = (placement: string) =>
 export const SOURCES = ['claude-code', 'lovable', 'bolt', 'v0', 'replit', 'github', 'zip', 'website'] as const;
 export type SourceKey = (typeof SOURCES)[number];
 /** How the code reaches equipe, per source (picks the tile's icon). */
+// v0: GitHub only. v0's docs (https://v0.app/docs/github, https://v0.app/docs/faqs, checked 2026-11-28) document
+// Project menu → Settings → GitHub → Connect (a new private repo) and no ZIP download.
 export const SOURCE_METHOD: Record<SourceKey, 'prompt' | 'github' | 'zip' | 'url'> = {
-  'claude-code': 'prompt', lovable: 'github', bolt: 'zip', v0: 'zip', replit: 'zip', github: 'github', zip: 'zip', website: 'url',
+  'claude-code': 'prompt', lovable: 'github', bolt: 'zip', v0: 'github', replit: 'zip', github: 'github', zip: 'zip', website: 'url',
 };
 
 interface Item { title: string; text: string }
@@ -65,7 +67,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code or Cursor', how: 'Paste our ready-made prompt into your session. It packs the project and gives you a link.', method: 'Prompt' },
         lovable: { name: 'Lovable', how: 'Connect your project to GitHub in Lovable, then paste the repository link.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'Download the project as a ZIP, or push it to GitHub and paste the link.', method: 'ZIP or GitHub' },
-        v0: { name: 'v0', how: 'Download the code as a ZIP, or connect GitHub and paste the link.', method: 'ZIP or GitHub' },
+        v0: { name: 'v0', how: 'In v0, open the project menu (…) → Settings → GitHub → Connect. v0 puts your code in a new private repository; paste its link.', method: 'GitHub' },
         replit: { name: 'Replit', how: 'Download the project as a ZIP, or push it to GitHub and paste the link.', method: 'ZIP or GitHub' },
         github: { name: 'GitHub', how: 'Paste the repository link. Private repositories need a one-time, read-only connect.', method: 'Link' },
         zip: { name: 'A ZIP file', how: 'Drag and drop the ZIP of your project, up to 100 MB.', method: 'ZIP' },
@@ -154,7 +156,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code 또는 Cursor', how: '준비된 프롬프트를 세션에 붙여 넣으세요. 프로젝트를 묶어서 링크를 알려 줘요.', method: '프롬프트' },
         lovable: { name: 'Lovable', how: 'Lovable에서 프로젝트를 GitHub에 연결한 뒤 저장소 링크를 붙여 넣으세요.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: '프로젝트를 ZIP으로 내려받거나, GitHub에 올리고 링크를 붙여 넣으세요.', method: 'ZIP 또는 GitHub' },
-        v0: { name: 'v0', how: '코드를 ZIP으로 내려받거나, GitHub에 연결하고 링크를 붙여 넣으세요.', method: 'ZIP 또는 GitHub' },
+        v0: { name: 'v0', how: 'v0에서 프로젝트 메뉴(…) → Settings → GitHub → Connect를 누르세요. v0가 코드를 새 비공개 저장소에 올려 줘요. 그 링크를 붙여 넣으면 돼요.', method: 'GitHub' },
         replit: { name: 'Replit', how: '프로젝트를 ZIP으로 내려받거나, GitHub에 올리고 링크를 붙여 넣으세요.', method: 'ZIP 또는 GitHub' },
         github: { name: 'GitHub', how: '저장소 링크를 붙여 넣으세요. 비공개 저장소는 읽기 전용으로 한 번만 연결하면 돼요.', method: '링크' },
         zip: { name: 'ZIP 파일', how: '프로젝트 ZIP을 끌어다 놓으세요. 100MB까지 돼요.', method: 'ZIP' },
@@ -243,7 +245,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code または Cursor', how: '用意したプロンプトをセッションに貼り付けます。プロジェクトをまとめてリンクを出してくれます。', method: 'プロンプト' },
         lovable: { name: 'Lovable', how: 'Lovable でプロジェクトを GitHub に接続し、リポジトリのリンクを貼り付けます。', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'プロジェクトを ZIP でダウンロードするか、GitHub に push してリンクを貼り付けます。', method: 'ZIP または GitHub' },
-        v0: { name: 'v0', how: 'コードを ZIP でダウンロードするか、GitHub に接続してリンクを貼り付けます。', method: 'ZIP または GitHub' },
+        v0: { name: 'v0', how: 'v0 でプロジェクトメニュー（…）→ Settings → GitHub → Connect を選びます。v0 が新しい非公開リポジトリにコードを入れるので、そのリンクを貼り付けます。', method: 'GitHub' },
         replit: { name: 'Replit', how: 'プロジェクトを ZIP でダウンロードするか、GitHub に push してリンクを貼り付けます。', method: 'ZIP または GitHub' },
         github: { name: 'GitHub', how: 'リポジトリのリンクを貼り付けます。非公開リポジトリは、読み取り専用の接続を一度だけ行います。', method: 'リンク' },
         zip: { name: 'ZIP ファイル', how: 'プロジェクトの ZIP をドラッグ＆ドロップ。100 MB まで対応します。', method: 'ZIP' },
@@ -332,7 +334,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code 或 Cursor', how: '把我们准备好的提示词粘贴到会话里。它会打包项目并给出链接。', method: '提示词' },
         lovable: { name: 'Lovable', how: '在 Lovable 中把项目连接到 GitHub，然后粘贴仓库链接。', method: 'GitHub' },
         bolt: { name: 'Bolt', how: '把项目下载为 ZIP，或推送到 GitHub 后粘贴链接。', method: 'ZIP 或 GitHub' },
-        v0: { name: 'v0', how: '把代码下载为 ZIP，或连接 GitHub 后粘贴链接。', method: 'ZIP 或 GitHub' },
+        v0: { name: 'v0', how: '在 v0 中打开项目菜单（…）→ Settings → GitHub → Connect。v0 会把代码放进一个新的私有仓库，粘贴它的链接即可。', method: 'GitHub' },
         replit: { name: 'Replit', how: '把项目下载为 ZIP，或推送到 GitHub 后粘贴链接。', method: 'ZIP 或 GitHub' },
         github: { name: 'GitHub', how: '粘贴仓库链接。私有仓库只需一次性的只读连接。', method: '链接' },
         zip: { name: 'ZIP 文件', how: '拖放项目的 ZIP，最大 100 MB。', method: 'ZIP' },
@@ -421,7 +423,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code o Cursor', how: 'Pega nuestro prompt en tu sesión. Empaqueta el proyecto y te da un enlace.', method: 'Prompt' },
         lovable: { name: 'Lovable', how: 'Conecta tu proyecto a GitHub en Lovable y pega el enlace del repositorio.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'Descarga el proyecto como ZIP, o súbelo a GitHub y pega el enlace.', method: 'ZIP o GitHub' },
-        v0: { name: 'v0', how: 'Descarga el código como ZIP, o conecta GitHub y pega el enlace.', method: 'ZIP o GitHub' },
+        v0: { name: 'v0', how: 'En v0, abre el menú del proyecto (…) → Settings → GitHub → Connect. v0 pone tu código en un repositorio privado nuevo; pega su enlace.', method: 'GitHub' },
         replit: { name: 'Replit', how: 'Descarga el proyecto como ZIP, o súbelo a GitHub y pega el enlace.', method: 'ZIP o GitHub' },
         github: { name: 'GitHub', how: 'Pega el enlace del repositorio. Los privados necesitan una conexión única de solo lectura.', method: 'Enlace' },
         zip: { name: 'Un archivo ZIP', how: 'Arrastra y suelta el ZIP de tu proyecto, hasta 100 MB.', method: 'ZIP' },
@@ -510,7 +512,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code ou Cursor', how: 'Cole nosso prompt na sua sessão. Ele empacota o projeto e mostra um link.', method: 'Prompt' },
         lovable: { name: 'Lovable', how: 'Conecte seu projeto ao GitHub no Lovable e cole o link do repositório.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'Baixe o projeto como ZIP, ou envie para o GitHub e cole o link.', method: 'ZIP ou GitHub' },
-        v0: { name: 'v0', how: 'Baixe o código como ZIP, ou conecte o GitHub e cole o link.', method: 'ZIP ou GitHub' },
+        v0: { name: 'v0', how: 'No v0, abra o menu do projeto (…) → Settings → GitHub → Connect. O v0 coloca seu código em um repositório privado novo; cole o link dele.', method: 'GitHub' },
         replit: { name: 'Replit', how: 'Baixe o projeto como ZIP, ou envie para o GitHub e cole o link.', method: 'ZIP ou GitHub' },
         github: { name: 'GitHub', how: 'Cole o link do repositório. Repositórios privados pedem uma conexão única, só de leitura.', method: 'Link' },
         zip: { name: 'Um arquivo ZIP', how: 'Arraste e solte o ZIP do seu projeto, até 100 MB.', method: 'ZIP' },
@@ -599,7 +601,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code oder Cursor', how: 'Füg unseren fertigen Prompt in deine Sitzung ein. Er packt das Projekt und gibt dir einen Link.', method: 'Prompt' },
         lovable: { name: 'Lovable', how: 'Verbinde dein Projekt in Lovable mit GitHub und füg den Repository-Link ein.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'Lade das Projekt als ZIP herunter oder push es zu GitHub und füg den Link ein.', method: 'ZIP oder GitHub' },
-        v0: { name: 'v0', how: 'Lade den Code als ZIP herunter oder verbinde GitHub und füg den Link ein.', method: 'ZIP oder GitHub' },
+        v0: { name: 'v0', how: 'Öffne in v0 das Projektmenü (…) → Settings → GitHub → Connect. v0 legt deinen Code in ein neues privates Repository; füg dessen Link ein.', method: 'GitHub' },
         replit: { name: 'Replit', how: 'Lade das Projekt als ZIP herunter oder push es zu GitHub und füg den Link ein.', method: 'ZIP oder GitHub' },
         github: { name: 'GitHub', how: 'Füg den Repository-Link ein. Private Repositorys brauchen eine einmalige Verbindung mit reinem Lesezugriff.', method: 'Link' },
         zip: { name: 'Eine ZIP-Datei', how: 'Zieh das ZIP deines Projekts hierher, bis 100 MB.', method: 'ZIP' },
@@ -688,7 +690,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
         'claude-code': { name: 'Claude Code ou Cursor', how: 'Collez notre prompt prêt à l’emploi dans votre session. Il emballe le projet et vous donne un lien.', method: 'Prompt' },
         lovable: { name: 'Lovable', how: 'Connectez votre projet à GitHub dans Lovable, puis collez le lien du dépôt.', method: 'GitHub' },
         bolt: { name: 'Bolt', how: 'Téléchargez le projet en ZIP, ou poussez-le sur GitHub et collez le lien.', method: 'ZIP ou GitHub' },
-        v0: { name: 'v0', how: 'Téléchargez le code en ZIP, ou connectez GitHub et collez le lien.', method: 'ZIP ou GitHub' },
+        v0: { name: 'v0', how: 'Dans v0, ouvrez le menu du projet (…) → Settings → GitHub → Connect. v0 place votre code dans un nouveau dépôt privé ; collez son lien.', method: 'GitHub' },
         replit: { name: 'Replit', how: 'Téléchargez le projet en ZIP, ou poussez-le sur GitHub et collez le lien.', method: 'ZIP ou GitHub' },
         github: { name: 'GitHub', how: 'Collez le lien du dépôt. Les dépôts privés demandent une connexion unique en lecture seule.', method: 'Lien' },
         zip: { name: 'Un fichier ZIP', how: 'Glissez-déposez le ZIP de votre projet, jusqu’à 100 Mo.', method: 'ZIP' },
