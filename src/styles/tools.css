@@ -39,17 +39,25 @@ main.pg .tl-hero h1 { max-width: 18ch; margin: 0 auto; font-size: clamp(36px, 5.
 /* ---------- running ---------- */
 .tl-run { padding: 0 0 var(--s-7); }
 .tl-run[hidden], .tl-report[hidden] { display: none; }
-.tl-steps { max-width: 520px; margin: 0 auto; display: grid; gap: 14px; padding: 24px; border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); }
-.tl-steps li { display: flex; align-items: center; gap: 14px; font-size: 16.5px; line-height: 1.4; color: var(--muted); transition: color 240ms var(--e); }
-.tl-steps li .d { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); transition: background 240ms var(--e), border-color 240ms var(--e); }
-.tl-steps li .d svg { width: 14px; height: 14px; fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.6); transition: opacity 200ms var(--e), transform 300ms var(--spring); }
-.tl-steps li.now { color: var(--text); font-weight: 600; }
-.tl-steps li.now .d { border-color: var(--accent); border-top-color: transparent; animation: tl-spin 900ms linear infinite; }
-.tl-steps li.done { color: var(--text); }
-.tl-steps li.done .d { background: var(--accent); border-color: var(--accent); }
-.tl-steps li.done .d svg { opacity: 1; transform: none; }
+/* The stepper: one card, one 24px icon column (pending: hollow ring; now: a spinner in the same ring; done: filled blue
+   check), a thin line joining the icons, text in the same place and weight on every row (the current row changes only
+   colour and gets a soft background inside the card's padding), and the time inside the card. Classes is-now/is-done
+   (never .now/.done: site.css has a .now badge). */
+.tl-stepper { max-width: 520px; margin: 0 auto; padding: 12px; border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); }
+.tl-steps { display: grid; gap: 4px; }
+.tl-steps li { position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 14px; min-height: 48px; padding: 12px; border-radius: 14px; font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--muted); transition: color 260ms var(--e), background-color 260ms var(--e); }
+.tl-steps li:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: calc(50% + 14px); height: calc(100% - 24px); width: 2px; border-radius: 2px; background: var(--line); transition: background-color 260ms var(--e); }
+.tl-steps li.is-done:not(:last-child)::after { background: var(--accent); }
+.tl-steps li .d { box-sizing: border-box; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); transition: background-color 260ms var(--e), border-color 260ms var(--e); }
+.tl-steps li .d svg { width: 13px; height: 13px; fill: none; stroke: var(--on-accent); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.5); transition: opacity 200ms var(--e), transform 320ms var(--spring); }
+.tl-steps li.is-now { color: var(--text); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.tl-steps li.is-now .d { border-color: color-mix(in srgb, var(--accent) 22%, transparent); border-top-color: var(--accent); animation: tl-spin 900ms linear infinite; }
+.tl-steps li.is-done { color: var(--text); }
+.tl-steps li.is-done .d { background: var(--accent); border-color: var(--accent); }
+.tl-steps li.is-done .d svg { opacity: 1; transform: none; }
 @keyframes tl-spin { to { transform: rotate(360deg); } }
-.tl-run p { margin: var(--s-4) auto 0 !important; text-align: center; font-size: 15px; color: var(--muted); }
+.tl-eta { display: flex; justify-content: space-between; gap: 12px; margin: 8px 0 0 !important; padding: 12px 12px 4px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.4; color: var(--muted); }
+.tl-eta-t { flex: none; font-variant-numeric: tabular-nums; }
 
 /* ---------- the report ---------- */
 .tl-report { padding: 0 0 var(--s-8); scroll-margin-top: 80px; }
@@ -191,8 +199,8 @@ main.pg .tl-more h2 { font-size: clamp(24px, 3vw, 32px); }
 html.mo .tl-in { opacity: 0; transform: translateY(14px); }
 html.mo .tl-in.on { opacity: 1; transform: none; transition: opacity 520ms var(--e), transform 620ms var(--e); transition-delay: var(--d, 0ms); }
 @media (prefers-reduced-motion: reduce) {
-  .tl-g .val, .tl-bar i, .tl-steps li .d, .tl-steps li .d svg, .tl-tool, .tl-all > summary svg { transition: none !important; }
-  .tl-steps li.now .d { animation: none; border-top-color: var(--accent); }
+  .tl-g .val, .tl-bar i, .tl-steps li, .tl-steps li::after, .tl-steps li .d, .tl-steps li .d svg, .tl-tool, .tl-all > summary svg { transition: none !important; }
+  .tl-steps li.is-now .d { animation: none; border-color: var(--accent); }
   .tl-form.shake .tl-url, .tl-form.shake .tl-fields { animation: none; }
 }
 
