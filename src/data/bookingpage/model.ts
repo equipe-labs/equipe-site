@@ -258,6 +258,13 @@ ${contactBlock}</main>
 <script type="application/json" id="cfg">${cfg}</script><script>${js}</script></body></html>`;
 }
 
+// ---- the address shown in the preview's browser bars ----------------------------------------------------------------------
+/** "linden-hair-studio.equipe.page" from the name; names without Latin letters show "yourbusiness.equipe.page". */
+export function hostFor(name: string): string {
+  const slug = name.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 28).replace(/-+$/, '');
+  return `${slug || 'yourbusiness'}.equipe.page`;
+}
+
 // ---- the share link -----------------------------------------------------------------------------------------------------
 // #p=<v><base64url>: 'z' = deflate-raw of the JSON (CompressionStream), 'j' = the JSON as it is (older browsers).
 // The JSON holds `t`, the hour the link was made, so a link stops opening after EXPIRE_DAYS.

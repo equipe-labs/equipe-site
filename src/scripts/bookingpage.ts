@@ -10,7 +10,7 @@
 // booking_run, booking_result, booking_share, booking_live). The button is data-ph="signup_cta_click", so the site's
 // funnel counts it as cta and signup_start too.
 import type { BookingCopy } from '../data/bookingpage/types';
-import { DURATIONS, TIMES, MAX, clean, clock, decodeShare, duration, encodeShare, ideaText, renderPage, sampleState, type BPState, type ThemeKey } from '../data/bookingpage/model';
+import { DURATIONS, TIMES, MAX, clean, hostFor, clock, decodeShare, duration, encodeShare, ideaText, renderPage, sampleState, type BPState, type ThemeKey } from '../data/bookingpage/model';
 import { hourRows, serviceRows } from '../data/bookingpage/editor';
 
 type W = Window & { eqOwn?: (k: string, t: string, f?: unknown) => void; eqTrack?: (n: string, p?: unknown) => void };
@@ -35,7 +35,8 @@ export function initBookingPage() {
   const addBtn = $<HTMLButtonElement>('[data-add]');
   const svcHint = $<HTMLElement>('[data-svc-hint]');
   const msg = $<HTMLElement>('[data-msg]');
-  const frames = [...root.querySelectorAll<HTMLIFrameElement>('[data-frame]')];
+  const pairs: Record<string, HTMLIFrameElement[]> = { phone: [...root.querySelectorAll<HTMLIFrameElement>('[data-frame="phone"]')], desktop: [...root.querySelectorAll<HTMLIFrameElement>('[data-frame="desktop"]')] };
+  const hosts = [...root.querySelectorAll<HTMLElement>('[data-host], .bp-iph .iph-url')];
   const stage = $<HTMLElement>('[data-stage]');
   const live = $<HTMLAnchorElement>('[data-live]');
   const pop = $<HTMLElement>('[data-pop]');
@@ -44,29 +45,36 @@ export function initBookingPage() {
   const shareL = $<HTMLElement>('[data-share-l]');
 
   let s: BPState = sampleState(c);
-  let y = 0, ran = false, result = false, front = 0, timer = 0, pending = '';
+  let y = 0, ran = false, result = false, timer = 0, dev = 'phone';
+  const front: Record<string, number> = { phone: 0, desktop: 0 };
+  const shown: Record<string, string> = { phone: '', desktop: '' };
 
   // ---- the preview ---------------------------------------------------------------------------------------------------
   addEventListener('message', (e: MessageEvent) => {
-    if (!e.data || e.data.bp !== 'y' || e.source !== frames[front].contentWindow) return;
+    if (!e.data || e.data.bp !== 'y' || e.source !== pairs[dev][front[dev]].contentWindow) return;
     y = Math.max(0, Number(e.data.y) || 0);
   });
-  frames.forEach((f, i) => f.addEventListener('load', () => {
-    if (i === front || !f.dataset.want) return;
+  Object.entries(pairs).forEach(([d, frames]) => frames.forEach((f, i) => f.addEventListener('load', () => {
+    if (i === front[d] || !f.dataset.want) return;
     delete f.dataset.want;
-    const old = frames[front];
-    front = i;
-    f.classList.add('on'); f.removeAttribute('aria-hidden'); f.tabIndex = 0;
+    const old = frames[front[d]];
+    front[d] = i;
+    f.classList.add('on'); f.removeAttribute('aria-hidden'); f.tabIndex = d === dev ? 0 : -1;
     old.classList.remove('on'); old.setAttribute('aria-hidden', 'true'); old.tabIndex = -1;
-  }));
+  })));
+  shown.phone = pairs.phone[0].getAttribute('srcdoc') ? 'ssr' : '';
+  // Only the device on show is drawn; the other catches up when it is chosen.
   const draw = () => {
     const html = renderPage(c, s, lang, { y });
-    if (html === pending) return;
-    pending = html;
-    const back = frames[1 - front];
+    live.href = startHref();
+    const h = hostFor(s.n);
+    hosts.forEach((el) => { const t = el.matches('.iph-url') ? [...el.childNodes].find((n) => n.nodeType === 3) : el.firstChild; if (t && t.textContent !== h) t.textContent = h; });
+    stage.dataset.th = s.th;
+    if (html === shown[dev]) return;
+    shown[dev] = html;
+    const frames = pairs[dev], back = frames[1 - front[dev]];
     back.dataset.want = '1';
     back.srcdoc = html;
-    live.href = startHref();
   };
   const soon = () => { clearTimeout(timer); timer = window.setTimeout(draw, 140); };
   const startHref = () => {
@@ -263,14 +271,35 @@ export function initBookingPage() {
   const seg = $<HTMLElement>('[data-dev]');
   const devs = [...seg.querySelectorAll<HTMLButtonElement>('[data-dev-v]')];
   const setDev = (v: string) => {
+    dev = v; y = 0;
     stage.dataset.device = v; seg.dataset.v = v;
+    stage.querySelectorAll<HTMLElement>('[data-dev-box]').forEach((b) => { if (b.dataset.devBox === v) b.removeAttribute('aria-hidden'); else b.setAttribute('aria-hidden', 'true'); });
+    Object.entries(pairs).forEach(([d, fr]) => fr.forEach((f, i) => { f.tabIndex = d === v && i === front[d] ? 0 : -1; }));
+    fit(); draw();
     devs.forEach((b) => { const on = b.dataset.devV === v; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
   };
   devs.forEach((b) => {
-    b.addEventListener('click', () => { if (stage.dataset.device !== b.dataset.devV) { setDev(b.dataset.devV!); own(`booking:device:${b.dataset.devV}`); } });
+    b.addEventListener('click', () => { if (stage.dataset.device !== b.dataset.devV) { setDev(b.dataset.devV!); own(`booking:device:${b.dataset.devV}`); track('booking_device', { device: b.dataset.devV }); } });
     b.addEventListener('keydown', (e) => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); const n = devs.find((x) => x !== b)!; n.focus(); n.click(); } });
   });
   seg.dataset.v = 'phone';
+
+  // Sizes: the phone fits the column and the window's height; the pages inside render at their real widths
+  // (393 pt on the phone, 1024 px on the computer) and are scaled down to the drawn screens.
+  const iph = stage.querySelector<HTMLElement>('.bp-iph')!;
+  const wscr = stage.querySelector<HTMLElement>('.bp-wscr')!;
+  function fit() {
+    const sw = stage.clientWidth - 32;
+    const wpx = Math.round(Math.max(250, Math.min(360, sw, (innerHeight - 250) * (425 / 884))));
+    iph.style.setProperty('--w', `${wpx}px`);
+    stage.style.setProperty('--s', String(((wpx / 425) * 1).toFixed(4)));
+    if (wscr.clientWidth) stage.style.setProperty('--ds', String((wscr.clientWidth / 1024).toFixed(4)));
+    // The stage takes the height of the device on show, so the computer view does not sit in empty space.
+    const box = stage.querySelector<HTMLElement>(`[data-dev-box="${dev}"]`);
+    if (box) { const cs = getComputedStyle(stage); stage.style.height = `${Math.ceil(box.offsetHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + 2)}px`; }
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(() => fit()).observe(stage);
+  fit();
 
   // ---- share ----------------------------------------------------------------------------------------------------------
   let shareT = 0;
