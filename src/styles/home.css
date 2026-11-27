@@ -34,20 +34,6 @@ main.home .hero .shot { position: relative; isolation: isolate; margin-top: 96px
 /* 2 from Claude */
 .wedge { background: var(--sunken); border-top: 1px solid var(--line); }
 main.home > section.wedge { padding-top: 112px; }
-.wedge .wa-import { margin-top: var(--s-8); }
-.wsteps { display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px minmax(0, 1.15fr); margin-top: var(--s-6); }
-.wsteps li { padding-right: var(--s-4); }
-.wsteps li:nth-child(2) { grid-column: 3; } .wsteps li:nth-child(3) { grid-column: 5; }
-.wsteps .n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--text); color: var(--bg); font: 700 13px/1 var(--sans); }
-main.home .wsteps h3 { margin-top: var(--s-3); font-size: 20px; }
-.wsteps p { margin-top: var(--s-2); font-size: 16px; line-height: 1.55; color: var(--muted); }
-.handled { margin-top: var(--s-8); padding: var(--s-5) var(--s-6); border: 1px solid var(--line); border-radius: 16px; background: var(--bg); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4) var(--s-6); }
-.handled > div { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
-main.home .handled h3 { font-size: 15px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
-.handled ul { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-.handled li { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px 0 8px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); font-size: 14.5px; font-weight: 500; white-space: nowrap; }
-.handled li svg { width: 16px; height: 16px; fill: none; stroke: var(--wa-ok); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.handled .never { font-size: 15px; color: var(--muted); max-width: 360px; }
 
 /* 3 how it works */
 .how .steps { margin-top: 88px; display: grid; gap: 120px; }
@@ -177,10 +163,6 @@ html.mo main.home .rv.in { opacity: 1; transform: none; transition: opacity 420m
   .hero .shot { margin-top: 48px; padding-bottom: var(--s-6); }
   .hero .shot::before { top: 30%; }
   main.home > section.wedge { padding-top: 72px; }
-  .wedge .wa-import { margin-top: var(--s-6); }
-  .wsteps { grid-template-columns: 1fr; gap: var(--s-5); margin-top: var(--s-6); }
-  .wsteps li:nth-child(n) { grid-column: auto; }
-  .handled { padding: var(--s-5); margin-top: var(--s-6); }
   .how .steps { margin-top: var(--s-7); gap: 72px; }
   .stage { padding: 20px 14px; min-height: 0; border-radius: 18px; }
   .roles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--s-3); margin: var(--s-6) -20px 0; padding: 0 20px var(--s-2); scroll-padding-inline: 20px; scrollbar-width: none; }
@@ -265,9 +247,6 @@ main.home > section.early { padding: 120px 0; }
   main.home > section.early { padding: 72px 0; }
 }
 
-/* wedge: the never-sign-in line sits under the chips, full width */
-.handled { display: grid; justify-content: stretch; gap: var(--s-4); }
-.handled .never { max-width: none; padding-top: var(--s-4); border-top: 1px solid var(--line); }
 
 /* the form card keeps the page colours inside the dark band */
 .early .ecard { color: var(--text); }
@@ -302,10 +281,6 @@ main.home :is(.sub, .hero .lead) { text-wrap: balance; }
 /* the closing band in dark mode: lifted off the page so it reads as one block, with the card a step lighter again */
 :root[data-theme='dark'] .early { --band: #1F2026; }
 :root[data-theme='dark'] .early .ecard { background: #282930; border-color: #FFFFFF1F; }
-@media (max-width: 900px) {
-  .wsteps { grid-template-columns: 1fr; gap: var(--s-5); }
-  .wsteps li:nth-child(n) { grid-column: auto; }
-}
 
 /* ---- sign-up: the idea box ---- */
 .idea { display: grid; gap: var(--s-3); }

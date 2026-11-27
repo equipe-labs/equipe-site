@@ -22,6 +22,8 @@ import CustomerLogos from '../components/CustomerLogos.astro';
 import DayOne from '../components/DayOne.astro';
 import PlanCards from '../components/PlanCards.astro';
 import PromoBanner from '../components/PromoBanner.astro';
+import ArtifactImport from '../components/ArtifactImport.astro';
+import { FROM_CLAUDE } from '../data/fromclaude';
 import { TYPICAL_TOTALS } from '../data/flags';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -41,10 +43,10 @@ const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const t = getMessages(code);
 const s = t.scene;
+const fc = FROM_CLAUDE[code] ?? FROM_CLAUDE.en;
 const pageUrl = new URL(localePath(info), Astro.site).href;
 // Where we are: one state per item.
 const statusState = ['now', 'early', 'soon'] as const;
-const check = 'M5 12.5l4.5 4.5L19 7.5';
 const faqMore = t.faq.more.split('{email}');
 ---
 
@@ -131,22 +133,16 @@ const faqMore = t.faq.more.split('{email}');
     <Gallery code={code} />
 
     <section class="wedge" id="from-claude">
-      <div class="wrap">
+      <div class="wrap fc-home">
         <div class="head rv">
-          <p class="kicker">{t.wedge.kicker}</p>
-          <h2>{t.wedge.title}</h2>
-          <p class="sub">{t.wedge.text}</p>
+          <p class="kicker">{fc.home.kicker}</p>
+          <h2>{fc.home.title}</h2>
+          <p class="sub">{fc.home.sub}</p>
+          <a class="fc-more" href={subPath(info, 'from-claude')} data-ph="from_claude_link_click" data-ph-location="home">{fc.home.more}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
         </div>
-        <div class="rv"><WebApp k="import" s={s} alt={t.wedge.alt} /></div>
-        <ol class="wsteps rv">
-          {t.wedge.steps.map((st, i) => <li><span class="n">{i + 1}</span><h3>{st.title}</h3><p>{st.text}</p></li>)}
-        </ol>
-        <div class="handled rv">
-          <div>
-            <h3>{t.wedge.handledTitle}</h3>
-            <ul>{t.wedge.handled.map((h) => <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={check} /></svg>{h}</li>)}</ul>
-          </div>
-          <p class="never">{t.wedge.never}</p>
+        <div class="rv">
+          <ArtifactImport code={code} id="fc-home" location="home" compact />
+          <p class="fc-home-legal">{fc.disclaimer}</p>
         </div>
       </div>
     </section>

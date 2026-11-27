@@ -9,6 +9,7 @@ import { NAV } from '../data/nav';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 import { DAY_ONE } from '../data/dayone';
+import { FROM_CLAUDE } from '../data/fromclaude';
 import { aiCopy } from '../data/productai';
 
 interface Props { code: LocaleCode; page: string; langs?: LocaleCode[] }
@@ -26,8 +27,10 @@ const examples = `${home}#gallery`;
 const aboutHref = `${subPath(info, 'about')}#team`;
 const D1 = DAY_ONE[code] ?? DAY_ONE.en;
 const AI = aiCopy(code);
+const FC = FROM_CLAUDE[code] ?? FROM_CLAUDE.en;
 const I = {
   'day-one': 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l2.8 2.8L16.5 9.5',
+  'from-claude': 'M9 3.5h6v3H9zM8.5 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1.5M9 14l3-3 3 3M12 11v6',
   'features/ai': 'M4 5h16v11H10l-4 3.5V16H4z',
   blog: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4zM9 9h6M9 13h6',
   security: 'M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3zM9.5 12l2 2 3.5-4',
@@ -37,6 +40,7 @@ const I = {
 };
 const res = [
   { k: 'day-one', href: subPath(info, 'day-one'), label: D1.nav, d: D1.navDesc },
+  { k: 'from-claude', href: subPath(info, 'from-claude'), label: FC.nav, d: FC.navDesc },
   { k: 'features/ai', href: subPath(info, 'features/ai'), label: AI.nav, d: AI.navDesc },
   { k: 'blog', href: blogPath(bl), label: bu.nav, d: N.desc.blog },
   { k: 'security', href: subPath(info, 'security'), label: t.nav.security, d: N.desc.security },
@@ -44,7 +48,7 @@ const res = [
   { k: 'changelog', href: subPath(info, 'changelog'), label: t.pages.changelog.h1, d: N.desc.changelog },
   { k: 'developers', href: subPath(info, 'developers'), label: t.nav.developers, d: N.desc.developers },
 ] as const;
-const resActive = ['day-one', 'features/ai', 'security', 'developers', 'changelog', 'facts', 'blog'].includes(page);
+const resActive = ['day-one', 'from-claude', 'features/ai', 'security', 'developers', 'changelog', 'facts', 'blog'].includes(page);
 ---
 <header class="site" data-site-header>
   <div class="wrap">
