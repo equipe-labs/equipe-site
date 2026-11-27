@@ -21,25 +21,13 @@
 
 /* ---------- running ---------- */
 .gr-run .wrap { display: grid; gap: var(--s-5); max-width: 880px; }
-.gr-runcard { width: 100%; max-width: 560px; margin: 0 auto; padding: 22px 24px; border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); }
-.gr-runhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.gr-runhead b { font-size: 16.5px; overflow-wrap: anywhere; }
-.gr-elapsed { flex: none; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.gr-prog { height: 4px; margin: 14px 0 18px; border-radius: 99px; background: var(--code-bg); overflow: hidden; }
+.gr-stepper { width: 100%; max-width: 560px; }
+.gr-runhead { padding: 10px 12px 0; }
+.gr-runhead b { font-size: 16px; overflow-wrap: anywhere; }
+.gr-prog { height: 4px; margin: 12px 12px 8px; border-radius: 99px; background: var(--code-bg); overflow: hidden; }
 .gr-prog i { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width 900ms linear; }
-.gr-steps { display: grid; gap: 12px; }
-.gr-steps li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 12px; font-size: 16px; line-height: 1.4; color: var(--muted); }
-.gr-steps .d { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line); transition: background 240ms var(--e), border-color 240ms var(--e); }
-.gr-steps .d svg { width: 13px; height: 13px; fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.5); transition: opacity 200ms var(--e), transform 320ms var(--spring); }
-.gr-steps .m { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.gr-steps li.gr-now { color: var(--text); font-weight: 600; }
-.gr-steps li.gr-now .d { border-color: var(--accent); border-top-color: transparent; animation: tl-spin 900ms linear infinite; }
-html.mo .gr-steps li.gr-now .t { background: linear-gradient(90deg, var(--muted) 35%, var(--text) 50%, var(--muted) 65%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gr-shimmer 1.6s linear infinite; }
-.gr-steps li.gr-done { color: var(--text); }
-.gr-steps li.gr-done .d { background: var(--accent); border-color: var(--accent); }
-.gr-steps li.gr-done .d svg { opacity: 1; transform: none; }
+html.mo .gr-stepper .tl-steps li.is-now > span:last-child { background: linear-gradient(90deg, var(--muted) 35%, var(--text) 50%, var(--muted) 65%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gr-shimmer 1.6s linear infinite; }
 @keyframes gr-shimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
-.gr-runnote { margin: 18px 0 0 !important; font-size: 14.5px; color: var(--muted); }
 
 /* the report's outline while it is on its way */
 .gr-skel { display: grid; gap: 14px; }
@@ -217,8 +205,8 @@ main.pg .gr-yours { margin: 8px 0 -8px; font-size: 22px; letter-spacing: -0.016e
 
 @media (prefers-reduced-motion: reduce) {
   .gr-vs { animation: none; }
-  .gr-prog i, .gr-steps .d, .gr-steps .d svg, .gr-tech summary svg, .gr-more svg { transition: none !important; }
-  .gr-steps li.gr-now .d, .gr-actions .btn.busy svg { animation: none; border-top-color: var(--accent); }
+  .gr-prog i, .gr-tech summary svg, .gr-more svg { transition: none !important; }
+  .gr-actions .btn.busy svg { animation: none; }
 }
 
 @media (max-width: 900px) {
