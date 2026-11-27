@@ -13,6 +13,7 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 
 const SITE = 'https://equipe.im';
+const INDEXNOW_KEY = '117d2ffce74b545350c9c162572066c4'; // public/<key>.txt
 const DIST = 'dist';
 const LOCALES = ['ko', 'ja', 'zh-cn', 'es', 'pt-br', 'de', 'fr'];
 // Path's first segment -> section. Everything else (home, pricing, about, legal...) is "pages"; from-* guides are "from".
@@ -97,9 +98,19 @@ async function main() {
   const idx = `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${index.map((s) => `<sitemap><loc>${s.loc}</loc><lastmod>${s.lastmod}</lastmod></sitemap>`).join('')}</sitemapindex>\n`;
   await writeFile(`${DIST}/sitemap-index.xml`, idx);
   await writeFile(`${DIST}/sitemap.xml`, idx);
+  // IndexNow (Bing, Yandex, Naver, Seznam): the new or changed pages of a production build. Sent from here because the
+  // shared endpoint refuses pings from Cloudflare Workers (429); equipe-cloud's monitor reads the result in the manifest.
+  let indexnow = null;
+  const fresh = Object.entries(pages).filter(([, p]) => p.lastmod === now).map(([u]) => u);
+  if (process.env.VERCEL_ENV === 'production' && fresh.length) {
+    try {
+      const r = await fetch('https://api.indexnow.org/indexnow', { method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' }, body: JSON.stringify({ host: 'equipe.im', key: INDEXNOW_KEY, keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`, urlList: fresh.slice(0, 10000) }), signal: AbortSignal.timeout(10000) });
+      indexnow = { status: r.status, urls: fresh.length, at: now };
+    } catch (e) { indexnow = { status: 0, urls: fresh.length, at: now }; }
+  }
   await mkdir(`${DIST}/seo`, { recursive: true });
-  await writeFile(`${DIST}/seo/pages.json`, JSON.stringify({ built: now, sitemaps: index.map((s) => s.loc), pages }));
-  console.log(`sitemaps: ${Object.keys(pages).length} URLs in ${index.length} sitemaps, ${changed} new or changed, ${dropped} noindex left out, previous manifest ${Object.keys(prev).length ? 'used' : 'not found'}`);
+  await writeFile(`${DIST}/seo/pages.json`, JSON.stringify({ built: now, sitemaps: index.map((s) => s.loc), indexnow, pages }));
+  console.log(`sitemaps: ${Object.keys(pages).length} URLs in ${index.length} sitemaps, ${changed} new or changed, ${dropped} noindex left out, previous manifest ${Object.keys(prev).length ? 'used' : 'not found'}${indexnow ? `, IndexNow ${indexnow.status}` : ''}`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) await main();
