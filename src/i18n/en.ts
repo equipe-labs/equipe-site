@@ -166,6 +166,9 @@ export const en = {
     teamNote: 'Everyone works on your request together.',
     teamLines: ['turns your idea into a plan', 'build it', 'makes it look right', 'checks it works', 'measures what’s working'],
     note: 'Free to start · 500 credits · No card needed',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: 'No idea yet?',
+    noIdeaGo: 'Start free, and your team suggests three',
   },
   see: { kicker: 'See it work', title: 'Your team, at work.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

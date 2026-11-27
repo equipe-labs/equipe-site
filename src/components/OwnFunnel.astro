@@ -1,0 +1,76 @@
+---
+// The landing funnel, counted by equipe's own collector (app.equipe.im/_own/rum.js, cloud docs/analytics.md "equipe's own
+// landing funnel"): each step once per tab, under the visit's source and its A/B arms. Never typed text (the idea box
+// sends only a length bucket and which script it is written in), never an id, nothing on Do Not Track.
+//   steps   view, scroll25/50/75/100, idea_focus, idea_type, idea_submit, cta, signup_start, pricing
+//   counts  idea_len, idea_lang, chip:<goal>, click:<data-ph>:<location>, sec:<section>, lang_switch, device, locale,
+//           browser_lang (first page of a tab), time (seconds on the page, bucketed)
+---
+
+<script is:inline>
+  (function () {
+    var w = window, d = document, t0 = Date.now(), pv = location.pathname, gone = 0;
+    function own(k, t, f) { if (w.eqOwn) w.eqOwn(k, t, f); }
+    var done = {}; // the collector also keeps a step once per tab; this keeps the queue short before it loads
+    function fn(s) { if (done[s]) return; done[s] = 1; own('fn', s); }
+    function ev(n, v) { own('ev', String(n).toLowerCase().replace(/[^a-z0-9_:.=-]+/g, '_').slice(0, 60), v); }
+    function bucket(n, cuts) { for (var i = 0; i < cuts.length; i++) if (n <= cuts[i]) return (i ? cuts[i - 1] + 1 : 0) + '-' + cuts[i]; return cuts[cuts.length - 1] + '+'; }
+    fn('view');
+    if (/\/pricing\/?$/.test(pv)) fn('pricing');
+    var first = 1; try { first = !sessionStorage.getItem('eq_own_m'); sessionStorage.setItem('eq_own_m', '1'); } catch (e) {}
+    if (first) {
+      ev('device', matchMedia('(max-width: 640px)').matches ? 'mobile' : matchMedia('(max-width: 1024px)').matches ? 'tablet' : 'desktop');
+      ev('locale', d.documentElement.lang || '');
+      ev('browser_lang', String(navigator.language || '').split('-')[0].toLowerCase().slice(0, 5));
+    }
+    // Scroll depth: each mark once.
+    var marks = [25, 50, 75, 100], busy = 0;
+    function onScroll() {
+      if (busy) return; busy = 1;
+      requestAnimationFrame(function () {
+        busy = 0;
+        var el = d.documentElement, max = el.scrollHeight - el.clientHeight, pct = max > 0 ? ((w.scrollY + 1) / max) * 100 : 100;
+        while (marks.length && pct >= marks[0]) fn('scroll' + marks.shift());
+        if (!marks.length) removeEventListener('scroll', onScroll);
+      });
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+    // Sections seen (a third of one on screen), each once a page.
+    if (w.IntersectionObserver) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); ev('sec:' + (e.target.id || e.target.classList[0] || 'section')); } }); }, { threshold: 0.33 });
+      d.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+    }
+    // The idea box: clicked into, started typing, sent (with its length and script only).
+    function box(e) { return e.target && e.target.closest && e.target.closest('[data-idea]'); }
+    d.addEventListener('focusin', function (e) { if (box(e) && e.target.tagName === 'TEXTAREA') fn('idea_focus'); });
+    d.addEventListener('input', function (e) { if (box(e) && e.target.tagName === 'TEXTAREA' && e.target.value.trim()) fn('idea_type'); });
+    var typed = '';
+    d.addEventListener('submit', function (e) { var f = box(e), ta = f && f.querySelector('textarea'); typed = ta ? ta.value.trim() : ''; }, true);
+    d.addEventListener('submit', function (e) {
+      if (!box(e) || e.defaultPrevented) return;
+      var v = typed;
+      fn('idea_submit'); fn('signup_start');
+      ev('idea_len', v ? bucket(v.length, [20, 60, 200]) : 'empty');
+      ev('idea_lang', !v ? 'none' : /[가-힣]/.test(v) ? 'korean' : /[぀-ヿ]/.test(v) ? 'japanese' : /[一-鿿]/.test(v) ? 'chinese' : /[a-zÀ-ɏ]/i.test(v) ? 'latin' : 'other');
+    });
+    // Clicks on tracked buttons and links (the same data-ph names PostHog gets), and every way into sign-up.
+    d.addEventListener('click', function (e) {
+      var el = e.target && e.target.closest ? e.target : null; if (!el) return;
+      var g = el.closest('.idea-goal[data-goal]'); if (g) ev('chip:' + g.getAttribute('data-goal'));
+      var t = el.closest('[data-ph]'), a = el.closest('a[href]');
+      if (t) {
+        var ph = t.getAttribute('data-ph'), loc = t.getAttribute('data-ph-location') || '';
+        ev('click:' + ph + (loc ? ':' + loc : ''));
+        if (ph === 'signup_cta_click') fn('cta');
+        if (/pricing/.test(loc)) fn('pricing');
+      }
+      if (a && a.hasAttribute('data-lang-choice')) ev('lang_switch', (d.documentElement.lang || '') + '>' + (a.getAttribute('hreflang') || ''));
+      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup)/.test(a.href)) fn('signup_start');
+      if (a && /\/pricing\/?(#|$)/.test(a.pathname || '') && a.host === location.host) fn('pricing');
+    }, true);
+    // Time on the page, once, when it is hidden or left.
+    function leave() { if (gone) return; gone = 1; var s = Math.round((Date.now() - t0) / 1000); ev('time', bucket(s, [10, 30, 60, 180])); }
+    d.addEventListener('visibilitychange', function () { if (d.visibilityState === 'hidden') leave(); });
+    addEventListener('pagehide', leave);
+  })();
+</script>

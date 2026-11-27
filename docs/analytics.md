@@ -177,3 +177,12 @@ GitHub 트래픽 API는 최근 14일치만 준다. `.github/workflows/github-tra
 - [ ] 이 브랜치를 main에 머지(예약 실행은 기본 브랜치에서만 돈다) → Actions → **GitHub traffic to PostHog** → Run workflow로 첫 수집
 - [ ] Actions → **PostHog KPI dashboard** → Run workflow. 로그 마지막 줄의 대시보드 링크를 위 **링크**에 넣는다
 - [ ] 다른 사람에게 보여줄 때: 대시보드 → Share → 팀원 초대 또는 공개 링크(공개 링크는 누구나 볼 수 있으니 필요할 때만)
+
+## equipe 자체 랜딩 퍼널 (app.equipe.im `/admin/analytics`)
+
+PostHog와 별개로, 랜딩 퍼널은 equipe 자체 수집기(`https://app.equipe.im/_own/rum.js?s=landing`)로도 센다. 쿠키·식별자·입력한 글은 보내지 않고, 하루 단위 숫자만 남는다. 정의는 cloud 저장소 `docs/analytics.md`의 "equipe's own landing funnel"에 있다.
+
+- `src/components/OwnFunnel.astro`: 단계(`view`, `scroll25/50/75/100`, `idea_focus`, `idea_type`, `idea_submit`, `cta`, `signup_start`, `pricing`)는 탭마다 한 번만 센다. 아이디어 상자는 길이 구간과 문자 종류(`idea_len`, `idea_lang`)만 보낸다. 그 밖에 `data-ph` 클릭, 섹션 노출, 언어 전환, 기기, 언어, 머문 시간 구간을 센다.
+- `src/layouts/Base.astro`: A/B 실험 배정. 탭마다 한 번 sessionStorage `eq_ab`에 정하고, 첫 화면이 그려지기 전에 `<html data-ab-이름="a|b">`를 붙인다. 화면 차이는 CSS로만 낸다. 배정 결과는 `_eqa`(`x: "hero=b"`)에 실어 앱으로 넘기므로, 가입까지 배정별로 센다.
+- 진행 중인 실험 `hero`는 2026-11-27에 시작했다. b안에서만 히어로 아이디어 상자 아래에 "아직 아이디어가 없나요? 무료로 시작하면 팀이 세 가지를 제안해요" 링크가 보인다. 결과는 `/admin/analytics` → Landing funnel → A/B tests에서 본다. 한쪽이 이기면 이긴 안을 기본으로 만들고 `Base.astro`의 실험 목록에서 `hero`를 지운다.
+- 아이디어 상자로 제출해도 `_eqa`가 같이 간다. 그래서 상자로 가입한 사람도 유입 경로가 남는다(2026-11-27 전에는 이 경로의 출처가 남지 않았다).
