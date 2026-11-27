@@ -9,6 +9,7 @@ import PromoBanner from '../../components/PromoBanner.astro';
 import PackStrip from '../../components/PackStrip.astro';
 import '../../styles/sections.css';
 import { TYPICAL_TOTALS } from '../../data/flags';
+import { USUAL_COSTS } from '../../data/home';
 import { aiCopy } from '../../data/productai';
 import { SITE } from '../../data/site';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
@@ -20,6 +21,8 @@ const P = t.pages.pricing;
 const cost = t.faq.items[4];
 const AI = aiCopy(code).pricingNote;
 const NP = t.plans.nonprofit;
+// "What it usually costs": real customer examples in dollars (sources in src/data/home.ts).
+const U = USUAL_COSTS[code];
 ---
 <PageShell code={code} page="pricing" title={P.title} description={P.desc} image={`/og/v4/pricing-${info.slug || 'en'}.png`} imageAlt={`equipe — ${P.lead}`}>
   <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
@@ -36,6 +39,14 @@ const NP = t.plans.nonprofit;
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" /><path d="M3.5 10h17M7 14.5h3" /></svg><div><h2>{t.plans.credits.title}</h2><p>{t.plans.credits.text}</p></div></div>
           <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5h16M7 15V11M12 15V7M17 15v-2.5" /></svg><div><h2>{t.plans.estimate.title}</h2><p>{t.plans.estimate.text}</p>{TYPICAL_TOTALS?.[code] && <p class="pfact-x">{TYPICAL_TOTALS[code]}</p>}</div></div>
         </div>
+    <div class="usual" id="usual-costs">
+      <h2>{U.title}</h2>
+      <p class="usual-sub">{U.sub}</p>
+      <ul role="list">
+        {U.items.map(([what, price, note]) => <li><span class="usual-w">{what}</span><b class="usual-p">{price}</b><span class="usual-n">{note}</span></li>)}
+      </ul>
+      <p class="usual-sub">{U.note}</p>
+    </div>
     <PackStrip code={code} />
     <a class="pai" href={subPath(info, 'features/ai')} data-ph="ai_features_click" data-ph-location="pricing">
       <span class="pai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>
@@ -58,3 +69,14 @@ const NP = t.plans.nonprofit;
     </div>
   </div></section>
 </PageShell>
+<style>
+  .usual { margin: 56px 0 0; padding: 28px 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+  .usual h2 { margin: 0; font-size: 24px; letter-spacing: -0.02em; }
+  .usual-sub { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  .usual ul { margin: 20px 0 16px; padding: 0; list-style: none; display: grid; }
+  .usual li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .usual-w { font-size: 17px; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+  .usual-p { font-size: 17px; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+  .usual-n { grid-column: 1 / -1; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 640px) { .usual { padding: 20px 16px; } }
+</style>

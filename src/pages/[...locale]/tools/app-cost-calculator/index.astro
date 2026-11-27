@@ -1,0 +1,62 @@
+---
+// /tools/app-cost-calculator/: what an app or website costs with an agency, with no-code tools and with equipe.
+// Model and sources: src/data/costcalc/model.ts; real equipe costs: src/data/costcalc-stats.json (scripts/costcalc-stats.mjs).
+import PageShell from '../../../../components/PageShell.astro';
+import JsonLd from '../../../../components/JsonLd.astro';
+import Calculator from '../../../../components/costcalc/Calculator.astro';
+import Method from '../../../../components/costcalc/Method.astro';
+import { SITE } from '../../../../data/site';
+import { TYPES, DEFAULT_PICK } from '../../../../data/costcalc/model';
+import { costCopy } from '../../../../data/costcalc/copy';
+import { available, getLocale, subPath, type LocaleCode } from '../../../../i18n';
+import '../../../../styles/costcalc.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = costCopy(code);
+const page = 'tools/app-cost-calculator';
+const url = new URL(subPath(info, page), Astro.site).href;
+const hasHub = Object.keys(import.meta.glob('../index.astro')).length > 0;
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+---
+<PageShell code={code} page={page} title={c.page.title} description={c.page.desc} image={`/og/costcalc/${info.slug || 'en'}.png`} imageAlt={c.page.h1}>
+  <Fragment slot="head">
+    <link rel="preconnect" href={SITE.app} crossorigin />
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, url, name: c.nav, description: c.page.desc, inLanguage: info.lang,
+      applicationCategory: 'BusinessApplication', operatingSystem: 'Any', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: { '@id': `${SITE.url}/#organization` },
+    }} />
+  </Fragment>
+
+  <section class="cc-hero"><div class="wrap">
+    {hasHub && <p class="cc-crumbs"><a href={subPath(info, 'tools')}>{c.typePage.hubLink}</a></p>}
+    <p class="cc-kick">{c.page.kicker}</p>
+    <h1>{c.page.h1}</h1>
+    <p class="cc-lead">{c.page.lead}</p>
+  </div></section>
+
+  <section class="cc-sec" id="calculator" style="padding-top:0"><div class="wrap">
+    <Calculator code={code} preset={DEFAULT_PICK('website')} placement="calculator" />
+  </div></section>
+
+  <section class="cc-sec" id="types"><div class="wrap">
+    <h2>{c.typePage.related}</h2>
+    <nav class="cc-related" aria-label={c.typePage.related}>
+      {TYPES.map((t) => <a href={subPath(info, `${page}/${t}`)} data-ph="costcalc_type_link" data-ph-location={`index-${t}`}>{c.types[t].name}</a>)}
+    </nav>
+  </div></section>
+
+  <Method code={code} />
+
+  <section class="cc-cta"><div class="wrap">
+    <h2>{c.cta.title}</h2>
+    <p>{c.cta.sub}</p>
+    <div class="acts">
+      <a class="btn primary lg" href="#calculator">{c.typePage.calc}<Fragment set:html={arrow} /></a>
+      <a class="btn ghost lg" href={subPath(info, 'pricing')} data-ph="costcalc_pricing" data-ph-location="index-final">{c.cta.secondary}</a>
+    </div>
+  </div></section>
+</PageShell>

@@ -36,14 +36,14 @@ export const en = {
     themeLight: 'Light theme',
     themeSystem: 'System theme',
   },
-  nav: { product: 'Product', pricing: 'Pricing', security: 'Security', about: 'About', how: 'How it works', team: 'The team', status: 'Where we are', faq: 'FAQ', developers: 'Developers', github: 'GitHub', cta: 'Get started', ctaShort: 'Get started', signIn: 'Sign in', signInShort: 'Sign in' },
+  nav: { product: 'Product', pricing: 'Pricing', security: 'Security', about: 'About', how: 'How it works', team: 'The team', status: 'Where we are', faq: 'FAQ', developers: 'Developers', github: 'GitHub', cta: 'Start free', ctaShort: 'Start free', signIn: 'Sign in', signInShort: 'Sign in' },
   // hero.title may contain one \n: a line break kept on wide screens (useful where the language would otherwise break mid-phrase).
   hero: {
     badge: 'Now open · start free',
     title: 'A startup team for one person.',
     lead: 'Bring an idea, or something you already built in Claude. A PM, engineers, a designer, QA and a data analyst put it live as a real service, then keep making it better.',
     approve: 'You don\'t need to know how to code. Your AI startup team does the building, launching and improving.',
-    cta: 'Get started',
+    cta: 'Start free',
     secondary: 'See how it works',
     meta: 'Runs in your browser. Nothing to install, no code to write.',
     shotAlt: 'The equipe web app: a chat with the PM, what each member is doing, a decision waiting for your approval, and the app the team shipped on a phone',
@@ -116,7 +116,7 @@ export const en = {
     labels: { now: 'Works today', early: 'Open now', soon: 'Coming' },
     items: [
       { title: 'The team itself', text: 'The PM, engineers, designer, QA and data roles already build and ship real products. This site and our apps were built by them.' },
-      { title: 'Your team in the cloud', text: 'Sign up, describe your idea and get your own team in about a minute. Chat with the PM, follow the work and open preview links. Weekly growth reports arrive on the day and time you choose.' },
+      { title: 'Your team in the cloud', text: 'Sign up, describe your idea and get your own team in under a minute. Chat with the PM, follow the work and open preview links. Weekly growth reports arrive on the day and time you choose.' },
       { title: 'Still coming', text: 'One-step import from Claude with a database and a domain.' },
     ],
   },
@@ -138,7 +138,7 @@ export const en = {
       { question: 'Who runs the hosting, the database and the domain?', answer: 'We do, as one project per customer, so there is nothing for you to set up or sign in to. If your product outgrows that, we can move it to your own accounts.' },
       { question: 'What does it cost?', answer: 'You pay with credits: 100 credits = $1. You get 500 credits when you create your team (+1,000 credits when you add a card). The Team plan includes hosting, storage and 5 people, plus a monthly amount of credits you choose: from {{m0}} a month to keep your product live, or {{m2}} a month with {{c2}} credits, where most teams start. Plan credits roll over for 2 months. Everything your team does while it works, AI work and the cloud computer it works on, is paid from credits. Every request shows its expected cost first, and you set a monthly cap.' },
       { question: 'What does “you approve” mean?', answer: 'Anything that goes live, costs money or reaches your customers waits for your OK. You get a short card with options and a recommendation, and answer with one tap.' },
-      { question: 'How do I start?', answer: 'Sign up at app.equipe.im and describe your idea. Your team is set up in about a minute, with 500 free credits and no card needed.' },
+      { question: 'How do I start?', answer: 'Sign up at app.equipe.im and describe your idea. Your team is set up in under a minute, with 500 free credits and no card needed.' },
       { question: 'I am a developer. Can I run it myself?', answer: 'Yes. The engine behind the team is open source and runs on your own machine. The developers page has the Mac app and the command-line tool.' },
     ],
     devLink: 'Go to the developers page',
@@ -234,7 +234,7 @@ export const en = {
     nonprofit: { title: 'Nonprofit and public-good program', text: 'For the first 3 months after approval, nonprofits and public-good projects get 50% in bonus credits on every credit purchase, auto top-up and monthly plan credit: buy 2,500 credits, get 1,250 more. Up to 25,000 bonus credits per team.', link: 'Apply in Billing', faq: { question: 'Is there a program for nonprofits?', answer: 'Yes. Nonprofit organizations and public-good projects can apply in the app, from Billing. For the first 3 months after approval, every credit purchase, auto top-up and monthly plan credit gets a matching 50% in bonus credits (buy 2,500 credits, get 1,250 more), up to 25,000 bonus credits per team in total. Bonus credits end when the 3 months end. The form asks for your organization’s name, website and country, a registration number if you have one, and a short description. A person at equipe reviews every application, and your team gets an email either way.' } },
     faq: [{ question: 'Do I pay while I’m away?', answer: 'No. When your team is not working, it costs nothing.' }, { question: 'What happens when my credits run out?', answer: 'Your team stops only then. Add credits and it continues right away. You can also set a monthly cap.' }, { question: 'Do monthly credits carry over?', answer: 'Yes. Credits from the Team plan roll over for 2 months.' }, { question: 'What does the Team plan cost?', answer: 'It depends on the credits you choose each month: {{m0}} a month with no credits (your product stays live), {{m1}} with {{c1}} credits, {{m2}} with {{c2}}, {{m3}} with {{c3}}, or {{m4}} with {{c4}}. Paying yearly applies to the {{m0}} base only: {{fromYear}} a year, so 2 months are free; the credits you choose stay monthly at 100 credits = $1 and roll over for 3 months.' }, { question: 'Can I keep my product live without building?', answer: 'Yes. Choose no monthly credits and the Team plan is {{m0}} a month: your sites, domains and storage stay live. Add credits whenever you want a change.' }, { question: 'How much more when my team grows?', answer: 'Up to 5 people are included in the Team plan. Each extra editor is $5 a month, up to 10 people per team. View-only invites are free, and credits are shared by the whole team, not counted per person. Free includes 2 people.' }],
   },
-  band: { title: 'Start with your idea.', text: 'Tell the PM about the business you want to run. Your team is ready in about a minute.' },
+  band: { title: 'Start with your idea.', text: 'Tell the PM about the business you want to run. Your team is ready in under a minute.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Team', decisions: 'Decisions', usage: 'Usage' },

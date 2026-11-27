@@ -15,6 +15,7 @@
 - Free tools (no sign-up): https://equipe.im/tools/
 - Free website grader (speed on a phone via Google PageSpeed Insights, search basics, mobile, accessibility and AI visibility: GPTBot/ClaudeBot/PerplexityBot access, llms.txt, structured data; overall score and the top 5 fixes in plain words; shareable report): https://equipe.im/grader/
 - Does ChatGPT know my business? Free AI visibility checker (asks ChatGPT and Claude, with web search, 3 questions a customer would ask; shows whether the business is named or its site cited, which sites are cited instead, and what to fix): https://equipe.im/ai-visibility/
+- App development cost calculator (what a website, online store, booking app, marketplace, SaaS, mobile app, internal tool, community or directory costs with an agency or freelancer (dated 2026 sources), with no-code tools (list prices), and with equipe (from real customer project costs; an estimate)): https://equipe.im/tools/app-cost-calculator/ . One page per type: https://equipe.im/tools/app-cost-calculator/<type>/ with type = landing-page, website, online-store, booking-app, marketplace, saas, mobile-app, internal-tool, community, directory
 - AI in your product, docs and API reference: https://ai.equipe.im/docs
 - About (Umbriles Inc.): https://equipe.im/about/
 - Changelog: https://equipe.im/changelog/

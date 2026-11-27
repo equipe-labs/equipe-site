@@ -32,13 +32,13 @@ const es: Messages = {
     themeLight: 'Tema claro',
     themeSystem: 'Tema del sistema',
   },
-  nav: { product: 'Producto', pricing: 'Precios', security: 'Seguridad', about: 'Nosotros', how: 'Cómo funciona', team: 'El equipo', status: 'Dónde estamos', faq: 'FAQ', developers: 'Desarrolladores', github: 'GitHub', cta: 'Empezar', ctaShort: 'Empezar', signIn: 'Iniciar sesión', signInShort: 'Entrar' },
+  nav: { product: 'Producto', pricing: 'Precios', security: 'Seguridad', about: 'Nosotros', how: 'Cómo funciona', team: 'El equipo', status: 'Dónde estamos', faq: 'FAQ', developers: 'Desarrolladores', github: 'GitHub', cta: 'Empezar gratis', ctaShort: 'Empezar gratis', signIn: 'Iniciar sesión', signInShort: 'Entrar' },
   hero: {
     badge: 'Abierto a todos · empieza gratis',
     title: 'Un equipo de startup para una sola persona.',
     lead: 'Trae una idea, o algo que ya hiciste en Claude. Un PM, ingenieros, un diseñador, QA y un analista de datos lo ponen en marcha como un servicio real y después lo siguen mejorando.',
     approve: 'No necesitas saber programar. Tu equipo de startup con IA construye, lanza y mejora.',
-    cta: 'Empezar',
+    cta: 'Empezar gratis',
     secondary: 'Ver cómo funciona',
     meta: 'Funciona en tu navegador. Nada que instalar, nada de código que escribir.',
     shotAlt: 'La app web de equipe: un chat con el PM, lo que hace cada miembro, una decisión esperando tu aprobación y la app que el equipo publicó, en un móvil',
@@ -111,7 +111,7 @@ const es: Messages = {
     labels: { now: 'Funciona hoy', early: 'Abierto ya', soon: 'Próximamente' },
     items: [
       { title: 'El equipo en sí', text: 'El PM, los ingenieros, el diseñador, QA y los analistas de datos ya construyen y publican productos reales. Este sitio y nuestras apps los hicieron ellos.' },
-      { title: 'Tu equipo en la nube', text: 'Regístrate, describe tu idea y ten tu propio equipo en más o menos un minuto. Habla con el PM, sigue el trabajo y abre enlaces de vista previa. Los informes semanales de crecimiento llegan el día y a la hora que elijas.' },
+      { title: 'Tu equipo en la nube', text: 'Regístrate, describe tu idea y ten tu propio equipo en menos de un minuto. Habla con el PM, sigue el trabajo y abre enlaces de vista previa. Los informes semanales de crecimiento llegan el día y a la hora que elijas.' },
       { title: 'Lo que aún falta', text: 'Importación en un paso desde Claude con base de datos y dominio.' },
     ],
   },
@@ -133,7 +133,7 @@ const es: Messages = {
       { question: '¿Quién se encarga del alojamiento, la base de datos y el dominio?', answer: 'Nosotros, con un proyecto por cliente, así que no tienes nada que configurar ni ningún sitio al que entrar. Si tu producto crece más de lo previsto, podemos pasarlo a tus propias cuentas.' },
       { question: '¿Cuánto cuesta?', answer: 'Pagas con créditos: 100 créditos = $1. Recibes 500 créditos al crear tu equipo (+1000 créditos al añadir una tarjeta). El plan Equipo incluye hosting, almacenamiento y 5 personas, más la cantidad de créditos mensuales que elijas: desde {{m0}} al mes para mantener tu producto en vivo, o {{m2}} al mes con {{c2}} créditos, donde empiezan la mayoría de los equipos. Los créditos del plan se acumulan durante 2 meses. Todo lo que hace tu equipo mientras trabaja, el trabajo de IA y el ordenador en la nube donde trabaja, se paga con créditos. Cada petición muestra primero su coste estimado, y tú fijas un tope mensual.' },
       { question: '¿Qué significa «tú apruebas»?', answer: 'Todo lo que sale en vivo, cuesta dinero o llega a tus clientes espera tu visto bueno. Recibes una tarjeta corta con opciones y una recomendación, y respondes con un toque.' },
-      { question: '¿Cómo empiezo?', answer: 'Regístrate en app.equipe.im y describe tu idea. Tu equipo queda listo en más o menos un minuto, con 500 créditos gratis y sin tarjeta.' },
+      { question: '¿Cómo empiezo?', answer: 'Regístrate en app.equipe.im y describe tu idea. Tu equipo queda listo en menos de un minuto, con 500 créditos gratis y sin tarjeta.' },
       { question: 'Soy desarrollador. ¿Puedo ejecutarlo yo mismo?', answer: 'Sí. El motor que hay detrás del equipo es de código abierto y funciona en tu propio ordenador. La página para desarrolladores tiene la app para Mac y la herramienta de línea de comandos.' },
     ],
     devLink: 'Ir a la página para desarrolladores',
@@ -229,7 +229,7 @@ const es: Messages = {
     nonprofit: { title: 'Programa para organizaciones sin fines de lucro y de bien público', text: 'Durante los primeros 3 meses tras la aprobación, las organizaciones sin fines de lucro y los proyectos de bien público reciben un 50% extra en créditos de bonificación con cada compra de créditos, recarga automática y crédito mensual del plan: compra 2500 créditos y recibe 1250 más. Hasta 25.000 créditos de bonificación por equipo.', link: 'Solicitar en Facturación', faq: { question: '¿Hay un programa para organizaciones sin fines de lucro?', answer: 'Sí. Las organizaciones sin fines de lucro y los proyectos de bien público pueden solicitarlo en la app, desde Facturación. Durante los primeros 3 meses tras la aprobación, cada compra de créditos, recarga automática y crédito mensual del plan recibe un 50% extra en créditos de bonificación (compra 2500 créditos y recibe 1250 más), hasta 25.000 créditos de bonificación por equipo en total. Los créditos de bonificación terminan cuando terminan los 3 meses. El formulario pide el nombre, el sitio web y el país de la organización, un número de registro si lo tienes y una breve descripción. Una persona de equipe revisa cada solicitud, y tu equipo recibe un correo en ambos casos.' } },
     faq: [{ question: '¿Pago mientras no estoy?', answer: 'No. Cuando tu equipo no trabaja, no cuesta nada.' }, { question: '¿Qué pasa cuando se acaban mis créditos?', answer: 'Solo entonces se detiene tu equipo. Añade créditos y continúa enseguida. También puedes fijar un tope mensual.' }, { question: '¿Los créditos mensuales se acumulan?', answer: 'Sí. Los créditos del plan Equipo se acumulan durante 2 meses.' }, { question: '¿Cuánto cuesta el plan Equipo?', answer: 'Depende de los créditos que elijas cada mes: {{m0}} al mes sin créditos (tu producto sigue en vivo), {{m1}} con {{c1}} créditos, {{m2}} con {{c2}}, {{m3}} con {{c3}} o {{m4}} con {{c4}}. El pago anual es solo para la base de {{m0}}: {{fromYear}} al año, así que 2 meses son gratis; los créditos que elijas se siguen cobrando cada mes a 100 créditos = $1 y se acumulan 3 meses.' }, { question: '¿Puedo mantener mi producto en vivo sin seguir construyendo?', answer: 'Sí. Elige cero créditos al mes y el plan Equipo cuesta {{m0}} al mes: tus sitios, dominios y almacenamiento siguen en vivo. Añade créditos cuando quieras un cambio.' }, { question: '¿Cuánto más pago si mi equipo crece?', answer: 'El plan Equipo incluye hasta 5 personas. Cada editor extra cuesta $5 al mes, hasta 10 personas por equipo. Las invitaciones de solo lectura son gratis, y los créditos se comparten entre todo el equipo, sin contarse por persona. Gratis incluye 2 personas.' }],
   },
-  band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué negocio quieres montar. Tu equipo está listo en más o menos un minuto.' },
+  band: { title: 'Empieza con tu idea.', text: 'Cuéntale al PM qué negocio quieres montar. Tu equipo está listo en menos de un minuto.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Equipo', decisions: 'Decisiones', usage: 'Uso' },

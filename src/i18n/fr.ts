@@ -33,13 +33,13 @@ const fr: Messages = {
     themeLight: 'Thème clair',
     themeSystem: 'Thème du système',
   },
-  nav: { product: 'Produit', pricing: 'Tarifs', security: 'Sécurité', about: 'À propos', how: 'Comment ça marche', team: 'L’équipe', status: 'Où nous en sommes', faq: 'FAQ', developers: 'Développeurs', github: 'GitHub', cta: 'Commencer', ctaShort: 'Commencer', signIn: 'Se connecter', signInShort: 'Connexion' },
+  nav: { product: 'Produit', pricing: 'Tarifs', security: 'Sécurité', about: 'À propos', how: 'Comment ça marche', team: 'L’équipe', status: 'Où nous en sommes', faq: 'FAQ', developers: 'Développeurs', github: 'GitHub', cta: 'Essai gratuit', ctaShort: 'Essai gratuit', signIn: 'Se connecter', signInShort: 'Connexion' },
   hero: {
     badge: 'Ouvert à tous · gratuit pour commencer',
     title: 'Une équipe de startup pour une seule personne.',
     lead: 'Apportez une idée, ou quelque chose que vous avez déjà créé dans Claude. Un PM, des ingénieurs, un designer, la QA et un analyste de données le mettent en ligne comme un vrai service, puis l’améliorent sans relâche.',
     approve: 'Pas besoin de savoir coder. Votre équipe de startup IA construit, lance et améliore.',
-    cta: 'Commencer',
+    cta: 'Essai gratuit',
     secondary: 'Voir comment ça marche',
     meta: 'Fonctionne dans votre navigateur. Rien à installer, aucun code à écrire.',
     shotAlt: 'L’appli web equipe : une discussion avec le PM, ce que fait chaque membre, une décision qui attend votre accord, et l’appli que l’équipe a mise en ligne, sur un téléphone',
@@ -112,7 +112,7 @@ const fr: Messages = {
     labels: { now: 'Disponible', early: 'Ouvert', soon: 'Bientôt' },
     items: [
       { title: 'L’équipe elle-même', text: 'Le PM, les ingénieurs, le designer, la QA et l’analyste de données construisent et lancent déjà de vrais produits. Ce site et nos applis ont été construits par eux.' },
-      { title: 'Votre équipe dans le cloud', text: 'Inscrivez-vous, décrivez votre idée et obtenez votre propre équipe en une minute environ. Discutez avec le PM, suivez le travail et ouvrez les liens d’aperçu. Les rapports de croissance hebdomadaires arrivent le jour et à l’heure de votre choix.' },
+      { title: 'Votre équipe dans le cloud', text: 'Inscrivez-vous, décrivez votre idée et obtenez votre propre équipe en moins d’une minute. Discutez avec le PM, suivez le travail et ouvrez les liens d’aperçu. Les rapports de croissance hebdomadaires arrivent le jour et à l’heure de votre choix.' },
       { title: 'Encore à venir', text: 'Import en une étape depuis Claude avec base de données et domaine.' },
     ],
   },
@@ -134,7 +134,7 @@ const fr: Messages = {
       { question: 'Qui s’occupe de l’hébergement, de la base de données et du domaine ?', answer: 'Nous, avec un projet séparé par client : vous n’avez rien à configurer ni de compte où vous connecter. Si votre produit dépasse ce cadre, nous pouvons le déplacer vers vos propres comptes.' },
       { question: 'Combien ça coûte ?', answer: 'Vous payez avec des crédits : 100 crédits = $1. Vous recevez 500 crédits à la création de votre équipe (+1 000 crédits en ajoutant une carte). L’offre Équipe comprend l’hébergement, le stockage et 5 personnes, plus un montant mensuel de crédits que vous choisissez : à partir de {{m0}} par mois pour garder votre produit en ligne, ou {{m2}} par mois avec {{c2}} crédits, le choix de la plupart des équipes. Les crédits de l’offre sont reportés pendant 2 mois. Tout ce que fait votre équipe quand elle travaille, le travail d’IA et l’ordinateur cloud sur lequel elle travaille, est payé avec les crédits. Chaque demande affiche d’abord son coût estimé, et vous fixez un plafond mensuel.' },
       { question: 'Que signifie « vous approuvez » ?', answer: 'Tout ce qui passe en ligne, coûte de l’argent ou atteint vos clients attend votre feu vert. Vous recevez une courte carte avec des options et une recommandation, et vous répondez d’un geste.' },
-      { question: 'Comment commencer ?', answer: 'Inscrivez-vous sur app.equipe.im et décrivez votre idée. Votre équipe est prête en une minute environ, avec 500 crédits offerts et sans carte.' },
+      { question: 'Comment commencer ?', answer: 'Inscrivez-vous sur app.equipe.im et décrivez votre idée. Votre équipe est prête en moins d’une minute, avec 500 crédits offerts et sans carte.' },
       { question: 'Je suis développeur. Puis-je l’héberger moi-même ?', answer: 'Oui. Le moteur de l’équipe est open source et tourne sur votre propre machine. La page développeurs propose l’appli Mac et l’outil en ligne de commande.' },
     ],
     devLink: 'Aller à la page développeurs',
@@ -230,7 +230,7 @@ const fr: Messages = {
     nonprofit: { title: 'Programme pour les associations et les projets d’intérêt général', text: 'Pendant les 3 premiers mois après l’approbation, les associations et les projets d’intérêt général reçoivent 50 % de crédits bonus en plus sur chaque achat de crédits, recharge automatique et crédit mensuel de l’offre : achetez 2 500 crédits, recevez-en 1 250 de plus. Jusqu’à 25 000 crédits bonus par équipe.', link: 'Faire une demande dans Facturation', faq: { question: 'Existe-t-il un programme pour les associations ?', answer: 'Oui. Les associations et les projets d’intérêt général peuvent faire une demande dans l’app, depuis Facturation. Pendant les 3 premiers mois après l’approbation, chaque achat de crédits, recharge automatique et crédit mensuel de l’offre donne 50 % de crédits bonus en plus (achetez 2 500 crédits, recevez-en 1 250 de plus), jusqu’à 25 000 crédits bonus par équipe au total. Les crédits bonus prennent fin à la fin des 3 mois. Le formulaire demande le nom, le site web et le pays de l’organisation, un numéro d’enregistrement si vous en avez un, et une courte description. Une personne de chez equipe examine chaque demande, et votre équipe reçoit un e-mail dans tous les cas.' } },
     faq: [{ question: 'Est-ce que je paie quand je ne suis pas là ?', answer: 'Non. Quand votre équipe ne travaille pas, cela ne coûte rien.' }, { question: 'Que se passe-t-il quand mes crédits sont épuisés ?', answer: 'Votre équipe ne s’arrête qu’à ce moment-là. Ajoutez des crédits et elle reprend aussitôt. Vous pouvez aussi fixer un plafond mensuel.' }, { question: 'Les crédits mensuels sont-ils reportés ?', answer: 'Oui. Les crédits de l’offre Équipe sont reportés pendant 2 mois.' }, { question: 'Combien coûte l’offre Équipe ?', answer: 'Cela dépend des crédits que vous choisissez chaque mois : {{m0}} par mois sans crédits (votre produit reste en ligne), {{m1}} avec {{c1}} crédits, {{m2}} avec {{c2}}, {{m3}} avec {{c3}} ou {{m4}} avec {{c4}}. L’annuel ne concerne que la base de {{m0}} : {{fromYear}} par an, donc 2 mois offerts ; les crédits choisis restent mensuels à 100 crédits = $1 et se reportent sur 3 mois.' }, { question: 'Puis-je garder mon produit en ligne sans continuer à construire ?', answer: 'Oui. Choisissez zéro crédit mensuel : l’offre Équipe coûte alors {{m0}} par mois, et vos sites, domaines et stockage restent en ligne. Ajoutez des crédits dès que vous voulez un changement.' }, { question: 'Combien de plus quand mon équipe grandit ?', answer: 'Le forfait Équipe inclut jusqu\'à 5 personnes. Chaque éditeur supplémentaire coûte 5 $ par mois, jusqu\'à 10 personnes par équipe. Les invitations en lecture seule sont gratuites, et les crédits sont partagés par toute l\'équipe, sans compter par personne. Gratuit inclut 2 personnes.' }],
   },
-  band: { title: 'Commencez par votre idée.', text: 'Parlez au PM de l’activité que vous voulez lancer. Votre équipe est prête en une minute environ.' },
+  band: { title: 'Commencez par votre idée.', text: 'Parlez au PM de l’activité que vous voulez lancer. Votre équipe est prête en moins d’une minute.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Équipe', decisions: 'Décisions', usage: 'Usage' },

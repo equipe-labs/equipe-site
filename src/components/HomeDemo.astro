@@ -1,0 +1,162 @@
+---
+// Home block 2, "See it work": the product demo.
+// With DEMO_VIDEO set (src/data/flags.ts), a poster-first player after the ui.equipe.im "Hero Video Dialog" pattern
+// (videos/hero-video-dialog, dillionverma): a still with a play button; the video file is only fetched when someone
+// opens the dialog (preload="none", src set on open), so the page stays as light as before. Native <dialog> gives the
+// focus trap, Esc and the backdrop. Without it, the drawn illustration of the web app with example data.
+import WebApp from './WebApp.astro';
+import { DEMO_VIDEO } from '../data/flags';
+import { HOME, DEMO_CAPS, DEMO_CAP_TIMES, DEMO_END_TIMES } from '../data/home';
+import { getLocale } from '../i18n';
+import { getMessages, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const t = getMessages(code);
+const d = HOME[code].demo;
+const v = DEMO_VIDEO;
+// Captions in the page's language, drawn over the video in the same place and style the words used to be burned in.
+const C = DEMO_CAPS[code] ?? DEMO_CAPS.en;
+const lang = getLocale(code).lang;
+---
+<section class="see demo" id="see">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">{d.kicker}</p>
+      <h2>{v ? d.title : t.see.title}</h2>
+      <p class="sub">{v ? d.sub : t.hero.lead}</p>
+    </div>
+    {v ? (
+      <div class="dv rv" data-dv>
+        <button type="button" class="dv-poster" data-dv-open data-ph="demo_video_play" data-ph-location="home" aria-haspopup="dialog">
+          <img src={v.poster} width={v.width} height={v.height} alt="" loading="lazy" decoding="async" />
+          <span class="dv-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" /></svg></span></span>
+          <span class="dv-label"><b>{d.play}</b><span>{d.length}</span></span>
+        </button>
+        <p class="cap">{d.caption}</p>
+        <dialog class="dv-dialog" aria-label={d.title}>
+          <div class="dv-frame">
+            <video data-src={v.src} poster={v.poster} width={v.width} height={v.height} controls playsinline preload="none">
+              <track kind="captions" src={`/video/captions-${code}.vtt`} srclang={lang} label={getLocale(code).name} />
+            </video>
+            <div class="dv-caps" aria-hidden="true">
+              {C.caps.map(([h, p], i) => <div class="dv-cap" data-a={DEMO_CAP_TIMES[i][0]} data-b={DEMO_CAP_TIMES[i][1]}><b>{h}</b><span>{p}</span></div>)}
+              <div class="dv-end">
+                <b class="dv-e" data-a={DEMO_END_TIMES[0]}>{C.end[0]}</b>
+                <span class="dv-e" data-a={DEMO_END_TIMES[1]}>{C.end[1]}</span>
+                <em class="dv-e" data-a={DEMO_END_TIMES[2]}>equipe.im</em>
+              </div>
+            </div>
+          </div>
+          <p class="dv-note">{d.caption}</p>
+          <button type="button" class="dv-x" data-dv-close aria-label={d.close}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg></button>
+        </dialog>
+      </div>
+    ) : (
+      <div class="shot rv">
+        <WebApp k="hero" s={t.scene} alt={t.hero.shotAlt} />
+        <p class="cap">{t.hero.caption}</p>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-dv]').forEach((box) => {
+    const dlg = box.querySelector('dialog')!;
+    const video = dlg.querySelector('video')!;
+    const open = () => {
+      if (!video.src) video.src = video.dataset.src!;
+      dlg.showModal();
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      (window as unknown as { eqOwn?: (k: string, t: string) => void }).eqOwn?.('ev', 'demo_video_open');
+    };
+    box.querySelector('[data-dv-open]')!.addEventListener('click', open);
+    dlg.querySelector('[data-dv-close]')!.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', () => video.pause());
+    // Captions follow the video's own clock: fade and rise in over 0.7 s, out over 0.35 s (as the words were in the video).
+    const caps = [...dlg.querySelectorAll<HTMLElement>('.dv-cap')], ends = [...dlg.querySelectorAll<HTMLElement>('.dv-e')];
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const seg = (t: number, a: number, b: number) => Math.min(1, Math.max(0, (t - a) / (b - a)));
+    const q = (x: number) => 1 - Math.pow(1 - x, 5);
+    const paint = () => {
+      const t = video.currentTime;
+      caps.forEach((el) => {
+        const a = +el.dataset.a!, b = +el.dataset.b!;
+        const i = still ? (t >= a && t < b ? 1 : 0) : q(seg(t, a, a + 0.7)), o = still ? 0 : seg(t, b - 0.35, b);
+        const op = t >= b ? 0 : i * (1 - o);
+        el.style.opacity = String(op);
+        el.style.transform = still ? '' : `translateY(${((1 - i) * 18 - o * 8) / 19.2}cqw)`;
+        el.style.filter = still || i >= 1 ? '' : `blur(${((1 - i) * 8) / 19.2}cqw)`;
+      });
+      ends.forEach((el) => {
+        const x = still ? (t >= +el.dataset.a! ? 1 : 0) : q(seg(t, +el.dataset.a!, +el.dataset.a! + 0.8));
+        el.style.opacity = String(x);
+        el.style.transform = still ? '' : `translateY(${((1 - x) * 20) / 19.2}cqw)`;
+      });
+    };
+    let raf = 0;
+    const loop = () => { paint(); raf = video.paused ? 0 : requestAnimationFrame(loop); };
+    video.addEventListener('play', () => { if (!raf) loop(); });
+    video.addEventListener('seeked', paint);
+    video.addEventListener('timeupdate', () => { if (!raf) paint(); });
+  });
+</script>
+
+<style is:global>
+  main.home .demo .head { margin: 0 auto; text-align: center; }
+  main.home .demo .head .sub { margin-left: auto; margin-right: auto; }
+  main.home .demo .shot { margin-top: 64px; }
+  main.home .demo .cap { margin-top: var(--s-4); text-align: center; font-size: 14px; color: var(--muted); }
+  .dv { max-width: 1040px; margin: 64px auto 0; }
+  .dv-poster { position: relative; display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--surface); cursor: pointer;
+    box-shadow: 0 30px 60px -30px rgb(10 10 12 / 0.35), 0 2px 8px -2px rgb(10 10 12 / 0.08); transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 320ms; }
+  .dv-poster img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: filter 320ms; }
+  .dv-play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .dv-play > span { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+    box-shadow: 0 0 0 12px color-mix(in srgb, var(--accent) 18%, transparent), 0 16px 32px -12px rgb(10 10 12 / 0.4); transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .dv-play svg { width: 34px; height: 34px; margin-left: 4px; fill: currentColor; }
+  .dv-label { position: absolute; left: 20px; bottom: 20px; display: inline-flex; align-items: baseline; gap: 10px; padding: 10px 16px; border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text); font-size: 15px; }
+  .dv-label span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  @media (hover: hover) {
+    .dv-poster:hover { transform: translateY(-2px); box-shadow: 0 40px 70px -30px rgb(10 10 12 / 0.4), 0 2px 8px -2px rgb(10 10 12 / 0.08); }
+    .dv-poster:hover .dv-play > span { transform: scale(1.06); }
+  }
+  .dv-dialog { width: min(1200px, calc(100vw - 32px)); max-width: none; padding: 0; border: 0; border-radius: 18px; background: #000; overflow: visible; }
+  .dv-dialog::backdrop { background: rgb(10 10 12 / 0.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .dv-dialog[open] { animation: dvIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .dv-dialog[open]::backdrop { animation: dvFade 300ms ease both; }
+  .dv-frame { position: relative; border-radius: 18px; overflow: hidden; container-type: inline-size; }
+  /* Caption layout in video pixels (1920 wide) turned into container units: 1920px = 100cqw. */
+  .dv-caps { position: absolute; inset: 0; pointer-events: none; font-family: -apple-system, "SF Pro Display", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .dv-cap { position: absolute; left: 4cqw; right: 4cqw; top: 2.8125cqw; text-align: center; opacity: 0; }
+  .dv-cap b { display: block; font-size: max(11px, 3.02cqw); line-height: 1.2; font-weight: 650; letter-spacing: -0.022em; color: #1d1d1f; text-wrap: balance; }
+  .dv-cap span { display: block; margin-top: 0.42cqw; font-size: max(9px, 1.5625cqw); line-height: 1.3; font-weight: 500; letter-spacing: -0.01em; color: #6e6e73; text-wrap: balance; }
+  .dv-end { position: absolute; left: 4cqw; right: 4cqw; top: 25.6cqw; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .dv-end .dv-e { opacity: 0; }
+  .dv-end b { font-size: max(13px, 4.17cqw); line-height: 1.2; font-weight: 650; letter-spacing: -0.025em; color: #1d1d1f; }
+  .dv-end span { margin-top: 0.73cqw; font-size: max(10px, 2.19cqw); line-height: 1.25; font-weight: 500; letter-spacing: -0.015em; color: #6e6e73; }
+  .dv-end em { margin-top: 2.5cqw; font-style: normal; font-size: max(10px, 2.08cqw); font-weight: 650; letter-spacing: -0.01em; color: #2F5BEA; }
+  .dv-note { margin: 12px 0 0; text-align: center; font-size: 13.5px; color: rgb(255 255 255 / 0.7); }
+  .dv-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+  .dv-x { position: absolute; top: -52px; right: 0; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgb(255 255 255 / 0.16); color: #fff; cursor: pointer; }
+  .dv-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .dv-x:hover { background: rgb(255 255 255 / 0.26); }
+  @keyframes dvIn { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+  @keyframes dvFade { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 640px) {
+    .dv { margin-top: 40px; }
+    .dv-poster { border-radius: 16px; }
+    .dv-play > span { width: 64px; height: 64px; box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 18%, transparent); }
+    .dv-play svg { width: 26px; height: 26px; }
+    .dv-label { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 13.5px; }
+    main.home .demo .shot { margin-top: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dv-poster, .dv-poster img, .dv-play > span { transition: none; }
+    .dv-dialog[open], .dv-dialog[open]::backdrop { animation: none; }
+  }
+</style>
