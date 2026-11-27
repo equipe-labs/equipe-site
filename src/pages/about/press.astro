@@ -46,7 +46,7 @@ const facts: [string, string][] = [
   <section class="pg-s"><div class="wrap">
     <div class="post-body press" style="max-width:760px;margin:0 auto">
       <h2 id="name">The name</h2>
-      <p>The product is <strong>equipe</strong>, always in lowercase, with no accent, even at the start of a sentence or in a headline. When the context needs it, call the company and brand <strong>equipe AI</strong>. The legal entity is {BRAND.legalName}.</p>
+      <p>The product is <strong>equipe</strong>, always in lowercase, with no accent, even at the start of a sentence or in a headline. When the context needs it, call the company and brand <strong>equipe AI</strong>. The legal entity is {BRAND.legalName}</p>
       <ul>
         <li>Write: equipe, equipe AI, equipe.im</li>
         <li>Please don't write: Equipe, EQUIPE, équipe, Equipe.ai</li>
@@ -69,7 +69,7 @@ const facts: [string, string][] = [
       <ul class="press-logos">
         {logos.map((l) => (
           <li>
-            <a class={`press-tile ${l.bg}`} href={l.file} download><img src={l.file} alt={`equipe ${l.label.toLowerCase()}`} loading="lazy" decoding="async" /></a>
+            <a class={`press-tile ${l.bg}`} href={l.file} download><img src={l.file} alt={`equipe ${l.label.toLowerCase()}`} decoding="async" /></a>
             <span><b>{l.label}</b><small>{l.note}</small><a href={l.file} download>Download</a></span>
           </li>
         ))}
