@@ -20,6 +20,8 @@
 .ic-form.shake .ic-box { animation: tl-shake 360ms var(--e); }
 .ic-form .tl-ts { margin-top: 12px; }
 .ic-shared-top { padding-top: 64px; }
+/* The report takes focus when it arrives (for screen readers); no ring around the whole section. */
+.ic-report:focus { outline: none; }
 
 /* ---------- the check: read at a glance (one-line verdict, two sentences, short bullets, "why" on demand) ---------- */
 .ic-rep { max-width: 880px; }
@@ -104,6 +106,49 @@ main.pg .ic-mvp h4.ic-h4:first-child { margin-top: 0; }
 .ic-cross svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--e); }
 @media (hover: hover) { .ic-cross:hover svg { transform: translateX(3px); } }
 @media (max-width: 860px) { .ic-comp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* ---------- several ideas: the hint under the box, the switcher between reports, sharper versions, the Idea Lab ---------- */
+.ic-hint { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 14px 0 0 !important; font-size: 14px; line-height: 1.5; color: var(--muted); text-align: center; text-wrap: pretty; }
+.ic-nl { display: none; color: color-mix(in srgb, var(--muted) 80%, transparent); }
+@media (hover: hover) and (pointer: fine) { .ic-nl { display: inline; } }
+.ic-multi { display: grid; gap: 28px; max-width: 880px; margin: 0 auto; }
+.ic-part { margin: 0 !important; padding: 14px 18px; border-radius: 16px; background: var(--code-bg); border: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--text); }
+.ic-tabs { position: relative; display: flex; gap: 4px; justify-self: start; max-width: 100%; padding: 5px; border-radius: 18px; background: var(--code-bg); border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+.ic-tabs::-webkit-scrollbar { display: none; }
+.ic-tabs [role='tab'] { position: relative; z-index: 1; flex: none; display: inline-flex; align-items: center; gap: 9px; max-width: 280px; height: 44px; padding: 0 18px; border: 0; border-radius: 13px; background: transparent; color: var(--muted); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: color 200ms var(--e); }
+.ic-tabs [role='tab']:hover { color: var(--text); }
+.ic-tabs [role='tab'][aria-selected='true'] { color: var(--accent-text); }
+.ic-tabs [role='tab']:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ic-tt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ic-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); opacity: 0.7; }
+.ic-dot[data-v='promising'] { background: var(--accent); opacity: 1; }
+.ic-dot[data-v='rethink'] { background: var(--warn); opacity: 1; }
+.ic-pill { position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 0; width: 0; border-radius: 13px; background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line)); box-shadow: 0 1px 2px rgb(10 10 12 / 0.06), 0 6px 16px -10px rgb(10 10 12 / 0.35); }
+.ic-tabs.ready .ic-pill { transition: transform 380ms var(--spring), width 320ms var(--e); }
+
+.ic-cons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px !important; counter-reset: c; }
+.ic-cons li { display: grid; align-content: start; gap: 8px; padding: 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.ic-cons b { font-size: 16.5px; line-height: 1.3; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.ic-cons p { display: grid; gap: 2px; margin: 0 !important; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
+.ic-cons p span { font-size: 13px; font-weight: 600; color: var(--muted); }
+
+.ic-lab { display: grid; gap: 14px; padding: 32px; }
+main.pg .ic-lab h3 { margin: 0; font-size: clamp(22px, 2.6vw, 28px); letter-spacing: -0.02em; }
+.ic-lab p { margin: 0 !important; font-size: 16.5px; line-height: 1.6; max-width: 620px; text-wrap: pretty; }
+.ic-lab .btn { justify-self: start; gap: 10px; }
+.ic-lab .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--e); }
+@media (hover: hover) { .ic-lab .btn:hover svg { transform: translateX(3px); } }
+.ic-lab small { font-size: 14px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 860px) { .ic-cons { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) {
+  .ic-hint { justify-content: flex-start; text-align: left; }
+  /* All the ideas stay in view on a phone: equal parts, long names end in an ellipsis. */
+  .ic-tabs { justify-self: stretch; }
+  .ic-tabs [role='tab'] { flex: 1 1 0; min-width: 0; max-width: none; justify-content: center; gap: 7px; padding: 0 10px; font-size: 14.5px; }
+  .ic-lab { padding: 24px; }
+  .ic-lab .btn { justify-self: stretch; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .ic-tabs.ready .ic-pill, .ic-tabs [role='tab'], .ic-lab .btn svg { transition: none; } }
+
 .ic-how { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 @media (max-width: 720px) {

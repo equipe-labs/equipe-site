@@ -5,10 +5,10 @@ export default {
   hub: { name: 'Valider une idée de business', blurb: 'Mon idée de business est-elle bonne ? Une analyse honnête : pour qui, les vrais concurrents, l’hypothèse la plus risquée et un test sur 7 jours.', cta: 'Analyser mon idée' },
   page: {
     title: 'Valider une idée de startup : est-elle bonne ? Gratuit | equipe',
-    desc: 'Décrivez votre idée de business et recevez une analyse honnête et structurée en 30 secondes environ : pour qui, le problème, les vrais concurrents trouvés sur le web, l’hypothèse la plus risquée, un plan de test sur 7 jours et ce qu’il faut construire en premier. Gratuit.',
+    desc: 'Décrivez votre idée de business (ou jusqu’à 3) et recevez une analyse honnête et structurée en 30 secondes environ : pour qui, le problème, les vrais concurrents trouvés sur le web, l’hypothèse la plus risquée, un plan de test sur 7 jours et ce qu’il faut construire en premier. Gratuit.',
     ogTitle: 'Valider une idée de startup',
     h1: 'Votre idée de business est-elle bonne ? Vérifiez-la en 30 secondes.',
-    lead: 'Décrivez votre idée en une ou deux phrases. Vous recevez une analyse honnête, comme l’écrirait un product manager : pour qui c’est, ce que les gens utilisent aujourd’hui, la seule chose qui doit être vraie, et comment la tester cette semaine.',
+    lead: 'Décrivez votre idée en une ou deux phrases, ou listez jusqu’à 3 idées brutes, une par ligne. Vous recevez une analyse honnête, comme l’écrirait un product manager : pour qui c’est, ce que les gens utilisent aujourd’hui, la seule chose qui doit être vraie, et comment la tester cette semaine.',
   },
   form: {
     label: 'Votre idée',
@@ -28,9 +28,14 @@ export default {
     errBudget: 'Les analyses gratuites du jour sont épuisées. Revenez demain.',
     errOff: 'L’outil d’analyse fait une pause. Veuillez réessayer plus tard.',
     errFailed: 'L’analyse n’a pas abouti. Veuillez réessayer dans une minute.',
+    hint: 'Une idée par ligne, jusqu’à 3. Vous avez 3 analyses gratuites par jour : 3 idées utilisent toutes celles du jour.',
+    nl: 'Maj + Entrée pour aller à la ligne',
+    errMany: 'Jusqu’à 3 idées à la fois, une par ligne. 3 analyses, c’est tout le quota gratuit du jour.',
+    errPartial: '{n} idées sur {total} analysées.',
   },
   progress: ['Lecture de votre idée', 'Recherche sur le web de ce que les gens utilisent aujourd’hui', 'Recherche de l’hypothèse la plus risquée', 'Rédaction de votre test sur 7 jours'] as [string, string, string, string],
   progressNote: 'Cela prend environ 20 à 40 secondes.',
+  progressMany: 'Analyse de {n} idées en parallèle. Cela prend environ 30 à 60 secondes.',
   result: {
     heading: 'Analyse de l’idée',
     checked: 'Analysée le {date}',
@@ -69,6 +74,9 @@ export default {
       button: 'Construire la première version',
       note: 'Gratuit pour commencer. Rien n’est mis en ligne et rien ne coûte d’argent sans votre accord.',
     },
+    ideas: 'Vos idées',
+    concepts: { title: 'Des versions plus précises à tester', sub: 'Une idée brute devient plus claire avec un client précis et un point de départ.', forWhom: 'Pour', start: 'Commencer par' },
+    lab: { title: 'Testez ces idées avec de vraies personnes', titleOne: 'Testez cette idée avec de vraies personnes', text: 'equipe étudie chaque idée plus en profondeur, met en ligne une page « bientôt disponible » honnête pour chacune, les compare sur de vraies inscriptions et construit la gagnante.', textOne: 'equipe étudie l’idée plus en profondeur, met en ligne une page « bientôt disponible » honnête, compte les vraies inscriptions et la construit si les gens la veulent.', button: 'Tester avec de vraies personnes', note: 'Les 3 premières analyses d’idées dans l’app sont gratuites. Rien n’est dépensé ni envoyé sans votre accord.' },
     share: { label: 'Partager cette analyse', copy: 'Copier le lien', copied: 'Copié', again: 'Analyser une autre idée' },
     notFound: 'Cette analyse est introuvable. Elle date peut-être de plus de 60 jours.',
     loading: 'Chargement de l’analyse…',
@@ -76,7 +84,7 @@ export default {
   how: {
     title: 'Comment fonctionne l’analyse',
     items: [
-      { title: 'Vous décrivez l’idée', text: 'Une ou deux phrases suffisent : pour qui c’est et ce que ça fait. Plus c’est précis, plus l’analyse est utile.' },
+      { title: 'Vous décrivez l’idée', text: 'Une ou deux phrases suffisent : pour qui c’est et ce que ça fait. Plus c’est précis, plus l’analyse est utile. Plusieurs idées ? Mettez-en jusqu’à 3 sur des lignes séparées pour les comparer côte à côte.' },
       { title: 'L’IA la lit comme un product manager', text: 'Un petit modèle d’IA rédige en une seule passe le même type de brief que notre PM écrit pour une nouvelle équipe : client, problème, hypothèse la plus risquée, première version.' },
       { title: 'Les concurrents viennent d’une vraie recherche web', text: 'Jusqu’à trois recherches cherchent ce que les gens utilisent aujourd’hui. Un concurrent n’est affiché que si son propre site est ressorti de la recherche : rien dans la liste n’est inventé.' },
       { title: 'Vous recevez un test à faire cette semaine', text: 'Un plan sur 7 jours qui teste la partie risquée à moindre coût (parler aux gens, un site d’une page, des précommandes) et un signal clair pour continuer.' },

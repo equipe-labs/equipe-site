@@ -5,10 +5,10 @@ export default {
   hub: { name: 'Validador de ideas de negocio', blurb: '¿Es buena mi idea de negocio? Una revisión honesta: para quién es, competidores reales, la suposición más arriesgada y una prueba de 7 días.', cta: 'Revisar mi idea' },
   page: {
     title: 'Validador de ideas de negocio: ¿es buena mi idea? Gratis | equipe',
-    desc: 'Escribe tu idea de negocio y recibe una revisión honesta y ordenada en unos 30 segundos: para quién es, el problema, competidores reales encontrados en la web, la suposición más arriesgada, un plan de prueba de 7 días y qué construir primero. Gratis.',
+    desc: 'Escribe tu idea de negocio (o hasta 3) y recibe una revisión honesta y ordenada en unos 30 segundos: para quién es, el problema, competidores reales encontrados en la web, la suposición más arriesgada, un plan de prueba de 7 días y qué construir primero. Gratis.',
     ogTitle: 'Validador de ideas de negocio',
     h1: '¿Es buena tu idea de negocio? Revísala en 30 segundos.',
-    lead: 'Describe tu idea en una o dos frases. Recibes una revisión honesta, como la escribiría un product manager: para quién es, qué usa la gente hoy, lo único que tiene que ser cierto y cómo probarlo esta semana.',
+    lead: 'Describe tu idea en una o dos frases, o escribe hasta 3 ideas sueltas, una por línea. Recibes una revisión honesta, como la escribiría un product manager: para quién es, qué usa la gente hoy, lo único que tiene que ser cierto y cómo probarlo esta semana.',
   },
   form: {
     label: 'Tu idea',
@@ -28,9 +28,14 @@ export default {
     errBudget: 'Las revisiones gratis de hoy se han agotado. Vuelve mañana.',
     errOff: 'El revisor está descansando ahora mismo. Inténtalo más tarde.',
     errFailed: 'La revisión no terminó. Inténtalo de nuevo en un minuto.',
+    hint: 'Una idea por línea, hasta 3. Tienes 3 revisiones gratis al día, así que 3 ideas usan todas las de hoy.',
+    nl: 'Mayús + Intro para una nueva línea',
+    errMany: 'Hasta 3 ideas a la vez, una por línea. 3 revisiones son todas las gratis de hoy.',
+    errPartial: 'Revisamos {n} de {total} ideas.',
   },
   progress: ['Leyendo tu idea', 'Buscando en la web lo que la gente usa hoy', 'Buscando la suposición más arriesgada', 'Escribiendo tu prueba de 7 días'] as [string, string, string, string],
   progressNote: 'Tarda entre 20 y 40 segundos.',
+  progressMany: 'Revisando {n} ideas a la vez. Tarda entre 30 y 60 segundos.',
   result: {
     heading: 'Revisión de la idea',
     checked: 'Revisada el {date}',
@@ -69,6 +74,9 @@ export default {
       button: 'Construir la primera versión',
       note: 'Empezar es gratis. Nada se publica ni cuesta dinero sin tu aprobación.',
     },
+    ideas: 'Tus ideas',
+    concepts: { title: 'Versiones más concretas para probar', sub: 'Una idea suelta se aclara con un cliente concreto y un punto de partida.', forWhom: 'Para', start: 'Empieza por' },
+    lab: { title: 'Prueba estas ideas con personas reales', titleOne: 'Prueba esta idea con personas reales', text: 'equipe investiga cada idea a fondo, publica una página honesta de “próximamente” para cada una, las compara con registros reales y construye la ganadora.', textOne: 'equipe investiga la idea a fondo, publica una página honesta de “próximamente”, cuenta registros reales y la construye si la gente la quiere.', button: 'Probar con personas reales', note: 'Las primeras 3 revisiones de ideas en la app son gratis. No se gasta ni se envía nada sin tu aprobación.' },
     share: { label: 'Comparte esta revisión', copy: 'Copiar enlace', copied: 'Copiado', again: 'Revisar otra idea' },
     notFound: 'No encontramos esta revisión. Puede que tenga más de 60 días.',
     loading: 'Cargando la revisión…',
@@ -76,7 +84,7 @@ export default {
   how: {
     title: 'Cómo funciona la revisión',
     items: [
-      { title: 'Describes la idea', text: 'Con una o dos frases basta: para quién es y qué hace. Cuanto más concreta, más útil la revisión.' },
+      { title: 'Describes la idea', text: 'Con una o dos frases basta: para quién es y qué hace. Cuanto más concreta, más útil la revisión. ¿Tienes varias? Pon hasta 3 en líneas separadas y compáralas lado a lado.' },
       { title: 'La IA la lee como un product manager', text: 'Una sola pasada de un modelo de IA pequeño escribe el mismo tipo de resumen que nuestro PM escribe para un equipo nuevo: cliente, problema, suposición más arriesgada y primera versión.' },
       { title: 'Los competidores salen de una búsqueda web real', text: 'Hasta tres búsquedas buscan lo que la gente usa hoy. Un competidor solo aparece si su propio sitio salió en la búsqueda, así que nada de la lista es inventado.' },
       { title: 'Recibes una prueba que puedes hacer esta semana', text: 'Un plan de 7 días que prueba la parte arriesgada con poco dinero (hablar con gente, una web de una página, preventas) y una señal clara para seguir.' },
