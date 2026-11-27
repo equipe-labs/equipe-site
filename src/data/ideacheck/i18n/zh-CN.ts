@@ -45,6 +45,7 @@ export default {
     whyRisk: '为什么风险最大',
     whyStep: '这一步验证什么',
     markDone: '标记为完成',
+    dayLabel: '第{n}天',
     yourIdea: '你的想法',
     who: '面向谁',
     first: '去哪里找到前 10 个客户',

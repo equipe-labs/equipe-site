@@ -45,6 +45,7 @@ export default {
     whyRisk: 'Why it is the riskiest',
     whyStep: 'Why this step',
     markDone: 'Mark as done',
+    dayLabel: 'Day {n}',
     yourIdea: 'Your idea',
     who: 'Who it is for',
     first: 'Where to find the first 10',

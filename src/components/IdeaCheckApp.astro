@@ -124,7 +124,9 @@ const data = {
             return `<li class="tl-in" style="--d:${i * 50}ms"><div class="ic-ch">${logo}<div class="ic-cn"><b>${esc(x.name)}</b>${u ? `<a href="${esc(u)}" target="_blank" rel="nofollow noopener" data-ph="idea_check_competitor" data-ph-location="result">${esc(host)}${ic.ext}</a>` : ''}</div></div>${x.what ? `<p class="ic-what">${esc(x.what)}</p>` : ''}${x.differ ? `<p class="ic-dif">${ic.arrow}<span>${esc(x.differ)}</span></p>` : ''}</li>`;
           }).join('')}</ul>`
         : `<p class="tl-empty">${esc(R.noCompetitors)}</p>`;
-      const plan = ((g.plan || []) as Json[]).map((p, i) => `<li class="tl-in" style="--d:${i * 50}ms"><label class="ic-tick"><input type="checkbox" data-ic-step="${i}" aria-label="${esc(R.markDone)}: ${esc(p.do)}"><span class="ic-box2">${ic.check}</span></label><div class="ic-pb"><span class="ic-day">${esc(p.days)}</span><p>${esc(p.do)}</p>${more(R.whyStep, p.why || '')}</div></li>`).join('');
+      // The model may write "Day 1-2" in English whatever the language: shown in the page's own words.
+      const dayOfPlan = (d: string) => { const m = /^\s*days?\s*(\d+(?:\s*[-–]\s*\d+)?)\s*$/i.exec(String(d || '')); return m ? String(R.dayLabel).replace('{n}', m[1].replace(/\s*[-–]\s*/, '–')) : d; };
+      const plan = ((g.plan || []) as Json[]).map((p, i) => `<li class="tl-in" style="--d:${i * 50}ms"><label class="ic-tick"><input type="checkbox" data-ic-step="${i}" aria-label="${esc(R.markDone)}: ${esc(p.do)}"><span class="ic-box2">${ic.check}</span></label><div class="ic-pb"><span class="ic-day">${esc(dayOfPlan(p.days))}</span><p>${esc(p.do)}</p>${more(R.whyStep, p.why || '')}</div></li>`).join('');
       const list = (xs: string[], icon: string) => xs.map((x) => `<li>${icon}<span>${esc(x)}</span></li>`).join('');
       const link = new URL(sharePath(g.id), location.origin).href;
       const build = startHref(g.idea || g.title || '', D.mode === 'shared' ? 'shared' : 'result');
