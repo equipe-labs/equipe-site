@@ -1,0 +1,22 @@
+---
+// How the three columns are worked out, and every dated source (agency guides and tool price pages).
+import { SOURCES, MODEL, TYPES, type TypeKey } from '../../data/costcalc/model';
+import { costCopy, fill } from '../../data/costcalc/copy';
+import type { LocaleCode } from '../../i18n';
+
+interface Props { code: LocaleCode; type?: TypeKey }
+const { code, type } = Astro.props;
+const c = costCopy(code);
+const types = type ? [type] : [...TYPES];
+const ids = [...new Set(types.flatMap((t) => [...MODEL[t].agencySources, ...MODEL[t].diy.sources]).concat(['clutchWeb']))];
+---
+<section class="cc-sec cc-method" id="method"><div class="wrap">
+  <h2>{c.method.title}</h2>
+  <p>{c.method.agency}</p>
+  <p>{c.method.diy}</p>
+  <p>{fill(c.method.hourly, { d: SOURCES.clutchWeb.date })}</p>
+  <h3>{c.method.sources}</h3>
+  <ul class="cc-sources">
+    {ids.map((id) => { const s = SOURCES[id]; return <li><a href={s.url} rel="nofollow noopener" target="_blank">{s.publisher}: {s.title}</a>, {fill(c.method.checked, { d: s.date })}{s.note ? ` (${s.note})` : ''}</li>; })}
+  </ul>
+</div></section>

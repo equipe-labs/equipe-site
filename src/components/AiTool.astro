@@ -1,0 +1,296 @@
+---
+// The free AI-to-website tool (src/data/aitool): paste or drop code, it runs right away in a sandboxed preview, then
+// "Make it a real site" goes to sign-up and the import continues by itself (app.equipe.im/import with go=1).
+//
+// Safety: pasted code never runs on equipe.im. The preview form posts the code into an <iframe> at sandbox.equipe.im
+// (cloud platform/src/artifact/sandbox.js), whose answer is always CSP-sandboxed to an opaque origin; the iframe has no
+// allow-same-origin either. The page only listens to that frame's postMessage (ready / error / fail).
+//
+// Funnel (cloud docs/analytics.md "equipe's own landing funnel"): steps tool_paste, tool_preview, tool_real (+ cta,
+// signup_start), and the same as click:<step>:<page>.<locale> per page and language; tool_fail:<code> when a preview fails.
+// A/B test `tool`: the button reads `real` (a) or `realB` (b).
+import { toolCopy, SANDBOX_URL, SANDBOX_ORIGIN, SAMPLE, type ToolId } from '../data/aitool';
+import { IMPORT_SRC } from '../data/aitool/facts';
+import { IMPORT_EXTS, IMPORT_MAX_BYTES, IMPORT_URL } from '../data/fromclaude';
+import { getLocale, type LocaleCode } from '../i18n';
+import '../styles/aitool.css';
+
+interface Props { code: LocaleCode; tool: ToolId; id?: string }
+const { code, tool, id = 'tool' } = Astro.props;
+const info = getLocale(code);
+const L = toolCopy(code);
+const S = L.shared;
+const P = L.pages[tool];
+const src = `${tool}.${(info.slug || 'en').toLowerCase()}`;
+// The import knows a fixed set of page names; newer pages send a neutral one and keep their own in utm_content.
+const importSrc = `${IMPORT_SRC[tool]}.${(info.slug || 'en').toLowerCase()}`;
+const free = S.free.split(' · ');
+const words = {
+  lines: S.lines, remove: S.remove, sending: S.sending, building: S.building, working: S.working,
+  errSyntax: S.errSyntax, errSyntaxLine: S.errSyntaxLine, errNoComponent: S.errNoComponent, errBig: S.errBig, errRate: S.errRate,
+  errType: S.errType, errRead: S.errRead, errGeneric: S.errGeneric, errLinkClaude: S.errLinkClaude, errLinkOther: S.errLinkOther,
+  runtimeErr: S.runtimeErr, noteStorage: S.noteStorage, noteClaudeApi: S.noteClaudeApi, noteFirebase: S.noteFirebase, noteCdn: S.noteCdn,
+  kinds: S.kinds, real: S.real, realB: S.realB,
+  exts: IMPORT_EXTS, max: IMPORT_MAX_BYTES, lang: info.lang, src, sandbox: SANDBOX_ORIGIN, sample: SAMPLE,
+};
+const frame = `${id}-frame`;
+---
+<div class="tl" data-tool data-words={JSON.stringify(words)}>
+  <div class="tl-grid">
+    <div class="tl-paste" data-drop>
+      <div class="tl-top">
+        <label class="tl-l" for={`${id}-code`}>{S.codeLabel}</label>
+        <span class="tl-count" data-count></span>
+        <button type="button" class="tl-clear" data-clear hidden>{S.clear}</button>
+      </div>
+      <textarea id={`${id}-code`} rows="12" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder={P.placeholder} data-code></textarea>
+      <div class="tl-bar">
+        <span class="tl-file" data-file-row>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3" /><path d="m7 8 5-5 5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg>
+          <span>{S.dropLead} <button type="button" class="tl-link" data-pick>{S.choose}</button></span>
+          <input type="file" accept={IMPORT_EXTS.join(',')} class="tl-fin" tabindex="-1" aria-hidden="true" data-file />
+        </span>
+        <span class="tl-chip" data-chip hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /></svg>
+          <b data-chip-name></b>
+          <button type="button" aria-label={S.remove} title={S.remove} data-chip-x><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg></button>
+        </span>
+      </div>
+      <div class="tl-over" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M12 15V3" /><path d="m7 8 5-5 5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg>{S.dropHere}</span></div>
+    </div>
+
+    <div class="tl-view" data-state="idle" data-view>
+      <div class="tl-chrome">
+        <span class="tl-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="tl-addr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg><span>your-name.equipe.page</span></span>
+        <span class="tl-pill" data-pill>{S.previewLabel}</span>
+        <button type="button" class="tl-icon" aria-label={S.refresh} title={S.refresh} data-refresh hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8" /><path d="M21 3v5h-5" /></svg></button>
+      </div>
+      <div class="tl-stage">
+        <iframe name={frame} title={S.previewLabel} sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="no-referrer" loading="lazy" tabindex="-1" data-frame></iframe>
+        <div class="tl-empty" data-empty>
+          <span class="tl-eic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M3 9h18" /><path d="m10 13-2 2 2 2M14 13l2 2-2 2" /></svg></span>
+          <b>{S.previewIdle}</b>
+          <p>{S.previewIdleSub}</p>
+          <button type="button" class="btn ghost tl-sample" data-sample>{S.sample}</button>
+        </div>
+        <div class="tl-busy" aria-hidden="true"><span class="tl-spin"></span><span>{S.building}</span></div>
+      </div>
+      <p class="tl-meta" data-meta hidden></p>
+    </div>
+  </div>
+
+  <p class="tl-msg" role="status" aria-live="polite" data-msg hidden></p>
+  <ul class="tl-notes" data-notes hidden></ul>
+
+  <form class="tl-go" action={IMPORT_URL} method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-real-form>
+    <input type="hidden" name="code" data-real-code />
+    <input type="hidden" name="filename" value="" disabled data-filename />
+    <input type="hidden" name="lang" value={info.lang} />
+    <input type="hidden" name="src" value={importSrc} />
+    <input type="hidden" name="go" value="1" />
+    <button class="btn primary lg tl-real" type="submit" disabled data-real>
+      <span class="tl-rl" data-real-label>{S.real}</span>
+      <span class="tl-spin" aria-hidden="true"></span>
+      <svg class="tl-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </button>
+    <span class="tl-free">{free.map((f) => <span>{f}</span>)}</span>
+    <p class="tl-note">{S.realNote}</p>
+  </form>
+
+  <form class="tl-pf" action={SANDBOX_URL} method="post" target={frame} enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" aria-hidden="true" data-preview-form>
+    <textarea name="code" tabindex="-1" data-pcode></textarea>
+    <input type="hidden" name="filename" value="" data-pfile />
+  </form>
+</div>
+
+<script>
+  type W = Record<string, any>;
+  const own = (k: string, t: string, f?: string) => { const w = window as unknown as { eqOwn?: (k: string, t: string, f?: string) => void }; try { w.eqOwn?.(k, t, f); } catch { /* counting never breaks the page */ } };
+  const ph = (n: string, p?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, p);
+  const once = new Set<string>();
+  const kb = (n: number) => (n < 1024 ? `${n} B` : `${Math.max(1, Math.round(n / 1024))} KB`);
+  const bytes = (s: string) => new Blob([s]).size;
+  const UTM = ['utm_source', 'utm_medium', 'utm_campaign'] as const;
+  const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // A/B test "tool": which words the button uses, kept for the tab. The landing hands its arms on at sign-up (_eqa).
+  const ab = (window as unknown as { __eqAB?: Record<string, string> });
+  // ToolPage.astro assigns it in <head>, before the page's first funnel step.
+  const arm = (ab.__eqAB && ab.__eqAB.tool) || 'a';
+
+  // Dropping a file anywhere else on the page must not navigate away from it.
+  if (document.querySelector('[data-tool]')) {
+    const hasFiles = (e: DragEvent) => !!e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+    addEventListener('dragover', (e) => { if (hasFiles(e) && !(e.target as Element | null)?.closest?.('[data-drop]')) e.preventDefault(); });
+    addEventListener('drop', (e) => { if (hasFiles(e) && !(e.target as Element | null)?.closest?.('[data-drop]')) e.preventDefault(); });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tool]').forEach((root) => {
+    const Wd: W = JSON.parse(root.dataset.words || '{}');
+    const $ = <T extends Element>(s: string) => root.querySelector(s) as T;
+    const ta = $<HTMLTextAreaElement>('[data-code]');
+    const box = $<HTMLElement>('[data-drop]');
+    const count = $<HTMLElement>('[data-count]');
+    const clear = $<HTMLButtonElement>('[data-clear]');
+    const fileIn = $<HTMLInputElement>('[data-file]');
+    const row = $<HTMLElement>('[data-file-row]');
+    const chip = $<HTMLElement>('[data-chip]');
+    const view = $<HTMLElement>('[data-view]');
+    const pill = $<HTMLElement>('[data-pill]');
+    const frame = $<HTMLIFrameElement>('[data-frame]');
+    const meta = $<HTMLElement>('[data-meta]');
+    const refreshBtn = $<HTMLButtonElement>('[data-refresh]');
+    const msg = $<HTMLElement>('[data-msg]');
+    const notes = $<HTMLUListElement>('[data-notes]');
+    const pf = $<HTMLFormElement>('[data-preview-form]');
+    const pcode = $<HTMLTextAreaElement>('[data-pcode]');
+    const pfile = $<HTMLInputElement>('[data-pfile]');
+    const real = $<HTMLButtonElement>('[data-real]');
+    const realLabel = $<HTMLElement>('[data-real-label]');
+    const realForm = $<HTMLFormElement>('[data-real-form]');
+    const realCode = $<HTMLInputElement>('[data-real-code]');
+    const fname = $<HTMLInputElement>('[data-filename]');
+    const tag = (step: string) => own('ev', `click:${step}:${Wd.src}`);
+    if (arm === 'b') realLabel.textContent = Wd.realB;
+    const idleLabel = realLabel.textContent || '';
+    root.classList.add('ready');
+
+    const say = (text: string, kind: 'err' | 'info' = 'err') => {
+      msg.textContent = text; msg.hidden = !text; msg.dataset.kind = kind;
+      if (text && motion) { msg.classList.remove('pop'); void msg.offsetWidth; msg.classList.add('pop'); }
+    };
+    const nudge = (el: HTMLElement) => { if (!motion) return; el.classList.remove('nudge'); void el.offsetWidth; el.classList.add('nudge'); };
+    const setNotes = (list: string[]) => { notes.replaceChildren(...list.map((t) => { const li = document.createElement('li'); li.textContent = t; return li; })); notes.hidden = !list.length; };
+    const setState = (s: 'idle' | 'busy' | 'ok' | 'err') => {
+      view.dataset.state = s;
+      pill.textContent = s === 'busy' ? Wd.building.replace(/…$/, '') : s === 'ok' ? Wd.working : pill.dataset.idle || pill.textContent || '';
+      refreshBtn.hidden = s === 'idle';
+    };
+    pill.dataset.idle = pill.textContent || '';
+    const setFile = (name: string, size: number) => {
+      fname.value = name; fname.disabled = !name; pfile.value = name;
+      chip.hidden = !name; row.hidden = !!name;
+      if (name) chip.querySelector('[data-chip-name]')!.textContent = `${name} · ${kb(size)}`;
+    };
+    const refresh = () => {
+      const v = ta.value;
+      const n = v ? v.replace(/\n$/, '').split('\n').length : 0;
+      count.textContent = v.trim() ? Wd.lines.replace('{n}', n.toLocaleString(document.documentElement.lang || undefined)) : '';
+      clear.hidden = !v.trim();
+      real.disabled = !v.trim();
+      root.classList.toggle('has-code', !!v.trim());
+    };
+
+    // A link instead of code: say how to get the code (a share link alone holds no code we may read).
+    const linkKind = (v: string) => {
+      const t = v.trim();
+      if (!t || /\s/.test(t) || t.length > 300) return '';
+      try { const u = new URL(/^https?:\/\//.test(t) ? t : `https://${t}`); if (/(^|\.)claude\.ai$/i.test(u.hostname)) return 'claude'; if (/(^|\.)(chatgpt\.com|openai\.com|gemini\.google\.com|g\.co)$/i.test(u.hostname)) return 'other'; } catch { /* not a link */ }
+      return '';
+    };
+
+    let last = '', timer = 0, pending = 0, started = 0;
+    const preview = (force = false) => {
+      const v = ta.value;
+      clearTimeout(timer);
+      if (!v.trim()) { setState('idle'); frame.removeAttribute('src'); last = ''; setNotes([]); meta.hidden = true; return; }
+      const lk = linkKind(v);
+      if (lk) { say(lk === 'claude' ? Wd.errLinkClaude : Wd.errLinkOther, 'info'); nudge(box); return; }
+      if (bytes(v) > Wd.max) { say(Wd.errBig); nudge(box); return; }
+      if (!force && v === last) return;
+      last = v; say(''); setNotes([]); meta.hidden = true;
+      if (!once.has('paste')) { once.add('paste'); own('fn', 'tool_paste'); tag('tool_paste'); ph('tool_paste', { page: Wd.src }); }
+      setState('busy'); started = performance.now(); pending++;
+      pcode.value = v;
+      pf.submit();
+    };
+    const soon = (ms: number) => { clearTimeout(timer); timer = window.setTimeout(() => preview(), ms); };
+
+    addEventListener('message', (e: MessageEvent) => {
+      if (e.source !== frame.contentWindow || !e.data || e.data.eq !== 'preview') return;
+      const d = e.data;
+      if (d.t === 'ready') {
+        if (!pending) return; pending = 0;
+        setState('ok');
+        const kind = Wd.kinds[d.kind] || '';
+        meta.textContent = [d.title, kind].filter(Boolean).join(' · '); meta.hidden = !meta.textContent;
+        const w: string[] = d.warnings || [];
+        setNotes([d.storage ? Wd.noteStorage : '', w.includes('claude_api') ? Wd.noteClaudeApi : '', w.includes('gemini_firebase') ? Wd.noteFirebase : '', w.includes('packages_cdn') ? Wd.noteCdn : ''].filter(Boolean));
+        if (!once.has('preview')) { once.add('preview'); own('fn', 'tool_preview'); tag('tool_preview'); ph('tool_preview', { page: Wd.src, kind: d.kind, ms: Math.round(performance.now() - started) }); }
+        if (!once.has(`kind:${d.kind}`)) { once.add(`kind:${d.kind}`); own('ev', `tool_kind:${String(d.kind).slice(0, 12)}`); }
+      } else if (d.t === 'fail') {
+        pending = 0; setState('err');
+        const c = String(d.code || 'failed');
+        say(c === 'syntax' ? (d.line ? Wd.errSyntaxLine.replace('{line}', String(d.line)) : Wd.errSyntax) : c === 'no_component' ? Wd.errNoComponent : c === 'too_big' ? Wd.errBig : c === 'rate' ? Wd.errRate : Wd.errGeneric);
+        if (!once.has(`fail:${c}`)) { once.add(`fail:${c}`); own('ev', `tool_fail:${c.slice(0, 20)}`); }
+      } else if (d.t === 'error' && view.dataset.state === 'ok' && !once.has('rterr')) {
+        once.add('rterr');
+        setNotes([...[...notes.children].map((li) => li.textContent || ''), Wd.runtimeErr.replace('{msg}', String(d.m || '').slice(0, 140))]);
+        own('ev', 'tool_fail:runtime');
+      }
+    });
+
+    ta.addEventListener('paste', () => setTimeout(() => preview(), 0));
+    ta.addEventListener('input', () => { refresh(); if (!ta.value.trim()) { setFile('', 0); preview(); } else soon(900); if (msg.dataset.kind === 'err') say(''); });
+    ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); if (!real.disabled) realForm.requestSubmit(); } });
+    clear.addEventListener('click', () => { ta.value = ''; setFile('', 0); refresh(); preview(); say(''); ta.focus(); });
+    refreshBtn.addEventListener('click', () => preview(true));
+    root.querySelector('[data-sample]')!.addEventListener('click', () => { ta.value = Wd.sample; setFile('', 0); refresh(); own('ev', `click:tool_sample:${Wd.src}`); preview(true); });
+
+    // Files are read here, in the browser. Nothing leaves it until the preview (sandbox) or the button.
+    const readFile = (f: File | undefined | null) => {
+      if (!f) return;
+      const ext = (f.name.match(/\.[^.]+$/)?.[0] || '').toLowerCase();
+      if (!Wd.exts.includes(ext)) { say(Wd.errType); nudge(box); return; }
+      if (f.size > Wd.max) { say(Wd.errBig); nudge(box); return; }
+      const r = new FileReader();
+      r.onload = () => { ta.value = String(r.result || ''); ta.scrollTop = 0; ta.scrollLeft = 0; setFile(f.name, f.size); refresh(); say(''); own('ev', `tool_file:${ext.slice(1)}`); preview(true); };
+      r.onerror = () => say(Wd.errRead);
+      r.readAsText(f);
+    };
+    root.querySelector<HTMLButtonElement>('[data-pick]')!.addEventListener('click', () => fileIn.click());
+    fileIn.addEventListener('change', () => { readFile(fileIn.files?.[0]); fileIn.value = ''; });
+    chip.querySelector<HTMLButtonElement>('[data-chip-x]')!.addEventListener('click', () => { ta.value = ''; setFile('', 0); refresh(); preview(); ta.focus(); });
+    let depth = 0;
+    const files = (e: DragEvent) => !!e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+    box.addEventListener('dragenter', (e) => { if (!files(e)) return; e.preventDefault(); depth++; box.classList.add('over'); });
+    box.addEventListener('dragover', (e) => { if (!files(e)) return; e.preventDefault(); e.dataTransfer!.dropEffect = 'copy'; });
+    box.addEventListener('dragleave', (e) => { if (!files(e)) return; depth = Math.max(0, depth - 1); if (!depth) box.classList.remove('over'); });
+    box.addEventListener('drop', (e) => { if (!files(e)) return; e.preventDefault(); depth = 0; box.classList.remove('over'); readFile(e.dataTransfer!.files[0]); });
+
+    // "Make it a real site": the code goes to app.equipe.im as a plain form post (no fetch, no CORS) with this page and
+    // language, the visit's utm tags and its hand-off (_eqa); the app keeps it as a draft and opens sign-up.
+    realForm.addEventListener('submit', (e) => {
+      const v = ta.value;
+      if (!v.trim()) { e.preventDefault(); ta.focus(); nudge(box); return; }
+      const lk = linkKind(v);
+      if (lk) { e.preventDefault(); say(lk === 'claude' ? Wd.errLinkClaude : Wd.errLinkOther, 'info'); return; }
+      if (bytes(v) > Wd.max) { e.preventDefault(); say(Wd.errBig); return; }
+      realCode.value = v;
+      const params = new URLSearchParams(location.search);
+      const extra: HTMLInputElement[] = [];
+      const add = (k: string, val: string) => { const h = document.createElement('input'); h.type = 'hidden'; h.name = k; h.value = val; realForm.appendChild(h); extra.push(h); };
+      UTM.forEach((k) => { const val = params.get(k); if (val) add(k, val.slice(0, 60)); });
+      if (!params.get('utm_source')) { add('utm_source', 'equipe.im'); add('utm_medium', 'tool'); add('utm_campaign', 'ai-to-website'); }
+      add('utm_content', String(Wd.src).slice(0, 60));
+      try { const enc = (window as unknown as { __eqaEnc?: () => string }).__eqaEnc?.(); if (enc) add('_eqa', enc); } catch { /* no hand-off */ }
+      own('fn', 'tool_real'); own('fn', 'cta'); own('fn', 'signup_start'); tag('tool_real');
+      ph('tool_real', { page: Wd.src, previewed: once.has('preview'), arm });
+      real.classList.add('busy'); real.setAttribute('aria-busy', 'true'); realLabel.textContent = Wd.sending;
+      setTimeout(() => extra.forEach((h) => h.remove()), 0);
+    });
+    addEventListener('pageshow', () => { real.classList.remove('busy'); real.removeAttribute('aria-busy'); realLabel.textContent = idleLabel; refresh(); });
+    refresh();
+    if (ta.value.trim()) preview(); // restored by the browser (back button)
+  });
+
+  // "Paste your code" links elsewhere on the page scroll to the box and put the caret in it.
+  document.querySelectorAll<HTMLAnchorElement>('[data-tool-focus]').forEach((a) => a.addEventListener('click', (e) => {
+    const target = document.querySelector<HTMLTextAreaElement>('[data-tool] [data-code]');
+    if (!target) return;
+    e.preventDefault();
+    target.closest('[data-tool]')!.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(() => target.focus({ preventScroll: true }), 350);
+  }));
+</script>

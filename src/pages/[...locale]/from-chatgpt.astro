@@ -1,0 +1,9 @@
+---
+// /from-chatgpt/: one page of the free AI-to-website tool. Everything is in src/components/ToolPage.astro and src/data/aitool/.
+import ToolPage from '../../components/ToolPage.astro';
+import { available, type LocaleCode } from '../../i18n';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+---
+<ToolPage code={code} tool="from-chatgpt" />

@@ -32,13 +32,13 @@ const de: Messages = {
     themeLight: 'Helles Design',
     themeSystem: 'Systemeinstellung',
   },
-  nav: { product: 'Produkt', pricing: 'Preise', security: 'Sicherheit', about: 'Über uns', how: 'So funktioniert’s', team: 'Das Team', status: 'Stand heute', faq: 'FAQ', developers: 'Entwickler', github: 'GitHub', cta: 'Loslegen', ctaShort: 'Loslegen', signIn: 'Anmelden', signInShort: 'Anmelden' },
+  nav: { product: 'Produkt', pricing: 'Preise', security: 'Sicherheit', about: 'Über uns', how: 'So funktioniert’s', team: 'Das Team', status: 'Stand heute', faq: 'FAQ', developers: 'Entwickler', github: 'GitHub', cta: 'Kostenlos starten', ctaShort: 'Kostenlos starten', signIn: 'Anmelden', signInShort: 'Anmelden' },
   hero: {
     badge: 'Jetzt offen · kostenlos starten',
     title: 'Ein Startup-Team für eine Person.',
     lead: 'Bring eine Idee mit oder etwas, das du schon in Claude gebaut hast. Ein PM, Engineers, Designer, QA und ein Datenanalyst bringen es als echten Dienst live und machen es danach immer besser.',
     approve: 'Du musst nicht programmieren können. Dein KI-Startup-Team baut, veröffentlicht und verbessert.',
-    cta: 'Loslegen',
+    cta: 'Kostenlos starten',
     secondary: 'So funktioniert’s',
     meta: 'Läuft im Browser. Nichts zu installieren, kein Code zu schreiben.',
     shotAlt: 'Die equipe-Web-App: ein Chat mit dem PM, woran jedes Mitglied arbeitet, eine Entscheidung, die auf deine Freigabe wartet, und die App, die das Team veröffentlicht hat, auf einem Handy',
@@ -111,7 +111,7 @@ const de: Messages = {
     labels: { now: 'Läuft heute', early: 'Jetzt offen', soon: 'Kommt' },
     items: [
       { title: 'Das Team selbst', text: 'PM, Engineers, Designer, QA und Datenanalyst bauen und veröffentlichen schon echte Produkte. Diese Website und unsere Apps hat das Team gebaut.' },
-      { title: 'Dein Team in der Cloud', text: 'Melde dich an, beschreib deine Idee und bekomm in etwa einer Minute dein eigenes Team. Chatte mit dem PM, verfolge die Arbeit und öffne Vorschau-Links. Wöchentliche Wachstumsberichte kommen an dem Tag und zu der Uhrzeit, die du wählst.' },
+      { title: 'Dein Team in der Cloud', text: 'Melde dich an, beschreib deine Idee und bekomm in unter einer Minute dein eigenes Team. Chatte mit dem PM, verfolge die Arbeit und öffne Vorschau-Links. Wöchentliche Wachstumsberichte kommen an dem Tag und zu der Uhrzeit, die du wählst.' },
       { title: 'Was noch kommt', text: 'Import aus Claude in einem Schritt mit Datenbank und Domain.' },
     ],
   },
@@ -133,7 +133,7 @@ const de: Messages = {
       { question: 'Wer betreibt Hosting, Datenbank und Domain?', answer: 'Wir, als eigenes Projekt pro Kunde. Du musst nichts einrichten und dich nirgends anmelden. Wächst dein Produkt darüber hinaus, ziehen wir es auf deine eigenen Konten um.' },
       { question: 'Was kostet es?', answer: 'Du zahlst mit Credits: 100 Credits = $1. Wenn du dein Team anlegst, bekommst du 500 Credits (+1.000 Credits mit hinterlegter Karte). Der Team-Plan enthält Hosting, Speicher und 5 Personen, dazu eine monatliche Menge an Credits, die du selbst wählst: ab {{m0}} im Monat, um dein Produkt live zu halten, oder {{m2}} im Monat mit {{c2}} Credits, womit die meisten Teams starten. Plan-Credits werden 2 Monate lang übertragen. Alles, was dein Team während der Arbeit tut, KI-Arbeit und der Cloud-Rechner, auf dem es arbeitet, wird aus Credits bezahlt. Jede Anfrage zeigt zuerst ihre erwarteten Kosten, und du legst ein Monatslimit fest.' },
       { question: 'Was heißt „Du gibst frei“?', answer: 'Alles, was live geht, Geld kostet oder deine Kunden erreicht, wartet auf dein Okay. Du bekommst eine kurze Karte mit Optionen und einer Empfehlung und antwortest mit einem Tipp.' },
-      { question: 'Wie fange ich an?', answer: 'Melde dich auf app.equipe.im an und beschreib deine Idee. Dein Team ist in etwa einer Minute bereit, mit 500 Gratis-Credits und ohne Karte.' },
+      { question: 'Wie fange ich an?', answer: 'Melde dich auf app.equipe.im an und beschreib deine Idee. Dein Team ist in unter einer Minute bereit, mit 500 Gratis-Credits und ohne Karte.' },
       { question: 'Ich bin Entwickler. Kann ich es selbst betreiben?', answer: 'Ja. Die Engine hinter dem Team ist Open Source und läuft auf deinem eigenen Rechner. Auf der Entwicklerseite findest du die Mac-App und das Kommandozeilen-Tool.' },
     ],
     devLink: 'Zur Entwicklerseite',
@@ -229,7 +229,7 @@ const de: Messages = {
     nonprofit: { title: 'Programm für gemeinnützige Organisationen und Gemeinwohl-Projekte', text: 'In den ersten 3 Monaten nach der Freigabe bekommen gemeinnützige Organisationen und Gemeinwohl-Projekte auf jeden Credit-Kauf, jede automatische Aufladung und die monatlichen Plan-Credits 50% Bonus-Credits dazu: 2.500 Credits kaufen, 1.250 mehr bekommen. Bis zu 25.000 Bonus-Credits pro Team.', link: 'Unter Abrechnung beantragen', faq: { question: 'Gibt es ein Programm für gemeinnützige Organisationen?', answer: 'Ja. Gemeinnützige Organisationen und Gemeinwohl-Projekte können es in der App unter Abrechnung beantragen. In den ersten 3 Monaten nach der Freigabe gibt es auf jeden Credit-Kauf, jede automatische Aufladung und die monatlichen Plan-Credits 50% Bonus-Credits dazu (2.500 Credits kaufen, 1.250 mehr bekommen), insgesamt bis zu 25.000 Bonus-Credits pro Team. Die Bonus-Credits enden, wenn die 3 Monate vorbei sind. Im Formular gibst du Name, Website und Land der Organisation an, eine Registernummer, falls vorhanden, und eine kurze Beschreibung. Jeden Antrag prüft ein Mensch bei equipe, und dein Team bekommt in jedem Fall eine E-Mail.' } },
     faq: [{ question: 'Zahle ich, während ich weg bin?', answer: 'Nein. Solange dein Team nicht arbeitet, kostet es nichts.' }, { question: 'Was passiert, wenn meine Credits aufgebraucht sind?', answer: 'Erst dann stoppt dein Team. Mit neuen Credits geht es sofort weiter. Du kannst auch ein Monatslimit setzen.' }, { question: 'Werden Monats-Credits übertragen?', answer: 'Ja. Credits aus dem Team-Plan bleiben 2 Monate erhalten.' }, { question: 'Was kostet der Team-Plan?', answer: 'Das hängt von den Credits ab, die du jeden Monat wählst: {{m0}} im Monat ohne Credits (dein Produkt bleibt live), {{m1}} mit {{c1}} Credits, {{m2}} mit {{c2}}, {{m3}} mit {{c3}} oder {{m4}} mit {{c4}}. Jährlich gilt nur für die Grundgebühr von {{m0}}: {{fromYear}} im Jahr, also 2 Monate gratis; die gewählten Credits bleiben monatlich zu 100 Credits = $1 und werden 3 Monate übertragen.' }, { question: 'Kann ich mein Produkt live halten, ohne weiterzubauen?', answer: 'Ja. Wähl keine monatlichen Credits, dann kostet der Team-Plan {{m0}} im Monat, und deine Seiten, Domains und dein Speicher bleiben live. Credits fügst du hinzu, sobald du etwas ändern willst.' }, { question: 'Wie viel kostet es mehr, wenn mein Team wächst?', answer: 'Der Team-Tarif enthält bis zu 5 Personen. Jede weitere Bearbeitung kostet $5 im Monat, bis zu 10 Personen pro Team. Einladungen nur zum Ansehen sind kostenlos. Credits werden nicht pro Person gezählt, sondern vom ganzen Team geteilt. Kostenlos enthält 2 Personen.' }],
   },
-  band: { title: 'Fang mit deiner Idee an.', text: 'Erzähl dem PM von dem Business, das du führen willst. Dein Team ist in etwa einer Minute bereit.' },
+  band: { title: 'Fang mit deiner Idee an.', text: 'Erzähl dem PM von dem Business, das du führen willst. Dein Team ist in unter einer Minute bereit.' },
   // Words drawn inside the web app and phone illustrations. The example product is "Stride", a habit app (getstride.app); names stay as they are.
   scene: {
     nav: { chat: 'PM', team: 'Team', decisions: 'Entscheidungen', usage: 'Nutzung' },

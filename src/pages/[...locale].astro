@@ -1,14 +1,14 @@
 ---
 // The home page, for non-developers: a startup team for one person, in the cloud. Developer content lives on /developers.
-// Ten blocks, each saying one thing once: hero, customer logos, the team at work, how it works, day one, real products,
-// from Claude, pricing, where we are today (the one place that lists what is still coming), FAQ, start.
+// Nine blocks, each saying one thing once (landing audit P0-3, 2026-11-28): hero (idea box + customer logos), product demo,
+// three steps, real products, customer proof, why it is different (day one), a pricing teaser in credits (dollars live on
+// /pricing), FAQ, start. "From Claude" is a link in step 1 and has its own page; "where we are" lives on /facts and the FAQ.
 // Section patterns were studied on 21st.dev (workflow hero, bento grid, how-it-works rail, marquee, pricing with a featured plan,
 // call-to-action) and rewritten here as plain Astro + CSS with our tokens: no React, no new dependencies.
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Mark from '../components/Mark.astro';
-import WebApp from '../components/WebApp.astro';
 import IdeaBox from '../components/IdeaBox.astro';
 import Gallery from '../components/Gallery.astro';
 import Analytics from '../components/Analytics.astro';
@@ -20,11 +20,9 @@ import WebApplicationJsonLd from '../components/WebApplicationJsonLd.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import CustomerLogos from '../components/CustomerLogos.astro';
 import DayOne from '../components/DayOne.astro';
-import PlanCards from '../components/PlanCards.astro';
-import PromoBanner from '../components/PromoBanner.astro';
-import ArtifactImport from '../components/ArtifactImport.astro';
-import { FROM_CLAUDE } from '../data/fromclaude';
-import { TYPICAL_TOTALS } from '../data/flags';
+import HomeDemo from '../components/HomeDemo.astro';
+import HomeProof from '../components/HomeProof.astro';
+import { HOME } from '../data/home';
 import { MIGRATE } from '../data/migrate';
 import '../styles/site.css';
 import '../styles/webapp.css';
@@ -32,6 +30,7 @@ import '../styles/iphone.css';
 import '../styles/home.css';
 import '../styles/sections.css';
 import '../styles/motion.css';
+import '../styles/home9.css';
 import { SITE } from '../data/site';
 import { available, getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 
@@ -43,11 +42,8 @@ export function getStaticPaths() {
 const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const t = getMessages(code);
-const s = t.scene;
-const fc = FROM_CLAUDE[code] ?? FROM_CLAUDE.en;
+const H = HOME[code];
 const pageUrl = new URL(localePath(info), Astro.site).href;
-// Where we are: one state per item.
-const statusState = ['now', 'early', 'soon'] as const;
 const faqMore = t.faq.more.split('{email}');
 ---
 
@@ -81,115 +77,54 @@ const faqMore = t.faq.more.split('{email}');
     </section>
 
     <section class="logos" aria-labelledby="trust-home">
-      <div class="wrap"><CustomerLogos code={code} id="trust-home" class="ltrust" /></div>
+      <div class="wrap"><CustomerLogos code={code} id="trust-home" class="ltrust" proof /></div>
     </section>
 
-    <section class="see" id="see">
-      <div class="wrap top">
-        <div class="hl rv">
-          <p class="kicker">{t.see.kicker}</p>
-          <h2>{t.see.title}</h2>
-        </div>
-        <div class="hr rv">
-          <p class="lead">{t.hero.lead}</p>
-        </div>
-        <div class="side rv"><WebApp k="mini" s={s} alt={s.activity.title} /></div>
-      </div>
-      <div class="wrap shot">
-        <WebApp k="hero" s={s} alt={t.hero.shotAlt} />
-        <p class="cap">{t.hero.caption}</p>
-      </div>
-    </section>
+    <HomeDemo code={code} />
 
-    <section class="flow" id="how-it-works">
+    <section class="flow steps3" id="how-it-works">
       <div class="wrap">
         <div class="head center rv">
           <p class="kicker">{t.nav.how}</p>
           <h2>{t.flow.title}</h2>
         </div>
-        <div class="hiw" data-hiw>
-          <ol class="hiw-steps">
-            {t.flow.steps.map((st, i) => (
-              <li class={`hiw-step${i === 0 ? ' on' : ''}`} data-step={i}>
-                <button type="button" class="hiw-b" aria-controls={`hiw-p${i}`} data-go={i}>
-                  <span class="fn" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                  <span class="hiw-t"><b>{st.title}</b><span>{st.text}</span></span>
-                </button>
-                <div class="hiw-m">{i === 0 ? <div class="hiw-type"><span class="ht-l">{t.prompt.label}</span><p class="ht-x" data-typer={JSON.stringify(t.prompt.examples)}>{t.prompt.examples[0]}</p><span class="ht-send" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></span></div> : i === 1 ? <WebApp k="mini" s={s} alt={st.title} /> : <WebApp k="growth" s={s} alt={st.title} />}</div>
-              </li>
-            ))}
-          </ol>
-          <div class="hiw-stage" aria-hidden="true">
-            <div class="hiw-p on" id="hiw-p0"><div class="hiw-type big"><span class="ht-l">{t.prompt.label}</span><p class="ht-x" data-typer={JSON.stringify(t.prompt.examples)}>{t.prompt.examples[0]}</p><span class="ht-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg></span></div></div>
-            <div class="hiw-p" id="hiw-p1"><WebApp k="mini" s={s} alt="" /></div>
-            <div class="hiw-p" id="hiw-p2"><WebApp k="growth" s={s} alt="" /></div>
-          </div>
-        </div>
+        <ol class="s3">
+          {t.flow.steps.map((st, i) => (
+            <li class="s3-c rv" style={`--i:${i}`}>
+              <span class="s3-n" aria-hidden="true">{i + 1}</span>
+              <h3>{st.title}</h3>
+              <p>{st.text}</p>
+              {i === 0 && <a class="s3-more" href={subPath(info, 'from-claude')} data-ph="from_claude_link_click" data-ph-location="home_steps">{H.steps.claude}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>}
+            </li>
+          ))}
+        </ol>
         <div class="fcta rv"><a class="btn primary lg" href={SITE.start} data-ph="signup_cta_click" data-ph-location="how">{t.hero.cta}</a></div>
       </div>
     </section>
 
-    <DayOne code={code} />
-
     <Gallery code={code} />
 
-    <section class="wedge" id="from-claude">
-      <div class="wrap fc-home">
-        <div class="head rv">
-          <p class="kicker">{fc.home.kicker}</p>
-          <h2>{fc.home.title}</h2>
-          <p class="sub">{fc.home.sub}</p>
-          <a class="fc-more" href={subPath(info, 'from-claude')} data-ph="from_claude_link_click" data-ph-location="home">{fc.home.more}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
-        </div>
-        <div class="rv">
-          <ArtifactImport code={code} id="fc-home" location="home" compact />
-          <p class="fc-home-legal">{fc.disclaimer}</p>
-        </div>
-      </div>
-    </section>
+    <HomeProof code={code} />
 
-    <section class="pricing" id="pricing">
+    <DayOne code={code} />
+
+    <section class="pricing ptease" id="pricing">
       <div class="wrap">
         <div class="head center rv">
-          <p class="kicker">{t.plans.title}</p>
-          <h2>{t.control.title}</h2>
-          <p class="sub">{t.plans.text}</p>
+          <p class="kicker">{H.price.kicker}</p>
+          <h2>{H.price.title}</h2>
+          <p class="sub">{H.price.sub}</p>
         </div>
-        <PromoBanner code={code} lang={info.lang} target="tp-pricing" />
-        <PlanCards t={t} level="h3" loc="pricing" reveal code={code} />
-        <div class="pwhich rv"><span class="pwhich-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z" /></svg></span><p><b>{t.plans.whichTitle}</b> {t.plans.whichText}</p></div>
-        <div class="pfacts rv">
-          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5" /><path d="M7.2 6.8a7.5 7.5 0 1 0 9.6 0" /></svg><div><h3>{t.plans.runout.title}</h3><p>{t.plans.runout.text}</p></div></div>
-          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" /><path d="M3.5 10h17M7 14.5h3" /></svg><div><h3>{t.plans.credits.title}</h3><p>{t.plans.credits.text}</p></div></div>
-          <div class="pfact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5h16M7 15V11M12 15V7M17 15v-2.5" /></svg><div><h3>{t.plans.estimate.title}</h3><p>{t.plans.estimate.text}</p>{TYPICAL_TOTALS?.[code] && <p class="pfact-x">{TYPICAL_TOTALS[code]}</p>}</div></div>
-        </div>
-        <ul class="pts rv">
-          {t.control.points.map((p) => <li><h3>{p.lead}</h3><p>{p.text}</p></li>)}
-        </ul>
-      </div>
-    </section>
-
-    <section class="status" id="status">
-      <div class="wrap">
-        <div class="head rv">
-          <h2>{t.status.title}</h2>
-          <p class="sub">{t.status.text}</p>
-        </div>
-        <ol class="track rv">
-          {t.status.items.map((it, i) => (
-            <li class={`is-${statusState[i]}`}>
-              <span class="dot" aria-hidden="true"></span>
-              <span class="lbl">{t.status.labels[statusState[i]]}</span>
-              <h3>{it.title}</h3>
-              <p>{it.text}</p>
+        <ul class="pt3" role="list">
+          {H.price.cards.map((c, i) => (
+            <li class="pt3-c rv" style={`--i:${i}`}>
+              <span class="pt3-i" aria-hidden="true">{i === 0 ? <svg viewBox="0 0 24 24"><path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8M2.5 7.5h19v4.5h-19zM12 21V7.5" /></svg> : i === 1 ? <svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.3 5.6.6-4.2 3.8 1.2 5.6L12 15.6l-5 2.7 1.2-5.6L4 8.9l5.6-.6z" /></svg> : <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>}</span>
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
             </li>
           ))}
-        </ol>
-        <div class="proof rv">
-          <h3>{t.proof.title}</h3>
-          <dl>{t.proof.nums.map((n) => <div><dt data-tick={n.n}>{n.n}</dt><dd>{n.label}</dd></div>)}</dl>
-          <p class="meta">{t.proof.small}</p>
-        </div>
+        </ul>
+        <div class="fcta rv"><a class="btn ghost lg" href={subPath(info, 'pricing')} data-ph="pricing_link_click" data-ph-location="home_pricing">{H.price.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
       </div>
     </section>
 
@@ -235,26 +170,8 @@ const faqMore = t.faq.more.split('{email}');
     // - blocks fade up as they enter (IntersectionObserver; anything already on screen shows at once)
     // - drawn scenes get `.live` while on screen, so their loops only run when someone can see them
     // - numbers with data-tick count up once, the first time they are seen
-    // How it works: the step in the middle of the screen is active; its preview fades in on the right. Clicking a step jumps to it.
-    document.querySelectorAll<HTMLElement>('[data-hiw]').forEach((box) => {
-      const steps = [...box.querySelectorAll<HTMLElement>('.hiw-step')];
-      const panes = [...box.querySelectorAll<HTMLElement>('.hiw-p')];
-      const set = (n: number) => { steps.forEach((s, i) => s.classList.toggle('on', i === n)); panes.forEach((p, i) => p.classList.toggle('on', i === n)); box.style.setProperty('--prog', String(n / Math.max(1, steps.length - 1))); };
-      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(Number((e.target as HTMLElement).dataset.step)); }), { rootMargin: '-45% 0px -45% 0px' });
-      steps.forEach((s) => io.observe(s));
-      box.querySelectorAll<HTMLButtonElement>('[data-go]').forEach((b) => b.addEventListener('click', () => { const n = Number(b.dataset.go); set(n); steps[n].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); }));
-    });
     const root = document.documentElement;
     if (root.classList.contains('mo')) {
-      // the step-1 preview types example ideas
-      document.querySelectorAll<HTMLElement>('[data-typer]').forEach((el) => {
-        const ex: string[] = JSON.parse(el.dataset.typer!); let i = 0, n = ex[0].length, dir = -1, wait = 30;
-        setInterval(() => {
-          if (wait > 0) { wait--; return; }
-          const w = ex[i]; n += dir; el.textContent = w.slice(0, Math.max(0, n));
-          if (dir > 0 && n >= w.length) { dir = -1; wait = 30; } else if (dir < 0 && n <= 0) { dir = 1; i = (i + 1) % ex.length; wait = 6; }
-        }, 60);
-      });
       (window as unknown as { __rv: boolean }).__rv = true;
       const reveal = new IntersectionObserver((es) => es.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
