@@ -128,7 +128,7 @@ const ptBR: LegalCopy = {
     summaryTitle: 'Em resumo',
     summary: [
       'Você é dono do que traz e do que seu time constrói para você. Você decide o que vai ao ar, o que é enviado e o que custa dinheiro.',
-      'O trabalho do seu time é pago com créditos (1 crédito = $1). Créditos comprados e não usados podem ser reembolsados em até 14 dias após a compra.',
+      'O trabalho do seu time é pago com créditos (100 créditos = $1). Créditos comprados e não usados podem ser reembolsados em até 14 dias após a compra.',
       'Os planos são renovados até você cancelar. O cancelamento vale a partir do fim do período que você pagou.',
       'Domínios comprados pelo equipe são registrados no seu nome.',
       'A IA pode errar. Revise o que importa antes que vá a público.',
@@ -152,7 +152,7 @@ const ptBR: LegalCopy = {
       ] },
       { id: 'credits', h: 'Créditos', body: [
         { ul: [
-          '**1 crédito = $1.** O trabalho do seu time é pago com créditos: o trabalho de IA pelo preço de tabela do modelo mais nossa margem, e o computador na nuvem que seu time usa enquanto trabalha. Cada tarefa mostra o que usou, e os pedidos mostram uma estimativa antes.',
+          '**100 créditos = $1.** O trabalho do seu time é pago com créditos: o trabalho de IA pelo preço de tabela do modelo mais nossa margem, e o computador na nuvem que seu time usa enquanto trabalha. Cada tarefa mostra o que usou, e os pedidos mostram uma estimativa antes.',
           '**Pacotes de créditos** são compras avulsas, válidas por 12 meses a partir da compra.',
           '**Créditos do plano** que vêm com um plano Time mensal acumulam por 2 meses; os créditos mensais de um plano anual acumulam por 3 meses. Créditos que passam da validade são removidos.',
           '**Créditos grátis e bônus** (por exemplo, o crédito de boas-vindas ou bônus promocionais) não têm valor em dinheiro, não podem ser reembolsados nem transferidos e expiram junto com os créditos com que vieram ou conforme mostrado em Cobrança.',

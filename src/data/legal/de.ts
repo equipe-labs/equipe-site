@@ -128,7 +128,7 @@ const de: LegalCopy = {
     summaryTitle: 'Kurz gesagt',
     summary: [
       'Dir gehört, was du mitbringst und was dein Team für dich baut. Du entscheidest, was live geht, verschickt wird oder Geld kostet.',
-      'Die Arbeit deines Teams wird aus Credits bezahlt (1 Credit = $1). Ungenutzte gekaufte Credits können innerhalb von 14 Tagen nach dem Kauf erstattet werden.',
+      'Die Arbeit deines Teams wird aus Credits bezahlt (100 Credits = $1). Ungenutzte gekaufte Credits können innerhalb von 14 Tagen nach dem Kauf erstattet werden.',
       'Pläne verlängern sich, bis du kündigst. Eine Kündigung wird zum Ende des bezahlten Zeitraums wirksam.',
       'Über equipe gekaufte Domains werden auf deinen Namen registriert.',
       'KI kann sich irren. Prüfe, was wichtig ist, bevor es öffentlich wird.',
@@ -152,7 +152,7 @@ const de: LegalCopy = {
       ] },
       { id: 'credits', h: 'Credits', body: [
         { ul: [
-          '**1 Credit = $1.** Die Arbeit deines Teams wird aus Credits bezahlt: KI-Arbeit zum Listenpreis des Modells plus unsere Marge sowie der Cloud-Rechner, den dein Team während der Arbeit nutzt. Jede Aufgabe zeigt, was sie verbraucht hat, und Anfragen zeigen vorab eine Schätzung.',
+          '**100 Credits = $1.** Die Arbeit deines Teams wird aus Credits bezahlt: KI-Arbeit zum Listenpreis des Modells plus unsere Marge sowie der Cloud-Rechner, den dein Team während der Arbeit nutzt. Jede Aufgabe zeigt, was sie verbraucht hat, und Anfragen zeigen vorab eine Schätzung.',
           '**Credit-Pakete** sind Einmalkäufe und gelten 12 Monate ab Kauf.',
           '**Plan-Credits**, die mit einem monatlichen Team-Plan kommen, werden 2 Monate lang übertragen; die monatlichen Credits eines Jahresplans werden 3 Monate lang übertragen. Credits, deren Ablaufdatum überschritten ist, werden entfernt.',
           '**Kostenlose und Bonus-Credits** (zum Beispiel das Willkommensguthaben oder Aktionsboni) haben keinen Geldwert, können weder erstattet noch übertragen werden und verfallen zusammen mit den Credits, mit denen sie kamen, oder wie unter Abrechnung angegeben.',

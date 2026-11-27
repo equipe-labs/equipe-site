@@ -26,7 +26,7 @@ const GI: Record<string, string> = {
   store: sv('<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>'),
   expert: sv('<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2.5 9 2.5 12 0v-5"/>'),
 };
-// "Free to start · $5 credit · No card needed" as parts, so phones can drop the middle one.
+// "Free to start · 500 credits · No card needed" as parts, so phones can drop the middle one.
 const free = p.note.split(' · ');
 const words = { ex: p.examples, goals: Object.fromEntries(p.goals.map((g) => [g.key, [g.label, g.starter]])), goalLine: p.goalLine, goalRemove: p.goalRemove, ref: p.ref, peek: new URL('/api/ref-peek', SITE.start).toString() };
 // Lucide shapes (ISC): copy (a reference), globe (a site), x.
