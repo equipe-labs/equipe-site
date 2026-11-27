@@ -104,7 +104,8 @@ main.pg .tl-cta h3 { margin: 0; font-size: clamp(22px, 2.6vw, 28px); letter-spac
 .tl-share label { font-size: 15px; font-weight: 600; }
 .tl-share-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .tl-share-row input { flex: 1 1 260px; min-width: 0; height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: inherit; font-size: 15px; }
-.tl-share-row .btn { height: 46px; gap: 8px; }
+.tl-share-row .btn { height: 46px; gap: 8px; font-size: 15px; }
+@media (max-width: 640px) { .tl-share-row .btn { flex: 1 1 0; padding: 0 12px; } }
 .tl-share-row .btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .tl-share-row .btn.done { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
@@ -121,8 +122,6 @@ main.pg .tl-cta h3 { margin: 0; font-size: clamp(22px, 2.6vw, 28px); letter-spac
 .tl-all { border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); }
 .tl-all > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 0 24px; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; }
 .tl-all > summary::-webkit-details-marker { display: none; }
-.tl-all > summary svg { width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 240ms var(--e); }
-.tl-all[open] > summary svg { transform: rotate(180deg); }
 .tl-all-b { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; padding: 4px 24px 24px; }
 .tl-all-b h4 { margin: 0 0 10px; font-size: 15px; }
 .tl-all-b ul { display: grid; gap: 8px; }

@@ -140,7 +140,7 @@ const data = {
         <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(fix)}" data-ph="grader_fix_click" data-ph-location="${D.mode === 'shared' ? 'shared' : 'result'}">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
         ${link ? `<div class="tl-share tl-in"><label for="g-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="g-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-g-copy data-ph="grader_share_copy" data-ph-location="${D.mode}">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-g-again data-ph="grader_again" data-ph-location="${D.mode}">${esc(R.share.again)}</a></div></div>` : ''}
         <div><h3 class="tl-h">${esc(R.crawlersTitle)}</h3><ul class="tl-bots">${bots}</ul></div>
-        <details class="tl-all"><summary>${esc(R.allChecksTitle)}${ic.chev}</summary><div class="tl-all-b">${checks}</div></details>
+        <details class="tl-all"><summary>${esc(R.allChecksTitle)}</summary><div class="tl-all-b">${checks}</div></details>
         <div class="tl-card tl-cross"><div><h3>${esc(R.aivis.title)}</h3><p>${esc(R.aivis.text)}</p></div><a class="btn ghost" href="${esc(D.aivis)}?url=${encodeURIComponent(site)}" data-ph="aivis_link_click" data-ph-location="grader">${esc(R.aivis.link)}${ic.arrow}</a></div>
       </div>`;
       rep.hidden = false;
