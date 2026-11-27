@@ -1,0 +1,125 @@
+---
+// The app cost calculator: pick a type, features, design and timeline; three columns update with rolling totals.
+// Controls are custom (radio cards, check chips, segmented controls; no native <select>), adapted from ui.equipe.im
+// "Billing Segmented Control" (sliding pill) and "Plan Finder" (tick what you need) and restyled to equipe tokens.
+// It renders the right numbers on the server for `preset`, so it reads fine without JavaScript; the script
+// (src/scripts/costcalc.ts) takes over, reads ?type=&f=&d=&t= and keeps the share link in sync.
+import { TYPES, FEATURES, DESIGNS, TIMELINES, MODEL, FREE_CREDITS, type Pick } from '../../data/costcalc/model';
+import { costCopy } from '../../data/costcalc/copy';
+import { view, measured, signupHref, fillT, num } from '../../data/costcalc/render';
+import { getLocale, subPath, type LocaleCode } from '../../i18n';
+
+interface Props { code: LocaleCode; preset: Pick; placement: string; heading?: string; lockType?: boolean }
+const { code, preset, placement, heading, lockType = false } = Astro.props;
+const info = getLocale(code);
+const c = costCopy(code);
+const lang = info.lang;
+const v = view(c, preset, lang);
+const ms = measured(c, v.e.items, lang);
+const base = subPath(info, 'tools/app-cost-calculator');
+const m = MODEL[preset.type];
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const link = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+// What the browser needs: this locale's words and the page's base path.
+const cfg = JSON.stringify({ lang, base, placement, lockType, c: { types: c.types, features: c.features, designs: c.designs, idea: c.idea, cols: c.cols, measured: c.measured, share: c.share, included: c.included } }).replace(/</g, '\\u003c');
+---
+<div class="cc" data-cc data-type={preset.type}>
+  <script type="application/json" data-cc-cfg set:html={cfg} />
+  {heading && <h2 class="cc-h">{heading}</h2>}
+  <div class="cc-grid">
+    <div class="cc-controls">
+      <fieldset class="cc-field" hidden={lockType}>
+        <legend>{c.steps.type}</legend>
+        <div class="cc-types" role="radiogroup" aria-label={c.steps.type}>
+          {TYPES.map((t) => (
+            <button type="button" role="radio" class="cc-type" data-type={t} aria-checked={t === preset.type ? 'true' : 'false'} tabindex={t === preset.type ? 0 : -1}>
+              <span class="cc-tick"><Fragment set:html={check} /></span>
+              <span class="cc-tn">{c.types[t].name}</span>
+              <span class="cc-ts">{c.types[t].short}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="cc-field">
+        <legend>{c.steps.features}</legend>
+        <div class="cc-feats">
+          {FEATURES.map((f) => {
+            const inc = m.includes.includes(f), on = preset.features.includes(f) || inc;
+            return (
+              <button type="button" role="checkbox" class="cc-feat" data-feat={f} aria-checked={on ? 'true' : 'false'} aria-disabled={inc ? 'true' : undefined} title={c.features[f].hint}>
+                <span class="cc-box"><Fragment set:html={check} /></span>
+                <span class="cc-fn">{c.features[f].name}</span>
+                <span class="cc-inc" hidden={!inc}>{c.included}</span>
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+      <fieldset class="cc-field">
+        <legend>{c.steps.design}</legend>
+        <div class="cc-seg" role="radiogroup" aria-label={c.steps.design} data-seg="design">
+          <span class="cc-pill" aria-hidden="true"></span>
+          {DESIGNS.map((d) => <button type="button" role="radio" data-val={d} aria-checked={d === preset.design ? 'true' : 'false'} tabindex={d === preset.design ? 0 : -1}>{c.designs[d].name}</button>)}
+        </div>
+        <p class="cc-hint" data-design-hint>{c.designs[preset.design].hint}</p>
+      </fieldset>
+      <fieldset class="cc-field">
+        <legend>{c.steps.timeline}</legend>
+        <div class="cc-seg" role="radiogroup" aria-label={c.steps.timeline} data-seg="timeline">
+          <span class="cc-pill" aria-hidden="true"></span>
+          {TIMELINES.map((t) => <button type="button" role="radio" data-val={t} aria-checked={t === preset.timeline ? 'true' : 'false'} tabindex={t === preset.timeline ? 0 : -1}>{c.timelines[t]}</button>)}
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="cc-results" aria-live="polite" aria-atomic="false">
+      <div class="cc-cols">
+        <article class="cc-col">
+          <h3>{c.cols.agency.title}</h3>
+          <p class="cc-sub">{c.cols.agency.sub}</p>
+          <p class="cc-big" data-out="agency">{v.agency}</p>
+          <p class="cc-line" data-out="agencyWeeks">{v.agencyWeeks}</p>
+          <p class="cc-warn" data-out="slow" hidden={!v.e.slow}>{c.cols.agency.slow}</p>
+          <p class="cc-note" data-out="beyond" hidden={!v.e.beyond}>{c.cols.agency.beyond}</p>
+          <p class="cc-note" data-out="proxy" hidden={!m.proxy}>{c.cols.agency.proxy}</p>
+        </article>
+        <article class="cc-col">
+          <h3>{c.cols.diy.title}</h3>
+          <p class="cc-sub">{c.cols.diy.sub}</p>
+          <p class="cc-big" data-out="diy">{v.diy}</p>
+          <p class="cc-line" data-out="diyLine">{v.diyLine}</p>
+          <p class="cc-note" data-out="diyFee" hidden={!v.diyFee}>{v.diyFee}</p>
+          <p class="cc-note">{c.cols.diy.time}</p>
+        </article>
+        <article class="cc-col is-eq">
+          <h3>{c.cols.equipe.title}</h3>
+          <p class="cc-sub">{c.cols.equipe.sub}</p>
+          <p class="cc-big" data-out="credits">{v.credits}</p>
+          <p class="cc-line" data-out="creditsUsd">{v.creditsUsd}</p>
+          <p class="cc-line" data-out="plan">{v.plan}</p>
+          <p class="cc-line strong" data-out="year">{v.year}</p>
+          <p class="cc-note">{fillT(c.cols.equipe.free, { free: num(FREE_CREDITS, lang) })}</p>
+        </article>
+      </div>
+      <div class="cc-acts">
+        <a class="btn primary lg" data-cc-cta href={signupHref(c, preset, lang, placement)} data-ph="signup_cta_click" data-ph-location={`costcalc-${placement}`}>{c.cta.button}<Fragment set:html={arrow} /></a>
+        <button type="button" class="cc-share" data-cc-share data-ph="costcalc_share" data-ph-location={placement}><Fragment set:html={link} /><span data-share-label>{c.share.button}</span></button>
+        <span class="cc-live" role="status" aria-live="polite" data-share-live></span>
+      </div>
+      <div class="cc-measured">
+        <h3>{c.measured.title}</h3>
+        <p data-out="measured">{ms.text}</p>
+        <ul>
+          <li>{ms.firstLive}</li>
+          <li>{ms.firstWeek}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initCalculators } from '../../scripts/costcalc';
+  initCalculators();
+</script>
