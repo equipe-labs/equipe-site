@@ -3,7 +3,7 @@
  * small placements (home day-one section, pricing page, header Resources menu, footer).
  *
  * Only claim what ships. Source of truth: equipe-cloud docs/product-ai.md and the public reference at ai.equipe.im/docs.
- * Public facts only: the fee (provider list price + 10%), the default monthly limit ($10), the note at 80%, the friendly
+ * Public facts only: the fee (provider list price + 10%), the default monthly limit (1,000 credits = $10), the note at 80%, the friendly
  * pause, limits per product/user/visitor (no numbers), per-product server-side keys stored as a hash, browser calls
  * refused, instructions kept on equipe's side, no prompts or answers stored. No model or provider names, no internal
  * limits, no key formats. Headlines say the outcome in plain words.
@@ -76,7 +76,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'Add AI to your product with equipe: a support chatbot, FAQ answers, translation and summaries, with no API keys.',
     },
     answerLabel: 'The short answer.',
-    answer: 'Products built with equipe can use AI without an AI account or an API key. Tell your equipe team what you want, such as a chatbot that answers questions about your prices, and the team adds it from 11 ready-made features. Usage is paid from your equipe credits at the AI provider’s list price plus 10%, and every product has a monthly AI limit ($10 unless you change it), so a busy chatbot can’t drain your credits.',
+    answer: 'Products built with equipe can use AI without an AI account or an API key. Tell your equipe team what you want, such as a chatbot that answers questions about your prices, and the team adds it from 11 ready-made features. Usage is paid from your equipe credits at the AI provider’s list price plus 10%, and every product has a monthly AI limit (1,000 credits unless you change it), so a busy chatbot can’t drain your credits.',
     ctaStart: 'Start building', ctaHow: 'See how it works',
     featuresTitle: '11 ready-made AI features',
     featuresSub: 'Your team picks the ones that fit your product and fills them with your own facts: your prices, hours, catalog and policies.',
@@ -131,7 +131,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: 'Your visitors’ usage is paid from your equipe credits as it happens. There’s no separate subscription for AI.',
       points: [
         { title: 'Provider price + 10%', text: 'Each request costs the AI provider’s list price plus a 10% fee. A short chat answer usually costs a small fraction of a cent.' },
-        { title: 'A monthly limit you control', text: 'Every product has its own monthly AI limit, $10 unless you change it. You get a note at 80%. At the limit, AI features tell visitors they’re taking a short break until next month or until you raise it.' },
+        { title: 'A monthly limit you control', text: 'Every product has its own monthly AI limit, 1,000 credits unless you change it. You get a note at 80%. At the limit, AI features tell visitors they’re taking a short break until next month or until you raise it.' },
         { title: 'One place to look', text: 'Product › AI shows each feature with a small live demo and a rough monthly cost, then what each product spent, a 30-day trend and the most used features.' },
       ],
       models: 'Your team picks the model for each job automatically: a fast, inexpensive one for chat and short summaries, and a stronger one only when the job needs it.',
@@ -164,7 +164,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'Do I need an OpenAI, Anthropic or Google account?', answer: 'No. equipe provides the AI models. Your team turns AI on for your product and the cost comes out of your equipe credits. You never sign up anywhere or copy a key.' },
       { question: 'Do I need to know how to code?', answer: 'No. You ask your team in plain words, like “add a chatbot that answers questions about my menu.” The team adds a ready-made feature, fills in what it should know, tests it and shows you.' },
-      { question: 'How much does an AI chatbot cost on equipe?', answer: 'The AI provider’s list price plus 10%, taken from your credits as visitors use it. A short chat answer usually costs a small fraction of a cent, and each product has a monthly AI limit ($10 by default) that you can change.' },
+      { question: 'How much does an AI chatbot cost on equipe?', answer: 'The AI provider’s list price plus 10%, taken from your credits as visitors use it. A short chat answer usually costs a small fraction of a cent, and each product has a monthly AI limit (1,000 credits by default) that you can change.' },
       { question: 'Can a busy chatbot use up all my credits?', answer: 'No. Every product has a monthly AI limit. You get a note at 80%, and at the limit AI features pause with a friendly message until next month or until you raise it. Limits per visitor keep one person from flooding it.' },
       { question: 'Do you keep what my visitors type?', answer: 'No. equipe does not store prompts or answers, only the number of requests and their cost. The AI provider receives each message to answer it. Your product’s privacy policy, which equipe writes for you, says so in 8 languages.' },
       { question: 'Can the chatbot get things wrong?', answer: 'Yes, any AI can. The assistant is told to answer only from the facts your team gives it and to say when it isn’t sure, and the chat tells visitors that answers are written by AI and can be wrong.' },
@@ -173,7 +173,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'Tell your team what you’d like AI to do.', text: 'That’s the whole setup. New teams start with free credit, no card needed.', pricing: 'See pricing' },
     home: { title: 'Want AI in it too?', text: 'A support chatbot, instant answers, translation, review summaries and more. Ask your team and it’s added, with a monthly limit you set.', link: 'See AI features' },
-    pricingNote: { title: 'AI in your product', text: 'If your product uses AI, like a chatbot or summaries, your visitors’ usage is paid from your credits at the provider’s price plus 10%, with a monthly limit per product ($10 unless you change it).', link: 'See AI features' },
+    pricingNote: { title: 'AI in your product', text: 'If your product uses AI, like a chatbot or summaries, your visitors’ usage is paid from your credits at the provider’s price plus 10%, with a monthly limit per product (1,000 credits unless you change it).', link: 'See AI features' },
   },
   ko: {
     nav: 'AI 기능', navDesc: '챗봇, 요약 등을 제품에 더해요',
@@ -185,7 +185,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'equipe로 제품에 AI 넣기: 고객 상담 챗봇, FAQ 답변, 번역, 요약을 API 키 없이.',
     },
     answerLabel: '짧게 답하면.',
-    answer: 'equipe로 만든 제품은 AI 계정이나 API 키 없이 AI를 쓸 수 있어요. 내 가격에 대해 답하는 챗봇처럼 원하는 걸 equipe 팀에게 말하면, 팀이 미리 만들어 둔 11가지 기능 중에서 골라 넣어 줘요. 사용료는 AI 제공사 정가에 10%를 더해 equipe 크레딧에서 나가고, 제품마다 월 AI 한도(바꾸지 않으면 $10)가 있어서 챗봇 이용이 몰려도 크레딧이 바닥나지 않아요.',
+    answer: 'equipe로 만든 제품은 AI 계정이나 API 키 없이 AI를 쓸 수 있어요. 내 가격에 대해 답하는 챗봇처럼 원하는 걸 equipe 팀에게 말하면, 팀이 미리 만들어 둔 11가지 기능 중에서 골라 넣어 줘요. 사용료는 AI 제공사 정가에 10%를 더해 equipe 크레딧에서 나가고, 제품마다 월 AI 한도(바꾸지 않으면 1,000 크레딧)가 있어서 챗봇 이용이 몰려도 크레딧이 바닥나지 않아요.',
     ctaStart: '만들기 시작하기', ctaHow: '어떻게 되는지 보기',
     featuresTitle: '바로 쓰는 AI 기능 11가지',
     featuresSub: '팀이 제품에 맞는 기능을 고르고, 내 정보로 채워요: 가격, 영업시간, 상품 목록, 운영 정책.',
@@ -240,7 +240,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: '방문자가 쓰는 만큼 그때그때 equipe 크레딧에서 나가요. AI만을 위한 별도 구독은 없어요.',
       points: [
         { title: '제공사 가격 + 10%', text: '요청마다 AI 제공사 정가에 10% 수수료가 붙어요. 짧은 채팅 답변 하나는 보통 1센트에 한참 못 미쳐요.' },
-        { title: '내가 정하는 월 한도', text: '제품마다 월 AI 한도가 따로 있어요. 바꾸지 않으면 $10이에요. 80%가 되면 알려 드려요. 한도에 닿으면 AI 기능은 다음 달이 되거나 한도를 올릴 때까지 방문자에게 잠시 쉬는 중이라고 안내해요.' },
+        { title: '내가 정하는 월 한도', text: '제품마다 월 AI 한도가 따로 있어요. 바꾸지 않으면 1,000 크레딧이에요. 80%가 되면 알려 드려요. 한도에 닿으면 AI 기능은 다음 달이 되거나 한도를 올릴 때까지 방문자에게 잠시 쉬는 중이라고 안내해요.' },
         { title: '한곳에서 확인해요', text: '제품 › 제품 속 AI에서 기능마다 작은 실시간 데모와 대략적인 월 비용을 보여 주고, 이어서 제품별 사용액, 30일 추이, 많이 쓰인 기능을 보여 줘요.' },
       ],
       models: '팀이 일마다 모델을 자동으로 골라요. 채팅과 짧은 요약에는 빠르고 저렴한 모델을, 꼭 필요할 때만 더 강한 모델을 써요.',
@@ -273,7 +273,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'OpenAI, Anthropic, Google 계정이 필요한가요?', answer: '아니요. AI 모델은 equipe가 제공해요. 팀이 제품에 AI를 켜고, 비용은 equipe 크레딧에서 나가요. 어디에 가입하거나 키를 복사할 일이 없어요.' },
       { question: '코딩을 할 줄 알아야 하나요?', answer: '아니요. “내 메뉴에 대해 답해 주는 챗봇을 넣어 줘”처럼 평소 말로 팀에게 부탁하면 돼요. 팀이 바로 쓰는 기능을 넣고, 알아야 할 내용을 채우고, 테스트한 뒤 보여 줘요.' },
-      { question: 'equipe에서 AI 챗봇 비용은 얼마인가요?', answer: 'AI 제공사 정가에 10%를 더한 금액이 방문자가 쓰는 만큼 크레딧에서 나가요. 짧은 채팅 답변 하나는 보통 1센트에 한참 못 미치고, 제품마다 월 AI 한도(기본 $10)가 있어서 바꿀 수 있어요.' },
+      { question: 'equipe에서 AI 챗봇 비용은 얼마인가요?', answer: 'AI 제공사 정가에 10%를 더한 금액이 방문자가 쓰는 만큼 크레딧에서 나가요. 짧은 채팅 답변 하나는 보통 1센트에 한참 못 미치고, 제품마다 월 AI 한도(기본 1,000 크레딧)가 있어서 바꿀 수 있어요.' },
       { question: '챗봇 이용이 몰리면 크레딧을 다 써 버리나요?', answer: '아니요. 제품마다 월 AI 한도가 있어요. 80%가 되면 알려 드리고, 한도에 닿으면 AI 기능은 다음 달이 되거나 한도를 올릴 때까지 친절한 안내와 함께 잠시 멈춰요. 방문자별 한도가 있어서 한 사람이 도배할 수도 없어요.' },
       { question: '방문자가 입력한 내용을 보관하나요?', answer: '아니요. equipe는 질문도 답변도 저장하지 않고, 요청 횟수와 비용만 기록해요. AI 제공사는 답하기 위해 각 메시지를 받아요. equipe가 써 드리는 제품의 개인정보처리방침에 8개 언어로 이 내용이 적혀 있어요.' },
       { question: '챗봇이 틀릴 수도 있나요?', answer: '네, 어떤 AI든 틀릴 수 있어요. 도우미는 팀이 준 정보로만 답하고 확실하지 않으면 그렇다고 말하도록 지시받아요. 채팅 창에서도 AI가 쓴 답이라 틀릴 수 있다고 방문자에게 알려요.' },
@@ -282,7 +282,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'AI에게 맡기고 싶은 일을 팀에게 말해 보세요.', text: '설정은 그게 전부예요. 새 팀은 무료 크레딧으로 시작하고, 카드는 필요 없어요.', pricing: '요금 보기' },
     home: { title: 'AI도 넣고 싶나요?', text: '고객 상담 챗봇, 바로 나오는 답변, 번역, 리뷰 요약 등. 팀에게 부탁하면 추가되고, 월 한도는 내가 정해요.', link: 'AI 기능 보기' },
-    pricingNote: { title: '제품 속 AI', text: '챗봇이나 요약처럼 제품이 AI를 쓴다면, 방문자 사용분은 제공사 가격에 10%를 더해 크레딧에서 나가요. 제품마다 월 한도가 있어요(바꾸지 않으면 $10).', link: 'AI 기능 보기' },
+    pricingNote: { title: '제품 속 AI', text: '챗봇이나 요약처럼 제품이 AI를 쓴다면, 방문자 사용분은 제공사 가격에 10%를 더해 크레딧에서 나가요. 제품마다 월 한도가 있어요(바꾸지 않으면 1,000 크레딧).', link: 'AI 기능 보기' },
   },
   ja: {
     nav: 'AI機能', navDesc: 'チャットボットや要約などを追加',
@@ -294,7 +294,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'equipeでプロダクトにAIを追加：サポート用チャットボット、FAQ回答、翻訳、要約をAPIキーなしで。',
     },
     answerLabel: 'ひとことで言うと。',
-    answer: 'equipeで作ったプロダクトは、AIのアカウントやAPIキーなしでAIを使えます。料金について答えるチャットボットなど、ほしいものをequipeのチームに伝えれば、チームが用意済みの11の機能から追加します。利用料はAIプロバイダーの定価に10%を加えてequipeのクレジットから支払われ、プロダクトごとに月のAI上限（変更しなければ$10）があるので、チャットボットが忙しくてもクレジットを使い切ることはありません。',
+    answer: 'equipeで作ったプロダクトは、AIのアカウントやAPIキーなしでAIを使えます。料金について答えるチャットボットなど、ほしいものをequipeのチームに伝えれば、チームが用意済みの11の機能から追加します。利用料はAIプロバイダーの定価に10%を加えてequipeのクレジットから支払われ、プロダクトごとに月のAI上限（変更しなければ1,000クレジット）があるので、チャットボットが忙しくてもクレジットを使い切ることはありません。',
     ctaStart: '作りはじめる', ctaHow: '仕組みを見る',
     featuresTitle: 'すぐ使える11のAI機能',
     featuresSub: 'チームがプロダクトに合う機能を選び、あなたの情報で中身を埋めます：料金、営業時間、商品一覧、ポリシー。',
@@ -349,7 +349,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: '訪問者の利用分は、使ったそのときにequipeのクレジットから支払われます。AIのための別の定額プランはありません。',
       points: [
         { title: 'プロバイダー価格 + 10%', text: 'リクエストごとに、AIプロバイダーの定価に10%の手数料が加わります。短いチャットの回答なら、ふつうは1セントのごく一部です。' },
-        { title: '自分で決める月の上限', text: 'プロダクトごとに月のAI上限があり、変更しなければ$10です。80%に達するとお知らせします。上限に達すると、翌月になるか上限を上げるまで、AI機能は訪問者に少し休憩中だと伝えます。' },
+        { title: '自分で決める月の上限', text: 'プロダクトごとに月のAI上限があり、変更しなければ1,000クレジットです。80%に達するとお知らせします。上限に達すると、翌月になるか上限を上げるまで、AI機能は訪問者に少し休憩中だと伝えます。' },
         { title: '確認はひとつの場所で', text: 'プロダクト › プロダクトのAIでは、各機能を小さなライブデモとおおよその月額で表示し、続いてプロダクトごとの利用額、30日間の推移、よく使われている機能を表示します。' },
       ],
       models: 'チームは仕事ごとにモデルを自動で選びます。チャットや短い要約には速くて安価なモデルを、必要なときだけより強力なモデルを使います。',
@@ -382,7 +382,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'OpenAI、Anthropic、Googleのアカウントは必要ですか？', answer: 'いいえ。AIモデルはequipeが用意します。チームがプロダクトのAIをオンにし、費用はequipeのクレジットから支払われます。どこかに登録したり、キーをコピーしたりすることはありません。' },
       { question: 'コードを書ける必要はありますか？', answer: 'いいえ。「メニューについての質問に答えるチャットボットを付けて」のように、ふだんの言葉でチームに頼むだけです。チームが既製の機能を追加し、知っておくべきことを入れ、テストしてから見せます。' },
-      { question: 'equipeのAIチャットボットはいくらかかりますか？', answer: 'AIプロバイダーの定価に10%を加えた額が、訪問者が使った分だけクレジットから引かれます。短いチャットの回答ならふつうは1セントのごく一部で、プロダクトごとに月のAI上限（標準は$10）があり、変更できます。' },
+      { question: 'equipeのAIチャットボットはいくらかかりますか？', answer: 'AIプロバイダーの定価に10%を加えた額が、訪問者が使った分だけクレジットから引かれます。短いチャットの回答ならふつうは1セントのごく一部で、プロダクトごとに月のAI上限（標準は1,000クレジット）があり、変更できます。' },
       { question: 'チャットボットが忙しいと、クレジットを使い切ってしまいますか？', answer: 'いいえ。プロダクトごとに月のAI上限があります。80%でお知らせし、上限に達すると、翌月になるか上限を上げるまで、AI機能は丁寧なメッセージとともに一時停止します。訪問者ごとの上限で、ひとりが埋め尽くすことも防ぎます。' },
       { question: '訪問者が入力した内容は保存されますか？', answer: 'いいえ。equipeはプロンプトも回答も保存せず、リクエスト数と費用だけを記録します。AIプロバイダーは回答のために各メッセージを受け取ります。equipeが作成するプロダクトのプライバシーポリシーに、このことが8言語で書かれています。' },
       { question: 'チャットボットが間違えることはありますか？', answer: 'はい、どんなAIでも間違えることがあります。アシスタントは、チームが渡した情報だけで答え、確かでないときはそう伝えるよう指示されています。チャットでも、回答はAIが書いたもので間違いがありうることを訪問者に伝えます。' },
@@ -391,7 +391,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'AIにやってほしいことを、チームに伝えましょう。', text: 'セットアップはそれだけです。新しいチームは無料クレジット付きで始められ、カードは不要です。', pricing: '料金を見る' },
     home: { title: 'AIも入れたいなら', text: 'サポート用チャットボット、すぐに返る回答、翻訳、レビュー要約など。チームに頼めば追加され、月の上限はあなたが決めます。', link: 'AI機能を見る' },
-    pricingNote: { title: 'プロダクトのAI', text: 'チャットボットや要約などプロダクトがAIを使う場合、訪問者の利用分はプロバイダー価格に10%を加えてクレジットから支払われます。プロダクトごとに月の上限があります（変更しなければ$10）。', link: 'AI機能を見る' },
+    pricingNote: { title: 'プロダクトのAI', text: 'チャットボットや要約などプロダクトがAIを使う場合、訪問者の利用分はプロバイダー価格に10%を加えてクレジットから支払われます。プロダクトごとに月の上限があります（変更しなければ1,000クレジット）。', link: 'AI機能を見る' },
   },
   'zh-CN': {
     nav: 'AI 功能', navDesc: '加入聊天机器人、摘要等',
@@ -403,7 +403,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: '用 equipe 为产品加入 AI：客服聊天机器人、FAQ 解答、翻译和摘要，无需 API 密钥。',
     },
     answerLabel: '简短回答。',
-    answer: '用 equipe 打造的产品无需 AI 账号或 API 密钥就能使用 AI。把你想要的告诉 equipe 团队，比如一个回答价格问题的聊天机器人，团队就会从 11 个现成功能中为你加上。用量按 AI 服务商的标价加 10% 从你的 equipe 点数中支付，每个产品都有每月 AI 上限（不修改则为 $10），所以聊天机器人再忙也不会把点数用光。',
+    answer: '用 equipe 打造的产品无需 AI 账号或 API 密钥就能使用 AI。把你想要的告诉 equipe 团队，比如一个回答价格问题的聊天机器人，团队就会从 11 个现成功能中为你加上。用量按 AI 服务商的标价加 10% 从你的 equipe 点数中支付，每个产品都有每月 AI 上限（不修改则为 1,000 点数），所以聊天机器人再忙也不会把点数用光。',
     ctaStart: '开始打造', ctaHow: '看看怎么做',
     featuresTitle: '11 个现成的 AI 功能',
     featuresSub: '团队会挑选适合你产品的功能，并填入你自己的信息：价格、营业时间、商品目录和政策。',
@@ -458,7 +458,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: '访客的用量会实时从你的 equipe 点数中支付。AI 没有单独的订阅。',
       points: [
         { title: '服务商价格 + 10%', text: '每个请求按 AI 服务商的标价加 10% 手续费计费。一条简短的聊天回答通常远不到一美分。' },
-        { title: '每月上限由你掌控', text: '每个产品都有自己的每月 AI 上限，不修改则为 $10。用到 80% 时会通知你。达到上限后，AI 功能会告诉访客正在短暂休息，直到下个月或你提高上限。' },
+        { title: '每月上限由你掌控', text: '每个产品都有自己的每月 AI 上限，不修改则为 1,000 点数。用到 80% 时会通知你。达到上限后，AI 功能会告诉访客正在短暂休息，直到下个月或你提高上限。' },
         { title: '一处查看', text: '在“产品 › 产品中的 AI”里，每个功能都有一个小型实时演示和大致的月费用，下面是每个产品的花费、30 天趋势和最常用的功能。' },
       ],
       models: '团队会为每项工作自动选择模型：聊天和简短摘要用快速、便宜的模型，只有工作需要时才用更强的模型。',
@@ -491,7 +491,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: '我需要 OpenAI、Anthropic 或 Google 账号吗？', answer: '不需要。AI 模型由 equipe 提供。团队为你的产品开启 AI，费用从你的 equipe 点数中扣除。你不用在任何地方注册，也不用复制密钥。' },
       { question: '我需要会写代码吗？', answer: '不需要。用平常的话告诉团队就行，比如“加一个能回答菜单问题的聊天机器人”。团队会加上现成功能，填好它要知道的内容，测试后给你看。' },
-      { question: '在 equipe 上用 AI 聊天机器人要花多少钱？', answer: 'AI 服务商的标价加 10%，按访客的实际使用从你的点数中扣除。一条简短的聊天回答通常远不到一美分，每个产品都有每月 AI 上限（默认 $10），你可以修改。' },
+      { question: '在 equipe 上用 AI 聊天机器人要花多少钱？', answer: 'AI 服务商的标价加 10%，按访客的实际使用从你的点数中扣除。一条简短的聊天回答通常远不到一美分，每个产品都有每月 AI 上限（默认 1,000 点数），你可以修改。' },
       { question: '聊天机器人太忙会把点数用光吗？', answer: '不会。每个产品都有每月 AI 上限。用到 80% 时会通知你，达到上限后 AI 功能会显示友好的提示并暂停，直到下个月或你提高上限。按访客设限，也能防止某个人刷爆它。' },
       { question: '你们会保存访客输入的内容吗？', answer: '不会。equipe 不保存提问和回答，只记录请求次数和费用。AI 服务商会收到每条消息以便回答。equipe 为你撰写的产品隐私政策会用 8 种语言说明这一点。' },
       { question: '聊天机器人会出错吗？', answer: '会，任何 AI 都可能出错。助手的指令要求它只根据团队提供的信息回答，不确定时要说明；聊天窗口也会告诉访客回答由 AI 撰写，可能有误。' },
@@ -500,7 +500,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: '告诉团队你想让 AI 做什么。', text: '设置就这么简单。新团队开始时就有免费点数，无需绑卡。', pricing: '查看价格' },
     home: { title: '也想加入 AI 吗？', text: '客服聊天机器人、即时解答、翻译、评价摘要等。告诉团队就能加上，每月上限由你设定。', link: '查看 AI 功能' },
-    pricingNote: { title: '产品中的 AI', text: '如果你的产品用到 AI，比如聊天机器人或摘要，访客的用量会按服务商价格加 10% 从你的点数中支付，每个产品都有每月上限（不修改则为 $10）。', link: '查看 AI 功能' },
+    pricingNote: { title: '产品中的 AI', text: '如果你的产品用到 AI，比如聊天机器人或摘要，访客的用量会按服务商价格加 10% 从你的点数中支付，每个产品都有每月上限（不修改则为 1,000 点数）。', link: '查看 AI 功能' },
   },
   es: {
     nav: 'Funciones de IA', navDesc: 'Añade un chatbot, resúmenes y más',
@@ -512,7 +512,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'Añade IA a tu producto con equipe: un chatbot de atención, respuestas de FAQ, traducción y resúmenes, sin claves de API.',
     },
     answerLabel: 'La respuesta corta.',
-    answer: 'Los productos hechos con equipe pueden usar IA sin una cuenta de IA ni una clave de API. Dile a tu equipo de equipe lo que quieres, por ejemplo un chatbot que responda preguntas sobre tus precios, y el equipo lo añade a partir de 11 funciones listas para usar. El uso se paga con tus créditos de equipe al precio de lista del proveedor de IA más un 10 %, y cada producto tiene un límite mensual de IA ($10 si no lo cambias), así que un chatbot con mucho movimiento no puede agotar tus créditos.',
+    answer: 'Los productos hechos con equipe pueden usar IA sin una cuenta de IA ni una clave de API. Dile a tu equipo de equipe lo que quieres, por ejemplo un chatbot que responda preguntas sobre tus precios, y el equipo lo añade a partir de 11 funciones listas para usar. El uso se paga con tus créditos de equipe al precio de lista del proveedor de IA más un 10 %, y cada producto tiene un límite mensual de IA (1000 créditos si no lo cambias), así que un chatbot con mucho movimiento no puede agotar tus créditos.',
     ctaStart: 'Empieza a crear', ctaHow: 'Mira cómo funciona',
     featuresTitle: '11 funciones de IA listas para usar',
     featuresSub: 'Tu equipo elige las que encajan con tu producto y las llena con tus propios datos: tus precios, horarios, catálogo y políticas.',
@@ -567,7 +567,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: 'El uso de tus visitantes se paga con tus créditos de equipe a medida que ocurre. No hay una suscripción aparte para la IA.',
       points: [
         { title: 'Precio del proveedor + 10 %', text: 'Cada solicitud cuesta el precio de lista del proveedor de IA más una comisión del 10 %. Una respuesta corta de chat suele costar una mínima fracción de centavo.' },
-        { title: 'Un límite mensual que tú controlas', text: 'Cada producto tiene su propio límite mensual de IA, $10 si no lo cambias. Recibes un aviso al 80 %. Al llegar al límite, las funciones de IA avisan a los visitantes de que se toman un breve descanso hasta el mes siguiente o hasta que lo subas.' },
+        { title: 'Un límite mensual que tú controlas', text: 'Cada producto tiene su propio límite mensual de IA, 1000 créditos si no lo cambias. Recibes un aviso al 80 %. Al llegar al límite, las funciones de IA avisan a los visitantes de que se toman un breve descanso hasta el mes siguiente o hasta que lo subas.' },
         { title: 'Todo en un solo lugar', text: 'Producto › IA en tu producto muestra cada función con una pequeña demo en vivo y un costo mensual aproximado, y luego lo que gastó cada producto, la tendencia de 30 días y las funciones más usadas.' },
       ],
       models: 'Tu equipo elige automáticamente el modelo para cada tarea: uno rápido y económico para el chat y los resúmenes cortos, y uno más potente solo cuando la tarea lo necesita.',
@@ -600,7 +600,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: '¿Necesito una cuenta de OpenAI, Anthropic o Google?', answer: 'No. equipe proporciona los modelos de IA. Tu equipo activa la IA en tu producto y el costo sale de tus créditos de equipe. Nunca te registras en ningún sitio ni copias una clave.' },
       { question: '¿Necesito saber programar?', answer: 'No. Se lo pides a tu equipo con palabras sencillas, como «añade un chatbot que responda preguntas sobre mi menú». El equipo añade una función lista para usar, completa lo que debe saber, la prueba y te la muestra.' },
-      { question: '¿Cuánto cuesta un chatbot de IA en equipe?', answer: 'El precio de lista del proveedor de IA más un 10 %, descontado de tus créditos a medida que los visitantes lo usan. Una respuesta corta de chat suele costar una mínima fracción de centavo, y cada producto tiene un límite mensual de IA ($10 por defecto) que puedes cambiar.' },
+      { question: '¿Cuánto cuesta un chatbot de IA en equipe?', answer: 'El precio de lista del proveedor de IA más un 10 %, descontado de tus créditos a medida que los visitantes lo usan. Una respuesta corta de chat suele costar una mínima fracción de centavo, y cada producto tiene un límite mensual de IA (1000 créditos por defecto) que puedes cambiar.' },
       { question: '¿Puede un chatbot con mucho uso gastar todos mis créditos?', answer: 'No. Cada producto tiene un límite mensual de IA. Recibes un aviso al 80 %, y al llegar al límite las funciones de IA se pausan con un mensaje amable hasta el mes siguiente o hasta que lo subas. Los límites por visitante evitan que una sola persona lo inunde.' },
       { question: '¿Guardan lo que escriben mis visitantes?', answer: 'No. equipe no guarda las preguntas ni las respuestas, solo el número de solicitudes y su costo. El proveedor de IA recibe cada mensaje para responderlo. La política de privacidad de tu producto, que equipe escribe por ti, lo dice en 8 idiomas.' },
       { question: '¿Puede equivocarse el chatbot?', answer: 'Sí, como cualquier IA. El asistente tiene instrucciones de responder solo con los datos que le da tu equipo y de decir cuándo no está seguro, y el chat avisa a los visitantes de que las respuestas las escribe una IA y pueden ser incorrectas.' },
@@ -609,7 +609,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'Dile a tu equipo qué te gustaría que hiciera la IA.', text: 'Esa es toda la configuración. Los equipos nuevos empiezan con crédito gratis, sin tarjeta.', pricing: 'Ver precios' },
     home: { title: '¿También quieres IA?', text: 'Un chatbot de atención, respuestas al instante, traducción, resúmenes de reseñas y más. Pídeselo a tu equipo y queda añadido, con un límite mensual que tú fijas.', link: 'Ver funciones de IA' },
-    pricingNote: { title: 'IA en tu producto', text: 'Si tu producto usa IA, como un chatbot o resúmenes, el uso de tus visitantes se paga con tus créditos al precio del proveedor más un 10 %, con un límite mensual por producto ($10 si no lo cambias).', link: 'Ver funciones de IA' },
+    pricingNote: { title: 'IA en tu producto', text: 'Si tu producto usa IA, como un chatbot o resúmenes, el uso de tus visitantes se paga con tus créditos al precio del proveedor más un 10 %, con un límite mensual por producto (1000 créditos si no lo cambias).', link: 'Ver funciones de IA' },
   },
   'pt-BR': {
     nav: 'Recursos de IA', navDesc: 'Adicione um chatbot, resumos e mais',
@@ -621,7 +621,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'Adicione IA ao seu produto com o equipe: um chatbot de atendimento, respostas de FAQ, tradução e resumos, sem chaves de API.',
     },
     answerLabel: 'A resposta curta.',
-    answer: 'Produtos feitos com o equipe podem usar IA sem conta de IA nem chave de API. Diga ao seu time no equipe o que você quer, como um chatbot que responde perguntas sobre seus preços, e o time adiciona a partir de 11 recursos prontos. O uso é pago com seus créditos do equipe pelo preço de tabela do provedor de IA mais 10%, e cada produto tem um limite mensal de IA ($10, a menos que você mude), então um chatbot movimentado não consegue esgotar seus créditos.',
+    answer: 'Produtos feitos com o equipe podem usar IA sem conta de IA nem chave de API. Diga ao seu time no equipe o que você quer, como um chatbot que responde perguntas sobre seus preços, e o time adiciona a partir de 11 recursos prontos. O uso é pago com seus créditos do equipe pelo preço de tabela do provedor de IA mais 10%, e cada produto tem um limite mensal de IA (1.000 créditos, a menos que você mude), então um chatbot movimentado não consegue esgotar seus créditos.',
     ctaStart: 'Comece a criar', ctaHow: 'Veja como funciona',
     featuresTitle: '11 recursos de IA prontos',
     featuresSub: 'Seu time escolhe os que combinam com seu produto e preenche com as suas informações: seus preços, horários, catálogo e políticas.',
@@ -676,7 +676,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: 'O uso dos seus visitantes é pago com seus créditos do equipe à medida que acontece. Não existe assinatura separada para IA.',
       points: [
         { title: 'Preço do provedor + 10%', text: 'Cada requisição custa o preço de tabela do provedor de IA mais uma taxa de 10%. Uma resposta curta de chat costuma custar uma pequena fração de centavo.' },
-        { title: 'Um limite mensal que você controla', text: 'Cada produto tem seu próprio limite mensal de IA, $10 a menos que você mude. Você recebe um aviso aos 80%. No limite, os recursos de IA avisam aos visitantes que estão fazendo uma pausa curta até o próximo mês ou até você aumentar o limite.' },
+        { title: 'Um limite mensal que você controla', text: 'Cada produto tem seu próprio limite mensal de IA, 1.000 créditos a menos que você mude. Você recebe um aviso aos 80%. No limite, os recursos de IA avisam aos visitantes que estão fazendo uma pausa curta até o próximo mês ou até você aumentar o limite.' },
         { title: 'Tudo num só lugar', text: 'Produto › IA no seu produto mostra cada recurso com uma pequena demonstração ao vivo e um custo mensal aproximado, depois quanto cada produto gastou, a tendência de 30 dias e os recursos mais usados.' },
       ],
       models: 'Seu time escolhe automaticamente o modelo de cada tarefa: um rápido e barato para chat e resumos curtos, e um mais forte só quando a tarefa pede.',
@@ -709,7 +709,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'Preciso de uma conta na OpenAI, Anthropic ou Google?', answer: 'Não. O equipe fornece os modelos de IA. Seu time ativa a IA no seu produto e o custo sai dos seus créditos do equipe. Você nunca se cadastra em lugar nenhum nem copia uma chave.' },
       { question: 'Preciso saber programar?', answer: 'Não. Você pede ao seu time com palavras simples, como “adicione um chatbot que responda perguntas sobre meu cardápio”. O time adiciona um recurso pronto, preenche o que ele precisa saber, testa e mostra para você.' },
-      { question: 'Quanto custa um chatbot de IA no equipe?', answer: 'O preço de tabela do provedor de IA mais 10%, descontado dos seus créditos conforme os visitantes usam. Uma resposta curta de chat costuma custar uma pequena fração de centavo, e cada produto tem um limite mensal de IA ($10 por padrão) que você pode mudar.' },
+      { question: 'Quanto custa um chatbot de IA no equipe?', answer: 'O preço de tabela do provedor de IA mais 10%, descontado dos seus créditos conforme os visitantes usam. Uma resposta curta de chat costuma custar uma pequena fração de centavo, e cada produto tem um limite mensal de IA (1.000 créditos por padrão) que você pode mudar.' },
       { question: 'Um chatbot muito usado pode gastar todos os meus créditos?', answer: 'Não. Cada produto tem um limite mensal de IA. Você recebe um aviso aos 80% e, no limite, os recursos de IA pausam com uma mensagem amigável até o próximo mês ou até você aumentar o limite. Limites por visitante impedem que uma pessoa inunde o chatbot.' },
       { question: 'Vocês guardam o que meus visitantes digitam?', answer: 'Não. O equipe não guarda perguntas nem respostas, só o número de requisições e o custo. O provedor de IA recebe cada mensagem para respondê-la. A política de privacidade do seu produto, que o equipe escreve para você, diz isso em 8 idiomas.' },
       { question: 'O chatbot pode errar?', answer: 'Pode, como qualquer IA. O assistente é instruído a responder só com os fatos que seu time passa e a dizer quando não tem certeza, e o chat avisa aos visitantes que as respostas são escritas por IA e podem estar erradas.' },
@@ -718,7 +718,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'Diga ao seu time o que você quer que a IA faça.', text: 'A configuração é só isso. Times novos começam com crédito grátis, sem cartão.', pricing: 'Ver preços' },
     home: { title: 'Quer IA nele também?', text: 'Um chatbot de atendimento, respostas na hora, tradução, resumos de avaliações e mais. Peça ao seu time e está adicionado, com um limite mensal definido por você.', link: 'Ver recursos de IA' },
-    pricingNote: { title: 'IA no seu produto', text: 'Se o seu produto usa IA, como um chatbot ou resumos, o uso dos seus visitantes é pago com seus créditos pelo preço do provedor mais 10%, com um limite mensal por produto ($10, a menos que você mude).', link: 'Ver recursos de IA' },
+    pricingNote: { title: 'IA no seu produto', text: 'Se o seu produto usa IA, como um chatbot ou resumos, o uso dos seus visitantes é pago com seus créditos pelo preço do provedor mais 10%, com um limite mensal por produto (1.000 créditos, a menos que você mude).', link: 'Ver recursos de IA' },
   },
   de: {
     nav: 'KI-Funktionen', navDesc: 'Chatbot, Zusammenfassungen und mehr',
@@ -730,7 +730,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'KI in deinem Produkt mit equipe: ein Support-Chatbot, FAQ-Antworten, Übersetzung und Zusammenfassungen, ohne API-Schlüssel.',
     },
     answerLabel: 'Die kurze Antwort.',
-    answer: 'Mit equipe gebaute Produkte können KI nutzen, ohne KI-Konto und ohne API-Schlüssel. Sag deinem equipe-Team, was du willst, etwa einen Chatbot, der Fragen zu deinen Preisen beantwortet, und das Team baut es aus 11 fertigen Funktionen ein. Die Nutzung wird zum Listenpreis des KI-Anbieters plus 10 % aus deinen equipe-Credits bezahlt, und jedes Produkt hat ein monatliches KI-Limit ($10, solange du es nicht änderst), damit ein viel genutzter Chatbot deine Credits nicht aufbrauchen kann.',
+    answer: 'Mit equipe gebaute Produkte können KI nutzen, ohne KI-Konto und ohne API-Schlüssel. Sag deinem equipe-Team, was du willst, etwa einen Chatbot, der Fragen zu deinen Preisen beantwortet, und das Team baut es aus 11 fertigen Funktionen ein. Die Nutzung wird zum Listenpreis des KI-Anbieters plus 10 % aus deinen equipe-Credits bezahlt, und jedes Produkt hat ein monatliches KI-Limit (1.000 Credits, solange du es nicht änderst), damit ein viel genutzter Chatbot deine Credits nicht aufbrauchen kann.',
     ctaStart: 'Loslegen', ctaHow: 'So funktioniert’s',
     featuresTitle: '11 fertige KI-Funktionen',
     featuresSub: 'Dein Team wählt die passenden für dein Produkt aus und füllt sie mit deinen eigenen Fakten: deinen Preisen, Öffnungszeiten, deinem Sortiment und deinen Regeln.',
@@ -785,7 +785,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: 'Die Nutzung durch deine Besucher wird laufend aus deinen equipe-Credits bezahlt. Ein eigenes KI-Abo gibt es nicht.',
       points: [
         { title: 'Anbieterpreis + 10 %', text: 'Jede Anfrage kostet den Listenpreis des KI-Anbieters plus 10 % Gebühr. Eine kurze Chat-Antwort kostet meist nur einen winzigen Bruchteil eines Cents.' },
-        { title: 'Ein Monatslimit, das du bestimmst', text: 'Jedes Produkt hat sein eigenes monatliches KI-Limit, $10, solange du es nicht änderst. Bei 80 % bekommst du einen Hinweis. Am Limit sagen KI-Funktionen den Besuchern, dass sie eine kurze Pause machen, bis zum nächsten Monat oder bis du das Limit erhöhst.' },
+        { title: 'Ein Monatslimit, das du bestimmst', text: 'Jedes Produkt hat sein eigenes monatliches KI-Limit, 1.000 Credits, solange du es nicht änderst. Bei 80 % bekommst du einen Hinweis. Am Limit sagen KI-Funktionen den Besuchern, dass sie eine kurze Pause machen, bis zum nächsten Monat oder bis du das Limit erhöhst.' },
         { title: 'Alles an einem Ort', text: 'Produkt › KI in deinem Produkt zeigt jede Funktion mit einer kleinen Live-Demo und groben Monatskosten, dann, was jedes Produkt ausgegeben hat, einen 30-Tage-Verlauf und die meistgenutzten Funktionen.' },
       ],
       models: 'Dein Team wählt das Modell für jede Aufgabe automatisch: ein schnelles, günstiges für Chat und kurze Zusammenfassungen und ein stärkeres nur, wenn die Aufgabe es braucht.',
@@ -818,7 +818,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'Brauche ich ein Konto bei OpenAI, Anthropic oder Google?', answer: 'Nein. equipe stellt die KI-Modelle bereit. Dein Team schaltet KI für dein Produkt ein, und die Kosten gehen von deinen equipe-Credits ab. Du meldest dich nirgends an und kopierst keinen Schlüssel.' },
       { question: 'Muss ich programmieren können?', answer: 'Nein. Du bittest dein Team in einfachen Worten, etwa: „Füge einen Chatbot hinzu, der Fragen zu meiner Speisekarte beantwortet.“ Das Team baut eine fertige Funktion ein, füllt aus, was sie wissen muss, testet sie und zeigt sie dir.' },
-      { question: 'Was kostet ein KI-Chatbot bei equipe?', answer: 'Den Listenpreis des KI-Anbieters plus 10 %, abgebucht von deinen Credits, während Besucher ihn nutzen. Eine kurze Chat-Antwort kostet meist nur einen winzigen Bruchteil eines Cents, und jedes Produkt hat ein monatliches KI-Limit (standardmäßig $10), das du ändern kannst.' },
+      { question: 'Was kostet ein KI-Chatbot bei equipe?', answer: 'Den Listenpreis des KI-Anbieters plus 10 %, abgebucht von deinen Credits, während Besucher ihn nutzen. Eine kurze Chat-Antwort kostet meist nur einen winzigen Bruchteil eines Cents, und jedes Produkt hat ein monatliches KI-Limit (standardmäßig 1.000 Credits), das du ändern kannst.' },
       { question: 'Kann ein viel genutzter Chatbot alle meine Credits aufbrauchen?', answer: 'Nein. Jedes Produkt hat ein monatliches KI-Limit. Bei 80 % bekommst du einen Hinweis, und am Limit pausieren KI-Funktionen mit einer freundlichen Nachricht bis zum nächsten Monat oder bis du das Limit erhöhst. Limits pro Besucher verhindern, dass eine einzelne Person ihn überflutet.' },
       { question: 'Speichert ihr, was meine Besucher eintippen?', answer: 'Nein. equipe speichert weder Prompts noch Antworten, nur die Zahl der Anfragen und ihre Kosten. Der KI-Anbieter erhält jede Nachricht, um sie zu beantworten. Die Datenschutzerklärung deines Produkts, die equipe für dich schreibt, sagt das in 8 Sprachen.' },
       { question: 'Kann sich der Chatbot irren?', answer: 'Ja, das kann jede KI. Der Assistent hat die Anweisung, nur mit den Fakten zu antworten, die dein Team ihm gibt, und zu sagen, wenn er unsicher ist. Der Chat weist Besucher außerdem darauf hin, dass die Antworten von einer KI stammen und falsch sein können.' },
@@ -827,7 +827,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'Sag deinem Team, was die KI für dich tun soll.', text: 'Das ist die ganze Einrichtung. Neue Teams starten mit kostenlosem Guthaben, ohne Karte.', pricing: 'Preise ansehen' },
     home: { title: 'Soll auch KI rein?', text: 'Ein Support-Chatbot, sofortige Antworten, Übersetzung, Zusammenfassungen von Bewertungen und mehr. Frag dein Team, und es ist drin, mit einem Monatslimit, das du festlegst.', link: 'KI-Funktionen ansehen' },
-    pricingNote: { title: 'KI in deinem Produkt', text: 'Nutzt dein Produkt KI, etwa einen Chatbot oder Zusammenfassungen, wird die Nutzung deiner Besucher zum Anbieterpreis plus 10 % aus deinen Credits bezahlt, mit einem Monatslimit pro Produkt ($10, solange du es nicht änderst).', link: 'KI-Funktionen ansehen' },
+    pricingNote: { title: 'KI in deinem Produkt', text: 'Nutzt dein Produkt KI, etwa einen Chatbot oder Zusammenfassungen, wird die Nutzung deiner Besucher zum Anbieterpreis plus 10 % aus deinen Credits bezahlt, mit einem Monatslimit pro Produkt (1.000 Credits, solange du es nicht änderst).', link: 'KI-Funktionen ansehen' },
   },
   fr: {
     nav: 'Fonctions IA', navDesc: 'Un chatbot, des résumés et plus encore',
@@ -839,7 +839,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       ogAlt: 'Ajoutez l’IA à votre produit avec equipe : un chatbot d’assistance, des réponses FAQ, la traduction et des résumés, sans clé API.',
     },
     answerLabel: 'La réponse courte.',
-    answer: 'Les produits créés avec equipe peuvent utiliser l’IA sans compte IA ni clé API. Dites à votre équipe sur equipe ce que vous voulez, par exemple un chatbot qui répond aux questions sur vos tarifs, et elle l’ajoute à partir de 11 fonctions prêtes à l’emploi. L’utilisation est payée avec vos crédits equipe, au prix catalogue du fournisseur d’IA plus 10 %, et chaque produit a une limite mensuelle d’IA ($10 sauf si vous la changez), pour qu’un chatbot très sollicité ne puisse pas épuiser vos crédits.',
+    answer: 'Les produits créés avec equipe peuvent utiliser l’IA sans compte IA ni clé API. Dites à votre équipe sur equipe ce que vous voulez, par exemple un chatbot qui répond aux questions sur vos tarifs, et elle l’ajoute à partir de 11 fonctions prêtes à l’emploi. L’utilisation est payée avec vos crédits equipe, au prix catalogue du fournisseur d’IA plus 10 %, et chaque produit a une limite mensuelle d’IA (1 000 crédits sauf si vous la changez), pour qu’un chatbot très sollicité ne puisse pas épuiser vos crédits.',
     ctaStart: 'Commencer à créer', ctaHow: 'Voir comment ça marche',
     featuresTitle: '11 fonctions IA prêtes à l’emploi',
     featuresSub: 'Votre équipe choisit celles qui conviennent à votre produit et les remplit avec vos propres informations : vos tarifs, horaires, catalogue et conditions.',
@@ -894,7 +894,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
       lead: 'L’utilisation par vos visiteurs est prélevée sur vos crédits equipe au fur et à mesure. Il n’y a pas d’abonnement IA séparé.',
       points: [
         { title: 'Prix du fournisseur + 10 %', text: 'Chaque requête coûte le prix catalogue du fournisseur d’IA plus 10 % de frais. Une courte réponse de chat coûte en général une infime fraction de centime.' },
-        { title: 'Une limite mensuelle que vous maîtrisez', text: 'Chaque produit a sa propre limite mensuelle d’IA, $10 sauf si vous la changez. Vous recevez un avis à 80 %. À la limite, les fonctions d’IA indiquent aux visiteurs qu’elles font une courte pause jusqu’au mois suivant ou jusqu’à ce que vous l’augmentiez.' },
+        { title: 'Une limite mensuelle que vous maîtrisez', text: 'Chaque produit a sa propre limite mensuelle d’IA, 1 000 crédits sauf si vous la changez. Vous recevez un avis à 80 %. À la limite, les fonctions d’IA indiquent aux visiteurs qu’elles font une courte pause jusqu’au mois suivant ou jusqu’à ce que vous l’augmentiez.' },
         { title: 'Tout au même endroit', text: 'Produit › L’IA dans votre produit montre chaque fonction avec une petite démo en direct et un coût mensuel approximatif, puis les dépenses de chaque produit, la tendance sur 30 jours et les fonctions les plus utilisées.' },
       ],
       models: 'Votre équipe choisit automatiquement le modèle pour chaque tâche : un modèle rapide et économique pour le chat et les résumés courts, et un plus puissant seulement quand la tâche l’exige.',
@@ -927,7 +927,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     faq: [
       { question: 'Faut-il un compte OpenAI, Anthropic ou Google ?', answer: 'Non. equipe fournit les modèles d’IA. Votre équipe active l’IA pour votre produit et le coût est prélevé sur vos crédits equipe. Vous ne vous inscrivez nulle part et ne copiez aucune clé.' },
       { question: 'Faut-il savoir coder ?', answer: 'Non. Vous le demandez à votre équipe avec des mots simples, comme « ajoute un chatbot qui répond aux questions sur ma carte ». Elle ajoute une fonction prête à l’emploi, renseigne ce qu’elle doit savoir, la teste et vous la montre.' },
-      { question: 'Combien coûte un chatbot IA sur equipe ?', answer: 'Le prix catalogue du fournisseur d’IA plus 10 %, prélevé sur vos crédits au fil de l’utilisation par vos visiteurs. Une courte réponse de chat coûte en général une infime fraction de centime, et chaque produit a une limite mensuelle d’IA ($10 par défaut) que vous pouvez modifier.' },
+      { question: 'Combien coûte un chatbot IA sur equipe ?', answer: 'Le prix catalogue du fournisseur d’IA plus 10 %, prélevé sur vos crédits au fil de l’utilisation par vos visiteurs. Une courte réponse de chat coûte en général une infime fraction de centime, et chaque produit a une limite mensuelle d’IA (1 000 crédits par défaut) que vous pouvez modifier.' },
       { question: 'Un chatbot très sollicité peut-il épuiser tous mes crédits ?', answer: 'Non. Chaque produit a une limite mensuelle d’IA. Vous recevez un avis à 80 %, et à la limite les fonctions d’IA se mettent en pause avec un message aimable jusqu’au mois suivant ou jusqu’à ce que vous l’augmentiez. Les limites par visiteur empêchent une seule personne de l’inonder.' },
       { question: 'Conservez-vous ce que tapent mes visiteurs ?', answer: 'Non. equipe ne conserve ni les questions ni les réponses, seulement le nombre de requêtes et leur coût. Le fournisseur d’IA reçoit chaque message pour y répondre. La politique de confidentialité de votre produit, qu’equipe rédige pour vous, le précise en 8 langues.' },
       { question: 'Le chatbot peut-il se tromper ?', answer: 'Oui, comme toute IA. L’assistant a pour consigne de répondre uniquement à partir des informations fournies par votre équipe et de dire quand il n’est pas sûr, et le chat indique aux visiteurs que les réponses sont rédigées par une IA et peuvent être erronées.' },
@@ -936,7 +936,7 @@ export const AI_COPY: Record<LocaleCode, AiCopy> = {
     ],
     cta: { title: 'Dites à votre équipe ce que vous aimeriez confier à l’IA.', text: 'C’est toute la configuration. Les nouvelles équipes démarrent avec du crédit offert, sans carte.', pricing: 'Voir les tarifs' },
     home: { title: 'Envie d’y ajouter de l’IA ?', text: 'Un chatbot d’assistance, des réponses instantanées, la traduction, des résumés d’avis et plus encore. Demandez-le à votre équipe et c’est ajouté, avec une limite mensuelle fixée par vous.', link: 'Voir les fonctions IA' },
-    pricingNote: { title: 'L’IA dans votre produit', text: 'Si votre produit utilise l’IA, comme un chatbot ou des résumés, l’utilisation par vos visiteurs est prélevée sur vos crédits au prix du fournisseur plus 10 %, avec une limite mensuelle par produit ($10 sauf si vous la changez).', link: 'Voir les fonctions IA' },
+    pricingNote: { title: 'L’IA dans votre produit', text: 'Si votre produit utilise l’IA, comme un chatbot ou des résumés, l’utilisation par vos visiteurs est prélevée sur vos crédits au prix du fournisseur plus 10 %, avec une limite mensuelle par produit (1 000 crédits sauf si vous la changez).', link: 'Voir les fonctions IA' },
   },
 };
 

@@ -128,7 +128,7 @@ const fr: LegalCopy = {
     summaryTitle: 'En bref',
     summary: [
       'Ce que vous apportez et ce que votre équipe construit pour vous vous appartient. Vous décidez de ce qui passe en ligne, de ce qui est envoyé et de ce qui coûte de l’argent.',
-      'Le travail de votre équipe est payé en crédits (1 crédit = $1). Les crédits achetés non utilisés sont remboursables dans les 14 jours suivant l’achat.',
+      'Le travail de votre équipe est payé en crédits (100 crédits = $1). Les crédits achetés non utilisés sont remboursables dans les 14 jours suivant l’achat.',
       'Les offres se renouvellent jusqu’à ce que vous les résiliiez. La résiliation prend effet à la fin de la période que vous avez payée.',
       'Les domaines achetés via equipe sont enregistrés à votre nom.',
       'L’IA peut se tromper. Vérifiez ce qui compte avant que ce soit rendu public.',
@@ -152,7 +152,7 @@ const fr: LegalCopy = {
       ] },
       { id: 'credits', h: 'Crédits', body: [
         { ul: [
-          '**1 crédit = $1.** Le travail de votre équipe est payé en crédits : le travail d’IA au prix catalogue du modèle plus notre marge, et l’ordinateur cloud qu’utilise votre équipe pendant qu’elle travaille. Chaque tâche indique ce qu’elle a utilisé, et les demandes affichent d’abord une estimation.',
+          '**100 crédits = $1.** Le travail de votre équipe est payé en crédits : le travail d’IA au prix catalogue du modèle plus notre marge, et l’ordinateur cloud qu’utilise votre équipe pendant qu’elle travaille. Chaque tâche indique ce qu’elle a utilisé, et les demandes affichent d’abord une estimation.',
           '**Les packs de crédits** sont des achats ponctuels, valables 12 mois à compter de l’achat.',
           '**Les crédits d’offre** inclus dans une offre Équipe mensuelle sont reportés pendant 2 mois ; les crédits mensuels d’une offre annuelle sont reportés pendant 3 mois. Les crédits arrivés à expiration sont retirés.',
           '**Les crédits gratuits et bonus** (par exemple le crédit de bienvenue ou les bonus promotionnels) n’ont aucune valeur monétaire, ne peuvent être ni remboursés ni transférés, et expirent avec les crédits qu’ils accompagnaient ou comme indiqué dans Facturation.',
@@ -183,7 +183,7 @@ const fr: LegalCopy = {
       { id: 'ai-features', h: 'Fonctions d’IA dans votre produit', body: [
         { ul: [
           'Les fonctions d’IA que votre équipe ajoute à votre produit (comme un chatbot, des résumés ou des images) sont payées avec vos crédits au prix catalogue du fournisseur d’IA plus 10 %, au fur et à mesure que vos visiteurs les utilisent.',
-          'Chaque produit a une limite mensuelle d’IA, de $10 sauf si un propriétaire ou un administrateur la modifie. À la limite, les fonctions d’IA se mettent en pause jusqu’au mois suivant ou jusqu’à ce que la limite soit relevée. Il existe aussi des limites par visiteur.',
+          'Chaque produit a une limite mensuelle d’IA, de 1 000 crédits sauf si un propriétaire ou un administrateur la modifie. À la limite, les fonctions d’IA se mettent en pause jusqu’au mois suivant ou jusqu’à ce que la limite soit relevée. Il existe aussi des limites par visiteur.',
           'Vous êtes responsable de la manière dont les fonctions d’IA sont utilisées dans votre produit, d’informer vos utilisateurs que les réponses sont rédigées par une IA, et de faire vérifier les résultats de l’IA par une personne avant qu’ils servent à des décisions qui affectent significativement quelqu’un.',
           'Nous pouvons mettre en pause les fonctions d’IA d’un produit qui fait l’objet d’abus ou qui enfreint les présentes conditions.',
         ] },

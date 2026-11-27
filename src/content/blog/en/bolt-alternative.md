@@ -19,7 +19,7 @@ faqs:
   - q: "Can I export my project from Bolt?"
     a: "Bolt's help page says its GitHub integration backs up your project, with a commit on each non-breaking change, and needs an individual GitHub account. The pages we read on 21 November 2026 did not say which plans include it or whether you can download the project, so check with Bolt."
   - q: "What is the difference between tokens and credits?"
-    a: "A token is a small chunk of text an AI reads or writes, so a token plan measures how much text moves through the AI. A credit plan charges a price per action or per dollar. Bolt meters in tokens; equipe uses credits where $1 is one credit and each task shows its cost."
+    a: "A token is a small chunk of text an AI reads or writes, so a token plan measures how much text moves through the AI. A credit plan charges a price per action or per dollar. Bolt meters in tokens; equipe uses credits where $1 is 100 credits and each task shows its cost."
   - q: "Does Bolt run my product after launch?"
     a: "Bolt describes an AI agent that plans your project, writes code and troubleshoots as you build. We found no statement about what it does after launch, so we treat it as a build-time agent. That is unclear, not a confirmed no. Ask Bolt if it matters to you."
   - q: "Is Bolt a better choice than equipe?"
@@ -50,7 +50,7 @@ Pricing is where people get confused, so here is the plain version.
 
 A **token** is a small chunk of text, roughly a piece of a word, that an AI reads or writes. A plan measured in tokens limits how much text goes through the AI. Bolt works this way: Pro is $25 a month with 10M tokens; Teams is $30 a month per member with 10M tokens each; tokens roll over on paid plans, but not on Free.
 
-A **credit** is a unit a company defines. Lovable, for example, prices by the size of the change: its pricing page gives 0.50 credit for "Make the button gray" and 1.70 for a landing page with images. equipe uses credits too, where $1 is one credit, and each task shows its price to the cent before it runs.
+A **credit** is a unit a company defines. Lovable, for example, prices by the size of the change: its pricing page gives 0.50 credit for "Make the button gray" and 1.70 for a landing page with images. equipe uses credits too, where $1 is 100 credits, and each task shows its price to the cent before it runs.
 
 Neither is better by itself. What matters:
 

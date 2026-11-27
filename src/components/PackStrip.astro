@@ -1,8 +1,9 @@
 ---
-// The credit packs on /pricing: the four plain packs and the bulk pack ($990 buys $1,100 of credits, "Best value").
+// The credit packs on /pricing: the four plain packs and the bulk pack ($990 buys 110,000 credits, "Best value").
+// Each card reads "$25 = 2,500 credits": the dollar price big (it is what you pay), what it buys in credits under it (100 credits = $1).
 // Prices come only from src/data/plan.ts (PACKS). Buying happens in the app (app.equipe.im/billing).
 import { SITE } from '../data/site';
-import { PACKS, usd } from '../data/plan';
+import { PACKS, usd, credits } from '../data/plan';
 import { packWords } from '../i18n/packs';
 import type { LocaleCode } from '../i18n/locales';
 
@@ -16,9 +17,9 @@ const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (
   <ul class="pk-list">
     {PACKS.map((p, i) => (
       <li class={`pk-card${p.bonus ? ' best' : ''}`} style={`--i:${i}`}>
-        {p.bonus ? <span class="pk-badge">{fill(W.best, { extra: usd(p.bonus) })}</span> : p.popular ? <span class="pk-badge soft">{W.popular}</span> : null}
+        {p.bonus ? <span class="pk-badge">{fill(W.best, { extra: credits(p.bonus, code) })}</span> : p.popular ? <span class="pk-badge soft">{W.popular}</span> : null}
         <b class="pk-price">{usd(p.usd)}</b>
-        <span class="pk-gets">{fill(W.gets, { credits: usd(p.usd + (p.bonus || 0)) })}</span>
+        <span class="pk-gets">{fill(W.gets, { credits: credits(p.usd + (p.bonus || 0), code) })}</span>
       </li>
     ))}
   </ul>
@@ -30,7 +31,9 @@ const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (
   .pk-h { display: grid; gap: 6px; }
   .pk-h h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; }
   .pk-h p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
-  .pk-list { list-style: none; margin: 0; padding: 12px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  /* The two cards with a badge are wider, so "Most teams start here" and "Best value · 11,000 credits extra" fit on one line in every locale. */
+  .pk-list { list-style: none; margin: 0; padding: 12px 0 0; display: grid; grid-template-columns: 1fr 1fr 1.25fr 1fr 1.7fr; gap: 12px; }
+  .pk-list > * { min-width: 0; }
   .pk-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 112px;
     padding: 22px 12px 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); text-align: center;
     animation: pk-in 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both; animation-delay: calc(var(--i) * 40ms); }
@@ -45,7 +48,7 @@ const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (
   .pk-f { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .pk-f p { margin: 0; flex: 1; min-width: 240px; font-size: 13.5px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
   @keyframes pk-in { from { opacity: 0; transform: translateY(8px); } }
-  @media (max-width: 760px) {
+  @media (max-width: 1000px) {
     .pk-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
     .pk-card.best { grid-column: 1 / -1; }
     .pk-f .btn { width: 100%; justify-content: center; }

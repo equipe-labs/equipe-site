@@ -38,25 +38,25 @@ Whatever route you take, a small app has the same cost categories. Naming them i
 
 ## equipe's prices, line by line
 
-All amounts are in US dollars. 1 credit equals $1.
+All amounts are in US dollars. 100 credits equal $1.
 
 | Item | Price | Notes |
 | --- | --- | --- |
 | Free start | $0 | $5 of credit when you create your team, $10 more when you add a card (no charge); no card needed |
-| Team plan | $19/month with no credits (keep it live); $44, $69, $119 or $269 a month with $25, $50, $100 or $250 of monthly credits; yearly is 10x monthly | Hosting for your sites, storage, the monthly credits you choose at $1 = $1 that roll over for 2 months, your whole team (PM, engineers, designer, QA, data) |
+| Team plan | $19/month with no credits (keep it live); $44, $69, $119 or $269 a month with $25, $50, $100 or $250 of monthly credits; yearly is 10x monthly | Hosting for your sites, storage, the monthly credits you choose at 100 credits = $1 that roll over for 2 months, your whole team (PM, engineers, designer, QA, data) |
 | Extra editors | $5/month each | The Team plan includes 5 people; each extra editor is $5 a month, up to 10 people per team. Free includes 2 people |
 | View-only invites | Free | Customers, investors or family can look without taking a seat |
 | AI work | Model list price plus a margin | Shown to the cent for each task; paid from credits |
 | The team's cloud computer | Part of the work | Drawn from credits only while the team is working; nothing when it is not |
 | Domains | The yearly price you approve | Paid from credits |
 | Credit packs | $25, $50, $100, $250 | Valid 12 months; unused credits refundable within 14 days |
-| Monthly credits | The amount you choose on the Team plan | At $1 = $1; they roll over for 2 months, and arrive every month on yearly billing too |
+| Monthly credits | The amount you choose on the Team plan | At 100 credits = $1; they roll over for 2 months, and arrive every month on yearly billing too |
 
 Yearly Team billing is 10x the monthly total at any credit amount, so two months are free compared with paying monthly.
 
 ## What credits pay for
 
-There is one concept to learn: credits, where 1 credit is $1. Everything your team does while it works draws from them. That is the AI work (the model's list price plus our margin, shown to the cent for each task) and the cloud computer the team works on. When the team is not working, it costs nothing, so you are not paying while you are away.
+There is one concept to learn: credits, where 100 credits are $1. Everything your team does while it works draws from them. That is the AI work (the model's list price plus our margin, shown to the cent for each task) and the cloud computer the team works on. When the team is not working, it costs nothing, so you are not paying while you are away.
 
 A team stops only when its credits run out. Add credits and it continues right away, and you can set a monthly cap so you decide the ceiling.
 

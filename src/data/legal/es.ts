@@ -128,7 +128,7 @@ const es: LegalCopy = {
     summaryTitle: 'En resumen',
     summary: [
       'Eres dueño de lo que aportas y de lo que tu equipo construye para ti. Tú decides qué sale en vivo, qué se envía y qué cuesta dinero.',
-      'El trabajo de tu equipo se paga con créditos (1 crédito = $1). Los créditos comprados que no hayas usado son reembolsables dentro de los 14 días posteriores a la compra.',
+      'El trabajo de tu equipo se paga con créditos (100 créditos = $1). Los créditos comprados que no hayas usado son reembolsables dentro de los 14 días posteriores a la compra.',
       'Los planes se renuevan hasta que los canceles. La cancelación surte efecto al final del período que pagaste.',
       'Los dominios comprados a través de equipe se registran a tu nombre.',
       'La IA puede equivocarse. Revisa lo importante antes de que se haga público.',
@@ -152,7 +152,7 @@ const es: LegalCopy = {
       ] },
       { id: 'credits', h: 'Créditos', body: [
         { ul: [
-          '**1 crédito = $1.** El trabajo de tu equipo se paga con créditos: el trabajo de IA al precio de lista del modelo más nuestro margen, y la computadora en la nube que usa tu equipo mientras trabaja. Cada tarea muestra lo que usó, y las solicitudes muestran primero una estimación.',
+          '**100 créditos = $1.** El trabajo de tu equipo se paga con créditos: el trabajo de IA al precio de lista del modelo más nuestro margen, y la computadora en la nube que usa tu equipo mientras trabaja. Cada tarea muestra lo que usó, y las solicitudes muestran primero una estimación.',
           '**Los paquetes de créditos** son compras únicas, válidas durante 12 meses desde la compra.',
           '**Los créditos del plan** que vienen con un plan Equipo mensual se acumulan durante 2 meses; los créditos mensuales de un plan anual se acumulan durante 3 meses. Los créditos que superan su fecha de vencimiento se eliminan.',
           '**Los créditos gratuitos y de bonificación** (por ejemplo, el crédito de bienvenida o las bonificaciones promocionales) no tienen valor en efectivo, no se pueden reembolsar ni transferir, y vencen junto con los créditos con los que llegaron o según se indique en Facturación.',
@@ -183,7 +183,7 @@ const es: LegalCopy = {
       { id: 'ai-features', h: 'Funciones de IA en tu producto', body: [
         { ul: [
           'Las funciones de IA que tu equipo agrega a tu producto (como un chatbot, resúmenes o imágenes) se pagan con tus créditos al precio de lista del proveedor de IA más un 10 %, a medida que tus visitantes las usan.',
-          'Cada producto tiene un límite mensual de IA, de $10 a menos que un propietario o administrador lo cambie. Al llegar al límite, las funciones de IA se pausan hasta el mes siguiente o hasta que se suba el límite. También hay límites por visitante.',
+          'Cada producto tiene un límite mensual de IA, de 1000 créditos a menos que un propietario o administrador lo cambie. Al llegar al límite, las funciones de IA se pausan hasta el mes siguiente o hasta que se suba el límite. También hay límites por visitante.',
           'Eres responsable de cómo se usan las funciones de IA en tu producto, de informar a tus usuarios que las respuestas están escritas por IA y de que una persona revise el resultado de la IA antes de usarlo para decisiones que afecten significativamente a alguien.',
           'Podemos pausar las funciones de IA de un producto que esté siendo objeto de abuso o que incumpla estos términos.',
         ] },

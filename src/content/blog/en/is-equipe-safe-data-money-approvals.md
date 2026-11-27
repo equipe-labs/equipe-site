@@ -56,7 +56,7 @@ Domain purchases show how seriously this is taken: the team cannot buy a domain 
 - Every request shows its **expected cost before it runs**.
 - You set a **monthly spending cap**, and you always see the expected total for the month.
 - Domains are bought only at the yearly price you approve, and AI work is billed at the model's list price plus a margin, shown to the cent for each task.
-- Credits are in dollars: 1 credit equals $1. Packs are valid for 12 months and unused credits are refundable within 14 days.
+- Credits have a fixed rate: 100 credits equal $1. Packs are valid for 12 months and unused credits are refundable within 14 days.
 
 You can read the full numbers on the [pricing page](/pricing/) and in our [cost breakdown](/blog/cost-to-build-and-run-a-small-app-with-ai-agents/).
 

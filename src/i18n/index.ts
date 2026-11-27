@@ -24,7 +24,8 @@ function diff(source: unknown, target: unknown, path: string, out: string[]) {
   }
 }
 
-// Prices are written as {{tokens}} (src/data/plan.ts) and filled here, so every locale reads the one price table.
+// Prices are written as {{tokens}} (src/data/plan.ts) and filled here, so every locale reads the one price table
+// (credit amounts are grouped the locale's way).
 const messages = new Map<LocaleCode, Messages>([[DEFAULT_LOCALE, fillPlanDeep(en)]]);
 for (const info of LOCALES) {
   if (info.code === DEFAULT_LOCALE) continue;
@@ -33,7 +34,7 @@ for (const info of LOCALES) {
   const problems: string[] = [];
   diff(en, mod.default, info.code, problems);
   if (problems.length) throw new Error(`src/i18n/${info.code}.ts does not match en.ts:\n  ${problems.join('\n  ')}`);
-  messages.set(info.code, fillPlanDeep(mod.default));
+  messages.set(info.code, fillPlanDeep(mod.default, info.code));
 }
 
 /** Locales that have a translation file (en always first), in LOCALES order. */

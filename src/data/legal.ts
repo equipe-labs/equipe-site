@@ -156,7 +156,7 @@ const en: LegalCopy = {
       summaryTitle: 'In short',
       summary: [
         'You own what you bring and what your team builds for you. You decide what goes live, gets sent or costs money.',
-        'Your team’s work is paid from credits (1 credit = $1). Unused purchased credits are refundable within 14 days of purchase.',
+        'Your team’s work is paid from credits (100 credits = $1). Unused purchased credits are refundable within 14 days of purchase.',
         'Plans renew until you cancel. Cancelling takes effect at the end of the period you paid for.',
         'Domains bought through equipe are registered in your name.',
         'AI can be wrong. Review what matters before it goes public.',
@@ -180,7 +180,7 @@ const en: LegalCopy = {
         ] },
         { id: 'credits', h: 'Credits', body: [
           { ul: [
-            '**1 credit = $1.** Your team’s work is paid from credits: AI work at the model’s list price plus our margin, and the cloud computer your team uses while it works. Each task shows what it used, and requests show an estimate first.',
+            '**100 credits = $1.** Your team’s work is paid from credits: AI work at the model’s list price plus our margin, and the cloud computer your team uses while it works. Each task shows what it used, and requests show an estimate first.',
             '**Credit packs** are one-time purchases, valid for 12 months from purchase.',
             '**Plan credits** that come with a monthly Team plan roll over for 2 months; the monthly credits of a yearly plan roll over for 3 months. Credits that pass their expiry are removed.',
             '**Free and bonus credits** (for example the welcome credit or promotional bonuses) have no cash value, cannot be refunded or transferred, and expire with the credits they came with or as shown in Billing.',
@@ -211,7 +211,7 @@ const en: LegalCopy = {
         { id: 'ai-features', h: 'AI features in your product', body: [
           { ul: [
             'AI features your team adds to your product (such as a chatbot, summaries or images) are paid from your credits at the AI provider’s list price plus 10%, as your visitors use them.',
-            'Each product has a monthly AI limit, $10 unless an owner or admin changes it. At the limit, AI features pause until the next month or until the limit is raised. There are also limits per visitor.',
+            'Each product has a monthly AI limit, 1,000 credits unless an owner or admin changes it. At the limit, AI features pause until the next month or until the limit is raised. There are also limits per visitor.',
             'You are responsible for how AI features are used in your product, for telling your users that answers are written by AI, and for having a person review AI output before it is used for decisions that significantly affect someone.',
             'We may pause AI features for a product that is being abused or that breaks these terms.',
           ] },

@@ -5,7 +5,7 @@
 // The picker is two custom radiogroups (billing cycle, credit amount): roving tabindex, arrow/Home/End keys, 44px targets,
 // a gliding indicator and a rolling price; prefers-reduced-motion turns all of that motion off.
 import { SITE } from '../data/site';
-import { TIERS, DEFAULT_TIER, usd, YEARLY, PROMO, promoLive, perMonth } from '../data/plan';
+import { TIERS, DEFAULT_TIER, usd, YEARLY, PROMO, promoLive, perMonth, creditNum, credits } from '../data/plan';
 import { PROMO_WORDS, fillP } from '../i18n/promo';
 import type { Messages } from '../i18n';
 import type { LocaleCode } from '../i18n/locales';
@@ -32,12 +32,13 @@ const P = t.plans;
 const K = P.picker;
 const def = TIERS[DEFAULT_TIER];
 const check = 'M5 12.5l4.5 4.5L19 7.5';
-const includes = (credits: number) => (credits === 0 ? K.keepLive : K.includes.replace('{credits}', usd(credits)));
+// Amounts of credit are shown in credits (100 credits = $1), grouped the locale's way; prices stay in dollars.
+const includes = (c: number) => (c === 0 ? K.keepLive : K.includes.replace('{credits}', creditNum(c, code)));
 const hint = (i: number) => (i === 0 ? K.stop0 : i === DEFAULT_TIER ? K.popular : '');
 const id = `tp-${loc}`;
 const yv = { first: usd(PROMO.firstYear), year: usd(YEARLY.usd) };
 const data = JSON.stringify({
-  tiers: TIERS.map((x, i) => ({ m: usd(x.month), y: usd(x.year), inc: includes(x.credits), hint: hint(i), plus: x.credits ? fillP(W.plus, { credits: usd(x.credits) }) : '' })),
+  tiers: TIERS.map((x, i) => ({ m: usd(x.month), y: usd(x.year), inc: includes(x.credits), hint: hint(i), plus: x.credits ? fillP(W.plus, { credits: creditNum(x.credits, code), usd: usd(x.credits) }) : '' })),
   perMonth: K.perMonth,
   perYear: K.perYear,
   yearly: { mo: perMonth(PROMO.firstYear), moStd: perMonth(YEARLY.usd), billed: fillP(W.billedPromo, yv), billedStd: fillP(W.billedStd, yv), save: K.save, badge: W.badge },
@@ -76,7 +77,7 @@ const data = JSON.stringify({
         <span class="seg-ind" aria-hidden="true"></span>
         {TIERS.map((x, i) => (
           <button type="button" role="radio" aria-checked={i === DEFAULT_TIER ? 'true' : 'false'} tabindex={i === DEFAULT_TIER ? 0 : -1} data-v={i}>
-            {usd(x.credits)}{i === DEFAULT_TIER && <i class="tp-dot" aria-hidden="true"></i>}
+            {creditNum(x.credits, code)}{i === DEFAULT_TIER && <i class="tp-dot" aria-hidden="true"></i>}
           </button>
         ))}
       </div>
@@ -87,7 +88,7 @@ const data = JSON.stringify({
     <a class="btn primary plan-a" href={SITE.start} data-ph="signup_cta_click" data-ph-location={`${loc}_1`}>{P.team.cta}</a>
   </li>
 </ul>
-{live && <p class="tp-terms" data-bf-until={PROMO.endsAt}>{fillP(W.terms, { first: usd(PROMO.firstYear), year: usd(YEARLY.usd), pct: PROMO.bonusPct, cap: usd(PROMO.bonusCap), date: endLabel })}</p>}
+{live && <p class="tp-terms" data-bf-until={PROMO.endsAt}>{fillP(W.terms, { first: usd(PROMO.firstYear), year: usd(YEARLY.usd), pct: PROMO.bonusPct, cap: credits(PROMO.bonusCap, code), date: endLabel })}</p>}
 
 <style is:global>
   /* Two cards: Start free is the narrower one. */
@@ -131,6 +132,9 @@ const data = JSON.stringify({
   .seg button:hover:not([aria-checked='true']) { color: var(--text); }
   .seg button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; z-index: 1; }
   .seg-tiers button:focus-visible { outline-offset: 3px; }
+  /* Credit amounts ("25,000") are wider than the old dollar labels: tighten on narrow cards so no label is cut. */
+  @media (max-width: 480px) { .seg-tiers button { padding: 0 2px; font-size: 14px; letter-spacing: -0.02em; } }
+  @media (max-width: 370px) { .seg-tiers button { font-size: 12.5px; } }
   .tp-dot { position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
   .seg-tiers button[aria-checked='true'] .tp-dot { background: var(--on-accent); }
   .tp-hint { margin: 0; min-height: 1.4em; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--accent-text); transition: opacity 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }

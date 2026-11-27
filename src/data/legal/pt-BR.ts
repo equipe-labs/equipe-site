@@ -128,7 +128,7 @@ const ptBR: LegalCopy = {
     summaryTitle: 'Em resumo',
     summary: [
       'Você é dono do que traz e do que seu time constrói para você. Você decide o que vai ao ar, o que é enviado e o que custa dinheiro.',
-      'O trabalho do seu time é pago com créditos (1 crédito = $1). Créditos comprados e não usados podem ser reembolsados em até 14 dias após a compra.',
+      'O trabalho do seu time é pago com créditos (100 créditos = $1). Créditos comprados e não usados podem ser reembolsados em até 14 dias após a compra.',
       'Os planos são renovados até você cancelar. O cancelamento vale a partir do fim do período que você pagou.',
       'Domínios comprados pelo equipe são registrados no seu nome.',
       'A IA pode errar. Revise o que importa antes que vá a público.',
@@ -152,7 +152,7 @@ const ptBR: LegalCopy = {
       ] },
       { id: 'credits', h: 'Créditos', body: [
         { ul: [
-          '**1 crédito = $1.** O trabalho do seu time é pago com créditos: o trabalho de IA pelo preço de tabela do modelo mais nossa margem, e o computador na nuvem que seu time usa enquanto trabalha. Cada tarefa mostra o que usou, e os pedidos mostram uma estimativa antes.',
+          '**100 créditos = $1.** O trabalho do seu time é pago com créditos: o trabalho de IA pelo preço de tabela do modelo mais nossa margem, e o computador na nuvem que seu time usa enquanto trabalha. Cada tarefa mostra o que usou, e os pedidos mostram uma estimativa antes.',
           '**Pacotes de créditos** são compras avulsas, válidas por 12 meses a partir da compra.',
           '**Créditos do plano** que vêm com um plano Time mensal acumulam por 2 meses; os créditos mensais de um plano anual acumulam por 3 meses. Créditos que passam da validade são removidos.',
           '**Créditos grátis e bônus** (por exemplo, o crédito de boas-vindas ou bônus promocionais) não têm valor em dinheiro, não podem ser reembolsados nem transferidos e expiram junto com os créditos com que vieram ou conforme mostrado em Cobrança.',
@@ -183,7 +183,7 @@ const ptBR: LegalCopy = {
       { id: 'ai-features', h: 'Recursos de IA no seu produto', body: [
         { ul: [
           'Recursos de IA que seu time adiciona ao seu produto (como um chatbot, resumos ou imagens) são pagos com seus créditos pelo preço de tabela do provedor de IA mais 10%, conforme seus visitantes os usam.',
-          'Cada produto tem um limite mensal de IA, de $10, a menos que um proprietário ou administrador o altere. Ao atingir o limite, os recursos de IA ficam pausados até o próximo mês ou até o limite ser aumentado. Também há limites por visitante.',
+          'Cada produto tem um limite mensal de IA, de 1.000 créditos, a menos que um proprietário ou administrador o altere. Ao atingir o limite, os recursos de IA ficam pausados até o próximo mês ou até o limite ser aumentado. Também há limites por visitante.',
           'Você é responsável por como os recursos de IA são usados no seu produto, por informar seus usuários de que as respostas são escritas por IA e por fazer com que uma pessoa revise o resultado da IA antes que ele seja usado em decisões que afetem alguém de forma significativa.',
           'Podemos pausar os recursos de IA de um produto que esteja sendo usado de forma abusiva ou que viole estes termos.',
         ] },

@@ -54,7 +54,7 @@ The first three are builders you drive prompt by prompt. equipe is a team you di
 | --- | --- | --- | --- | --- |
 | Entry paid plan | Pro, $25/month | Pro, $25/month | Starter, $16/month billed annually | Team, from $19/month ($190/year); $69/month with $50 of monthly credits |
 | Free plan | 5 credits a day, up to 30 a month; publishing is invite-only | 1M tokens a month, 300K a day; Bolt branding on sites | 25 message credits a month, up to 5 apps | $5 credit at sign-up, $10 more with a card (no charge) |
-| How usage is metered | Credits (shared by building, hosting and in-app AI) | Tokens | Message credits and integration credits | Credits ($1 = 1 credit) for everything the team does: AI work and the cloud computer it works on |
+| How usage is metered | Credits (shared by building, hosting and in-app AI) | Tokens | Message credits and integration credits | Credits (100 credits = $1) for everything the team does: AI work and the cloud computer it works on |
 | Code export / GitHub | Two-way GitHub sync on all plans; download on paid plans | GitHub backup commits; plan and download options unclear from the pages | Two-way GitHub sync on Builder and above | Hosted as one project per customer; can be moved to your own accounts. Engine is open source (MIT) |
 | Custom domain | Paid plans | Pro and above | Starter and above | Team set up for you; domains paid from credits after you approve the price |
 | Built-in backend | Lovable Cloud (Supabase-based) | Bolt Database, with sign-in | Integrated backend, database and sign-in | Database and hosting set up by the team (Cloudflare) |
