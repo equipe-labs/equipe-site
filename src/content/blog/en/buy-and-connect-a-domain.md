@@ -22,6 +22,8 @@ This guide explains the whole job in plain words: how to choose a name, who you 
 
 <p class="answer"><strong>The short answer.</strong> Pick a short name you can spell aloud, buy it in your own account from a registrar, then add the records your host gives you so the name points at your product. Wait for the settings to spread, confirm the padlock appears in the browser, set a renewal reminder, and keep your own login safe.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What a domain is, and the three parts you deal with
 
 Think of three separate things that work together:

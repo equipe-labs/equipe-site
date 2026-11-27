@@ -23,6 +23,8 @@ faqs:
 
 <p class="answer"><strong>짧은 답.</strong> 구매 요청으로 시작하세요. 고객이 상품을 요청하면 여러분이 이메일로 확정하고 결제를 직접 안내하니, 사이트가 카드 정보를 다루지 않아요. 주문과 재고는 관리자 페이지 한곳에서 관리하고, 정책을 분명히 쓰세요. 요청이 꾸준해지고 운영에 자신이 생기면 그때 실제 결제를 붙이세요.</p>
 
+<p class="series">이 글은 <a href="/ko/blog/build-a-website-or-app-without-coding/">코딩 없이 웹사이트·앱 만들기</a> 가이드의 일부예요.</p>
+
 ## 실제 사례: Tidepool Ceramics
 
 Tidepool Ceramics는 가상의 소량 생산 도자기 가게예요. 사이트는 실제로 열려 있고, 데모로 equipe 팀이 약 40분 만에 만들었어요. 이런 기능이 있어요.

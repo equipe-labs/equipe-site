@@ -33,6 +33,8 @@ We make equipe, so we have a stake. Everything we say about Base44 comes from it
 
 <p class="answer"><strong>The short answer.</strong> Base44 is a strong, low-priced builder: you describe an app, it generates and hosts it, and it states SOC 2 Type II and ISO 27001. Stay if you want to steer the app yourself. Look at a team like equipe if you want agents that also plan, test and propose improvements after launch, with you approving, and you do not need those certifications.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What Base44 is, and what it is good at
 
 Base44's homepage says "Build your own apps, websites, products and AI agents on Base44 using your own words." Its docs call it "a no-code AI platform for building full-stack apps, websites, and AI agents." In plain terms: a **builder**. You type what you want, it produces a working app, and you keep typing to change it.

@@ -26,6 +26,8 @@ One honest note first: we do not publish a "most products spend $X a month" figu
 
 <p class="answer"><strong>The short answer.</strong> Keeping a small app live on equipe is $19 a month on the Team plan with no monthly credits. Having the whole team work on it most often means $69 a month (or $690 a year) with $50 of monthly credits, plus more credits as the work needs them. You see each request's expected cost before it runs, and you set a monthly cap.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## The five costs of running a small app
 
 Whatever route you take, a small app has the same cost categories. Naming them is half the budgeting.

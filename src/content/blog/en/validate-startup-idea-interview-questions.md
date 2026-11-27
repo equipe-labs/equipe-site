@@ -23,6 +23,8 @@ This guide is for people who have an idea and no technical background. It covers
 
 <p class="answer"><strong>The short answer.</strong> Pick one group of people. Talk to about ten of them for twenty minutes each. Ask about what they did last time the problem appeared, not what they would do in future. Count only actions, money and effort as evidence. Stop when one sentence describes the problem and a few people have committed to something.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## Who to talk to (and who not to)
 
 Choose **one** narrow group, written the way you wrote the "who" line in [our launch guide](/blog/launch-a-real-product-without-code/). "Solo yoga teachers who take bookings by text message" is a group. "Small businesses" is not.

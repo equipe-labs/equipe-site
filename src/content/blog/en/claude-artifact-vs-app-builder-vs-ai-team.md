@@ -22,6 +22,8 @@ The useful question is not "which is best?" but "what am I trying to do this wee
 
 <p class="answer"><strong>The short answer.</strong> Use a Claude artifact to explore an idea, an app builder to get a first version online yourself, and an AI team when you want the product run and improved for you while you approve what goes live. They stack: many people use all three in order. Pick by goal and by who you want running it after launch.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## The three routes in plain words
 
 **A Claude artifact** is something Claude makes inside a conversation: a small page, tool or mini app you can look at, use and ask Claude to change. It is quick, free of setup and ideal for answering "would this even work?" It is a prototype that lives in the chat world, not a business with customers.

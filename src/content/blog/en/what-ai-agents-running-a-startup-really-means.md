@@ -23,6 +23,8 @@ This guide separates the two, for people who cannot code. You will see what agen
 
 <p class="answer"><strong>The short answer.</strong> Today, AI agents can plan, build, test, deploy, read how people use a product and propose what to change. They should not decide what is worth building, spend your money, talk to your customers, judge taste, handle legal questions or take risky actions alone. "Runs your startup" is honest only if a human approval gate sits in front of those.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## First, what is an AI agent?
 
 An **AI agent** is an AI program that does a task in several steps on its own, rather than answering a single question. A chat assistant tells you how to fix a page. An agent opens the project, makes the change, checks it and reports back. A **team of agents** gives each one a job, such as planner, engineer or tester, so the work is divided the way a small company would divide it.

@@ -22,6 +22,8 @@ This article explains how to run short build-measure-learn sprints with an AI te
 
 <p class="answer"><strong>The short answer.</strong> Each week: look at three numbers, pick the single biggest drop-off, change one thing, ship it behind your approval, and measure again. An AI team can do the building, the measuring and the proposing; you do the deciding.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## The loop in one paragraph
 
 Build the smallest change that tests a guess. Measure what real people do with it. Learn whether the guess was right. Decide what to try next. That is the build-measure-learn loop from lean startup practice, and its point is speed of learning, not speed of building. A feature nobody uses is expensive however fast it was made.

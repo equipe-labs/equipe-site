@@ -35,6 +35,8 @@ We make equipe, so we have a stake. Every fact about Bolt below comes from its o
 
 <p class="answer"><strong>The short answer.</strong> Bolt is a capable builder for chatting your way to a working app, with a built-in database, free hosting on a Bolt domain and a stated SOC 2 Type 2 certification. Look elsewhere if you want someone to run the product after launch and decide what to improve next. A team like equipe is built for that.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## What Bolt does well
 
 Bolt's homepage says "Create stunning apps & websites by chatting with AI." From its pricing, help and security pages, here is what stands out.

@@ -22,6 +22,8 @@ Here are eleven that a small business can add today, grouped by who they help, w
 
 <p class="answer"><strong>The short answer.</strong> The most useful AI features for a small business site are a support chatbot, instant FAQ answers, translation, smart form filling and recommendations for visitors; review summaries, product descriptions, reply drafts and post images for you; and inquiry sorting and comment checks behind the scenes. Start with the one that removes the most repeated work, and set a monthly spending limit first.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/build-a-website-or-app-without-coding/">How to build a website or app without coding</a>.</p>
+
 ## For your visitors, on your site
 
 ### 1. A support chatbot

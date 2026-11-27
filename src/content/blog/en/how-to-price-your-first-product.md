@@ -23,6 +23,8 @@ This guide gives you a method you can follow without a spreadsheet: reason from 
 
 <p class="answer"><strong>The short answer.</strong> Find what your customer does today and what it costs them. Price clearly below the value you save or create. Keep one simple price at first, ask real people to pay before you build everything, and judge the result with visits, sign-ups that pay and returns. Change one thing at a time.</p>
 
+<p class="series">This article is part of our guide: <a href="/blog/start-a-business-with-ai/">How to start a business with AI</a>.</p>
+
 ## Start with value, not cost
 
 Your costs set a floor: you cannot sell below what it takes to run the product for a customer. They do not tell you the price. The price lives between two numbers:

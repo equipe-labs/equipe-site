@@ -43,6 +43,8 @@ faqs:
 
 <p class="answer"><strong>짧은 답.</strong> Lovable, Bolt, Base44는 앱의 첫 버전을 빠르게 만들어 공개하기에 좋은 도구예요. equipe는 모양이 달라요. 제품을 실제로 공개하고, 운영하고, 다음에 무엇을 개선할지까지 제안하는 AI 스타트업 팀이고, 승인은 당신이 해요. 직접 프롬프트를 입력하며 이끌고 싶다면 빌더가 맞아요. 누군가 제품을 계속 굴려 주길 원한다면 팀을 살펴보세요.</p>
 
+<p class="series">이 글은 <a href="/ko/blog/build-a-website-or-app-without-coding/">코딩 없이 웹사이트·앱 만들기</a> 가이드의 일부예요.</p>
+
 ## 각자 스스로를 어떻게 소개하나요
 
 - **Lovable**은 문서에서 스스로를 "a full-stack AI development platform for building, iterating on, and deploying web applications."(웹 애플리케이션을 만들고, 반복하고, 배포하는 풀스택 AI 개발 플랫폼)이라고 설명해요.
