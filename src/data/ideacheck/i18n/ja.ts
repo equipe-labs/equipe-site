@@ -45,6 +45,7 @@ export default {
     whyRisk: 'いちばんのリスクである理由',
     whyStep: 'このステップの目的',
     markDone: '完了にする',
+    dayLabel: '{n}日目',
     yourIdea: 'あなたのアイデア',
     who: '誰のためのものか',
     first: '最初の10人を見つける場所',

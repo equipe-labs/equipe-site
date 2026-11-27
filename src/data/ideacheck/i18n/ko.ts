@@ -45,6 +45,7 @@ export default {
     whyRisk: '가장 위험한 이유',
     whyStep: '이 단계가 필요한 이유',
     markDone: '완료로 표시',
+    dayLabel: '{n}일차',
     yourIdea: '내 아이디어',
     who: '누구를 위한 건가요',
     first: '첫 고객 10명을 찾을 곳',

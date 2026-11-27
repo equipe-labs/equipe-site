@@ -45,6 +45,7 @@ export default {
     whyRisk: 'Warum das am riskantesten ist',
     whyStep: 'Warum dieser Schritt',
     markDone: 'Als erledigt markieren',
+    dayLabel: 'Tag {n}',
     yourIdea: 'Deine Idee',
     who: 'Für wen sie ist',
     first: 'Wo du die ersten 10 findest',
