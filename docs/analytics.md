@@ -101,6 +101,21 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 
 | `feature_view`, `feature_start`, `feature_done`, `feature_signup`, `feature_<step>` | `feature`(아래 기능 이름) | 기능 사용 단계(2026-11-28). 탭마다 단계별로 한 번. `view`·`signup`은 `OwnFunnel.astro`가 자동으로, 도구는 `start`·`done`·`error`·`shared_view`를 부른다 |
 
+| `tools_hub_click` | `location`: `hub` / `hub-lab` / `related-<도구>`, `tool`: 도구 slug | 무료 도구 허브·관련 도구 카드 클릭 |
+| `tools_hub_filter` | `cat`: `all` / `start` / `website` / `found` / `grow`, `results` | `/tools/` 카테고리 칩 선택 (Features `tools_hub:filter`) |
+| `tools_hub_search` | `results`, `length`(글자 수만, 입력한 글은 보내지 않음) | `/tools/` 검색, 입력이 멈출 때 한 번 (Features `tools_hub:search`) |
+| `tools_hub_empty` | `cat` | 검색 결과가 0개 (Features `tools_hub:empty`) |
+| `grader_run` | `location`: `run` / `shared`, `compare` | 웹사이트 점수 검사 시작 (Features `grader:start`, 경쟁 비교면 `grader:compare`도) |
+| `grader_result` | `score`, `cached`, `fixes`, `compare`, `field`(실사용자 속도 있음), `before`(이전 결과 있음) | 결과가 나옴 (Features `grader:done`) |
+| `grader_error` | `error` | 검사 실패 (Features `grader:error`) |
+| `grader_compare_open` / `grader_compare_result` | `location` / `you`, `them` | 경쟁 업체 칸 열기 / 두 사이트 결과 |
+| `grader_recheck` | `result`: `new` / `too_soon` / 오류 코드, `delta` | 다시 검사하기 (Features `grader:recheck`) |
+| `grader_pdf` | `location` | PDF로 저장 (Features `grader:pdf`) |
+| `grader_share` | `via`: `sheet` / `copy` / `x` / `linkedin` | 리포트 공유 (Features `grader:share`) |
+| `grader_issue_open` | `key`: 수정 항목 키 | 이슈의 ‘자세히’ 처음 열기 (Features `grader:issue_open`) |
+| `grader_section_open` | `section`: `low` / `passed` / `all` | 접힌 구역 처음 열기 |
+| `grader_shared_view` | `score`, `compare` | 공유 리포트 열람 (Features `grader:shared_view`) |
+
 `cta_github_click`을 보낸 링크는 `outbound_click`을 **중복으로 보내지 않는다**.
 
 ### 기능 사용 (`window.eqFeat`)

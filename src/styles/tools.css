@@ -44,6 +44,9 @@ main.pg .tl-hero h1 { max-width: 18ch; margin: 0 auto; font-size: clamp(36px, 5.
 .tl-steps li .d { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); transition: background 240ms var(--e), border-color 240ms var(--e); }
 .tl-steps li .d svg { width: 14px; height: 14px; fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.6); transition: opacity 200ms var(--e), transform 300ms var(--spring); }
 .tl-steps li.now { color: var(--text); font-weight: 600; }
+/* site.css styles a .now badge; a running step is not one */
+.tl-steps li.now { display: flex; height: auto; padding: 0; border-radius: 0; background: none; font: inherit; font-weight: 600; white-space: normal; letter-spacing: inherit; }
+.tl-steps li.now::before { content: none; }
 .tl-steps li.now .d { border-color: var(--accent); border-top-color: transparent; animation: tl-spin 900ms linear infinite; }
 .tl-steps li.done { color: var(--text); }
 .tl-steps li.done .d { background: var(--accent); border-color: var(--accent); }
