@@ -24,7 +24,8 @@ export const FOUNDER: null | { name: string; photo: string; photoLarge: string; 
  * (a preview deploy), which sets this to { src: '/video/equipe-demo-720.mp4', poster: '/video/equipe-demo-poster.webp', ... }.
  * `captions` is an optional .vtt file; the current cut has English captions burned in.
  */
-export const DEMO_VIDEO: null | { src: string; poster: string; width: number; height: number; captions?: string } = null;
+// Owner approval pending (2026-11-28): the 42 s X demo (equipe-launch/marketing/demo-video-x), 720p, English captions burned in.
+export const DEMO_VIDEO: null | { src: string; poster: string; width: number; height: number; captions?: string } = { src: '/video/equipe-demo-720.mp4', poster: '/video/equipe-demo-poster.webp', width: 1280, height: 720 };
 
 /**
  * Pricing: typical monthly totals ("most products spend $X–$Y a month"). Hidden until there is real usage data.
