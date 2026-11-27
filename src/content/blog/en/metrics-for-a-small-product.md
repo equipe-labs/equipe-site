@@ -131,3 +131,4 @@ The [pricing page](/pricing/) lists costs, and [what an AI startup team does](/b
 - Run your first weekly review one week after launch, even if the numbers are tiny.
 - If you are working toward paying customers, [the 30-day plan](/blog/idea-to-paying-customers-30-day-plan/) shows where these numbers fit on a calendar.
 - For the full path from idea to launch, see [how to launch a real product without code](/blog/launch-a-real-product-without-code/).
+- Before you measure visitors, check that the site itself isn't losing them: the free [website grader](/grader/) shows speed on a phone, search basics and the top fixes.

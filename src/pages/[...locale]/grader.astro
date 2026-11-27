@@ -1,0 +1,53 @@
+---
+// /grader/: the free website grader. Copy: src/data/grader.ts. The check runs on platform.equipe.im (cloud
+// platform/src/free-tools.js); the report is drawn by GraderApp. Shared reports live at /grader/r/<id>/ (grader/r.astro).
+import PageShell from '../../components/PageShell.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import GraderApp from '../../components/GraderApp.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { SITE } from '../../data/site';
+import { graderCopy } from '../../data/grader';
+import { available, getLocale, subPath, type LocaleCode } from '../../i18n';
+import '../../styles/tools.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = graderCopy(code);
+const url = new URL(subPath(info, 'grader'), Astro.site).href;
+---
+<PageShell code={code} page="grader" title={c.page.title} description={c.page.desc} image="/og/tools/grader.png" imageAlt={c.page.ogTitle}>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, name: c.page.ogTitle, url, description: c.page.desc, inLanguage: info.lang,
+      applicationCategory: 'BusinessApplication', operatingSystem: 'Any', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: { '@id': `${SITE.url}/#organization` },
+      featureList: c.how.items.map((x) => x.title),
+    }} />
+    <JsonLd data={{ '@type': 'HowTo', name: c.how.title, step: c.how.items.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) }} />
+    <FaqJsonLd lang={info.lang} faqs={c.faq.items} />
+  </Fragment>
+  <div class="tl">
+    <GraderApp code={code} mode="run" />
+
+    <section class="tl-sec" id="how"><div class="wrap">
+      <h2>{c.how.title}</h2>
+      <ol class="tl-how">
+        {c.how.items.map((s, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div></section>
+
+    <section class="tl-sec tl-faq" id="faq"><div class="wrap">
+      <h2>{c.faq.title}</h2>
+      <div class="faqs">
+        {c.faq.items.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+      </div>
+    </div></section>
+
+    <div class="tl-end"><RelatedTools code={code} current="grader" /></div>
+  </div>
+</PageShell>

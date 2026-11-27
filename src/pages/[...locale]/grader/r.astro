@@ -1,0 +1,27 @@
+---
+// /grader/r/: the shell for shared reports. equipe.im rewrites /grader/r/<id>/ to platform.equipe.im, which serves this
+// page with the report's own title, description and share image (the eq-share-* metas are its templates, {host} and
+// {score} filled there). The report itself is loaded here by GraderApp (mode 'shared'). Not indexed, not in the sitemap.
+import PageShell from '../../../components/PageShell.astro';
+import GraderApp from '../../../components/GraderApp.astro';
+import RelatedTools from '../../../components/RelatedTools.astro';
+import { graderCopy } from '../../../data/grader';
+import { available, type LocaleCode } from '../../../i18n';
+import '../../../styles/tools.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const c = graderCopy(code);
+---
+<PageShell code={code} page="grader/r" title={c.share.pageTitle} description={c.page.desc} image="/og/grader/na.png" imageAlt={c.page.ogTitle} noindex>
+  <Fragment slot="head">
+    <meta name="eq-share-title" content={c.share.title} />
+    <meta name="eq-share-desc" content={c.share.desc} />
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+  </Fragment>
+  <div class="tl">
+    <GraderApp code={code} mode="shared" />
+    <div class="tl-end"><RelatedTools code={code} current="grader" /></div>
+  </div>
+</PageShell>

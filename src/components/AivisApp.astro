@@ -1,0 +1,219 @@
+---
+// "Does ChatGPT know my business?": the form (Turnstile loads on first use, interaction-only), the steps while the
+// assistants answer, and the result drawn from the platform's JSON. A shared result is /ai-visibility/?r=<id>.
+// ?url=<site> (from the website grader) fills the website field.
+// Events: PostHog aivis_run / aivis_result / aivis_error; the own funnel tool_run, tool_result and click:<data-ph>.
+import { aivisCopy, aivisFixHref, AIVIS_API, TURNSTILE_SITE_KEY } from '../data/aivis';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const info = getLocale(code);
+const c = aivisCopy(code);
+const F = c.form;
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const data = {
+  api: AIVIS_API, lang: info.lang, code, ts: TURNSTILE_SITE_KEY,
+  base: subPath(info, 'ai-visibility'), grader: subPath(info, 'grader'),
+  fixSite: aivisFixHref('__SITE__', '', '__PLACE__'), fixIdea: aivisFixHref(null, '__IDEA__', '__PLACE__'),
+  c: { result: c.result, fixes: c.fixes, form: c.form },
+};
+---
+<section class="tl-hero"><div class="wrap">
+  <h1>{c.page.h1}</h1>
+  <p class="tl-lead">{c.page.lead}</p>
+  <form class="tl-form" novalidate data-a-form>
+    <div class="tl-fields">
+      <div class="tl-field"><label for="a-name">{F.name}</label><input id="a-name" name="name" type="text" autocomplete="organization" maxlength="80" placeholder={F.namePh} required /></div>
+      <div class="tl-field"><label for="a-place">{F.place}</label><input id="a-place" name="place" type="text" autocomplete="address-level2" maxlength="60" placeholder={F.placePh} /></div>
+      <div class="tl-field"><label for="a-cat">{F.category}</label><input id="a-cat" name="category" type="text" autocomplete="off" maxlength="60" placeholder={F.categoryPh} /></div>
+      <div class="tl-field"><label for="a-url">{F.url}<small>{F.optional}</small></label><input id="a-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="300" placeholder={F.urlPh} /></div>
+      <div class="tl-go">
+        <div class="tl-ts" data-a-ts></div>
+        <button class="btn primary lg" type="submit" data-ph="aivis_submit" data-ph-location="hero"><span>{F.button}</span><Fragment set:html={arrow} /></button>
+      </div>
+    </div>
+    <p class="tl-err" role="alert" hidden data-a-err></p>
+    <p class="tl-note">{F.note}</p>
+  </form>
+</div></section>
+
+<section class="tl-run" hidden data-a-run aria-live="polite">
+  <div class="wrap">
+    <ol class="tl-steps">
+      {c.progress.map((s) => <li><span class="d"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
+    </ol>
+    <p>{c.progressNote}</p>
+  </div>
+</section>
+
+<section class="tl-report" hidden data-a-report tabindex="-1"><div class="wrap" data-a-out></div></section>
+
+<script type="application/json" data-a-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<script>
+  type Json = Record<string, any>;
+  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
+  const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
+  const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
+  const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ic = {
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>',
+    dash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12h10"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+  };
+  const el = document.querySelector<HTMLScriptElement>('[data-a-data]');
+  const D = (el ? JSON.parse(el.textContent || '{}') : null) as Json;
+  const form = document.querySelector<HTMLFormElement>('[data-a-form]')!;
+  const run = document.querySelector<HTMLElement>('[data-a-run]')!;
+  const rep = document.querySelector<HTMLElement>('[data-a-report]')!;
+  const out = document.querySelector<HTMLElement>('[data-a-out]')!;
+  if (D && form && run && rep && out) {
+    const C = D.c, R = C.result, FM = C.form;
+    const f = (n: string) => form.querySelector<HTMLInputElement>(`[name="${n}"]`)!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const err = form.querySelector<HTMLElement>('[data-a-err]')!;
+    const tsBox = form.querySelector<HTMLElement>('[data-a-ts]')!;
+    const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
+    let timer = 0;
+
+    // Turnstile: loaded on the first touch of the form, rendered interaction-only (most people never see it).
+    let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
+    const loadTs = () => {
+      if (tsLoad) return tsLoad;
+      tsLoad = new Promise<void>((res) => {
+        w.onEqTs = () => {
+          try {
+            tsId = w.turnstile!.render(tsBox, { sitekey: D.ts, theme: 'auto', size: 'flexible', appearance: 'interaction-only',
+              callback: (t: string) => { tsTok = t; tsWait?.(); }, 'expired-callback': () => { tsTok = ''; }, 'error-callback': () => { tsTok = ''; tsWait?.(); } });
+          } catch { /* the check below reports it */ }
+          res();
+        };
+        const s = document.createElement('script');
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onEqTs&render=explicit';
+        s.async = true; s.onerror = () => res();
+        document.head.appendChild(s);
+      });
+      return tsLoad;
+    };
+    const token = async () => {
+      await Promise.race([loadTs(), new Promise((r) => setTimeout(r, 8000))]);
+      if (!tsTok) await new Promise((r) => { tsWait = r; setTimeout(r, 15000); });
+      tsWait = null;
+      return tsTok;
+    };
+    form.addEventListener('focusin', () => { loadTs(); }, { once: true });
+
+    const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
+    const urlish = (v: string) => /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(:\d+)?(\/\S*)?$/i.test(v.trim());
+    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('done', j < i); s.classList.toggle('now', j === i); });
+    const startSteps = () => { run.hidden = false; stepTo(0); let i = 0; const at = [2500, 10000, 12000]; const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 8000); }; timer = window.setTimeout(next, at[0]); };
+    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
+    const band = (s: number) => (s >= 80 ? R.bands.great : s >= 50 ? R.bands.good : s >= 20 ? R.bands.fair : R.bands.poor);
+
+    function draw(g: Json) {
+      const score = typeof g.score === 'number' ? g.score : null;
+      const r = 70, circ = 2 * Math.PI * r, trk = circ * 0.94;
+      const answers = (g.answers || []).map((a: Json, i: number) => {
+        if (a.error) return `<li class="tl-in" style="--d:${i * 70}ms"><p class="q">${esc(a.question)}</p><span class="who">${esc(fill(R.asked, { assistant: a.label }))}</span><p class="tl-cached">${esc(R.error)}</p></li>`;
+        const p1 = a.mentioned ? `<span class="tl-pill ok">${ic.check}${esc(R.mentioned)}</span>` : `<span class="tl-pill no">${ic.x}${esc(R.notMentioned)}</span>`;
+        const p2 = !g.url ? `<span class="tl-pill mute">${ic.dash}${esc(R.noSite)}</span>` : a.cited ? `<span class="tl-pill ok">${ic.check}${esc(R.cited)}</span>` : `<span class="tl-pill mute">${ic.dash}${esc(R.notCited)}</span>`;
+        return `<li class="tl-in" style="--d:${i * 70}ms"><p class="q">${esc(a.question)}</p><span class="who">${esc(fill(R.asked, { assistant: a.label }))}</span><div class="pills">${p1}${p2}</div>${a.excerpt ? `<blockquote><span>${esc(R.quote)}</span>${esc(a.excerpt)}</blockquote>` : ''}</li>`;
+      }).join('');
+      const hosts = (g.cited_instead || []).map((h: Json) => `<li title="${esc(h.host)}">${esc(h.host)} <small>×${h.n}</small></li>`).join('');
+      const fixes = (g.fixes || []).map((x: Json) => { const t = C.fixes[x.key]; if (!t) return null; const v = { bots: (x.bots || []).join(', '), words: x.words }; return { title: fill(t.title, v), text: fill(t.text, v) }; }).filter(Boolean).slice(0, 5) as Json[];
+      const inPlace = g.place ? ` (${g.place})` : '';
+      const idea = fill(R.cta.idea, { name: g.name, inPlace });
+      const fix = g.url ? String(D.fixSite).replace('__SITE__', encodeURIComponent(g.url)).replace('__PLACE__', 'result') : String(D.fixIdea).replace('__IDEA__', encodeURIComponent(idea)).replace('__PLACE__', 'result');
+      const link = new URL(`${D.base}?r=${g.id}`, location.origin).href;
+      out.innerHTML = `<div class="tl-rep">
+        <div class="tl-card tl-top tl-in">
+          <div class="tl-g" role="img" aria-label="${esc(R.score)}: ${score ?? '–'}/100"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="tr" cx="80" cy="80" r="${r}" stroke-dasharray="${trk} ${circ}"/><circle class="val" cx="80" cy="80" r="${r}" stroke-dasharray="0 ${circ}" data-to="${score == null ? 0 : (trk * score) / 100}" data-c="${circ}"/></svg><div class="num"><b data-count="${score ?? ''}">${score == null ? '–' : reduce ? score : 0}</b><span>${esc(R.score)}</span></div></div>
+          <div><p class="tl-host">${esc(fill(R.heading, { name: g.name }))}</p><h2>${esc(score == null ? R.error : band(score))}</h2><p class="tl-date">${esc(fill(R.summary, { mentioned: g.mentioned ?? 0, asked: g.asked ?? 0 }))} ${esc(fill(R.checked, { date: dateOf(g.created_at) }))}</p>${g.cached ? `<p class="tl-cached">${esc(R.cachedNote)}</p>` : ''}</div>
+        </div>
+        <div><h3 class="tl-h">${esc(R.answersTitle)}</h3><p class="tl-sub">${esc(R.answersSub)}</p><ul class="tl-ans">${answers}</ul></div>
+        ${hosts ? `<div><h3 class="tl-h">${esc(R.instead)}</h3><p class="tl-sub">${esc(R.insteadSub)}</p><ul class="tl-hosts">${hosts}</ul></div>` : ''}
+        <div><h3 class="tl-h">${esc(R.fixesTitle)}</h3><ol class="tl-fixes">${fixes.map((x, i) => `<li class="tl-in" style="--d:${i * 70}ms"><span class="n">${i + 1}</span><div><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p></div></li>`).join('')}</ol></div>
+        <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(fix)}" data-ph="aivis_fix_click" data-ph-location="result">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
+        <div class="tl-share tl-in"><label for="a-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="a-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-a-copy data-ph="aivis_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-a-again data-ph="aivis_again" data-ph-location="result">${esc(R.share.again)}</a></div></div>
+        <div class="tl-card tl-cross"><div><h3>${esc(R.grader.title)}</h3><p>${esc(R.grader.text)}</p></div><a class="btn ghost" href="${esc(D.grader)}${g.url ? `?url=${encodeURIComponent(g.url)}` : ''}" data-ph="grader_link_click" data-ph-location="aivis">${esc(R.grader.link)}${ic.arrow}</a></div>
+      </div>`;
+      rep.hidden = false;
+      const items = [...out.querySelectorAll<HTMLElement>('.tl-in')];
+      if (reduce || !document.documentElement.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
+      else items.forEach((x, i) => { if (!x.style.getPropertyValue('--d')) x.style.setProperty('--d', `${Math.min(i, 8) * 60}ms`); requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))); });
+      const ring = out.querySelector<SVGCircleElement>('circle.val'), num = out.querySelector<HTMLElement>('[data-count]');
+      if (ring && num && num.dataset.count) {
+        const to = Number(ring.dataset.to), c2 = Number(ring.dataset.c), target = Number(num.dataset.count);
+        if (reduce) ring.style.strokeDasharray = `${to} ${c2}`;
+        else {
+          requestAnimationFrame(() => requestAnimationFrame(() => { ring.style.strokeDasharray = `${to} ${c2}`; }));
+          const t0 = performance.now(); const tick = (t: number) => { const p = Math.min(1, (t - t0) / 1200); num.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick);
+        }
+      }
+      const cb = out.querySelector<HTMLButtonElement>('[data-a-copy]');
+      cb?.addEventListener('click', async () => {
+        const i = out.querySelector<HTMLInputElement>('#a-share')!; let ok = false;
+        try { await navigator.clipboard.writeText(i.value); ok = true; } catch { i.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+        if (!ok) return; const lab = cb.querySelector('span')!; cb.classList.add('done'); lab.textContent = R.share.copied;
+        setTimeout(() => { cb.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
+      });
+    }
+
+    async function check() {
+      say('');
+      const name = f('name').value.trim(), place = f('place').value.trim(), category = f('category').value.trim(), url = f('url').value.trim();
+      form.querySelectorAll('input').forEach((i) => i.removeAttribute('aria-invalid'));
+      if (name.length < 2) { say(FM.errName); f('name').setAttribute('aria-invalid', 'true'); f('name').focus(); return; }
+      if (url && !urlish(url)) { say(FM.errUrl); f('url').setAttribute('aria-invalid', 'true'); f('url').focus(); return; }
+      if (!url && !(place && category)) { say(FM.errMore); (place ? f('category') : f('place')).focus(); return; }
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+      own('fn', 'tool_run'); track('aivis_run', { has_url: !!url, has_place: !!place, has_category: !!category });
+      const tok = await token();
+      rep.hidden = true; startSteps();
+      run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      let res: Response | null = null, g: Json | null = null;
+      try {
+        res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, place, category, url, lang: D.code, token: tok }), signal: AbortSignal.timeout(120000) });
+        g = await res.json().catch(() => null);
+      } catch { /* below */ }
+      stopSteps();
+      btn.disabled = false; btn.removeAttribute('aria-busy');
+      try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';
+      if (!res || !res.ok || !g || !g.id) {
+        const e = g?.error;
+        const m = e === 'name' ? FM.errName : e === 'more' ? FM.errMore : e === 'bad_url' ? FM.errUrl : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
+        track('aivis_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        say(m); return;
+      }
+      own('fn', 'tool_result'); own('ev', 'aivis_named', `${g.mentioned ?? 0}/${g.asked ?? 0}`);
+      track('aivis_result', { score: g.score, mentioned: g.mentioned, asked: g.asked, cited: g.cited, cached: !!g.cached });
+      draw(g);
+      try { history.replaceState(null, '', `${D.base}?r=${g.id}`); } catch { /* fine */ }
+      setTimeout(() => { rep.focus({ preventScroll: true }); rep.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
+    }
+    form.addEventListener('submit', (e) => { e.preventDefault(); check(); });
+    form.addEventListener('input', () => { if (!err.hidden) say(''); });
+    out.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest('[data-a-again]'); if (!a) return;
+      e.preventDefault(); rep.hidden = true; form.reset(); history.replaceState(null, '', D.base);
+      form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(() => f('name').focus(), reduce ? 0 : 300);
+    });
+
+    const q = new URLSearchParams(location.search);
+    if (q.get('url')) f('url').value = q.get('url')!.slice(0, 300);
+    const rid = q.get('r');
+    if (rid && /^[A-Za-z0-9]{6,16}$/.test(rid)) {
+      out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
+      fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
+        if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
+        track('aivis_shared_view', { score: g.score }); draw(g);
+      }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
+    }
+  }
+</script>

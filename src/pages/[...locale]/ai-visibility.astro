@@ -1,0 +1,53 @@
+---
+// /ai-visibility/: "Does ChatGPT know my business?" Copy: src/data/aivis.ts. The check runs on platform.equipe.im
+// (cloud platform/src/free-tools.js, the AI-citation probe); AivisApp draws the result.
+import PageShell from '../../components/PageShell.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import AivisApp from '../../components/AivisApp.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { SITE } from '../../data/site';
+import { aivisCopy } from '../../data/aivis';
+import { available, getLocale, subPath, type LocaleCode } from '../../i18n';
+import '../../styles/tools.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = aivisCopy(code);
+const url = new URL(subPath(info, 'ai-visibility'), Astro.site).href;
+---
+<PageShell code={code} page="ai-visibility" title={c.page.title} description={c.page.desc} image="/og/tools/ai-visibility.png" imageAlt={c.page.ogTitle}>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, name: c.page.ogTitle, url, description: c.page.desc, inLanguage: info.lang,
+      applicationCategory: 'BusinessApplication', operatingSystem: 'Any', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: { '@id': `${SITE.url}/#organization` },
+      featureList: c.how.items.map((x) => x.title),
+    }} />
+    <JsonLd data={{ '@type': 'HowTo', name: c.how.title, step: c.how.items.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) }} />
+    <FaqJsonLd lang={info.lang} faqs={c.faq.items} />
+  </Fragment>
+  <div class="tl">
+    <AivisApp code={code} />
+
+    <section class="tl-sec" id="how"><div class="wrap">
+      <h2>{c.how.title}</h2>
+      <ol class="tl-how">
+        {c.how.items.map((s, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div></section>
+
+    <section class="tl-sec tl-faq" id="faq"><div class="wrap">
+      <h2>{c.faq.title}</h2>
+      <div class="faqs">
+        {c.faq.items.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+      </div>
+    </div></section>
+
+    <div class="tl-end"><RelatedTools code={code} current="ai-visibility" /></div>
+  </div>
+</PageShell>

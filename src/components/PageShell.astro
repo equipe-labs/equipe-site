@@ -12,13 +12,13 @@ import '../styles/site.css';
 import '../styles/pages.css';
 import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
 
-interface Props { code: LocaleCode; page: string; title: string; description: string; image?: string; imageAlt?: string; ogType?: 'website' | 'article'; /** Languages this page exists in; all when omitted. */ langs?: LocaleCode[] }
-const { code, page, title, description, image, imageAlt, ogType, langs } = Astro.props;
+interface Props { code: LocaleCode; page: string; title: string; description: string; image?: string; imageAlt?: string; ogType?: 'website' | 'article'; /** Languages this page exists in; all when omitted. */ langs?: LocaleCode[]; /** Kept out of search (e.g. a shared result's shell). */ noindex?: boolean }
+const { code, page, title, description, image, imageAlt, ogType, langs, noindex } = Astro.props;
 const info = getLocale(code);
 const t = getMessages(code);
 const url = new URL(subPath(info, page), Astro.site).href;
 ---
-<Base locale={code} title={title} description={description} image={image ?? `/og/v4/${info.slug || 'en'}.png`} imageAlt={imageAlt ?? t.meta.ogImageAlt} subpage={page} langs={langs} ogType={ogType}>
+<Base locale={code} title={title} description={description} image={image ?? `/og/v4/${info.slug || 'en'}.png`} imageAlt={imageAlt ?? t.meta.ogImageAlt} subpage={page} langs={langs} ogType={ogType} noindex={noindex}>
   <Fragment slot="head">
     <OrganizationJsonLd />
     <WebSiteJsonLd lang={info.lang} url={url} description={description} />

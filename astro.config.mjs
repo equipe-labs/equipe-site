@@ -31,7 +31,7 @@ export default defineConfig({
   integrations: [sitemap({
       i18n: { defaultLocale: 'en', locales },
       lastmod: new Date(), // build time
-      // The Design pages stay out of the sitemap until DESIGN_MENU_LIVE=true (src/data/design.ts).
-      filter: (page) => !page.endsWith('/404/') && (process.env.DESIGN_MENU_LIVE === 'true' || !/\/design\//.test(page)),
+      // Shared grader reports (/grader/r/) are a noindex shell. The Design pages stay out of the sitemap until DESIGN_MENU_LIVE=true (src/data/design.ts).
+      filter: (page) => !page.endsWith('/404/') && !/\/grader\/r\/$/.test(page) && (process.env.DESIGN_MENU_LIVE === 'true' || !/\/design\//.test(page)),
     })],
 });

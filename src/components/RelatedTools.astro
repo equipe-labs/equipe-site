@@ -1,0 +1,26 @@
+---
+// "More free tools" on every tool page: the other tools of the hub (src/data/tools/*.ts), then a link to /tools/.
+import { TOOLS, TOOL_ICONS, toolCopy } from '../data/tools/index';
+import { hubCopy } from '../data/toolshub';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; current: string; max?: number }
+const { code, current, max = 3 } = Astro.props;
+const info = getLocale(code);
+const H = hubCopy(code);
+const list = TOOLS.filter((t) => t.slug !== current).slice(0, max);
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const icon = (k: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${TOOL_ICONS[k] ?? TOOL_ICONS.wrench}</svg>`;
+---
+{list.length > 0 && (
+  <section class="tl-rel"><div class="wrap">
+    <div class="tl-rel-h"><h2>{H.related}</h2><a href={subPath(info, 'tools')} data-ph="tools_hub_link" data-ph-location={`related-${current}`}>{H.all}</a></div>
+    <ul class="tl-grid">
+      {list.map((t) => { const c = toolCopy(t, code); return (
+        <li><a class="tl-tool" href={subPath(info, t.path)} data-ph="tools_hub_click" data-ph-location={`related-${current}`} data-ph-tool={t.slug}>
+          <span class="ic"><Fragment set:html={icon(t.icon)} /></span><b>{c.name}</b><span class="bl">{c.blurb}</span><span class="go">{c.cta}<Fragment set:html={arrow} /></span>
+        </a></li>
+      ); })}
+    </ul>
+  </div></section>
+)}

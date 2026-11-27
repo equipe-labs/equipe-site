@@ -12,6 +12,9 @@
 - From Claude (paste a Claude artifact's code or published link; it goes live at <name>.equipe.page in about a minute, with analytics, SEO and a privacy page; equipe is independent and not affiliated with Anthropic): https://equipe.im/from-claude/
 - AI features (AI in the products the team builds: chatbot, FAQ answers, translation, summaries and more): https://equipe.im/features/ai/
 - Move a project to equipe (from Claude Code, Cursor, Lovable, Bolt, v0, Replit, GitHub or a ZIP; the design is kept, Next.js runs on Cloudflare Workers through OpenNext): https://equipe.im/migrate/
+- Free tools (no sign-up): https://equipe.im/tools/
+- Free website grader (speed on a phone via Google PageSpeed Insights, search basics, mobile, accessibility and AI visibility: GPTBot/ClaudeBot/PerplexityBot access, llms.txt, structured data; overall score and the top 5 fixes in plain words; shareable report): https://equipe.im/grader/
+- Does ChatGPT know my business? Free AI visibility checker (asks ChatGPT and Claude, with web search, 3 questions a customer would ask; shows whether the business is named or its site cited, which sites are cited instead, and what to fix): https://equipe.im/ai-visibility/
 - AI in your product, docs and API reference: https://ai.equipe.im/docs
 - About (Umbriles Inc.): https://equipe.im/about/
 - Changelog: https://equipe.im/changelog/

@@ -138,3 +138,5 @@ You can start free: $5 of credit when you create your team, and no card is neede
 - [ ] Five real people have been invited, by you, personally
 
 Launching is the beginning of the work, not the end. The products that become businesses are the ones whose owners keep changing them every week.
+
+After launch, run the free [website grader](/grader/) to check speed, search basics and AI visibility, and see whether [ChatGPT knows your business](/ai-visibility/) yet.

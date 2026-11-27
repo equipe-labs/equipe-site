@@ -123,3 +123,5 @@ Some things are less ready for a small site than the demos suggest. Voice assist
 All eleven features above are ready-made on equipe. You tell your team which one you want, in plain words, and it is added and filled with your facts. There's no AI account or key: usage comes from your equipe credits at the AI provider's list price plus 10%, every product has a monthly AI limit ($10 unless you change it) with limits per visitor, and equipe doesn't store what visitors type. Voice to text and site-wide search by meaning aren't available on equipe yet.
 
 See each feature with a small drawing on the [AI features page](/features/ai/), or read [how adding AI with no API keys works](/blog/add-ai-to-your-product-no-api-keys/).
+
+Want to know where your current site stands first? The free [website grader](/grader/) scores speed, search basics, mobile, accessibility and AI visibility, and [Does ChatGPT know my business?](/ai-visibility/) asks ChatGPT and Claude the questions your customers ask.
