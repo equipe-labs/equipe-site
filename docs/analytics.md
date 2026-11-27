@@ -99,7 +99,19 @@ PostHog는 `posthog-js`의 slim 빌드(약 50KB gzip)를 **동적 import**한다
 | `outbound_click` | `url`, `host` | 위 `data-ph`가 없는 그 밖의 외부 링크 클릭 |
 | `scroll_depth` | `percent`: `25` / `50` / `75` / `100` | 해당 지점을 처음 지날 때 페이지 로드당 한 번씩 |
 
+| `feature_view`, `feature_start`, `feature_done`, `feature_signup`, `feature_<step>` | `feature`(아래 기능 이름) | 기능 사용 단계(2026-11-28). 탭마다 단계별로 한 번. `view`·`signup`은 `OwnFunnel.astro`가 자동으로, 도구는 `start`·`done`·`error`·`shared_view`를 부른다 |
+
 `cta_github_click`을 보낸 링크는 `outbound_click`을 **중복으로 보내지 않는다**.
+
+### 기능 사용 (`window.eqFeat`)
+
+모든 기능은 사용 여부를 남긴다(오너 규칙 2026-11-28). 이름은 `<기능>:<단계>`이고 cloud `docs/analytics.md`의 "Feature usage"와 같다.
+
+- 기능 이름은 페이지 경로로 정한다(`OwnFunnel.astro`의 `FEAT`, cloud `web/src/features.js`의 `siteFeatureOf`와 같은 규칙): `home`, `pricing`, `grader`, `ai_visibility`, `cost_calculator`, `name_generator`, `booking_page`, `idea_validator`, `privacy_policy`, `tools_hub`, `ai_to_site`(/from-*, /publish-html), `migrate`, `industry_pages`, `comparisons`(/vs, /alternatives), `blog`.
+- 단계: `view`(자동), `start`, `done`, `signup`(가입 링크·아이디어 상자 제출, 자동), 그 밖의 `data-ph` 클릭은 그 이름 그대로 핵심 클릭으로 센다(PostHog에는 원래 이벤트만 간다).
+- 자체 수집기로는 `eqOwn('ft', '기능:단계')`, PostHog로는 `feature_<단계>`. 입력한 글은 보내지 않는다.
+- 가입 연결: `_eqa`에 클릭한 페이지(`p`)가 실려, 앱이 가입을 그 기능에 붙인다.
+- 새 기능 페이지를 만들면 `FEAT`과 cloud `FEATURES`에 같은 이름을 넣고, 도구라면 `window.eqFeat?.('start')`/`('done')`을 부른다. 결과는 app.equipe.im `/admin/analytics` → Features.
 
 ## 새 이벤트 추가하는 법
 
