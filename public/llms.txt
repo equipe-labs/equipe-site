@@ -13,6 +13,18 @@
 - AI features (AI in the products the team builds: chatbot, FAQ answers, translation, summaries and more): https://equipe.im/features/ai/
 - Move a project to equipe (from Claude Code, Cursor, Lovable, Bolt, v0, Replit, GitHub or a ZIP; the design is kept, Next.js runs on Cloudflare Workers through OpenNext): https://equipe.im/migrate/
 - AI in your product, docs and API reference: https://ai.equipe.im/docs
+- Website guides by business type (what each kind of site needs, the local platforms that send customers to it, the schema.org type to use, and a ready-made brief that starts a build; each also in the languages where it has local copy, e.g. /ko/websites/, /ja/websites/): https://equipe.im/websites/
+  - Restaurant website: https://equipe.im/websites/restaurant/
+  - Cafe website: https://equipe.im/websites/cafe/
+  - Bakery website: https://equipe.im/websites/bakery/
+  - Hair salon website: https://equipe.im/websites/hair-salon/
+  - Yoga or Pilates studio website: https://equipe.im/websites/yoga-pilates/
+  - Dog grooming website: https://equipe.im/websites/dog-grooming/
+  - Tutoring website: https://equipe.im/websites/tutoring/
+  - Youth soccer academy website: https://equipe.im/websites/soccer-academy/
+  - Dental clinic website: https://equipe.im/websites/dental/
+  - Photographer website: https://equipe.im/websites/photographer/
+  - Nonprofit website: https://equipe.im/websites/nonprofit/
 - About (Umbriles Inc.): https://equipe.im/about/
 - Changelog: https://equipe.im/changelog/
 - Sign up: https://app.equipe.im/start · Sign in: https://app.equipe.im/login

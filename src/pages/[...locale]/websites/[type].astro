@@ -1,0 +1,298 @@
+---
+// /websites/<type>/: "[business type] website" guides (programmatic SEO). Copy: src/data/industries/<lang>.ts.
+// A type is built only in the languages that have copy for it, and its hreflang cluster lists only those.
+// Funnel: the brief goes to app.equipe.im/start?idea=… with utm_campaign=industry-<type>; clicks carry data-ph for
+// PostHog and the site's own collector (OwnFunnel counts click:<data-ph>:<location>, idea_focus/type/submit).
+import PageShell from '../../../components/PageShell.astro';
+import FaqJsonLd from '../../../components/FaqJsonLd.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import { SITE } from '../../../data/site';
+import {
+  INDUSTRY, META, DEMOS, GOLDEN_BOOT, GOLDEN_BOOT_EXAMPLE, langsFor, typesFor, startHref, type IndustryKey,
+} from '../../../data/industries';
+import { available, getLocale, localePath, segments, subPath, type LocaleCode } from '../../../i18n';
+import '../../../styles/industry.css';
+
+export function getStaticPaths() {
+  return available.flatMap((l) =>
+    typesFor(l.code).map((type) => ({ params: { locale: l.slug || undefined, type }, props: { code: l.code, type } })),
+  );
+}
+const { code, type } = Astro.props as { code: LocaleCode; type: IndustryKey };
+const info = getLocale(code);
+const L = INDUSTRY[code];
+const u = L.ui;
+const p = L.pages[type]!;
+const meta = META[type];
+const page = `websites/${type}`;
+const url = new URL(subPath(info, page), Astro.site).href;
+const hubUrl = new URL(subPath(info, 'websites'), Astro.site).href;
+
+// Free tools built on other branches: linked only when their page is in this build.
+const built = Object.keys(import.meta.glob([
+  '../grader.astro', '../grader/index.astro', '../tools.astro', '../tools/index.astro',
+  '../tools/app-cost-calculator.astro', '../tools/app-cost-calculator/index.astro',
+]));
+const has = (name: string) => built.some((k) => k.startsWith(`../${name}.astro`) || k.startsWith(`../${name}/index.astro`));
+const tools = {
+  grader: has('grader') ? subPath(info, 'grader') : null,
+  cost: has('tools/app-cost-calculator') ? `${subPath(info, 'tools/app-cost-calculator')}?type=${meta.costType}` : null,
+  hub: has('tools') ? subPath(info, 'tools') : null,
+};
+
+// The live example: the real customer when allowed, otherwise the gallery demo that shows the same pattern.
+const customer = type === 'soccer-academy' && GOLDEN_BOOT_EXAMPLE ? GOLDEN_BOOT : null;
+const demo = !customer && meta.demo ? DEMOS[meta.demo] : null;
+const demoCopy = meta.demo ? u.demos[meta.demo] : undefined;
+
+// Example JSON-LD for the owner's own site: the type's fields, then this market's overrides (null removes one).
+const merged: Record<string, unknown> = { ...meta.schemaExtra, ...(p.schemaExtra ?? {}) };
+for (const k of Object.keys(merged)) if (merged[k] === null || merged[k] === undefined) delete merged[k];
+const typeField = merged['@type'] ?? meta.schemaType;
+delete merged['@type'];
+const example = {
+  '@context': 'https://schema.org',
+  '@type': typeField,
+  name: u.ph.name,
+  url: 'https://…',
+  telephone: u.ph.phone,
+  address: { '@type': 'PostalAddress', streetAddress: u.ph.street, addressLocality: u.ph.city },
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
+  ...merged,
+  sameAs: ['https://www.instagram.com/…'],
+};
+const exampleJson = JSON.stringify(example, null, 2);
+
+const others = typesFor(code).filter((k) => k !== type);
+const rich = (s: string) => segments(s);
+const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? '');
+const loc = `industry-${type}`;
+
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>';
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const ext = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
+const copyIc = '<svg class="in-ci" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><svg class="in-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const icon = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const toolIc = {
+  grader: icon('<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>'),
+  cost: icon('<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8"/><path d="M16 14v4"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/>'),
+};
+---
+<PageShell code={code} page={page} title={p.title} description={p.desc} langs={langsFor(type)}>
+  <Fragment slot="head">
+    <link rel="preconnect" href={SITE.app} crossorigin />
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__inrv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: p.h1, description: p.desc, inLanguage: info.lang,
+      isPartOf: { '@id': `${SITE.url}/#website` }, about: { '@id': `${SITE.url}/#organization` },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'equipe', item: new URL(localePath(info), Astro.site).href },
+          { '@type': 'ListItem', position: 2, name: u.hubName, item: hubUrl },
+          { '@type': 'ListItem', position: 3, name: p.name, item: url },
+        ],
+      },
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={p.faq} />
+  </Fragment>
+
+  <section class="in-hero"><div class="wrap">
+    <nav class="in-crumbs in-ld" style="--d:0" aria-label="Breadcrumb">
+      <a href={subPath(info, 'websites')}>{u.hubName}</a><span aria-hidden="true">/</span><span aria-current="page">{p.name}</span>
+    </nav>
+    <span class="in-mark in-ld" style="--d:0"><Fragment set:html={icon(meta.icon)} /></span>
+    <h1 class="in-ld" style="--d:1">{p.h1}</h1>
+    <p class="in-lead in-ld" style="--d:2">{p.lead}</p>
+    <div class="in-acts in-ld" style="--d:3">
+      <a class="btn primary lg" href="#brief" data-ph="industry_brief_jump" data-ph-location={`${loc}-hero`}>{u.heroCta}<Fragment set:html={arrow} /></a>
+      <a class="btn ghost lg" href="#needs" data-ph="industry_needs_jump" data-ph-location={`${loc}-hero`}>{u.heroSecondary}</a>
+    </div>
+  </div></section>
+
+  <section class="in-sec" id="needs"><div class="wrap">
+    <h2 class="in-rv">{p.needsTitle}</h2>
+    <p class="in-sub in-rv">{u.needsSub}</p>
+    <ol class="in-needs">
+      {p.needs.map((n, i) => (
+        <li class="in-rv" style={`transition-delay:${(i % 2) * 60}ms`}>
+          <span class="in-n" aria-hidden="true">{i + 1}</span>
+          <div><h3>{n.title}</h3><p>{n.text}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div></section>
+
+  <section class="in-sec" id="channels"><div class="wrap">
+    <h2 class="in-rv">{u.localTitle}</h2>
+    <p class="in-sub in-rv">{u.localSub}</p>
+    <ul class="in-local">
+      {p.local.map((c, i) => (
+        <li class="in-rv" style={`transition-delay:${(i % 4) * 60}ms`}>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div></section>
+
+  {(customer || (demo && demoCopy)) && (
+    <section class="in-sec" id="example"><div class="wrap">
+      <h2 class="in-rv">{u.exampleTitle}</h2>
+      {customer ? (
+        <a class="in-demo in-rv" href={customer.url} target="_blank" rel="noopener" data-ph="industry_example_click" data-ph-location={loc}>
+          <span class="in-demo-body">
+            <span class="in-badge">{u.customerBadge}</span>
+            <span class="in-demo-name">{customer.name}</span>
+            {p.example && <span class="in-demo-line">{p.example}</span>}
+            <span class="in-go">{customer.url.replace('https://', '')}<Fragment set:html={ext} /></span>
+          </span>
+        </a>
+      ) : demo && demoCopy && (
+        <a class="in-demo in-rv" href={`${demo.url}/?utm_source=equipe.im&utm_medium=seo&utm_campaign=${loc}`} target="_blank" rel="noopener" data-ph="industry_example_click" data-ph-location={loc}>
+          <span class="in-shot">
+            <img class="in-th-l" src={demo.screenshotLight.replace('.png', '.webp')} alt={demo.name} width="1440" height="900" loading="lazy" decoding="async" />
+            <img class="in-th-d" src={demo.screenshotDark.replace('.png', '.webp')} alt="" width="1440" height="900" loading="lazy" decoding="async" />
+          </span>
+          <span class="in-demo-body">
+            <span class="in-badge">{u.demoBadge}</span>
+            <span class="in-demo-name">{fill(u.demoBy, { name: demo.name, time: demoCopy.time })}</span>
+            <span class="in-demo-line">{demoCopy.line}</span>
+            {p.example && <span class="in-demo-why">{p.example}</span>}
+            <span class="in-go">{u.demoOpen}<Fragment set:html={ext} /></span>
+          </span>
+        </a>
+      )}
+    </div></section>
+  )}
+
+  <section class="in-sec" id="brief"><div class="wrap">
+    <h2 class="in-rv">{u.promptTitle}</h2>
+    <p class="in-sub in-rv">{u.promptSub}</p>
+    <form class="in-brief in-rv" action={`${SITE.app}/start`} method="get" data-idea data-in-brief>
+      <div class="in-brief-bar">
+        <label class="in-brief-l" for="in-brief-text">{u.promptLabel}</label>
+        <button type="button" class="in-copy" data-copy={u.copy} data-copied={u.copied} data-ph="industry_brief_copy" data-ph-location={loc}>
+          <Fragment set:html={copyIc} /><span data-copy-label>{u.copy}</span>
+        </button>
+      </div>
+      <textarea id="in-brief-text" name="idea" rows="9" spellcheck="false">{p.prompt}</textarea>
+      <input type="hidden" name="utm_source" value="equipe.im" />
+      <input type="hidden" name="utm_medium" value="seo" />
+      <input type="hidden" name="utm_campaign" value={loc} />
+      <input type="hidden" name="utm_content" value="brief" />
+      <div class="in-brief-foot">
+        <p>{u.promptNote}</p>
+        <button type="submit" class="btn primary lg" data-ph="signup_cta_click" data-ph-location={`${loc}-brief`}>{u.promptButton}<Fragment set:html={arrow} /></button>
+      </div>
+      <span class="in-live" role="status" aria-live="polite" data-copy-live></span>
+    </form>
+    <noscript><p class="in-sub"><a href={startHref(p.prompt, type, 'brief-nojs')}>{u.promptButton}</a></p></noscript>
+  </div></section>
+
+  <section class="in-sec" id="structured-data"><div class="wrap">
+    <h2 class="in-rv">{u.schemaTitle}</h2>
+    <p class="in-sub in-rv">{u.schemaSub}</p>
+    <div class="in-schema">
+      <p class="in-schema-text in-rv">{rich(p.schema).map((g) => g.kind === 'code' ? <code>{g.t}</code> : g.kind === 'strong' ? <strong>{g.t}</strong> : g.t)}</p>
+      <figure class="in-code in-rv">
+        <figcaption>{u.schemaCode}</figcaption>
+        <pre tabindex="0"><code>{exampleJson}</code></pre>
+      </figure>
+    </div>
+    <p class="in-note in-rv"><span class="in-li"><Fragment set:html={check} /></span><span>{u.schemaNote}</span></p>
+  </div></section>
+
+  {(tools.grader || tools.cost) && (
+    <section class="in-sec" id="tools"><div class="wrap">
+      <h2 class="in-rv">{u.toolsTitle}</h2>
+      <ul class="in-tools">
+        {tools.grader && (
+          <li class="in-rv"><a class="in-tool" href={tools.grader} data-ph="grader_link" data-ph-location={loc}>
+            <span class="in-ic"><Fragment set:html={toolIc.grader} /></span>
+            <span class="in-tool-t">{u.grader.title}</span><span class="in-tool-d">{u.grader.text}</span>
+            <span class="in-go">{u.grader.cta}<Fragment set:html={arrow} /></span>
+          </a></li>
+        )}
+        {tools.cost && (
+          <li class="in-rv" style="transition-delay:60ms"><a class="in-tool" href={tools.cost} data-ph="costcalc_link" data-ph-location={loc}>
+            <span class="in-ic"><Fragment set:html={toolIc.cost} /></span>
+            <span class="in-tool-t">{u.cost.title}</span><span class="in-tool-d">{u.cost.text}</span>
+            <span class="in-go">{u.cost.cta}<Fragment set:html={arrow} /></span>
+          </a></li>
+        )}
+      </ul>
+      {tools.hub && <p class="in-more-tools in-rv"><a href={tools.hub} data-ph="tools_hub_link" data-ph-location={loc}>{u.toolsHub}<Fragment set:html={arrow} /></a></p>}
+    </div></section>
+  )}
+
+  <section class="in-sec" id="faq"><div class="wrap">
+    <h2 class="in-rv">{u.faqTitle}</h2>
+    <div class="faqs in-faqs in-rv">
+      {p.faq.map((f, i) => <details open={i === 0} data-faq-id={`${type}-${i + 1}`}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  {others.length > 0 && (
+    <section class="in-sec in-others" id="more"><div class="wrap">
+      <h2 class="in-rv">{u.moreTitle}</h2>
+      <ul class="in-chips in-rv">
+        {others.map((k) => (
+          <li><a href={subPath(info, `websites/${k}`)} data-ph="industry_other_click" data-ph-location={loc}>
+            <span class="in-chip-ic"><Fragment set:html={icon(META[k].icon)} /></span>{L.pages[k]!.name}
+          </a></li>
+        ))}
+      </ul>
+    </div></section>
+  )}
+
+  <section class="in-end"><div class="wrap">
+    <a class="btn primary lg in-rv" href={startHref(p.prompt, type, 'final')} data-ph="signup_cta_click" data-ph-location={`${loc}-final`}>{u.promptButton}<Fragment set:html={arrow} /></a>
+  </div></section>
+
+  <script>
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
+      (window as unknown as { __inrv: boolean }).__inrv = true;
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.in-rv').forEach((el) => io.observe(el));
+      addEventListener('beforeprint', () => document.querySelectorAll('.in-rv').forEach((el) => el.classList.add('in')));
+    }
+    // The brief: grows with its text; Copy puts the edited text on the clipboard; the final button sends the edited text too.
+    document.querySelectorAll<HTMLFormElement>('[data-in-brief]').forEach((form) => {
+      const ta = form.querySelector<HTMLTextAreaElement>('textarea');
+      const btn = form.querySelector<HTMLButtonElement>('.in-copy');
+      const label = form.querySelector<HTMLElement>('[data-copy-label]');
+      const live = form.querySelector<HTMLElement>('[data-copy-live]');
+      if (!ta) return;
+      const fit = () => { ta.style.height = 'auto'; ta.style.height = `${ta.scrollHeight + 2}px`; };
+      fit();
+      ta.addEventListener('input', fit);
+      addEventListener('resize', fit, { passive: true });
+      form.addEventListener('submit', (e) => { if (!ta.value.trim()) e.preventDefault(); });
+      const final = document.querySelector<HTMLAnchorElement>('.in-end a');
+      final?.addEventListener('click', () => {
+        const u = new URL(final.href);
+        u.searchParams.set('idea', ta.value.trim());
+        final.href = u.href;
+      });
+      if (!btn || !label) return;
+      let timer = 0;
+      btn.addEventListener('click', async () => {
+        let ok = false;
+        try { await navigator.clipboard.writeText(ta.value); ok = true; } catch { ta.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+        if (!ok) return;
+        btn.classList.add('done');
+        label.textContent = btn.dataset.copied ?? '';
+        if (live) live.textContent = btn.dataset.copied ?? '';
+        clearTimeout(timer);
+        timer = window.setTimeout(() => { btn.classList.remove('done'); label.textContent = btn.dataset.copy ?? ''; if (live) live.textContent = ''; }, 2000);
+      });
+    });
+  </script>
+</PageShell>
