@@ -74,6 +74,8 @@ const words = {
 <script>
   type Words = { lines: string; remove: string; sending: string; errEmpty: string; errLink: string; errType: string; errSize: string; errRead: string; moved: string; exts: string[]; max: number; url: string; lang: string };
   const track = (n: string, p?: Record<string, unknown>) => (window as unknown as { eqTrack?: (n: string, p?: unknown) => void }).eqTrack?.(n, p);
+  // Feature usage (OwnFunnel eqFeat): code pasted or a file read is the start; sending it to the app is the sign-up step.
+  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const UTM = ['utm_source', 'utm_medium', 'utm_campaign'] as const;
 
   /** A Claude artifact link, normalised (https, no hash), or '' when it is not one. */
@@ -142,7 +144,7 @@ const words = {
       say(W.moved, 'info');
       urlIn.focus({ preventScroll: true });
     };
-    ta.addEventListener('input', () => { refresh(); if (msg.dataset.kind === 'err') say(''); });
+    ta.addEventListener('input', () => { refresh(); if (ta.value.trim()) ft('paste'); if (msg.dataset.kind === 'err') say(''); });
     ta.addEventListener('paste', () => setTimeout(linkInCode, 0));
     // Typing over a dropped file's text keeps the file name only while the text is still there.
     ta.addEventListener('input', () => { if (!ta.value.trim()) setFile('', 0); });
@@ -160,6 +162,7 @@ const words = {
       r.onload = () => {
         ta.value = String(r.result || ''); ta.scrollTop = 0; ta.scrollLeft = 0;
         setFile(f.name, f.size); refresh(); say('');
+        ft('paste'); ft('file');
         track('from_claude_file', { location: loc, ext: ext.slice(1), kb: Math.round(f.size / 1024) });
       };
       r.onerror = () => say(W.errRead);
@@ -193,6 +196,7 @@ const words = {
         e.preventDefault();
         const q = new URLSearchParams({ url: link, lang: W.lang });
         utm.forEach(([k, v]) => q.set(k, v));
+        ft('signup'); ft('submit_link');
         track('from_claude_submit', { mode: 'link', location: loc });
         location.href = `${W.url}?${q.toString().replace(/\+/g, '%20')}`;
         return;
@@ -200,6 +204,7 @@ const words = {
       // Code: the browser posts the form. Empty optional fields stay out; utm fields ride along as hidden inputs.
       urlIn.value = link; urlIn.disabled = !link;
       const extra = utm.map(([k, v]) => { const h = document.createElement('input'); h.type = 'hidden'; h.name = k; h.value = v; form.appendChild(h); return h; });
+      ft('signup'); ft('submit_code');
       track('from_claude_submit', { mode: 'code', location: loc, has_file: !!fname.value, has_link: !!link });
       setTimeout(() => { urlIn.disabled = false; extra.forEach((h) => h.remove()); }, 0);
     });
