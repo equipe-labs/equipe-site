@@ -1,0 +1,28 @@
+---
+// /business-name-generator/r/: the shell for shared names. equipe.im rewrites /business-name-generator/r/<id>/ to
+// platform.equipe.im, which serves this page with the names in its title and the business type's share image (the
+// eq-share-* metas are its templates: {n}, {names}, {about}). NamesApp (mode 'shared') loads the names. Not indexed.
+import PageShell from '../../../components/PageShell.astro';
+import NamesApp from '../../../components/NamesApp.astro';
+import RelatedTools from '../../../components/RelatedTools.astro';
+import { namesCopy } from '../../../data/names';
+import { available, type LocaleCode } from '../../../i18n';
+import '../../../styles/tools.css';
+import '../../../styles/names.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const c = namesCopy(code);
+---
+<PageShell code={code} page="business-name-generator/r" title={c.share.pageTitle} description={c.page.desc} image="/og/names/other.png" imageAlt={c.page.ogTitle} noindex>
+  <Fragment slot="head">
+    <meta name="eq-share-title" content={c.share.title} />
+    <meta name="eq-share-desc" content={c.share.desc} />
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+  </Fragment>
+  <div class="tl">
+    <NamesApp code={code} mode="shared" />
+    <div class="tl-end"><RelatedTools code={code} current="business-name-generator" /></div>
+  </div>
+</PageShell>

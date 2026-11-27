@@ -36,16 +36,16 @@ const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
     </div></section>
     <div class="wrap tl-end">
       {groups.map(({ g, items }) => (
-        <section class="tl-grp">
+        <div class="tl-grp">
           <h2>{H.groups[g]}</h2>
           <ul class="tl-grid">
             {items.map((t, i) => { const c = toolCopy(t, code); return (
-              <li class="tl-in" style={`--d:${i * 60}ms`}><a class="tl-tool" href={subPath(info, t.path)} data-ph="tools_hub_click" data-ph-location="hub" data-ph-tool={t.slug}>
+              <li class="tl-in" style={`--d:${Math.min(i, 6) * 60}ms`}><a class="tl-tool" href={subPath(info, t.path)} data-ph="tools_hub_click" data-ph-location="hub" data-ph-tool={t.slug}>
                 <span class="ic"><Fragment set:html={icon(t.icon)} /></span><b>{c.name}</b><span class="bl">{c.blurb}</span><span class="go">{c.cta}<Fragment set:html={arrow} /></span>
               </a></li>
             ); })}
           </ul>
-        </section>
+        </div>
       ))}
       <div class="tl-more">
         <h2>{H.more.title}</h2>
@@ -55,9 +55,8 @@ const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
     </div>
   </div>
   <script>
-    if (document.documentElement.classList.contains('mo')) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' });
-      document.querySelectorAll('.tl-in').forEach((x) => io.observe(x));
-    } else document.querySelectorAll('.tl-in').forEach((x) => x.classList.add('on'));
+    // Every card fades in on load, a little after the one before (no scroll trigger: a card is never left hidden).
+    const cards = document.querySelectorAll<HTMLElement>('.tl-in');
+    requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach((x) => x.classList.add('on'))));
   </script>
 </PageShell>
