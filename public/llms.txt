@@ -9,6 +9,7 @@
 - Pricing: https://equipe.im/pricing/
 - Security: https://equipe.im/security/
 - Day one (what the AI team delivers from the first launch): https://equipe.im/day-one/
+- From Claude (paste a Claude artifact's code or published link; it goes live at <name>.equipe.page in about a minute, with analytics, SEO and a privacy page; equipe is independent and not affiliated with Anthropic): https://equipe.im/from-claude/
 - AI features (AI in the products the team builds: chatbot, FAQ answers, translation, summaries and more): https://equipe.im/features/ai/
 - Move a project to equipe (from Claude Code, Cursor, Lovable, Bolt, v0, Replit, GitHub or a ZIP; the design is kept, Next.js runs on Cloudflare Workers through OpenNext): https://equipe.im/migrate/
 - AI in your product, docs and API reference: https://ai.equipe.im/docs

@@ -10,6 +10,7 @@ import { CONSENT_REQUIRED } from '../data/consent';
 import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '../i18n';
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 import { DAY_ONE } from '../data/dayone';
+import { FROM_CLAUDE } from '../data/fromclaude';
 import { aiCopy } from '../data/productai';
 import { MIGRATE } from '../data/migrate';
 import { legalCopy } from '../data/legal';
@@ -41,6 +42,7 @@ const bu = BLOG_UI[bl];
         <ul>
           <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
           <li><a href={subPath(info, 'day-one')}>{(DAY_ONE[code] ?? DAY_ONE.en).nav}</a></li>
+          <li><a href={subPath(info, 'from-claude')}>{(FROM_CLAUDE[code] ?? FROM_CLAUDE.en).nav}</a></li>
           <li><a href={subPath(info, 'features/ai')}>{aiCopy(code).nav}</a></li>
           <li><a href={subPath(info, 'migrate')}>{(MIGRATE[code] ?? MIGRATE.en).nav}</a></li>
           <li><a href={subPath(info, 'pricing')}>{t.nav.pricing}</a></li>
