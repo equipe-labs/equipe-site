@@ -26,7 +26,7 @@ const LOCS = available.map((l) => l.slug).filter(Boolean);
     // Features: which one this page is, then its steps (each once per tab here and in the collector).
     var base = pv.toLowerCase().replace(new RegExp('^/(' + LOCS.join('|') + ')(?=/|$)'), '') || '/';
     var FEAT = [[/^\/?$/, 'home'], [/^\/pricing\/?$/, 'pricing'], [/^\/grader(\/|$)/, 'grader'], [/^\/ai-visibility(\/|$)/, 'ai_visibility'],
-      [/^\/tools\/app-cost-calculator(\/|$)/, 'cost_calculator'], [/^\/business-name-generator(\/|$)/, 'name_generator'],
+      [/^\/tools\/app-cost-calculator(\/|$)/, 'cost_calculator'], [/^\/business-name-generator(\/|$)/, 'name_generator'], [/^\/logo-maker(\/|$)/, 'logo_maker'],
       [/^\/tools\/booking-page(\/|$)/, 'booking_page'], [/^\/tools\/idea-validator(\/|$)/, 'idea_validator'],
       [/^\/tools\/privacy-policy-generator(\/|$)/, 'privacy_policy'], [/^\/tools\/?$/, 'tools_hub'],
       [/^\/(from-[a-z0-9-]+|publish-html)(\/|$)/, 'ai_to_site'], [/^\/migrate(\/|$)/, 'migrate'], [/^\/websites(\/|$)/, 'industry_pages'],
@@ -94,7 +94,7 @@ const LOCS = available.map((l) => l.slug).filter(Boolean);
         if (/pricing/.test(loc)) fn('pricing');
       }
       if (a && a.hasAttribute('data-lang-choice')) ev('lang_switch', (d.documentElement.lang || '') + '>' + (a.getAttribute('hreflang') || ''));
-      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup|import)/.test(a.href)) { fn('signup_start'); w.eqFeat('signup'); }
+      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup|import|lab\/start)/.test(a.href)) { fn('signup_start'); w.eqFeat('signup'); }
       if (a && /\/pricing\/?(#|$)/.test(a.pathname || '') && a.host === location.host) fn('pricing');
     }, true);
     // Time on the page, once, when it is hidden or left.

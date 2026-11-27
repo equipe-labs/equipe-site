@@ -119,11 +119,11 @@ export const META: Record<IndustryKey, Meta> = {
 };
 
 /**
- * Golden Boot Academy (goldenbootacademy.app) is a real, paying equipe customer and the natural live example for
- * /websites/soccer-academy/. It stays off until the customer agrees to be shown as a case (their logo row on the
- * home page is not a case study). Turn on with GOLDEN_BOOT_EXAMPLE=true once they say yes.
+ * Golden Boot Academy (goldenbootacademy.app) is a real, paying equipe customer and the live example on
+ * /websites/soccer-academy/. The customer agreed to be shown (verbally, to the owner, 2026-11-28). The copy uses only
+ * what their public site says. Build with GOLDEN_BOOT_EXAMPLE=false to hide it again.
  */
-export const GOLDEN_BOOT_EXAMPLE = process.env.GOLDEN_BOOT_EXAMPLE === 'true';
+export const GOLDEN_BOOT_EXAMPLE = process.env.GOLDEN_BOOT_EXAMPLE !== 'false';
 export const GOLDEN_BOOT = { name: 'Golden Boot Academy', url: 'https://goldenbootacademy.app' };
 
 /** Gallery demos (src/data/gallery.json): built by the equipe team, not real businesses. */

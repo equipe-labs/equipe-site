@@ -55,7 +55,11 @@ main.pg .nm-top h3 { margin: 0; min-width: 0; font-size: 24px; line-height: 1.2;
 .nm-logo-slot:empty { display: none; }
 .nm-logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .nm-logo { margin: 0; aspect-ratio: 1; border-radius: 14px; background: #fff; border: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; }
-.nm-logo img { width: 82%; height: 82%; object-fit: contain; }
+.nm-logo img { width: 76%; height: 76%; object-fit: contain; }
+/* The marks come fitted to their ink (the logo engine): a card shows them large, with even padding. */
+.nm-logos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
+.nm-full { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 14.5px; font-weight: 500; color: var(--accent-text); text-decoration: none; }
+.nm-full svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 html.mo .nm-logos:not(.nm-wait) .nm-logo { opacity: 0; transform: scale(0.94); }
 html.mo .nm-logos .nm-logo.on { opacity: 1; transform: none; transition: opacity 420ms var(--e), transform 520ms var(--spring); }
 html.mo .nm-logos .nm-logo.on + .nm-logo.on { transition-delay: 90ms; }

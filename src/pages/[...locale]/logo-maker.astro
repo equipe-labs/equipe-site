@@ -1,0 +1,55 @@
+---
+// /logo-maker/: the free logo maker. Copy: src/data/logo.ts. The marks are drawn and checked on platform.equipe.im
+// (cloud platform/src/free-logo.js); LogoApp composes, edits, previews and exports them in the browser.
+import PageShell from '../../components/PageShell.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import LogoApp from '../../components/LogoApp.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+import { SITE } from '../../data/site';
+import { logoCopy } from '../../data/logo';
+import { available, getLocale, subPath, type LocaleCode } from '../../i18n';
+import '../../styles/tools.css';
+import '../../styles/names.css';
+import '../../styles/logo.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = logoCopy(code);
+const url = new URL(subPath(info, 'logo-maker'), Astro.site).href;
+---
+<PageShell code={code} page="logo-maker" title={c.page.title} description={c.page.desc} image={`/og/logo/tool-${info.slug || 'en'}.png`} imageAlt={c.page.ogTitle}>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, name: c.page.ogTitle, url, description: c.page.desc, inLanguage: info.lang,
+      applicationCategory: 'DesignApplication', operatingSystem: 'Any', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: { '@id': `${SITE.url}/#organization` },
+      featureList: [...c.how.items.map((x) => x.title), ...c.kit.contents],
+    }} />
+    <JsonLd data={{ '@type': 'HowTo', name: c.how.title, step: c.how.items.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) }} />
+    <FaqJsonLd lang={info.lang} faqs={c.faq.items} />
+  </Fragment>
+  <div class="tl lg">
+    <LogoApp code={code} />
+
+    <section class="tl-sec" id="how"><div class="wrap">
+      <h2>{c.how.title}</h2>
+      <ol class="tl-how">
+        {c.how.items.map((s, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div></section>
+
+    <section class="tl-sec tl-faq" id="faq"><div class="wrap">
+      <h2>{c.faq.title}</h2>
+      <div class="faqs">
+        {c.faq.items.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+      </div>
+    </div></section>
+
+    <div class="tl-end"><RelatedTools code={code} current="logo-maker" /></div>
+  </div>
+</PageShell>

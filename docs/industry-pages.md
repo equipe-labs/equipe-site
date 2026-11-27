@@ -34,5 +34,5 @@ queries, and mainland search happens elsewhere. Add a language to a type only wi
 - Each language is written for its market (local platforms, local rules), never translated.
 - Honest facts only: no invented numbers, reviews or customers. Demos are labelled as demos.
 - Golden Boot Academy is the real-customer example for soccer-academy; it shows only with `GOLDEN_BOOT_EXAMPLE=true`
-  once the customer agrees to be shown as a case.
+  (on; the customer agreed on 2026-11-28; `GOLDEN_BOOT_EXAMPLE=false` hides it).
 - Links to the grader, the cost calculator and /tools/ appear only when those pages are in the build.
