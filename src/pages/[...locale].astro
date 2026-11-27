@@ -23,6 +23,7 @@ import DayOne from '../components/DayOne.astro';
 import PlanCards from '../components/PlanCards.astro';
 import PromoBanner from '../components/PromoBanner.astro';
 import { TYPICAL_TOTALS } from '../data/flags';
+import { MIGRATE } from '../data/migrate';
 import '../styles/site.css';
 import '../styles/webapp.css';
 import '../styles/iphone.css';
@@ -207,7 +208,7 @@ const faqMore = t.faq.more.split('{email}');
             {t.faq.items.map((f, i) => (
               <details data-faq-id={`faq-${i + 1}`} open={i === 0}>
                 <summary><h3>{f.question}</h3></summary>
-                <p>{f.answer}{i === t.faq.items.length - 1 && <> <a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="faq">{t.faq.devLink} →</a></>}</p>
+                <p>{f.answer}{i === 1 && <> <a href={subPath(info, 'migrate')} data-ph="migrate_link_click" data-ph-location="faq">{(MIGRATE[code] ?? MIGRATE.en).homeLink} →</a></>}{i === t.faq.items.length - 1 && <> <a href={subPath(info, 'developers')} data-ph="developers_link_click" data-ph-location="faq">{t.faq.devLink} →</a></>}</p>
               </details>
             ))}
           </div>

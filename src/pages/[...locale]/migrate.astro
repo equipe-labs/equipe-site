@@ -1,0 +1,201 @@
+---
+// /migrate/: move a project made in Claude Code, Cursor, Lovable, Bolt, v0, Replit, GitHub or a ZIP to equipe.
+// Copy: src/data/migrate.ts. Every link to the app carries UTM (migrateHref). Tool names are descriptive only:
+// no third-party logos, and the disclaimer closes the page.
+import PageShell from '../../components/PageShell.astro';
+import FaqJsonLd from '../../components/FaqJsonLd.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { SITE } from '../../data/site';
+import { MIGRATE, SOURCES, SOURCE_METHOD, migrateHref } from '../../data/migrate';
+import { available, getLocale, segments, subPath, type LocaleCode } from '../../i18n';
+import '../../styles/migrate.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = MIGRATE[code] ?? MIGRATE.en;
+const P = c.page;
+const url = new URL(subPath(info, 'migrate'), Astro.site).href;
+// The Claude artifact page (/from-claude/) is linked only once it exists in this build.
+const hasFromClaude = Object.keys(import.meta.glob('./from-claude.astro')).length > 0;
+
+const sv = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+// Lucide shapes (ISC): square terminal, git branch, archive, globe.
+const METHOD_ICON = {
+  prompt: sv('<path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2"/>'),
+  github: sv('<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/><path d="M6 9v6"/>'),
+  zip: sv('<rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>'),
+  url: sv('<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>'),
+} as const;
+// file text, shield/lock, upload to cloud.
+const AFTER_ICONS = [
+  sv('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 13H8"/><path d="M16 17H8"/><path d="M16 13h-2"/>'),
+  sv('<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'),
+  sv('<path d="M12 13v8"/><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="m8 17 4-4 4 4"/>'),
+];
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>';
+const swap = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>';
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const copyIc = '<svg class="mg-ci" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><svg class="mg-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const rich = (s: string) => segments(s);
+---
+<PageShell code={code} page="migrate" title={P.title} description={P.desc}>
+  <Fragment slot="head">
+    <link rel="preconnect" href={SITE.app} crossorigin />
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__mgrv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: P.ogTitle, description: P.desc, inLanguage: info.lang,
+      about: { '@id': `${SITE.url}/#organization` },
+      mainEntity: { '@type': 'HowTo', name: P.ogTitle, step: c.steps.items.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) },
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={c.faq.items} />
+  </Fragment>
+
+  <section class="mg-hero"><div class="wrap">
+    <p class="mg-kick mg-ld" style="--d:0">{P.kicker}</p>
+    <h1 class="mg-ld" style="--d:1">{P.h1}</h1>
+    <p class="mg-lead mg-ld" style="--d:2">{P.lead}</p>
+    <div class="mg-acts mg-ld" style="--d:3">
+      <a class="btn primary lg" href={migrateHref('hero')} data-ph="migrate_import_click" data-ph-location="hero">{P.cta}<Fragment set:html={arrow} /></a>
+      <a class="btn ghost lg" href="#prompt" data-ph="migrate_prompt_jump" data-ph-location="hero">{P.secondary}</a>
+    </div>
+    <p class="mg-free mg-ld" style="--d:4">{P.free}</p>
+  </div></section>
+
+  <section class="mg-sec" id="sources"><div class="wrap">
+    <h2 class="mg-rv">{c.sources.title}</h2>
+    <p class="mg-sub mg-rv">{c.sources.sub}</p>
+    <ul class="mg-tiles">
+      {SOURCES.map((k, i) => {
+        const s = c.sources.items[k];
+        return (
+          <li class="mg-rv" style={`transition-delay:${(i % 4) * 60}ms`}>
+            <a class="mg-tile" href={migrateHref(`tiles-${k}`)} data-ph="migrate_import_click" data-ph-location={`tiles-${k}`}>
+              <span class="mg-tile-top">
+                <span class="mg-ic"><Fragment set:html={METHOD_ICON[SOURCE_METHOD[k]]} /></span>
+                <span class="mg-meth">{s.method}</span>
+              </span>
+              <span class="mg-name">{s.name}</span>
+              <span class="mg-how">{s.how}</span>
+              <span class="mg-go">{c.sources.open}<Fragment set:html={arrow} /></span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    {hasFromClaude && (
+      <p class="mg-art mg-rv">{c.sources.artifact} <a href={subPath(info, 'from-claude')} data-ph="from_claude_link_click" data-ph-location="migrate">{c.sources.artifactLink}<Fragment set:html={arrow} /></a></p>
+    )}
+  </div></section>
+
+  <section class="mg-sec" id="steps"><div class="wrap">
+    <h2 class="mg-rv">{c.steps.title}</h2>
+    <ol class="mg-steps">
+      {c.steps.items.map((s, i) => (
+        <li class="mg-rv" style={`transition-delay:${i * 80}ms`}>
+          <span class="n" aria-hidden="true">{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div></section>
+
+  <section class="mg-sec" id="kept"><div class="wrap">
+    <h2 class="mg-rv">{c.kept.title}</h2>
+    <p class="mg-sub mg-rv">{c.kept.sub}</p>
+    <div class="mg-ka">
+      <div class="mg-card mg-rv">
+        <h3>{c.kept.keptTitle}</h3>
+        <ul class="mg-list is-kept">
+          {c.kept.kept.map((x) => <li><span class="mg-li"><Fragment set:html={check} /></span><span>{rich(x).map((g) => g.kind === 'code' ? <code>{g.t}</code> : g.t)}</span></li>)}
+        </ul>
+      </div>
+      <div class="mg-card mg-rv" style="transition-delay:80ms">
+        <h3>{c.kept.adaptedTitle}</h3>
+        <ul class="mg-list is-adapted">
+          {c.kept.adapted.map((x) => <li><span class="mg-li"><Fragment set:html={swap} /></span><span>{rich(x).map((g) => g.kind === 'code' ? <code>{g.t}</code> : g.t)}</span></li>)}
+        </ul>
+        <p class="mg-note">{c.kept.adaptedNote}</p>
+      </div>
+    </div>
+    <ul class="mg-after">
+      {c.kept.after.map((a, i) => (
+        <li class="mg-rv" style={`transition-delay:${i * 70}ms`}>
+          <span class="mg-ic"><Fragment set:html={AFTER_ICONS[i]} /></span>
+          <div><h3>{a.title}</h3><p>{a.text}</p></div>
+        </li>
+      ))}
+    </ul>
+  </div></section>
+
+  <section class="mg-sec" id="prompt"><div class="wrap">
+    <h2 class="mg-rv">{c.prompt.title}</h2>
+    <p class="mg-sub mg-rv">{c.prompt.sub}</p>
+    <div class="mg-code mg-rv" data-mg-copy>
+      <div class="mg-code-bar">
+        <span class="mg-code-l"><Fragment set:html={METHOD_ICON.prompt} />{c.prompt.label}</span>
+        <button type="button" class="mg-copy" data-copy={c.prompt.copy} data-copied={c.prompt.copied} data-ph="migrate_prompt_copy" data-ph-location="prompt">
+          <Fragment set:html={copyIc} /><span data-copy-label>{c.prompt.copy}</span>
+        </button>
+      </div>
+      <pre tabindex="0"><code data-copy-src>{c.prompt.text}</code></pre>
+      <span class="mg-live" role="status" aria-live="polite" data-copy-live></span>
+    </div>
+    <p class="mg-pnote mg-rv">{c.prompt.note}</p>
+  </div></section>
+
+  <section class="mg-sec mg-faq" id="faq"><div class="wrap">
+    <h2 class="mg-rv">{c.faq.title}</h2>
+    <div class="faqs mg-rv">
+      {c.faq.items.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  <section class="mg-cta"><div class="wrap">
+    <h2 class="mg-rv">{c.cta.title}</h2>
+    <p class="mg-rv">{c.cta.sub}</p>
+    <a class="btn primary lg mg-rv" href={migrateHref('final')} data-ph="migrate_import_click" data-ph-location="final">{c.cta.button}<Fragment set:html={arrow} /></a>
+  </div></section>
+
+  <aside class="mg-legal"><div class="wrap"><p>{c.disclaimer}</p></div></aside>
+
+  <script>
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
+      (window as unknown as { __mgrv: boolean }).__mgrv = true;
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.mg-rv').forEach((el) => io.observe(el));
+      addEventListener('beforeprint', () => document.querySelectorAll('.mg-rv').forEach((el) => el.classList.add('in')));
+    }
+    // Copy the prompt: Clipboard API, with a selection fallback; the label flips to "Copied" for 2 s.
+    document.querySelectorAll<HTMLElement>('[data-mg-copy]').forEach((box) => {
+      const btn = box.querySelector<HTMLButtonElement>('.mg-copy');
+      const src = box.querySelector<HTMLElement>('[data-copy-src]');
+      const label = box.querySelector<HTMLElement>('[data-copy-label]');
+      const live = box.querySelector<HTMLElement>('[data-copy-live]');
+      if (!btn || !src || !label) return;
+      let timer = 0;
+      btn.addEventListener('click', async () => {
+        const text = src.textContent ?? '';
+        let ok = false;
+        try { await navigator.clipboard.writeText(text); ok = true; } catch {
+          const r = document.createRange(); r.selectNodeContents(src);
+          const sel = getSelection(); sel?.removeAllRanges(); sel?.addRange(r);
+          try { ok = document.execCommand('copy'); } catch { ok = false; }
+        }
+        if (!ok) return;
+        btn.classList.add('done');
+        label.textContent = btn.dataset.copied ?? '';
+        if (live) live.textContent = btn.dataset.copied ?? '';
+        clearTimeout(timer);
+        timer = window.setTimeout(() => { btn.classList.remove('done'); label.textContent = btn.dataset.copy ?? ''; if (live) live.textContent = ''; }, 2000);
+      });
+    });
+  </script>
+</PageShell>
