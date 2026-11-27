@@ -65,7 +65,7 @@ export interface AivisCopy {
     notFound: string;
     loading: string;
     /** One status per answer. */
-    status: { named: string; ambiguous: string; not_named: string; unchecked: string };
+    status: { named: string; ambiguous: string; not_named: string; unchecked: string; reference: string };
     uncheckedNote: string;
     showAnswer: string;
     hideAnswer: string;
@@ -160,7 +160,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'This business was checked recently, so this is the same result. Checks refresh once a week.',
       notFound: 'This result doesn’t exist or has expired.',
       loading: 'Loading the result…',
-      status: { named: 'Names you', ambiguous: 'Not sure which one', not_named: 'Doesn’t name you', unchecked: 'Couldn’t check' },
+      status: { named: 'Names you', ambiguous: 'Not sure which one', not_named: 'Doesn’t name you', unchecked: 'Couldn’t check', reference: 'Not scored: alternatives' },
       uncheckedNote: 'This assistant’s web search failed twice, so this answer isn’t counted in your score.',
       showAnswer: 'Show the full answer',
       hideAnswer: 'Hide the answer',
@@ -284,7 +284,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '최근에 확인한 가게라 같은 결과를 보여드려요. 결과는 일주일에 한 번 새로 고쳐져요.',
       notFound: '없거나 만료된 결과예요.',
       loading: '결과를 불러오는 중…',
-      status: { named: '언급함', ambiguous: '어느 가게인지 헷갈려함', not_named: '언급 안 함', unchecked: '확인 못 함' },
+      status: { named: '언급함', ambiguous: '어느 가게인지 헷갈려함', not_named: '언급 안 함', unchecked: '확인 못 함', reference: '점수 제외: 대안 질문' },
       uncheckedNote: '이 AI의 웹 검색이 두 번 실패해서 이 답변은 점수에 넣지 않았어요.',
       showAnswer: '답변 전체 보기',
       hideAnswer: '답변 접기',
@@ -408,7 +408,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '最近チェックしたお店なので、同じ結果を表示しています。チェックは週に1回更新されます。',
       notFound: 'この結果は存在しないか、期限が切れています。',
       loading: '結果を読み込んでいます…',
-      status: { named: '名前あり', ambiguous: 'どのお店か迷っています', not_named: '名前なし', unchecked: 'チェックできませんでした' },
+      status: { named: '名前あり', ambiguous: 'どのお店か迷っています', not_named: '名前なし', unchecked: 'チェックできませんでした', reference: '採点外：代わりのお店の質問' },
       uncheckedNote: 'この AI のウェブ検索が2回失敗したため、この答えはスコアに含めていません。',
       showAnswer: '答えをすべて表示',
       hideAnswer: '答えを閉じる',
@@ -532,7 +532,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '这家店最近检查过，所以显示的是同一结果。每周更新一次。',
       notFound: '这个结果不存在或已过期。',
       loading: '正在加载结果…',
-      status: { named: '提到了你', ambiguous: '不确定是哪一家', not_named: '没有提到你', unchecked: '无法检查' },
+      status: { named: '提到了你', ambiguous: '不确定是哪一家', not_named: '没有提到你', unchecked: '无法检查', reference: '不计分：替代选择问题' },
       uncheckedNote: '这个助手的联网搜索失败了两次，所以这条回答不计入你的分数。',
       showAnswer: '查看完整回答',
       hideAnswer: '收起回答',
@@ -656,7 +656,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Este negocio se revisó hace poco, así que ves el mismo resultado. Se actualiza una vez por semana.',
       notFound: 'Este resultado no existe o ya caducó.',
       loading: 'Cargando el resultado…',
-      status: { named: 'Te menciona', ambiguous: 'No sabe cuál eres', not_named: 'No te menciona', unchecked: 'No se pudo comprobar' },
+      status: { named: 'Te menciona', ambiguous: 'No sabe cuál eres', not_named: 'No te menciona', unchecked: 'No se pudo comprobar', reference: 'Sin puntuar: alternativas' },
       uncheckedNote: 'La búsqueda web de este asistente falló dos veces, así que esta respuesta no cuenta en tu puntuación.',
       showAnswer: 'Ver la respuesta completa',
       hideAnswer: 'Ocultar la respuesta',
@@ -780,7 +780,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Este negócio foi verificado recentemente, então este é o mesmo resultado. As verificações são atualizadas uma vez por semana.',
       notFound: 'Este resultado não existe ou expirou.',
       loading: 'Carregando o resultado…',
-      status: { named: 'Cita você', ambiguous: 'Não sabe qual é você', not_named: 'Não cita você', unchecked: 'Não deu para verificar' },
+      status: { named: 'Cita você', ambiguous: 'Não sabe qual é você', not_named: 'Não cita você', unchecked: 'Não deu para verificar', reference: 'Sem pontuação: alternativas' },
       uncheckedNote: 'A busca na web deste assistente falhou duas vezes, então esta resposta não conta na sua pontuação.',
       showAnswer: 'Ver a resposta completa',
       hideAnswer: 'Esconder a resposta',
@@ -904,7 +904,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Dieses Unternehmen wurde vor Kurzem geprüft, daher siehst du dasselbe Ergebnis. Checks werden einmal pro Woche aktualisiert.',
       notFound: 'Dieses Ergebnis gibt es nicht oder es ist abgelaufen.',
       loading: 'Ergebnis wird geladen…',
-      status: { named: 'Nennt dich', ambiguous: 'Weiß nicht, welches gemeint ist', not_named: 'Nennt dich nicht', unchecked: 'Nicht prüfbar' },
+      status: { named: 'Nennt dich', ambiguous: 'Weiß nicht, welches gemeint ist', not_named: 'Nennt dich nicht', unchecked: 'Nicht prüfbar', reference: 'Nicht gewertet: Alternativen' },
       uncheckedNote: 'Die Websuche dieses Assistenten ist zweimal fehlgeschlagen, deshalb zählt diese Antwort nicht für deine Punktzahl.',
       showAnswer: 'Ganze Antwort anzeigen',
       hideAnswer: 'Antwort ausblenden',
@@ -1028,7 +1028,7 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Cette entreprise a été testée récemment, voici donc le même résultat. Les tests sont mis à jour une fois par semaine.',
       notFound: 'Ce résultat n’existe pas ou a expiré.',
       loading: 'Chargement du résultat…',
-      status: { named: 'Vous cite', ambiguous: 'Ne sait pas lequel vous êtes', not_named: 'Ne vous cite pas', unchecked: 'Impossible à vérifier' },
+      status: { named: 'Vous cite', ambiguous: 'Ne sait pas lequel vous êtes', not_named: 'Ne vous cite pas', unchecked: 'Impossible à vérifier', reference: 'Non noté : alternatives' },
       uncheckedNote: 'La recherche web de cet assistant a échoué deux fois, cette réponse ne compte donc pas dans votre score.',
       showAnswer: 'Voir la réponse complète',
       hideAnswer: 'Masquer la réponse',

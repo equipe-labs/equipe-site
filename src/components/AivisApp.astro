@@ -167,7 +167,7 @@ const step = (s: string) => s;
     const shortDate = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { month: 'short', day: 'numeric' });
     const band = (s: number) => (s >= 80 ? R.bands.great : s >= 50 ? R.bands.good : s >= 20 ? R.bands.fair : R.bands.poor);
     const list = (xs: string[]) => { try { return new Intl.ListFormat(D.lang, { style: 'long', type: 'conjunction' }).format(xs); } catch { return xs.join(', '); } };
-    const STATUS: Json = { named: ['ok', ic.check], ambiguous: ['mid', ic.q], not_named: ['no', ic.x], unchecked: ['mute', ic.dash] };
+    const STATUS: Json = { named: ['ok', ic.check], ambiguous: ['mid', ic.q], not_named: ['no', ic.x], unchecked: ['mute', ic.dash], reference: ['mute', ic.dash] };
 
     function fixText(x: Json, g: Json) {
       const t = C.fixes[x.key];
@@ -184,7 +184,7 @@ const step = (s: string) => s;
       const st = a.status || (a.error ? 'unchecked' : a.mentioned ? 'named' : 'not_named');
       const [cls, icon] = STATUS[st] || STATUS.unchecked;
       const pill = `<span class="tl-pill av-${cls}">${icon}${esc(R.status[st])}</span>`;
-      const link = st === 'unchecked' ? '' : !g.url ? `<span class="tl-pill mute">${ic.dash}${esc(R.noSite)}</span>` : a.cited ? `<span class="tl-pill ok">${ic.link}${esc(R.cited)}</span>` : `<span class="tl-pill mute">${ic.dash}${esc(R.notCited)}</span>`;
+      const link = st === 'unchecked' || st === 'reference' ? '' : !g.url ? `<span class="tl-pill mute">${ic.dash}${esc(R.noSite)}</span>` : a.cited ? `<span class="tl-pill ok">${ic.link}${esc(R.cited)}</span>` : `<span class="tl-pill mute">${ic.dash}${esc(R.notCited)}</span>`;
       const head = `<div class="av-who">${mark(a.provider)}<b>${esc(a.label)}</b></div><div class="av-pills">${pill}${link}</div>`;
       if (st === 'unchecked') return `<div class="av-row is-unchecked">${head}<p class="av-note">${esc(R.uncheckedNote)}</p></div>`;
       const places = (a.named || []).length ? `<div class="av-chips"><span>${esc(R.placesLabel)}</span><ul>${a.named.map((n: string) => `<li>${esc(n)}</li>`).join('')}</ul></div>` : '';
