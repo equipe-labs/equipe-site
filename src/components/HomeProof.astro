@@ -1,0 +1,141 @@
+---
+// Home block 5, proof: the customer logos are the tab list (ui.equipe.im "Logo Cloud Story Tabs", tabs/logo-cloud-story-tabs,
+// hirael, MIT), rewritten as plain Astro: picking a company shows what its team does with equipe, in facts the customer
+// approved or shows on its own public site. A quote appears only once a customer sends one (QUOTES in src/data/home.ts);
+// nothing is shown in its place until then. The hero's logo row links here (#proof-<key>) and opens that tab.
+// Below: the build-in-public numbers of the team that builds equipe.
+import { HOME, QUOTES, CUSTOMER_SITES, type CustomerKey } from '../data/home';
+import { SHOW_CJ } from '../data/flags';
+import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const t = getMessages(code);
+const P = HOME[code].proof;
+const LOGOS: { key: CustomerKey; alt: string; src: string; w: number; h: number; hh: number; name?: string }[] = [
+  { key: 'cj', alt: 'CJ', src: '/brand/customers/cj.svg', w: 79, h: 67, hh: 34 },
+  { key: 'gba', alt: 'Golden Boot Academy', src: '/brand/customers/golden-boot-academy.webp', w: 102, h: 112, hh: 30, name: 'Golden Boot Academy' },
+  { key: 'ironact', alt: 'Ironact', src: '/brand/customers/ironact.svg', w: 404.91, h: 56.08, hh: 13 },
+];
+const size = (l: (typeof LOGOS)[number]) => ({ width: Math.round((l.w / l.h) * l.hh), height: l.hh });
+const story: Partial<Record<CustomerKey, string>> = SHOW_CJ ? { cj: subPath(getLocale(code), 'customers/cj') } : {};
+const host = (u: string) => new URL(u).host;
+---
+<section class="cproof" id="proof">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="kicker">{P.kicker}</p>
+      <h2>{P.title}</h2>
+      <p class="sub">{P.sub}</p>
+    </div>
+    <div class="cp rv" data-cp>
+      <div class="cp-tabs" role="tablist" aria-label={P.label}>
+        {LOGOS.map((l, i) => (
+          <button type="button" role="tab" id={`cp-t-${l.key}`} class="cp-tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`proof-${l.key}`} tabindex={i === 0 ? 0 : -1} data-cp-key={l.key} data-ph="proof_tab" data-ph-location={l.key}>
+            <img src={l.src} alt={l.alt} {...size(l)} decoding="async" loading="lazy" />
+            {l.name && <span aria-hidden="true">{l.name}</span>}
+            <svg class="cp-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+          </button>
+        ))}
+      </div>
+      {LOGOS.map((l, i) => {
+        const c = P.customers[l.key];
+        const q = QUOTES[l.key];
+        const site = CUSTOMER_SITES[l.key];
+        return (
+          <div class="cp-panel" role="tabpanel" id={`proof-${l.key}`} aria-labelledby={`cp-t-${l.key}`} hidden={i !== 0} tabindex="0">
+            <p class="cp-what">{l.alt === c.what ? l.alt : <><b>{l.alt}</b> · {c.what}</>}</p>
+            <p class="cp-fact">{c.fact}</p>
+            {q && (
+              <figure class="cp-q" lang={q.lang}>
+                <blockquote>“{q.text}”</blockquote>
+                <figcaption><b>{q.person}</b> <span>{q.role}</span></figcaption>
+              </figure>
+            )}
+            {(story[l.key] || site) && (
+              <p class="cp-links">
+                {story[l.key] && <a href={story[l.key]} data-ph="proof_story_click" data-ph-location={l.key}>{P.story}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>}
+                {site && <a href={site} target="_blank" rel="noopener" data-ph="proof_site_click" data-ph-location={l.key}>{P.visit}: {host(site)}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L16 8M9.5 8H16v6.5" /></svg></a>}
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+    <div class="proof rv">
+      <h3>{t.proof.title}</h3>
+      <dl>{t.proof.nums.map((n) => <div><dt data-tick={n.n}>{n.n}</dt><dd>{n.label}</dd></div>)}</dl>
+      <p class="meta">{t.proof.small}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-cp]').forEach((box) => {
+    const tabs = [...box.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const pick = (key: string, focus = false) => {
+      tabs.forEach((t) => {
+        const on = t.dataset.cpKey === key;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        const p = document.getElementById(`proof-${t.dataset.cpKey}`)!;
+        p.hidden = !on; if (on) { p.classList.remove('swap'); void p.offsetWidth; p.classList.add('swap'); }
+        if (on && focus) t.focus();
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => pick(t.dataset.cpKey!));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length].dataset.cpKey!, true); }
+      });
+    });
+    // The hero's logo row links to #proof-<key>: open that tab.
+    // The panel was hidden when the browser tried to scroll to it, so scroll to the block once it is shown.
+    const fromHash = () => {
+      const m = location.hash.match(/^#proof-(\w+)$/);
+      if (!m || !tabs.some((t) => t.dataset.cpKey === m[1])) return;
+      pick(m[1]);
+      box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    };
+    addEventListener('hashchange', fromHash); fromHash();
+  });
+</script>
+
+<style is:global>
+  main.home > section.cproof { padding-top: 112px; }
+  .cp { margin-top: 48px; padding: 8px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); }
+  .cp-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 4px; border-radius: 18px; background: color-mix(in srgb, var(--text) 4%, transparent); }
+  .cp-tab { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 72px; padding: 12px 16px; border: 0; border-radius: 14px; background: transparent; color: var(--text); font: 600 14px var(--sans); cursor: pointer; transition: background-color 220ms, box-shadow 220ms; }
+  .cp-tab img { filter: grayscale(1) brightness(0.25); opacity: 0.6; transition: opacity 220ms; }
+  .cp-tab span { opacity: 0.6; transition: opacity 220ms; }
+  .cp-tab[aria-selected='true'] { background: var(--surface); box-shadow: 0 1px 2px rgb(10 10 12 / 0.06), 0 6px 16px -8px rgb(10 10 12 / 0.18); }
+  .cp-tab[aria-selected='true'] img, .cp-tab[aria-selected='true'] span { opacity: 1; }
+  .cp-ck { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--accent); fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.6); transition: opacity 220ms, transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .cp-tab[aria-selected='true'] .cp-ck { opacity: 1; transform: none; }
+  @media (hover: hover) { .cp-tab:not([aria-selected='true']):hover { background: color-mix(in srgb, var(--surface) 60%, transparent); } .cp-tab:hover img, .cp-tab:hover span { opacity: 1; } }
+  :root[data-theme='dark'] .cp-tab img { filter: grayscale(1) brightness(0) invert(1); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme]) .cp-tab img { filter: grayscale(1) brightness(0) invert(1); } }
+  .cp-panel { padding: 32px 28px 28px; outline-offset: -4px; }
+  .cp-panel.swap { animation: cpIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .cp-what { margin: 0; font-size: 15px; color: var(--muted); }
+  .cp-what b { color: var(--text); font-weight: 600; }
+  .cp-fact { margin: 12px 0 0; max-width: 34ch; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; font-weight: 600; letter-spacing: -0.02em; text-wrap: pretty; overflow-wrap: anywhere; }
+  .cp-q { margin: 24px 0 0; }
+  .cp-q blockquote { margin: 0; font-size: 19px; line-height: 1.5; text-wrap: pretty; }
+  .cp-q figcaption { margin-top: 12px; font-size: 15px; } .cp-q figcaption span { color: var(--muted); }
+  .cp-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin: 24px 0 0; }
+  .cp-links a { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+  .cp-links a:hover { text-decoration: underline; }
+  .cp-links svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  main.home .cproof .proof { margin-top: 32px; }
+  @keyframes cpIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 640px) {
+    main.home > section.cproof { padding-top: 80px; }
+    .cp { margin-top: 32px; border-radius: 20px; }
+    .cp-tab { min-height: 60px; padding: 10px 8px; }
+    .cp-tab span { display: none; }
+    .cp-ck { top: 6px; right: 6px; width: 16px; height: 16px; }
+    .cp-panel { padding: 24px 16px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .cp-panel.swap { animation: none; } .cp-tab, .cp-tab img, .cp-ck { transition: none; } }
+</style>
