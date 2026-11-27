@@ -3,8 +3,12 @@
 // in the placeholder, Enter sends), Turnstile on first use (interaction-only), the steps while it runs, and the check
 // drawn from the platform's JSON (cloud platform/src/free-idea.js). mode 'shared': /tools/idea-validator/r/<id>/ loads
 // one check by id. ?idea=<text> (from the home idea box's "check it first") fills the box.
-// Events: PostHog idea_check_run / idea_check_result / idea_check_error / idea_check_shared_view; the own funnel
-// tool_run, tool_result and click:<data-ph> (the build button is a link to app.equipe.im/start, counted as signup_start).
+// Several ideas: one per line, up to 3 (each is its own check, so 3 lines use a visitor's whole daily allowance). They
+// run side by side, each with its own Turnstile token, and the reports sit behind a small switcher. Every report offers
+// the app's Idea Lab (app.equipe.im/lab/start?ideas=…) before the "build the first version" sign-up.
+// Events: PostHog idea_check_run / idea_check_result / idea_check_error / idea_check_shared_view / idea_check_switch; the
+// own funnel tool_run, tool_result and click:<data-ph> (the build button is a link to app.equipe.im/start and the lab
+// button one to app.equipe.im/lab/start, both counted as signup_start); feature steps start, multi, done, error.
 import { ideaCopy, IDEA_API, IDEA_PAGE } from '../data/ideacheck/copy';
 import { TURNSTILE_SITE_KEY } from '../data/aivis';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
@@ -18,7 +22,9 @@ const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 
 const data = {
   api: IDEA_API, code, lang: info.lang, ts: TURNSTILE_SITE_KEY, mode,
   base: subPath(info, IDEA_PAGE), privacy: subPath(info, 'tools/privacy-policy-generator'),
-  c: { result: c.result, form: c.form, related: c.related },
+  c: { result: c.result, form: c.form, related: c.related, progressNote: c.progressNote, progressMany: c.progressMany },
+  // The app's Idea Lab speaks fewer languages than this site: Brazilian Portuguese falls back to English there.
+  appLang: ({ en: 'en', ko: 'ko', ja: 'ja', 'zh-CN': 'zh-Hans', es: 'es', 'pt-BR': 'en', de: 'de', fr: 'fr' } as Record<string, string>)[code] || 'en',
 };
 ---
 {mode === 'run' ? (
@@ -29,7 +35,7 @@ const data = {
       <label class="sr-only" for="ic-idea">{F.label}</label>
       <div class="ic-box">
         <div class="ic-in">
-          <textarea id="ic-idea" name="idea" rows="3" maxlength="1500" placeholder=" " enterkeyhint="send" required></textarea>
+          <textarea id="ic-idea" name="idea" rows="3" maxlength="1500" placeholder=" " enterkeyhint="send" aria-describedby="ic-hint" required></textarea>
           <span class="ic-ph" aria-hidden="true">{F.placeholder}</span>
         </div>
         <div class="ic-bar">
@@ -37,6 +43,7 @@ const data = {
           <button class="btn primary ic-go" type="submit" data-ph="idea_check_submit" data-ph-location="hero"><span>{F.button}</span><Fragment set:html={arrow} /></button>
         </div>
       </div>
+      <p class="ic-hint" id="ic-hint"><span>{F.hint}</span><span class="ic-nl" aria-hidden="true">{F.nl}</span></p>
       <ul class="ic-ex" aria-label={F.label}>
         {F.examples.map((x) => <li><button type="button" data-ic-ex={x}>{x}</button></li>)}
       </ul>
@@ -55,7 +62,7 @@ const data = {
       <ol class="tl-steps">
         {c.progress.map((s) => <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
       </ol>
-      <p class="tl-eta"><span>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
+      <p class="tl-eta"><span data-ic-eta>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
     </div>
   </div>
 </section>
@@ -106,9 +113,18 @@ const data = {
       const eqa = w.__eqaEnc?.(); if (eqa) u.searchParams.set('_eqa', eqa);
       return u.toString();
     };
+    // The app's Idea Lab with these ideas filled in (one per line): it researches each, puts up a coming-soon page per
+    // idea, compares them on real sign-ups and builds the winner.
+    const labHref = (ideas: string[], placement: string) => {
+      const ps = [`ideas=${encodeURIComponent(ideas.map((x) => x.slice(0, 500)).join('\n'))}`, `lang=${encodeURIComponent(D.appLang)}`, 'from=idea-validator',
+        'utm_source=equipe.im', 'utm_medium=tool', 'utm_campaign=idea-validator', `utm_content=${encodeURIComponent(placement)}`];
+      const eqa = w.__eqaEnc?.(); if (eqa) ps.push(`_eqa=${encodeURIComponent(eqa)}`);
+      return `https://app.equipe.im/lab/start?${ps.join('&')}`;
+    };
     const sharePath = (id: string) => `${D.base}r/${id}/`;
 
-    function draw(g: Json) {
+    // One check, drawn into `box` (the report area, or the panel under the switcher when there are several).
+    function draw(g: Json, ideas: string[], box: HTMLElement) {
       const v = R.verdicts[g.verdict] || R.verdicts.test_first;
       const arr = (x: unknown): string[] => (Array.isArray(x) ? x : x ? [String(x)] : []).filter(Boolean) as string[];
       // Checks saved before the short format have no headline: the verdict's title leads and the long summary follows.
@@ -129,8 +145,16 @@ const data = {
       const plan = ((g.plan || []) as Json[]).map((p, i) => `<li class="tl-in" style="--d:${i * 50}ms"><label class="ic-tick"><input type="checkbox" data-ic-step="${i}" aria-label="${esc(R.markDone)}: ${esc(p.do)}"><span class="ic-box2">${ic.check}</span></label><div class="ic-pb"><span class="ic-day">${esc(dayOfPlan(p.days))}</span><p>${esc(p.do)}</p>${more(R.whyStep, p.why || '')}</div></li>`).join('');
       const list = (xs: string[], icon: string) => xs.map((x) => `<li>${icon}<span>${esc(x)}</span></li>`).join('');
       const link = new URL(sharePath(g.id), location.origin).href;
-      const build = startHref(g.idea || g.title || '', D.mode === 'shared' ? 'shared' : 'result');
-      out!.innerHTML = `<div class="tl-rep ic-rep">
+      const place = D.mode === 'shared' ? 'shared' : 'result';
+      const build = startHref(g.idea || g.title || '', place);
+      // Sharper versions of a rough idea (checks saved before they existed have none).
+      const cons = ((Array.isArray(g.concepts) ? g.concepts : []) as Json[]).filter((x) => x && x.name);
+      const concepts = cons.length
+        ? `<div class="ic-con tl-in"><h3 class="tl-h">${esc(R.concepts.title)}</h3><p class="tl-sub">${esc(R.concepts.sub)}</p><ol class="ic-cons">${cons.map((x) => `<li><b>${esc(x.name)}</b>${x.customer ? `<p><span>${esc(R.concepts.forWhom)}</span>${esc(x.customer)}</p>` : ''}${x.wedge ? `<p><span>${esc(R.concepts.start)}</span>${esc(x.wedge)}</p>` : ''}</li>`).join('')}</ol></div>`
+        : '';
+      const many = ideas.length > 1;
+      const lab = `<div class="tl-card ic-lab tl-in"><h3>${esc(many ? R.lab.title : R.lab.titleOne)}</h3><p>${esc(many ? R.lab.text : R.lab.textOne)}</p><a class="btn primary lg" href="${esc(labHref(ideas, place))}" data-ph="idea_check_lab" data-ph-location="${place}">${esc(R.lab.button)}${ic.arrow}</a><small>${esc(R.lab.note)}</small></div>`;
+      box.innerHTML = `<div class="tl-rep ic-rep">
         <div class="tl-card ic-top tl-in">
           <p class="tl-host">${esc(R.heading)}${g.title ? ` · ${esc(g.title)}` : ''}</p>
           <span class="ic-verdict" data-v="${esc(g.verdict)}">${g.verdict === 'promising' ? ic.check : g.verdict === 'rethink' ? ic.flag : ic.minus}${esc(v.title)}</span>
@@ -140,6 +164,7 @@ const data = {
           <p class="ic-idea"><span>${esc(R.yourIdea)}</span>${esc(g.idea)}</p>
           <p class="tl-date">${esc(fill(R.checked, { date: dateOf(g.created_at) }))}${g.cached ? ` · ${esc(R.cachedNote)}` : ''}${g.sample ? ` · ${esc(R.sampleNote)}` : ''}</p>
         </div>
+        ${concepts}
         <div class="ic-grid">
           <div class="tl-card tl-in"><h3 class="ic-h">${esc(R.who)}</h3><p class="ic-lead">${esc(g.who)}</p>${arr(g.first_customers).length ? `<h4 class="ic-h4">${esc(R.first)}</h4>${bullets(arr(g.first_customers))}` : ''}</div>
           <div class="tl-card tl-in"><h3 class="ic-h">${esc(R.problem)}</h3><p class="ic-lead">${esc(g.problem)}</p>${arr(g.today).length ? `<h4 class="ic-h4">${esc(R.today)}</h4>${bullets(arr(g.today))}` : ''}</div>
@@ -152,13 +177,14 @@ const data = {
           <div class="tl-card tl-in"><h4 class="ic-h4">${esc(R.mvpOut)}</h4><ul class="ic-li">${list(arr(g.mvp_out), ic.minus)}</ul>${g.price ? `<h4 class="ic-h4">${esc(R.price)}</h4><p>${esc(g.price)}</p>` : ''}</div>
         </div></div>
         <p class="ic-honest">${esc(R.honest)}</p>
-        <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(build)}" data-ph="idea_check_build" data-ph-location="${D.mode === 'shared' ? 'shared' : 'result'}">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
+        ${lab}
+        <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(build)}" data-ph="idea_check_build" data-ph-location="${place}">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
         <div class="tl-share tl-in"><label for="ic-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="ic-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-ic-copy data-ph="idea_check_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-ic-again data-ph="idea_check_again" data-ph-location="result">${esc(R.share.again)}</a></div></div>
         <a class="tl-card ic-cross" href="${esc(D.privacy)}" data-ph="tools_hub_click" data-ph-location="idea-result" data-ph-tool="privacy-policy-generator"><span>${esc(D.c.related.privacy)}</span>${ic.arrow}</a>
       </div>`;
       rep!.hidden = false;
       // A favicon that does not load (or is Google's blank globe, 16 px) gives way to the name's first letter.
-      out!.querySelectorAll<HTMLImageElement>('.ic-logo img').forEach((im) => {
+      box.querySelectorAll<HTMLImageElement>('.ic-logo img').forEach((im) => {
         const ok = () => { if (im.naturalWidth && im.naturalWidth <= 16) im.remove(); else im.parentElement?.classList.add('has'); };
         if (im.complete) ok(); else { im.addEventListener('load', ok); im.addEventListener('error', () => im.remove()); }
       });
@@ -166,7 +192,7 @@ const data = {
       const KEY = `eq_ic_plan_${g.id}`;
       let done: number[] = [];
       try { done = JSON.parse(localStorage.getItem(KEY) || '[]') || []; } catch { done = []; }
-      out!.querySelectorAll<HTMLInputElement>('[data-ic-step]').forEach((cb) => {
+      box.querySelectorAll<HTMLInputElement>('[data-ic-step]').forEach((cb) => {
         const i = Number(cb.dataset.icStep); cb.checked = done.includes(i); cb.closest('li')?.classList.toggle('done', cb.checked);
         cb.addEventListener('change', () => {
           cb.closest('li')?.classList.toggle('done', cb.checked);
@@ -175,16 +201,56 @@ const data = {
           if (cb.checked) track('idea_check_step_done', { step: i });
         });
       });
-      const items = [...out!.querySelectorAll<HTMLElement>('.tl-in')];
+      const items = [...box.querySelectorAll<HTMLElement>('.tl-in')];
       if (reduce || !document.documentElement.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
       else items.forEach((x, i) => { if (!x.style.getPropertyValue('--d')) x.style.setProperty('--d', `${Math.min(i, 8) * 60}ms`); requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))); });
-      const cb = out!.querySelector<HTMLButtonElement>('[data-ic-copy]');
+      const cb = box.querySelector<HTMLButtonElement>('[data-ic-copy]');
       cb?.addEventListener('click', async () => {
-        const i = out!.querySelector<HTMLInputElement>('#ic-share')!; let ok = false;
+        const i = box.querySelector<HTMLInputElement>('#ic-share')!; let ok = false;
         try { await navigator.clipboard.writeText(i.value); ok = true; } catch { i.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
         if (!ok) return; const lab = cb.querySelector('span')!; cb.classList.add('done'); lab.textContent = R.share.copied;
         setTimeout(() => { cb.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
       });
+    }
+
+    // Several checks: a switcher (tabs) over one panel; the selected report is drawn into it and the address follows it.
+    let placePill = () => {};
+    addEventListener('resize', () => placePill());
+    function show(list: Json[], ideas: string[], note = '') {
+      placePill = () => {};
+      const noteHtml = note ? `<p class="ic-part" role="status">${esc(note)}</p>` : '';
+      if (list.length < 2) {
+        draw(list[0], ideas, out!);
+        if (noteHtml) out!.querySelector('.ic-rep')?.insertAdjacentHTML('afterbegin', noteHtml);
+        rep!.hidden = false; return;
+      }
+      out!.innerHTML = `<div class="ic-multi">${noteHtml}<div class="ic-tabs" role="tablist" aria-label="${esc(R.ideas)}">${list.map((g, i) => `<button type="button" role="tab" id="ic-tab-${i}" aria-controls="ic-panel" aria-selected="false" tabindex="-1" data-ic-tab="${i}"><span class="ic-dot" data-v="${esc(g.verdict)}" aria-hidden="true"></span><span class="ic-tt">${esc(g.title || g.idea)}</span></button>`).join('')}<span class="ic-pill" aria-hidden="true"></span></div><div id="ic-panel" role="tabpanel" data-ic-panel></div></div>`;
+      rep!.hidden = false;
+      const tabs = [...out!.querySelectorAll<HTMLButtonElement>('[data-ic-tab]')];
+      const bar = out!.querySelector<HTMLElement>('.ic-tabs')!, pill = out!.querySelector<HTMLElement>('.ic-pill')!;
+      const panel = out!.querySelector<HTMLElement>('[data-ic-panel]')!;
+      let cur = -1;
+      const place = () => { const t = tabs[cur]; if (!t) return; pill.style.width = `${t.offsetWidth}px`; pill.style.transform = `translateX(${t.offsetLeft}px)`; };
+      const pick = (i: number, user = false) => {
+        if (i === cur) return; cur = i;
+        tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
+        panel.setAttribute('aria-labelledby', `ic-tab-${i}`);
+        place(); bar.classList.add('ready');
+        draw(list[i], ideas, panel);
+        if (user) {
+          tabs[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'nearest' });
+          track('idea_check_switch', { to: i });
+          if (D.mode === 'run') { try { history.replaceState(null, '', sharePath(list[i].id)); } catch { /* fine */ } }
+        }
+      };
+      tabs.forEach((t, i) => t.addEventListener('click', () => pick(i, true)));
+      bar.addEventListener('keydown', (e) => {
+        const k = e.key, n = tabs.length;
+        const to = k === 'ArrowRight' ? (cur + 1) % n : k === 'ArrowLeft' ? (cur - 1 + n) % n : k === 'Home' ? 0 : k === 'End' ? n - 1 : -1;
+        if (to < 0) return; e.preventDefault(); pick(to, true); tabs[to].focus();
+      });
+      placePill = place;
+      pick(0);
     }
 
     const form = document.querySelector<HTMLFormElement>('[data-ic-form]');
@@ -195,6 +261,7 @@ const data = {
       const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const err = form.querySelector<HTMLElement>('[data-ic-err]')!;
       const tsBox = form.querySelector<HTMLElement>('[data-ic-ts]')!;
+      const eta = run.querySelector<HTMLElement>('[data-ic-eta]');
       const fit = () => {
         ta.style.height = 'auto';
         const lh = parseFloat(getComputedStyle(ta).lineHeight) || 26, max = lh * 8 + 24;
@@ -247,35 +314,60 @@ const data = {
         ta.value = b.dataset.icEx || ''; fit(); ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
         track('idea_check_example', {});
       }));
-      ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); } });
+      // With a keyboard, Enter sends and Shift+Enter starts the next idea's line; on touch screens the return key makes
+      // a new line (the button sends), since there is no Shift there.
+      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!fine) ta.enterKeyHint = 'enter';
+      ta.addEventListener('keydown', (e) => { if (fine && e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); } });
 
-      async function check() {
-        say('');
-        const idea = ta.value.trim();
-        if (idea.replace(/[^\p{L}\p{N}]+/gu, '').length < 10) { say(FM.errShort); ta.focus(); return; }
-        btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-        own('fn', 'tool_run'); ft('start'); track('idea_check_run', { length: idea.length });
-        const tok = await token();
-        rep!.hidden = true; startSteps();
-        run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      // One idea per line, up to 3; a rough one-liner ("AI dating") is enough.
+      const linesOf = (v: string) => [...new Set(v.split(/\n+/).map((x) => x.trim()).filter(Boolean))];
+      const errOf = (x: { res: Response | null; g: Json | null }) => {
+        const e = x.g?.error;
+        return { code: e || (x.res ? `http_${x.res.status}` : 'network'), text: e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed };
+      };
+      const ask = async (idea: string, tok: string) => {
         let res: Response | null = null, g: Json | null = null;
         try {
           res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ idea, lang: D.code, token: tok }), signal: AbortSignal.timeout(120000) });
           g = await res.json().catch(() => null);
         } catch { /* below */ }
+        return { res, g };
+      };
+      async function check() {
+        say('');
+        const ideas = linesOf(ta.value);
+        if (!ideas.length || ideas.some((x) => x.replace(/[^\p{L}\p{N}]+/gu, '').length < 4)) { say(FM.errShort); ta.focus(); return; }
+        if (ideas.length > 3) { say(FM.errMany); ta.focus(); return; }
+        btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+        own('fn', 'tool_run'); ft('start'); if (ideas.length > 1) ft('multi');
+        track('idea_check_run', { length: ta.value.trim().length, ideas: ideas.length });
+        if (eta) eta.textContent = ideas.length > 1 ? fill(D.c.progressMany, { n: ideas.length }) : D.c.progressNote;
+        // A Turnstile token works once: take one, start that check, reset the widget for the next. The checks run together.
+        const calls: Promise<{ res: Response | null; g: Json | null }>[] = [];
+        for (let i = 0; i < ideas.length; i++) {
+          const tok = await token();
+          if (i === 0) { rep!.hidden = true; startSteps(); run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+          calls.push(ask(ideas[i], tok));
+          tsTok = '';
+          if (i < ideas.length - 1) { try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* the server says so */ } }
+        }
+        const got = await Promise.all(calls);
         stopSteps();
         btn.disabled = false; btn.removeAttribute('aria-busy');
         try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';
-        if (!res || !res.ok || !g || !g.id) {
-          const e = g?.error;
-          const m = e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
-          ft('error'); track('idea_check_error', { error: e || (res ? `http_${res.status}` : 'network') });
-          say(m); return;
+        const ok = got.filter((x) => x.res?.ok && x.g?.id).map((x) => x.g!);
+        const bad = got.find((x) => !(x.res?.ok && x.g?.id));
+        const why = bad ? errOf(bad) : null;
+        if (!ok.length) {
+          ft('error'); track('idea_check_error', { error: why!.code, ideas: ideas.length });
+          say(why!.text); return;
         }
-        own('fn', 'tool_result'); ft('done'); own('ev', 'idea_verdict', String(g.verdict));
-        track('idea_check_result', { verdict: g.verdict, competitors: (g.competitors || []).length, cached: !!g.cached });
-        draw(g);
-        try { history.replaceState(null, '', sharePath(g.id)); } catch { /* fine */ }
+        if (why) { ft('error'); track('idea_check_error', { error: why.code, ideas: ideas.length, partial: true }); }
+        own('fn', 'tool_result'); ft('done'); ok.forEach((g) => own('ev', 'idea_verdict', String(g.verdict)));
+        track('idea_check_result', { verdict: ok[0].verdict, competitors: (ok[0].competitors || []).length, cached: !!ok[0].cached, ideas: ok.length, concepts: (ok[0].concepts || []).length });
+        show(ok, ideas, why ? `${fill(FM.errPartial, { n: ok.length, total: ideas.length })} ${why.text}` : '');
+        try { history.replaceState(null, '', sharePath(ok[0].id)); } catch { /* fine */ }
         setTimeout(() => { rep!.focus({ preventScroll: true }); rep!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
       }
       form.addEventListener('submit', (e) => { e.preventDefault(); check(); });
@@ -296,7 +388,7 @@ const data = {
       out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
       fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
         if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`; return; }
-        ft('shared_view'); track('idea_check_shared_view', { verdict: g.verdict }); draw(g);
+        ft('shared_view'); track('idea_check_shared_view', { verdict: g.verdict }); show([g], [String(g.idea || g.title || '')]);
       }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
     } else if (D.mode === 'shared') {
       out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`;

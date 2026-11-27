@@ -5,10 +5,10 @@ export default {
   hub: { name: 'Startup idea validator', blurb: 'Is my business idea good? An honest check: who it is for, real competitors, the riskiest assumption and a 7-day test.', cta: 'Check my idea' },
   page: {
     title: 'Startup Idea Validator: Is My Business Idea Good? Free Check | equipe',
-    desc: 'Type your business idea and get an honest, structured check in about 30 seconds: who it is for, the problem, real competitors found on the web, the riskiest assumption, a 7-day test plan and what to build first. Free.',
+    desc: 'Type one business idea, or up to 3, and get an honest, structured check in about 30 seconds: who it is for, the problem, real competitors found on the web, the riskiest assumption, a 7-day test plan and what to build first. Free.',
     ogTitle: 'Startup idea validator',
     h1: 'Is your business idea good? Check it in 30 seconds.',
-    lead: 'Describe your idea in a sentence or two. You get an honest check, the way a product manager would write it: who it is for, what people use today, the one thing that must be true, and how to test it this week.',
+    lead: 'Describe your idea in a sentence or two, or list up to 3 rough ideas, one per line. You get an honest check, the way a product manager would write it: who it is for, what people use today, the one thing that must be true, and how to test it this week.',
   },
   form: {
     label: 'Your idea',
@@ -28,9 +28,14 @@ export default {
     errBudget: 'Today’s free checks are used up. Please come back tomorrow.',
     errOff: 'The checker is resting right now. Please try again later.',
     errFailed: 'The check did not finish. Please try again in a minute.',
+    hint: 'One idea per line, up to 3. You get 3 free checks a day, so 3 ideas use all of today’s.',
+    nl: 'Shift + Enter for a new line',
+    errMany: 'Up to 3 ideas at once, one per line. 3 checks are today’s whole free allowance.',
+    errPartial: 'Checked {n} of {total} ideas.',
   },
   progress: ['Reading your idea', 'Searching the web for what people use today', 'Finding the riskiest assumption', 'Writing your 7-day test'] as [string, string, string, string],
   progressNote: 'This takes about 20 to 40 seconds.',
+  progressMany: 'Checking {n} ideas side by side. This takes about 30 to 60 seconds.',
   result: {
     heading: 'Idea check',
     checked: 'Checked {date}',
@@ -69,6 +74,9 @@ export default {
       button: 'Build the first version',
       note: 'Free to start. Nothing goes live or costs money without your OK.',
     },
+    ideas: 'Your ideas',
+    concepts: { title: 'Sharper versions to test', sub: 'Rough ideas get clearer with one customer and one place to start.', forWhom: 'For', start: 'Start with' },
+    lab: { title: 'Test these ideas with real people', titleOne: 'Test this idea with real people', text: 'equipe researches each idea deeper, puts up an honest coming-soon page for each one, compares them on real sign-ups and builds the winner.', textOne: 'equipe researches the idea deeper, puts up an honest coming-soon page, counts real sign-ups and builds it if people want it.', button: 'Test with real people', note: 'Your first 3 idea checks in the app are free. Nothing is spent or sent without your OK.' },
     share: { label: 'Share this check', copy: 'Copy link', copied: 'Copied', again: 'Check another idea' },
     notFound: 'This check was not found. It may be older than 60 days.',
     loading: 'Loading the check…',
@@ -76,7 +84,7 @@ export default {
   how: {
     title: 'How the check works',
     items: [
-      { title: 'You describe the idea', text: 'One or two sentences is enough: who it is for and what it does. The more specific, the more useful the check.' },
+      { title: 'You describe the idea', text: 'One or two sentences is enough: who it is for and what it does. The more specific, the more useful the check. Got several? Put up to 3 on separate lines to see them side by side.' },
       { title: 'AI reads it like a product manager', text: 'One pass of a small AI model writes the same kind of brief our PM writes for a new team: customer, problem, riskiest assumption, first version.' },
       { title: 'Competitors come from a real web search', text: 'Up to three searches look for what people use today. A competitor is shown only when its own site came back from the search, so nothing in the list is made up.' },
       { title: 'You get a test you can run this week', text: 'A 7-day plan that tests the risky part cheaply (talk to people, a one-page site, pre-orders) and a clear go signal.' },
