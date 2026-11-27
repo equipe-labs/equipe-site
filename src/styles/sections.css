@@ -684,6 +684,24 @@ main.home .idea.big .idea-next .sep { width: 13px; height: 13px; stroke: color-m
   .idea-bar:has(.idea-gchip, .idea-l2 > :nth-child(3)) .idea-free { display: none; }
 }
 @media (max-width: 359px) { .idea-free { display: none; } }
+/* The free-to-start note under the box on phones (inside the bar there is no room beside + and "Like this app"). */
+.idea-free-m { display: none; }
+@media (max-width: 640px) {
+  .idea.big .idea-free { display: none; }
+  .idea-free-m { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 0; margin: 14px 0 0; font-size: 13px; line-height: 18px; color: var(--muted); text-align: center; }
+  .idea-free-m > span + span::before { content: '·'; margin: 0 6px; opacity: 0.7; }
+  main.home .final .idea-free-m { color: #B9BAC0; }
+}
+/* A/B test 'hero', arm b: "No idea yet? Start free, and your team suggests three". */
+.idea-noidea { display: none; }
+:root[data-ab-hero='b'] .idea-noidea { display: block; margin: 16px 0 0; font-size: 15px; line-height: 22px; color: var(--muted); text-align: center; text-wrap: balance; animation: noidea-in 420ms var(--ease, ease) both; }
+.idea-noidea a { display: inline-flex; align-items: center; gap: 4px; color: var(--accent-text); font-weight: 600; text-decoration: none; }
+.idea-noidea a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.idea-noidea a:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; border-radius: 4px; }
+.idea-noidea svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms var(--ease, ease); }
+.idea-noidea a:hover svg { transform: translateX(2px); }
+@keyframes noidea-in { from { opacity: 0; transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { :root[data-ab-hero='b'] .idea-noidea { animation: none; } .idea-noidea svg { transition: none; } }
 @media (prefers-reduced-motion: reduce) { main.home .idea.big .idea-goal, main.home .idea.big .idea-box { animation: none; transition: none; } }
 /* the closing band is dark in both themes: its goals and next-steps line keep light text */
 main.home .final .idea.big .idea-goal { color: #EFEDE7; background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }

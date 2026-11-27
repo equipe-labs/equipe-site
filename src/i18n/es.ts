@@ -161,6 +161,9 @@ const es: Messages = {
     teamNote: 'Todos trabajan juntos en tu petición.',
     teamLines: ['convierte tu idea en un plan', 'lo construyen', 'hace que se vea bien', 'comprueba que funciona', 'mide qué funciona'],
     note: 'Gratis para empezar · 500 créditos · Sin tarjeta',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: '¿Aún sin idea?',
+    noIdeaGo: 'Empieza gratis y tu equipo te propone tres',
   },
   see: { kicker: 'Míralo en acción', title: 'Tu equipo, trabajando.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

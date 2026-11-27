@@ -161,6 +161,9 @@ const ptBR: Messages = {
     teamNote: 'Todos trabalham juntos no seu pedido.',
     teamLines: ['transforma sua ideia em um plano', 'constroem', 'deixa com a cara certa', 'confere se funciona', 'mede o que está dando certo'],
     note: 'Grátis para começar · 500 créditos · Sem cartão',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: 'Ainda sem ideia?',
+    noIdeaGo: 'Comece grátis e sua equipe sugere três',
   },
   see: { kicker: 'Veja funcionando', title: 'Seu time, trabalhando.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

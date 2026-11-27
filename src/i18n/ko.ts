@@ -161,6 +161,9 @@ const ko: Messages = {
     teamNote: '모두가 함께 요청을 맡아요.',
     teamLines: ['아이디어를 계획으로 바꿔요', '직접 만들어요', '보기 좋게 다듬어요', '제대로 되는지 확인해요', '무엇이 효과 있는지 재요'],
     note: '무료로 시작 · 500 크레딧 · 카드 필요 없음',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: '아직 아이디어가 없나요?',
+    noIdeaGo: '무료로 시작하면 팀이 세 가지를 제안해요',
   },
   see: { kicker: '일하는 모습 보기', title: '일하고 있는 내 팀.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

@@ -161,6 +161,9 @@ const ja: Messages = {
     teamNote: '全員でひとつのリクエストに取り組みます。',
     teamLines: ['アイデアを計画にします', '実際に作ります', '見た目を整えます', 'ちゃんと動くか確かめます', '何が効いているかを測ります'],
     note: '無料で開始 · 500クレジット · カード不要',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: 'まだアイデアがない？',
+    noIdeaGo: '無料で始めると、チームが3つ提案します',
   },
   see: { kicker: '動いているところ', title: '働くあなたのチーム。' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

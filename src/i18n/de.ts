@@ -161,6 +161,9 @@ const de: Messages = {
     teamNote: 'Alle arbeiten gemeinsam an deiner Anfrage.',
     teamLines: ['macht aus deiner Idee einen Plan', 'bauen es', 'sorgt dafür, dass es gut aussieht', 'prüft, ob es funktioniert', 'misst, was wirkt'],
     note: 'Kostenlos starten · 500 Credits · Keine Karte',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: 'Noch keine Idee?',
+    noIdeaGo: 'Kostenlos starten, dein Team schlägt drei vor',
   },
   see: { kicker: 'So arbeitet es', title: 'Dein Team bei der Arbeit.' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.

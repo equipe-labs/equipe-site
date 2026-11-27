@@ -41,8 +41,11 @@ const config = JSON.stringify({ key, uiHost, environment, locales }).replace(/</
     var landing = L.pathname.slice(0, 100);
     if (!S.eq_af) S.eq_af = JSON.stringify(Object.assign({}, o, { landing: landing, at: Math.floor(Date.now() / 1000) }));
     if (Object.keys(o).length) S.eq_al = JSON.stringify(Object.assign({}, o, { landing: landing }));
-    function enc() { var j = JSON.stringify({ f: JSON.parse(S.eq_af), l: JSON.parse(S.eq_al || S.eq_af) }); return btoa(unescape(encodeURIComponent(j))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+    // The A/B arms this tab is in (Base.astro), so the app can count each arm's sign-ups (x: "hero=b").
+    function arms() { var a = window.__eqAB || {}, o = []; for (var k in a) o.push(k + '=' + a[k]); return o.join(','); }
+    function enc() { var x = arms(), f = JSON.parse(S.eq_af), l = JSON.parse(S.eq_al || S.eq_af); if (x) { f.x = x; l.x = x; } var j = JSON.stringify({ f: f, l: l }); return btoa(unescape(encodeURIComponent(j))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
     function tag(a) { try { var u = new URL(a.href); if (u.hostname === 'app.equipe.im' && !u.searchParams.has('_eqa')) { u.searchParams.set('_eqa', enc()); a.href = u.toString(); } } catch (e) {} }
+    window.__eqaEnc = function () { try { return enc(); } catch (e) { return ''; } };
     function all() { [].forEach.call(document.querySelectorAll('a[href*="app.equipe.im"]'), tag); }
     all(); document.addEventListener('DOMContentLoaded', all);
     document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a'); if (a) tag(a); }, true);

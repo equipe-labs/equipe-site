@@ -161,6 +161,9 @@ const zhCN: Messages = {
     teamNote: '大家一起处理你的需求。',
     teamLines: ['把想法变成计划', '动手开发', '让它好看好用', '检查是否正常运行', '衡量哪些有效'],
     note: '免费开始 · 500 点数 · 无需绑卡',
+    // Under the hero idea box (A/B test 'hero', arm b): for people who have no idea ready yet.
+    noIdea: '还没有想法？',
+    noIdeaGo: '免费开始，团队会为你提出三个',
   },
   see: { kicker: '看看团队怎么做', title: '你的团队，正在工作。' },
   // Example ideas in the scrolling strip under the hero. Examples, not customers.
