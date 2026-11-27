@@ -1,0 +1,130 @@
+---
+// /tools/app-cost-calculator/<type>/: "<type> development cost" pages, one per app type and language.
+// Each has its own cost table, what drives the cost, a real example where we have one, a FAQ (FAQPage) and the
+// calculator preset to the type. A shared estimate (?f=&d=&t=) opens here, so its social image is the type's.
+import PageShell from '../../../../components/PageShell.astro';
+import JsonLd from '../../../../components/JsonLd.astro';
+import FaqJsonLd from '../../../../components/FaqJsonLd.astro';
+import Calculator from '../../../../components/costcalc/Calculator.astro';
+import Method from '../../../../components/costcalc/Method.astro';
+import { SITE } from '../../../../data/site';
+import { TYPES, MODEL, EXAMPLES, DEFAULT_PICK, stats, type TypeKey } from '../../../../data/costcalc/model';
+import { costCopy, fill } from '../../../../data/costcalc/copy';
+import { view, typeFaq, signupHref, usdN, num } from '../../../../data/costcalc/render';
+import { available, getLocale, subPath, type LocaleCode } from '../../../../i18n';
+import '../../../../styles/costcalc.css';
+
+export function getStaticPaths() {
+  return available.flatMap((l) => TYPES.map((type) => ({ params: { locale: l.slug || undefined, type }, props: { code: l.code, type } })));
+}
+const { code, type } = Astro.props as { code: LocaleCode; type: TypeKey };
+const info = getLocale(code);
+const c = costCopy(code);
+const lang = info.lang;
+const T = c.types[type];
+const m = MODEL[type];
+const pick = DEFAULT_PICK(type);
+const v = view(c, pick, lang);
+const base = 'tools/app-cost-calculator';
+const page = `${base}/${type}`;
+const url = new URL(subPath(info, page), Astro.site).href;
+const vars = { Type: T.name, a: T.a, lo: usdN(v.e.agency[0]), hi: usdN(v.e.agency[1]), dlo: usdN(v.e.diy[0]), dhi: usdN(v.e.diy[1]), clo: num(v.e.credits[0], lang), chi: num(v.e.credits[1], lang) };
+const title = fill(c.typePage.title, vars);
+const desc = fill(c.typePage.desc, vars);
+const faqs = typeFaq(c, type, pick, lang);
+const drivers = m.drivers.map((k) => (c.drivers as Record<string, { t: string; d: string }>)[k]);
+const ex = m.example ? EXAMPLES[m.example] : undefined;
+const exText = m.example ? (c.examples as Record<string, string>)[m.example] : '';
+const hasHub = Object.keys(import.meta.glob('../index.astro')).length > 0;
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const crumbs = [
+  ...(hasHub ? [{ name: c.typePage.hubLink, url: new URL(subPath(info, 'tools'), Astro.site).href }] : []),
+  { name: c.nav, url: new URL(subPath(info, base), Astro.site).href },
+  { name: T.name, url },
+];
+---
+<PageShell code={code} page={page} title={title} description={desc} image={`/og/costcalc/${info.slug || 'en'}-${type}.png`} imageAlt={fill(c.typePage.h1, vars)}>
+  <Fragment slot="head">
+    <link rel="preconnect" href={SITE.app} crossorigin />
+    <JsonLd data={{
+      '@type': 'WebPage', '@id': `${url}#page`, url, name: title, description: desc, inLanguage: info.lang,
+      about: { '@id': `${SITE.url}/#organization` },
+      breadcrumb: { '@type': 'BreadcrumbList', itemListElement: crumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: b.url })) },
+      mainEntity: { '@type': 'WebApplication', name: c.nav, url: new URL(subPath(info, base), Astro.site).href, applicationCategory: 'BusinessApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+    }} />
+    <FaqJsonLd lang={info.lang} faqs={faqs} />
+  </Fragment>
+
+  <section class="cc-hero"><div class="wrap">
+    <nav class="cc-crumbs" aria-label="Breadcrumb">
+      {hasHub && <><a href={subPath(info, 'tools')}>{c.typePage.hubLink}</a><span aria-hidden="true">/</span></>}
+      <a href={subPath(info, base)}>{c.nav}</a>
+    </nav>
+    <h1>{fill(c.typePage.h1, vars)}</h1>
+    <p class="cc-lead">{fill(c.typePage.lead, vars)}</p>
+    <p class="cc-lead" style="margin-top:12px!important;font-size:17px">{(c.intros as Record<string, string>)[type]}</p>
+  </div></section>
+
+  <section class="cc-sec" id="table" style="padding-top:var(--s-5)"><div class="wrap">
+    <h2>{c.typePage.tableTitle}</h2>
+    <div class="cc-table-wrap">
+      <table class="cc-table">
+        <thead><tr>{c.typePage.tableHead.map((h, i) => <th scope="col">{i === 0 ? <span class="sr-only">{T.name}</span> : h}</th>)}</tr></thead>
+        <tbody>
+          <tr><th scope="row">{c.typePage.rows.build}</th><td data-label={c.typePage.tableHead[1]}>{v.agency}</td><td data-label={c.typePage.tableHead[2]}>{c.typePage.diyTime}</td><td class="eq" data-label={c.typePage.tableHead[3]}>{v.credits}<br /><span style="font-weight:400">{v.creditsUsd}</span></td></tr>
+          <tr><th scope="row">{c.typePage.rows.year}</th><td data-label={c.typePage.tableHead[1]}>{v.agency}<br /><span style="color:var(--muted)">{c.cols.oneOff}</span></td><td data-label={c.typePage.tableHead[2]}>{v.diy}<br /><span style="color:var(--muted)">{v.diyLine}</span></td><td class="eq" data-label={c.typePage.tableHead[3]}>{v.year.replace(/^[^$]*/, '')}</td></tr>
+          <tr><th scope="row">{c.typePage.rows.time}</th><td data-label={c.typePage.tableHead[1]}>{fill(c.typePage.weeksUnit, { a: m.weeks[0], b: m.weeks[1] })}</td><td data-label={c.typePage.tableHead[2]}>{c.typePage.diyTime}</td><td class="eq" data-label={c.typePage.tableHead[3]}>{fill(c.typePage.minutesUnit, { m: stats.firstLive.minutes.median })}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></section>
+
+  <section class="cc-sec" id="calculator"><div class="wrap">
+    <Calculator code={code} preset={pick} placement={`type-${type}`} heading={c.typePage.calc} lockType />
+    <p style="margin-top:var(--s-4)"><a href={`${subPath(info, base)}?type=${type}`} data-ph="costcalc_full_link" data-ph-location={`type-${type}`}>{c.typePage.calcLink}</a></p>
+  </div></section>
+
+  <section class="cc-sec" id="drivers"><div class="wrap">
+    <h2>{c.typePage.drivers}</h2>
+    <ul class="cc-drivers">{drivers.map((d) => <li><h3>{d.t}</h3><p>{d.d}</p></li>)}</ul>
+  </div></section>
+
+  {ex && (
+    <section class="cc-sec" id="example"><div class="wrap">
+      <h2>{ex.kind === 'demo' ? c.typePage.exampleDemoTitle : c.typePage.example}</h2>
+      <div class="cc-example">
+        <p class="what">{exText}</p>
+        {ex.kind === 'real'
+          ? <p class="num">{fill(ex.firstMinutes ? c.typePage.exampleReal : c.typePage.exampleRealNoTime, { c: new Intl.NumberFormat(lang).format(ex.firstCredits), m: ex.firstMinutes ?? '', lc: new Intl.NumberFormat(lang).format(ex.laterCredits), li: ex.laterItems })}</p>
+          : <><p class="num">{fill(c.typePage.exampleDemo, { m: ex.minutes })}</p><a href={ex.url} rel="noopener" target="_blank" data-ph="costcalc_example_open" data-ph-location={type}>{c.typePage.exampleOpen}</a></>}
+      </div>
+    </div></section>
+  )}
+
+  <section class="cc-sec" id="faq"><div class="wrap">
+    <h2>{c.typePage.faq}</h2>
+    <div class="faqs" style="max-width:800px">
+      {faqs.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+    </div>
+  </div></section>
+
+  <Method code={code} type={type} />
+
+  <section class="cc-sec" id="types"><div class="wrap">
+    <h2>{c.typePage.related}</h2>
+    <nav class="cc-related" aria-label={c.typePage.related}>
+      {TYPES.map((t) => <a href={subPath(info, `${base}/${t}`)} aria-current={t === type ? 'page' : undefined} data-ph="costcalc_type_link" data-ph-location={`type-${type}-${t}`}>{c.types[t].name}</a>)}
+      <a href={subPath(info, base)} data-ph="costcalc_full_link" data-ph-location={`related-${type}`}>{c.typePage.calcLink}</a>
+      {hasHub && <a href={subPath(info, 'tools')}>{c.typePage.hubLink}</a>}
+    </nav>
+  </div></section>
+
+  <section class="cc-cta"><div class="wrap">
+    <h2>{c.cta.title}</h2>
+    <p>{c.cta.sub}</p>
+    <div class="acts">
+      <a class="btn primary lg" href={signupHref(c, pick, lang, `final-${type}`)} data-ph="signup_cta_click" data-ph-location={`costcalc-final-${type}`}>{c.cta.button}<Fragment set:html={arrow} /></a>
+      <a class="btn ghost lg" href={subPath(info, 'pricing')} data-ph="costcalc_pricing" data-ph-location={`type-${type}`}>{c.cta.secondary}</a>
+    </div>
+  </div></section>
+</PageShell>

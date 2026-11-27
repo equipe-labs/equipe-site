@@ -1,0 +1,40 @@
+{
+  "asOf": "2026-11-27",
+  "projects": 13,
+  "firstLive": {
+    "n": 11,
+    "credits": {
+      "p25": 319,
+      "median": 477,
+      "p75": 1329
+    },
+    "minutes": {
+      "median": 40
+    }
+  },
+  "firstWeek": {
+    "n": 13,
+    "credits": {
+      "p25": 1038,
+      "median": 3290,
+      "p75": 8178
+    }
+  },
+  "perItem": {
+    "n": 12,
+    "workItems": 150,
+    "credits": {
+      "p25": 406,
+      "median": 493,
+      "p75": 510
+    }
+  },
+  "itemOnly": {
+    "n": 150,
+    "credits": {
+      "p25": 37,
+      "median": 130,
+      "p75": 314
+    }
+  }
+}

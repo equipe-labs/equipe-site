@@ -15,6 +15,7 @@
 - Honest comparisons for non-coders (prices from each company's own pages, dated 2026-11-28, with where the other product is better and where equipe is weaker): Lovable https://equipe.im/vs/lovable/ · Base44 https://equipe.im/vs/base44/ · Bolt https://equipe.im/vs/bolt/ · Wix https://equipe.im/vs/wix/ · v0 https://equipe.im/vs/v0/ · Replit https://equipe.im/vs/replit/ (alternatives lists: https://equipe.im/alternatives/lovable/ and the same path for the others)
 - AI features (AI in the products the team builds: chatbot, FAQ answers, translation, summaries and more): https://equipe.im/features/ai/
 - Move a project to equipe (from Claude Code, Cursor, Lovable, Bolt, v0, Replit, GitHub or a ZIP; the design is kept, Next.js runs on Cloudflare Workers through OpenNext): https://equipe.im/migrate/
+- App development cost calculator (what a website, online store, booking app, marketplace, SaaS, mobile app, internal tool, community or directory costs with an agency or freelancer (dated 2026 sources), with no-code tools (list prices), and with equipe (from real customer project costs; an estimate)): https://equipe.im/tools/app-cost-calculator/ . One page per type: https://equipe.im/tools/app-cost-calculator/<type>/ with type = landing-page, website, online-store, booking-app, marketplace, saas, mobile-app, internal-tool, community, directory
 - AI in your product, docs and API reference: https://ai.equipe.im/docs
 - About (Umbriles Inc.): https://equipe.im/about/
 - Changelog: https://equipe.im/changelog/

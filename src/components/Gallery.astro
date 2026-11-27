@@ -5,10 +5,14 @@
 import gallery from '../data/gallery.json';
 import IPhone from './IPhone.astro';
 import { getMessages, type LocaleCode } from '../i18n';
+import { HOME, TYPICAL, credits } from '../data/home';
 
 interface Props { code: LocaleCode }
 const { code } = Astro.props;
 const g = getMessages(code).gallery;
+// Typical cost of a first version like these (median of real customer teams; see src/data/home.ts), in credits.
+const cost = HOME[code].gallery;
+const typical = cost.cost.replace('{c}', credits(code, TYPICAL.credits));
 const host = (u: string) => new URL(u).host;
 const webp = (p: string) => p.replace(/\.png$/, '.webp');
 const mins = (s: string) => s.match(/\d+/)?.[0] ?? '';
@@ -52,7 +56,7 @@ const lock = 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z';
                 )}
               </div>
               <div class="gal-t">
-                <p class="gal-k"><span>{it.category}</span><span>{g.made.replace('{n}', mins(p.madeIn))}</span></p>
+                <p class="gal-k"><span>{it.category}</span><span>{g.made.replace('{n}', mins(p.madeIn))} · {typical}</span></p>
                 <h3>{p.name}</h3>
                 <p class="gal-d">{it.text}</p>
                 <span class="gal-o">{g.open}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L16 8M9.5 8H16v6.5" /></svg><span class="sr-only"> — {host(p.url)} ({g.newTab})</span></span>
@@ -62,6 +66,6 @@ const lock = 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5z';
         );
       })}
     </ul>
-    <p class="gal-n rv">{g.note}</p>
+    <p class="gal-n rv">{g.note} {cost.costNote}</p>
   </div>
 </section>
