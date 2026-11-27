@@ -39,6 +39,14 @@
       "destination": "https://platform.equipe.im/v1/free/idea/:id/share?l=:loc"
     },
     {
+      "source": "/business-name-generator/r/:id([A-Za-z0-9]{6,16})/",
+      "destination": "https://platform.equipe.im/v1/free/names/:id/share?l="
+    },
+    {
+      "source": "/:loc(ko|ja|zh-cn|es|pt-br|de|fr)/business-name-generator/r/:id([A-Za-z0-9]{6,16})/",
+      "destination": "https://platform.equipe.im/v1/free/names/:id/share?l=:loc"
+    },
+    {
       "source": "/ingest/static/:path(.*)",
       "destination": "https://us-assets.i.posthog.com/static/:path"
     },

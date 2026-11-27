@@ -221,3 +221,7 @@ html.mo .tl-in.on { opacity: 1; transform: none; transition: opacity 520ms var(-
 main.pg .tl-shared-h h1 { font-size: 18px; font-weight: 600; letter-spacing: 0; color: var(--muted); }
 .tl-again { padding-top: var(--s-6); }
 main.pg .tl-again-h { max-width: 20ch; margin: 0 auto; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.028em; text-wrap: balance; }
+
+/* On a shared report the report comes first and the box follows; on /grader/ the box leads. */
+.tl-flow { display: flex; flex-direction: column; }
+.tl-flow-shared [data-g-hero] { order: 3; }

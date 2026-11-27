@@ -7,6 +7,7 @@ import JsonLd from '../../../../components/JsonLd.astro';
 import FaqJsonLd from '../../../../components/FaqJsonLd.astro';
 import Calculator from '../../../../components/costcalc/Calculator.astro';
 import Method from '../../../../components/costcalc/Method.astro';
+import RelatedTools from '../../../../components/RelatedTools.astro';
 import { SITE } from '../../../../data/site';
 import { TYPES, MODEL, EXAMPLES, DEFAULT_PICK, stats, type TypeKey } from '../../../../data/costcalc/model';
 import { costCopy, fill } from '../../../../data/costcalc/copy';
@@ -118,6 +119,8 @@ const crumbs = [
       {hasHub && <a href={subPath(info, 'tools')}>{c.typePage.hubLink}</a>}
     </nav>
   </div></section>
+
+  <RelatedTools code={code} current="app-cost-calculator" />
 
   <section class="cc-cta"><div class="wrap">
     <h2>{c.cta.title}</h2>

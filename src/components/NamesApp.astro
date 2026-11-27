@@ -1,0 +1,363 @@
+---
+// The business name generator: the form (Turnstile loads on first use, interaction-only), the steps while names are
+// found and checked, and the result drawn from the platform's JSON (cloud platform/src/free-names.js). A logo is drawn
+// only when the visitor clicks "Make a logo" on a name.
+// mode 'shared': /business-name-generator/r/<id>/ (the id from the address), no form.
+// Events: PostHog names_run / names_result / names_error / names_logo / names_logo_error / names_shared_view; the own
+// funnel tool_run, tool_result and click:<data-ph> (names_start_click is the sign-up click).
+import { namesCopy, namesStartHref, NAMES_API, TURNSTILE_SITE_KEY, NAME_KINDS, NAME_VIBES } from '../data/names';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; mode?: 'tool' | 'shared' }
+const { code, mode = 'tool' } = Astro.props;
+const info = getLocale(code);
+const c = namesCopy(code);
+const F = c.form;
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>';
+const base = subPath(info, 'business-name-generator');
+const data = {
+  api: NAMES_API, lang: info.lang, code, ts: TURNSTILE_SITE_KEY, mode, base,
+  start: namesStartHref('__IDEA__', '__PLACE__'),
+  c: { result: c.result, form: c.form },
+};
+---
+{mode === 'tool' ? (
+  <section class="tl-hero"><div class="wrap">
+    <h1>{c.page.h1}</h1>
+    <p class="tl-lead">{c.page.lead}</p>
+    <form class="tl-form nm-form" novalidate data-n-form>
+      <div class="tl-fields nm-fields">
+        <div class="tl-field nm-wide">
+          <label for="n-about">{F.about}</label>
+          <textarea id="n-about" name="about" rows="2" maxlength="300" autocomplete="off" placeholder={F.aboutPh} required></textarea>
+        </div>
+        <div class="tl-field nm-wide" role="radiogroup" aria-labelledby="n-kind-l" data-n-group="kind">
+          <span class="nm-l" id="n-kind-l">{F.kind}<small>{F.optional}</small></span>
+          <div class="nm-chips">
+            {NAME_KINDS.map((k) => <button type="button" class="nm-chip" role="radio" aria-checked="false" data-v={k}><Fragment set:html={check} /><span>{c.kinds[k]}</span></button>)}
+          </div>
+        </div>
+        <div class="tl-field nm-wide" role="radiogroup" aria-labelledby="n-vibe-l" data-n-group="vibe">
+          <span class="nm-l" id="n-vibe-l">{F.vibe}<small>{F.optional}</small></span>
+          <div class="nm-chips">
+            {NAME_VIBES.map((k) => <button type="button" class="nm-chip" role="radio" aria-checked="false" data-v={k}><Fragment set:html={check} /><span>{c.vibes[k]}</span></button>)}
+          </div>
+        </div>
+        <div class="tl-field"><label for="n-place">{F.place}<small>{F.optional}</small></label><input id="n-place" name="place" type="text" autocomplete="address-level2" maxlength="60" placeholder={F.placePh} /></div>
+        {code !== 'en' ? (
+          <div class="tl-field" role="radiogroup" aria-labelledby="n-style-l" data-n-group="style" data-n-required>
+            <span class="nm-l" id="n-style-l">{F.style}</span>
+            <div class="nm-seg">
+              <button type="button" class="nm-chip" role="radio" aria-checked="true" data-v="local"><Fragment set:html={check} /><span>{F.styleLocal}</span></button>
+              <button type="button" class="nm-chip" role="radio" aria-checked="false" data-v="english"><Fragment set:html={check} /><span>{F.styleEnglish}</span></button>
+            </div>
+          </div>
+        ) : <div class="nm-spacer" aria-hidden="true"></div>}
+        <div class="tl-go">
+          <div class="tl-ts" data-n-ts></div>
+          <button class="btn primary lg" type="submit" data-ph="names_submit" data-ph-location="hero"><span>{F.button}</span><Fragment set:html={arrow} /></button>
+        </div>
+      </div>
+      <p class="tl-err" role="alert" hidden data-n-err></p>
+      <p class="tl-note">{F.note}</p>
+    </form>
+  </div></section>
+) : (
+  <section class="tl-shared-h"><div class="wrap"><h1>{c.share.heading}</h1><div class="tl-ts" data-n-ts></div></div></section>
+)}
+
+<section class="tl-run" hidden data-n-run aria-live="polite">
+  <div class="wrap">
+    <ol class="tl-steps">
+      {c.progress.map((s) => <li><span class="d"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
+    </ol>
+    <p>{c.progressNote}</p>
+  </div>
+</section>
+
+<section class="tl-report" hidden data-n-report tabindex="-1"><div class="wrap" data-n-out></div></section>
+
+{mode === 'shared' && (
+  <section class="tl-again"><div class="wrap" style="text-align:center;display:grid;justify-items:center;gap:20px">
+    <h2 class="tl-again-h">{c.share.own}</h2>
+    <a class="btn primary lg" href={base} data-ph="names_own_click" data-ph-location="shared">{c.share.ownButton}<Fragment set:html={arrow} /></a>
+  </div></section>
+)}
+
+<script type="application/json" data-n-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<script>
+  type Json = Record<string, any>;
+  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
+  const track = (n: string, p?: Json) => { try { w.eqTrack?.(n, p); } catch { /* never breaks the page */ } };
+  const own = (k: string, t: string, f?: string) => { try { w.eqOwn?.(k, t, f); } catch { /* never breaks the page */ } };
+  const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
+  const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ic = {
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>',
+    dash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12h10"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+    pen: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>',
+    redo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
+  };
+  const el = document.querySelector<HTMLScriptElement>('[data-n-data]');
+  const D = (el ? JSON.parse(el.textContent || '{}') : null) as Json;
+  const form = document.querySelector<HTMLFormElement>('[data-n-form]');
+  const run = document.querySelector<HTMLElement>('[data-n-run]')!;
+  const rep = document.querySelector<HTMLElement>('[data-n-report]')!;
+  const out = document.querySelector<HTMLElement>('[data-n-out]')!;
+  const tsBox = document.querySelector<HTMLElement>('[data-n-ts]');
+  if (D && run && rep && out) {
+    const R = D.c.result, FM = D.c.form;
+    const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
+    let timer = 0;
+    let cur: Json | null = null;
+    const money = (cents: number) => new Intl.NumberFormat(D.lang, { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(cents / 100);
+
+    // Turnstile: loaded on the first touch, interaction-only (most people never see it). A token is good for one call.
+    let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
+    const loadTs = () => {
+      if (tsLoad) return tsLoad;
+      tsLoad = new Promise<void>((res) => {
+        if (!tsBox) { res(); return; }
+        w.onEqTs = () => {
+          try {
+            tsId = w.turnstile!.render(tsBox, { sitekey: D.ts, theme: 'auto', size: 'flexible', appearance: 'interaction-only',
+              callback: (t: string) => { tsTok = t; tsWait?.(); }, 'expired-callback': () => { tsTok = ''; }, 'error-callback': () => { tsTok = ''; tsWait?.(); } });
+          } catch { /* the server says so */ }
+          res();
+        };
+        const s = document.createElement('script');
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onEqTs&render=explicit';
+        s.async = true; s.onerror = () => res();
+        document.head.appendChild(s);
+      });
+      return tsLoad;
+    };
+    const token = async () => {
+      await Promise.race([loadTs(), new Promise((r) => setTimeout(r, 8000))]);
+      if (!tsTok) await new Promise((r) => { tsWait = r; setTimeout(r, 15000); });
+      tsWait = null;
+      const t = tsTok; tsTok = '';
+      return t;
+    };
+    const resetTs = () => { try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } };
+
+    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('done', j < i); s.classList.toggle('now', j === i); });
+    const startSteps = () => { run.hidden = false; stepTo(0); let i = 0; const at = [3500, 6000]; const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 6000); }; timer = window.setTimeout(next, at[0]); };
+    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const when = (t: number) => new Date(t * 1000).toLocaleString(D.lang, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+    const ideaFor = (g: Json, n: Json) => {
+      const inPlace = g.place ? ` (${g.place})` : '';
+      let idea = fill(R.cta.idea, { name: n.name, about: g.about, inPlace });
+      if (n.domain) idea += `\n${fill(R.cta.ideaDomain, { domain: n.domain.domain })}`;
+      return idea;
+    };
+    const startHref = (g: Json, n: Json, place: string) => String(D.start).replace('__IDEA__', encodeURIComponent(ideaFor(g, n))).replace('__PLACE__', place);
+    const priceLine = (d: Json) => {
+      const p = d.years > 1 ? fill(R.perYears, { price: money(d.price_cents), n: d.years }) : fill(R.perYear, { price: money(d.price_cents) });
+      return d.renewal_price_cents && d.renewal_price_cents !== d.price_cents ? `${p} · ${fill(R.renews, { renew: money(d.renewal_price_cents) })}` : p;
+    };
+    const logosHtml = (n: Json) => (n.logos || []).map((u: string, j: number) => `<figure class="nm-logo"><img src="${esc(u)}" alt="${esc(fill(R.logoAlt, { name: n.name }))} ${j + 1}" width="160" height="160" loading="lazy" decoding="async"></figure>`).join('');
+
+    // A logo fades in once its picture has loaded; one that fails to load is removed (never a broken image).
+    function revealLogos(root: Element) {
+      root.querySelectorAll<HTMLImageElement>('.nm-logo img').forEach((im) => {
+        const on = () => im.closest('figure')?.classList.add('on');
+        if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on); im.addEventListener('error', () => im.closest('figure')?.remove()); }
+      });
+    }
+    const shortPrice = (d: Json) => d.renewal_price_cents && d.renewal_price_cents !== d.price_cents ? `${money(d.price_cents)} · ${fill(R.renews, { renew: money(d.renewal_price_cents) })}` : money(d.price_cents);
+
+    function card(g: Json, n: Json, i: number) {
+      const pill = n.com === 'free' ? `<span class="tl-pill ok">${ic.check}${esc(R.available)}</span>`
+        : n.com === 'taken' ? `<span class="tl-pill mute">${ic.x}${esc(R.comTaken)}</span>`
+        : `<span class="tl-pill mute">${ic.dash}${esc(n.com === 'unknown' ? R.unknown : R.noneFree)}</span>`;
+      const dom = n.domain ? `<p class="nm-dom"><b>${esc(n.domain.domain)}</b><span>${esc(priceLine(n.domain))}</span></p>` : (n.com === 'unknown' ? '' : `<p class="nm-dom nm-none">${esc(R.noneFree)}</p>`);
+      const more = (n.more || []).filter(Boolean).length ? `<p class="nm-more">${esc(R.more)} ${(n.more || []).filter(Boolean).map((d: Json) => `<span>${esc(d.domain)} <small>${esc(shortPrice(d))}</small></span>`).join('')}</p>` : '';
+      const logos = n.logos?.length ? `<div class="nm-logos">${logosHtml(n)}</div>` : '';
+      const logoBtn = D.mode === 'tool' && !n.logos?.length ? `<button type="button" class="btn ghost nm-logo-btn" data-n-logo="${i}" data-ph="names_logo_click" data-ph-location="card">${ic.pen}<span>${esc(R.logo)}</span></button>` : '';
+      return `<li class="nm-card tl-in" style="--d:${Math.min(i, 9) * 60}ms" data-i="${i}">
+        <div class="nm-top"><h3 lang="${esc(g.style === 'local' ? D.lang : 'en')}">${esc(n.name)}</h3>${pill}</div>
+        ${n.why ? `<p class="nm-why">${esc(n.why)}</p>` : ''}
+        ${dom}${more}
+        <div class="nm-logo-slot">${logos}</div>
+        <p class="nm-msg" role="status" hidden></p>
+        <div class="nm-act">${logoBtn}<a class="nm-use" href="${esc(startHref(g, n, 'card'))}" data-ph="names_start_click" data-ph-location="card">${esc(R.use)}${ic.arrow}</a></div>
+      </li>`;
+    }
+
+    function draw(g: Json) {
+      cur = g;
+      const names = (g.names || []) as Json[];
+      const top = names[0];
+      const link = new URL(`${D.base}r/${g.id}/`, location.origin).href;
+      const stale = Date.now() / 1000 - (g.checked_at || 0) > 600;
+      out.innerHTML = `<div class="tl-rep nm-rep">
+        <div class="nm-head tl-in">
+          <div><h2>${esc(R.title)}</h2><p class="tl-sub">${esc(fill(R.sub, { about: g.about }))}</p></div>
+          <p class="tl-date">${esc(fill(R.checked, { time: when(g.checked_at || g.created_at) }))}${stale ? ` <button type="button" class="nm-re" data-n-recheck data-ph="names_recheck" data-ph-location="result">${ic.redo}<span>${esc(R.recheck)}</span></button>` : ''}</p>
+        </div>
+        ${g.by === 'code' ? `<p class="tl-cached nm-note tl-in">${esc(R.fromCode)}</p>` : ''}
+        ${g.registrar === 'down' ? `<p class="tl-err nm-note tl-in">${esc(R.registrarDown)}</p>` : ''}
+        ${names.length ? `<ul class="nm-list">${names.map((n, i) => card(g, n, i)).join('')}</ul>` : `<p class="tl-empty">${esc(R.notFound)}</p>`}
+        <p class="nm-price-note tl-in">${esc(R.priceNote)}</p>
+        ${top ? `<div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(startHref(g, top, 'result'))}" data-ph="names_start_click" data-ph-location="result">${esc(fill(R.cta.button, { name: top.name }))}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>` : ''}
+        <div class="tl-share tl-in"><label for="n-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="n-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-n-copy data-ph="names_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button>${D.mode === 'tool' ? `<a class="btn ghost" href="${esc(D.base)}" data-n-again data-ph="names_again" data-ph-location="result">${esc(R.share.again)}</a>` : ''}</div></div>
+      </div>`;
+      rep.hidden = false;
+      revealLogos(out);
+      const items = [...out.querySelectorAll<HTMLElement>('.tl-in')];
+      if (reduce || !document.documentElement.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
+      else items.forEach((x) => requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))));
+    }
+
+    async function makeLogo(btn: HTMLButtonElement) {
+      if (!cur) return;
+      const i = Number(btn.dataset.nLogo);
+      const li = btn.closest<HTMLElement>('.nm-card')!;
+      const slot = li.querySelector<HTMLElement>('.nm-logo-slot')!;
+      const msg = li.querySelector<HTMLElement>('.nm-msg')!;
+      msg.hidden = true;
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+      btn.querySelector('span')!.textContent = R.logoMaking;
+      slot.innerHTML = `<div class="nm-logos nm-wait" aria-hidden="true"><figure class="nm-logo"></figure><figure class="nm-logo"></figure></div>`;
+      track('names_logo', { i });
+      const tok = await token();
+      let res: Response | null = null, j: Json | null = null;
+      try { res = await fetch(`${D.api}/${cur.id}/logo`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ i, token: tok }), signal: AbortSignal.timeout(120000) }); j = await res.json().catch(() => null); } catch { /* below */ }
+      resetTs();
+      btn.removeAttribute('aria-busy');
+      if (!res || !res.ok || !j?.logos?.length) {
+        const e = j?.error;
+        slot.innerHTML = '';
+        msg.textContent = e === 'rate' ? R.logoErrRate : e === 'budget' || e === 'off' ? R.logoErrBudget : e === 'turnstile' ? FM.errTurnstile : R.logoErrFailed;
+        msg.hidden = false;
+        btn.disabled = e === 'rate' || e === 'budget' || e === 'off';
+        btn.querySelector('span')!.textContent = R.logo;
+        track('names_logo_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        return;
+      }
+      const n = cur.names[i]; n.logos = j.logos;
+      slot.innerHTML = `<div class="nm-logos">${logosHtml(n)}</div><p class="nm-hint">${esc(R.logoNote)}</p>`;
+      revealLogos(slot);
+      btn.remove();
+      own('ev', 'names_logo_made');
+    }
+
+    out.addEventListener('click', async (e) => {
+      const t = e.target as Element;
+      const lb = t.closest<HTMLButtonElement>('[data-n-logo]');
+      if (lb) { makeLogo(lb); return; }
+      const cb = t.closest<HTMLButtonElement>('[data-n-copy]');
+      if (cb) {
+        const i = out.querySelector<HTMLInputElement>('#n-share')!; let ok = false;
+        try { await navigator.clipboard.writeText(i.value); ok = true; } catch { i.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+        if (!ok) return; const lab = cb.querySelector('span')!; cb.classList.add('done'); lab.textContent = R.share.copied;
+        setTimeout(() => { cb.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
+        return;
+      }
+      const rb = t.closest<HTMLButtonElement>('[data-n-recheck]');
+      if (rb && cur) {
+        rb.disabled = true; rb.classList.add('spin');
+        try { const r = await fetch(`${D.api}/${cur.id}/recheck`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }); const g = await r.json(); if (g?.id) draw(g); } catch { rb.disabled = false; rb.classList.remove('spin'); }
+        return;
+      }
+      const a = t.closest('[data-n-again]');
+      if (a && form) {
+        e.preventDefault(); rep.hidden = true; form.reset(); history.replaceState(null, '', D.base);
+        form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        setTimeout(() => form.querySelector<HTMLTextAreaElement>('textarea')?.focus(), reduce ? 0 : 300);
+      }
+    });
+
+    const load = (id: string) => {
+      out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
+      fetch(`${D.api}/${id}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
+        if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
+        track('names_shared_view', { count: (g.names || []).length }); draw(g);
+      }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
+    };
+
+    if (D.mode === 'shared') {
+      const m = location.pathname.match(/\/r\/([A-Za-z0-9]{6,16})\/?$/);
+      if (m) load(m[1]); else out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`, rep.hidden = false;
+    }
+
+    if (form) {
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      const err = form.querySelector<HTMLElement>('[data-n-err]')!;
+      const about = form.querySelector<HTMLTextAreaElement>('textarea[name="about"]')!;
+      const place = form.querySelector<HTMLInputElement>('input[name="place"]')!;
+      const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
+      const picked = (g: string) => form.querySelector<HTMLElement>(`[data-n-group="${g}"] [aria-checked="true"]`)?.dataset.v || '';
+      // Chips: one choice per group, a second tap clears it (the language choice always keeps one). Arrow keys move.
+      form.querySelectorAll<HTMLElement>('[data-n-group]').forEach((grp) => {
+        const chips = [...grp.querySelectorAll<HTMLButtonElement>('.nm-chip')];
+        const required = grp.hasAttribute('data-n-required');
+        const roving = () => { const sel = chips.find((x) => x.getAttribute('aria-checked') === 'true') || chips[0]; chips.forEach((x) => { x.tabIndex = x === sel ? 0 : -1; }); };
+        roving();
+        grp.addEventListener('click', (e) => {
+          const b = (e.target as Element).closest<HTMLButtonElement>('.nm-chip'); if (!b) return;
+          const on = b.getAttribute('aria-checked') === 'true';
+          if (on && required) return;
+          chips.forEach((x) => x.setAttribute('aria-checked', 'false'));
+          if (!on) b.setAttribute('aria-checked', 'true');
+          roving();
+        });
+        grp.addEventListener('keydown', (e) => {
+          const k = (e as KeyboardEvent).key; const i = chips.indexOf(document.activeElement as HTMLButtonElement); if (i < 0) return;
+          const n = k === 'ArrowRight' || k === 'ArrowDown' ? (i + 1) % chips.length : k === 'ArrowLeft' || k === 'ArrowUp' ? (i - 1 + chips.length) % chips.length : -1;
+          if (n < 0) return; e.preventDefault(); chips[n].focus();
+        });
+      });
+      const grow = () => { about.style.height = 'auto'; about.style.height = `${Math.min(about.scrollHeight, 180)}px`; };
+      about.addEventListener('input', grow);
+      form.addEventListener('focusin', () => { loadTs(); }, { once: true });
+
+      async function go() {
+        say('');
+        const a = about.value.trim();
+        about.removeAttribute('aria-invalid');
+        if (a.length < 3) { say(FM.errAbout); about.setAttribute('aria-invalid', 'true'); about.focus(); return; }
+        btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+        const body = { about: a, kind: picked('kind'), vibe: picked('vibe'), place: place.value.trim(), style: picked('style') || 'english', lang: D.code };
+        own('fn', 'tool_run'); track('names_run', { kind: body.kind, vibe: body.vibe, has_place: !!body.place, style: body.style });
+        const tok = await token();
+        rep.hidden = true; startSteps();
+        run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        let res: Response | null = null, g: Json | null = null;
+        try {
+          res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...body, token: tok }), signal: AbortSignal.timeout(90000) });
+          g = await res.json().catch(() => null);
+        } catch { /* below */ }
+        stopSteps();
+        btn.disabled = false; btn.removeAttribute('aria-busy');
+        resetTs();
+        if (!res || !res.ok || !g || !g.id) {
+          const e = g?.error;
+          const m = e === 'about' ? FM.errAbout : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'busy' ? FM.errBusy : FM.errFailed;
+          track('names_error', { error: e || (res ? `http_${res.status}` : 'network') });
+          say(m); return;
+        }
+        own('fn', 'tool_result'); own('ev', 'names_com_free', String((g.names || []).filter((n: Json) => n.com === 'free').length));
+        track('names_result', { count: (g.names || []).length, com_free: (g.names || []).filter((n: Json) => n.com === 'free').length, by: g.by, cached: !!g.cached });
+        draw(g);
+        try { history.replaceState(null, '', `${D.base}?r=${g.id}`); } catch { /* fine */ }
+        setTimeout(() => { rep.focus({ preventScroll: true }); rep.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
+      }
+      form.addEventListener('submit', (e) => { e.preventDefault(); go(); });
+      about.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !(e as KeyboardEvent).isComposing) { e.preventDefault(); go(); } });
+      form.addEventListener('input', () => { if (!err.hidden) say(''); });
+      const q = new URLSearchParams(location.search);
+      if (q.get('about')) { about.value = q.get('about')!.slice(0, 300); grow(); }
+      const rid = q.get('r');
+      if (rid && /^[A-Za-z0-9]{6,16}$/.test(rid)) load(rid);
+    }
+  }
+</script>

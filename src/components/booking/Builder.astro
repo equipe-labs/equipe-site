@@ -1,0 +1,118 @@
+---
+// The free booking page maker: the editor on the left, the booking page on the right, re-drawn on every key press.
+// The page is a fixed template (src/data/bookingpage/model.ts renderPage) in a sandboxed iframe (scripts only, an opaque
+// origin); the first preview is drawn at build time, so it is there before any JavaScript. Controls are custom (switches,
+// radio cards, a shared list for every menu; no native <select> or time pickers), after ui.equipe.im "Time Slot Picker"
+// (radio-groups/time-slot-picker) for the page's day strip and times, restyled to equipe tokens.
+// Behaviour: src/scripts/bookingpage.ts.
+import { bookingCopy } from '../../data/bookingpage';
+import { sampleState, renderPage, ideaText, THEMES, PALETTES } from '../../data/bookingpage/model';
+import { serviceRows, hourRows } from '../../data/bookingpage/editor';
+import { getLocale, type LocaleCode } from '../../i18n';
+import '../../styles/bookingpage.css';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const info = getLocale(code);
+const lang = info.lang;
+const c = bookingCopy(code);
+const E = c.ed;
+const s = sampleState(c);
+const html = renderPage(c, s, lang);
+const loc = (info.slug || 'en').toLowerCase();
+const startHref = `https://app.equipe.im/start?${new URLSearchParams({ idea: ideaText(c, s, lang), utm_source: 'equipe.im', utm_medium: 'tool', utm_campaign: 'booking-page', utm_content: `booking-page.${loc}`, ref: 'booking-page' })}`;
+// Only the words the browser needs (not the FAQ or the page copy).
+const cfg = JSON.stringify({ code, lang, loc, c: { ed: c.ed, pv: c.pv, bp: c.bp, idea: c.idea, sample: c.sample } }).replace(/</g, '\\u003c');
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const plus = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+const link = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+const eye = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>';
+const free = c.live.free.split(' · ');
+---
+<div class="bp" data-bp>
+  <script type="application/json" data-bp-cfg set:html={cfg} />
+  <p class="bp-msg" role="status" aria-live="polite" data-msg hidden></p>
+  <div class="bp-grid">
+    <form class="bp-ed" data-ed novalidate>
+      <section class="bp-card" aria-labelledby="bp-h-biz">
+        <h2 id="bp-h-biz"><span class="n" aria-hidden="true">1</span>{E.business}</h2>
+        <div class="bp-f"><label for="bp-n">{E.name}</label><input id="bp-n" data-f="n" maxlength="60" value={s.n} placeholder={E.namePh} autocomplete="organization" /></div>
+        <div class="bp-f"><label for="bp-g">{E.tagline}</label><input id="bp-g" data-f="g" maxlength="120" value={s.g} placeholder={E.taglinePh} autocomplete="off" /></div>
+      </section>
+
+      <section class="bp-card" aria-labelledby="bp-h-svc">
+        <h2 id="bp-h-svc"><span class="n" aria-hidden="true">2</span>{E.services}</h2>
+        <ul class="bp-svcs" data-svcs set:html={serviceRows(c, s)} />
+        <div class="bp-row">
+          <button type="button" class="bp-add" data-add><Fragment set:html={plus} />{E.addService}</button>
+          <p class="bp-hint" data-svc-hint hidden></p>
+        </div>
+      </section>
+
+      <section class="bp-card" aria-labelledby="bp-h-hours">
+        <h2 id="bp-h-hours"><span class="n" aria-hidden="true">3</span>{E.hours}</h2>
+        <ul class="bp-days" data-days set:html={hourRows(c, s, lang)} />
+        <div class="bp-row"><button type="button" class="bp-add" data-same>{E.sameAs}</button></div>
+      </section>
+
+      <section class="bp-card" aria-labelledby="bp-h-ct">
+        <h2 id="bp-h-ct"><span class="n" aria-hidden="true">4</span>{E.contact}</h2>
+        <p class="bp-sub">{E.contactNote}</p>
+        <div class="bp-two">
+          <div class="bp-f"><label for="bp-ph">{E.phone}</label><input id="bp-ph" data-f="ph" type="tel" inputmode="tel" maxlength="32" autocomplete="off" /></div>
+          <div class="bp-f"><label for="bp-em">{E.email}</label><input id="bp-em" data-f="em" type="email" inputmode="email" maxlength="80" autocomplete="off" /></div>
+        </div>
+        <div class="bp-f"><label for="bp-ad">{E.address}</label><input id="bp-ad" data-f="ad" maxlength="140" placeholder={E.addressPh} autocomplete="off" /></div>
+      </section>
+
+      <section class="bp-card" aria-labelledby="bp-h-look">
+        <h2 id="bp-h-look"><span class="n" aria-hidden="true">5</span>{E.look}</h2>
+        <div class="bp-themes" role="radiogroup" aria-labelledby="bp-h-look">
+          {THEMES.map((t) => { const P = PALETTES[t]; return (
+            <button type="button" role="radio" class="bp-th" data-th={t} aria-checked={t === s.th ? 'true' : 'false'} tabindex={t === s.th ? 0 : -1}>
+              <span class="sw" style={`--a:${P.bg};--b:${P.accent};--c:${P.line}`} aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="tn">{E.themes[t]}</span>
+              <span class="tk" aria-hidden="true"><Fragment set:html={check} /></span>
+            </button>
+          ); })}
+        </div>
+      </section>
+    </form>
+
+    <div class="bp-side" id="bp-preview">
+      <div class="bp-pvbar">
+        <span class="bp-live-dot"><i aria-hidden="true"></i>{c.pv.label}</span>
+        <div class="bp-seg" role="radiogroup" aria-label={c.pv.label} data-dev>
+          <span class="pill" aria-hidden="true"></span>
+          <button type="button" role="radio" aria-checked="true" data-dev-v="phone">{c.pv.phone}</button>
+          <button type="button" role="radio" aria-checked="false" data-dev-v="desktop" tabindex="-1">{c.pv.desktop}</button>
+        </div>
+      </div>
+      <div class="bp-stage" data-stage data-device="phone">
+        <div class="bp-dev">
+          <iframe class="on" title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" srcdoc={html} data-frame></iframe>
+          <iframe title={c.pv.label} sandbox="allow-scripts" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" data-frame></iframe>
+        </div>
+      </div>
+      <div class="bp-share">
+        <button type="button" class="bp-sh" data-share><Fragment set:html={link} /><span data-share-l>{c.pv.share}</span></button>
+        <p class="bp-shn">{c.pv.shareNote}</p>
+      </div>
+      <div class="bp-live">
+        <h2>{c.live.title}</h2>
+        <p>{c.live.sub}</p>
+        <a class="btn primary lg bp-go" href={startHref} data-live data-ph="signup_cta_click" data-ph-location="booking-page">{c.live.btn}<Fragment set:html={arrow} /></a>
+        <span class="bp-free">{free.map((f) => <span>{f}</span>)}</span>
+        <p class="bp-priv">{c.live.privacy}</p>
+      </div>
+    </div>
+  </div>
+  <a class="bp-peek" href="#bp-preview" data-peek hidden><Fragment set:html={eye} />{c.pv.label}</a>
+  <div class="bp-pop" role="listbox" tabindex="-1" data-pop hidden></div>
+</div>
+
+<script>
+  import { initBookingPage } from '../../scripts/bookingpage';
+  initBookingPage();
+</script>
