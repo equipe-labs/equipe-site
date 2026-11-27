@@ -3,6 +3,7 @@ title: "equipe vs Lovable vs Bolt vs Base44: an honest comparison (Nov 2026)"
 description: "A dated, sourced comparison of equipe, Lovable, Bolt and Base44 for people who cannot code: prices, hosting, code export, security claims and who runs the product after launch."
 lang: en
 date: 2026-11-21
+updated: 2026-11-28
 tags: ["comparison", "lovable", "bolt", "base44"]
 imageAlt: "equipe vs Lovable vs Bolt vs Base44, an honest comparison — equipe blog"
 sources:
@@ -34,6 +35,8 @@ faqs:
   - q: "Is this comparison neutral?"
     a: "We make equipe, so no. We tried to be fair: every fact about another product comes from its official pages, with the date we read them, and we say where a page was unclear or could not be read."
 ---
+
+<p class="note"><strong>Comparing equipe with just one of them?</strong> See <a href="/vs/lovable/">Lovable vs equipe</a>, <a href="/vs/bolt/">Bolt vs equipe</a> and <a href="/vs/base44/">Base44 vs equipe</a>, or the alternatives pages for <a href="/alternatives/lovable/">Lovable</a>, <a href="/alternatives/bolt/">Bolt</a> and <a href="/alternatives/base44/">Base44</a>. This article puts all four in one place.</p>
 
 We make equipe, so you should read this comparison knowing we have a stake. To keep it useful, every fact about another product below comes from that company's own pages, read on **21 November 2026**, and where a page was unclear or would not load, we say so rather than guess. Prices and features change; check the linked pages before you decide.
 

@@ -87,9 +87,9 @@ export const FACTS: Record<ToolId, ToolFacts> = {
   'publish-html': { name: 'AI', project: false, checked: CHECKED, sources: [] },
 };
 
-/** The cloud's /import accepts these page names as `src` (equipe-cloud web/src/artifact-import.js SRC_RE); newer pages
- * send publish-html (neutral words on the import screen) and keep their own name in utm_content. */
+/** The cloud's /import accepts these page names as `src` (equipe-cloud web/src/artifact-import.js SRC_RE), so each page
+ * counts on its own in /admin/analytics; v0/Lovable/Cursor/Replit get the neutral (publish-html) words on the import screen. */
 export const IMPORT_SRC: Record<ToolId, ToolId> = {
   'from-claude': 'from-claude', 'from-chatgpt': 'from-chatgpt', 'from-gemini': 'from-gemini', 'publish-html': 'publish-html',
-  'from-v0': 'publish-html', 'from-lovable': 'publish-html', 'from-cursor': 'publish-html', 'from-replit': 'publish-html',
+  'from-v0': 'from-v0', 'from-lovable': 'from-lovable', 'from-cursor': 'from-cursor', 'from-replit': 'from-replit',
 };
