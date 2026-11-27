@@ -54,6 +54,7 @@ const data = {
 <script type="application/json" data-a-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
 
 <script>
+  import { internalRun } from '../lib/internal-run';
   import '../scripts/tl-stepper';
   type Json = Record<string, any>;
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
@@ -89,7 +90,8 @@ const data = {
     let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
     const loadTs = () => {
       if (tsLoad) return tsLoad;
-      tsLoad = new Promise<void>((res) => {
+      // Our own test runs (internal-run.ts): no widget at all.
+      tsLoad = internalRun().then((internal) => internal ? undefined : new Promise<void>((res) => {
         w.onEqTs = () => {
           try {
             tsId = w.turnstile!.render(tsBox, { sitekey: D.ts, theme: 'auto', size: 'flexible', appearance: 'interaction-only',
@@ -101,10 +103,11 @@ const data = {
         s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onEqTs&render=explicit';
         s.async = true; s.onerror = () => res();
         document.head.appendChild(s);
-      });
+      }));
       return tsLoad;
     };
     const token = async () => {
+      if (await internalRun()) return '';
       await Promise.race([loadTs(), new Promise((r) => setTimeout(r, 8000))]);
       if (!tsTok) await new Promise((r) => { tsWait = r; setTimeout(r, 15000); });
       tsWait = null;
