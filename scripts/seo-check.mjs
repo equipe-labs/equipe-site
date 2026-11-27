@@ -149,7 +149,7 @@ for (const { lang, path } of LOCALES) {
   const html = pages.get(CANONICAL + path);
   const src = html && meta(html, 'og:image')[0];
   const slug = path === '/' ? 'en' : path.replaceAll('/', '');
-  check(src === `${CANONICAL}/og/v3/${slug}.png`, `${path} og:image is its own language image (${src})`);
+  check(src === `${CANONICAL}/og/v4/${slug}.png`, `${path} og:image is its own language image (${src})`);
   if (!src) continue;
   check(meta(html, 'og:image:width')[0] === '1200' && meta(html, 'og:image:height')[0] === '630', `${path} og:image size meta 1200x630`);
   const res = await get(src);
@@ -254,7 +254,7 @@ section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Fa
       check(!meta(ph, 'robots').some((c) => /noindex/.test(c)), `${tag} indexable`);
       check(meta(ph, 'og:type')[0] === 'article', `${tag} og:type article`);
       const og = meta(ph, 'og:image')[0];
-      check(og === `${CANONICAL}/og/blog/v2/${lang}-${slug}.png`, `${tag} own og:image (${og})`);
+      check(og === `${CANONICAL}/og/blog/v3/${lang}-${slug}.png`, `${tag} own og:image (${og})`);
       if (og) {
         const img = await get(og);
         const buf = Buffer.from(await img.arrayBuffer());

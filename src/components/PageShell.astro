@@ -18,7 +18,7 @@ const info = getLocale(code);
 const t = getMessages(code);
 const url = new URL(subPath(info, page), Astro.site).href;
 ---
-<Base locale={code} title={title} description={description} image={image ?? `/og/v3/${info.slug || 'en'}.png`} imageAlt={imageAlt ?? t.meta.ogImageAlt} subpage={page} langs={langs} ogType={ogType}>
+<Base locale={code} title={title} description={description} image={image ?? `/og/v4/${info.slug || 'en'}.png`} imageAlt={imageAlt ?? t.meta.ogImageAlt} subpage={page} langs={langs} ogType={ogType}>
   <Fragment slot="head">
     <OrganizationJsonLd />
     <WebSiteJsonLd lang={info.lang} url={url} description={description} />

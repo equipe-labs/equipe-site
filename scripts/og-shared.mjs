@@ -1,5 +1,5 @@
-// The parts every equipe social image shares (scripts/og.mjs, scripts/og-blog.mjs; scripts/og-home.mjs draws the same
-// look): equipe blue with the soft glow from the home hero, the white logo, the system fonts and the Chrome renderer.
+// The parts every equipe social image shares (scripts/og-home.mjs, scripts/og.mjs, scripts/og-blog.mjs): the light and
+// dark looks, the logo, the role marks, the system fonts and the Chrome renderer.
 // Chrome draws at 2x and the result is scaled down to 1200x630, so text stays crisp at every preview size.
 import sharp from 'sharp';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
@@ -15,20 +15,28 @@ export const br = (s) => esc(s).replace(/\n/g, '<br>');
 export const CJK = (lang) => /^(ko|ja|zh)/.test(lang);
 export const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Apple SD Gothic Neo','Pretendard Variable','Hiragino Sans','PingFang SC',system-ui,sans-serif";
 
-// The dark wordmark (light letters), drawn all white on the blue.
-const WORDMARK_SRC = (await readFile('public/brand/wordmark-dark.svg', 'utf8')).replace(/<title>.*?<\/title>/, '').replace(/fill="#[0-9A-Fa-f]{6}"/g, 'fill="#FFFFFF"');
-export const wordmark = (h = 40) => WORDMARK_SRC.replace('<svg ', `<svg height="${h}" `);
-// The app mark on a white tile: dark "e", blue dot.
-export const mark = (s = 48) => `<svg viewBox="0 0 100 100" width="${s}" height="${s}" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#FFFFFF"/><path fill="#0D0D0D" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="${BLUE}"/></svg>`;
-export const logo = (s = 48, h = 40) => `<div class="brand">${mark(s)}${wordmark(h)}</div>`;
+// Two looks, the web app's own (equipe-cloud brand/COLOR.md, runtime/agent/theme.js): mostly white with equipe blue as
+// a small accent (the logo's dot, one chip or mark), and the dark version in soft charcoal. Social images use light
+// (link previews have no dark mode); dark is for surfaces that do, and for previews (THEME=dark).
+export const THEMES = {
+  light: { bg: '#FFFFFF', glow: '#2F5BEA12', ink: '#0D0D0D', text2: '#363636', mute: '#5D5D5D', line: '#0000001A', sunken: '#F4F4F4', chip: '#2F5BEA14', chipInk: '#2550D6', chipLine: '#2F5BEA33', winEdge: '#0000001A', shadow: '#15161A26' },
+  dark: { bg: '#17181C', glow: '#2F5BEA2E', ink: '#ECEAE4', text2: '#CBC9C4', mute: '#A6A8AE', line: '#FFFFFF1F', sunken: '#27282E', chip: '#2F5BEA3D', chipInk: '#97ADF4', chipLine: '#97ADF44D', winEdge: '#FFFFFF24', shadow: '#00000080' },
+};
+export const theme = (name = process.env.THEME) => THEMES[name === 'dark' ? 'dark' : 'light'];
+const WM = { light: await readFile('public/brand/wordmark.svg', 'utf8'), dark: await readFile('public/brand/wordmark-dark.svg', 'utf8') };
+/** The wordmark: dark letters (light theme) or light letters (dark theme), the blue dot in both. */
+export const wordmark = (h = 40, dark = false) => WM[dark ? 'dark' : 'light'].replace(/<title>.*?<\/title>/, '').replace('<svg ', `<svg height="${h}" `);
+const E = 'M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z';
+/** The app mark: the charcoal tile with the light "e" (light theme) or the light tile with the dark "e" (dark theme), blue dot. */
+export const mark = (s = 48, dark = false) => `<svg viewBox="0 0 100 100" width="${s}" height="${s}" aria-hidden="true"><rect width="100" height="100" rx="22" fill="${dark ? '#EFEDE7' : '#2A2B31'}"/><path fill="${dark ? '#0A0A0C' : '#EFEDE7'}" d="${E}"/><circle cx="70.5" cy="66.5" r="6.4" fill="${BLUE}"/></svg>`;
+export const logo = (dark = false, s = 48, h = 40) => `<div class="brand">${mark(s, dark)}${wordmark(h, dark)}</div>`;
 
-// The blue page: the brand blue, lighter where the glow sits (top right), deeper at the bottom left.
-export const BASE_CSS = `
+// The page: white (or charcoal) with a very soft blue glow in the top right corner.
+export const baseCss = (T) => `
   html, body { margin: 0; width: ${W}px; height: ${H}px; overflow: hidden; }
   * { box-sizing: border-box; }
-  body { font-family: ${SANS}; color: #FFFFFF; position: relative; -webkit-font-smoothing: antialiased; letter-spacing: -0.011em;
-    background: radial-gradient(120% 90% at 85% 0%, #4E74ED 0%, ${BLUE} 45%, #2550D6 100%); }
-  .glow { position: absolute; right: -180px; top: -220px; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, #FFFFFF2E, #FFFFFF00); pointer-events: none; }
+  body { font-family: ${SANS}; color: ${T.ink}; background: ${T.bg}; position: relative; -webkit-font-smoothing: antialiased; letter-spacing: -0.011em; }
+  .glow { position: absolute; right: -220px; top: -280px; width: 820px; height: 820px; border-radius: 50%; background: radial-gradient(closest-side, ${T.glow}, #2F5BEA00); pointer-events: none; }
   .brand { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 14px; }`;
 
 // The web app's role marks (equipe-cloud runtime/agent/brand-assets.js ROLE_GLYPHS): 24px line icons.

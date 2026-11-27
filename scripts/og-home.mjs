@@ -1,6 +1,6 @@
-// Export the home social image (1200x630 PNG, also the twitter:image) into public/og/v3/<slug>.png, one per language
+// Export the home social image (1200x630 PNG, also the twitter:image) into public/og/v4/<slug>.png, one per language
 // (English is `en`); every page without its own image uses it too. public/og.png is a copy of the English one.
-//   Left, on equipe blue: the logo, "Your AI startup team." and "Builds it. Grows it. No coding needed.", the roles.
+//   Left, on white with a very soft blue glow (equipe blue is the accent, not the ground): the logo, "Your AI startup team." and "Builds it. Grows it. No coding needed.", the roles.
 //   Right: the web app's team chat, bleeding off the edge: the progress strip (Plan, Make, Check, Live), the PM's reply
 //   and the plan card with each member's steps. The shop is Tidepool Ceramics, the live demo at tidepool.equipe.page;
 //   the words are an example and carry no numbers.
@@ -19,14 +19,14 @@ import { join, resolve } from 'node:path';
 import { LOCALES } from '../src/i18n/locales.ts';
 
 const W = 1200, H = 630, SCALE = 2;
-const DIR = 'public/og/v3';
+const DIR = 'public/og/v4';
 const BLUE = '#2F5BEA';
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const br = (s) => esc(s).replace(/\n/g, '<br>');
 const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Apple SD Gothic Neo','Pretendard Variable','Hiragino Sans','PingFang SC',system-ui,sans-serif";
 // The dark wordmark (light letters), drawn all white on the blue.
-const WORDMARK = (await readFile('public/brand/wordmark-dark.svg', 'utf8')).replace('<svg ', '<svg height="40" ').replace(/<title>.*?<\/title>/, '').replace(/fill="#[0-9A-Fa-f]{6}"/g, 'fill="#FFFFFF"');
-const MARK = `<svg viewBox="0 0 100 100" width="48" height="48" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#FFFFFF"/><path fill="#0D0D0D" d="M60.54 52.17C60.54 38.69 53.73 30.5 42.2 30.5C30.96 30.5 24.07 38.11 24.07 51.23C24.07 63.77 30.89 70.95 41.98 70.95C50.75 70.95 57.86 66.97 60.11 59.28H50.1C49.23 62.11 46.04 63.2 42.34 63.2C37.56 63.2 34.51 61.02 34.22 53.41H60.47ZM49.96 46.66H34.37C35.02 41.23 37.56 38.26 42.05 38.26C46.4 38.26 49.45 41.08 49.96 46.66Z"/><circle cx="70.5" cy="66.5" r="6.4" fill="${BLUE}"/></svg>`;
+import { THEMES, logo } from './og-shared.mjs';
+const T = THEMES.light;
 const GLYPHS = {
   pm: '<circle cx="12" cy="12" r="9.5"/><path d="m15.8 8.2-1.6 4.9a1.8 1.8 0 0 1-1.1 1.1l-4.9 1.6 1.6-4.9a1.8 1.8 0 0 1 1.1-1.1z"/>',
   engineer: '<rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/><path d="M6.5 6.2h.01M9.5 6.2h.01"/>',
@@ -58,14 +58,14 @@ function home(lang, m, c) {
   return `<html lang="${lang}"><head><meta charset="utf-8"><style>
   html, body { margin: 0; width: ${W}px; height: ${H}px; overflow: hidden; }
   * { box-sizing: border-box; }
-  body { font-family: ${SANS}; color: #FFFFFF; position: relative; -webkit-font-smoothing: antialiased; letter-spacing: -0.011em;
-    background: radial-gradient(120% 90% at 85% 0%, #4E74ED 0%, ${BLUE} 45%, #2550D6 100%); }
+  body { font-family: ${SANS}; color: ${T.ink}; position: relative; -webkit-font-smoothing: antialiased; letter-spacing: -0.011em; background: ${T.bg}; }
+  .glow { position: absolute; right: -220px; top: -280px; width: 820px; height: 820px; border-radius: 50%; background: radial-gradient(closest-side, ${T.glow}, #2F5BEA00); }
   .brand { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 14px; }
   .l { position: absolute; left: 72px; top: 170px; width: 470px; }
   h1 { margin: 0; font-size: 76px; line-height: ${cjk ? 1.14 : 1.0}; font-weight: 700; letter-spacing: ${cjk ? '-0.03em' : '-0.045em'}; word-break: ${lang === 'ja' ? 'auto-phrase' : 'keep-all'}; text-wrap: balance; }
-  .sub { margin: 26px 0 0; font-size: 28px; line-height: 1.32; color: #FFFFFFD9; font-weight: 500; letter-spacing: ${cjk ? '-0.01em' : '-0.015em'}; word-break: keep-all; }
-  .foot { position: absolute; left: 72px; bottom: 62px; width: 480px; font-size: 21px; font-weight: 600; color: #FFFFFFD9; letter-spacing: -0.01em; white-space: nowrap; }
-  .win { position: absolute; left: 590px; top: 76px; width: 680px; height: 640px; border-radius: 24px; background: #FFFFFF; color: #0D0D0D; box-shadow: 0 40px 90px -30px #0B1E6B99, 0 0 0 1px #FFFFFF33; overflow: hidden; }
+  .sub { margin: 26px 0 0; font-size: 28px; line-height: 1.32; color: ${T.mute}; font-weight: 500; letter-spacing: ${cjk ? '-0.01em' : '-0.015em'}; word-break: keep-all; }
+  .foot { position: absolute; left: 72px; bottom: 62px; width: 480px; font-size: 21px; font-weight: 500; color: ${T.mute}; letter-spacing: -0.01em; white-space: nowrap; }
+  .win { position: absolute; left: 590px; top: 76px; width: 680px; height: 640px; border-radius: 24px; background: #FFFFFF; color: #0D0D0D; box-shadow: 0 30px 80px -30px ${T.shadow}, 0 2px 10px #15161A10, 0 0 0 1px ${T.winEdge}; overflow: hidden; }
   .bar { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid #0000001A; }
   .tiles { display: flex; } .tiles .tile { width: 28px; height: 28px; margin-right: -4px; } .tiles .tile svg { width: 16px; height: 16px; }
   .bar b { margin-left: 16px; font-size: 18px; font-weight: 600; }
@@ -94,7 +94,8 @@ function home(lang, m, c) {
   .sp { border: 2px solid #2550D633; border-top-color: ${BLUE}; transform: rotate(30deg); }
   .ring { border: 1.6px solid #5D5D5D; }
   </style></head><body>
-  <div class="brand">${MARK}${WORDMARK}</div>
+  <div class="glow"></div>
+  ${logo(false)}
   <div class="l" id="l"><h1 id="h">${br(c.h)}</h1><p class="sub" id="s">${br(c.sub)}</p></div>
   <div class="foot" id="f">${roles}</div>
   <div class="win">
