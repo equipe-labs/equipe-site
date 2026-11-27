@@ -36,7 +36,7 @@ const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
     </div></section>
     <div class="wrap tl-end">
       {groups.map(({ g, items }) => (
-        <section class="tl-grp">
+        <div class="tl-grp">
           <h2>{H.groups[g]}</h2>
           <ul class="tl-grid">
             {items.map((t, i) => { const c = toolCopy(t, code); return (
@@ -45,7 +45,7 @@ const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
               </a></li>
             ); })}
           </ul>
-        </section>
+        </div>
       ))}
       <div class="tl-more">
         <h2>{H.more.title}</h2>
