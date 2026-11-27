@@ -213,7 +213,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
       cta: {
         title: '이 사업, equipe와 시작해 보세요',
         text: 'equipe는 PM, 디자이너, 엔지니어로 이뤄진 AI 팀이에요. 홈페이지를 만들고, 도메인과 이메일을 연결하고, 첫 손님을 모으는 일까지 도와드려요. 코딩은 필요 없어요.',
-        button: '{name}(으)로 시작하기',
+        button: '‘{name}’ 이름으로 시작하기',
         note: '이름과 아이디어가 미리 채워져요. 도메인은 원하실 때 앱에서 사면 돼요.',
         idea: '{name}: {about}{inPlace}',
         ideaDomain: '마음에 드는 도메인: {domain}',

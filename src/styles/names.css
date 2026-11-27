@@ -34,7 +34,7 @@ main.pg .nm-head h2 { margin: 0; font-size: clamp(26px, 3.2vw, 34px); letter-spa
 .nm-re.spin svg { animation: tl-spin 900ms linear infinite; }
 .nm-note { margin: 0 !important; }
 
-.nm-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.nm-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .nm-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 22px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); transition: border-color 200ms var(--e), box-shadow 260ms var(--e); }
 @media (hover: hover) { .nm-card:hover { border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); box-shadow: 0 1px 2px rgb(10 10 12 / 0.04), 0 18px 40px -30px rgb(10 10 12 / 0.3); } }
 .nm-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -77,6 +77,8 @@ html.mo .nm-logos .nm-logo.on + .nm-logo.on { transition-delay: 90ms; }
   .nm-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
+  .nm-rep .tl-share-row input { flex-basis: 100%; }
+  .nm-rep .tl-share-row .btn { white-space: nowrap; }
   .nm-spacer { display: none; }
   .nm-card { padding: 18px; }
   main.pg .nm-top h3 { font-size: 22px; }

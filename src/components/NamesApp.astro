@@ -116,7 +116,7 @@ const data = {
     const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
     let timer = 0;
     let cur: Json | null = null;
-    const money = (cents: number) => new Intl.NumberFormat(D.lang, { style: 'currency', currency: 'USD' }).format(cents / 100);
+    const money = (cents: number) => new Intl.NumberFormat(D.lang, { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(cents / 100);
 
     // Turnstile: loaded on the first touch, interaction-only (most people never see it). A token is good for one call.
     let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
@@ -165,12 +165,21 @@ const data = {
     };
     const logosHtml = (n: Json) => (n.logos || []).map((u: string, j: number) => `<figure class="nm-logo"><img src="${esc(u)}" alt="${esc(fill(R.logoAlt, { name: n.name }))} ${j + 1}" width="160" height="160" loading="lazy" decoding="async"></figure>`).join('');
 
+    // A logo fades in once its picture has loaded; one that fails to load is removed (never a broken image).
+    function revealLogos(root: Element) {
+      root.querySelectorAll<HTMLImageElement>('.nm-logo img').forEach((im) => {
+        const on = () => im.closest('figure')?.classList.add('on');
+        if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on); im.addEventListener('error', () => im.closest('figure')?.remove()); }
+      });
+    }
+    const shortPrice = (d: Json) => d.renewal_price_cents && d.renewal_price_cents !== d.price_cents ? `${money(d.price_cents)} · ${fill(R.renews, { renew: money(d.renewal_price_cents) })}` : money(d.price_cents);
+
     function card(g: Json, n: Json, i: number) {
       const pill = n.com === 'free' ? `<span class="tl-pill ok">${ic.check}${esc(R.available)}</span>`
         : n.com === 'taken' ? `<span class="tl-pill mute">${ic.x}${esc(R.comTaken)}</span>`
         : `<span class="tl-pill mute">${ic.dash}${esc(n.com === 'unknown' ? R.unknown : R.noneFree)}</span>`;
       const dom = n.domain ? `<p class="nm-dom"><b>${esc(n.domain.domain)}</b><span>${esc(priceLine(n.domain))}</span></p>` : (n.com === 'unknown' ? '' : `<p class="nm-dom nm-none">${esc(R.noneFree)}</p>`);
-      const more = (n.more || []).filter(Boolean).length ? `<p class="nm-more">${esc(R.more)} ${(n.more || []).filter(Boolean).map((d: Json) => `<span>${esc(d.domain)} <small>${esc(money(d.price_cents))}</small></span>`).join('')}</p>` : '';
+      const more = (n.more || []).filter(Boolean).length ? `<p class="nm-more">${esc(R.more)} ${(n.more || []).filter(Boolean).map((d: Json) => `<span>${esc(d.domain)} <small>${esc(shortPrice(d))}</small></span>`).join('')}</p>` : '';
       const logos = n.logos?.length ? `<div class="nm-logos">${logosHtml(n)}</div>` : '';
       const logoBtn = D.mode === 'tool' && !n.logos?.length ? `<button type="button" class="btn ghost nm-logo-btn" data-n-logo="${i}" data-ph="names_logo_click" data-ph-location="card">${ic.pen}<span>${esc(R.logo)}</span></button>` : '';
       return `<li class="nm-card tl-in" style="--d:${Math.min(i, 9) * 60}ms" data-i="${i}">
@@ -202,6 +211,7 @@ const data = {
         <div class="tl-share tl-in"><label for="n-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="n-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-n-copy data-ph="names_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button>${D.mode === 'tool' ? `<a class="btn ghost" href="${esc(D.base)}" data-n-again data-ph="names_again" data-ph-location="result">${esc(R.share.again)}</a>` : ''}</div></div>
       </div>`;
       rep.hidden = false;
+      revealLogos(out);
       const items = [...out.querySelectorAll<HTMLElement>('.tl-in')];
       if (reduce || !document.documentElement.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
       else items.forEach((x) => requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))));
@@ -235,7 +245,7 @@ const data = {
       }
       const n = cur.names[i]; n.logos = j.logos;
       slot.innerHTML = `<div class="nm-logos">${logosHtml(n)}</div><p class="nm-hint">${esc(R.logoNote)}</p>`;
-      slot.querySelectorAll('img').forEach((im) => { const on = () => im.closest('figure')?.classList.add('on'); if (im.complete) on(); else { im.addEventListener('load', on); im.addEventListener('error', () => im.closest('figure')?.remove()); } });
+      revealLogos(slot);
       btn.remove();
       own('ev', 'names_logo_made');
     }
