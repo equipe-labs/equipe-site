@@ -11,6 +11,7 @@ import { getLocale, getMessages, localePath, subPath, type LocaleCode } from '..
 import { BLOG_UI, blogLangFor, blogPath } from '../data/blog';
 import { DAY_ONE } from '../data/dayone';
 import { FROM_CLAUDE } from '../data/fromclaude';
+import { toolCopy } from '../data/aitool';
 import { aiCopy } from '../data/productai';
 import { MIGRATE } from '../data/migrate';
 import { hubCopy } from '../data/toolshub';
@@ -44,6 +45,7 @@ const bu = BLOG_UI[bl];
           <li><a href={`${home}#how-it-works`}>{t.nav.how}</a></li>
           <li><a href={subPath(info, 'day-one')}>{(DAY_ONE[code] ?? DAY_ONE.en).nav}</a></li>
           <li><a href={subPath(info, 'from-claude')}>{(FROM_CLAUDE[code] ?? FROM_CLAUDE.en).nav}</a></li>
+          <li><a href={subPath(info, 'publish-html')}>{toolCopy(code).pages['publish-html'].nav}</a></li>
           <li><a href={subPath(info, 'features/ai')}>{aiCopy(code).nav}</a></li>
           <li><a href={subPath(info, 'migrate')}>{(MIGRATE[code] ?? MIGRATE.en).nav}</a></li>
           <li><a href={subPath(info, 'tools')} data-ph="tools_hub_link" data-ph-location="footer">{hubCopy(code).nav}</a></li>
