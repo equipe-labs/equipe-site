@@ -80,7 +80,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: 'Three steps',
       items: [
-        { title: 'Copy the prompt', text: 'In Claude Code or Cursor, paste our prompt. It writes EQUIPE.md, a short note on what your project is and needs, and packs the code. From Lovable, Bolt, v0 or Replit, export a ZIP or push to GitHub instead.' },
+        { title: 'Copy the prompt', text: 'In Claude Code or Cursor, paste our prompt. It writes EQUIPE.md, a short note on what your project is and needs, and packs the code. From Lovable, Bolt or Replit, export a ZIP or push to GitHub instead; from v0, connect GitHub.' },
         { title: 'Paste the link or drop the ZIP', text: 'In equipe, choose Import a project. Paste the GitHub link, or drop the ZIP.' },
         { title: 'Your team takes it live', text: 'Your AI team imports the code as it is, adapts only what can’t run on Cloudflare Workers, tells you what and why, and puts it live.' },
       ],
@@ -169,7 +169,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: '세 단계면 돼요',
       items: [
-        { title: '프롬프트 복사하기', text: 'Claude Code나 Cursor에 프롬프트를 붙여 넣으세요. 프로젝트가 무엇이고 무엇이 필요한지 적은 EQUIPE.md를 쓰고 코드를 묶어 줘요. Lovable, Bolt, v0, Replit에서는 ZIP으로 내보내거나 GitHub에 올리면 돼요.' },
+        { title: '프롬프트 복사하기', text: 'Claude Code나 Cursor에 프롬프트를 붙여 넣으세요. 프로젝트가 무엇이고 무엇이 필요한지 적은 EQUIPE.md를 쓰고 코드를 묶어 줘요. Lovable, Bolt, Replit에서는 ZIP으로 내보내거나 GitHub에 올리면 되고, v0는 GitHub에 연결하면 돼요.' },
         { title: '링크 붙여 넣기 또는 ZIP 놓기', text: 'equipe에서 프로젝트 가져오기를 고르고, GitHub 링크를 붙여 넣거나 ZIP을 끌어다 놓으세요.' },
         { title: '팀이 서비스로 올려요', text: 'AI 팀이 코드를 그대로 가져오고, Cloudflare Workers에서 돌지 않는 부분만 고쳐요. 무엇을 왜 고쳤는지 알려 드리고 서비스로 올려요.' },
       ],
@@ -258,7 +258,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: '3 つのステップ',
       items: [
-        { title: 'プロンプトをコピー', text: 'Claude Code か Cursor にプロンプトを貼り付けます。プロジェクトの内容と必要なものをまとめた EQUIPE.md を書き、コードをまとめます。Lovable、Bolt、v0、Replit からは ZIP で書き出すか GitHub に push します。' },
+        { title: 'プロンプトをコピー', text: 'Claude Code か Cursor にプロンプトを貼り付けます。プロジェクトの内容と必要なものをまとめた EQUIPE.md を書き、コードをまとめます。Lovable、Bolt、Replit からは ZIP で書き出すか GitHub に push し、v0 からは GitHub に接続します。' },
         { title: 'リンクを貼るか ZIP を置く', text: 'equipe で「プロジェクトを取り込む」を選び、GitHub のリンクを貼り付けるか ZIP をドロップします。' },
         { title: 'チームが公開する', text: 'AI チームがコードをそのまま取り込み、Cloudflare Workers で動かない部分だけを調整します。何をなぜ変えたかを伝えてから公開します。' },
       ],
@@ -347,7 +347,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: '三个步骤',
       items: [
-        { title: '复制提示词', text: '在 Claude Code 或 Cursor 中粘贴我们的提示词。它会写一份 EQUIPE.md，简要说明项目是什么、需要什么，并打包代码。如果来自 Lovable、Bolt、v0 或 Replit，导出 ZIP 或推送到 GitHub 即可。' },
+        { title: '复制提示词', text: '在 Claude Code 或 Cursor 中粘贴我们的提示词。它会写一份 EQUIPE.md，简要说明项目是什么、需要什么，并打包代码。如果来自 Lovable、Bolt 或 Replit，导出 ZIP 或推送到 GitHub 即可；来自 v0 则连接 GitHub。' },
         { title: '粘贴链接或拖入 ZIP', text: '在 equipe 中选择“导入项目”，粘贴 GitHub 链接，或拖入 ZIP。' },
         { title: '团队让它上线', text: 'AI 团队原样导入代码，只调整无法在 Cloudflare Workers 上运行的部分，告诉你改了什么、为什么改，然后让它上线。' },
       ],
@@ -436,7 +436,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: 'Tres pasos',
       items: [
-        { title: 'Copia el prompt', text: 'En Claude Code o Cursor, pega nuestro prompt. Escribe EQUIPE.md, una nota breve sobre qué es tu proyecto y qué necesita, y empaqueta el código. Desde Lovable, Bolt, v0 o Replit, exporta un ZIP o súbelo a GitHub.' },
+        { title: 'Copia el prompt', text: 'En Claude Code o Cursor, pega nuestro prompt. Escribe EQUIPE.md, una nota breve sobre qué es tu proyecto y qué necesita, y empaqueta el código. Desde Lovable, Bolt o Replit, exporta un ZIP o súbelo a GitHub; desde v0, conecta GitHub.' },
         { title: 'Pega el enlace o suelta el ZIP', text: 'En equipe, elige Importar un proyecto. Pega el enlace de GitHub o suelta el ZIP.' },
         { title: 'Tu equipo lo publica', text: 'Tu equipo de IA importa el código tal cual, adapta solo lo que no puede ejecutarse en Cloudflare Workers, te cuenta qué cambió y por qué, y lo publica.' },
       ],
@@ -525,7 +525,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: 'Três passos',
       items: [
-        { title: 'Copie o prompt', text: 'No Claude Code ou no Cursor, cole nosso prompt. Ele escreve o EQUIPE.md, uma nota curta sobre o que é o projeto e do que ele precisa, e empacota o código. Vindo do Lovable, Bolt, v0 ou Replit, exporte um ZIP ou envie para o GitHub.' },
+        { title: 'Copie o prompt', text: 'No Claude Code ou no Cursor, cole nosso prompt. Ele escreve o EQUIPE.md, uma nota curta sobre o que é o projeto e do que ele precisa, e empacota o código. Vindo do Lovable, Bolt ou Replit, exporte um ZIP ou envie para o GitHub; vindo do v0, conecte o GitHub.' },
         { title: 'Cole o link ou solte o ZIP', text: 'Na equipe, escolha Importar um projeto. Cole o link do GitHub ou solte o ZIP.' },
         { title: 'Seu time coloca no ar', text: 'Seu time de IA importa o código como está, adapta só o que não roda no Cloudflare Workers, conta o que mudou e por quê, e coloca no ar.' },
       ],
@@ -614,7 +614,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: 'Drei Schritte',
       items: [
-        { title: 'Prompt kopieren', text: 'Füg unseren Prompt in Claude Code oder Cursor ein. Er schreibt EQUIPE.md, eine kurze Notiz dazu, was dein Projekt ist und braucht, und packt den Code. Aus Lovable, Bolt, v0 oder Replit exportierst du stattdessen ein ZIP oder pushst zu GitHub.' },
+        { title: 'Prompt kopieren', text: 'Füg unseren Prompt in Claude Code oder Cursor ein. Er schreibt EQUIPE.md, eine kurze Notiz dazu, was dein Projekt ist und braucht, und packt den Code. Aus Lovable, Bolt oder Replit exportierst du stattdessen ein ZIP oder pushst zu GitHub; aus v0 verbindest du GitHub.' },
         { title: 'Link einfügen oder ZIP ablegen', text: 'Wähl in equipe „Projekt importieren“. Füg den GitHub-Link ein oder leg das ZIP ab.' },
         { title: 'Dein Team bringt es live', text: 'Dein KI-Team importiert den Code unverändert, passt nur an, was nicht auf Cloudflare Workers läuft, sagt dir, was und warum, und bringt es live.' },
       ],
@@ -703,7 +703,7 @@ export const MIGRATE: Record<LocaleCode, MigrateCopy> = {
     steps: {
       title: 'Trois étapes',
       items: [
-        { title: 'Copiez le prompt', text: 'Dans Claude Code ou Cursor, collez notre prompt. Il rédige EQUIPE.md, une courte note sur ce qu’est votre projet et ce dont il a besoin, et emballe le code. Depuis Lovable, Bolt, v0 ou Replit, exportez plutôt un ZIP ou poussez sur GitHub.' },
+        { title: 'Copiez le prompt', text: 'Dans Claude Code ou Cursor, collez notre prompt. Il rédige EQUIPE.md, une courte note sur ce qu’est votre projet et ce dont il a besoin, et emballe le code. Depuis Lovable, Bolt ou Replit, exportez plutôt un ZIP ou poussez sur GitHub ; depuis v0, connectez GitHub.' },
         { title: 'Collez le lien ou déposez le ZIP', text: 'Dans equipe, choisissez Importer un projet. Collez le lien GitHub ou déposez le ZIP.' },
         { title: 'Votre équipe le met en ligne', text: 'Votre équipe IA importe le code tel quel, adapte seulement ce qui ne tourne pas sur Cloudflare Workers, vous dit quoi et pourquoi, puis le met en ligne.' },
       ],
