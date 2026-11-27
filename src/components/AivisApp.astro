@@ -1,10 +1,17 @@
 ---
-// "Does ChatGPT know my business?": the form (Turnstile loads on first use, interaction-only), the steps while the
-// assistants answer, and the result drawn from the platform's JSON. A shared result is /ai-visibility/?r=<id>.
-// ?url=<site> (from the website grader) fills the website field.
-// Events: PostHog aivis_run / aivis_result / aivis_error; the own funnel tool_run, tool_result and click:<data-ph>.
+// "Does ChatGPT know my business?": the form (Turnstile loads on first use, interaction-only), one loading step per assistant
+// while they answer, and the result drawn from the platform's JSON (cloud platform/src/free-aivis.js): the score with how it
+// works and the change since the last check, the questions with one row per assistant (logo, named / not sure / not named /
+// couldn't check, linked or not, the answer folded), the businesses recommended instead, the sites used, fixes tied to what
+// was found, sign-up with the business filled in, and weekly checks by email (double opt-in).
+// A shared result is /ai-visibility/?r=<id>; ?url=<site> (from the website grader) fills the website field; ?watch=on|off
+// comes back from the weekly-check emails.
+// Events: PostHog aivis_* (form_start, run, result, error, answer_open, watch_*, shared_view); the own funnel tool_run,
+// tool_result, ev:aivis_*, click:<data-ph>; feature steps start / done / error / shared_view.
 import { aivisCopy, aivisFixHref, AIVIS_API, TURNSTILE_SITE_KEY } from '../data/aivis';
+import { ASSISTANT_MARKS } from '../data/assistant-marks';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/aivis.css';
 
 interface Props { code: LocaleCode }
 const { code } = Astro.props;
@@ -12,17 +19,21 @@ const info = getLocale(code);
 const c = aivisCopy(code);
 const F = c.form;
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+// What the checker asks today (the platform's /config confirms it on load): ChatGPT and Claude.
+const DEFAULT_ASSISTANTS = [{ key: 'openai', label: 'ChatGPT' }, { key: 'anthropic', label: 'Claude' }];
 const data = {
   api: AIVIS_API, lang: info.lang, code, ts: TURNSTILE_SITE_KEY,
   base: subPath(info, 'ai-visibility'), grader: subPath(info, 'grader'),
   fixSite: aivisFixHref('__SITE__', '', '__PLACE__'), fixIdea: aivisFixHref(null, '__IDEA__', '__PLACE__'),
-  c: { result: c.result, fixes: c.fixes, form: c.form },
+  marks: ASSISTANT_MARKS, assistants: DEFAULT_ASSISTANTS,
+  c: { result: c.result, fixes: c.fixes, form: c.form, progress: c.progress },
 };
+const step = (s: string) => s;
 ---
 <section class="tl-hero"><div class="wrap">
   <h1>{c.page.h1}</h1>
   <p class="tl-lead">{c.page.lead}</p>
-  <form class="tl-form" novalidate data-a-form>
+  <form class="tl-form av-form" novalidate data-a-form>
     <div class="tl-fields">
       <div class="tl-field"><label for="a-name">{F.name}</label><input id="a-name" name="name" type="text" autocomplete="organization" maxlength="80" placeholder={F.namePh} required /></div>
       <div class="tl-field"><label for="a-place">{F.place}</label><input id="a-place" name="place" type="text" autocomplete="address-level2" maxlength="60" placeholder={F.placePh} /></div>
@@ -34,6 +45,7 @@ const data = {
       </div>
     </div>
     <p class="tl-err" role="alert" hidden data-a-err></p>
+    <div class="av-asks"><span>{c.result.asks}</span><ul data-a-asks>{DEFAULT_ASSISTANTS.map((a) => <li><Fragment set:html={ASSISTANT_MARKS[a.key]} />{a.label}</li>)}</ul></div>
     <p class="tl-note">{F.note}</p>
   </form>
 </div></section>
@@ -41,8 +53,10 @@ const data = {
 <section class="tl-run" hidden data-a-run aria-live="polite">
   <div class="wrap">
     <div class="tl-stepper">
-      <ol class="tl-steps">
-        {c.progress.map((s) => <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
+      <ol class="tl-steps" data-a-steps>
+        <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{c.progress.write}</span></li>
+        {DEFAULT_ASSISTANTS.map((a) => <li data-step-ask><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{step(c.progress.ask.replace('{assistant}', a.label))}</span></li>)}
+        <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{c.progress.read}</span></li>
       </ol>
       <p class="tl-eta"><span>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
     </div>
@@ -61,14 +75,19 @@ const data = {
   const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
   const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
-  const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
+  const fill = (s: string, v: Json) => String(s).replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ic = {
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
     x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>',
     dash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12h10"/></svg>',
+    q: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>',
+    link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
+    up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14l5-5 5 5"/></svg>',
+    down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
     copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
   };
   const el = document.querySelector<HTMLScriptElement>('[data-a-data]');
   const D = (el ? JSON.parse(el.textContent || '{}') : null) as Json;
@@ -77,13 +96,31 @@ const data = {
   const rep = document.querySelector<HTMLElement>('[data-a-report]')!;
   const out = document.querySelector<HTMLElement>('[data-a-out]')!;
   if (D && form && run && rep && out) {
-    const C = D.c, R = C.result, FM = C.form;
+    const C = D.c, R = C.result, FM = C.form, P = C.progress;
+    const mark = (k: string) => D.marks[k] || '';
     const f = (n: string) => form.querySelector<HTMLInputElement>(`[name="${n}"]`)!;
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const err = form.querySelector<HTMLElement>('[data-a-err]')!;
     const tsBox = form.querySelector<HTMLElement>('[data-a-ts]')!;
-    const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
+    const stepsEl = run.querySelector<HTMLElement>('[data-a-steps]')!;
+    let assistants: Json[] = D.assistants;
     let timer = 0;
+
+    // Which assistants the platform asks today: the "We ask" row and one loading step each.
+    const setAssistants = (list: Json[]) => {
+      if (!list?.length) return;
+      assistants = list;
+      const asks = form.querySelector<HTMLElement>('[data-a-asks]');
+      if (asks) asks.innerHTML = list.map((a) => `<li>${mark(a.key)}${esc(a.label)}</li>`).join('');
+      stepsEl.querySelectorAll('[data-step-ask]').forEach((x) => x.remove());
+      const last = stepsEl.lastElementChild!;
+      for (const a of list) {
+        const li = document.createElement('li'); li.setAttribute('data-step-ask', '');
+        li.innerHTML = `<span class="d" aria-hidden="true">${ic.check}</span><span>${esc(fill(P.ask, { assistant: a.label }))}</span>`;
+        stepsEl.insertBefore(li, last);
+      }
+    };
+    fetch(`${D.api}/config`).then((r) => (r.ok ? r.json() : null)).then((cfg) => { if (cfg) setAssistants(cfg.assistants); }).catch(() => {});
 
     // Turnstile: loaded on the first touch of the form, rendered interaction-only (most people never see it).
     let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
@@ -110,40 +147,89 @@ const data = {
       tsWait = null;
       return tsTok;
     };
-    form.addEventListener('focusin', () => { loadTs(); }, { once: true });
+    form.addEventListener('focusin', () => { loadTs(); own('ev', 'aivis_form_start'); track('aivis_form_start'); }, { once: true });
 
     const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
     const urlish = (v: string) => /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(:\d+)?(\/\S*)?$/i.test(v.trim());
-    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
-    const startSteps = () => { run.hidden = false; stepTo(0); let i = 0; const at = [2500, 10000, 12000]; const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 8000); }; timer = window.setTimeout(next, at[0]); };
-    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const steps = () => [...stepsEl.querySelectorAll<HTMLLIElement>('li')];
+    const stepTo = (i: number) => steps().forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
+    // The assistants answer together; the steps walk through them at about the pace they answer (roughly 20 seconds).
+    const startSteps = () => {
+      run.hidden = false; stepTo(0); let i = 0; const n = steps().length;
+      const next = () => { if (i >= n - 1) return; i++; stepTo(i); timer = window.setTimeout(next, i === 1 ? 6000 : 5500); };
+      timer = window.setTimeout(next, 1800);
+    };
+    const stopSteps = () => { clearTimeout(timer); stepTo(steps().length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
     const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
+    const shortDate = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { month: 'short', day: 'numeric' });
     const band = (s: number) => (s >= 80 ? R.bands.great : s >= 50 ? R.bands.good : s >= 20 ? R.bands.fair : R.bands.poor);
+    const list = (xs: string[]) => { try { return new Intl.ListFormat(D.lang, { style: 'long', type: 'conjunction' }).format(xs); } catch { return xs.join(', '); } };
+    const STATUS: Json = { named: ['ok', ic.check], ambiguous: ['mid', ic.q], not_named: ['no', ic.x], unchecked: ['mute', ic.dash] };
+
+    function fixText(x: Json, g: Json) {
+      const t = C.fixes[x.key];
+      if (!t) return null;
+      const v = { name: g.name, place: g.place || '', category: g.category || '', bots: list(x.bots || []), words: x.words };
+      let text = fill(t.text, v);
+      if (x.names?.length) text += ` ${fill(R.fixExtra.names, { names: list(x.names) })}`;
+      if (x.hosts?.length && (x.key === 'reviews' || x.key === 'not_cited')) text += ` ${fill(R.fixExtra.hosts, { hosts: list(x.hosts) })}`;
+      if (x.key === 'no_site' && x.yours) text += ` ${fill(R.fixExtra.yours, { host: x.yours })}`;
+      return { title: fill(t.title, v).replace(/\s+([?.!])/g, '$1').replace(/\s{2,}/g, ' '), text, quote: x.key === 'ambiguous' && x.quote ? fill(R.fixExtra.quote, { quote: x.quote }) : '' };
+    }
+
+    function answerRow(a: Json, g: Json, k: number) {
+      const st = a.status || (a.error ? 'unchecked' : a.mentioned ? 'named' : 'not_named');
+      const [cls, icon] = STATUS[st] || STATUS.unchecked;
+      const pill = `<span class="tl-pill av-${cls}">${icon}${esc(R.status[st])}</span>`;
+      const link = st === 'unchecked' ? '' : !g.url ? `<span class="tl-pill mute">${ic.dash}${esc(R.noSite)}</span>` : a.cited ? `<span class="tl-pill ok">${ic.link}${esc(R.cited)}</span>` : `<span class="tl-pill mute">${ic.dash}${esc(R.notCited)}</span>`;
+      const head = `<div class="av-who">${mark(a.provider)}<b>${esc(a.label)}</b></div><div class="av-pills">${pill}${link}</div>`;
+      if (st === 'unchecked') return `<div class="av-row is-unchecked">${head}<p class="av-note">${esc(R.uncheckedNote)}</p></div>`;
+      const places = (a.named || []).length ? `<div class="av-chips"><span>${esc(R.placesLabel)}</span><ul>${a.named.map((n: string) => `<li>${esc(n)}</li>`).join('')}</ul></div>` : '';
+      const srcs = (a.sources || []).length ? `<div class="av-chips"><span>${esc(R.sourcesLabel)}</span><ul>${a.sources.map((h: string) => `<li>${esc(h)}</li>`).join('')}</ul></div>` : '';
+      const full = a.text && a.text.length > (a.excerpt || '').length + 20;
+      return `<div class="av-row">${head}${a.excerpt ? `<blockquote class="av-quote">${esc(a.excerpt)}</blockquote>` : ''}${full || places || srcs ? `<details class="av-more" data-provider="${esc(a.provider)}"><summary><span class="o">${esc(R.showAnswer)}</span><span class="c">${esc(R.hideAnswer)}</span></summary><div class="av-more-b">${full ? `<p class="av-full">${esc(a.text)}</p>` : ''}${places}${srcs}</div></details>` : ''}</div>`;
+    }
 
     function draw(g: Json) {
       const score = typeof g.score === 'number' ? g.score : null;
       const r = 70, circ = 2 * Math.PI * r, trk = circ * 0.94;
-      const answers = (g.answers || []).map((a: Json, i: number) => {
-        if (a.error) return `<li class="tl-in" style="--d:${i * 70}ms"><p class="q">${esc(a.question)}</p><span class="who">${esc(fill(R.asked, { assistant: a.label }))}</span><p class="tl-cached">${esc(R.error)}</p></li>`;
-        const p1 = a.mentioned ? `<span class="tl-pill ok">${ic.check}${esc(R.mentioned)}</span>` : `<span class="tl-pill no">${ic.x}${esc(R.notMentioned)}</span>`;
-        const p2 = !g.url ? `<span class="tl-pill mute">${ic.dash}${esc(R.noSite)}</span>` : a.cited ? `<span class="tl-pill ok">${ic.check}${esc(R.cited)}</span>` : `<span class="tl-pill mute">${ic.dash}${esc(R.notCited)}</span>`;
-        return `<li class="tl-in" style="--d:${i * 70}ms"><p class="q">${esc(a.question)}</p><span class="who">${esc(fill(R.asked, { assistant: a.label }))}</span><div class="pills">${p1}${p2}</div>${a.excerpt ? `<blockquote><span>${esc(R.quote)}</span>${esc(a.excerpt)}</blockquote>` : ''}</li>`;
-      }).join('');
-      const hosts = (g.cited_instead || []).map((h: Json) => `<li title="${esc(h.host)}">${esc(h.host)} <small>×${h.n}</small></li>`).join('');
-      const fixes = (g.fixes || []).map((x: Json) => { const t = C.fixes[x.key]; if (!t) return null; const v = { bots: (x.bots || []).join(', '), words: x.words }; return { title: fill(t.title, v), text: fill(t.text, v) }; }).filter(Boolean).slice(0, 5) as Json[];
-      const inPlace = g.place ? ` (${g.place})` : '';
-      const idea = fill(R.cta.idea, { name: g.name, inPlace });
+      const checked = g.checked ?? g.asked ?? 0, named = g.named ?? g.mentioned ?? 0, unchecked = g.unchecked ?? 0;
+      // Group the answers by question: one card per question, one row per assistant.
+      const groups: Json[] = [];
+      (g.answers || []).forEach((a: Json, k: number) => { let x = groups.find((y) => y.q === a.question); if (!x) { x = { q: a.question, rows: [] }; groups.push(x); } x.rows.push(answerRow(a, g, k)); });
+      const qs = groups.map((x, i) => `<li class="av-q tl-in" style="--d:${i * 70}ms"><p class="av-qt">${esc(x.q)}</p><div class="av-rows">${x.rows.join('')}</div></li>`).join('');
+      const instead = (g.named_instead || []).slice(0, 8).map((x: Json) => `<li><b>${esc(x.name)}</b>${x.n > 1 ? `<small>×${x.n}</small>` : ''}</li>`).join('');
+      const hosts = (g.cited_instead || []).map((h: Json) => `<li title="${esc(h.host)}">${esc(h.host)}${h.n > 1 ? `<small>×${h.n}</small>` : ''}</li>`).join('');
+      const fixes = (g.fixes || []).map((x: Json) => fixText(x, g)).filter(Boolean).slice(0, 5) as Json[];
+      const prev = g.previous && typeof g.previous.score === 'number' && score != null ? g.previous : null;
+      const delta = prev ? score! - prev.score : 0;
+      const prevChip = prev ? `<span class="av-delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta > 0 ? ic.up : delta < 0 ? ic.down : ''}${esc(fill(delta > 0 ? R.prev.up : delta < 0 ? R.prev.down : R.prev.same, { d: Math.abs(delta), date: shortDate(prev.created_at), prev: prev.score }))}</span>` : '';
+      const idea = fill(R.cta.idea, { name: g.name, inPlace: g.place ? ` (${g.category ? `${g.category}, ` : ''}${g.place})` : '' });
       const fix = g.url ? String(D.fixSite).replace('__SITE__', encodeURIComponent(g.url)).replace('__PLACE__', 'result') : String(D.fixIdea).replace('__IDEA__', encodeURIComponent(idea)).replace('__PLACE__', 'result');
       const link = new URL(`${D.base}?r=${g.id}`, location.origin).href;
-      out.innerHTML = `<div class="tl-rep">
-        <div class="tl-card tl-top tl-in">
+      const watchState = new URLSearchParams(location.search).get('watch');
+      out.innerHTML = `<div class="tl-rep av-rep">
+        ${watchState === 'on' || watchState === 'off' ? `<p class="av-banner" role="status">${ic.mail}${esc(watchState === 'on' ? R.watch.on : R.watch.off)}</p>` : ''}
+        <div class="tl-card tl-top av-top tl-in">
           <div class="tl-g" role="img" aria-label="${esc(R.score)}: ${score ?? '–'}/100"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="tr" cx="80" cy="80" r="${r}" stroke-dasharray="${trk} ${circ}"/><circle class="val" cx="80" cy="80" r="${r}" stroke-dasharray="0 ${circ}" data-to="${score == null ? 0 : (trk * score) / 100}" data-c="${circ}"/></svg><div class="num"><b data-count="${score ?? ''}">${score == null ? '–' : reduce ? score : 0}</b><span>${esc(R.score)}</span></div></div>
-          <div><p class="tl-host">${esc(fill(R.heading, { name: g.name }))}</p><h2>${esc(score == null ? R.error : band(score))}</h2><p class="tl-date">${esc(fill(R.summary, { mentioned: g.mentioned ?? 0, asked: g.asked ?? 0 }))} ${esc(fill(R.checked, { date: dateOf(g.created_at) }))}</p>${g.cached ? `<p class="tl-cached">${esc(R.cachedNote)}</p>` : ''}</div>
+          <div class="av-top-t">
+            <p class="tl-host">${esc(fill(R.heading, { name: g.name }))}</p>
+            <h2>${esc(score == null ? R.error : band(score))}</h2>
+            <p class="av-sum">${esc(fill(R.summaryChecked, { named, checked }))}${unchecked ? ` <span>${esc(fill(R.summaryUnchecked, { n: unchecked }))}</span>` : ''}</p>
+            <div class="av-meta">${prevChip}<span class="tl-date">${esc(fill(R.checked, { date: dateOf(g.created_at) }))}</span></div>
+            ${g.cached ? `<p class="tl-cached">${esc(R.cachedNote)}</p>` : ''}
+            <details class="av-how"><summary>${esc(R.scoreHow.title)}</summary><p>${esc(R.scoreHow.text)}</p></details>
+          </div>
         </div>
-        <div><h3 class="tl-h">${esc(R.answersTitle)}</h3><p class="tl-sub">${esc(R.answersSub)}</p><ul class="tl-ans">${answers}</ul></div>
-        ${hosts ? `<div><h3 class="tl-h">${esc(R.instead)}</h3><p class="tl-sub">${esc(R.insteadSub)}</p><ul class="tl-hosts">${hosts}</ul></div>` : ''}
-        <div><h3 class="tl-h">${esc(R.fixesTitle)}</h3><ol class="tl-fixes">${fixes.map((x, i) => `<li class="tl-in" style="--d:${i * 70}ms"><span class="n">${i + 1}</span><div><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p></div></li>`).join('')}</ol></div>
+        <div><h3 class="tl-h">${esc(R.answersTitle)}</h3><p class="tl-sub">${esc(R.answersSub)}</p><ol class="av-qs">${qs}</ol></div>
+        ${instead ? `<div class="tl-in"><h3 class="tl-h">${esc(R.namedInstead)}</h3><p class="tl-sub">${esc(R.namedInsteadSub)}</p><ul class="av-names">${instead}</ul></div>` : ''}
+        ${hosts ? `<div class="tl-in"><h3 class="tl-h">${esc(R.instead)}</h3><p class="tl-sub">${esc(R.insteadSub)}</p><ul class="tl-hosts">${hosts}</ul></div>` : ''}
+        <div><h3 class="tl-h">${esc(R.fixesTitle)}</h3><ol class="tl-fixes">${fixes.map((x, i) => `<li class="tl-in" style="--d:${i * 70}ms"><span class="n">${i + 1}</span><div><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p>${x.quote ? `<p class="av-fq">${esc(x.quote)}</p>` : ''}</div></li>`).join('')}</ol></div>
         <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(fix)}" data-ph="aivis_fix_click" data-ph-location="result">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
+        ${g.v ? `<form class="tl-card av-watch tl-in" novalidate data-a-watch><div class="av-watch-h"><span class="av-wi">${ic.mail}</span><div><h3>${esc(R.watch.title)}</h3><p>${esc(R.watch.text)}</p></div></div>
+          <div class="av-watch-f"><label class="sr-only" for="a-watch-email">${esc(R.watch.email)}</label><input id="a-watch-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="${esc(R.watch.emailPh)}" required><button class="btn primary" type="submit" data-ph="aivis_watch_submit" data-ph-location="result">${esc(R.watch.button)}</button></div>
+          <label class="av-consent"><input type="checkbox" name="consent"><span class="av-box" aria-hidden="true">${ic.check}</span><span>${esc(R.watch.consent)}</span></label>
+          <p class="av-watch-msg" role="status" hidden data-a-watch-msg></p></form>` : ''}
         <div class="tl-share tl-in"><label for="a-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="a-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-a-copy data-ph="aivis_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-a-again data-ph="aivis_again" data-ph-location="result">${esc(R.share.again)}</a></div></div>
         <div class="tl-card tl-cross"><div><h3>${esc(R.grader.title)}</h3><p>${esc(R.grader.text)}</p></div><a class="btn ghost" href="${esc(D.grader)}${g.url ? `?url=${encodeURIComponent(g.url)}` : ''}" data-ph="grader_link_click" data-ph-location="aivis">${esc(R.grader.link)}${ic.arrow}</a></div>
       </div>`;
@@ -160,12 +246,30 @@ const data = {
           const t0 = performance.now(); const tick = (t: number) => { const p = Math.min(1, (t - t0) / 1200); num.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick);
         }
       }
+      out.querySelectorAll<HTMLDetailsElement>('details.av-more').forEach((d) => d.addEventListener('toggle', () => { if (d.open) { track('aivis_answer_open', { provider: d.dataset.provider }); own('ev', `aivis_answer_open:${d.dataset.provider}`); } }));
+      out.querySelector<HTMLDetailsElement>('details.av-how')?.addEventListener('toggle', (e) => { if ((e.target as HTMLDetailsElement).open) { track('aivis_score_how'); own('ev', 'aivis_score_how'); } });
       const cb = out.querySelector<HTMLButtonElement>('[data-a-copy]');
       cb?.addEventListener('click', async () => {
         const i = out.querySelector<HTMLInputElement>('#a-share')!; let ok = false;
         try { await navigator.clipboard.writeText(i.value); ok = true; } catch { i.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
         if (!ok) return; const lab = cb.querySelector('span')!; cb.classList.add('done'); lab.textContent = R.share.copied;
         setTimeout(() => { cb.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
+      });
+      const wf = out.querySelector<HTMLFormElement>('[data-a-watch]');
+      wf?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = wf.querySelector<HTMLElement>('[data-a-watch-msg]')!, email = wf.querySelector<HTMLInputElement>('[name="email"]')!, consent = wf.querySelector<HTMLInputElement>('[name="consent"]')!, b = wf.querySelector<HTMLButtonElement>('button')!;
+        const show = (m: string, bad = false) => { msg.textContent = m; msg.hidden = false; msg.classList.toggle('bad', bad); };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) { show(R.watch.errEmail, true); email.focus(); return; }
+        if (!consent.checked) { show(R.watch.errConsent, true); consent.focus(); return; }
+        b.disabled = true; track('aivis_watch_submit'); own('ev', 'aivis_watch_submit');
+        let d: Json | null = null, res: Response | null = null;
+        try { res = await fetch(`${D.api}/watch`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id: g.id, email: email.value.trim(), consent: true }) }); d = await res.json().catch(() => null); } catch { /* below */ }
+        b.disabled = false;
+        if (res?.ok && d?.ok) { show(d.already ? R.watch.already : R.watch.sent); wf.classList.add('is-done'); track('aivis_watch_ok'); own('ev', 'aivis_watch_ok'); return; }
+        const e2 = d?.error;
+        show(e2 === 'email' ? R.watch.errEmail : e2 === 'consent' ? R.watch.errConsent : e2 === 'rate' ? R.watch.errRate : e2 === 'full' ? R.watch.errFull : R.watch.errMail, true);
+        track('aivis_watch_error', { error: e2 || 'network' });
       });
     }
 
@@ -177,13 +281,13 @@ const data = {
       if (url && !urlish(url)) { say(FM.errUrl); f('url').setAttribute('aria-invalid', 'true'); f('url').focus(); return; }
       if (!url && !(place && category)) { say(FM.errMore); (place ? f('category') : f('place')).focus(); return; }
       btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-      own('fn', 'tool_run'); ft('start'); track('aivis_run', { has_url: !!url, has_place: !!place, has_category: !!category });
+      own('fn', 'tool_run'); ft('start'); track('aivis_run', { has_url: !!url, has_place: !!place, has_category: !!category, assistants: assistants.length });
       const tok = await token();
       rep.hidden = true; startSteps();
       run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
       let res: Response | null = null, g: Json | null = null;
       try {
-        res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, place, category, url, lang: D.code, token: tok }), signal: AbortSignal.timeout(120000) });
+        res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, place, category, url, lang: D.code, token: tok }), signal: AbortSignal.timeout(150000) });
         g = await res.json().catch(() => null);
       } catch { /* below */ }
       stopSteps();
@@ -191,12 +295,12 @@ const data = {
       try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';
       if (!res || !res.ok || !g || !g.id) {
         const e = g?.error;
-        const m = e === 'name' ? FM.errName : e === 'more' ? FM.errMore : e === 'bad_url' ? FM.errUrl : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
-        ft('error'); track('aivis_error', { error: e || (res ? `http_${res.status}` : 'network') });
+        const m = e === 'name' ? FM.errName : e === 'more' ? FM.errMore : e === 'bad_url' ? FM.errUrl : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : e === 'search_failed' ? FM.errSearch : FM.errFailed;
+        ft('error'); own('ev', `aivis_error:${e || 'network'}`); track('aivis_error', { error: e || (res ? `http_${res.status}` : 'network') });
         say(m); return;
       }
-      own('fn', 'tool_result'); ft('done'); own('ev', 'aivis_named', `${g.mentioned ?? 0}/${g.asked ?? 0}`);
-      track('aivis_result', { score: g.score, mentioned: g.mentioned, asked: g.asked, cited: g.cited, cached: !!g.cached });
+      own('fn', 'tool_result'); ft('done'); own('ev', 'aivis_named', `${g.named ?? g.mentioned ?? 0}/${g.checked ?? g.asked ?? 0}`);
+      track('aivis_result', { score: g.score, named: g.named, checked: g.checked, unchecked: g.unchecked, ambiguous: g.ambiguous, cited: g.cited, cached: !!g.cached, rechecked: !!g.previous });
       draw(g);
       try { history.replaceState(null, '', `${D.base}?r=${g.id}`); } catch { /* fine */ }
       setTimeout(() => { rep.focus({ preventScroll: true }); rep.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
@@ -216,7 +320,8 @@ const data = {
       out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
       fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
         if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
-        ft('shared_view'); track('aivis_shared_view', { score: g.score }); draw(g);
+        ft('shared_view'); track('aivis_shared_view', { score: g.score, watch: q.get('watch') || '' }); draw(g);
+        if (q.get('watch')) { own('ev', `aivis_watch_${q.get('watch')}`); setTimeout(() => rep.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }), 200); }
       }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
     }
   }
