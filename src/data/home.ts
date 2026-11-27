@@ -235,3 +235,46 @@ export const USUAL_COSTS: Record<LocaleCode, { title: string; sub: string; items
   de: { title: 'Was es meistens kostet', sub: 'Echte Beispiele von Kundenteams, November 2026.', items: [['Eine erste Version, live unter eigener Adresse', 'etwa $7', 'Median echter Teams, meist unter $15. Deine erste Version übernehmen wir.'], ['Eine neue Funktion auf einer laufenden Website', 'etwa $12,50', 'Ein echtes Beispiel: Spieler-Anmeldung und Buchungen.'], ['Online halten, ohne neue Arbeit', '$19 im Monat', 'Der Team-Plan mit 0 monatlichen Credits: Hosting, Speicher und 5 Personen.']], note: 'Jede Anfrage zeigt vorher ihre Schätzung, und du kannst ein Monatslimit setzen.' },
   fr: { title: 'Ce que ça coûte d’habitude', sub: 'Exemples réels d’équipes clientes, novembre 2026.', items: [['Une première version, en ligne à sa propre adresse', 'environ 7 $', 'Médiane d’équipes réelles, presque toujours sous 15 $. Votre première version est offerte.'], ['Une nouvelle fonction sur un site en ligne', 'environ 12,50 $', 'Un exemple réel : inscription des joueurs et réservations.'], ['Garder le site en ligne, sans nouveau travail', '19 $ par mois', 'L’offre Team avec 0 crédit mensuel : hébergement, stockage et 5 personnes.']], note: 'Chaque demande affiche son estimation avant de commencer, et vous pouvez fixer un plafond mensuel.' },
 };
+
+/**
+ * The demo video's captions, drawn over the video in the page's language (the video itself carries no words).
+ * Times are the video's own (seconds), from equipe-launch/marketing/demo-video-x/source/timeline.js (CAPS and the end card).
+ * The same lines are written to public/video/captions-<code>.vtt for full screen and screen readers.
+ */
+export const DEMO_CAP_TIMES: [number, number][] = [[0.25, 5.55], [5.85, 10.45], [10.75, 15.3], [15.5, 20.75], [21.0, 28.95], [29.2, 33.4], [33.6, 37.35]];
+/** End card: the title, the line under it and the address fade in one after another from these times, until the end. */
+export const DEMO_END_TIMES = [38.3, 38.65, 39.1] as const;
+export const DEMO_CAPS: Record<LocaleCode, { caps: [string, string][]; end: [string, string] }> = {
+  en: {
+    caps: [['Tell your team what you want.', 'In your own words.'], ['Your PM turns it into a plan.', 'Who does what, step by step.'], ['Your team builds it.', 'Designer, engineers and QA, working together.'], ['Live, at your own address.', 'Pick a domain. Your team sets it up.'], ['Sign-in, payments, admin.', 'One request each.'], ['A brand kit, logo included.', 'Colors, type and voice, ready to use.'], ['Then it helps you grow.', 'Visitors, sign-ups and tests your team runs.']],
+    end: ['Your AI startup team.', 'No coding needed.'],
+  },
+  ko: {
+    caps: [['팀에게 원하는 걸 말하세요.', '평소 쓰는 말로요.'], ['PM이 계획으로 바꿔요.', '누가 무엇을 할지, 단계별로요.'], ['팀이 만들어요.', '디자이너, 엔지니어, QA가 함께요.'], ['내 주소로 공개돼요.', '도메인만 고르면 팀이 연결해요.'], ['로그인, 결제, 관리자 페이지.', '각각 한 번만 부탁하면 돼요.'], ['로고까지 담긴 브랜드 키트.', '색, 글꼴, 말투를 바로 쓸 수 있어요.'], ['그다음엔 성장을 도와요.', '방문자, 가입, 팀이 돌리는 실험까지.']],
+    end: ['나만의 AI 스타트업 팀.', '코딩은 필요 없어요.'],
+  },
+  ja: {
+    caps: [['チームにやりたいことを伝える。', 'ふだんの言葉で。'], ['PM が計画にまとめる。', '誰が何をするか、ステップごとに。'], ['チームが作る。', 'デザイナー、エンジニア、QA が一緒に。'], ['自分のアドレスで公開。', 'ドメインを選べば、チームが設定します。'], ['ログイン、決済、管理画面。', 'どれもひと言頼むだけ。'], ['ロゴ入りのブランドキット。', '色、書体、トーンをすぐに使えます。'], ['そして、成長を手伝う。', '訪問者、登録、チームが回すテストまで。']],
+    end: ['あなたの AI スタートアップチーム。', 'コーディングは不要です。'],
+  },
+  'zh-CN': {
+    caps: [['告诉团队你想要什么。', '用你自己的话说。'], ['PM 把它变成计划。', '谁做什么，一步一步来。'], ['团队动手搭建。', '设计师、工程师和 QA 一起协作。'], ['在你自己的地址上线。', '选个域名，团队帮你配好。'], ['登录、支付、管理后台。', '每样只需提一次。'], ['品牌套件，连 Logo 都有。', '配色、字体和语气，拿来就用。'], ['然后帮你增长。', '访客、注册，还有团队跑的测试。']],
+    end: ['你的 AI 创业团队。', '无需写代码。'],
+  },
+  es: {
+    caps: [['Dile a tu equipo lo que quieres.', 'Con tus propias palabras.'], ['Tu PM lo convierte en un plan.', 'Quién hace qué, paso a paso.'], ['Tu equipo lo construye.', 'Diseño, ingeniería y QA, trabajando juntos.'], ['Publicado en tu propia dirección.', 'Elige un dominio. Tu equipo lo configura.'], ['Acceso, pagos y panel de gestión.', 'Un pedido para cada uno.'], ['Un kit de marca, con logo.', 'Colores, tipografía y tono, listos para usar.'], ['Y después te ayuda a crecer.', 'Visitas, registros y pruebas que hace tu equipo.']],
+    end: ['Tu equipo de startup con IA.', 'Sin programar.'],
+  },
+  'pt-BR': {
+    caps: [['Diga ao seu time o que você quer.', 'Com suas próprias palavras.'], ['Seu PM transforma isso em um plano.', 'Quem faz o quê, passo a passo.'], ['Seu time constrói.', 'Design, engenharia e QA, trabalhando juntos.'], ['No ar, no seu próprio endereço.', 'Escolha um domínio. Seu time configura.'], ['Login, pagamentos e painel de gestão.', 'Um pedido para cada um.'], ['Um kit de marca, com logo.', 'Cores, fontes e tom de voz, prontos para usar.'], ['Depois, ajuda você a crescer.', 'Visitas, cadastros e testes que seu time faz.']],
+    end: ['Seu time de startup com IA.', 'Sem precisar programar.'],
+  },
+  de: {
+    caps: [['Sag deinem Team, was du willst.', 'In deinen eigenen Worten.'], ['Dein PM macht daraus einen Plan.', 'Wer was macht, Schritt für Schritt.'], ['Dein Team baut es.', 'Design, Engineering und QA, gemeinsam.'], ['Live unter deiner eigenen Adresse.', 'Such dir eine Domain aus. Dein Team richtet sie ein.'], ['Anmeldung, Zahlungen, Admin.', 'Je eine Bitte genügt.'], ['Ein Brand-Kit, Logo inklusive.', 'Farben, Schrift und Tonalität, sofort nutzbar.'], ['Dann hilft es dir beim Wachsen.', 'Besucher, Anmeldungen und Tests deines Teams.']],
+    end: ['Dein KI-Startup-Team.', 'Ganz ohne Programmieren.'],
+  },
+  fr: {
+    caps: [['Dites à votre équipe ce que vous voulez.', 'Avec vos propres mots.'], ['Votre PM en fait un plan.', 'Qui fait quoi, étape par étape.'], ['Votre équipe le construit.', 'Design, développement et QA, ensemble.'], ['En ligne, à votre propre adresse.', 'Choisissez un domaine. Votre équipe s’en occupe.'], ['Connexion, paiements, administration.', 'Une demande pour chacun.'], ['Un kit de marque, logo compris.', 'Couleurs, typographie et ton, prêts à l’emploi.'], ['Puis elle vous aide à grandir.', 'Visiteurs, inscriptions et tests menés par votre équipe.']],
+    end: ['Votre équipe de startup IA.', 'Sans coder.'],
+  },
+};
