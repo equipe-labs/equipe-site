@@ -171,7 +171,7 @@ const dot = sv('<circle cx="12" cy="12" r="3"/>');
 
   <aside class="vs-legal"><div class="wrap">
     <p>{f(S.checked)}</p>
-    <p class="vs-src"><span>{S.sourcesLabel}:</span> {[...F.sources, ...EQUIPE_SOURCES].map((s, i) => <>{i > 0 && ' · '}<a href={s.url} rel="nofollow noopener" target="_blank">{s.title}</a>{'accessed' in s && s.accessed ? ` (${fill(S.accessedOn, { date: dateOf(s.accessed) })})` : ''}</>)}</p>
+    <p class="vs-src"><span>{S.sourcesLabel}:</span> {[...F.sources, ...EQUIPE_SOURCES].map((s, i) => <>{i > 0 && ' · '}<a href={s.url} rel="nofollow noopener" target="_blank">{s.title}</a>{(s as { accessed?: string }).accessed ? ` (${fill(S.accessedOn, { date: dateOf((s as { accessed?: string }).accessed!) })})` : ''}</>)}</p>
     <p>{F.owner ? f(S.disclaimerOwner) : f(S.disclaimer)}</p>
   </div></aside>
 
