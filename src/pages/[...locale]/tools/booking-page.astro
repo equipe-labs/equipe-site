@@ -1,0 +1,69 @@
+---
+// /tools/booking-page/: the free booking page maker. Copy: src/data/bookingpage/<locale>.ts; model and template:
+// src/data/bookingpage/model.ts; the editor and preview: src/components/booking/Builder.astro.
+// No AI and no server: the page is a fixed template; "Make it live" goes to app.equipe.im/start with everything typed.
+import PageShell from '../../../components/PageShell.astro';
+import FaqJsonLd from '../../../components/FaqJsonLd.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import RelatedTools from '../../../components/RelatedTools.astro';
+import Builder from '../../../components/booking/Builder.astro';
+import { SITE } from '../../../data/site';
+import { bookingCopy, BOOKING_PATH } from '../../../data/bookingpage';
+import { available, getLocale, subPath, type LocaleCode } from '../../../i18n';
+import '../../../styles/tools.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = bookingCopy(code);
+const url = new URL(subPath(info, BOOKING_PATH), Astro.site).href;
+---
+<PageShell code={code} page={BOOKING_PATH} title={c.page.title} description={c.page.desc} image={`/og/tools/booking-page-${info.slug || 'en'}.png`} imageAlt={c.page.h1}>
+  <Fragment slot="head">
+    <link rel="preconnect" href={SITE.app} crossorigin />
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, name: c.page.ogTitle, url, description: c.page.desc, inLanguage: info.lang,
+      applicationCategory: 'BusinessApplication', operatingSystem: 'Any', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      publisher: { '@id': `${SITE.url}/#organization` },
+      featureList: c.how.items.map((x) => x.title),
+    }} />
+    <JsonLd data={{ '@type': 'HowTo', name: c.page.h1, inLanguage: info.lang, totalTime: 'PT1M', step: c.how.items.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })) }} />
+    <FaqJsonLd lang={info.lang} faqs={c.faq.items} />
+  </Fragment>
+  <div class="tl">
+    <section class="tl-hero bp-hero"><div class="wrap">
+      <p class="bp-crumbs"><a href={subPath(info, 'tools')}>{c.page.crumbs}</a></p>
+      <h1>{c.page.h1}</h1>
+      <p class="tl-lead">{c.page.lead}</p>
+    </div></section>
+
+    <section class="bp-sec" id="maker"><div class="wrap">
+      <Builder code={code} />
+    </div></section>
+
+    <section class="tl-sec" id="how"><div class="wrap">
+      <h2>{c.how.title}</h2>
+      <ol class="tl-how">
+        {c.how.items.map((s, i) => <li><span class="n" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div></section>
+
+    <section class="tl-sec" id="after"><div class="wrap">
+      <h2>{c.after.title}</h2>
+      <p class="bp-after-sub">{c.after.sub}</p>
+      <ul class="bp-after">
+        {c.after.items.map((s) => <li><h3>{s.title}</h3><p>{s.text}</p></li>)}
+      </ul>
+    </div></section>
+
+    <section class="tl-sec tl-faq" id="faq"><div class="wrap">
+      <h2>{c.faq.title}</h2>
+      <div class="faqs">
+        {c.faq.items.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}
+      </div>
+    </div></section>
+
+    <div class="tl-end"><RelatedTools code={code} current="booking-page" /></div>
+  </div>
+</PageShell>
