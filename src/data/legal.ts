@@ -211,7 +211,7 @@ const en: LegalCopy = {
         { id: 'ai-features', h: 'AI features in your product', body: [
           { ul: [
             'AI features your team adds to your product (such as a chatbot, summaries or images) are paid from your credits at the AI provider’s list price plus 10%, as your visitors use them.',
-            'Each product has a monthly AI limit, $10 unless an owner or admin changes it. At the limit, AI features pause until the next month or until the limit is raised. There are also limits per visitor.',
+            'Each product has a monthly AI limit, 1,000 credits unless an owner or admin changes it. At the limit, AI features pause until the next month or until the limit is raised. There are also limits per visitor.',
             'You are responsible for how AI features are used in your product, for telling your users that answers are written by AI, and for having a person review AI output before it is used for decisions that significantly affect someone.',
             'We may pause AI features for a product that is being abused or that breaks these terms.',
           ] },

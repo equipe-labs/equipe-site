@@ -183,7 +183,7 @@ const fr: LegalCopy = {
       { id: 'ai-features', h: 'Fonctions d’IA dans votre produit', body: [
         { ul: [
           'Les fonctions d’IA que votre équipe ajoute à votre produit (comme un chatbot, des résumés ou des images) sont payées avec vos crédits au prix catalogue du fournisseur d’IA plus 10 %, au fur et à mesure que vos visiteurs les utilisent.',
-          'Chaque produit a une limite mensuelle d’IA, de $10 sauf si un propriétaire ou un administrateur la modifie. À la limite, les fonctions d’IA se mettent en pause jusqu’au mois suivant ou jusqu’à ce que la limite soit relevée. Il existe aussi des limites par visiteur.',
+          'Chaque produit a une limite mensuelle d’IA, de 1 000 crédits sauf si un propriétaire ou un administrateur la modifie. À la limite, les fonctions d’IA se mettent en pause jusqu’au mois suivant ou jusqu’à ce que la limite soit relevée. Il existe aussi des limites par visiteur.',
           'Vous êtes responsable de la manière dont les fonctions d’IA sont utilisées dans votre produit, d’informer vos utilisateurs que les réponses sont rédigées par une IA, et de faire vérifier les résultats de l’IA par une personne avant qu’ils servent à des décisions qui affectent significativement quelqu’un.',
           'Nous pouvons mettre en pause les fonctions d’IA d’un produit qui fait l’objet d’abus ou qui enfreint les présentes conditions.',
         ] },

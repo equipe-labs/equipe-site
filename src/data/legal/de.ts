@@ -183,7 +183,7 @@ const de: LegalCopy = {
       { id: 'ai-features', h: 'KI-Funktionen in deinem Produkt', body: [
         { ul: [
           'KI-Funktionen, die dein Team in dein Produkt einbaut (etwa ein Chatbot, Zusammenfassungen oder Bilder), werden aus deinen Credits zum Listenpreis des KI-Anbieters plus 10 % bezahlt, während deine Besucher sie nutzen.',
-          'Jedes Produkt hat ein monatliches KI-Limit, $10, sofern ein Inhaber oder Admin es nicht ändert. Am Limit pausieren KI-Funktionen bis zum nächsten Monat oder bis das Limit erhöht wird. Es gibt außerdem Limits pro Besucher.',
+          'Jedes Produkt hat ein monatliches KI-Limit, 1.000 Credits, sofern ein Inhaber oder Admin es nicht ändert. Am Limit pausieren KI-Funktionen bis zum nächsten Monat oder bis das Limit erhöht wird. Es gibt außerdem Limits pro Besucher.',
           'Du bist dafür verantwortlich, wie KI-Funktionen in deinem Produkt genutzt werden, deine Nutzer darüber zu informieren, dass Antworten von KI geschrieben werden, und KI-Ergebnisse von einem Menschen prüfen zu lassen, bevor sie für Entscheidungen genutzt werden, die jemanden erheblich betreffen.',
           'Wir können KI-Funktionen eines Produkts pausieren, das missbraucht wird oder gegen diese Bedingungen verstößt.',
         ] },

@@ -183,7 +183,7 @@ const ptBR: LegalCopy = {
       { id: 'ai-features', h: 'Recursos de IA no seu produto', body: [
         { ul: [
           'Recursos de IA que seu time adiciona ao seu produto (como um chatbot, resumos ou imagens) são pagos com seus créditos pelo preço de tabela do provedor de IA mais 10%, conforme seus visitantes os usam.',
-          'Cada produto tem um limite mensal de IA, de $10, a menos que um proprietário ou administrador o altere. Ao atingir o limite, os recursos de IA ficam pausados até o próximo mês ou até o limite ser aumentado. Também há limites por visitante.',
+          'Cada produto tem um limite mensal de IA, de 1.000 créditos, a menos que um proprietário ou administrador o altere. Ao atingir o limite, os recursos de IA ficam pausados até o próximo mês ou até o limite ser aumentado. Também há limites por visitante.',
           'Você é responsável por como os recursos de IA são usados no seu produto, por informar seus usuários de que as respostas são escritas por IA e por fazer com que uma pessoa revise o resultado da IA antes que ele seja usado em decisões que afetem alguém de forma significativa.',
           'Podemos pausar os recursos de IA de um produto que esteja sendo usado de forma abusiva ou que viole estes termos.',
         ] },

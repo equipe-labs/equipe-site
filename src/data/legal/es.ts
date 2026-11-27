@@ -183,7 +183,7 @@ const es: LegalCopy = {
       { id: 'ai-features', h: 'Funciones de IA en tu producto', body: [
         { ul: [
           'Las funciones de IA que tu equipo agrega a tu producto (como un chatbot, resúmenes o imágenes) se pagan con tus créditos al precio de lista del proveedor de IA más un 10 %, a medida que tus visitantes las usan.',
-          'Cada producto tiene un límite mensual de IA, de $10 a menos que un propietario o administrador lo cambie. Al llegar al límite, las funciones de IA se pausan hasta el mes siguiente o hasta que se suba el límite. También hay límites por visitante.',
+          'Cada producto tiene un límite mensual de IA, de 1000 créditos a menos que un propietario o administrador lo cambie. Al llegar al límite, las funciones de IA se pausan hasta el mes siguiente o hasta que se suba el límite. También hay límites por visitante.',
           'Eres responsable de cómo se usan las funciones de IA en tu producto, de informar a tus usuarios que las respuestas están escritas por IA y de que una persona revise el resultado de la IA antes de usarlo para decisiones que afecten significativamente a alguien.',
           'Podemos pausar las funciones de IA de un producto que esté siendo objeto de abuso o que incumpla estos términos.',
         ] },
