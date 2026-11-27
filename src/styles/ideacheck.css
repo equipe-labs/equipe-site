@@ -109,6 +109,8 @@ main.pg .ic-mvp h4.ic-h4:first-child { margin-top: 0; }
 @media (max-width: 720px) {
   .ic-grid, .ic-comp, .ic-how { grid-template-columns: minmax(0, 1fr); }
   .ic-plan li { padding: 14px; gap: 12px; }
+  .ic-rep .tl-share-row input { flex: 1 1 100%; }
+  .ic-rep .tl-share-row .btn { white-space: nowrap; }
   .ic-in textarea, .ic-ph { font-size: 17px; }
   .ic-bar { padding-left: 16px; }
   .ic-go { flex: 1; justify-content: center; }
