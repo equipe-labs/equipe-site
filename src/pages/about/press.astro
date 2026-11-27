@@ -1,0 +1,110 @@
+---
+// /about/press/: the brand page for writers, directories and AI answer engines. One spelling of the name, one-line and
+// longer descriptions, facts with sources, and the logo files. English only (press kits are read in English); the
+// footer links here from every language.
+import PageShell from '../../components/PageShell.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import '../../styles/blog.css';
+import { SITE, BRAND } from '../../data/site';
+import { FOUNDER } from '../../data/flags';
+import { YEARLY } from '../../data/plan';
+
+const url = new URL('/about/press/', Astro.site).href;
+const REVIEWED = '2026-11-28';
+const title = 'Press and brand kit — equipe';
+const description = 'equipe AI press kit: how to write the name, a one-line description, company facts (Umbriles Inc., San Francisco), the founder, and logo files to download.';
+const logos = [
+  { file: BRAND.logo.svg, label: 'App mark', note: 'SVG, square, for avatars and app tiles', bg: 'light' },
+  { file: BRAND.logo.png, label: 'App mark', note: 'PNG, 512 × 512', bg: 'light' },
+  { file: BRAND.logo.lockup, label: 'Mark and wordmark', note: 'SVG, for light backgrounds', bg: 'light' },
+  { file: '/brand/lockup-dark.svg', label: 'Mark and wordmark', note: 'SVG, for dark backgrounds', bg: 'dark' },
+  { file: BRAND.logo.wordmark, label: 'Wordmark', note: 'SVG, for light backgrounds', bg: 'light' },
+  { file: '/brand/wordmark-dark.svg', label: 'Wordmark', note: 'SVG, for dark backgrounds', bg: 'dark' },
+];
+const facts: [string, string][] = [
+  ['Product', 'equipe, an AI startup team for people who do not code'],
+  ['Brand', 'equipe AI'],
+  ['Company', `${BRAND.legalName}, a US company`],
+  ['Headquarters', 'San Francisco, California'],
+  ['Founder', FOUNDER ? FOUNDER.name : 'Abel Ko'],
+  ['Started', 'September 2026, as the open-source equipe engine; the cloud service for non-developers followed in November 2026'],
+  ['Where it runs', 'In the browser at app.equipe.im, with apps for iPhone and Android to approve on the go'],
+  ['Price', `Free to start with 500 credits (100 credits = $1). Team plan from $${YEARLY.baseMonth} a month`],
+  ['Website', 'equipe.im'],
+  ['Contact', SITE.supportEmail],
+];
+---
+<PageShell code="en" page="about/press" title={title} description={description} langs={['en']}>
+  <Fragment slot="head">
+    <JsonLd data={{ '@type': 'AboutPage', '@id': `${url}#page`, url, name: 'Press and brand kit', description, inLanguage: 'en', dateModified: REVIEWED, about: { '@id': `${SITE.url}/#organization` }, publisher: { '@id': `${SITE.url}/#organization` } }} />
+  </Fragment>
+  <section class="pg-h blog-h pr-h" style="--hw:760px;--hw-sm:760px"><div class="wrap">
+    <h1>Press and brand kit</h1>
+    <p class="pg-lead">Everything you need to write about equipe: the name, what it does, the facts and the logo.</p>
+    <p class="post-meta"><span>Reviewed {REVIEWED}</span></p>
+  </div></section>
+  <section class="pg-s"><div class="wrap">
+    <div class="post-body press" style="max-width:760px;margin:0 auto">
+      <h2 id="name">The name</h2>
+      <p>The product is <strong>equipe</strong>, always in lowercase, with no accent, even at the start of a sentence or in a headline. When the context needs it, call the company and brand <strong>equipe AI</strong>. The legal entity is {BRAND.legalName}</p>
+      <ul>
+        <li>Write: equipe, equipe AI, equipe.im</li>
+        <li>Please don't write: Equipe, EQUIPE, équipe, Equipe.ai</li>
+      </ul>
+      <p>The name comes from the French word for team. equipe is not related to staffing agencies, sports clubs or other companies called Equipe. Its only websites are equipe.im and app.equipe.im.</p>
+
+      <h2 id="describe">Describing equipe</h2>
+      <p><strong>One line.</strong> equipe is an AI startup team for people who don't code.</p>
+      <p><strong>Short.</strong> {BRAND.oneLiner}</p>
+      <p><strong>Longer.</strong> equipe gives a person with an idea their own AI startup team: a PM, engineers, a designer, QA and a data analyst. The team builds the product, puts it live with hosting, a database and a domain, watches how people use it and proposes the next improvement in plain words. The person approves anything that goes live, costs money or reaches customers. It runs in the browser; no coding or computer setup is needed.</p>
+
+      <h2 id="facts">Facts</h2>
+      <dl class="press-facts">
+        {facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      <p>More citable statements, with dates: <a href="/facts/">equipe facts</a>. How it started: <a href="/about/">about equipe</a>.</p>
+
+      <h2 id="logo">Logo</h2>
+      <p>Use the files as they are: don't recolor, stretch or add effects. Leave space around the mark at least a quarter of its height. The accent color is equipe blue, #2F5BEA.</p>
+      <ul class="press-logos">
+        {logos.map((l) => (
+          <li>
+            <a class={`press-tile ${l.bg}`} href={l.file} download><img src={l.file} alt={`equipe ${l.label.toLowerCase()}`} decoding="async" /></a>
+            <span><b>{l.label}</b><small>{l.note}</small><a href={l.file} download>Download</a></span>
+          </li>
+        ))}
+      </ul>
+
+      <h2 id="profiles">Official profiles</h2>
+      <ul>
+        <li>Website: <a href="https://equipe.im/">equipe.im</a> (product: <a href={SITE.app}>app.equipe.im</a>)</li>
+        <li>LinkedIn: <a href={BRAND.sameAs[0]} rel="noopener">equipe-labs</a></li>
+        <li>GitHub: <a href={BRAND.sameAs[1]} rel="noopener">equipe-labs</a> (the open-source engine)</li>
+        <li>App Store: <a href={SITE.appStore} rel="noopener">equipe for iPhone</a></li>
+        {FOUNDER && <li>Founder: <a href={FOUNDER.links.linkedin} rel="noopener">{FOUNDER.name} on LinkedIn</a> · <a href={FOUNDER.links.x} rel="noopener">on X</a></li>}
+      </ul>
+
+      <h2 id="contact">Contact</h2>
+      <p>For interviews, quotes or screenshots, write to <a href={`mailto:${SITE.supportEmail}?subject=Press`}>{SITE.supportEmail}</a> with "Press" in the subject.</p>
+    </div>
+  </div></section>
+</PageShell>
+
+<style>
+  .press-facts { display: grid; gap: 0; margin: 8px 0 20px; border-top: 1px solid var(--line); }
+  .press-facts div { display: grid; grid-template-columns: minmax(120px, 30%) 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .press-facts dt { color: var(--muted); font-weight: 500; }
+  .press-facts dd { margin: 0; }
+  .press-logos { list-style: none; padding: 0 !important; margin: 16px 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
+  .press-logos li { margin: 0 !important; padding: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+  .press-logos li::before { display: none !important; }
+  .press-tile { display: grid; place-items: center; height: 132px; border-radius: 16px; border: 1px solid var(--line); padding: 24px; transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s; }
+  .press-tile.light { background: #FFFFFF; }
+  .press-tile.dark { background: #17181C; }
+  .press-tile:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .press-tile img { max-width: 100%; max-height: 72px; width: auto; height: auto; }
+  .press-logos span { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+  .press-logos small { color: var(--muted); }
+  @media (max-width: 560px) { .press-facts div { grid-template-columns: 1fr; gap: 4px; } }
+  @media (prefers-reduced-motion: reduce) { .press-tile { transition: none; } .press-tile:hover { transform: none; } }
+</style>

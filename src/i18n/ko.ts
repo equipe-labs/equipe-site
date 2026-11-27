@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const ko: Messages = {
   meta: {
-    title: 'equipe — 혼자서도 스타트업 팀이 생겨요',
+    title: 'equipe — 코딩 없이 갖는 나만의 AI 스타트업 팀',
     description:
       'equipe AI는 혼자서도 갖는 스타트업 팀이에요. PM, 엔지니어, 디자이너, QA, 데이터 분석가가 아이디어를 서비스로 띄우고 계속 더 낫게 만들어요. 나는 승인만 해요.',
-    ogTitle: 'equipe — 혼자서도 스타트업 팀이 생겨요',
+    ogTitle: 'equipe — 코딩 없이 갖는 나만의 AI 스타트업 팀',
     ogDescription:
       'Claude로 만든 걸 진짜 서비스로. PM, 엔지니어, 디자이너, QA, 데이터 분석가가 만들고, 출시하고, 키워요. 나는 승인만 하면 돼요.',
     ogImageAlt: 'equipe — 나만의 AI 스타트업 팀. 만들고, 키워요. 코딩은 몰라도 돼요. 옆에는 팀 채팅: 도자기 가게를 만드는 PM의 계획과 개발자·디자이너의 단계.',
@@ -279,6 +279,8 @@ const ko: Messages = {
     developers: '개발자',
     phone: '폰 앱',
     engine: 'equipe 엔진은 MIT 라이선스 오픈소스예요.',
+    entity: "equipe(equipe AI)는 코딩을 모르는 사람을 위한 AI 스타트업 팀이에요. 샌프란시스코의 Umbriles Inc.가 만들어요.",
+    press: "보도·브랜드 자료",
     company: '회사', legal: '법적 고지', support: '고객 지원', noCookies: '추적 쿠키 없음', cookieSettings: '쿠키 설정', doNotSell: '내 개인정보 판매·공유 거부', privacy: '개인정보 처리방침',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

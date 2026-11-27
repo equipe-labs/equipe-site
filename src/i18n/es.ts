@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const es: Messages = {
   meta: {
-    title: 'equipe — Un equipo de startup para una sola persona',
+    title: 'equipe — tu equipo de startup con IA, sin programar',
     description:
       'equipe AI es un equipo de startup para una sola persona: un PM, ingenieros, un diseñador, QA y un analista de datos lanzan tu idea y la siguen mejorando. Tú apruebas.',
-    ogTitle: 'equipe — Un equipo de startup para una sola persona',
+    ogTitle: 'equipe — tu equipo de startup con IA, sin programar',
     ogDescription:
       'Lleva lo que hiciste en Claude a un servicio real. Un PM, ingenieros, un diseñador, QA y un analista de datos lo construyen, lo publican y lo hacen crecer. Tú apruebas.',
     ogImageAlt: 'equipe — Tu equipo de startup con IA. Lo construye. Lo hace crecer. Sin programar. Al lado, el chat del equipo: el plan del PM para una tienda de cerámica, con los pasos del ingeniero y del diseñador.',
@@ -279,6 +279,8 @@ const es: Messages = {
     developers: 'Desarrolladores',
     phone: 'App para el móvil',
     engine: 'El motor de equipe es de código abierto bajo la licencia MIT.',
+    entity: "equipe (equipe AI) es un equipo de startup con IA para quienes no programan. Lo hace Umbriles Inc., en San Francisco.",
+    press: "Prensa y marca",
     company: 'Empresa', legal: 'Legal', support: 'Soporte', noCookies: 'Sin cookies de rastreo', cookieSettings: 'Configuración de cookies', doNotSell: 'No vender ni compartir mi información personal', privacy: 'Privacidad',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

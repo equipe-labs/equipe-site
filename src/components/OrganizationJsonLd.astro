@@ -1,23 +1,29 @@
 ---
 import JsonLd from './JsonLd.astro';
-import { SITE } from '../data/site';
+import { SITE, BRAND } from '../data/site';
 import { FOUNDER } from '../data/flags';
-// sameAs lists official profiles only; add social accounts here when they exist.
+// One brand entity on every page: the company "equipe AI" (legal name Umbriles Inc.) makes the product "equipe".
+// sameAs lists official profiles only (src/data/site.ts BRAND.sameAs); add social accounts there when they exist.
 ---
 
 <JsonLd
   data={{
     '@type': 'Organization',
     '@id': `${SITE.url}/#organization`,
-    name: SITE.name,
-    alternateName: 'equipe AI',
-    legalName: 'Umbriles Inc.',
+    name: BRAND.name,
+    alternateName: [BRAND.product, 'equipe.im'],
+    legalName: BRAND.legalName,
     url: SITE.url,
-    logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/logo-512.png`, width: 512, height: 512 },
+    description: BRAND.oneLiner,
+    logo: { '@type': 'ImageObject', '@id': `${SITE.url}/#logo`, url: `${SITE.url}${BRAND.logo.png}`, width: 512, height: 512, caption: BRAND.name },
+    image: { '@id': `${SITE.url}/#logo` },
+    foundingDate: BRAND.foundingDate,
+    address: { '@type': 'PostalAddress', addressLocality: 'San Francisco', addressRegion: 'CA', addressCountry: 'US' },
     email: SITE.supportEmail,
-    contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.supportEmail },
-    sameAs: [SITE.repo],
-    ...(FOUNDER ? { founder: { '@id': `${SITE.url}/#founder` } } : {}),
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.supportEmail, url: `${SITE.url}/app/support/` },
+    brand: { '@type': 'Brand', name: BRAND.product, logo: `${SITE.url}${BRAND.logo.png}` },
+    sameAs: [...BRAND.sameAs],
+    ...(FOUNDER ? { founder: { '@id': `${SITE.url}/#founder` }, founders: [{ '@id': `${SITE.url}/#founder` }] } : {}),
   }}
 />
 {FOUNDER && (

@@ -2,10 +2,10 @@ import type { Messages } from './en';
 
 const ptBR: Messages = {
   meta: {
-    title: 'equipe — Um time de startup para uma pessoa só',
+    title: 'equipe — seu time de startup com IA, sem programar',
     description:
       'equipe AI é um time de startup para uma pessoa só: um PM, engenheiros, um designer, QA e um analista de dados colocam sua ideia no ar e seguem melhorando. Você aprova.',
-    ogTitle: 'equipe — Um time de startup para uma pessoa só',
+    ogTitle: 'equipe — seu time de startup com IA, sem programar',
     ogDescription:
       'Leve o que você fez no Claude a um serviço de verdade. Um PM, engenheiros, um designer, QA e um analista de dados constroem, publicam e fazem crescer. Você aprova.',
     ogImageAlt: 'equipe — Seu time de startup com IA. Constrói. Faz crescer. Sem programar. Ao lado, o chat do time: o plano do PM para uma loja de cerâmica, com os passos do engenheiro e do designer.',
@@ -279,6 +279,8 @@ const ptBR: Messages = {
     developers: 'Desenvolvedores',
     phone: 'App para celular',
     engine: 'O engine do equipe é de código aberto sob a licença MIT.',
+    entity: "equipe (equipe AI) é um time de startup com IA para quem não programa. Feito pela Umbriles Inc., em San Francisco.",
+    press: "Imprensa e marca",
     company: 'Empresa', legal: 'Legal', support: 'Suporte', noCookies: 'Sem cookies de rastreamento', cookieSettings: 'Configurações de cookies', doNotSell: 'Não vender nem compartilhar minhas informações pessoais', privacy: 'Privacidade',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).

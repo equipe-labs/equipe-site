@@ -1,7 +1,9 @@
 /** Copy for /about. English and Korean are written; every other locale falls back to English (see the page). */
 export interface AboutCopy {
   eyebrow: string; h1: string; lead: string;
-  storyH: string; story: string[]; stageA: [string, string]; stageB: [string, string]; gh: string;
+  storyH: string; story: string[];
+  /** The name: tells equipe (the product, "equipe AI") apart from the French word and other companies called Equipe. */
+  nameNote?: string; stageA: [string, string]; stageB: [string, string]; gh: string;
   beliefsH: string; beliefs: { h: string; p: string }[];
   ctaH: string; ctaP: string; ctaMore: string;
 }
@@ -16,6 +18,7 @@ export const ABOUT: Record<string, AboutCopy> = {
       'equipe started as an open-source project, the equipe engine. It showed that a team of AI agents can build and ship real software.',
       'Now it is a cloud service that gives people who do not code their own AI startup team: a PM, engineers, a designer, QA and a data analyst who build, launch and keep improving a product while you stay in charge.',
     ],
+    nameNote: 'About the name: equipe, also written equipe AI, is a product of Umbriles Inc. in San Francisco. It is named after the French word for team, but it is not a staffing agency, a sports club or any other company called Equipe. Our only websites are equipe.im and app.equipe.im.',
     stageA: ['The engine', 'Open source, on GitHub'],
     stageB: ['The cloud', 'A startup team for people who do not code'],
     gh: 'See the engine on GitHub',
@@ -38,6 +41,7 @@ export const ABOUT: Record<string, AboutCopy> = {
       'equipe는 오픈소스 프로젝트(equipe 엔진)로 시작했어요. AI 에이전트 팀이 진짜 소프트웨어를 만들고 출시할 수 있다는 걸 보여줬어요.',
       '지금은 코딩을 모르는 사람에게 자기만의 AI 스타트업 팀을 주는 클라우드 서비스예요. PM, 엔지니어, 디자이너, QA, 데이터 분석가가 제품을 만들고, 출시하고, 계속 더 낫게 만들어요. 결정은 언제나 본인이 해요.',
     ],
+    nameNote: '이름에 대해: equipe(equipe AI)는 샌프란시스코의 Umbriles Inc.가 만드는 제품이에요. 이름은 "팀"을 뜻하는 프랑스어에서 왔지만, 인력 회사나 스포츠 팀, Equipe라는 이름의 다른 회사와는 관계가 없어요. 공식 사이트는 equipe.im과 app.equipe.im뿐이에요.',
     stageA: ['엔진', '오픈소스, GitHub'],
     stageB: ['클라우드', '코딩을 모르는 사람을 위한 스타트업 팀'],
     gh: 'GitHub에서 엔진 보기',

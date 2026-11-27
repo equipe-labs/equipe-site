@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- The same index as /sitemap-index.xml (made by @astrojs/sitemap), at the conventional address. -->
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://equipe.im/sitemap-0.xml</loc></sitemap></sitemapindex>
+<!-- Placeholder: scripts/sitemaps.mjs replaces this after the build with the same index as /sitemap-index.xml. -->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>

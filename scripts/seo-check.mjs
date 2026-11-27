@@ -293,7 +293,10 @@ section('Blog: index, articles (canonical, hreflang, JSON-LD, OG image), RSS, Fa
     const person = jsonLd(about).find((x) => x?.['@type'] === 'Person');
     check(!person || (person.name && person.sameAs?.length >= 2 && about.includes('/brand/founder')), '/about/ founder Person JSON-LD has name and sameAs, photo shown');
   }
-  const sm = await (await get(`${CANONICAL}/sitemap-0.xml`)).text();
+  // One sitemap per section and language (scripts/sitemaps.mjs): read them all through the index.
+  const smIdx = await (await get(`${CANONICAL}/sitemap-index.xml`)).text();
+  let sm = '';
+  for (const m of smIdx.matchAll(/<loc>([^<]+)<\/loc>/g)) sm += await (await get(m[1])).text();
   const missing = (slugsByLang.en ?? []).filter((s) => !sm.includes(`<loc>${CANONICAL}/blog/${s}/</loc>`));
   check(missing.length === 0 && sm.includes(`<loc>${CANONICAL}/facts/</loc>`), `sitemap lists every article and /facts/${missing.length ? ` (missing: ${missing.join(', ')})` : ''}`);
 }

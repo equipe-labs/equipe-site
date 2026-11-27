@@ -4,10 +4,10 @@
 // The home page is for non-developers (no developer words there); developer content lives under `dev` and `start` (the /developers page).
 export const en = {
   meta: {
-    title: 'equipe — A startup team for one person',
+    title: 'equipe — your AI startup team, no coding needed',
     description:
       'equipe AI is a startup team for one person: a PM, engineers, a designer, QA and a data analyst put your idea live and keep improving it. You approve.',
-    ogTitle: 'equipe — A startup team for one person',
+    ogTitle: 'equipe — your AI startup team, no coding needed',
     ogDescription:
       'Take what you built in Claude to a real service. A PM, engineers, a designer, QA and a data analyst build, ship and grow it. You approve.',
     ogImageAlt: 'equipe — Your AI startup team. Builds it. Grows it. No coding needed. Beside it, the team chat: the PM\'s plan for a ceramics shop, with the engineer and designer\'s steps.',
@@ -284,6 +284,8 @@ export const en = {
     developers: 'Developers',
     phone: 'Phone app',
     engine: 'The equipe engine is open source under the MIT License.',
+    entity: "equipe (equipe AI) is an AI startup team for people who don't code, made by Umbriles Inc. in San Francisco.",
+    press: "Press and brand",
     company: 'Company', legal: 'Legal', support: 'Support', noCookies: 'No tracking cookies', cookieSettings: 'Cookie settings', doNotSell: 'Do not sell or share my personal information', privacy: 'Privacy',
   },
   // Top-level pages: /pricing, /security, /about, /changelog, and the customer story (SHOW_CJ in src/data/flags.ts).
