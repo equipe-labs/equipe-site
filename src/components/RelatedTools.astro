@@ -6,11 +6,12 @@ import { getLocale, subPath, type LocaleCode } from '../i18n';
 // Its own styles (and the .tl tokens), so it looks right on any page, not only those that import tools.css.
 import '../styles/tools.css';
 
-interface Props { code: LocaleCode; current: string; max?: number }
-const { code, current, max = 3 } = Astro.props;
+interface Props { code: LocaleCode; current: string; max?: number; first?: string[] }
+const { code, current, max = 3, first = [] } = Astro.props;
 const info = getLocale(code);
 const H = hubCopy(code);
-const list = TOOLS.filter((t) => t.slug !== current).slice(0, max);
+// `first`: tools that belong next to this one (a page's natural next step), then the hub order.
+const list = TOOLS.filter((t) => t.slug !== current).sort((a, b) => Number(first.includes(b.slug)) - Number(first.includes(a.slug))).slice(0, max);
 const arrow = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
 const icon = (k: string) => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">${TOOL_ICONS[k] ?? TOOL_ICONS.wrench}</svg>`;
 ---

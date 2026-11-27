@@ -1,0 +1,30 @@
+---
+// /logo-maker/r/: the shell for a shared logo. equipe.im rewrites /logo-maker/r/<id>/ to platform.equipe.im, which serves
+// this page with the business name in its title and the logo itself as the share image (the eq-share-* metas are its
+// templates: {name}). LogoApp (mode 'shared') loads the logo. Not indexed.
+import PageShell from '../../../components/PageShell.astro';
+import LogoApp from '../../../components/LogoApp.astro';
+import RelatedTools from '../../../components/RelatedTools.astro';
+import { logoCopy } from '../../../data/logo';
+import { available, getLocale, type LocaleCode } from '../../../i18n';
+import '../../../styles/tools.css';
+import '../../../styles/names.css';
+import '../../../styles/logo.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = logoCopy(code);
+---
+<PageShell code={code} page="logo-maker/r" title={c.share.pageTitle} description={c.page.desc} image={`/og/logo/tool-${info.slug || 'en'}.png`} imageAlt={c.page.ogTitle} noindex>
+  <Fragment slot="head">
+    <meta name="eq-share-title" content={c.share.title} />
+    <meta name="eq-share-desc" content={c.share.desc} />
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+  </Fragment>
+  <div class="tl lg">
+    <LogoApp code={code} mode="shared" />
+    <div class="tl-end"><RelatedTools code={code} current="logo-maker" /></div>
+  </div>
+</PageShell>

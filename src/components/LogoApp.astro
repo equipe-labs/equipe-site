@@ -1,0 +1,143 @@
+---
+// The free logo maker: the form (Turnstile loads on first use, interaction-only; skipped for equipe's own test runs), the
+// shared stepper while the platform draws and checks a round (cloud platform/src/free-logo.js), the ideas (symbol logos and
+// type-only logos), the editor (font, weight, case, spacing, colours, layout, light/dark: free, in the browser), live
+// mockups, the brand kit (made on the device), the share link and "Build your website with this logo".
+// mode 'shared': /logo-maker/r/<id>/ shows a kept design, no form.
+// Events: own funnel feature steps (eqFeat): view, start, done, edit, more, download, share, signup; PostHog logo_run,
+// logo_result, logo_error, logo_edit, logo_more, logo_download, logo_share, logo_shared_view.
+import { logoCopy, LOGO_API, FREE_PASS_API, TURNSTILE_SITE_KEY, LOGO_STYLES, LOGO_MOODS, LOGO_KINDS, LOGO_SWATCHES, logoStartHref } from '../data/logo';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; mode?: 'tool' | 'shared' }
+const { code, mode = 'tool' } = Astro.props;
+const info = getLocale(code);
+const c = logoCopy(code);
+const F = c.form;
+const base = subPath(info, 'logo-maker');
+const namesHref = subPath(info, 'business-name-generator');
+const ic = {
+  arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>',
+  chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+};
+const styleArt: Record<string, string> = {
+  icon: '<svg viewBox="0 0 64 32" aria-hidden="true"><rect x="2" y="6" width="20" height="20" rx="6" class="a"/><rect x="28" y="12" width="32" height="8" rx="4" class="b"/></svg>',
+  wordmark: '<svg viewBox="0 0 64 32" aria-hidden="true"><rect x="6" y="11" width="44" height="10" rx="5" class="b"/><circle cx="56" cy="19" r="3" class="a"/></svg>',
+  lettermark: '<svg viewBox="0 0 64 32" aria-hidden="true"><rect x="20" y="4" width="24" height="24" rx="7" class="a"/><path d="M28 22V10h5a4 4 0 0 1 0 8h-5" class="w"/></svg>',
+  emblem: '<svg viewBox="0 0 64 32" aria-hidden="true"><circle cx="32" cy="16" r="14" class="a"/><circle cx="32" cy="17" r="5" class="w2"/></svg>',
+};
+const data = {
+  api: LOGO_API, pass: FREE_PASS_API, lang: info.lang, code, ts: TURNSTILE_SITE_KEY, mode, base,
+  start: logoStartHref('__IDEA__', '__PLACE__'),
+  swatches: LOGO_SWATCHES,
+  c: { form: c.form, result: c.result, editor: c.editor, mock: c.mock, kit: c.kit, cta: c.cta, share: c.share, picker: c.picker, styles: c.form.styles },
+};
+---
+{mode === 'tool' ? (
+  <section class="tl-hero lg-hero"><div class="wrap">
+    <h1>{c.page.h1}</h1>
+    <p class="tl-lead">{c.page.lead}</p>
+    <form class="tl-form lg-form" novalidate data-l-form>
+      <div class="tl-fields lg-fields">
+        <div class="tl-field">
+          <label for="l-name">{F.name}</label>
+          <input id="l-name" name="name" type="text" maxlength="40" autocomplete="organization" placeholder={F.namePh} required />
+          <a class="lg-need" href={namesHref} data-ph="logo_need_name" data-ph-location="form">{F.needName}<Fragment set:html={ic.arrow} /></a>
+        </div>
+        <div class="tl-field">
+          <label for="l-about">{F.about}<small>{F.optional}</small></label>
+          <input id="l-about" name="about" type="text" maxlength="300" autocomplete="off" placeholder={F.aboutPh} />
+        </div>
+        <div class="tl-field lg-wide" role="radiogroup" aria-labelledby="l-style-l" data-l-group="style" data-l-required>
+          <span class="nm-l" id="l-style-l">{F.style}</span>
+          <div class="lg-styles">
+            {LOGO_STYLES.map((s, i) => (
+              <button type="button" class="lg-style" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-v={s}>
+                <span class="lg-art"><Fragment set:html={styleArt[s]} /></span>
+                <b><Fragment set:html={ic.check} /><span>{F.styles[s].t}</span></b>
+                <small>{F.styles[s].d}</small>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="tl-field lg-wide" role="radiogroup" aria-labelledby="l-mood-l" data-l-group="mood">
+          <span class="nm-l" id="l-mood-l">{F.mood}<small>{F.optional}</small></span>
+          <div class="nm-chips lg-moods">
+            {LOGO_MOODS.map((m) => <button type="button" class="nm-chip" role="radio" aria-checked="false" data-v={m}><Fragment set:html={ic.check} /><span>{c.moods[m]}</span></button>)}
+          </div>
+        </div>
+        <div class="tl-field lg-wide">
+          <span class="nm-l" id="l-col-l">{F.colours}<small>{F.optional}</small></span>
+          <div class="lg-cols" data-l-cols aria-labelledby="l-col-l">
+            <button type="button" class="lg-add" data-l-addcol aria-haspopup="dialog"><Fragment set:html={ic.plus} /><span>{F.addColour}</span></button>
+          </div>
+          <p class="lg-hint">{F.coloursHint}</p>
+        </div>
+        <details class="lg-more lg-wide">
+          <summary><span>{F.more}</span><Fragment set:html={ic.chev} /></summary>
+          <div class="lg-more-in">
+            <div class="tl-field" role="radiogroup" aria-labelledby="l-kind-l" data-l-group="kind">
+              <span class="nm-l" id="l-kind-l">{F.kind}<small>{F.optional}</small></span>
+              <div class="nm-chips">
+                {LOGO_KINDS.map((k) => <button type="button" class="nm-chip" role="radio" aria-checked="false" data-v={k}><Fragment set:html={ic.check} /><span>{c.kinds[k]}</span></button>)}
+              </div>
+            </div>
+            <div class="tl-field">
+              <label for="l-insp">{F.inspiration}<small>{F.optional}</small></label>
+              <input id="l-insp" name="inspiration" type="text" maxlength="160" autocomplete="off" placeholder={F.inspirationPh} />
+            </div>
+          </div>
+        </details>
+        <div class="tl-go">
+          <div class="tl-ts" data-l-ts></div>
+          <button class="btn primary lg" type="submit" data-ph="logo_submit" data-ph-location="hero"><span>{F.button}</span><Fragment set:html={ic.arrow} /></button>
+        </div>
+      </div>
+      <p class="tl-err" role="alert" hidden data-l-err></p>
+      <p class="tl-note" data-l-note>{F.note}</p>
+    </form>
+  </div></section>
+) : (
+  <section class="tl-shared-h lg-shared-h"><div class="wrap"><h1>{c.share.heading}</h1></div></section>
+)}
+
+<section class="tl-run" hidden data-l-run aria-live="polite">
+  <div class="wrap">
+    <div class="tl-stepper">
+      <ol class="tl-steps">
+        {c.progress.map((s) => <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
+      </ol>
+      <p class="tl-eta"><span>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
+    </div>
+  </div>
+</section>
+
+<section class="tl-report lg-report" hidden data-l-report tabindex="-1"><div class="wrap" data-l-out></div></section>
+
+{mode === 'shared' && (
+  <section class="tl-again"><div class="wrap lg-again">
+    <h2 class="tl-again-h">{c.share.own}</h2>
+    <a class="btn primary lg" href={base} data-ph="logo_own_click" data-ph-location="shared">{c.share.ownButton}<Fragment set:html={ic.arrow} /></a>
+  </div></section>
+)}
+
+<div class="lg-pop" hidden data-l-pop role="dialog" aria-modal="false" aria-label={c.form.colours}>
+  <div class="lg-sv" data-l-sv><i data-l-svk></i></div>
+  <div class="lg-hue" data-l-hue role="slider" tabindex="0" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><i data-l-huek></i></div>
+  <div class="lg-hexrow"><span class="lg-chip" data-l-chipnow></span><label><span>{c.picker.hex}</span><input data-l-hex maxlength="7" spellcheck="false" autocomplete="off" /></label><button type="button" class="btn primary" data-l-popdone>{c.picker.done}</button></div>
+  <p class="lg-pop-l">{c.picker.presets}</p>
+  <div class="lg-presets">{LOGO_SWATCHES.map((s) => <button type="button" style={`--c:${s}`} data-l-preset={s} aria-label={s}></button>)}</div>
+</div>
+
+<script type="application/json" data-l-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<script>
+  import { internalRun } from '../lib/internal-run';
+  import '../scripts/tl-stepper';
+  import { runLogoApp } from '../scripts/logo/app';
+  const el = document.querySelector<HTMLScriptElement>('[data-l-data]');
+  if (el) runLogoApp(JSON.parse(el.textContent || '{}'), internalRun);
+</script>

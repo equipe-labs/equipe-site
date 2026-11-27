@@ -26,7 +26,7 @@ const LOCS = available.map((l) => l.slug).filter(Boolean);
     // Features: which one this page is, then its steps (each once per tab here and in the collector).
     var base = pv.toLowerCase().replace(new RegExp('^/(' + LOCS.join('|') + ')(?=/|$)'), '') || '/';
     var FEAT = [[/^\/?$/, 'home'], [/^\/pricing\/?$/, 'pricing'], [/^\/grader(\/|$)/, 'grader'], [/^\/ai-visibility(\/|$)/, 'ai_visibility'],
-      [/^\/tools\/app-cost-calculator(\/|$)/, 'cost_calculator'], [/^\/business-name-generator(\/|$)/, 'name_generator'],
+      [/^\/tools\/app-cost-calculator(\/|$)/, 'cost_calculator'], [/^\/business-name-generator(\/|$)/, 'name_generator'], [/^\/logo-maker(\/|$)/, 'logo_maker'],
       [/^\/tools\/booking-page(\/|$)/, 'booking_page'], [/^\/tools\/idea-validator(\/|$)/, 'idea_validator'],
       [/^\/tools\/privacy-policy-generator(\/|$)/, 'privacy_policy'], [/^\/tools\/?$/, 'tools_hub'],
       [/^\/(from-[a-z0-9-]+|publish-html)(\/|$)/, 'ai_to_site'], [/^\/migrate(\/|$)/, 'migrate'], [/^\/websites(\/|$)/, 'industry_pages'],
