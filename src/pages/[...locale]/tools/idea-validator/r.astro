@@ -1,0 +1,30 @@
+---
+// /tools/idea-validator/r/: the shell for shared idea checks. equipe.im rewrites /tools/idea-validator/r/<id>/ to
+// platform.equipe.im, which serves this page with the check's own title, description and share image (the eq-share-*
+// metas are its templates, {title} and {summary} filled there). IdeaCheckApp (mode 'shared') loads the check itself.
+// Not indexed, not in the sitemap.
+import PageShell from '../../../../components/PageShell.astro';
+import IdeaCheckApp from '../../../../components/IdeaCheckApp.astro';
+import RelatedTools from '../../../../components/RelatedTools.astro';
+import { ideaCopy, IDEA_PAGE } from '../../../../data/ideacheck/copy';
+import { available, getLocale, type LocaleCode } from '../../../../i18n';
+import '../../../../styles/tools.css';
+import '../../../../styles/ideacheck.css';
+
+export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
+const { code } = Astro.props as { code: LocaleCode };
+const info = getLocale(code);
+const c = ideaCopy(code);
+---
+<PageShell code={code} page={`${IDEA_PAGE}/r`} title={c.sharePage.pageTitle} description={c.page.desc} image={`/og/idea/test_first-${info.slug || 'en'}.png`} imageAlt={c.page.ogTitle} noindex>
+  <Fragment slot="head">
+    <meta name="eq-share-title" content={c.sharePage.title} />
+    <meta name="eq-share-desc" content={c.sharePage.desc} />
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
+  </Fragment>
+  <div class="tl">
+    <IdeaCheckApp code={code} mode="shared" />
+    <div class="tl-end"><RelatedTools code={code} current="idea-validator" /></div>
+  </div>
+</PageShell>

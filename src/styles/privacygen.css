@@ -1,0 +1,69 @@
+/* Privacy policy generator (/tools/privacy-policy-generator/). Builds on tools.css. Questions on the left, the policy on
+   the right (sticky, scrolls inside) on wide screens; stacked on phones. Chips: selected = blue fill + check. */
+.pg-hero { padding-bottom: var(--s-6); }
+.pg-app { padding-bottom: var(--s-8); }
+.pg-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 32px; align-items: start; }
+.pg-form { display: grid; gap: 20px; }
+.pg-card { margin: 0; min-width: 0; padding: 20px 22px 22px; border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); display: grid; gap: 14px; }
+.pg-card legend { float: left; width: 100%; padding: 0; font-size: 18px; font-weight: 650; letter-spacing: -0.012em; }
+.pg-card legend + * { clear: both; }
+.pg-hint { margin: -6px 0 0 !important; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.pg-sub { margin: 10px 0 0; font-size: 15.5px; font-weight: 650; }
+.pg-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+.pg-fields.one { grid-template-columns: minmax(0, 1fr); }
+.pg-card .tl-field input { height: 46px; font-size: 16px; }
+.pg-more[hidden] { display: none; }
+.pg-more { display: grid; gap: 12px; }
+.pg-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.pg-chip { display: inline-flex; align-items: center; gap: 0; min-height: 40px; max-width: 100%; padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; line-height: 1.3; text-align: left; cursor: pointer; transition: background 180ms var(--e), border-color 180ms var(--e), color 180ms var(--e), transform 160ms var(--e), gap 200ms var(--e); }
+.pg-chip .ck { width: 0; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: width 200ms var(--e), opacity 160ms var(--e); }
+.pg-chip:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.pg-chip:active { transform: scale(0.97); }
+.pg-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pg-chip[aria-pressed='true'], .pg-chip[aria-checked='true'] { gap: 6px; background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.pg-chip[aria-pressed='true'] .ck, .pg-chip[aria-checked='true'] .ck { width: 16px; opacity: 1; }
+.pg-other { margin-top: 4px; }
+
+.pg-side { position: sticky; top: 88px; display: grid; gap: 20px; }
+.pg-out { border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.pg-outh { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+main.pg .pg-outh h2 { margin: 0; font-size: 18px; letter-spacing: -0.012em; }
+.pg-outh p { margin: 2px 0 0 !important; font-size: 13.5px; color: var(--muted); }
+.pg-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pg-acts .btn { height: 40px; padding: 0 14px; gap: 6px; font-size: 14.5px; }
+.pg-acts .btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.pg-acts .btn.done { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.pg-doc { max-height: min(62vh, 640px); overflow: auto; padding: 22px 24px 28px; font-size: 15px; line-height: 1.65; overscroll-behavior: contain; outline: none; overflow-wrap: anywhere; }
+.pg-doc:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+main.pg .pg-doc h1 { margin: 0 0 4px; font-size: 24px; line-height: 1.25; letter-spacing: -0.02em; }
+main.pg .pg-doc h2 { margin: 22px 0 6px; font-size: 16.5px; letter-spacing: -0.01em; }
+.pg-doc p { margin: 0 0 10px !important; }
+.pg-doc ul { margin: 0 0 10px; padding-left: 20px; list-style: disc; }
+.pg-doc li { margin: 4px 0; }
+.pg-doc em { color: var(--muted); font-style: normal; font-size: 14px; }
+.pg-doc a { color: var(--accent-text); }
+.pg-doc mark { background: var(--accent-bg); color: var(--accent-text); border-radius: 4px; padding: 0 3px; }
+
+.pg-legal { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; padding: 18px 20px; border-radius: var(--card-r); background: var(--surface); border: 1px solid var(--line); }
+.pg-legal > svg { width: 20px; height: 20px; margin-top: 2px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+main.pg .pg-legal h3 { margin: 0; font-size: 16px; }
+.pg-legal p { margin: 6px 0 0 !important; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+main.pg .pg-legal h4 { margin: 14px 0 6px; font-size: 14px; font-weight: 650; }
+.pg-legal ul { display: grid; gap: 6px; padding-left: 18px; list-style: disc; font-size: 14px; line-height: 1.5; }
+.pg-legal a { color: var(--accent-text); }
+.pg-legal .pg-none { list-style: none; margin-left: -18px; color: var(--muted); }
+.pg-host { padding: 24px; }
+
+@media (max-width: 960px) {
+  .pg-grid { grid-template-columns: minmax(0, 1fr); }
+  .pg-side { position: static; }
+  .pg-doc { max-height: 70vh; }
+}
+@media (max-width: 560px) {
+  .pg-fields { grid-template-columns: minmax(0, 1fr); }
+  .pg-card { padding: 18px 16px 20px; }
+  .pg-acts { width: 100%; }
+  .pg-acts .btn { flex: 1 1 0; padding: 0 10px; }
+  .pg-doc { padding: 18px 16px 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .pg-chip, .pg-chip .ck { transition: none; } }

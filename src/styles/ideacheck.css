@@ -1,0 +1,78 @@
+/* Startup idea validator (/tools/idea-validator/, shared checks /tools/idea-validator/r/<id>/). Builds on tools.css.
+   The idea box takes the home hero's look (one large rounded surface, the text grows with what is typed). One accent
+   (equipe blue), full borders only, amber only on the "sharpen it first" verdict. */
+.ic-form { max-width: 760px; }
+.ic-box { position: relative; display: grid; border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 1px 2px rgb(10 10 12 / 0.04), 0 24px 56px -36px rgb(10 10 12 / 0.4); transition: border-color 200ms var(--e), box-shadow 200ms var(--e); }
+.ic-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-bg), 0 24px 56px -36px rgb(10 10 12 / 0.4); }
+.ic-in { position: relative; }
+.ic-in textarea { display: block; width: 100%; min-height: 108px; padding: 20px 22px 8px; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 18px; line-height: 1.55; resize: none; outline: none; }
+.ic-ph { position: absolute; left: 22px; right: 22px; top: 20px; font-size: 18px; line-height: 1.55; color: color-mix(in srgb, var(--muted) 72%, transparent); pointer-events: none; transition: opacity 240ms var(--e), transform 240ms var(--e); }
+.ic-form:not(.empty) .ic-ph { opacity: 0; }
+.ic-ph.out { opacity: 0; transform: translateY(-4px); }
+.ic-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 8px 10px 10px 22px; }
+.ic-count { margin-right: auto; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ic-go { height: 48px; padding: 0 20px; border-radius: 14px; gap: 8px; }
+.ic-ex { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 16px 0 0 !important; }
+.ic-ex button { max-width: 100%; padding: 9px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: inherit; font-size: 14px; line-height: 1.35; text-align: left; cursor: pointer; transition: color 160ms var(--e), border-color 160ms var(--e), transform 160ms var(--e); }
+.ic-ex button:hover { color: var(--text); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.ic-ex button:active { transform: scale(0.98); }
+.ic-ex button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ic-form.shake .ic-box { animation: tl-shake 360ms var(--e); }
+.ic-form .tl-ts { margin-top: 12px; }
+.ic-shared-top { padding-top: 64px; }
+
+/* ---------- the check ---------- */
+.ic-rep { max-width: 860px; }
+.ic-top { display: grid; gap: 12px; }
+.ic-verdict { justify-self: start; display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: 99px; font-size: 15px; font-weight: 650; background: var(--code-bg); color: var(--text); }
+.ic-verdict svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.ic-verdict[data-v='promising'] { background: var(--accent-bg); color: var(--accent-text); }
+.ic-verdict[data-v='rethink'] { background: var(--warn-bg); color: var(--warn); }
+main.pg .ic-top h2 { margin: 4px 0 0; font-size: clamp(22px, 2.8vw, 30px); line-height: 1.3; letter-spacing: -0.02em; text-wrap: pretty; overflow-wrap: anywhere; }
+.ic-vtext { margin: 0 !important; font-size: 16px; line-height: 1.55; color: var(--muted); }
+.ic-idea { margin: 8px 0 0; padding: 14px 16px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); font-size: 15.5px; line-height: 1.6; color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 14em; overflow: auto; }
+.ic-idea span { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.ic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.ic-grid .tl-card, .ic-risk { padding: 22px; }
+main.pg .ic-rep h3.ic-h { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.012em; }
+main.pg .ic-rep h4.ic-h4 { margin: 18px 0 6px; font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+main.pg .ic-mvp h4.ic-h4:first-child { margin-top: 0; }
+.ic-rep .tl-card p { margin: 0 !important; font-size: 16px; line-height: 1.6; overflow-wrap: anywhere; }
+.ic-comp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px !important; }
+.ic-comp li { display: grid; align-content: start; gap: 8px; padding: 18px 20px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.ic-ch { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.ic-ch b { font-size: 16.5px; overflow-wrap: anywhere; }
+.ic-ch a { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; color: var(--accent-text); text-decoration: none; overflow-wrap: anywhere; }
+.ic-ch a:hover { text-decoration: underline; }
+.ic-ch a svg { flex: none; width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.ic-comp p { margin: 0 !important; font-size: 15px; line-height: 1.55; color: var(--muted); overflow-wrap: anywhere; }
+.ic-comp .ic-dif { color: var(--text); }
+.ic-dif span { display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
+.ic-risk .ic-rk { font-size: 18px !important; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px !important; }
+.ic-risk p:not(.ic-rk) { color: var(--muted); }
+.ic-plan { display: grid; gap: 12px; margin-top: 16px !important; }
+.ic-plan li { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 16px 20px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.ic-day { font-size: 14px; font-weight: 650; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.ic-plan p { margin: 0 !important; font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+.ic-signal { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 14px 0 0 !important; padding: 16px 20px; border-radius: 16px; background: var(--accent-bg); font-size: 16px; line-height: 1.5; }
+.ic-signal b { color: var(--accent-text); }
+.ic-li { display: grid; gap: 10px; }
+.ic-li li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+.ic-li svg { width: 18px; height: 18px; margin-top: 2px; fill: none; stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ic-li.in svg { stroke: var(--accent); }
+.ic-honest { margin: 0 !important; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.ic-cross { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; color: var(--text); text-decoration: none; font-weight: 600; transition: border-color 160ms var(--e); }
+.ic-cross:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.ic-cross svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--e); }
+@media (hover: hover) { .ic-cross:hover svg { transform: translateX(3px); } }
+.ic-how { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (max-width: 720px) {
+  .ic-grid, .ic-comp, .ic-how { grid-template-columns: minmax(0, 1fr); }
+  .ic-plan li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .ic-in textarea, .ic-ph { font-size: 17px; }
+  .ic-bar { padding-left: 16px; }
+  .ic-go { flex: 1; justify-content: center; }
+  .ic-ex { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { .ic-ph, .ic-box, .ic-ex button, .ic-cross svg { transition: none; } .ic-form.shake .ic-box { animation: none; } }

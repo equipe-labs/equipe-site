@@ -12,7 +12,8 @@
 // `big`: the hero version (large rounded surface, + and a round send button, the free-to-start
 // note beside send, goals in a 2 x 2 grid that lines up with the box, one quiet line of what the team does next).
 import { SITE } from '../data/site';
-import { getMessages, type LocaleCode } from '../i18n';
+import { getLocale, getMessages, subPath, type LocaleCode } from '../i18n';
+import { ideaCopy, IDEA_PAGE } from '../data/ideacheck/copy';
 
 interface Props { code: LocaleCode; id: string; location: string; big?: boolean }
 const { code, id, location, big = false } = Astro.props;
@@ -31,6 +32,9 @@ const free = p.note.split(' · ');
 const words = { ex: p.examples, goals: Object.fromEntries(p.goals.map((g) => [g.key, [g.label, g.starter]])), goalLine: p.goalLine, goalRemove: p.goalRemove, ref: p.ref, peek: new URL('/api/ref-peek', SITE.start).toString() };
 // Lucide shapes (ISC): copy (a reference), globe (a site), x.
 const REF_ICON = sv('<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2"/>');
+// The hero's quiet way to the free idea validator, for people who want a check before they start (it carries what was typed).
+const checkHref = subPath(getLocale(code), IDEA_PAGE);
+const checkLabel = ideaCopy(code).homeLink;
 const like = `<button type="button" class="idea-like" aria-expanded="false" aria-controls="${id}-ref" data-ref-toggle>${REF_ICON}<span>${p.ref.toggle}</span></button>`;
 ---
 <form class={`idea${big ? ' big' : ''}`} action={SITE.start} method="get" data-idea data-ph-location={location} data-words={JSON.stringify(words)}>
@@ -82,6 +86,9 @@ const like = `<button type="button" class="idea-like" aria-expanded="false" aria
   {location === 'hero' && (
     /* A/B test 'hero' (Base.astro assigns it), arm b: a way in for people who have no idea ready yet. */
     <p class="idea-noidea">{p.noIdea} <a href={SITE.start} data-ph="signup_cta_click" data-ph-location="noidea">{p.noIdeaGo}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></p>
+  )}
+  {big && (
+    <p class="idea-check"><a href={checkHref} data-idea-check data-ph="idea_check_link" data-ph-location={location}>{checkLabel}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></p>
   )}
   {location === 'hero' ? (
     /* The hero's step strip: four numbered steps on one connector; the brand fill runs along it and lights each step in turn. */
@@ -241,6 +248,11 @@ const like = `<button type="button" class="idea-like" aria-expanded="false" aria
     // A store or Product Hunt link pasted into the idea box is someone else's product: it becomes a reference card.
     ta.addEventListener('paste', () => setTimeout(() => { const v = ta.value.trim(); if (isListing(v)) { ta.value = ''; fit(); open(true); addRef(v); } }, 0));
 
+    // "Check the idea first" takes what was typed along to the idea validator.
+    form.querySelector<HTMLAnchorElement>('[data-idea-check]')?.addEventListener('click', (e) => {
+      const a = e.currentTarget as HTMLAnchorElement, v = ta.value.trim();
+      if (v && !(starter && v === starter.trim())) a.href = `${a.pathname}?idea=${encodeURIComponent(v.slice(0, 1500))}`;
+    });
     form.addEventListener('submit', (e) => {
       const v0 = ta.value.trim();
       // A goal's sentence start left alone next to a reference says nothing: the reference and its line carry the idea.
@@ -259,3 +271,12 @@ const like = `<button type="button" class="idea-like" aria-expanded="false" aria
     });
   });
 </script>
+
+<style>
+  .idea-check { margin: 14px 0 0; text-align: center; font-size: 15px; }
+  .idea-check a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; transition: color 160ms ease; }
+  .idea-check a:hover { color: var(--accent-text); }
+  .idea-check svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms ease; }
+  @media (hover: hover) { .idea-check a:hover svg { transform: translateX(3px); } }
+  @media (prefers-reduced-motion: reduce) { .idea-check a, .idea-check svg { transition: none; } }
+</style>

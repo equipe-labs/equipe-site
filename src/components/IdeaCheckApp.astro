@@ -1,0 +1,267 @@
+---
+// Startup idea validator: the idea box (the home hero's look: one large rounded surface, the text grows, examples rotate
+// in the placeholder, Enter sends), Turnstile on first use (interaction-only), the steps while it runs, and the check
+// drawn from the platform's JSON (cloud platform/src/free-idea.js). mode 'shared': /tools/idea-validator/r/<id>/ loads
+// one check by id. ?idea=<text> (from the home idea box's "check it first") fills the box.
+// Events: PostHog idea_check_run / idea_check_result / idea_check_error / idea_check_shared_view; the own funnel
+// tool_run, tool_result and click:<data-ph> (the build button is a link to app.equipe.im/start, counted as signup_start).
+import { ideaCopy, IDEA_API, IDEA_PAGE } from '../data/ideacheck/copy';
+import { TURNSTILE_SITE_KEY } from '../data/aivis';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode; mode: 'run' | 'shared' }
+const { code, mode } = Astro.props;
+const info = getLocale(code);
+const c = ideaCopy(code);
+const F = c.form;
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const data = {
+  api: IDEA_API, code, lang: info.lang, ts: TURNSTILE_SITE_KEY, mode,
+  base: subPath(info, IDEA_PAGE), privacy: subPath(info, 'tools/privacy-policy-generator'),
+  c: { result: c.result, form: c.form, related: c.related },
+};
+---
+{mode === 'run' ? (
+  <section class="tl-hero ic-hero"><div class="wrap">
+    <h1>{c.page.h1}</h1>
+    <p class="tl-lead">{c.page.lead}</p>
+    <form class="tl-form ic-form" novalidate data-ic-form>
+      <label class="sr-only" for="ic-idea">{F.label}</label>
+      <div class="ic-box">
+        <div class="ic-in">
+          <textarea id="ic-idea" name="idea" rows="3" maxlength="1500" placeholder=" " enterkeyhint="send" required></textarea>
+          <span class="ic-ph" aria-hidden="true">{F.placeholder}</span>
+        </div>
+        <div class="ic-bar">
+          <span class="ic-count" aria-hidden="true" data-ic-count></span>
+          <button class="btn primary ic-go" type="submit" data-ph="idea_check_submit" data-ph-location="hero"><span>{F.button}</span><Fragment set:html={arrow} /></button>
+        </div>
+      </div>
+      <ul class="ic-ex" aria-label={F.label}>
+        {F.examples.map((x) => <li><button type="button" data-ic-ex={x}>{x}</button></li>)}
+      </ul>
+      <div class="tl-ts" data-ic-ts></div>
+      <p class="tl-err" role="alert" hidden data-ic-err></p>
+      <p class="tl-note">{F.note}</p>
+    </form>
+  </div></section>
+) : (
+  <section class="ic-shared-top"><div class="wrap"><p class="sr-only">{c.result.heading}</p></div></section>
+)}
+
+<section class="tl-run" hidden data-ic-run aria-live="polite">
+  <div class="wrap">
+    <ol class="tl-steps">
+      {c.progress.map((s) => <li><span class="d"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
+    </ol>
+    <p>{c.progressNote}</p>
+  </div>
+</section>
+
+<section class="tl-report ic-report" hidden={mode === 'run'} data-ic-report tabindex="-1"><div class="wrap" data-ic-out>{mode === 'shared' && <p class="tl-empty">{c.result.loading}</p>}</div></section>
+
+<script type="application/json" data-ic-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<script>
+  type Json = Record<string, any>;
+  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; __eqaEnc?: () => string; turnstile?: Json; onEqTs?: () => void };
+  const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
+  const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
+  const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ic = {
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    minus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12h10"/></svg>',
+    ext: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+    flag: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg>',
+  };
+  const el = document.querySelector<HTMLScriptElement>('[data-ic-data]');
+  const D = (el ? JSON.parse(el.textContent || '{}') : null) as Json;
+  const rep = document.querySelector<HTMLElement>('[data-ic-report]');
+  const out = document.querySelector<HTMLElement>('[data-ic-out]');
+  const run = document.querySelector<HTMLElement>('[data-ic-run]');
+  if (D && rep && out && run) {
+    const R = D.c.result, FM = D.c.form;
+    const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
+    let timer = 0;
+    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('done', j < i); s.classList.toggle('now', j === i); });
+    const startSteps = () => { run.hidden = false; stepTo(0); let i = 0; const at = [2500, 12000, 9000]; const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 9000); }; timer = window.setTimeout(next, at[0]); };
+    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
+    const hostOf = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
+    const safeUrl = (u: string) => (/^https?:\/\//i.test(u) ? u : '');
+    const startHref = (idea: string, placement: string) => {
+      const u = new URL('https://app.equipe.im/start');
+      u.searchParams.set('idea', idea);
+      u.searchParams.set('utm_source', 'equipe.im'); u.searchParams.set('utm_medium', 'tool'); u.searchParams.set('utm_campaign', 'idea-validator'); u.searchParams.set('utm_content', placement);
+      const eqa = w.__eqaEnc?.(); if (eqa) u.searchParams.set('_eqa', eqa);
+      return u.toString();
+    };
+    const sharePath = (id: string) => `${D.base}r/${id}/`;
+
+    function draw(g: Json) {
+      const v = R.verdicts[g.verdict] || R.verdicts.test_first;
+      const comp = (g.competitors || []) as Json[];
+      const comps = comp.length
+        ? `<ul class="ic-comp">${comp.map((x, i) => { const u = safeUrl(x.url); return `<li class="tl-in" style="--d:${i * 60}ms"><div class="ic-ch"><b>${esc(x.name)}</b>${u ? `<a href="${esc(u)}" target="_blank" rel="nofollow noopener" data-ph="idea_check_competitor" data-ph-location="result">${esc(hostOf(u))}${ic.ext}</a>` : ''}</div>${x.what ? `<p>${esc(x.what)}</p>` : ''}${x.differ ? `<p class="ic-dif"><span>${esc(R.differ)}</span>${esc(x.differ)}</p>` : ''}</li>`; }).join('')}</ul>`
+        : `<p class="tl-empty">${esc(R.noCompetitors)}</p>`;
+      const plan = ((g.plan || []) as Json[]).map((p, i) => `<li class="tl-in" style="--d:${i * 60}ms"><span class="ic-day">${esc(p.days)}</span><p>${esc(p.do)}</p></li>`).join('');
+      const list = (xs: string[], icon: string) => (xs || []).map((x) => `<li>${icon}<span>${esc(x)}</span></li>`).join('');
+      const link = new URL(sharePath(g.id), location.origin).href;
+      const build = startHref(g.idea || g.title || '', D.mode === 'shared' ? 'shared' : 'result');
+      out!.innerHTML = `<div class="tl-rep ic-rep">
+        <div class="tl-card ic-top tl-in">
+          <p class="tl-host">${esc(R.heading)}${g.title ? ` · ${esc(g.title)}` : ''}</p>
+          <span class="ic-verdict" data-v="${esc(g.verdict)}">${g.verdict === 'promising' ? ic.check : g.verdict === 'rethink' ? ic.flag : ic.minus}${esc(v.title)}</span>
+          <h2>${esc(g.summary)}</h2>
+          <p class="ic-vtext">${esc(v.text)}</p>
+          <blockquote class="ic-idea"><span>${esc(R.yourIdea)}</span>${esc(g.idea)}</blockquote>
+          <p class="tl-date">${esc(fill(R.checked, { date: dateOf(g.created_at) }))}</p>
+          ${g.cached ? `<p class="tl-cached">${esc(R.cachedNote)}</p>` : ''}${g.sample ? `<p class="tl-cached">${esc(R.sampleNote)}</p>` : ''}
+        </div>
+        <div class="ic-grid">
+          <div class="tl-card tl-in"><h3 class="ic-h">${esc(R.who)}</h3><p>${esc(g.who)}</p>${g.first_customers ? `<h4 class="ic-h4">${esc(R.first)}</h4><p>${esc(g.first_customers)}</p>` : ''}</div>
+          <div class="tl-card tl-in"><h3 class="ic-h">${esc(R.problem)}</h3><p>${esc(g.problem)}</p>${g.today ? `<h4 class="ic-h4">${esc(R.today)}</h4><p>${esc(g.today)}</p>` : ''}</div>
+        </div>
+        <div><h3 class="tl-h">${esc(R.competitors)}</h3><p class="tl-sub">${esc(R.competitorsSub)}</p>${comps}</div>
+        <div class="tl-card ic-risk tl-in"><h3 class="ic-h">${esc(R.risk)}</h3><p class="ic-rk">${esc(g.risk)}</p>${g.risk_why ? `<p>${esc(g.risk_why)}</p>` : ''}</div>
+        <div><h3 class="tl-h">${esc(R.plan)}</h3><ol class="ic-plan">${plan}</ol>${g.signal ? `<p class="ic-signal tl-in"><b>${esc(R.signal)}</b><span>${esc(g.signal)}</span></p>` : ''}</div>
+        <div><h3 class="tl-h">${esc(R.mvp)}</h3><div class="ic-grid ic-mvp">
+          <div class="tl-card tl-in"><h4 class="ic-h4">${esc(R.mvpIn)}</h4><ul class="ic-li in">${list(g.mvp_in, ic.check)}</ul></div>
+          <div class="tl-card tl-in"><h4 class="ic-h4">${esc(R.mvpOut)}</h4><ul class="ic-li">${list(g.mvp_out, ic.minus)}</ul>${g.price ? `<h4 class="ic-h4">${esc(R.price)}</h4><p>${esc(g.price)}</p>` : ''}</div>
+        </div></div>
+        <p class="ic-honest">${esc(R.honest)}</p>
+        <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(build)}" data-ph="idea_check_build" data-ph-location="${D.mode === 'shared' ? 'shared' : 'result'}">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
+        <div class="tl-share tl-in"><label for="ic-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="ic-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-ic-copy data-ph="idea_check_share_copy" data-ph-location="result">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-ic-again data-ph="idea_check_again" data-ph-location="result">${esc(R.share.again)}</a></div></div>
+        <a class="tl-card ic-cross" href="${esc(D.privacy)}" data-ph="tools_hub_click" data-ph-location="idea-result" data-ph-tool="privacy-policy-generator"><span>${esc(D.c.related.privacy)}</span>${ic.arrow}</a>
+      </div>`;
+      rep!.hidden = false;
+      const items = [...out!.querySelectorAll<HTMLElement>('.tl-in')];
+      if (reduce || !document.documentElement.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
+      else items.forEach((x, i) => { if (!x.style.getPropertyValue('--d')) x.style.setProperty('--d', `${Math.min(i, 8) * 60}ms`); requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))); });
+      const cb = out!.querySelector<HTMLButtonElement>('[data-ic-copy]');
+      cb?.addEventListener('click', async () => {
+        const i = out!.querySelector<HTMLInputElement>('#ic-share')!; let ok = false;
+        try { await navigator.clipboard.writeText(i.value); ok = true; } catch { i.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+        if (!ok) return; const lab = cb.querySelector('span')!; cb.classList.add('done'); lab.textContent = R.share.copied;
+        setTimeout(() => { cb.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
+      });
+    }
+
+    const form = document.querySelector<HTMLFormElement>('[data-ic-form]');
+    if (form && D.mode === 'run') {
+      const ta = form.querySelector<HTMLTextAreaElement>('textarea')!;
+      const ph = form.querySelector<HTMLElement>('.ic-ph')!;
+      const count = form.querySelector<HTMLElement>('[data-ic-count]')!;
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      const err = form.querySelector<HTMLElement>('[data-ic-err]')!;
+      const tsBox = form.querySelector<HTMLElement>('[data-ic-ts]')!;
+      const fit = () => {
+        ta.style.height = 'auto';
+        const lh = parseFloat(getComputedStyle(ta).lineHeight) || 26, max = lh * 8 + 24;
+        ta.style.height = Math.min(Math.max(ta.scrollHeight, lh * 3 + 24), max) + 'px';
+        ta.style.overflowY = ta.scrollHeight > max ? 'auto' : 'hidden';
+        form.classList.toggle('empty', !ta.value);
+        const n = ta.value.length; count.textContent = n > 1200 ? fill(FM.count, { n }) : '';
+      };
+      ta.addEventListener('input', () => { fit(); if (!err.hidden) say(''); });
+      // Turnstile: loaded on the first touch of the form, rendered interaction-only (most people never see it).
+      let tsTok = '', tsId: unknown = null, tsLoad: Promise<void> | null = null, tsWait: ((v?: unknown) => void) | null = null;
+      const loadTs = () => {
+        if (tsLoad) return tsLoad;
+        tsLoad = new Promise<void>((res) => {
+          w.onEqTs = () => {
+            try { tsId = w.turnstile!.render(tsBox, { sitekey: D.ts, theme: 'auto', size: 'flexible', appearance: 'interaction-only', callback: (t: string) => { tsTok = t; tsWait?.(); }, 'expired-callback': () => { tsTok = ''; }, 'error-callback': () => { tsTok = ''; tsWait?.(); } }); } catch { /* the server says so */ }
+            res();
+          };
+          const s = document.createElement('script');
+          s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onEqTs&render=explicit';
+          s.async = true; s.onerror = () => res();
+          document.head.appendChild(s);
+        });
+        return tsLoad;
+      };
+      const token = async () => {
+        await Promise.race([loadTs(), new Promise((r) => setTimeout(r, 8000))]);
+        if (!tsTok) await new Promise((r) => { tsWait = r; setTimeout(r, 15000); });
+        tsWait = null;
+        return tsTok;
+      };
+      form.addEventListener('focusin', () => { loadTs(); }, { once: true });
+      const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
+
+      // Examples: rotate in the placeholder while the box is empty and on screen; a tap fills the box.
+      const EX: string[] = FM.examples || [];
+      let pi = -1;
+      if (document.documentElement.classList.contains('mo') && EX.length) {
+        let visible = false;
+        new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(form);
+        setInterval(() => {
+          if (!visible || document.hidden || ta.value) return;
+          ph.classList.add('out');
+          setTimeout(() => { pi = (pi + 1) % EX.length; ph.textContent = EX[pi]; ph.classList.remove('out'); }, 260);
+        }, 3800);
+      }
+      form.querySelectorAll<HTMLButtonElement>('[data-ic-ex]').forEach((b) => b.addEventListener('click', () => {
+        ta.value = b.dataset.icEx || ''; fit(); ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+        track('idea_check_example', {});
+      }));
+      ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); form.requestSubmit(); } });
+
+      async function check() {
+        say('');
+        const idea = ta.value.trim();
+        if (idea.replace(/[^\p{L}\p{N}]+/gu, '').length < 10) { say(FM.errShort); ta.focus(); return; }
+        btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+        own('fn', 'tool_run'); track('idea_check_run', { length: idea.length });
+        const tok = await token();
+        rep!.hidden = true; startSteps();
+        run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        let res: Response | null = null, g: Json | null = null;
+        try {
+          res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ idea, lang: D.code, token: tok }), signal: AbortSignal.timeout(120000) });
+          g = await res.json().catch(() => null);
+        } catch { /* below */ }
+        stopSteps();
+        btn.disabled = false; btn.removeAttribute('aria-busy');
+        try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';
+        if (!res || !res.ok || !g || !g.id) {
+          const e = g?.error;
+          const m = e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed;
+          track('idea_check_error', { error: e || (res ? `http_${res.status}` : 'network') });
+          say(m); return;
+        }
+        own('fn', 'tool_result'); own('ev', 'idea_verdict', String(g.verdict));
+        track('idea_check_result', { verdict: g.verdict, competitors: (g.competitors || []).length, cached: !!g.cached });
+        draw(g);
+        try { history.replaceState(null, '', sharePath(g.id)); } catch { /* fine */ }
+        setTimeout(() => { rep!.focus({ preventScroll: true }); rep!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
+      }
+      form.addEventListener('submit', (e) => { e.preventDefault(); check(); });
+      out.addEventListener('click', (e) => {
+        const a = (e.target as Element).closest('[data-ic-again]'); if (!a) return;
+        e.preventDefault(); rep!.hidden = true; ta.value = ''; fit(); history.replaceState(null, '', D.base);
+        form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(() => ta.focus(), reduce ? 0 : 300);
+      });
+      const q = new URLSearchParams(location.search);
+      if (q.get('idea')) ta.value = q.get('idea')!.slice(0, 1500);
+      fit();
+    }
+
+    // A shared check: /tools/idea-validator/r/<id>/ (or ?r=<id> on the tool page).
+    const m = location.pathname.match(/\/r\/([A-Za-z0-9]{6,16})\/?$/);
+    const rid = m ? m[1] : new URLSearchParams(location.search).get('r');
+    if (rid && /^[A-Za-z0-9]{6,16}$/.test(rid)) {
+      out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
+      fetch(`${D.api}/${rid}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
+        if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`; return; }
+        track('idea_check_shared_view', { verdict: g.verdict }); draw(g);
+      }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
+    } else if (D.mode === 'shared') {
+      out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}<br><a href="${esc(D.base)}">${esc(R.share.again)}</a></p>`;
+    }
+  }
+</script>

@@ -1,0 +1,271 @@
+---
+// Privacy policy generator: the questions (chips with a fill and a check, plain text fields; no native pickers), and the
+// policy written as you answer (src/data/privacygen/generate.ts, the launch kit's templates; no AI, nothing leaves the
+// browser). The page opens with an example policy rendered at build time, so the HTML is complete without JavaScript.
+// Copy / .md / .html; the laws it cites; "not legal advice"; and a way to have equipe host it.
+// Answers are kept in this browser (localStorage) so a reload does not lose them.
+// Events: PostHog privacy_gen_start / privacy_gen_copy / privacy_gen_download; own funnel tool_run (first answer),
+// tool_result (copy or download) and click:<data-ph>.
+import { privacyCopy, policyWords, LAWS, POLICY_LANGS } from '../data/privacygen/copy';
+import { policyBlocks, policyHtml, EXAMPLE, COLLECT, REGIONS, ANALYTICS, AD_TOOLS, PAY_TOOLS } from '../data/privacygen/generate';
+import { SITE } from '../data/site';
+import { LOCALES } from '../i18n/locales';
+import { getLocale, type LocaleCode } from '../i18n';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const info = getLocale(code);
+const c = privacyCopy(code);
+const F = c.form;
+const W = policyWords(code);
+const ph = { company: c.out.placeholderCompany, site: c.out.placeholderSite, email: c.out.placeholderEmail };
+const date = new Intl.DateTimeFormat(info.lang, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date());
+const first = policyHtml(policyBlocks({ ...EXAMPLE, date }, W, ph), W, date);
+const check = '<svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const sv = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const I = {
+  copy: sv('<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>'),
+  down: sv('<path d="M12 4v12"/><path d="m6 11 6 6 6-6"/><path d="M5 20h14"/>'),
+  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  info: sv('<circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'),
+};
+const data = {
+  code, lang: info.lang, ph, start: SITE.start, idea: c.host.idea,
+  c: { out: c.out, legal: c.legal },
+  laws: LAWS,
+};
+const chip = (group: string, value: string, label: string, kind: 'multi' | 'one', on = false) =>
+  `<button type="button" class="pg-chip" data-g="${group}" data-v="${value}" ${kind === 'one' ? `role="radio" aria-checked="${on}"` : `aria-pressed="${on}"`}>${check}<span>${label}</span></button>`;
+---
+<section class="tl-hero pg-hero"><div class="wrap">
+  <h1>{c.page.h1}</h1>
+  <p class="tl-lead">{c.page.lead}</p>
+</div></section>
+
+<section class="pg-app" data-pg><div class="wrap pg-grid">
+  <form class="pg-form" novalidate data-pg-form autocomplete="off">
+    <fieldset class="pg-card">
+      <legend>{F.about}</legend>
+      <div class="pg-fields">
+        <div class="tl-field"><label for="pg-company">{F.company}</label><input id="pg-company" name="company" type="text" autocomplete="organization" maxlength="80" placeholder={F.companyPh} /></div>
+        <div class="tl-field"><label for="pg-site">{F.site}</label><input id="pg-site" name="site" type="text" maxlength="80" placeholder={F.sitePh} /></div>
+        <div class="tl-field"><label for="pg-email">{F.email}</label><input id="pg-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder={F.emailPh} /></div>
+        <div class="tl-field"><label for="pg-url">{F.url}<small>{F.optional}</small></label><input id="pg-url" name="url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" maxlength="120" placeholder={F.urlPh} /></div>
+        <div class="tl-field"><label for="pg-country">{F.country}<small>{F.optional}</small></label><input id="pg-country" name="country" type="text" autocomplete="country-name" maxlength="60" placeholder={F.countryPh} /></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="pg-card">
+      <legend>{F.collect}</legend>
+      <p class="pg-hint">{F.collectHint}</p>
+      <div class="pg-chips" role="group" aria-label={F.collect}>
+        <Fragment set:html={COLLECT.map((k) => chip('collect', k, F.collectItems[k], 'multi', EXAMPLE.collect.includes(k))).join('')} />
+      </div>
+    </fieldset>
+
+    <fieldset class="pg-card">
+      <legend>{F.analytics}</legend>
+      <p class="pg-hint">{F.analyticsHint}</p>
+      <div class="pg-chips" role="radiogroup" aria-label={F.analytics}>
+        <Fragment set:html={ANALYTICS.map((k) => chip('analytics', k, F.analyticsItems[k], 'one', EXAMPLE.analytics === k)).join('')} />
+      </div>
+      <div class="tl-field pg-more" data-show="analytics:other" hidden><label for="pg-antool">{F.analyticsTool}</label><input id="pg-antool" name="analyticsTool" type="text" maxlength="60" placeholder={F.analyticsToolPh} /></div>
+      <h3 class="pg-sub">{F.ads}</h3>
+      <p class="pg-hint">{F.adsHint}</p>
+      <div class="pg-chips" role="group" aria-label={F.ads}>
+        <Fragment set:html={AD_TOOLS.map((k) => chip('ads', k, k, 'multi')).join('')} />
+      </div>
+    </fieldset>
+
+    <fieldset class="pg-card">
+      <legend>{F.hosting}</legend>
+      <div class="pg-fields one">
+        <div class="tl-field"><label class="sr-only" for="pg-hosting">{F.hosting}</label><input id="pg-hosting" name="hosting" type="text" maxlength="60" placeholder={F.hostingPh} /></div>
+      </div>
+      <div class="pg-more" data-show="collect:payments" hidden>
+        <h3 class="pg-sub">{F.payments}</h3>
+        <div class="pg-chips" role="group" aria-label={F.payments}>
+          <Fragment set:html={PAY_TOOLS.map((k) => chip('payments', k, k, 'multi')).join('')} />
+        </div>
+        <div class="tl-field pg-other"><label class="sr-only" for="pg-payother">{F.paymentsOther}</label><input id="pg-payother" name="payOther" type="text" maxlength="40" placeholder={F.paymentsOtherPh} /></div>
+      </div>
+      <div class="tl-field pg-other"><label for="pg-others">{F.others}<small>{F.optional}</small></label><input id="pg-others" name="others" type="text" maxlength="300" placeholder={F.othersPh} /></div>
+    </fieldset>
+
+    <fieldset class="pg-card">
+      <legend>{F.regions}</legend>
+      <p class="pg-hint">{F.regionsHint}</p>
+      <div class="pg-chips" role="group" aria-label={F.regions}>
+        <Fragment set:html={REGIONS.map((k) => chip('regions', k, F.regionItems[k], 'multi')).join('')} />
+      </div>
+      <div class="tl-field pg-more" data-show="regions:kr" hidden><label for="pg-officer">{F.officer}</label><input id="pg-officer" name="officer" type="text" maxlength="80" placeholder={F.officerPh} /></div>
+    </fieldset>
+
+    <fieldset class="pg-card">
+      <legend>{F.lang}</legend>
+      <div class="pg-chips" role="radiogroup" aria-label={F.lang}>
+        <Fragment set:html={POLICY_LANGS.map((l) => chip('lang', l, LOCALES.find((x) => x.code === l)!.name, 'one', l === code)).join('')} />
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="pg-side">
+    <div class="pg-out">
+      <div class="pg-outh">
+        <div><h2>{c.out.title}</h2><p aria-live="polite" data-pg-status>{c.out.live}</p></div>
+        <div class="pg-acts">
+          <button type="button" class="btn ghost" data-pg-copy data-ph="privacy_gen_copy" data-ph-location="tool"><Fragment set:html={I.copy} /><span>{c.out.copy}</span></button>
+          <button type="button" class="btn ghost" data-pg-dl="md" data-ph="privacy_gen_download" data-ph-location="md"><Fragment set:html={I.down} /><span>{c.out.md}</span></button>
+          <button type="button" class="btn ghost" data-pg-dl="html" data-ph="privacy_gen_download" data-ph-location="html"><Fragment set:html={I.down} /><span>{c.out.html}</span></button>
+        </div>
+      </div>
+      <article class="pg-doc" lang={info.lang} data-pg-doc set:html={first} tabindex="0" aria-label={c.out.title} />
+    </div>
+    <div class="pg-legal">
+      <Fragment set:html={I.info} />
+      <div>
+        <h3>{c.legal.title}</h3>
+        <p>{c.legal.text}</p>
+        <h4>{c.legal.lawsTitle}</h4>
+        <ul data-pg-laws><li class="pg-none">{c.legal.none}</li></ul>
+      </div>
+    </div>
+    <div class="tl-cta pg-host">
+      <h3>{c.host.title}</h3>
+      <p>{c.host.text}</p>
+      <a class="btn primary lg" href={`${SITE.start}?utm_source=equipe.im&utm_medium=tool&utm_campaign=privacy-policy-generator&utm_content=host`} data-pg-host data-ph="privacy_gen_host" data-ph-location="tool"><span>{c.host.button}</span><Fragment set:html={I.arrow} /></a>
+      <small>{c.host.note}</small>
+    </div>
+  </div>
+</div></section>
+
+<script type="application/json" data-pg-data set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<script>
+  import { policyBlocks, policyHtml, policyMd, policyPage, type Answers, type PolicyWords, type Region, type Collect } from '../data/privacygen/generate';
+  import { lawsFor } from '../data/privacygen/generate';
+  type Json = Record<string, any>;
+  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; __eqaEnc?: () => string };
+  const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
+  const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
+  const esc = (s: string) => s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
+  // Each language's words load only when that language is picked (the page's own language is already in the page).
+  const kits = import.meta.glob<{ default: Record<string, string> }>('../data/privacygen/policy/kit-*.json');
+  const extras = import.meta.glob<{ default: Record<string, string> }>('../data/privacygen/policy/extra-*.ts');
+  const cache: Record<string, PolicyWords> = {};
+  async function words(l: string): Promise<PolicyWords> {
+    if (cache[l]) return cache[l];
+    const [ke, xe, k, x] = await Promise.all([kits['../data/privacygen/policy/kit-en.json'](), extras['../data/privacygen/policy/extra-en.ts'](), (kits[`../data/privacygen/policy/kit-${l}.json`] || kits['../data/privacygen/policy/kit-en.json'])(), (extras[`../data/privacygen/policy/extra-${l}.ts`] || extras['../data/privacygen/policy/extra-en.ts'])()]);
+    return (cache[l] = { ...ke.default, ...xe.default, ...k.default, ...x.default } as PolicyWords);
+  }
+  const LANG_TAG: Record<string, string> = { en: 'en', ko: 'ko', ja: 'ja', 'zh-CN': 'zh-CN', es: 'es', 'pt-BR': 'pt-BR', de: 'de', fr: 'fr' };
+
+  const el = document.querySelector<HTMLScriptElement>('[data-pg-data]');
+  const D = (el ? JSON.parse(el.textContent || '{}') : null) as Json;
+  const form = document.querySelector<HTMLFormElement>('[data-pg-form]');
+  const doc = document.querySelector<HTMLElement>('[data-pg-doc]');
+  if (D && form && doc) {
+    const O = D.c.out, LG = D.c.legal;
+    const status = document.querySelector<HTMLElement>('[data-pg-status]')!;
+    const lawsEl = document.querySelector<HTMLElement>('[data-pg-laws]')!;
+    const host = document.querySelector<HTMLAnchorElement>('[data-pg-host]')!;
+    const KEY = 'eq_pg_answers';
+    const input = (n: string) => form.querySelector<HTMLInputElement>(`[name="${n}"]`)!;
+    const chips = (g: string) => [...form.querySelectorAll<HTMLButtonElement>(`.pg-chip[data-g="${g}"]`)];
+    const picked = (g: string) => chips(g).filter((b) => b.getAttribute('aria-pressed') === 'true' || b.getAttribute('aria-checked') === 'true').map((b) => b.dataset.v!);
+    const setChip = (b: HTMLButtonElement, on: boolean) => b.setAttribute(b.hasAttribute('aria-checked') ? 'aria-checked' : 'aria-pressed', String(on));
+    let lang = picked('lang')[0] || D.code;
+    let started = false;
+
+    const answers = (): Answers => {
+      const pays = [...picked('payments'), input('payOther').value.trim()].filter(Boolean);
+      return {
+        company: input('company').value, site: input('site').value, url: input('url').value, email: input('email').value, country: input('country').value, officer: input('officer').value,
+        collect: picked('collect') as Collect[], analytics: (picked('analytics')[0] || 'none') as Answers['analytics'], analyticsTool: input('analyticsTool').value,
+        ads: picked('ads'), payments: pays, hosting: input('hosting').value, others: input('others').value, regions: picked('regions') as Region[], date: '',
+      };
+    };
+    const today = () => new Intl.DateTimeFormat(LANG_TAG[lang] || 'en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date());
+    let last: { md: string; html: string; page: string } | null = null;
+
+    async function render() {
+      const a = answers();
+      // Follow-up questions show only when they apply.
+      form!.querySelectorAll<HTMLElement>('[data-show]').forEach((x) => { const [g, v] = x.dataset.show!.split(':'); x.hidden = !picked(g).includes(v); });
+      const W = await words(lang);
+      const date = today();
+      const blocks = policyBlocks({ ...a, date }, W, D.ph);
+      const html = policyHtml(blocks, W, date);
+      last = { md: policyMd(blocks, W, date), html, page: policyPage(blocks, W, date, LANG_TAG[lang] || 'en') };
+      doc!.innerHTML = html;
+      doc!.lang = LANG_TAG[lang] || 'en';
+      // Placeholders still in the text are marked so they stand out.
+      doc!.querySelectorAll('p, li').forEach((n) => { if (/\[[^\]]+\]/.test(n.textContent || '')) n.innerHTML = n.innerHTML.replace(/(\[[^\]<]+\])/g, '<mark>$1</mark>'); });
+      status.textContent = !a.company.trim() || !a.email.trim() ? O.missing : O.live;
+      const cookies = ['ga', 'other'].includes(a.analytics) || a.ads.length > 0;
+      const laws = lawsFor(a.regions, a.collect, cookies);
+      lawsEl.innerHTML = laws.length ? laws.map((k) => `<li><a href="${esc(D.laws[k])}" target="_blank" rel="noopener">${esc(LG.laws[k])}</a></li>`).join('') : `<li class="pg-none">${esc(LG.none)}</li>`;
+      const name = a.site.trim() || a.url.trim() || a.company.trim();
+      const u = new URL(host.href);
+      if (name) u.searchParams.set('idea', String(D.idea).replace('{name}', name)); else u.searchParams.delete('idea');
+      const eqa = w.__eqaEnc?.(); if (eqa) u.searchParams.set('_eqa', eqa);
+      host.href = u.toString();
+      try { localStorage.setItem(KEY, JSON.stringify({ ...a, payOther: input('payOther').value, lang })); } catch { /* fine */ }
+    }
+    const changed = () => {
+      if (!started) { started = true; own('fn', 'tool_run'); track('privacy_gen_start', {}); }
+      render();
+    };
+
+    form.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('.pg-chip'); if (!b) return;
+      const g = b.dataset.g!;
+      if (b.hasAttribute('aria-checked')) { chips(g).forEach((x) => setChip(x, x === b)); if (g === 'lang') lang = b.dataset.v!; }
+      else setChip(b, b.getAttribute('aria-pressed') !== 'true');
+      changed();
+    });
+    // Arrow keys move within a one-choice group (radio behaviour).
+    form.addEventListener('keydown', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('.pg-chip[aria-checked]'); if (!b || !/^Arrow(Left|Right|Up|Down)$/.test(e.key)) return;
+      e.preventDefault();
+      const list = chips(b.dataset.g!), i = list.indexOf(b), n = list[(i + (/Right|Down/.test(e.key) ? 1 : -1) + list.length) % list.length];
+      n.focus(); n.click();
+    });
+    let tm = 0;
+    form.addEventListener('input', () => { clearTimeout(tm); tm = window.setTimeout(changed, 120); });
+    form.addEventListener('submit', (e) => e.preventDefault());
+
+    const done = (kind: string) => { own('fn', 'tool_result'); own('ev', 'privacy_gen_out', kind); };
+    const copyBtn = document.querySelector<HTMLButtonElement>('[data-pg-copy]')!;
+    copyBtn.addEventListener('click', async () => {
+      if (!last) await render();
+      let ok = false;
+      try { await navigator.clipboard.writeText(last!.md); ok = true; } catch { ok = false; }
+      if (!ok) return;
+      const lab = copyBtn.querySelector('span')!; copyBtn.classList.add('done'); lab.textContent = O.copied;
+      setTimeout(() => { copyBtn.classList.remove('done'); lab.textContent = O.copy; }, 2000);
+      done('copy'); track('privacy_gen_copy', { lang });
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-pg-dl]').forEach((b) => b.addEventListener('click', async () => {
+      if (!last) await render();
+      const kind = b.dataset.pgDl!;
+      const blob = new Blob([kind === 'md' ? last!.md : last!.page], { type: kind === 'md' ? 'text/markdown;charset=utf-8' : 'text/html;charset=utf-8' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `privacy-policy.${kind}`;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      done(kind); track('privacy_gen_download', { format: kind, lang });
+    }));
+
+    // Answers from an earlier visit come back.
+    let saved: Json | null = null;
+    try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { saved = null; }
+    if (saved && typeof saved === 'object') {
+      for (const n of ['company', 'site', 'url', 'email', 'country', 'officer', 'analyticsTool', 'hosting', 'others', 'payOther']) if (typeof saved[n] === 'string') input(n).value = saved[n].slice(0, 300);
+      const set = (g: string, vals: unknown) => { if (Array.isArray(vals)) chips(g).forEach((b) => setChip(b, vals.includes(b.dataset.v))); };
+      set('collect', saved.collect); set('ads', saved.ads); set('regions', saved.regions);
+      set('payments', Array.isArray(saved.payments) ? saved.payments : []);
+      if (typeof saved.analytics === 'string') set('analytics', [saved.analytics]);
+      if (typeof saved.lang === 'string' && chips('lang').some((b) => b.dataset.v === saved!.lang)) { lang = saved.lang; set('lang', [lang]); }
+      render();
+    } else render();
+  }
+</script>
