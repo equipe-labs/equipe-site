@@ -3,17 +3,19 @@
 import { TOOLS, TOOL_ICONS, toolCopy } from '../data/tools/index';
 import { hubCopy } from '../data/toolshub';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
+// Its own styles (and the .tl tokens), so it looks right on any page, not only those that import tools.css.
+import '../styles/tools.css';
 
 interface Props { code: LocaleCode; current: string; max?: number }
 const { code, current, max = 3 } = Astro.props;
 const info = getLocale(code);
 const H = hubCopy(code);
 const list = TOOLS.filter((t) => t.slug !== current).slice(0, max);
-const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
-const icon = (k: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${TOOL_ICONS[k] ?? TOOL_ICONS.wrench}</svg>`;
+const arrow = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const icon = (k: string) => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">${TOOL_ICONS[k] ?? TOOL_ICONS.wrench}</svg>`;
 ---
 {list.length > 0 && (
-  <section class="tl-rel"><div class="wrap">
+  <section class="tl tl-rel"><div class="wrap">
     <div class="tl-rel-h"><h2>{H.related}</h2><a href={subPath(info, 'tools')} data-ph="tools_hub_link" data-ph-location={`related-${current}`}>{H.all}</a></div>
     <ul class="tl-grid">
       {list.map((t) => { const c = toolCopy(t, code); return (
