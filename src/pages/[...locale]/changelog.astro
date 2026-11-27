@@ -7,7 +7,8 @@ export function getStaticPaths() { return available.map((l) => ({ params: { loca
 const { code } = Astro.props as { code: LocaleCode };
 const C = getMessages(code).pages.changelog;
 ---
-<PageShell code={code} page="changelog" title={C.title} description={C.desc}>
+{/* The release notes are English in every language: only /changelog/ is indexed, the copies are not (scripts/seo-audit.mjs). */}
+<PageShell code={code} page="changelog" title={C.title} description={C.desc} langs={['en']} noindex={code !== 'en'}>
   <section class="pg-h"><div class="wrap"><h1>{C.h1}</h1><p class="pg-lead">{C.lead}</p></div></section>
   <section class="pg-s"><div class="wrap">
     <p class="pg-note" style="margin:0 0 24px;text-align:left">{C.note}</p>

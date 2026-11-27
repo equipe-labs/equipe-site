@@ -29,7 +29,8 @@ const links = [
   { href: SITE.repo, label: 'GitHub' },
 ];
 ---
-<PageShell code={code} page="about" title={A.title} description={A.desc}>
+{/* Languages without their own About copy show the English text: kept out of search so they are not duplicates of /about/ (scripts/seo-audit.mjs). */}
+<PageShell code={code} page="about" title={A.title} description={A.desc} langs={Object.keys(ABOUT) as LocaleCode[]} noindex={!ABOUT[lang]}>
   <div class="ab">
     <section class="pg-h ab-hero"><div class="wrap">
       <h1 class="ld">{C.h1}</h1>
@@ -40,6 +41,7 @@ const links = [
       <div class="rv"><h2>{C.storyH}</h2><a class="ab-gh" href={SITE.repo} rel="noopener">{C.gh}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></a></div>
       <div class="ab-st">
         {C.story.map((p, i) => <p class="rv" style={`--i:${i + 1}`}>{p}</p>)}
+        {C.nameNote && <p class="rv ab-name" id="name" style={`--i:${C.story.length + 1}`}>{C.nameNote}</p>}
         <div class="ab-path rv" style="--i:3">
           <div class="ab-stage"><b>{C.stageA[0]}</b><span>{C.stageA[1]}</span></div>
           <svg class="ab-arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>

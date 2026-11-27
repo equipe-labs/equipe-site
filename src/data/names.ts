@@ -99,7 +99,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'Café', bakery: 'Bakery', restaurant: 'Restaurant', beauty: 'Beauty or salon', fitness: 'Fitness', shop: 'Shop', app: 'App or software', agency: 'Agency or studio', health: 'Health or clinic', consulting: 'Consulting', photo: 'Photo or video', pets: 'Pets', education: 'Education', home: 'Home services', other: 'Something else' },
     vibes: { friendly: 'Friendly', premium: 'Premium', playful: 'Playful', modern: 'Modern', classic: 'Classic', bold: 'Bold', calm: 'Calm', natural: 'Natural' },
     progress: ['Thinking of names that fit', 'Checking each domain with the registrar', 'Putting the free ones first'],
-    progressNote: 'This takes about 15 seconds.',
+    progressNote: 'Usually about 15 s',
     result: {
       title: 'Names for your business',
       sub: 'For: {about}',
@@ -186,7 +186,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: '카페', bakery: '빵집', restaurant: '음식점', beauty: '미용·뷰티', fitness: '운동·피트니스', shop: '쇼핑몰·가게', app: '앱·소프트웨어', agency: '에이전시·스튜디오', health: '병원·건강', consulting: '컨설팅', photo: '사진·영상', pets: '반려동물', education: '교육·학원', home: '생활 서비스', other: '기타' },
     vibes: { friendly: '친근한', premium: '고급스러운', playful: '재미있는', modern: '세련된', classic: '클래식한', bold: '강렬한', calm: '차분한', natural: '자연스러운' },
     progress: ['어울리는 이름을 고르고 있어요', '도메인을 하나씩 확인하고 있어요', '비어 있는 이름을 앞으로 모으고 있어요'],
-    progressNote: '15초쯤 걸려요.',
+    progressNote: '보통 15초쯤 걸려요',
     result: {
       title: '추천 이름',
       sub: '사업: {about}',
@@ -273,7 +273,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'カフェ', bakery: 'パン屋', restaurant: '飲食店', beauty: '美容・サロン', fitness: 'フィットネス', shop: 'ショップ', app: 'アプリ・ソフト', agency: '制作会社・スタジオ', health: '医療・健康', consulting: 'コンサル', photo: '写真・映像', pets: 'ペット', education: '教育・教室', home: '暮らしのサービス', other: 'その他' },
     vibes: { friendly: '親しみやすい', premium: '上質', playful: '遊び心', modern: 'モダン', classic: 'クラシック', bold: '力強い', calm: '落ち着いた', natural: 'ナチュラル' },
     progress: ['合う名前を考えています', 'ドメインを一つずつ確認しています', '空いている名前を前に並べています'],
-    progressNote: '15秒ほどかかります。',
+    progressNote: 'ふつう15秒ほど',
     result: {
       title: 'おすすめの名前',
       sub: '事業：{about}',
@@ -360,7 +360,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: '咖啡店', bakery: '面包店', restaurant: '餐厅', beauty: '美容美发', fitness: '健身', shop: '商店', app: '应用或软件', agency: '工作室或代理', health: '诊所或健康', consulting: '咨询', photo: '摄影或视频', pets: '宠物', education: '教育培训', home: '家政服务', other: '其他' },
     vibes: { friendly: '亲切', premium: '高端', playful: '有趣', modern: '现代', classic: '经典', bold: '大胆', calm: '沉静', natural: '自然' },
     progress: ['正在想合适的名字', '正在逐个查询域名', '把可注册的排在前面'],
-    progressNote: '大约需要 15 秒。',
+    progressNote: '通常约 15 秒',
     result: {
       title: '推荐的名字',
       sub: '生意：{about}',
@@ -447,7 +447,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'Cafetería', bakery: 'Panadería', restaurant: 'Restaurante', beauty: 'Belleza o salón', fitness: 'Fitness', shop: 'Tienda', app: 'App o software', agency: 'Agencia o estudio', health: 'Salud o clínica', consulting: 'Consultoría', photo: 'Foto o vídeo', pets: 'Mascotas', education: 'Educación', home: 'Servicios del hogar', other: 'Otro' },
     vibes: { friendly: 'Cercano', premium: 'Premium', playful: 'Divertido', modern: 'Moderno', classic: 'Clásico', bold: 'Atrevido', calm: 'Sereno', natural: 'Natural' },
     progress: ['Pensando nombres que encajen', 'Comprobando cada dominio con el registrador', 'Poniendo primero los libres'],
-    progressNote: 'Tarda unos 15 segundos.',
+    progressNote: 'Suele tardar unos 15 s',
     result: {
       title: 'Nombres para tu negocio',
       sub: 'Para: {about}',
@@ -534,7 +534,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'Cafeteria', bakery: 'Padaria', restaurant: 'Restaurante', beauty: 'Beleza ou salão', fitness: 'Fitness', shop: 'Loja', app: 'App ou software', agency: 'Agência ou estúdio', health: 'Saúde ou clínica', consulting: 'Consultoria', photo: 'Foto ou vídeo', pets: 'Pets', education: 'Educação', home: 'Serviços para casa', other: 'Outro' },
     vibes: { friendly: 'Acolhedor', premium: 'Premium', playful: 'Divertido', modern: 'Moderno', classic: 'Clássico', bold: 'Ousado', calm: 'Tranquilo', natural: 'Natural' },
     progress: ['Pensando em nomes que combinam', 'Verificando cada domínio com o registrador', 'Colocando os livres primeiro'],
-    progressNote: 'Leva uns 15 segundos.',
+    progressNote: 'Costuma levar uns 15 s',
     result: {
       title: 'Nomes para o seu negócio',
       sub: 'Para: {about}',
@@ -621,7 +621,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'Café', bakery: 'Bäckerei', restaurant: 'Restaurant', beauty: 'Beauty oder Salon', fitness: 'Fitness', shop: 'Shop', app: 'App oder Software', agency: 'Agentur oder Studio', health: 'Gesundheit oder Praxis', consulting: 'Beratung', photo: 'Foto oder Video', pets: 'Haustiere', education: 'Bildung', home: 'Haus-Service', other: 'Etwas anderes' },
     vibes: { friendly: 'Freundlich', premium: 'Edel', playful: 'Verspielt', modern: 'Modern', classic: 'Klassisch', bold: 'Kräftig', calm: 'Ruhig', natural: 'Natürlich' },
     progress: ['Passende Namen finden', 'Jede Domain beim Registrar prüfen', 'Freie Namen nach vorne'],
-    progressNote: 'Das dauert etwa 15 Sekunden.',
+    progressNote: 'Meist etwa 15 s',
     result: {
       title: 'Namen für dein Unternehmen',
       sub: 'Für: {about}',
@@ -708,7 +708,7 @@ export const NAMES: Partial<Record<LocaleCode, NamesCopy>> & { en: NamesCopy } =
     kinds: { cafe: 'Café', bakery: 'Boulangerie', restaurant: 'Restaurant', beauty: 'Beauté ou salon', fitness: 'Sport', shop: 'Boutique', app: 'Appli ou logiciel', agency: 'Agence ou studio', health: 'Santé ou cabinet', consulting: 'Conseil', photo: 'Photo ou vidéo', pets: 'Animaux', education: 'Formation', home: 'Services à domicile', other: 'Autre' },
     vibes: { friendly: 'Chaleureux', premium: 'Haut de gamme', playful: 'Ludique', modern: 'Moderne', classic: 'Classique', bold: 'Audacieux', calm: 'Apaisant', natural: 'Naturel' },
     progress: ['Recherche de noms qui vous ressemblent', 'Vérification de chaque domaine', 'Les noms libres en premier'],
-    progressNote: 'Cela prend environ 15 secondes.',
+    progressNote: 'En général environ 15 s',
     result: {
       title: 'Des noms pour votre entreprise',
       sub: 'Pour : {about}',

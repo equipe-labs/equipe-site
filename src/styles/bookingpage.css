@@ -112,12 +112,37 @@ main.pg .bp-card h2, .bp-card h2 { display: flex; align-items: center; gap: 12px
 .bp-seg .pill { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: var(--accent); transition: transform 320ms var(--spring); }
 .bp-seg[data-v='desktop'] .pill { transform: translateX(100%); }
 
-.bp-stage { display: grid; place-items: center; padding: 24px; border-radius: var(--card-r); background: var(--code-bg); border: 1px solid var(--line); overflow: hidden; }
-.bp-dev { position: relative; width: 100%; max-width: 390px; height: min(680px, calc(100vh - 360px)); min-height: 460px; border-radius: 34px; border: 8px solid #1B1C20; background: #1B1C20; box-shadow: 0 28px 60px -30px rgb(10 10 12 / 0.5); overflow: hidden; transition: max-width 420ms var(--e), border-radius 420ms var(--e), border-width 420ms var(--e); }
-.bp-stage[data-device='desktop'] .bp-dev { max-width: 100%; border-radius: 14px; border-width: 1px; border-color: var(--line); background: var(--surface); }
-.bp-dev iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 26px; background: #FFFFFF; opacity: 0; transition: opacity 220ms var(--e); }
-.bp-stage[data-device='desktop'] .bp-dev iframe { border-radius: 13px; }
-.bp-dev iframe.on { opacity: 1; z-index: 1; }
+/* The stage holds both devices in one grid cell; the chosen one scales in, the other scales out (no reflow).
+   The phone is the site's iPhone (IPhone.astro, iphone.css): the booking page renders at a real 393 pt width and is
+   scaled to the drawn screen (--s, set by the script from the phone's width). The computer is a browser window whose
+   page renders at 1024 px and is scaled the same way. */
+.bp-stage { --s: 0.8; --ds: 0.5; position: relative; display: grid; place-items: start center; align-content: start; padding: 32px 16px; border-radius: var(--card-r); background: var(--code-bg); border: 1px solid var(--line); overflow: hidden; transition: height 460ms var(--e); }
+.bp-stage > * { grid-area: 1 / 1; transition: opacity 360ms var(--e), transform 520ms var(--spring), visibility 0s linear 0s; }
+.bp-stage[data-device='phone'] .bp-win, .bp-stage[data-device='desktop'] .bp-phone { opacity: 0; transform: scale(0.92); visibility: hidden; pointer-events: none; transition: opacity 260ms var(--e), transform 360ms var(--e), visibility 0s linear 360ms; }
+.bp-stage[data-device='desktop'] .bp-win { transform: none; }
+
+.bp-iph { --w: 340px; }
+.bp-iph .iph-content { overflow: hidden; }
+.bp-scr { position: absolute; inset: 0; }
+.bp-scr iframe { position: absolute; left: 0; top: 0; width: 393px; height: calc(100% / var(--s)); border: 0; background: #FFFFFF; transform: scale(var(--s)); transform-origin: 0 0; opacity: 0; transition: opacity 220ms var(--e); }
+.bp-scr iframe.on, .bp-wscr iframe.on { opacity: 1; z-index: 1; }
+/* the screen takes the page's look (status bar ink, Safari glass) */
+.bp-stage .iph-screen { background: #FFFFFF; color: #0A0A0B; transition: background-color 300ms var(--e), color 300ms var(--e); }
+.bp-stage[data-th='warm'] .iph-screen { background: #FBF7F1; color: #2B231D; }
+.bp-stage[data-th='night'] .iph-screen { background: #121316; color: #ECEAE4; }
+.bp-stage[data-th='night'] .iph-safari { --glass: rgb(40 41 46 / 0.82); --glass-ink: #ECEAE4; }
+
+.bp-win { width: 100%; border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 1px 2px rgb(10 10 12 / 0.06), 0 30px 60px -30px rgb(10 10 12 / 0.45); }
+.bp-wbar { display: grid; grid-template-columns: 64px minmax(0, 1fr) 64px; align-items: center; gap: 12px; height: 44px; padding: 0 14px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bp-lights { display: flex; gap: 8px; }
+.bp-lights i { width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.12); }
+.bp-lights i:nth-child(2) { background: #FEBC2E; }
+.bp-lights i:nth-child(3) { background: #28C840; }
+.bp-addr { justify-self: center; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-width: 0; height: 28px; padding: 0 14px; border-radius: 8px; background: var(--code-bg); color: var(--muted); font-size: 13px; }
+.bp-addr span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bp-addr svg { flex: none; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.bp-wscr { position: relative; aspect-ratio: 16 / 10.5; max-height: calc(100vh - 360px); min-height: 300px; overflow: hidden; background: #FFFFFF; }
+.bp-wscr iframe { position: absolute; left: 0; top: 0; width: 1024px; height: calc(100% / var(--ds)); border: 0; background: #FFFFFF; transform: scale(var(--ds)); transform-origin: 0 0; opacity: 0; transition: opacity 220ms var(--e); }
 
 .bp-share { display: grid; gap: 8px; justify-items: start; }
 .bp-sh { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: border-color 160ms var(--e), background-color 200ms var(--e), color 200ms var(--e); }
@@ -160,7 +185,6 @@ main.pg .bp-after h3, .bp-after h3 { margin: 0 0 8px; font-size: 18.5px; letter-
 @media (max-width: 959px) {
   .bp-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .bp-side { position: static; }
-  .bp-dev { height: 620px; }
 }
 @media (max-width: 640px) {
   .bp-card { padding: 20px 16px; }
@@ -170,10 +194,8 @@ main.pg .bp-after h3, .bp-after h3 { margin: 0 0 8px; font-size: 18.5px; letter-
   .bp-day .bp-hh { grid-column: 1 / -1; }
   .bp-hh .bp-dd { flex: 1; }
   .bp-day.off .bp-hh { grid-column: 2; }
-  .bp-stage { padding: 12px; }
-  .bp-dev { border-width: 6px; border-radius: 30px; }
-  .bp-dev iframe { border-radius: 24px; }
-  .bp-dev { height: 600px; min-height: 0; }
+  .bp-stage { padding: 24px 8px; }
+  .bp-wscr { min-height: 240px; }
   .bp-pvbar { flex-wrap: wrap; }
   .bp-after { grid-template-columns: minmax(0, 1fr); }
   .bp-live { padding: 20px 16px; }
@@ -181,4 +203,5 @@ main.pg .bp-after h3, .bp-after h3 { margin: 0 0 8px; font-size: 18.5px; letter-
 }
 @media (prefers-reduced-motion: reduce) {
   .bp *, .bp-pop { transition: none !important; animation: none !important; }
+  .bp-stage[data-device] > * { transition: none !important; }
 }

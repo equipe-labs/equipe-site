@@ -11,7 +11,8 @@ const { code } = Astro.props as { code: LocaleCode };
 const t = getMessages(code);
 const C = t.pages.cj;
 ---
-<PageShell code={code} page="customers/cj" title={C.title} description={C.desc}>
+{/* A two-line story until CJ approves a longer one: too thin for search, kept out of the index (scripts/seo-audit.mjs). */}
+<PageShell code={code} page="customers/cj" title={C.title} description={C.desc} noindex>
   <section class="pg-h"><div class="wrap">
     <img class="case-logo" src="/brand/customers/cj.svg" alt="CJ" width="66" height="56" decoding="async" />
     <h1>{C.h1}</h1>

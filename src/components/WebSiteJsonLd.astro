@@ -1,6 +1,6 @@
 ---
 import JsonLd from './JsonLd.astro';
-import { SITE } from '../data/site';
+import { SITE, BRAND } from '../data/site';
 
 interface Props {
   lang: string;
@@ -15,6 +15,7 @@ const { lang, url, description } = Astro.props;
     '@type': 'WebSite',
     '@id': `${url}#website`,
     name: SITE.name,
+    alternateName: [BRAND.name, 'equipe.im'],
     url,
     inLanguage: lang,
     description,

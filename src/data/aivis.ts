@@ -17,7 +17,7 @@ export const aivisFixHref = (site: string | null, idea: string, placement: strin
   ? `https://app.equipe.im/new?import=1&site=${encodeURIComponent(site)}&utm_source=equipe.im&utm_medium=tool&utm_campaign=ai-visibility&utm_content=${encodeURIComponent(placement)}`
   : `https://app.equipe.im/start?idea=${encodeURIComponent(idea)}&utm_source=equipe.im&utm_medium=tool&utm_campaign=ai-visibility&utm_content=${encodeURIComponent(placement)}`;
 
-export const AIVIS_FIX_KEYS = ['not_recommended', 'unknown', 'no_site', 'not_cited', 'ai_blocked', 'llms_missing', 'schema_missing', 'business_schema', 'answers', 'thin_content', 'reviews'] as const;
+export const AIVIS_FIX_KEYS = ['ambiguous', 'not_recommended', 'unknown', 'no_site', 'not_cited', 'ai_blocked', 'llms_missing', 'schema_missing', 'business_schema', 'answers', 'thin_content', 'reviews'] as const;
 export type AivisFixKey = (typeof AIVIS_FIX_KEYS)[number];
 
 interface QA { question: string; answer: string }
@@ -30,8 +30,11 @@ export interface AivisCopy {
     name: string; namePh: string; place: string; placePh: string; category: string; categoryPh: string; url: string; urlPh: string; optional: string;
     button: string; note: string;
     errName: string; errMore: string; errUrl: string; errTurnstile: string; errRate: string; errBudget: string; errOff: string; errFailed: string;
+    /** Most answers could not be checked (the assistants' web search failed): nothing was kept. */
+    errSearch: string;
   };
-  progress: [string, string, string, string];
+  /** The loading steps: write the questions, one row per assistant ({assistant}), read the answers. */
+  progress: { write: string; ask: string; read: string };
   progressNote: string;
   result: {
     /** {name} */
@@ -61,6 +64,31 @@ export interface AivisCopy {
     cachedNote: string;
     notFound: string;
     loading: string;
+    /** One status per answer. */
+    status: { named: string; ambiguous: string; not_named: string; unchecked: string };
+    uncheckedNote: string;
+    showAnswer: string;
+    hideAnswer: string;
+    placesLabel: string;
+    sourcesLabel: string;
+    /** Businesses the AI recommended instead; {n} answers. */
+    namedInstead: string;
+    namedInsteadSub: string;
+    /** {named} {checked} */
+    summaryChecked: string;
+    /** {n} */
+    summaryUnchecked: string;
+    asks: string;
+    scoreHow: { title: string; text: string };
+    /** {d} points, {date} of the last check, {prev} its score. */
+    prev: { up: string; down: string; same: string };
+    /** Added after a fix text: {names}, {hosts}, {quote}. */
+    fixExtra: { names: string; hosts: string; quote: string; yours: string };
+    watch: {
+      title: string; text: string; email: string; emailPh: string; consent: string; button: string;
+      sent: string; already: string; on: string; off: string;
+      errEmail: string; errConsent: string; errRate: string; errFull: string; errMail: string;
+    };
   };
   fixes: Record<AivisFixKey, Fix>;
   how: { title: string; items: [Fix, Fix, Fix] };
@@ -92,8 +120,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: 'Today’s free checks are used up. Please come back tomorrow.',
       errOff: 'The checker is resting right now. Please try again later.',
       errFailed: 'Something went wrong on our side. Please try again.',
+      errSearch: 'We couldn’t check right now: the assistants’ web search didn’t answer. Nothing was saved. Please try again in a few minutes.',
     },
-    progress: ['Writing the questions your customers ask', 'Asking ChatGPT with web search', 'Asking Claude with web search', 'Reading the answers'],
+    progress: { write: 'Writing the questions your customers ask', ask: 'Asking {assistant} with web search on', read: 'Reading the answers: names, links and sources' },
     progressNote: 'This takes about 30 seconds. Keep this tab open.',
     result: {
       heading: 'Does AI know {name}?',
@@ -131,9 +160,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'This business was checked recently, so this is the same result. Checks refresh once a week.',
       notFound: 'This result doesn’t exist or has expired.',
       loading: 'Loading the result…',
+      status: { named: 'Names you', ambiguous: 'Not sure which one', not_named: 'Doesn’t name you', unchecked: 'Couldn’t check' },
+      uncheckedNote: 'This assistant’s web search failed twice, so this answer isn’t counted in your score.',
+      showAnswer: 'Show the full answer',
+      hideAnswer: 'Hide the answer',
+      placesLabel: 'Places it named',
+      sourcesLabel: 'Sources it used',
+      namedInstead: 'Businesses AI recommended instead',
+      namedInsteadSub: 'When customers asked for a recommendation, these are the names the assistants gave.',
+      summaryChecked: 'Named in {named} of {checked} answers.',
+      summaryUnchecked: '{n} more couldn’t be checked and don’t count.',
+      asks: 'We ask',
+      scoreHow: { title: 'How the score works', text: 'For each answer we could check: 60 points if it names you, 40 more if it links to your website, and 20 if it wasn’t sure which business you are. Answers where the assistant’s web search failed don’t count. The score is the average, out of 100.' },
+      prev: { up: 'Up {d} since {date} ({prev})', down: 'Down {d} since {date} ({prev})', same: 'Same as {date}' },
+      fixExtra: { names: 'Named instead: {names}.', hosts: 'It leaned on {hosts}.', quote: 'It said: “{quote}”', yours: 'Is {host} your website? Add it above and check again: AI can then link to it.' },
+      watch: {
+        title: 'Check again every week',
+        text: 'We’ll ask the same questions once a week and email you the new score, so you can see if your fixes work. Free, stop anytime.',
+        email: 'Your email', emailPh: 'you@yourbusiness.com',
+        consent: 'Email me this check once a week. I can stop with one click.',
+        button: 'Start weekly checks',
+        sent: 'Almost done: we sent you an email. Click the link in it to start the weekly checks.',
+        already: 'You already get weekly checks for this business.',
+        on: 'Weekly checks are on. The first email comes in about a week.',
+        off: 'Weekly checks are off. We won’t email you about this business again.',
+        errEmail: 'Please enter a valid email address.', errConsent: 'Please tick the box so we may email you.', errRate: 'Too many sign-ups from here today. Please try tomorrow.', errFull: 'Weekly checks are full right now. Please try again later.', errMail: 'We couldn’t send the email. Please check the address and try again.',
+      },
     },
     fixes: {
-      not_recommended: { title: 'Get named when people ask for “the best” near you', text: 'When customers asked for a recommendation, the AI didn’t name you. It recommends businesses that review sites, local lists and their own pages describe clearly, with your kind of business and your city in plain words.' },
+      ambiguous: { title: 'AI isn’t sure which {name} you are', text: 'Asked about you, the assistant asked back which {name} was meant. Put “{category} in {place}” right next to your name everywhere: your Google Business Profile, your website’s title and first line, and your listings.' },
+      not_recommended: { title: 'Get named when people ask for the best {category} in {place}', text: 'When customers asked for a recommendation, the AI didn’t name you. It recommends places that review sites, local guides and their own websites describe clearly, with the kind of business and the area in plain words.' },
       unknown: { title: 'Help AI learn who you are', text: 'Asked about you by name, the AI didn’t find you. Use the same name, address and phone everywhere: your website, Google Business Profile, maps and directories.' },
       no_site: { title: 'Give AI a website to quote', text: 'Without a website, AI can only repeat what others say about you. A simple site with your services, area, hours and answers gives it a source it can trust and link.' },
       not_cited: { title: 'Make your own site the source', text: 'The AI knows you, but links to other sites when it does. Put the facts people ask about on your own site, clearly, so it becomes the page AI quotes.' },
@@ -188,8 +244,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: '오늘 무료 확인이 모두 소진됐어요. 내일 다시 와 주세요.',
       errOff: '지금은 잠시 쉬고 있어요. 나중에 다시 시도해 주세요.',
       errFailed: '저희 쪽에서 문제가 생겼어요. 다시 시도해 주세요.',
+      errSearch: '지금은 확인하지 못했어요. AI의 웹 검색이 응답하지 않았어요. 아무것도 저장되지 않았으니 몇 분 뒤에 다시 시도해 주세요.',
     },
-    progress: ['손님이 할 만한 질문을 만드는 중', '웹 검색을 켜고 ChatGPT에게 묻는 중', '웹 검색을 켜고 Claude에게 묻는 중', '답변을 읽는 중'],
+    progress: { write: '손님이 할 만한 질문을 만드는 중', ask: '웹 검색을 켜고 {assistant}에게 묻는 중', read: '답변을 읽는 중: 이름, 링크, 출처' },
     progressNote: '30초 정도 걸려요. 이 탭을 열어 두세요.',
     result: {
       heading: 'AI는 {name}을(를) 알고 있을까요?',
@@ -227,9 +284,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '최근에 확인한 가게라 같은 결과를 보여드려요. 결과는 일주일에 한 번 새로 고쳐져요.',
       notFound: '없거나 만료된 결과예요.',
       loading: '결과를 불러오는 중…',
+      status: { named: '언급함', ambiguous: '어느 가게인지 헷갈려함', not_named: '언급 안 함', unchecked: '확인 못 함' },
+      uncheckedNote: '이 AI의 웹 검색이 두 번 실패해서 이 답변은 점수에 넣지 않았어요.',
+      showAnswer: '답변 전체 보기',
+      hideAnswer: '답변 접기',
+      placesLabel: 'AI가 말한 가게',
+      sourcesLabel: 'AI가 참고한 출처',
+      namedInstead: 'AI가 대신 추천한 가게',
+      namedInsteadSub: '손님이 추천을 부탁했을 때 AI가 말한 이름들이에요.',
+      summaryChecked: '답변 {checked}개 중 {named}개에서 언급됐어요.',
+      summaryUnchecked: '{n}개는 확인하지 못해서 점수에 넣지 않았어요.',
+      asks: '질문',
+      scoreHow: { title: '점수 계산 방법', text: '확인할 수 있었던 답변마다 가게 이름이 나오면 60점, 내 웹사이트 링크가 있으면 40점을 더해요. 어느 가게인지 헷갈려했다면 20점이에요. AI의 웹 검색이 실패한 답변은 빼고, 평균을 100점 만점으로 보여드려요.' },
+      prev: { up: '{date}보다 {d}점 올랐어요 ({prev})', down: '{date}보다 {d}점 내려갔어요 ({prev})', same: '{date}와 같아요' },
+      fixExtra: { names: '대신 언급된 곳: {names}.', hosts: '주로 참고한 곳: {hosts}.', quote: 'AI가 한 말: “{quote}”', yours: '{host}이(가) 내 웹사이트인가요? 위 칸에 넣고 다시 확인해 보세요. AI가 링크할 수 있어요.' },
+      watch: {
+        title: '매주 다시 확인하기',
+        text: '일주일에 한 번 같은 질문을 다시 묻고 새 점수를 이메일로 보내드려요. 고친 게 효과가 있는지 볼 수 있어요. 무료이고 언제든 그만둘 수 있어요.',
+        email: '이메일', emailPh: 'you@yourbusiness.com',
+        consent: '이 확인 결과를 일주일에 한 번 이메일로 받을게요. 클릭 한 번으로 그만둘 수 있어요.',
+        button: '매주 확인 시작하기',
+        sent: '거의 다 됐어요. 보내드린 이메일의 링크를 누르면 매주 확인이 시작돼요.',
+        already: '이 가게는 이미 매주 확인을 받고 계세요.',
+        on: '매주 확인이 켜졌어요. 첫 이메일은 일주일쯤 뒤에 가요.',
+        off: '매주 확인을 껐어요. 이 가게에 대한 이메일은 더 보내지 않아요.',
+        errEmail: '올바른 이메일 주소를 입력해 주세요.', errConsent: '이메일을 보내도 되도록 체크해 주세요.', errRate: '오늘 여기서 신청이 너무 많았어요. 내일 다시 시도해 주세요.', errFull: '지금은 매주 확인 자리가 꽉 찼어요. 나중에 다시 시도해 주세요.', errMail: '이메일을 보내지 못했어요. 주소를 확인하고 다시 시도해 주세요.',
+      },
     },
     fixes: {
-      not_recommended: { title: '“근처 최고의 가게”를 물을 때 이름 나오기', text: '손님이 추천을 부탁했을 때 AI가 가게 이름을 말하지 않았어요. AI는 리뷰 사이트, 지역 목록, 자기 웹사이트에 업종과 지역이 쉬운 말로 분명하게 적힌 가게를 추천해요.' },
+      ambiguous: { title: 'AI가 어느 {name}인지 헷갈려해요', text: '가게에 대해 물었더니 AI가 어느 {name}을(를) 말하는지 되물었어요. Google 비즈니스 프로필, 웹사이트 제목과 첫 줄, 각종 목록 등 이름이 나오는 모든 곳에 “{place} {category}”을(를) 이름 바로 옆에 적어 주세요.' },
+      not_recommended: { title: '{place} 최고의 {category}을(를) 물을 때 이름 나오기', text: '손님이 추천을 부탁했을 때 AI가 가게 이름을 말하지 않았어요. AI는 리뷰 사이트, 지역 가이드, 자기 웹사이트에 업종과 지역이 쉬운 말로 분명하게 적힌 가게를 추천해요.' },
       unknown: { title: 'AI가 가게를 알게 하기', text: '가게 이름으로 물어봤는데도 AI가 찾지 못했어요. 웹사이트, Google 비즈니스 프로필, 지도, 각종 목록에 같은 이름, 주소, 전화번호를 쓰세요.' },
       no_site: { title: 'AI가 인용할 웹사이트 만들기', text: '웹사이트가 없으면 AI는 남들이 하는 말만 옮길 수 있어요. 서비스, 지역, 영업시간, 자주 묻는 질문의 답이 담긴 간단한 사이트가 있으면 AI가 믿고 링크할 출처가 생겨요.' },
       not_cited: { title: '내 사이트를 출처로 만들기', text: 'AI가 가게를 알긴 하지만, 언급할 때 다른 사이트를 링크해요. 사람들이 궁금해하는 정보를 내 사이트에 분명하게 올려서 AI가 인용하는 페이지가 되게 하세요.' },
@@ -284,8 +368,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: '本日の無料チェックは上限に達しました。また明日お試しください。',
       errOff: '現在チェックを休止しています。しばらくしてからお試しください。',
       errFailed: 'こちらで問題が発生しました。もう一度お試しください。',
+      errSearch: '今はチェックできませんでした。AI のウェブ検索が応答しませんでした。何も保存されていません。数分後にもう一度お試しください。',
     },
-    progress: ['お客さまがする質問を作っています', 'ウェブ検索ありで ChatGPT に聞いています', 'ウェブ検索ありで Claude に聞いています', '答えを読んでいます'],
+    progress: { write: 'お客さまがする質問を作っています', ask: 'ウェブ検索ありで {assistant} に聞いています', read: '答えを読んでいます：名前、リンク、情報源' },
     progressNote: '30秒ほどかかります。このタブは開いたままにしてください。',
     result: {
       heading: 'AI は {name} を知っている？',
@@ -323,9 +408,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '最近チェックしたお店なので、同じ結果を表示しています。チェックは週に1回更新されます。',
       notFound: 'この結果は存在しないか、期限が切れています。',
       loading: '結果を読み込んでいます…',
+      status: { named: '名前あり', ambiguous: 'どのお店か迷っています', not_named: '名前なし', unchecked: 'チェックできませんでした' },
+      uncheckedNote: 'この AI のウェブ検索が2回失敗したため、この答えはスコアに含めていません。',
+      showAnswer: '答えをすべて表示',
+      hideAnswer: '答えを閉じる',
+      placesLabel: '挙がったお店',
+      sourcesLabel: '使われた情報源',
+      namedInstead: '代わりに AI がすすめたお店',
+      namedInsteadSub: 'お客さまがおすすめを聞いたとき、AI が挙げた名前です。',
+      summaryChecked: '{checked} 件中 {named} 件の答えで名前が挙がりました。',
+      summaryUnchecked: 'ほかの {n} 件はチェックできなかったため、数えていません。',
+      asks: '質問',
+      scoreHow: { title: 'スコアの計算方法', text: 'チェックできた答えごとに、名前が挙がれば60点、ウェブサイトへのリンクがあればさらに40点、どのお店か迷っていた場合は20点です。AI のウェブ検索が失敗した答えは数えません。スコアはその平均で、100点満点です。' },
+      prev: { up: '{date} から {d} ポイントアップ（{prev}）', down: '{date} から {d} ポイントダウン（{prev}）', same: '{date} と同じです' },
+      fixExtra: { names: '代わりに挙がった名前：{names}。', hosts: '主な情報源：{hosts}。', quote: 'AI の答え：「{quote}」', yours: '{host} はあなたのサイトですか？ 上の欄に入れてもう一度チェックすると、AI がリンクできるようになります。' },
+      watch: {
+        title: '毎週もう一度チェックする',
+        text: '週に1回同じ質問をして、新しいスコアをメールでお送りします。直したことが効いているか確かめられます。無料で、いつでも止められます。',
+        email: 'メールアドレス', emailPh: 'you@yourbusiness.jp',
+        consent: 'このチェック結果を週に1回メールで受け取ります。ワンクリックで止められます。',
+        button: '毎週のチェックを始める',
+        sent: 'あと少しです。お送りしたメールのリンクをクリックすると、毎週のチェックが始まります。',
+        already: 'このお店はすでに毎週チェックしています。',
+        on: '毎週のチェックをオンにしました。最初のメールは約1週間後に届きます。',
+        off: '毎週のチェックをオフにしました。このお店についてのメールはもうお送りしません。',
+        errEmail: '正しいメールアドレスを入力してください。', errConsent: 'メールをお送りしてよいか、チェックを入れてください。', errRate: '今日はここからの登録が多すぎます。明日もう一度お試しください。', errFull: '毎週のチェックは今いっぱいです。しばらくしてからお試しください。', errMail: 'メールを送れませんでした。アドレスを確認して、もう一度お試しください。',
+      },
     },
     fixes: {
-      not_recommended: { title: '「近くのおすすめ」を聞かれたときに名前が挙がるように', text: 'お客さまがおすすめを聞いたとき、AI はあなたの名前を出しませんでした。AI は、口コミサイトや地域の一覧、自分のサイトで、業種と地域がわかりやすく書かれているお店をすすめます。' },
+      ambiguous: { title: 'AI がどの {name} か迷っています', text: 'あなたについて聞くと、AI はどの {name} のことかを聞き返しました。Google ビジネス プロフィール、ウェブサイトのタイトルと最初の一文、各種掲載サイトなど、あらゆる場所で名前のすぐ横に「{place}の{category}」と書きましょう。' },
+      not_recommended: { title: '{place}でおすすめの{category}を聞かれたときに名前が挙がるように', text: 'お客さまがおすすめを聞いたとき、AI はあなたの名前を出しませんでした。AI は、口コミサイトや地域ガイド、自分のサイトで、業種と地域がわかりやすく書かれているお店をすすめます。' },
       unknown: { title: 'AI にあなたのことを知ってもらう', text: '名前で聞いても、AI はあなたを見つけられませんでした。ウェブサイト、Google ビジネス プロフィール、地図、各種サイトで、同じ名前・住所・電話番号を使いましょう。' },
       no_site: { title: 'AI が引用できるウェブサイトを用意する', text: 'ウェブサイトがないと、AI はほかの人の話を繰り返すしかありません。サービス、地域、営業時間、よくある質問への答えをのせたシンプルなサイトがあれば、AI が信頼してリンクできる情報源になります。' },
       not_cited: { title: '自分のサイトを情報源にする', text: 'AI はあなたを知っていますが、紹介するときにほかのサイトへリンクしています。お客さまが知りたい情報を自分のサイトにはっきり載せ、AI が引用するページにしましょう。' },
@@ -380,8 +492,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: '今天的免费检查次数已用完，请明天再来。',
       errOff: '检查工具暂时休息中，请稍后再试。',
       errFailed: '我们这边出了点问题，请再试一次。',
+      errSearch: '暂时无法检查：AI 助手的联网搜索没有响应。没有保存任何内容，请过几分钟再试。',
     },
-    progress: ['正在写出顾客会问的问题', '正在联网询问 ChatGPT', '正在联网询问 Claude', '正在阅读回答'],
+    progress: { write: '正在写出顾客会问的问题', ask: '正在联网询问 {assistant}', read: '正在阅读回答：名称、链接和来源' },
     progressNote: '大约需要 30 秒，请不要关闭此页面。',
     result: {
       heading: 'AI 认识 {name} 吗？',
@@ -419,9 +532,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: '这家店最近检查过，所以显示的是同一结果。每周更新一次。',
       notFound: '这个结果不存在或已过期。',
       loading: '正在加载结果…',
+      status: { named: '提到了你', ambiguous: '不确定是哪一家', not_named: '没有提到你', unchecked: '无法检查' },
+      uncheckedNote: '这个助手的联网搜索失败了两次，所以这条回答不计入你的分数。',
+      showAnswer: '查看完整回答',
+      hideAnswer: '收起回答',
+      placesLabel: '提到的商家',
+      sourcesLabel: '使用的来源',
+      namedInstead: 'AI 推荐的其他商家',
+      namedInsteadSub: '顾客请 AI 推荐时，助手给出的就是这些名字。',
+      summaryChecked: '{checked} 个回答中有 {named} 个提到了你。',
+      summaryUnchecked: '另有 {n} 个回答无法检查，不计入分数。',
+      asks: '我们问',
+      scoreHow: { title: '分数怎么算', text: '每个能检查的回答：提到你得 60 分，链接到你的网站再加 40 分；如果它不确定你是哪一家，得 20 分。助手联网搜索失败的回答不计入。分数是平均值，满分 100。' },
+      prev: { up: '比 {date} 提高 {d} 分（{prev}）', down: '比 {date} 下降 {d} 分（{prev}）', same: '与 {date} 相同' },
+      fixExtra: { names: '它推荐的是：{names}。', hosts: '它主要参考了 {hosts}。', quote: '它说：“{quote}”', yours: '{host} 是你的网站吗？在上方填入后再查一次，AI 就能链接到它。' },
+      watch: {
+        title: '每周再查一次',
+        text: '我们每周问一次同样的问题，并把新分数发到你的邮箱，让你看到修改有没有效果。免费，随时可以停止。',
+        email: '你的邮箱', emailPh: 'you@yourbusiness.com',
+        consent: '每周给我发一次这项检查的结果。一键即可停止。',
+        button: '开始每周检查',
+        sent: '就差一步：我们给你发了一封邮件，点击里面的链接即可开始每周检查。',
+        already: '这家商家已经开启了每周检查。',
+        on: '每周检查已开启，第一封邮件大约一周后送达。',
+        off: '每周检查已关闭，我们不会再为这家商家给你发邮件。',
+        errEmail: '请输入有效的邮箱地址。', errConsent: '请勾选同意，我们才能给你发邮件。', errRate: '今天从这里报名的次数太多了，请明天再试。', errFull: '每周检查名额已满，请稍后再试。', errMail: '邮件没能发出，请检查地址后再试。',
+      },
     },
     fixes: {
-      not_recommended: { title: '当有人问“附近最好的”时被提到', text: '顾客请 AI 推荐时，它没有提到你。AI 推荐的是在点评网站、本地榜单和自己网站上，把经营类型和所在城市写得清清楚楚的商家。' },
+      ambiguous: { title: 'AI 不确定你是哪一家 {name}', text: '问到你时，助手反问是指哪一家 {name}。在所有地方都把“{place}的{category}”写在名称旁边：你的 Google 商家资料、网站标题和第一句话，以及各类目录。' },
+      not_recommended: { title: '当有人问{place}最好的{category}时被提到', text: '顾客请 AI 推荐时，它没有提到你。AI 推荐的是在点评网站、本地指南和自己网站上，把经营类型和所在地区写得清清楚楚的商家。' },
       unknown: { title: '让 AI 认识你', text: '直接按店名问，AI 也没找到你。在网站、Google 商家资料、地图和各类目录上使用相同的名称、地址和电话。' },
       no_site: { title: '给 AI 一个可以引用的网站', text: '没有网站，AI 只能复述别人对你的评价。一个写清服务、区域、营业时间和常见问题的简单网站，能给 AI 一个可信、可链接的来源。' },
       not_cited: { title: '让你自己的网站成为来源', text: 'AI 认识你，但提到你时链接的是别的网站。把大家关心的信息清楚地放在你自己的网站上，让它成为 AI 引用的页面。' },
@@ -476,8 +616,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: 'Las comprobaciones gratis de hoy se han agotado. Vuelve mañana.',
       errOff: 'El comprobador está descansando ahora mismo. Inténtalo más tarde.',
       errFailed: 'Algo falló de nuestro lado. Inténtalo de nuevo.',
+      errSearch: 'No pudimos comprobarlo ahora: la búsqueda web de los asistentes no respondió. No se guardó nada. Inténtalo de nuevo en unos minutos.',
     },
-    progress: ['Escribiendo las preguntas de tus clientes', 'Preguntando a ChatGPT con búsqueda web', 'Preguntando a Claude con búsqueda web', 'Leyendo las respuestas'],
+    progress: { write: 'Escribiendo las preguntas de tus clientes', ask: 'Preguntando a {assistant} con búsqueda web', read: 'Leyendo las respuestas: nombres, enlaces y fuentes' },
     progressNote: 'Tarda unos 30 segundos. No cierres esta pestaña.',
     result: {
       heading: '¿La IA conoce {name}?',
@@ -515,9 +656,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Este negocio se revisó hace poco, así que ves el mismo resultado. Se actualiza una vez por semana.',
       notFound: 'Este resultado no existe o ya caducó.',
       loading: 'Cargando el resultado…',
+      status: { named: 'Te menciona', ambiguous: 'No sabe cuál eres', not_named: 'No te menciona', unchecked: 'No se pudo comprobar' },
+      uncheckedNote: 'La búsqueda web de este asistente falló dos veces, así que esta respuesta no cuenta en tu puntuación.',
+      showAnswer: 'Ver la respuesta completa',
+      hideAnswer: 'Ocultar la respuesta',
+      placesLabel: 'Negocios que nombró',
+      sourcesLabel: 'Fuentes que usó',
+      namedInstead: 'Negocios que la IA recomendó en tu lugar',
+      namedInsteadSub: 'Cuando los clientes pidieron una recomendación, estos son los nombres que dieron los asistentes.',
+      summaryChecked: 'Te menciona en {named} de {checked} respuestas.',
+      summaryUnchecked: 'Otras {n} no se pudieron comprobar y no cuentan.',
+      asks: 'Preguntamos',
+      scoreHow: { title: 'Cómo se calcula la puntuación', text: 'Por cada respuesta que pudimos comprobar: 60 puntos si te menciona, 40 más si enlaza a tu web y 20 si no estaba seguro de qué negocio eres. Las respuestas en las que falló la búsqueda web del asistente no cuentan. La puntuación es la media, sobre 100.' },
+      prev: { up: '{d} más que el {date} ({prev})', down: '{d} menos que el {date} ({prev})', same: 'Igual que el {date}' },
+      fixExtra: { names: 'Nombró en tu lugar a: {names}.', hosts: 'Se apoyó en {hosts}.', quote: 'Dijo: “{quote}”', yours: '¿{host} es tu web? Añádela arriba y vuelve a comprobar: así la IA puede enlazarla.' },
+      watch: {
+        title: 'Comprobarlo cada semana',
+        text: 'Haremos las mismas preguntas una vez por semana y te enviaremos la nueva puntuación por email, para que veas si tus cambios funcionan. Gratis, puedes dejarlo cuando quieras.',
+        email: 'Tu email', emailPh: 'tu@tunegocio.com',
+        consent: 'Envíame esta comprobación por email una vez por semana. Puedo dejarlo con un clic.',
+        button: 'Empezar las comprobaciones semanales',
+        sent: 'Casi listo: te enviamos un email. Haz clic en el enlace para empezar las comprobaciones semanales.',
+        already: 'Ya recibes comprobaciones semanales de este negocio.',
+        on: 'Las comprobaciones semanales están activadas. El primer email llegará en una semana más o menos.',
+        off: 'Las comprobaciones semanales están desactivadas. No te volveremos a escribir sobre este negocio.',
+        errEmail: 'Escribe un email válido.', errConsent: 'Marca la casilla para que podamos escribirte.', errRate: 'Demasiadas suscripciones desde aquí hoy. Inténtalo mañana.', errFull: 'Las comprobaciones semanales están llenas ahora mismo. Inténtalo más tarde.', errMail: 'No pudimos enviar el email. Revisa la dirección e inténtalo de nuevo.',
+      },
     },
     fixes: {
-      not_recommended: { title: 'Que te nombren cuando piden “el mejor” cerca', text: 'Cuando los clientes pidieron una recomendación, la IA no te nombró. Recomienda negocios que las webs de reseñas, las listas locales y sus propias páginas describen con claridad, con el tipo de negocio y la ciudad en palabras sencillas.' },
+      ambiguous: { title: 'La IA no sabe cuál {name} eres', text: 'Al preguntarle por ti, el asistente preguntó a qué {name} nos referíamos. Pon “{category} en {place}” justo al lado de tu nombre en todas partes: tu Perfil de Empresa de Google, el título y la primera línea de tu web y tus fichas en directorios.' },
+      not_recommended: { title: 'Que te nombren cuando piden el mejor {category} en {place}', text: 'Cuando los clientes pidieron una recomendación, la IA no te nombró. Recomienda negocios que las webs de reseñas, las guías locales y sus propias páginas describen con claridad, con el tipo de negocio y la zona en palabras sencillas.' },
       unknown: { title: 'Ayuda a la IA a saber quién eres', text: 'Al preguntarle por tu nombre, la IA no te encontró. Usa el mismo nombre, dirección y teléfono en todas partes: tu web, tu Perfil de Empresa de Google, mapas y directorios.' },
       no_site: { title: 'Dale a la IA una web que citar', text: 'Sin web, la IA solo puede repetir lo que otros dicen de ti. Una web sencilla con tus servicios, zona, horario y respuestas le da una fuente fiable que puede enlazar.' },
       not_cited: { title: 'Haz que tu web sea la fuente', text: 'La IA te conoce, pero cuando habla de ti enlaza a otras webs. Pon en tu propia web, con claridad, lo que la gente pregunta, para que sea la página que la IA cite.' },
@@ -572,8 +740,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: 'As verificações grátis de hoje acabaram. Volte amanhã.',
       errOff: 'O verificador está descansando agora. Tente mais tarde.',
       errFailed: 'Algo deu errado do nosso lado. Tente de novo.',
+      errSearch: 'Não conseguimos verificar agora: a busca na web dos assistentes não respondeu. Nada foi salvo. Tente de novo em alguns minutos.',
     },
-    progress: ['Escrevendo as perguntas dos seus clientes', 'Perguntando ao ChatGPT com busca na web', 'Perguntando ao Claude com busca na web', 'Lendo as respostas'],
+    progress: { write: 'Escrevendo as perguntas dos seus clientes', ask: 'Perguntando ao {assistant} com busca na web', read: 'Lendo as respostas: nomes, links e fontes' },
     progressNote: 'Leva cerca de 30 segundos. Deixe esta aba aberta.',
     result: {
       heading: 'A IA conhece {name}?',
@@ -611,9 +780,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Este negócio foi verificado recentemente, então este é o mesmo resultado. As verificações são atualizadas uma vez por semana.',
       notFound: 'Este resultado não existe ou expirou.',
       loading: 'Carregando o resultado…',
+      status: { named: 'Cita você', ambiguous: 'Não sabe qual é você', not_named: 'Não cita você', unchecked: 'Não deu para verificar' },
+      uncheckedNote: 'A busca na web deste assistente falhou duas vezes, então esta resposta não conta na sua pontuação.',
+      showAnswer: 'Ver a resposta completa',
+      hideAnswer: 'Esconder a resposta',
+      placesLabel: 'Negócios que citou',
+      sourcesLabel: 'Fontes que usou',
+      namedInstead: 'Negócios que a IA recomendou no seu lugar',
+      namedInsteadSub: 'Quando os clientes pediram uma recomendação, estes foram os nomes que os assistentes deram.',
+      summaryChecked: 'Citado em {named} de {checked} respostas.',
+      summaryUnchecked: 'Outras {n} não puderam ser verificadas e não contam.',
+      asks: 'Perguntamos',
+      scoreHow: { title: 'Como a pontuação funciona', text: 'Para cada resposta que conseguimos verificar: 60 pontos se cita você, mais 40 se tem link para o seu site e 20 se não tinha certeza de qual negócio é você. Respostas em que a busca na web do assistente falhou não contam. A pontuação é a média, de 0 a 100.' },
+      prev: { up: '{d} a mais desde {date} ({prev})', down: '{d} a menos desde {date} ({prev})', same: 'Igual a {date}' },
+      fixExtra: { names: 'Citou no seu lugar: {names}.', hosts: 'Se apoiou em {hosts}.', quote: 'Ela disse: “{quote}”', yours: '{host} é o seu site? Coloque no campo acima e cheque de novo: assim a IA pode linkar para ele.' },
+      watch: {
+        title: 'Verificar de novo toda semana',
+        text: 'Vamos fazer as mesmas perguntas uma vez por semana e mandar a nova pontuação por e-mail, para você ver se suas mudanças funcionam. Grátis, pare quando quiser.',
+        email: 'Seu e-mail', emailPh: 'voce@seunegocio.com.br',
+        consent: 'Quero receber esta verificação por e-mail uma vez por semana. Posso parar com um clique.',
+        button: 'Começar as verificações semanais',
+        sent: 'Quase lá: mandamos um e-mail. Clique no link dele para começar as verificações semanais.',
+        already: 'Você já recebe verificações semanais deste negócio.',
+        on: 'As verificações semanais estão ativas. O primeiro e-mail chega em cerca de uma semana.',
+        off: 'As verificações semanais foram desativadas. Não vamos mais mandar e-mails sobre este negócio.',
+        errEmail: 'Digite um e-mail válido.', errConsent: 'Marque a caixa para podermos mandar e-mails para você.', errRate: 'Muitas inscrições daqui hoje. Tente amanhã.', errFull: 'As verificações semanais estão lotadas agora. Tente de novo mais tarde.', errMail: 'Não conseguimos mandar o e-mail. Confira o endereço e tente de novo.',
+      },
     },
     fixes: {
-      not_recommended: { title: 'Seja citado quando pedirem “o melhor” perto', text: 'Quando os clientes pediram uma recomendação, a IA não citou você. Ela recomenda negócios que sites de avaliação, listas locais e as próprias páginas descrevem com clareza, com o tipo de negócio e a cidade em palavras simples.' },
+      ambiguous: { title: 'A IA não sabe qual {name} é você', text: 'Ao ser perguntado sobre você, o assistente perguntou de volta qual {name} era. Coloque “{category} em {place}” logo ao lado do seu nome em todo lugar: no seu Perfil da Empresa no Google, no título e na primeira linha do seu site e nos seus cadastros em diretórios.' },
+      not_recommended: { title: 'Seja citado quando pedirem o melhor {category} em {place}', text: 'Quando os clientes pediram uma recomendação, a IA não citou você. Ela recomenda negócios que sites de avaliação, guias locais e as próprias páginas descrevem com clareza, com o tipo de negócio e a região em palavras simples.' },
       unknown: { title: 'Ajude a IA a saber quem você é', text: 'Perguntada pelo seu nome, a IA não encontrou você. Use o mesmo nome, endereço e telefone em todo lugar: seu site, Perfil da Empresa no Google, mapas e diretórios.' },
       no_site: { title: 'Dê à IA um site para citar', text: 'Sem site, a IA só consegue repetir o que os outros falam de você. Um site simples com seus serviços, região, horários e respostas dá a ela uma fonte confiável para citar e linkar.' },
       not_cited: { title: 'Faça do seu site a fonte', text: 'A IA conhece você, mas quando fala de você coloca link para outros sites. Coloque no seu próprio site, com clareza, as informações que as pessoas perguntam, para ele virar a página que a IA cita.' },
@@ -668,8 +864,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: 'Die kostenlosen Checks für heute sind aufgebraucht. Komm morgen wieder.',
       errOff: 'Der Check macht gerade Pause. Bitte versuch es später noch mal.',
       errFailed: 'Bei uns ist etwas schiefgelaufen. Bitte versuch es noch mal.',
+      errSearch: 'Wir konnten gerade nicht prüfen: Die Websuche der Assistenten hat nicht geantwortet. Es wurde nichts gespeichert. Bitte versuch es in ein paar Minuten noch mal.',
     },
-    progress: ['Schreibe die Fragen deiner Kunden', 'Frage ChatGPT mit Websuche', 'Frage Claude mit Websuche', 'Lese die Antworten'],
+    progress: { write: 'Schreibe die Fragen deiner Kunden', ask: 'Frage {assistant} mit Websuche', read: 'Lese die Antworten: Namen, Links und Quellen' },
     progressNote: 'Das dauert etwa 30 Sekunden. Lass diesen Tab offen.',
     result: {
       heading: 'Kennt KI {name}?',
@@ -707,9 +904,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Dieses Unternehmen wurde vor Kurzem geprüft, daher siehst du dasselbe Ergebnis. Checks werden einmal pro Woche aktualisiert.',
       notFound: 'Dieses Ergebnis gibt es nicht oder es ist abgelaufen.',
       loading: 'Ergebnis wird geladen…',
+      status: { named: 'Nennt dich', ambiguous: 'Weiß nicht, welches gemeint ist', not_named: 'Nennt dich nicht', unchecked: 'Nicht prüfbar' },
+      uncheckedNote: 'Die Websuche dieses Assistenten ist zweimal fehlgeschlagen, deshalb zählt diese Antwort nicht für deine Punktzahl.',
+      showAnswer: 'Ganze Antwort anzeigen',
+      hideAnswer: 'Antwort ausblenden',
+      placesLabel: 'Genannte Unternehmen',
+      sourcesLabel: 'Genutzte Quellen',
+      namedInstead: 'Unternehmen, die die KI stattdessen empfohlen hat',
+      namedInsteadSub: 'Als Kunden um eine Empfehlung gebeten haben, haben die Assistenten diese Namen genannt.',
+      summaryChecked: 'In {named} von {checked} Antworten genannt.',
+      summaryUnchecked: '{n} weitere konnten nicht geprüft werden und zählen nicht.',
+      asks: 'Wir fragen',
+      scoreHow: { title: 'So funktioniert die Punktzahl', text: 'Für jede Antwort, die wir prüfen konnten: 60 Punkte, wenn sie dich nennt, 40 weitere, wenn sie auf deine Website verlinkt, und 20, wenn sie nicht sicher war, welches Unternehmen du bist. Antworten, bei denen die Websuche des Assistenten fehlgeschlagen ist, zählen nicht. Die Punktzahl ist der Durchschnitt, von 100.' },
+      prev: { up: '{d} mehr seit {date} ({prev})', down: '{d} weniger seit {date} ({prev})', same: 'Gleich wie am {date}' },
+      fixExtra: { names: 'Stattdessen genannt: {names}.', hosts: 'Sie hat sich auf {hosts} gestützt.', quote: 'Sie hat gesagt: „{quote}“', yours: 'Ist {host} deine Website? Trag sie oben ein und prüf noch mal: Dann kann die KI darauf verlinken.' },
+      watch: {
+        title: 'Jede Woche neu prüfen',
+        text: 'Wir stellen einmal pro Woche dieselben Fragen und schicken dir die neue Punktzahl per E-Mail. So siehst du, ob deine Änderungen wirken. Kostenlos, jederzeit kündbar.',
+        email: 'Deine E-Mail', emailPh: 'du@deinunternehmen.de',
+        consent: 'Schickt mir diese Prüfung einmal pro Woche per E-Mail. Ich kann sie mit einem Klick beenden.',
+        button: 'Wöchentliche Prüfung starten',
+        sent: 'Fast geschafft: Wir haben dir eine E-Mail geschickt. Klick auf den Link darin, um die wöchentliche Prüfung zu starten.',
+        already: 'Du bekommst für dieses Unternehmen schon wöchentliche Prüfungen.',
+        on: 'Die wöchentliche Prüfung ist an. Die erste E-Mail kommt in etwa einer Woche.',
+        off: 'Die wöchentliche Prüfung ist aus. Wir schreiben dir zu diesem Unternehmen nicht mehr.',
+        errEmail: 'Bitte gib eine gültige E-Mail-Adresse ein.', errConsent: 'Bitte setz das Häkchen, damit wir dir schreiben dürfen.', errRate: 'Heute gab es von hier zu viele Anmeldungen. Bitte versuch es morgen.', errFull: 'Die wöchentlichen Prüfungen sind gerade voll. Bitte versuch es später noch mal.', errMail: 'Wir konnten die E-Mail nicht senden. Bitte prüf die Adresse und versuch es noch mal.',
+      },
     },
     fixes: {
-      not_recommended: { title: 'Genannt werden, wenn jemand nach „dem Besten“ in der Nähe fragt', text: 'Als Kunden um eine Empfehlung gebeten haben, hat die KI dich nicht genannt. Sie empfiehlt Unternehmen, die Bewertungsportale, lokale Listen und die eigene Website klar beschreiben, mit Branche und Stadt in einfachen Worten.' },
+      ambiguous: { title: 'Die KI weiß nicht, welches {name} du bist', text: 'Nach dir gefragt, hat der Assistent zurückgefragt, welches {name} gemeint ist. Schreib „{category} in {place}“ überall direkt neben deinen Namen: in dein Google-Unternehmensprofil, in Titel und erste Zeile deiner Website und in deine Einträge in Verzeichnissen.' },
+      not_recommended: { title: 'Genannt werden, wenn jemand nach dem besten {category} in {place} fragt', text: 'Als Kunden um eine Empfehlung gebeten haben, hat die KI dich nicht genannt. Sie empfiehlt Unternehmen, die Bewertungsportale, lokale Ratgeber und die eigene Website klar beschreiben, mit Branche und Gegend in einfachen Worten.' },
       unknown: { title: 'Der KI zeigen, wer du bist', text: 'Nach deinem Namen gefragt, hat die KI dich nicht gefunden. Nutze überall denselben Namen, dieselbe Adresse und Telefonnummer: auf deiner Website, im Google-Unternehmensprofil, in Karten und Verzeichnissen.' },
       no_site: { title: 'Der KI eine Website zum Zitieren geben', text: 'Ohne Website kann die KI nur wiederholen, was andere über dich sagen. Eine einfache Seite mit Angebot, Gebiet, Öffnungszeiten und Antworten gibt ihr eine Quelle, der sie vertrauen und auf die sie verlinken kann.' },
       not_cited: { title: 'Deine eigene Website zur Quelle machen', text: 'Die KI kennt dich, verlinkt dabei aber andere Seiten. Stell die Infos, nach denen Leute fragen, klar auf deine eigene Website, damit sie die Seite wird, die die KI zitiert.' },
@@ -764,8 +988,9 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       errBudget: 'Les tests gratuits du jour sont épuisés. Revenez demain.',
       errOff: 'Le test fait une pause pour le moment. Merci de réessayer plus tard.',
       errFailed: 'Un problème est survenu de notre côté. Merci de réessayer.',
+      errSearch: 'Impossible de vérifier pour le moment : la recherche web des assistants n’a pas répondu. Rien n’a été enregistré. Merci de réessayer dans quelques minutes.',
     },
-    progress: ['Rédaction des questions de vos clients', 'Question à ChatGPT avec recherche web', 'Question à Claude avec recherche web', 'Lecture des réponses'],
+    progress: { write: 'Rédaction des questions de vos clients', ask: 'Question à {assistant} avec recherche web', read: 'Lecture des réponses : noms, liens et sources' },
     progressNote: 'Cela prend environ 30 secondes. Gardez cet onglet ouvert.',
     result: {
       heading: 'L’IA connaît-elle {name} ?',
@@ -803,9 +1028,36 @@ export const AIVIS: Partial<Record<LocaleCode, AivisCopy>> & { en: AivisCopy } =
       cachedNote: 'Cette entreprise a été testée récemment, voici donc le même résultat. Les tests sont mis à jour une fois par semaine.',
       notFound: 'Ce résultat n’existe pas ou a expiré.',
       loading: 'Chargement du résultat…',
+      status: { named: 'Vous cite', ambiguous: 'Ne sait pas lequel vous êtes', not_named: 'Ne vous cite pas', unchecked: 'Impossible à vérifier' },
+      uncheckedNote: 'La recherche web de cet assistant a échoué deux fois, cette réponse ne compte donc pas dans votre score.',
+      showAnswer: 'Voir la réponse complète',
+      hideAnswer: 'Masquer la réponse',
+      placesLabel: 'Établissements cités',
+      sourcesLabel: 'Sources utilisées',
+      namedInstead: 'Établissements que l’IA a recommandés à votre place',
+      namedInsteadSub: 'Quand des clients ont demandé une recommandation, voici les noms donnés par les assistants.',
+      summaryChecked: 'Cité dans {named} réponses sur {checked}.',
+      summaryUnchecked: '{n} autres n’ont pas pu être vérifiées et ne comptent pas.',
+      asks: 'Nous demandons',
+      scoreHow: { title: 'Comment le score est calculé', text: 'Pour chaque réponse vérifiable : 60 points si elle vous cite, 40 de plus si elle renvoie vers votre site, et 20 si elle ne savait pas quel établissement vous êtes. Les réponses où la recherche web de l’assistant a échoué ne comptent pas. Le score est la moyenne, sur 100.' },
+      prev: { up: '+{d} depuis le {date} ({prev})', down: '-{d} depuis le {date} ({prev})', same: 'Identique au {date}' },
+      fixExtra: { names: 'Cités à votre place : {names}.', hosts: 'Elle s’est appuyée sur {hosts}.', quote: 'Elle a dit : « {quote} »', yours: '{host} est-il votre site ? Ajoutez-le ci-dessus et relancez la vérification : l’IA pourra alors y renvoyer.' },
+      watch: {
+        title: 'Revérifier chaque semaine',
+        text: 'Nous poserons les mêmes questions une fois par semaine et vous enverrons le nouveau score par e-mail, pour voir si vos corrections fonctionnent. Gratuit, vous arrêtez quand vous voulez.',
+        email: 'Votre e-mail', emailPh: 'vous@votreentreprise.fr',
+        consent: 'Envoyez-moi cette vérification par e-mail une fois par semaine. Je peux arrêter en un clic.',
+        button: 'Lancer les vérifications hebdomadaires',
+        sent: 'Presque fini : nous vous avons envoyé un e-mail. Cliquez sur le lien qu’il contient pour lancer les vérifications hebdomadaires.',
+        already: 'Vous recevez déjà des vérifications hebdomadaires pour cet établissement.',
+        on: 'Les vérifications hebdomadaires sont activées. Le premier e-mail arrivera dans une semaine environ.',
+        off: 'Les vérifications hebdomadaires sont désactivées. Nous ne vous écrirons plus au sujet de cet établissement.',
+        errEmail: 'Merci de saisir une adresse e-mail valide.', errConsent: 'Merci de cocher la case pour que nous puissions vous écrire.', errRate: 'Trop d’inscriptions depuis cet endroit aujourd’hui. Merci de réessayer demain.', errFull: 'Les vérifications hebdomadaires sont complètes pour le moment. Merci de réessayer plus tard.', errMail: 'Impossible d’envoyer l’e-mail. Vérifiez l’adresse et réessayez.',
+      },
     },
     fixes: {
-      not_recommended: { title: 'Être cité quand on demande « le meilleur » près de chez soi', text: 'Quand des clients ont demandé une recommandation, l’IA ne vous a pas cité. Elle recommande les entreprises que les sites d’avis, les annuaires locaux et leurs propres pages décrivent clairement, avec le type d’activité et la ville en termes simples.' },
+      ambiguous: { title: 'L’IA ne sait pas quel {name} vous êtes', text: 'Interrogé sur vous, l’assistant a demandé de quel {name} il s’agissait. Écrivez « {category} à {place} » juste à côté de votre nom partout : votre fiche d’établissement Google, le titre et la première ligne de votre site, et vos fiches dans les annuaires.' },
+      not_recommended: { title: 'Être cité quand on demande le meilleur {category} à {place}', text: 'Quand des clients ont demandé une recommandation, l’IA ne vous a pas cité. Elle recommande les établissements que les sites d’avis, les guides locaux et leurs propres pages décrivent clairement, avec le type d’activité et la zone en termes simples.' },
       unknown: { title: 'Aidez l’IA à savoir qui vous êtes', text: 'Interrogée sur votre nom, l’IA ne vous a pas trouvé. Utilisez partout le même nom, la même adresse et le même téléphone : votre site, votre fiche d’établissement Google, les cartes et les annuaires.' },
       no_site: { title: 'Donnez à l’IA un site à citer', text: 'Sans site, l’IA ne peut que répéter ce que d’autres disent de vous. Un site simple avec vos services, votre zone, vos horaires et des réponses lui offre une source fiable à citer et à lier.' },
       not_cited: { title: 'Faites de votre site la source', text: 'L’IA vous connaît, mais renvoie vers d’autres sites quand elle parle de vous. Mettez clairement sur votre propre site les infos que les gens demandent, pour qu’il devienne la page que l’IA cite.' },
