@@ -1,27 +1,52 @@
 ---
-// /tools/: every free tool, grouped. Data-driven: each tool is one file in src/data/tools/ (see index.ts), so adding a
-// tool never touches this page. Page copy: src/data/toolshub.ts.
+// /tools/: every free tool, as one even grid with a search and category filters. Data-driven: each tool is one file in
+// src/data/tools/ (see index.ts), so adding a tool never touches this page. Page copy: src/data/toolshub.ts; categories,
+// outcomes, times and service marks: src/data/toolshub-cards.ts. Static HTML; the small script only filters what is there
+// and, once enough people used the tools, marks the most used ones (platform /v1/free/popular).
 import PageShell from '../../../components/PageShell.astro';
 import JsonLd from '../../../components/JsonLd.astro';
 import { SITE } from '../../../data/site';
 import { TOOLS, TOOL_ICONS, toolCopy, type ToolEntry } from '../../../data/tools/index';
 import { hubCopy } from '../../../data/toolshub';
+import { HUB_CATS, hubUi, hubCard, hubCats } from '../../../data/toolshub-cards';
+import { SERVICE_LOGOS } from '../../../data/serviceLogos';
 import { available, getLocale, subPath, type LocaleCode } from '../../../i18n';
 import '../../../styles/tools.css';
+import '../../../styles/toolshub.css';
 
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
 const info = getLocale(code);
 const H = hubCopy(code);
+const U = hubUi(code);
 const url = new URL(subPath(info, 'tools'), Astro.site).href;
-const ORDER = ['site', 'ai', 'money', 'start', 'other'] as const;
-const groups = ORDER.map((g) => ({ g, items: TOOLS.filter((t) => (t.group ?? 'other') === g) })).filter((x) => x.items.length);
+// The idea lab, once it ships as a tool file (slug 'idea-lab'), leads the page instead of sitting in the grid.
+const lab = TOOLS.find((t) => t.slug === 'idea-lab');
+const tools = TOOLS.filter((t) => t !== lab);
+const fill = (s: string, v: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ''));
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>';
 const icon = (k: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${TOOL_ICONS[k] ?? TOOL_ICONS.wrench}</svg>`;
 const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
+const time = (t: ToolEntry) => {
+  const c = hubCard(t);
+  if (!c) return '';
+  const v = new Intl.NumberFormat(info.lang, { style: 'unit', unit: c.time.unit, unitDisplay: 'short' }).format(c.time.n);
+  return fill(U.meta.about, { t: v });
+};
+const used = [...new Set(tools.flatMap((t) => hubCard(t)?.logos ?? []))].filter((k) => SERVICE_LOGOS[k]);
+const counts = Object.fromEntries(HUB_CATS.map((c) => [c, tools.filter((t) => hubCats(t).includes(c)).length]));
+const cats = HUB_CATS.filter((c) => counts[c] > 0);
+// What the search matches: this language's words, plus the English ones (people often type them anyway).
+const words = (t: ToolEntry) => {
+  const a = toolCopy(t, code), e = toolCopy(t, 'en'), c = hubCard(t);
+  return [a.name, a.blurb, e.name, e.blurb, c?.outcome[code], c?.outcome.en, ...hubCats(t).map((k) => `${U.cats[k]} ${hubUi('en').cats[k]}`), t.slug.replace(/-/g, ' ')].filter(Boolean).join(' ').toLowerCase();
+};
+const startHref = `${SITE.start}?utm_source=equipe.im&utm_medium=tool&utm_campaign=tools-hub`;
 ---
 <PageShell code={code} page="tools" title={H.page.title} description={H.page.desc} image="/og/tools/tools.png" imageAlt={H.page.h1}>
   <Fragment slot="head">
+    <link rel="preconnect" href="https://platform.equipe.im" crossorigin />
     <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mo');</script>
     <JsonLd data={{
       '@type': 'CollectionPage', '@id': `${url}#page`, url, name: H.page.h1, description: H.page.desc, inLanguage: info.lang,
@@ -29,34 +54,157 @@ const href = (t: ToolEntry) => new URL(subPath(info, t.path), SITE.url).href;
       mainEntity: { '@type': 'ItemList', itemListElement: TOOLS.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: href(t), name: toolCopy(t, code).name })) },
     }} />
   </Fragment>
-  <div class="tl">
-    <section class="tl-hero"><div class="wrap">
+  <svg class="th-sprite" aria-hidden="true" width="0" height="0">
+    {used.map((k) => <symbol id={`lg-${k}`} viewBox={SERVICE_LOGOS[k].viewBox}><Fragment set:html={SERVICE_LOGOS[k].svg} /></symbol>)}
+  </svg>
+  <div class="tl th" data-th>
+    <section class="th-hero"><div class="wrap">
       <h1>{H.page.h1}</h1>
       <p class="tl-lead">{H.page.lead}</p>
+      <p class="th-stats">{fill(U.stats, { n: TOOLS.length })}</p>
+      <form class="th-search" role="search" data-th-form>
+        <label class="sr-only" for="th-q">{U.search.label}</label>
+        <svg class="th-search-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.5" /><path d="m20.5 20.5-4.2-4.2" /></svg>
+        <input id="th-q" type="search" name="q" placeholder={U.search.placeholder} autocomplete="off" spellcheck="false" maxlength="60" enterkeyhint="search" />
+        <button type="button" class="th-clear" aria-label={U.search.clear} hidden data-th-clear><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" /></svg></button>
+      </form>
     </div></section>
+
     <div class="wrap tl-end">
-      {groups.map(({ g, items }) => (
-        <div class="tl-grp">
-          <h2>{H.groups[g]}</h2>
-          <ul class="tl-grid">
-            {items.map((t, i) => { const c = toolCopy(t, code); return (
-              <li class="tl-in" style={`--d:${Math.min(i, 6) * 60}ms`}><a class="tl-tool" href={subPath(info, t.path)} data-ph="tools_hub_click" data-ph-location="hub" data-ph-tool={t.slug}>
-                <span class="ic"><Fragment set:html={icon(t.icon)} /></span><b>{c.name}</b><span class="bl">{c.blurb}</span><span class="go">{c.cta}<Fragment set:html={arrow} /></span>
-              </a></li>
-            ); })}
-          </ul>
+      {lab && (() => { const c = toolCopy(lab, code); return (
+        <a class="th-lab" href={subPath(info, lab.path)} data-ph="tools_hub_click" data-ph-location="hub-lab" data-ph-tool={lab.slug}>
+          <span class="ic"><Fragment set:html={icon(lab.icon)} /></span>
+          <span class="tx"><span class="th-badge">{U.meta.new}</span><b>{c.name}</b><span>{c.blurb}</span></span>
+          <span class="go">{c.cta}<Fragment set:html={arrow} /></span>
+        </a>
+      ); })()}
+
+      <div class="th-bar">
+        <div class="th-chips" role="group" aria-label={U.search.label} data-th-chips>
+          <button type="button" class="th-chip" aria-pressed="true" data-cat="all"><Fragment set:html={check} /><span>{U.cats.all}</span><small>{tools.length}</small></button>
+          {cats.map((c) => <button type="button" class="th-chip" aria-pressed="false" data-cat={c}><Fragment set:html={check} /><span>{U.cats[c]}</span><small>{counts[c]}</small></button>)}
         </div>
-      ))}
-      <div class="tl-more">
+        <p class="th-count" aria-live="polite" data-th-count data-one={U.search.countOne} data-many={U.search.count}>{fill(U.search.count, { n: tools.length })}</p>
+      </div>
+
+      <ul class="th-grid" data-th-grid>
+        {tools.map((t, i) => { const c = toolCopy(t, code), card = hubCard(t), tm = time(t); return (
+          <li class="tl-in th-li" style={`--d:${Math.min(i, 8) * 45}ms`} data-cats={hubCats(t).join(' ')} data-k={words(t)} data-feat={card?.feature ?? ''}>
+            <a class="th-card" href={subPath(info, t.path)} data-ph="tools_hub_click" data-ph-location="hub" data-ph-tool={t.slug}>
+              <span class="th-top">
+                <span class="ic"><Fragment set:html={icon(t.icon)} /></span>
+                <span class="th-pop" hidden>{U.meta.popular}</span>
+                {card?.logos?.length ? <span class="th-logos" aria-label={card.logos.map((k) => SERVICE_LOGOS[k]?.name).filter(Boolean).join(', ')}>{card.logos.filter((k) => SERVICE_LOGOS[k]).map((k) => <span class={`lg lg-${k}`} title={SERVICE_LOGOS[k].name}><svg aria-hidden="true"><use href={`#lg-${k}`} /></svg></span>)}</span> : null}
+              </span>
+              <b class="th-name">{c.name}</b>
+              <span class="th-bl">{c.blurb}</span>
+              {card && <span class="th-out"><Fragment set:html={check} /><span><span class="sr-only">{U.meta.youGet}: </span>{card.outcome[code] ?? card.outcome.en}</span></span>}
+              <span class="th-foot">
+                <span class="th-meta">{tm && <span>{tm}</span>}<span>{U.meta.free}</span><span>{U.meta.noSignup}</span></span>
+                <span class="go">{c.cta}<Fragment set:html={arrow} /></span>
+              </span>
+            </a>
+          </li>
+        ); })}
+      </ul>
+
+      <div class="th-empty" hidden data-th-empty>
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5" /><path d="m20.5 20.5-4.2-4.2" /><path d="M8.5 11h5" /></svg></span>
+        <h2 data-th-empty-title data-tpl={U.empty.title}></h2>
+        <p>{U.empty.text}</p>
+        <div class="th-empty-do">
+          <a class="btn primary" href={startHref} data-th-ask data-base={startHref} data-ph="signup_cta_click" data-ph-location="tools-hub-empty">{U.empty.button}<Fragment set:html={arrow} /></a>
+          <button type="button" class="btn ghost" data-th-reset>{U.empty.reset}</button>
+        </div>
+      </div>
+
+      <div class="tl-more th-more">
         <h2>{H.more.title}</h2>
         <p>{H.more.text}</p>
-        <a class="btn primary lg" href={`${SITE.start}?utm_source=equipe.im&utm_medium=tool&utm_campaign=tools-hub&utm_content=more`} data-ph="signup_cta_click" data-ph-location="tools-hub">{H.more.button}</a>
+        <a class="btn primary lg" href={`${startHref}&utm_content=more`} data-ph="signup_cta_click" data-ph-location="tools-hub">{H.more.button}</a>
       </div>
     </div>
   </div>
   <script>
-    // Every card fades in on load, a little after the one before (no scroll trigger: a card is never left hidden).
-    const cards = document.querySelectorAll<HTMLElement>('.tl-in');
-    requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach((x) => x.classList.add('on'))));
+    // Filter by category, search as you type, keep both in the address (?c=, ?q=) so a filtered view can be shared.
+    // Counts: tools_hub_filter {cat}, tools_hub_search {results} (never the typed words), tools_hub_empty; Features steps
+    // tools_hub:filter / search / empty.
+    type W = { eqTrack?: (n: string, p?: Record<string, unknown>) => void; eqFeat?: (s: string) => void };
+    const w = window as unknown as W;
+    const track = (n: string, p?: Record<string, unknown>) => { try { w.eqTrack?.(n, p); } catch { /* never breaks the page */ } };
+    const feat = (s: string) => { try { w.eqFeat?.(s); } catch { /* never breaks the page */ } };
+    const root = document.querySelector<HTMLElement>('[data-th]');
+    if (root) {
+      const cards = [...root.querySelectorAll<HTMLLIElement>('.th-li')];
+      const chips = [...root.querySelectorAll<HTMLButtonElement>('.th-chip')];
+      const input = root.querySelector<HTMLInputElement>('#th-q')!;
+      const clear = root.querySelector<HTMLButtonElement>('[data-th-clear]')!;
+      const count = root.querySelector<HTMLElement>('[data-th-count]')!;
+      const empty = root.querySelector<HTMLElement>('[data-th-empty]')!;
+      const emptyTitle = root.querySelector<HTMLElement>('[data-th-empty-title]')!;
+      const ask = root.querySelector<HTMLAnchorElement>('[data-th-ask]')!;
+      const grid = root.querySelector<HTMLElement>('[data-th-grid]')!;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let cat = 'all', q = '', searchTimer = 0, lastSent = '';
+      const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').trim();
+      const apply = (animate = true) => {
+        const terms = norm(q).split(/\s+/).filter(Boolean);
+        let n = 0;
+        cards.forEach((li) => {
+          const k = norm(li.dataset.k || '');
+          const show = (cat === 'all' || (li.dataset.cats || '').split(' ').includes(cat)) && terms.every((x) => k.includes(x));
+          if (show && li.hidden && animate && !reduce) { li.classList.remove('on'); li.hidden = false; requestAnimationFrame(() => requestAnimationFrame(() => li.classList.add('on'))); }
+          else li.hidden = !show;
+          if (show) { li.style.setProperty('--d', `${Math.min(n, 8) * 35}ms`); n++; }
+        });
+        count.textContent = n === 1 ? count.dataset.one! : count.dataset.many!.replace('{n}', String(n));
+        empty.hidden = n > 0; grid.hidden = n === 0;
+        if (!n) {
+          emptyTitle.textContent = emptyTitle.dataset.tpl!.replace('{q}', q.trim() || chips.find((c) => c.dataset.cat === cat)?.querySelector('span')?.textContent || '');
+          const u = new URL(ask.dataset.base!); if (q.trim()) u.searchParams.set('idea', q.trim().slice(0, 120)); u.searchParams.set('utm_content', 'empty'); ask.href = u.toString();
+        }
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.cat === cat)));
+        clear.hidden = !q;
+        try { const u = new URL(location.href); cat === 'all' ? u.searchParams.delete('c') : u.searchParams.set('c', cat); q ? u.searchParams.set('q', q) : u.searchParams.delete('q'); history.replaceState(null, '', u); } catch { /* fine */ }
+        return n;
+      };
+      chips.forEach((c) => c.addEventListener('click', () => {
+        if (cat === c.dataset.cat) return;
+        cat = c.dataset.cat || 'all';
+        const n = apply();
+        track('tools_hub_filter', { cat, results: n }); feat('filter');
+      }));
+      input.addEventListener('input', () => {
+        q = input.value.slice(0, 60);
+        const n = apply();
+        clearTimeout(searchTimer);
+        // One count per pause in typing, never the words themselves.
+        searchTimer = window.setTimeout(() => {
+          if (!q.trim() || q === lastSent) return;
+          lastSent = q;
+          track('tools_hub_search', { results: n, length: q.trim().length }); feat('search');
+          if (!n) { track('tools_hub_empty', { cat }); feat('empty'); }
+        }, 900);
+      });
+      root.querySelector('[data-th-form]')!.addEventListener('submit', (e) => { e.preventDefault(); input.blur(); });
+      input.addEventListener('keydown', (e) => { if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; q = ''; apply(); } });
+      clear.addEventListener('click', () => { input.value = ''; q = ''; apply(); input.focus(); });
+      root.querySelector('[data-th-reset]')!.addEventListener('click', () => { input.value = ''; q = ''; cat = 'all'; apply(); });
+
+      // Opened with a filter in the address: show it.
+      const p = new URLSearchParams(location.search);
+      if (p.get('c') && chips.some((c) => c.dataset.cat === p.get('c'))) cat = p.get('c')!;
+      if (p.get('q')) { q = p.get('q')!.slice(0, 60); input.value = q; }
+      apply(false);
+      // Every visible card fades in, a little after the one before (no scroll trigger: a card is never left hidden).
+      requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach((x) => x.classList.add('on'))));
+
+      // "Popular": the most used tools by real use (Features counts). The platform answers nothing until there is enough.
+      const popular = () => fetch('https://platform.equipe.im/v1/free/popular').then((r) => (r.ok ? r.json() : null)).then((d) => {
+        const keys: string[] = Array.isArray(d?.popular) ? d.popular : [];
+        keys.forEach((k) => cards.forEach((li) => { if (li.dataset.feat === k) li.querySelector<HTMLElement>('.th-pop')!.hidden = false; }));
+      }).catch(() => { /* no badge */ });
+      ('requestIdleCallback' in window ? (window as unknown as { requestIdleCallback: (f: () => void, o?: object) => void }).requestIdleCallback(popular, { timeout: 3000 }) : setTimeout(popular, 1500));
+    }
   </script>
 </PageShell>

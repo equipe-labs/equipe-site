@@ -1,24 +1,33 @@
 ---
-// The website grader: the address box, the steps while it runs, and the report (drawn here from the platform's JSON).
-// mode 'run' (/grader/): the box is the hero; after a check the address bar becomes the shared link /grader/r/<id>/.
+// The website grader: the address box (plus an optional competitor), the steps while it runs, and the report, drawn
+// here from the platform's JSON (cloud platform/src/free-tools.js).
+// mode 'run' (/grader/): the box is the hero; after a check the address bar becomes the shared link /grader/r/<id>/
+//   (with ?vs=<id> when a competitor was checked too).
 // mode 'shared' (/grader/r/<id>/): the report loads first, the box follows ("check your own site").
-// Events: PostHog grader_run / grader_result / grader_error; the own funnel tool_run and tool_result, click:<data-ph>.
+// Events (PostHog): grader_run, grader_result, grader_error, grader_compare_open, grader_compare_result, grader_recheck,
+// grader_pdf, grader_share, grader_issue_open, grader_section_open, grader_shared_view; own funnel tool_run / tool_result;
+// Features steps grader:start / done / error / shared_view / compare / recheck / pdf / share / issue_open.
 import { graderCopy, graderFixHref, GRADER_API, AREAS, CHECKS } from '../data/grader';
-import { aivisCopy } from '../data/aivis';
+import { graderV2, FIX_ROLE } from '../data/grader-v2';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/grader.css';
 
 interface Props { code: LocaleCode; mode: 'run' | 'shared' }
 const { code, mode } = Astro.props;
 const info = getLocale(code);
 const c = graderCopy(code);
+const V = graderV2(code);
 const F = c.form;
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>';
+const plus = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>';
 const data = {
   api: GRADER_API, lang: info.lang, mode,
   base: subPath(info, 'grader'), aivis: subPath(info, 'ai-visibility'),
   fixHref: graderFixHref('__SITE__', '__PLACE__'),
-  areas: AREAS, checks: CHECKS,
-  c: { result: c.result, areas: c.areas, fixes: c.fixes, checks: c.checks, form: c.form, progress: c.progress },
+  areas: AREAS, checks: { ...CHECKS, ai: [...CHECKS.ai, 'schema_valid'] },
+  role: FIX_ROLE,
+  c: { result: c.result, areas: c.areas, fixes: { ...c.fixes, schema_invalid: V.fix }, checks: { ...c.checks, schema_valid: V.check }, form: c.form, progress: c.progress },
+  v: V,
 };
 ---
 <div class={`tl-flow tl-flow-${mode}`}>
@@ -30,20 +39,37 @@ const data = {
     <label class="sr-only" for={`g-url-${mode}`}>{F.label}</label>
     <div class="tl-url">
       <input id={`g-url-${mode}`} name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder={F.placeholder} maxlength="300" required />
-      <button class="btn primary" type="submit" data-ph="grader_submit" data-ph-location={mode}><span data-label>{F.button}</span><Fragment set:html={arrow} /></button>
+      <button class="btn primary" type="submit" data-ph="grader_submit" data-ph-location={mode}><span data-label data-one={F.button} data-two={V.form.compareButton}>{F.button}</span><Fragment set:html={arrow} /></button>
+    </div>
+    <div class="gr-vs" data-g-vs hidden>
+      <label for={`g-vs-${mode}`}>{V.form.compareLabel}</label>
+      <div class="gr-vs-row">
+        <input id={`g-vs-${mode}`} name="vs" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder={V.form.comparePlaceholder} maxlength="300" />
+        <button type="button" class="gr-x" aria-label={V.form.compareRemove} data-g-vs-off><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" /></svg></button>
+      </div>
     </div>
     <p class="tl-err" role="alert" hidden data-g-err></p>
-    <p class="tl-note">{F.note}</p>
+    <div class="gr-under">
+      <button type="button" class="gr-link" data-g-vs-on aria-expanded="false"><Fragment set:html={plus} />{V.form.compareOpen}</button>
+      <p class="tl-note">{F.note}</p>
+    </div>
   </form>
 </div></section>
 
-<section class="tl-run" hidden data-g-run aria-live="polite">
+<section class="tl-run gr-run" hidden data-g-run aria-live="polite">
   <div class="wrap">
-    <div class="tl-stepper">
+    <div class="tl-stepper gr-stepper">
+      <div class="gr-runhead"><b data-g-runwho></b></div>
+      <div class="gr-prog" aria-hidden="true"><i data-g-prog></i></div>
       <ol class="tl-steps">
         {c.progress.map((s) => <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{s}</span></li>)}
       </ol>
-      <p class="tl-eta"><span>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
+      <p class="tl-eta"><span data-g-runnote data-slow={V.run.slow}>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
+    </div>
+    <div class="gr-skel" aria-hidden="true">
+      <div class="gr-sk gr-sk-top"><span class="ring"></span><span class="lines"><i></i><i></i><i></i></span></div>
+      <div class="gr-sk-row">{[0, 1, 2, 3, 4].map(() => <span class="gr-sk"><i></i><i></i></span>)}</div>
+      <div class="gr-sk gr-sk-wide"><i></i><i></i></div>
     </div>
   </div>
 </section>
@@ -56,12 +82,12 @@ const data = {
 <script>
   import '../scripts/tl-stepper';
   type Json = Record<string, any>;
-  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void };
-  const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
-  const own = (k: string, t: string, f?: string) => w.eqOwn?.(k, t, f);
-  const ft = (s: string) => { try { (window as unknown as { eqFeat?: (s: string) => void }).eqFeat?.(s); } catch { /* counting never breaks the page */ } };
+  const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; eqFeat?: (s: string) => void };
+  const track = (n: string, p?: Json) => { try { w.eqTrack?.(n, p); } catch { /* counting never breaks the page */ } };
+  const own = (k: string, t: string, f?: string) => { try { w.eqOwn?.(k, t, f); } catch { /* fine */ } };
+  const ft = (s: string) => { try { w.eqFeat?.(s); } catch { /* fine */ } };
   const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
-  const fill = (s: string, v: Json) => s.replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
+  const fill = (s: string, v: Json) => String(s).replace(/\{(\w+)\}/g, (_, k) => (v[k] == null ? '' : String(v[k])));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ic = {
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
@@ -70,6 +96,14 @@ const data = {
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
     copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
     chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    redo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>',
+    pdf: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
+    share: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg>',
+    up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>',
+    down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    img: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>',
+    x_logo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.2 22H3l7.3-8.4L1 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z"/></svg>',
+    in_logo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>',
   };
 
   const el = document.querySelector<HTMLScriptElement>('[data-g-data]');
@@ -79,88 +113,236 @@ const data = {
   const rep = document.querySelector<HTMLElement>('[data-g-report]')!;
   const out = document.querySelector<HTMLElement>('[data-g-out]')!;
   if (D && form && run && rep && out) {
-    const C = D.c, R = C.result;
-    const input = form.querySelector<HTMLInputElement>('input')!;
-    const btn = form.querySelector<HTMLButtonElement>('button')!;
+    const C = D.c, R = C.result, V = D.v;
+    const input = form.querySelector<HTMLInputElement>('input[name=url]')!;
+    const vsBox = form.querySelector<HTMLElement>('[data-g-vs]')!;
+    const vsInput = form.querySelector<HTMLInputElement>('input[name=vs]')!;
+    const vsOn = form.querySelector<HTMLButtonElement>('[data-g-vs-on]')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const btnLabel = btn.querySelector<HTMLElement>('[data-label]')!;
     const err = form.querySelector<HTMLElement>('[data-g-err]')!;
     const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
-    let timer = 0;
+    const prog = run.querySelector<HTMLElement>('[data-g-prog]')!;
+    const runWho = run.querySelector<HTMLElement>('[data-g-runwho]')!;
+    const runNote = run.querySelector<HTMLElement>('[data-g-runnote]')!;
+    const noteText = runNote.textContent || '';
+    let timer = 0, tick = 0, t0 = 0;
+    let cur: Json | null = null, them: Json | null = null;
 
     const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
     const urlish = (v: string) => /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(:\d+)?(\/\S*)?$/i.test(v.trim()) && !/\s/.test(v.trim());
+    const hostish = (v: string) => v.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[/?#]/)[0].toLowerCase();
+    const secs = (ms: number | null) => (ms == null ? '–' : (Math.round(ms / 100) / 10).toLocaleString(D.lang));
+    const kb = (b: number | null) => (b == null ? '–' : b >= 1e6 ? `${(Math.round(b / 1e5) / 10).toLocaleString(D.lang)} MB` : `${Math.round(b / 1024)} KB`);
+    const dateOf = (t: number, short = false) => new Date(t * 1000).toLocaleDateString(D.lang, short ? { month: 'short', day: 'numeric' } : { year: 'numeric', month: 'long', day: 'numeric' });
+    const band = (s: number) => (s >= 90 ? R.bands.great : s >= 70 ? R.bands.good : s >= 50 ? R.bands.fair : R.bands.poor);
+    const tone = (s: number | null) => (s == null ? 'na' : s < 50 ? 'low' : s < 90 ? 'mid' : 'hi');
+    const shareUrl = (id: string, vs?: string) => new URL(`${D.base}r/${id}/${vs ? `?vs=${vs}` : ''}`, location.origin).href;
+    const impactOf = (n: number) => (n >= 60 ? 'high' : n >= 40 ? 'medium' : 'low');
+
+    // ---- running: steps that tick with their time, an elapsed clock and a bar that never claims 100 % early ----
     const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
-    const startSteps = () => {
-      run.hidden = false; stepTo(0);
+    const startSteps = (who: string) => {
+      run.hidden = false; t0 = performance.now(); runWho.textContent = who; runNote.textContent = noteText; stepTo(0);
       let i = 0;
-      // About 30 seconds in all; the last step waits for the answer.
       const at = [2500, 9000, 6000, 7000];
       const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 6000); };
       timer = window.setTimeout(next, at[0]);
+      const upd = () => {
+        const s = (performance.now() - t0) / 1000;
+        prog.style.width = `${Math.min(94, 100 * (1 - Math.exp(-s / 22)))}%`;
+        if (s > 50) runNote.textContent = runNote.dataset.slow || noteText;
+      };
+      upd(); clearInterval(tick); tick = window.setInterval(upd, 1000);
     };
-    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const stopSteps = () => { clearTimeout(timer); clearInterval(tick); stepTo(steps.length); prog.style.width = '100%'; setTimeout(() => { run.hidden = true; prog.style.width = '0%'; }, reduce ? 0 : 420); };
 
-    const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
-    const band = (s: number) => (s >= 90 ? R.bands.great : s >= 70 ? R.bands.good : s >= 50 ? R.bands.fair : R.bands.poor);
-    const secs = (ms: number | null) => (ms == null ? '–' : (Math.round(ms / 100) / 10).toLocaleString(D.lang));
-    const kb = (b: number | null) => (b == null ? '–' : b >= 1e6 ? `${(Math.round(b / 1e5) / 10).toLocaleString(D.lang)} MB` : `${Math.round(b / 1024)} KB`);
-    const shareUrl = (id: string) => new URL(`${D.base}r/${id}/`, location.origin).href;
-
+    // ---- pieces of the report ----
     function fixText(f: Json) {
       const t = C.fixes[f.key];
       if (!t) return null;
-      const v = { n: f.n, of: f.of, score: f.score, sec: secs(f.lcp_ms), words: f.words, bots: (f.bots || []).join(', ') };
-      return { title: fill(t.title, v), text: fill(t.text, v), area: C.areas[f.area]?.name || '' };
+      const v = { n: f.n, of: f.of, score: f.score, sec: secs(f.lcp_ms), words: f.words, bots: (f.bots || []).join(', '), types: (f.types || []).join(', ') || 'JSON' };
+      return { key: f.key, impact: impactOf(Number(f.impact) || 0), title: fill(t.title, v), text: fill(t.text, v), area: C.areas[f.area]?.name || '', role: D.role[f.key] || 'engineer', raw: f };
+    }
+    const kv = (rows: [string, string][]) => rows.filter((r) => r[1]).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+    function techOf(f: Json, g: Json) {
+      const fa = g.facts || {}, x = f.raw;
+      const rows: [string, string][] = [];
+      let list = '';
+      if (/^speed_/.test(x.key)) rows.push([V.field.lcp, `${secs(fa.lcp_ms)} s (LCP)`], [V.field.fcp, `${secs(fa.fcp_ms)} s (FCP)`], ['TBT', fa.tbt_ms != null ? `${fa.tbt_ms} ms` : ''], [R.facts.weight, kb(fa.bytes)], [V.field.requests, fa.requests != null ? String(fa.requests) : '']);
+      if (x.key === 'layout_shift') rows.push(['CLS', fa.cls != null ? String(fa.cls) : '']);
+      if (x.key === 'ai_blocked') list = (g.crawlers || []).filter((b: Json) => !b.allowed).map((b: Json) => `<li><b>${esc(b.name)}</b> · ${esc(b.firewall ? R.crawlerFirewall : R.crawlerRobots)}</li>`).join('');
+      if (x.key === 'broken_links') list = (g.broken || []).map((b: Json) => `<li><span class="u">${esc(b.url)}</span><span class="tl-pill no">${esc(b.status)}</span></li>`).join('') || (x.examples || []).map((u: string) => `<li><span class="u">${esc(u)}</span></li>`).join('');
+      if (x.key === 'title_length' || x.key === 'title_missing') rows.push(['<title>', fa.title || '—']);
+      if (x.key === 'description_length' || x.key === 'description_missing') rows.push(['meta description', fa.description || '—']);
+      if (x.key === 'alt_text') rows.push(['img', `${x.n} / ${x.of}`]);
+      if (x.key === 'many_h1') rows.push(['h1', String(x.n)]);
+      if (x.key === 'thin_content') rows.push([R.facts.words, String(x.words)]);
+      if (x.key === 'share_image' && g.social) rows.push(['', fill(V.preview.missing, { tags: (g.social.missing || []).join(', ') })]);
+      if ((x.key === 'schema_invalid' || x.key === 'business_schema' || x.key === 'schema_missing') && g.schema) {
+        list = (g.schema.items || []).map((s: Json) => `<li><b>${esc(s.type)}</b>${s.missing?.length ? ` · ${esc(fill(V.schema.missing, { fields: s.missing.join(', ') }))}` : ''}</li>`).join('');
+        if (g.schema.broken) list += `<li>${esc(fill(V.schema.broken, { n: g.schema.broken }))}</li>`;
+      }
+      const dl = kv(rows);
+      return dl || list ? `${dl ? `<dl class="gr-kv">${dl}</dl>` : ''}${list ? `<ul class="gr-list">${list}</ul>` : ''}` : '';
+    }
+    function issueCard(f: Json, g: Json, i: number) {
+      const tech = techOf(f, g);
+      const role = V.issues.roles[f.role], does = V.issues.does[f.role];
+      return `<li class="gr-issue tl-in gr-${f.impact}" style="--d:${Math.min(i, 8) * 50}ms">
+        <div class="gr-ih"><span class="gr-dot" aria-hidden="true"></span><h4>${esc(f.title)}</h4><span class="tl-tag">${esc(f.area)}</span></div>
+        <p>${esc(f.text)}</p>
+        <p class="gr-team"><span class="gr-av gr-av-${f.role}" aria-hidden="true">${esc(role.slice(0, 1).toUpperCase())}</span><span>${esc(fill(V.issues.team, { role }))}${esc(does)}</span></p>
+        ${tech ? `<details class="gr-tech" data-key="${esc(f.key)}"><summary>${esc(V.issues.details)}${ic.chev}</summary><div>${tech}</div></details>` : ''}
+      </li>`;
+    }
+    function issuesHtml(g: Json) {
+      const all = (g.fixes || []).map(fixText).filter(Boolean) as Json[];
+      if (!all.length) return `<p class="tl-empty">${esc(R.noFixes)}</p>`;
+      const groups = (['high', 'medium', 'low'] as const).map((k) => [k, all.filter((f) => f.impact === k)] as const).filter(([, l]) => l.length);
+      let n = 0;
+      return groups.map(([k, l]) => {
+        const body = `<ol class="gr-issues">${l.map((f) => issueCard(f, g, n++)).join('')}</ol>`;
+        const head = `<span class="gr-imp gr-${k}"><i aria-hidden="true"></i>${esc(V.top[k])}</span><span class="gr-n">${l.length}</span>`;
+        // Small fixes start folded when there are bigger ones above them.
+        return k === 'low' && groups.length > 1
+          ? `<details class="gr-grp gr-fold" data-sec="low"><summary><span class="gr-gh">${head}</span><span class="gr-more">${esc(fill(V.issues.showLow, { n: l.length }))}${ic.chev}</span></summary>${body}</details>`
+          : `<div class="gr-grp"><div class="gr-gh">${head}</div>${body}</div>`;
+      }).join('');
+    }
+    function fieldHtml(g: Json) {
+      const fd = g.field, fa = g.facts || {};
+      const cat = (c: string) => (c === 'FAST' ? ['good', V.field.good] : c === 'AVERAGE' ? ['ni', V.field.ni] : c === 'SLOW' ? ['poor', V.field.poor] : ['na', '–']);
+      if (fd && fd.metrics) {
+        const m = fd.metrics;
+        const row = (k: string, label: string, val: string) => { if (!m[k]) return ''; const [cl, word] = cat(m[k].cat); return `<li><span class="l">${esc(label)}</span><b>${esc(val)}</b><span class="gr-cat gr-${cl}">${esc(word)}</span></li>`; };
+        return `<p class="gr-cs">${esc(V.field.sub)}${fd.scope === 'origin' ? ` ${esc(V.field.origin)}` : ''}</p><ul class="gr-metrics">
+          ${row('lcp', V.field.lcp, m.lcp ? `${secs(m.lcp.p75)} s` : '')}${row('inp', V.field.inp, m.inp ? `${m.inp.p75} ms` : '')}${row('cls', V.field.cls, m.cls ? String(m.cls.p75) : '')}${row('fcp', V.field.fcp, m.fcp ? `${secs(m.fcp.p75)} s` : '')}</ul>`;
+      }
+      const lab = (k: string, val: string, ok: boolean | null) => (val ? `<li><span class="l">${esc(k)}</span><b>${esc(val)}</b>${ok == null ? '' : `<span class="gr-cat gr-${ok ? 'good' : 'ni'}">${esc(ok ? V.field.good : V.field.ni)}</span>`}</li>` : '');
+      return `<p class="gr-cs">${esc(V.field.none)}</p><ul class="gr-metrics">
+        ${lab(V.field.lcp, fa.lcp_ms != null ? `${secs(fa.lcp_ms)} s` : '', fa.lcp_ms != null ? fa.lcp_ms <= 2500 : null)}${lab(V.field.cls, fa.cls != null ? String(fa.cls) : '', fa.cls != null ? fa.cls <= 0.1 : null)}${lab(R.facts.weight, fa.bytes != null ? kb(fa.bytes) : '', null)}${lab(V.field.requests, fa.requests != null ? String(fa.requests) : '', null)}</ul>`;
+    }
+    function previewHtml(g: Json) {
+      const s = g.social;
+      if (!s) return '';
+      const img = s.image ? `<img src="${esc(s.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-g-img>` : '';
+      const noimg = `<span class="gr-noimg">${ic.img}<span>${esc(V.preview.noImage)}</span></span>`;
+      const media = `<span class="gr-media">${img}${noimg}</span>`;
+      const fav = s.icon ? `<img class="fav" src="${esc(s.icon)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-g-img>` : '';
+      const t = esc(s.title || s.host), d = esc(s.description), h = esc(s.host);
+      const miss = (s.missing || []).length ? `<p class="gr-miss"><span class="tl-pill no">${ic.x}${esc(fill(V.preview.missing, { tags: s.missing.join(', ') }))}</span></p>` : `<p class="gr-miss"><span class="tl-pill ok">${ic.check}${esc(V.preview.ok)}</span></p>`;
+      return `<div class="gr-sec tl-in"><h3 class="tl-h">${esc(V.preview.title)}</h3><p class="tl-sub">${esc(V.preview.sub)}</p>${miss}
+        <div class="gr-cards${s.image ? '' : ' noimage'}">
+          <figure class="gr-pv gr-pv-x"><figcaption>${ic.x_logo}X</figcaption><div class="card">${media}<span class="cap"><span class="h">${h}</span><b>${t}</b></span></div></figure>
+          <figure class="gr-pv gr-pv-in"><figcaption>${ic.in_logo}LinkedIn</figcaption><div class="card">${media}<span class="cap"><b>${t}</b><span class="h">${h}</span></span></div></figure>
+          <figure class="gr-pv gr-pv-chat"><figcaption>${ic.share}${esc(V.preview.chat)}</figcaption><div class="bubble"><span class="link">${esc(g.final_url || g.url)}</span><div class="card">${media}<span class="cap"><span class="site">${fav}${esc(s.site_name || s.host)}</span><b>${t}</b>${d ? `<span class="d">${d}</span>` : ''}</span></div></div></figure>
+        </div></div>`;
+    }
+    function schemaHtml(g: Json) {
+      const s = g.schema;
+      if (!s) return '';
+      const items = (s.items || []).map((x: Json) => `<li>${x.missing?.length ? `<span class="tl-pill no">${ic.x}</span>` : `<span class="tl-pill ok">${ic.check}</span>`}<b>${esc(x.type)}</b><span>${x.missing?.length ? esc(fill(V.schema.missing, { fields: x.missing.join(', ') })) : esc(x.known ? V.schema.ok : '')}</span></li>`).join('');
+      const broken = s.broken ? `<li><span class="tl-pill no">${ic.x}</span><b>JSON</b><span>${esc(fill(V.schema.broken, { n: s.broken }))}</span></li>` : '';
+      return `<div class="gr-box"><h3>${esc(V.schema.title)}</h3><p>${esc(V.schema.sub)}</p>${items || broken ? `<ul class="gr-rows">${items}${broken}</ul>` : `<p class="gr-none">${esc(V.schema.none)}</p>`}</div>`;
+    }
+    function linksHtml(g: Json) {
+      const n = g.facts?.links_checked || 0;
+      if (!n) return '';
+      const br = g.broken || [];
+      return `<div class="gr-box"><h3>${esc(V.links.title)}</h3><p>${esc(fill(V.links.sub, { n }))}</p>${br.length ? `<ul class="gr-rows">${br.map((b: Json) => `<li><span class="tl-pill no">${esc(b.status)}</span><span class="u">${esc(b.url)}</span></li>`).join('')}</ul>` : `<p class="gr-none ok">${ic.check}${esc(V.links.ok)}</p>`}</div>`;
+    }
+    function ringHtml(score: number | null, size: 'lg' | 'sm' = 'lg') {
+      const r = 70, circ = 2 * Math.PI * r, track = circ * 0.94;
+      return `<div class="tl-g gr-g gr-g-${size} gr-t-${tone(score)}" role="img" aria-label="${esc(R.overall)}: ${score ?? '–'}/100"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="tr" cx="80" cy="80" r="${r}" stroke-dasharray="${track} ${circ}"/><circle class="val" cx="80" cy="80" r="${r}" stroke-dasharray="0 ${circ}" data-to="${score == null ? 0 : (track * score) / 100}" data-c="${circ}"/></svg><div class="num"><b data-count="${score ?? ''}">${score == null ? '–' : reduce ? score : 0}</b>${size === 'lg' ? `<span>${esc(R.overall)}</span>` : ''}</div></div>`;
+    }
+    function compareHtml(g: Json, t: Json) {
+      const areas = D.areas as string[];
+      let ahead = 0, behind = 0;
+      const rows = areas.map((k) => {
+        const a = g.areas?.[k], b = t.areas?.[k];
+        if (typeof a === 'number' && typeof b === 'number') { if (a > b) ahead++; else if (b > a) behind++; }
+        const bar = (v: unknown, win: boolean) => `<span class="gr-cbar gr-t-${tone(typeof v === 'number' ? v : null)}${win ? ' win' : ''}"><span class="tl-bar"><i style="--w:${typeof v === 'number' ? v : 0}%"></i></span><b>${typeof v === 'number' ? v : '–'}</b>${win ? `<span class="gr-win">${ic.check}<span class="sr-only">${esc(V.compare.win)}</span></span>` : ''}</span>`;
+        return `<li><span class="an">${esc(C.areas[k].name)}</span>${bar(a, typeof a === 'number' && typeof b === 'number' && a > b)}${bar(b, typeof a === 'number' && typeof b === 'number' && b > a)}</li>`;
+      }).join('');
+      const verdict = ahead > behind ? fill(V.compare.ahead, { n: ahead }) : behind > ahead ? fill(V.compare.behind, { n: behind }) : V.compare.tie;
+      return `<div class="tl-card gr-cmp tl-in">
+        <h2>${esc(fill(V.compare.title, { host: t.host }))}</h2><p class="gr-verdict">${esc(verdict)}</p>
+        <div class="gr-cmp-top"><div><span class="who">${esc(V.compare.you)}</span>${ringHtml(g.score, 'sm')}<span class="h">${esc(g.host)}</span></div><div><span class="who">${esc(V.compare.them)}</span>${ringHtml(t.score, 'sm')}<span class="h">${esc(t.host)}</span></div></div>
+        <ul class="gr-cmp-rows"><li class="hd"><span></span><span>${esc(g.host)}</span><span>${esc(t.host)}</span></li>${rows}</ul>
+        ${t.id ? `<a class="gr-link2" href="${esc(shareUrl(t.id))}" data-ph="grader_compare_theirs">${esc(V.compare.theirs)}${ic.arrow}</a>` : ''}
+      </div><h2 class="gr-yours">${esc(V.compare.yours)}</h2>`;
     }
 
-    function draw(g: Json) {
+    function draw(g: Json, opts: { recheckNote?: string } = {}) {
+      cur = g;
       const score = typeof g.score === 'number' ? g.score : null;
       const site = g.final_url || g.url;
-      const r = 70, circ = 2 * Math.PI * r, track = circ * 0.94;
+      const fixes = (g.fixes || []).map(fixText).filter(Boolean) as Json[];
+      const cnt = { high: 0, medium: 0, low: 0 } as Record<string, number>;
+      fixes.forEach((f) => cnt[f.impact]++);
       const areas = (D.areas as string[]).map((k) => {
         const v = g.areas?.[k];
-        return `<li class="tl-area tl-in${typeof v === 'number' && v < 50 ? ' low' : ''}"><span class="an">${esc(C.areas[k].name)}</span>${typeof v === 'number' ? `<span class="as">${v}<small>/100</small></span><span class="tl-bar"><i style="--w:${v}%"></i></span>` : `<span class="as na">${esc(R.notMeasured)}</span>`}<span class="aw">${esc(C.areas[k].what)}</span></li>`;
+        return `<li class="tl-area gr-area tl-in gr-t-${tone(typeof v === 'number' ? v : null)}"><span class="an">${esc(C.areas[k].name)}</span>${typeof v === 'number' ? `<span class="as">${v}<small>/100</small></span><span class="tl-bar"><i style="--w:${v}%"></i></span>` : `<span class="as na">${esc(R.notMeasured)}</span>`}<span class="aw">${esc(C.areas[k].what)}</span></li>`;
       }).join('');
-      const fixes = (g.fixes || []).map(fixText).filter(Boolean).slice(0, 5) as Json[];
-      const fixesHtml = fixes.length ? `<ol class="tl-fixes">${fixes.map((f, i) => `<li class="tl-in" style="--d:${i * 70}ms"><span class="n">${i + 1}</span><div><h4>${esc(f.title)}</h4><p>${esc(f.text)}</p><span class="tl-tag">${esc(f.area)}</span></div></li>`).join('')}</ol>` : `<p class="tl-empty">${esc(R.noFixes)}</p>`;
+      const p = g.prev;
+      const delta = p && typeof p.score === 'number' && score != null && p.id !== g.id
+        ? (() => { const d = score - p.score, dt = dateOf(p.created_at, true); return `<a class="gr-delta ${d > 0 ? 'up' : d < 0 ? 'down' : 'same'}" href="${esc(shareUrl(p.id))}" data-ph="grader_prev_open">${d > 0 ? ic.up : d < 0 ? ic.down : ic.dash}${esc(fill(d > 0 ? V.top.up : d < 0 ? V.top.down : V.top.same, { n: Math.abs(d), date: dt }))}</a>`; })()
+        : '';
+      const counts = fixes.length ? `<ul class="gr-counts" aria-label="${esc(V.top.issues)}">${(['high', 'medium', 'low'] as const).filter((k) => cnt[k]).map((k) => `<li class="gr-${k}"><i aria-hidden="true"></i>${esc(V.top[k])}<b>${cnt[k]}</b></li>`).join('')}</ul>` : '';
       const facts = g.facts || {};
-      const factRow = [
-        facts.lcp_ms != null ? `<li>${esc(R.facts.loads)} <b>${secs(facts.lcp_ms)} s</b></li>` : '',
-        facts.bytes != null ? `<li>${esc(R.facts.weight)} <b>${kb(facts.bytes)}</b></li>` : '',
-        facts.words != null ? `<li>${esc(R.facts.words)} <b>${Number(facts.words).toLocaleString(D.lang)}</b></li>` : '',
-      ].join('');
-      const bots = (g.crawlers || []).map((b: Json) => `<li><span><b>${esc(b.name)}</b><small>${esc(b.who)}</small></span>${b.allowed ? `<span class="tl-pill ok">${ic.check}${esc(R.crawlerOk)}</span>` : `<span class="tl-pill no">${ic.x}${esc(b.firewall ? R.crawlerFirewall : R.crawlerRobots)}</span>`}</li>`).join('');
-      const checks = (D.areas as string[]).map((k) => `<div><h4>${esc(C.areas[k].name)}</h4><ul>${(D.checks[k] as string[]).map((ck) => {
-        const v = g.checks?.[ck];
-        const cls = v === true ? 'p' : v === false ? 'f' : 'u';
-        return `<li class="${cls}"><i title="${esc(v === true ? R.pass : v === false ? R.fail : R.unknown)}">${v === true ? ic.check : v === false ? ic.x : ic.dash}</i><span>${esc(C.checks[ck])}<span class="sr-only"> (${esc(v === true ? R.pass : v === false ? R.fail : R.unknown)})</span></span></li>`;
-      }).join('')}</ul></div>`).join('');
       const fix = String(D.fixHref).replace('__SITE__', encodeURIComponent(site)).replace('__PLACE__', D.mode === 'shared' ? 'shared' : 'result');
-      const link = g.id ? shareUrl(g.id) : '';
-      out.innerHTML = `<div class="tl-rep">
-        <div class="tl-card tl-top tl-in">
-          <div class="tl-g" role="img" aria-label="${esc(R.overall)}: ${score ?? '–'}/100"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="tr" cx="80" cy="80" r="${r}" stroke-dasharray="${track} ${circ}"/><circle class="val" cx="80" cy="80" r="${r}" stroke-dasharray="0 ${circ}" data-to="${score == null ? 0 : (track * score) / 100}" data-c="${circ}"/></svg><div class="num"><b data-count="${score ?? ''}">${score == null ? '–' : reduce ? score : 0}</b><span>${esc(R.overall)}</span></div></div>
-          <div><p class="tl-host">${esc(fill(R.heading, { host: g.host }))}</p><h2>${esc(score == null ? R.notMeasured : band(score))}</h2><p class="tl-date">${esc(fill(R.checked, { date: dateOf(g.created_at) }))}</p>${factRow ? `<ul class="tl-facts">${factRow}</ul>` : ''}</div>
+      const link = g.id ? shareUrl(g.id, them?.id) : '';
+      const bots = (g.crawlers || []).map((b: Json) => `<li><span><b>${esc(b.name)}</b><small>${esc(b.who)}</small></span>${b.allowed ? `<span class="tl-pill ok">${ic.check}${esc(R.crawlerOk)}</span>` : `<span class="tl-pill no">${ic.x}${esc(b.firewall ? R.crawlerFirewall : R.crawlerRobots)}</span>`}</li>`).join('');
+      const checkRows = (want: 'p' | 'f') => (D.areas as string[]).map((k) => {
+        const lis = (D.checks[k] as string[]).map((ck) => {
+          const v = g.checks?.[ck];
+          const cls = v === true ? 'p' : v === false ? 'f' : 'u';
+          if ((want === 'p') !== (cls === 'p')) return '';
+          return `<li class="${cls}"><i>${v === true ? ic.check : v === false ? ic.x : ic.dash}</i><span>${esc(C.checks[ck])}<span class="sr-only"> (${esc(v === true ? R.pass : v === false ? R.fail : R.unknown)})</span></span></li>`;
+        }).join('');
+        return lis ? `<div><h4>${esc(C.areas[k].name)}</h4><ul>${lis}</ul></div>` : '';
+      }).join('');
+      const shot = g.screenshot ? `<figure class="gr-phone"><div class="frame"><img src="${esc(g.screenshot)}" alt="${esc(fill(V.phone.alt, { host: g.host }))}" loading="lazy"></div></figure>` : `<p class="gr-none">${esc(V.phone.none)}</p>`;
+      out.innerHTML = `<div class="tl-rep gr-rep">
+        ${them ? compareHtml(g, them) : ''}
+        <div class="tl-card gr-top tl-in">
+          ${ringHtml(score)}
+          <div class="gr-sum">
+            <p class="tl-host">${esc(fill(R.heading, { host: g.host }))}</p>
+            <h2>${esc(score == null ? R.notMeasured : band(score))}</h2>
+            <p class="tl-date">${esc(fill(R.checked, { date: dateOf(g.created_at) }))}${delta}</p>
+            ${counts}
+            <div class="gr-actions">
+              <button type="button" class="btn ghost" data-g-recheck data-ph="grader_recheck_click" data-ph-location="${D.mode}">${ic.redo}<span>${esc(V.top.recheck)}</span></button>
+              <button type="button" class="btn ghost" data-g-share data-ph="grader_share_click" data-ph-location="${D.mode}">${ic.share}<span>${esc(V.top.share)}</span></button>
+              <button type="button" class="btn ghost" data-g-pdf data-ph="grader_pdf_click" data-ph-location="${D.mode}">${ic.pdf}<span>${esc(V.top.pdf)}</span></button>
+            </div>
+            <p class="gr-note" role="status" data-g-note${opts.recheckNote ? '' : ' hidden'}>${esc(opts.recheckNote || '')}</p>
+          </div>
         </div>
-        <div><h3 class="tl-h">${esc(R.areasTitle)}</h3><ul class="tl-areas">${areas}</ul></div>
-        <div><h3 class="tl-h">${esc(R.fixesTitle)}</h3><p class="tl-sub">${esc(R.fixesSub)}</p>${fixesHtml}</div>
+        <div><h3 class="tl-h">${esc(R.areasTitle)}</h3><ul class="tl-areas gr-areas">${areas}</ul></div>
+        <div class="gr-two tl-in">
+          <div class="gr-box gr-box-phone"><h3>${esc(V.phone.title)}</h3>${shot}</div>
+          <div class="gr-box"><h3>${esc(V.field.title)}</h3>${fieldHtml(g)}${facts.words != null ? `<ul class="tl-facts"><li>${esc(R.facts.words)} <b>${Number(facts.words).toLocaleString(D.lang)}</b></li></ul>` : ''}</div>
+        </div>
+        <div><h3 class="tl-h">${esc(V.issues.title)}</h3><p class="tl-sub">${esc(V.issues.sub)}</p>${issuesHtml(g)}</div>
         <div class="tl-cta tl-in"><h3>${esc(R.cta.title)}</h3><p>${esc(R.cta.text)}</p><a class="btn primary lg" href="${esc(fix)}" data-ph="grader_fix_click" data-ph-location="${D.mode === 'shared' ? 'shared' : 'result'}">${esc(R.cta.button)}${ic.arrow}</a><small>${esc(R.cta.note)}</small></div>
-        ${link ? `<div class="tl-share tl-in"><label for="g-share">${esc(R.share.label)}</label><div class="tl-share-row"><input id="g-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-g-copy data-ph="grader_share_copy" data-ph-location="${D.mode}">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost" href="${esc(D.base)}" data-g-again data-ph="grader_again" data-ph-location="${D.mode}">${esc(R.share.again)}</a></div></div>` : ''}
+        ${previewHtml(g)}
+        <div class="gr-two tl-in">${schemaHtml(g)}${linksHtml(g)}</div>
         <div><h3 class="tl-h">${esc(R.crawlersTitle)}</h3><ul class="tl-bots">${bots}</ul></div>
-        <details class="tl-all"><summary>${esc(R.allChecksTitle)}</summary><div class="tl-all-b">${checks}</div></details>
+        <details class="tl-all" data-sec="passed"><summary>${esc(V.issues.passed)}</summary><div class="tl-all-b">${checkRows('p')}</div></details>
+        <details class="tl-all" data-sec="all"><summary>${esc(R.allChecksTitle)}</summary><div class="tl-all-b">${checkRows('f')}${checkRows('p')}</div></details>
+        ${link ? `<div class="tl-share tl-in"><label for="g-share">${esc(R.share.label)}</label><div class="tl-share-row gr-share-row"><input id="g-share" readonly value="${esc(link)}"><button type="button" class="btn ghost" data-g-copy data-ph="grader_share_copy" data-ph-location="${D.mode}">${ic.copy}<span>${esc(R.share.copy)}</span></button><a class="btn ghost gr-ico" href="https://twitter.com/intent/tweet?url=${encodeURIComponent(link)}&text=${encodeURIComponent(fill(R.heading, { host: g.host }))}" target="_blank" rel="noopener" aria-label="${esc(V.top.shareX)}" data-g-sharevia="x">${ic.x_logo}</a><a class="btn ghost gr-ico" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}" target="_blank" rel="noopener" aria-label="${esc(V.top.shareIn)}" data-g-sharevia="linkedin">${ic.in_logo}</a></div><a class="gr-link2" href="${esc(D.base)}" data-g-again data-ph="grader_again" data-ph-location="${D.mode}">${esc(R.share.again)}${ic.arrow}</a></div>` : ''}
         <div class="tl-card tl-cross"><div><h3>${esc(R.aivis.title)}</h3><p>${esc(R.aivis.text)}</p></div><a class="btn ghost" href="${esc(D.aivis)}?url=${encodeURIComponent(site)}" data-ph="aivis_link_click" data-ph-location="grader">${esc(R.aivis.link)}${ic.arrow}</a></div>
       </div>`;
+      // A preview image or icon that fails to load quietly turns into the "no image" state, never a broken image.
+      out.querySelectorAll<HTMLImageElement>('img[data-g-img]').forEach((im) => {
+        const bad = () => { im.closest('.gr-media')?.classList.add('noimg'); im.remove(); };
+        if (im.complete && im.naturalWidth === 0 && im.src) bad(); else im.addEventListener('error', bad, { once: true });
+      });
       rep.hidden = false;
       animate();
-      const copyBtn = out.querySelector<HTMLButtonElement>('[data-g-copy]');
-      copyBtn?.addEventListener('click', async () => {
-        const f = out.querySelector<HTMLInputElement>('#g-share')!;
-        let ok = false;
-        try { await navigator.clipboard.writeText(f.value); ok = true; } catch { f.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
-        if (!ok) return;
-        const lab = copyBtn.querySelector('span')!;
-        copyBtn.classList.add('done'); lab.textContent = R.share.copied;
-        setTimeout(() => { copyBtn.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
-      });
     }
 
     function animate() {
@@ -168,70 +350,153 @@ const data = {
       const items = [...out.querySelectorAll<HTMLElement>('.tl-in')];
       if (reduce || !root.classList.contains('mo')) items.forEach((x) => x.classList.add('on'));
       else items.forEach((x, i) => { x.style.setProperty('--d', x.style.getPropertyValue('--d') || `${Math.min(i, 8) * 60}ms`); requestAnimationFrame(() => requestAnimationFrame(() => x.classList.add('on'))); });
-      const ring = out.querySelector<SVGCircleElement>('circle.val');
-      const num = out.querySelector<HTMLElement>('[data-count]');
-      const to = Number(ring?.dataset.to || 0), circ = Number(ring?.dataset.c || 0), target = Number(num?.dataset.count || 0);
-      if (!ring || !num || !num.dataset.count) return;
-      if (reduce) { ring.style.strokeDasharray = `${to} ${circ}`; return; }
-      requestAnimationFrame(() => requestAnimationFrame(() => { ring.style.strokeDasharray = `${to} ${circ}`; }));
-      const t0 = performance.now(), dur = 1200;
-      const tick = (t: number) => { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3); num.textContent = String(Math.round(target * e)); if (p < 1) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick);
+      out.querySelectorAll<HTMLElement>('.tl-g').forEach((g) => {
+        const ring = g.querySelector<SVGCircleElement>('circle.val'), num = g.querySelector<HTMLElement>('[data-count]');
+        const to = Number(ring?.dataset.to || 0), circ = Number(ring?.dataset.c || 0), target = Number(num?.dataset.count || 0);
+        if (!ring || !num || !num.dataset.count) return;
+        if (reduce) { ring.style.strokeDasharray = `${to} ${circ}`; return; }
+        requestAnimationFrame(() => requestAnimationFrame(() => { ring.style.strokeDasharray = `${to} ${circ}`; }));
+        const s0 = performance.now(), dur = 1200;
+        const step = (t: number) => { const p = Math.min(1, (t - s0) / dur), e = 1 - Math.pow(1 - p, 3); num.textContent = String(Math.round(target * e)); if (p < 1) requestAnimationFrame(step); };
+        requestAnimationFrame(step);
+      });
     }
 
-    async function check(raw: string) {
+    const post = (url: string, fresh = false) => fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(fresh ? { url, fresh: true } : { url }), signal: AbortSignal.timeout(150000) })
+      .then(async (r) => ({ ok: r.ok, status: r.status, g: (await r.json().catch(() => null)) as Json | null }))
+      .catch(() => ({ ok: false, status: 0, g: null as Json | null }));
+    const errMsg = (e: string | undefined) => (e === 'bad_url' ? C.form.errUrl : e === 'unreachable' ? C.form.errUnreachable : e === 'rate' ? C.form.errRate : e === 'busy' ? C.form.errBusy : C.form.errFailed);
+    const sizeOf = (g: Json) => (g.score == null ? 'none' : g.score >= 90 ? '90-100' : g.score >= 70 ? '70-89' : g.score >= 50 ? '50-69' : '0-49');
+
+    async function check(raw: string, vsRaw: string) {
       say('');
       if (!urlish(raw)) { say(C.form.errUrl); input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
-      input.removeAttribute('aria-invalid');
+      const vs = vsBox.hidden ? '' : vsRaw.trim();
+      if (vs && !urlish(vs)) { say(V.form.errThem); vsInput.setAttribute('aria-invalid', 'true'); vsInput.focus(); return; }
+      if (vs && hostish(vs) === hostish(raw)) { say(V.form.errSame); vsInput.focus(); return; }
+      input.removeAttribute('aria-invalid'); vsInput.removeAttribute('aria-invalid');
       btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-      rep.hidden = true;
-      own('fn', 'tool_run'); ft('start'); track('grader_run', { location: D.mode });
-      startSteps();
-      run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
-      let res: Response | null = null, g: Json | null = null;
-      try {
-        res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: raw.trim() }), signal: AbortSignal.timeout(150000) });
-        g = await res.json().catch(() => null);
-      } catch { /* below */ }
+      rep.hidden = true; them = null;
+      own('fn', 'tool_run'); ft('start'); track('grader_run', { location: D.mode, compare: !!vs });
+      if (vs) ft('compare');
+      startSteps(vs ? fill(V.run.both, { a: hostish(raw), b: hostish(vs) }) : fill(V.run.one, { host: hostish(raw) }));
+      run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      const [a, b] = await Promise.all([post(raw.trim()), vs ? post(vs) : Promise.resolve(null)]);
       stopSteps();
       btn.disabled = false; btn.removeAttribute('aria-busy');
-      if (!res || !res.ok || !g || !g.id) {
-        const e = g?.error;
-        const m = e === 'bad_url' ? C.form.errUrl : e === 'unreachable' ? C.form.errUnreachable : e === 'rate' ? C.form.errRate : e === 'busy' ? C.form.errBusy : C.form.errFailed;
-        ft('error'); track('grader_error', { error: e || (res ? `http_${res.status}` : 'network') });
-        say(m); return;
+      if (!a.ok || !a.g || !a.g.id) {
+        const e = a.g?.error;
+        ft('error'); track('grader_error', { error: e || (a.status ? `http_${a.status}` : 'network') });
+        say(errMsg(e)); return;
       }
-      own('fn', 'tool_result'); ft('done'); own('ev', 'grader_score', g.score == null ? 'none' : g.score >= 90 ? '90-100' : g.score >= 70 ? '70-89' : g.score >= 50 ? '50-69' : '0-49');
-      track('grader_result', { score: g.score, cached: !!g.cached, fixes: (g.fixes || []).length });
-      draw(g);
-      try { history.replaceState(null, '', `${D.base}r/${g.id}/`); } catch { /* fine */ }
+      if (b && b.ok && b.g?.id) { them = b.g; track('grader_compare_result', { you: a.g.score, them: b.g.score }); }
+      else if (b) { track('grader_error', { error: `compare_${b.g?.error || b.status || 'network'}` }); }
+      own('fn', 'tool_result'); ft('done'); own('ev', 'grader_score', sizeOf(a.g));
+      track('grader_result', { score: a.g.score, cached: !!a.g.cached, fixes: (a.g.fixes || []).length, compare: !!them, field: !!a.g.field, before: !!a.g.prev });
+      draw(a.g);
+      try { history.replaceState(null, '', `${D.base}r/${a.g.id}/${them ? `?vs=${them.id}` : ''}`); } catch { /* fine */ }
       setTimeout(() => { rep.focus({ preventScroll: true }); rep.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 380);
     }
 
-    form.addEventListener('submit', (e) => { e.preventDefault(); check(input.value); });
-    input.addEventListener('input', () => { if (!err.hidden) say(''); input.removeAttribute('aria-invalid'); });
-    // "Check another site": back to the empty box on this page.
-    out.addEventListener('click', (e) => {
-      const a = (e.target as Element).closest('[data-g-again]');
-      if (!a || D.mode === 'shared') return;
-      e.preventDefault(); rep.hidden = true; input.value = ''; history.replaceState(null, '', D.base);
-      form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(() => input.focus(), reduce ? 0 : 300);
+    async function recheck(b: HTMLButtonElement) {
+      if (!cur) return;
+      const lab = b.querySelector('span')!;
+      b.disabled = true; b.classList.add('busy'); lab.textContent = V.top.rechecking;
+      ft('recheck');
+      const r = await post(cur.url, true);
+      b.disabled = false; b.classList.remove('busy'); lab.textContent = V.top.recheck;
+      const note = out.querySelector<HTMLElement>('[data-g-note]');
+      if (!r.ok || !r.g?.id) { if (note) { note.textContent = errMsg(r.g?.error); note.hidden = false; } track('grader_recheck', { result: r.g?.error || 'failed' }); return; }
+      if (r.g.id === cur.id) { if (note) { note.textContent = V.top.recent; note.hidden = false; } track('grader_recheck', { result: 'too_soon' }); return; }
+      track('grader_recheck', { result: 'new', delta: typeof r.g.score === 'number' && typeof cur.score === 'number' ? r.g.score - cur.score : null });
+      draw(r.g);
+      try { history.replaceState(null, '', `${D.base}r/${r.g.id}/${them ? `?vs=${them.id}` : ''}`); } catch { /* fine */ }
+    }
+
+    async function share() {
+      const f = out.querySelector<HTMLInputElement>('#g-share');
+      const url = f?.value || location.href;
+      ft('share');
+      if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+        try { await navigator.share({ title: document.title, url }); track('grader_share', { via: 'sheet' }); return; } catch { return; }
+      }
+      let ok = false;
+      try { await navigator.clipboard.writeText(url); ok = true; } catch { f?.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+      track('grader_share', { via: 'copy' });
+      const note = out.querySelector<HTMLElement>('[data-g-note]');
+      if (ok && note) { note.textContent = V.top.copied; note.hidden = false; setTimeout(() => { if (note.textContent === V.top.copied) note.hidden = true; }, 2400); }
+    }
+
+    // Print: every fold opens, the page's chrome hides (grader.css @media print).
+    let reopened: HTMLDetailsElement[] = [];
+    addEventListener('beforeprint', () => { reopened = [...out.querySelectorAll<HTMLDetailsElement>('details:not([open])')]; reopened.forEach((d) => (d.open = true)); });
+    addEventListener('afterprint', () => { reopened.forEach((d) => (d.open = false)); reopened = []; });
+
+    out.addEventListener('click', async (e) => {
+      const t = e.target as Element;
+      const again = t.closest('[data-g-again]');
+      if (again && D.mode !== 'shared') {
+        e.preventDefault(); rep.hidden = true; input.value = ''; them = null; history.replaceState(null, '', D.base);
+        form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(() => input.focus(), reduce ? 0 : 300);
+        return;
+      }
+      const rc = t.closest<HTMLButtonElement>('[data-g-recheck]');
+      if (rc) { recheck(rc); return; }
+      if (t.closest('[data-g-share]')) { share(); return; }
+      if (t.closest('[data-g-pdf]')) { ft('pdf'); track('grader_pdf', { location: D.mode }); window.print(); return; }
+      const via = t.closest<HTMLElement>('[data-g-sharevia]');
+      if (via) { ft('share'); track('grader_share', { via: via.dataset.gSharevia }); return; }
+      const cp = t.closest<HTMLButtonElement>('[data-g-copy]');
+      if (cp) {
+        const f = out.querySelector<HTMLInputElement>('#g-share')!;
+        let ok = false;
+        try { await navigator.clipboard.writeText(f.value); ok = true; } catch { f.select(); try { ok = document.execCommand('copy'); } catch { ok = false; } }
+        if (!ok) return;
+        ft('share');
+        const lab = cp.querySelector('span')!;
+        cp.classList.add('done'); lab.textContent = R.share.copied;
+        setTimeout(() => { cp.classList.remove('done'); lab.textContent = R.share.copy; }, 2000);
+      }
     });
+    // Opening a fold counts once per kind (which issue's details, which section), never what's inside.
+    const opened = new Set<string>();
+    out.addEventListener('toggle', (e) => {
+      const d = e.target as HTMLDetailsElement;
+      if (!(d instanceof HTMLDetailsElement) || !d.open) return;
+      const k = d.dataset.key ? `issue:${d.dataset.key}` : `sec:${d.dataset.sec || 'other'}`;
+      if (opened.has(k)) return;
+      opened.add(k);
+      if (d.dataset.key) { ft('issue_open'); track('grader_issue_open', { key: d.dataset.key }); } else track('grader_section_open', { section: d.dataset.sec || 'other' });
+    }, true);
+
+    const setVs = (on: boolean) => {
+      vsBox.hidden = !on; vsOn.hidden = on; vsOn.setAttribute('aria-expanded', String(on));
+      btnLabel.textContent = on ? btnLabel.dataset.two! : btnLabel.dataset.one!;
+      if (on) { track('grader_compare_open', { location: D.mode }); setTimeout(() => vsInput.focus(), 30); } else vsInput.value = '';
+    };
+    vsOn.addEventListener('click', () => setVs(true));
+    form.querySelector('[data-g-vs-off]')!.addEventListener('click', () => { setVs(false); input.focus(); });
+    form.addEventListener('submit', (e) => { e.preventDefault(); check(input.value, vsInput.value); });
+    [input, vsInput].forEach((x) => x.addEventListener('input', () => { if (!err.hidden) say(''); x.removeAttribute('aria-invalid'); }));
 
     const q = new URLSearchParams(location.search);
+    const getG = (id: string) => fetch(`${D.api}/${id}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
     if (D.mode === 'shared') {
-      // /grader/r/<id>/ (equipe.im's rewrite serves this page for every id): load the stored report.
+      // /grader/r/<id>/ (equipe.im's rewrite serves this page for every id): load the stored report, and the competitor's.
       const id = (location.pathname.match(/\/grader\/r\/([A-Za-z0-9]{6,16})\/?$/) || [])[1];
+      const vsId = (q.get('vs') || '').match(/^[A-Za-z0-9]{6,16}$/)?.[0];
       if (!id) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; rep.hidden = false; }
       else {
-        out.innerHTML = `<p class="tl-empty">${esc(R.loading)}</p>`; rep.hidden = false;
-        fetch(`${D.api}/${id}`).then((r) => (r.ok ? r.json() : null)).then((g) => {
+        out.innerHTML = `<div class="gr-skel gr-skel-in" aria-label="${esc(R.loading)}"><div class="gr-sk gr-sk-top"><span class="ring"></span><span class="lines"><i></i><i></i><i></i></span></div><div class="gr-sk-row">${'<span class="gr-sk"><i></i><i></i></span>'.repeat(5)}</div></div>`; rep.hidden = false;
+        Promise.all([getG(id), vsId ? getG(vsId) : Promise.resolve(null)]).then(([g, t]) => {
           if (!g) { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; return; }
-          ft('shared_view'); track('grader_shared_view', { score: g.score }); draw(g);
-        }).catch(() => { out.innerHTML = `<p class="tl-empty">${esc(R.notFound)}</p>`; });
+          them = t && t.id ? t : null;
+          ft('shared_view'); track('grader_shared_view', { score: g.score, compare: !!them }); draw(g);
+        });
       }
-    } else if (q.get('url')) {
-      input.value = q.get('url')!.slice(0, 300);
+    } else {
+      if (q.get('url')) input.value = q.get('url')!.slice(0, 300);
+      if (q.get('vs')) { setVs(true); vsInput.value = q.get('vs')!.slice(0, 300); }
     }
   }
 </script>
