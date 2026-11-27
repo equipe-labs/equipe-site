@@ -10,6 +10,7 @@ import PackStrip from '../../components/PackStrip.astro';
 import '../../styles/sections.css';
 import { TYPICAL_TOTALS } from '../../data/flags';
 import { aiCopy } from '../../data/productai';
+import { SITE } from '../../data/site';
 import { available, getLocale, getMessages, subPath, type LocaleCode } from '../../i18n';
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
@@ -18,10 +19,11 @@ const t = getMessages(code);
 const P = t.pages.pricing;
 const cost = t.faq.items[4];
 const AI = aiCopy(code).pricingNote;
+const NP = t.plans.nonprofit;
 ---
 <PageShell code={code} page="pricing" title={P.title} description={P.desc} image={`/og/v4/pricing-${info.slug || 'en'}.png`} imageAlt={`equipe — ${P.lead}`}>
   <WebApplicationJsonLd slot="head" lang={info.lang} url={new URL(subPath(info, 'pricing'), Astro.site).href} description={P.desc} />
-  <FaqJsonLd slot="head" lang={info.lang} faqs={[cost, ...t.plans.faq]} />
+  <FaqJsonLd slot="head" lang={info.lang} faqs={[cost, ...t.plans.faq, NP.faq]} />
   <section class="pg-h pr-h"><div class="wrap"><h1>{P.h1}</h1><p class="pg-lead">{P.lead}</p></div></section>
   <section class="pg-s"><div class="wrap">
     <PromoBanner code={code} lang={info.lang} target="tp-pricing_page" />
@@ -40,12 +42,19 @@ const AI = aiCopy(code).pricingNote;
       <span class="pai-t"><b>{AI.title}</b><span>{AI.text}</span></span>
       <span class="pai-l">{AI.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
     </a>
+    <a class="pai" id="nonprofit" href={`${SITE.app}/billing/nonprofit`} data-ph="nonprofit_apply_click" data-ph-location="pricing">
+      <span class="pai-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg></span>
+      <span class="pai-t"><b>{NP.title}</b><span>{NP.text}</span></span>
+      <span class="pai-l">{NP.link}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+    </a>
     <p class="pg-note">{t.plans.text}</p>
     <p class="pg-note pg-free">{t.plans.freeNote}</p>
     <div class="pg-prose" style="margin-top:64px">
       <h2>{cost.question}</h2>
       <p>{cost.answer}</p>
       {t.plans.faq.map((f) => <><h2>{f.question}</h2><p>{f.answer}</p></>)}
+      <h2>{NP.faq.question}</h2>
+      <p>{NP.faq.answer} <a href={`${SITE.app}/billing/nonprofit`} data-ph="nonprofit_apply_click" data-ph-location="pricing_faq">{NP.link}</a></p>
     </div>
   </div></section>
 </PageShell>
