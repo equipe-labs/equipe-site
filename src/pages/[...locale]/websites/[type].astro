@@ -12,6 +12,8 @@ import {
 } from '../../../data/industries';
 import { available, getLocale, localePath, segments, subPath, type LocaleCode } from '../../../i18n';
 import '../../../styles/industry.css';
+import { TOOL as LOGO_TOOL } from '../../../data/tools/logo-maker';
+import { toolCopy, TOOL_ICONS } from '../../../data/tools/index';
 
 export function getStaticPaths() {
   return available.flatMap((l) =>
@@ -38,7 +40,9 @@ const tools = {
   grader: has('grader') ? subPath(info, 'grader') : null,
   cost: has('tools/app-cost-calculator') ? `${subPath(info, 'tools/app-cost-calculator')}?type=${meta.costType}` : null,
   hub: has('tools') ? subPath(info, 'tools') : null,
+  logo: subPath(info, 'logo-maker'),
 };
+const logoTool = toolCopy(LOGO_TOOL, code);
 
 // The live example: the real customer when allowed, otherwise the gallery demo that shows the same pattern.
 const customer = type === 'soccer-academy' && GOLDEN_BOOT_EXAMPLE ? GOLDEN_BOOT : null;
@@ -75,6 +79,7 @@ const copyIc = '<svg class="in-ci" viewBox="0 0 24 24" aria-hidden="true"><rect 
 const icon = (d: string) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
 const toolIc = {
   grader: icon('<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>'),
+  logo: icon(TOOL_ICONS.palette),
   cost: icon('<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8"/><path d="M16 14v4"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/>'),
 };
 ---
@@ -208,7 +213,7 @@ const toolIc = {
     <p class="in-note in-rv"><span class="in-li"><Fragment set:html={check} /></span><span>{u.schemaNote}</span></p>
   </div></section>
 
-  {(tools.grader || tools.cost) && (
+  {(tools.grader || tools.cost || tools.logo) && (
     <section class="in-sec" id="tools"><div class="wrap">
       <h2 class="in-rv">{u.toolsTitle}</h2>
       <ul class="in-tools">
@@ -219,8 +224,13 @@ const toolIc = {
             <span class="in-go">{u.grader.cta}<Fragment set:html={arrow} /></span>
           </a></li>
         )}
+        <li class="in-rv" style="transition-delay:60ms"><a class="in-tool" href={tools.logo} data-ph="logo_maker_link" data-ph-location={loc}>
+          <span class="in-ic"><Fragment set:html={toolIc.logo} /></span>
+          <span class="in-tool-t">{logoTool.name}</span><span class="in-tool-d">{logoTool.blurb}</span>
+          <span class="in-go">{logoTool.cta}<Fragment set:html={arrow} /></span>
+        </a></li>
         {tools.cost && (
-          <li class="in-rv" style="transition-delay:60ms"><a class="in-tool" href={tools.cost} data-ph="costcalc_link" data-ph-location={loc}>
+          <li class="in-rv" style="transition-delay:120ms"><a class="in-tool" href={tools.cost} data-ph="costcalc_link" data-ph-location={loc}>
             <span class="in-ic"><Fragment set:html={toolIc.cost} /></span>
             <span class="in-tool-t">{u.cost.title}</span><span class="in-tool-d">{u.cost.text}</span>
             <span class="in-go">{u.cost.cta}<Fragment set:html={arrow} /></span>

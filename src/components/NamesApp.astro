@@ -7,6 +7,7 @@
 // funnel tool_run, tool_result and click:<data-ph> (names_start_click is the sign-up click).
 import { namesCopy, namesStartHref, NAMES_API, TURNSTILE_SITE_KEY, NAME_KINDS, NAME_VIBES } from '../data/names';
 import { getLocale, subPath, type LocaleCode } from '../i18n';
+import { logoCopy } from '../data/logo';
 
 interface Props { code: LocaleCode; mode?: 'tool' | 'shared' }
 const { code, mode = 'tool' } = Astro.props;
@@ -20,6 +21,7 @@ const data = {
   api: NAMES_API, lang: info.lang, code, ts: TURNSTILE_SITE_KEY, mode, base,
   start: namesStartHref('__IDEA__', '__PLACE__'),
   c: { result: c.result, form: c.form },
+  logoMaker: { href: subPath(info, 'logo-maker'), label: logoCopy(code).fromNames },
 };
 ---
 {mode === 'tool' ? (
@@ -248,7 +250,7 @@ const data = {
         return;
       }
       const n = cur.names[i]; n.logos = j.logos;
-      slot.innerHTML = `<div class="nm-logos">${logosHtml(n)}</div><p class="nm-hint">${esc(R.logoNote)}</p>`;
+      slot.innerHTML = `<div class="nm-logos">${logosHtml(n)}</div><p class="nm-hint">${esc(R.logoNote)}</p><a class="nm-full" href="${esc(`${D.logoMaker.href}?name=${encodeURIComponent(n.name)}&about=${encodeURIComponent(cur.about || '')}`)}" data-ph="names_logo_maker" data-ph-location="card">${esc(D.logoMaker.label)}${ic.arrow}</a>`;
       revealLogos(slot);
       btn.remove();
       own('ev', 'names_logo_made');
