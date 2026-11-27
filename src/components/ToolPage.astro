@@ -46,7 +46,7 @@ const ICON = {
 const arrow = sv('<path d="M5 12h14M13 6l6 6-6 6"/>');
 const up = sv('<path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>');
 ---
-<PageShell code={code} page={tool} title={P.title} description={P.desc}>
+<PageShell code={code} page={tool} title={P.title} description={P.desc} image={tool === 'from-claude' ? `/og/tools/from-claude-${(info.slug || 'en').toLowerCase()}.png` : undefined} imageAlt={tool === 'from-claude' ? P.ogTitle : undefined}>
   <Fragment slot="head">
     <link rel="preconnect" href="https://sandbox.equipe.im" crossorigin />
     <script is:inline>
