@@ -74,5 +74,6 @@ main.pg .ic-mvp h4.ic-h4:first-child { margin-top: 0; }
   .ic-bar { padding-left: 16px; }
   .ic-go { flex: 1; justify-content: center; }
   .ic-ex { justify-content: flex-start; }
+  .ic-ex li:nth-child(n+3) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .ic-ph, .ic-box, .ic-ex button, .ic-cross svg { transition: none; } .ic-form.shake .ic-box { animation: none; } }
