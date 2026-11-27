@@ -198,12 +198,12 @@ export function runLogoApp(D: Json, internalRun: () => Promise<boolean>) {
         <span class="lg-acts">${o.kind === 'ai' && D.mode === 'tool' && o.mark?.from == null ? `<button type="button" class="lg-ghost" data-l-more="${o.mark!.n}" title="${esc(R.moreNote)}" data-ph="logo_more_click" data-ph-location="card">${IC.more}<span>${esc(R.more)}</span></button>` : ''}<button type="button" class="lg-ghost strong" data-l-pick="${o.key}" data-ph="logo_edit_click" data-ph-location="card">${IC.pen}<span>${esc(R.edit)}</span></button></span></div>
       </li>`;
     out.innerHTML = `<div class="lg-rep">
-      <div class="lg-head tl-in"><div><h2>${esc(R.title)}</h2><p class="tl-sub">${esc(R.sub)}</p></div>
+      <div class="lg-head tl-in"><div><h2>${esc(R.title)}</h2><p class="tl-sub">${esc(ai.length ? R.sub : R.typeSub)}</p></div>
         <div class="lg-headr">${left ? `<span class="lg-left">${esc(left)}</span>` : ''}<span class="lg-seg" role="radiogroup" aria-label="${esc(R.ground)}" data-l-ground><button type="button" role="radio" aria-checked="true" data-v="light">${IC.check}<span>${esc(R.light)}</span></button><button type="button" role="radio" aria-checked="false" data-v="dark">${IC.check}<span>${esc(R.dark)}</span></button></span></div>
       </div>
       ${ai.length < 2 && g.input?.style !== 'wordmark' ? `<p class="tl-cached lg-note tl-in">${esc(R.fewer)}</p>` : ''}
       ${ai.length ? `<ul class="lg-grid">${ai.map(card).join('')}</ul>` : ''}
-      ${ty.length ? `<div class="lg-sub tl-in"><h3>${esc(R.typeTitle)}</h3><p>${esc(R.typeSub)}</p></div><ul class="lg-grid">${ty.map((o, i) => card(o, i + ai.length)).join('')}</ul>` : ''}
+      ${ty.length ? `${ai.length ? `<div class="lg-sub tl-in"><h3>${esc(R.typeTitle)}</h3><p>${esc(R.typeSub)}</p></div>` : ''}<ul class="lg-grid">${ty.map((o, i) => card(o, i + ai.length)).join('')}</ul>` : ''}
       <div class="lg-edit" hidden data-l-edit></div>
     </div>`;
     rep.hidden = false;
@@ -420,7 +420,9 @@ export function runLogoApp(D: Json, internalRun: () => Promise<boolean>) {
       line = `\n${CT.kitLine}: logo ${P}/${id}/lockup.svg · icon ${P}/${id}/icon.svg · colours ${[sel!.design.accent, ...sel!.design.palette, sel!.design.text].filter((c, i, l) => HEX.test(c) && l.indexOf(c) === i).join(', ')} · fonts ${sel!.design.font} (headings), ${sel!.design.body} (text)`;
     } catch { /* the idea still goes, without the kit line */ }
     const idea = fill(CT.idea, { name: NAME, about: ABOUT || G?.brief?.what || '' }).replace(/:\s*$/, '') + line;
-    location.href = String(D.start).replace('__IDEA__', encodeURIComponent(idea)).replace('__PLACE__', 'editor');
+    const u = new URL(String(D.start).replace('__IDEA__', encodeURIComponent(idea)).replace('__PLACE__', 'editor'));
+    try { const eqa = (window as unknown as { __eqaEnc?: () => string }).__eqaEnc?.(); if (eqa) u.searchParams.set('_eqa', eqa); } catch { /* attribution is best effort */ }
+    location.href = u.toString();
   }
 
   // ---- the brand kit ---------------------------------------------------------------------------------------------------------------
