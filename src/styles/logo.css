@@ -275,3 +275,5 @@ main.pg .lg-kit h3 { margin: 0; font-size: 22px; letter-spacing: -0.016em; }
   .lg-style, .lg-style b svg, .lg-sw, .lg-sw svg, .lg-seg button, .lg-seg button svg, .lg-pop, .lg-menu-b svg, .lg-more summary svg, .lg-opt { transition: none !important; }
   .lg-menu-l, html.mo .lg-stage .lg-svg, .lg-skel, .lg-ghost.spin svg { animation: none !important; }
 }
+.lg-shared-h .wrap { display: grid; justify-items: center; }
+main.pg .lg-shared-h h1 { max-width: 820px; margin: 0 auto; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -0.025em; text-align: center; text-wrap: balance; }
