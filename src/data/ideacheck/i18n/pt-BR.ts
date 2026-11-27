@@ -5,10 +5,10 @@ export default {
   hub: { name: 'Validar ideia de negócio', blurb: 'Minha ideia de negócio é boa? Uma análise honesta: para quem é, concorrentes reais, a suposição mais arriscada e um teste de 7 dias.', cta: 'Analisar minha ideia' },
   page: {
     title: 'Validar ideia de negócio: minha ideia é boa? Grátis | equipe',
-    desc: 'Digite sua ideia de negócio e receba uma análise honesta e organizada em cerca de 30 segundos: para quem é, o problema, concorrentes reais encontrados na web, a suposição mais arriscada, um plano de teste de 7 dias e o que construir primeiro. Grátis.',
+    desc: 'Digite sua ideia de negócio (ou até 3) e receba uma análise honesta e organizada em cerca de 30 segundos: para quem é, o problema, concorrentes reais encontrados na web, a suposição mais arriscada, um plano de teste de 7 dias e o que construir primeiro. Grátis.',
     ogTitle: 'Validar ideia de negócio',
     h1: 'Sua ideia de negócio é boa? Descubra em 30 segundos.',
-    lead: 'Descreva sua ideia em uma ou duas frases. Você recebe uma análise honesta, do jeito que um gerente de produto escreveria: para quem é, o que as pessoas usam hoje, a única coisa que precisa ser verdade e como testar isso nesta semana.',
+    lead: 'Descreva sua ideia em uma ou duas frases, ou liste até 3 ideias soltas, uma por linha. Você recebe uma análise honesta, do jeito que um gerente de produto escreveria: para quem é, o que as pessoas usam hoje, a única coisa que precisa ser verdade e como testar isso nesta semana.',
   },
   form: {
     label: 'Sua ideia',
@@ -28,9 +28,14 @@ export default {
     errBudget: 'As análises grátis de hoje acabaram. Volte amanhã.',
     errOff: 'O analisador está descansando agora. Tente de novo mais tarde.',
     errFailed: 'A análise não terminou. Tente de novo daqui a um minuto.',
+    hint: 'Uma ideia por linha, até 3. Você tem 3 análises grátis por dia, então 3 ideias usam todas as de hoje.',
+    nl: 'Shift + Enter para nova linha',
+    errMany: 'Até 3 ideias por vez, uma por linha. 3 análises são todas as grátis de hoje.',
+    errPartial: 'Analisamos {n} de {total} ideias.',
   },
   progress: ['Lendo sua ideia', 'Buscando na web o que as pessoas usam hoje', 'Encontrando a suposição mais arriscada', 'Escrevendo seu teste de 7 dias'] as [string, string, string, string],
   progressNote: 'Leva de 20 a 40 segundos.',
+  progressMany: 'Analisando {n} ideias lado a lado. Leva de 30 a 60 segundos.',
   result: {
     heading: 'Análise da ideia',
     checked: 'Analisada em {date}',
@@ -69,6 +74,9 @@ export default {
       button: 'Construir a primeira versão',
       note: 'Grátis para começar. Nada vai ao ar nem custa dinheiro sem o seu OK.',
     },
+    ideas: 'Suas ideias',
+    concepts: { title: 'Versões mais concretas para testar', sub: 'Uma ideia solta fica mais clara com um cliente específico e um ponto de partida.', forWhom: 'Para', start: 'Comece por' },
+    lab: { title: 'Teste estas ideias com pessoas reais', titleOne: 'Teste esta ideia com pessoas reais', text: 'O equipe pesquisa cada ideia a fundo, coloca no ar uma página honesta de “em breve” para cada uma, compara pelos cadastros reais e constrói a vencedora.', textOne: 'O equipe pesquisa a ideia a fundo, coloca no ar uma página honesta de “em breve”, conta os cadastros reais e constrói se as pessoas quiserem.', button: 'Testar com pessoas reais', note: 'As 3 primeiras análises de ideias no app são grátis. Nada é gasto nem enviado sem o seu OK.' },
     share: { label: 'Compartilhe esta análise', copy: 'Copiar link', copied: 'Copiado', again: 'Analisar outra ideia' },
     notFound: 'Não encontramos esta análise. Ela pode ter mais de 60 dias.',
     loading: 'Carregando a análise…',
@@ -76,7 +84,7 @@ export default {
   how: {
     title: 'Como a análise funciona',
     items: [
-      { title: 'Você descreve a ideia', text: 'Uma ou duas frases bastam: para quem é e o que faz. Quanto mais específica, mais útil a análise.' },
+      { title: 'Você descreve a ideia', text: 'Uma ou duas frases bastam: para quem é e o que faz. Quanto mais específica, mais útil a análise. Tem várias? Coloque até 3 em linhas separadas e compare lado a lado.' },
       { title: 'A IA lê como um gerente de produto', text: 'Uma única passada de um modelo de IA pequeno escreve o mesmo tipo de briefing que nosso PM escreve para um time novo: cliente, problema, suposição mais arriscada e primeira versão.' },
       { title: 'Os concorrentes vêm de uma busca real na web', text: 'Até três buscas procuram o que as pessoas usam hoje. Um concorrente só aparece quando o próprio site dele voltou na busca, então nada na lista é inventado.' },
       { title: 'Você recebe um teste para fazer nesta semana', text: 'Um plano de 7 dias que testa a parte arriscada gastando pouco (conversar com pessoas, um site de uma página, pré-vendas) e um sinal claro para seguir.' },

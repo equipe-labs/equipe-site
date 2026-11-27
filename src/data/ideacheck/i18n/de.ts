@@ -5,10 +5,10 @@ export default {
   hub: { name: 'Geschäftsidee prüfen', blurb: 'Ist meine Geschäftsidee gut? Ein ehrlicher Check: für wen sie ist, echte Wettbewerber, die riskanteste Annahme und ein 7-Tage-Test.', cta: 'Meine Idee prüfen' },
   page: {
     title: 'Geschäftsidee prüfen: Ist meine Idee gut? Gratis-Check | equipe',
-    desc: 'Gib deine Geschäftsidee ein und erhalte in etwa 30 Sekunden einen ehrlichen, strukturierten Check: für wen sie ist, das Problem, echte Wettbewerber aus dem Web, die riskanteste Annahme, einen 7-Tage-Testplan und was du zuerst bauen solltest. Kostenlos.',
+    desc: 'Gib deine Geschäftsidee ein (oder bis zu 3) und erhalte in etwa 30 Sekunden einen ehrlichen, strukturierten Check: für wen sie ist, das Problem, echte Wettbewerber aus dem Web, die riskanteste Annahme, einen 7-Tage-Testplan und was du zuerst bauen solltest. Kostenlos.',
     ogTitle: 'Geschäftsidee prüfen',
     h1: 'Ist deine Geschäftsidee gut? Prüfe sie in 30 Sekunden.',
-    lead: 'Beschreibe deine Idee in ein oder zwei Sätzen. Du bekommst einen ehrlichen Check, so wie ihn ein Produktmanager schreiben würde: für wen sie ist, was die Leute heute nutzen, die eine Sache, die stimmen muss, und wie du das diese Woche testest.',
+    lead: 'Beschreibe deine Idee in ein oder zwei Sätzen, oder schreib bis zu 3 grobe Ideen untereinander, eine pro Zeile. Du bekommst einen ehrlichen Check, so wie ihn ein Produktmanager schreiben würde: für wen sie ist, was die Leute heute nutzen, die eine Sache, die stimmen muss, und wie du das diese Woche testest.',
   },
   form: {
     label: 'Deine Idee',
@@ -28,9 +28,14 @@ export default {
     errBudget: 'Die kostenlosen Checks für heute sind aufgebraucht. Bitte komm morgen wieder.',
     errOff: 'Der Check macht gerade Pause. Bitte versuch es später noch einmal.',
     errFailed: 'Der Check wurde nicht fertig. Bitte versuch es in einer Minute noch einmal.',
+    hint: 'Eine Idee pro Zeile, bis zu 3. Du hast 3 kostenlose Checks pro Tag, 3 Ideen nutzen also alle von heute.',
+    nl: 'Umschalt + Enter für eine neue Zeile',
+    errMany: 'Bis zu 3 Ideen auf einmal, eine pro Zeile. 3 Checks sind alle kostenlosen von heute.',
+    errPartial: '{n} von {total} Ideen geprüft.',
   },
   progress: ['Deine Idee wird gelesen', 'Im Web wird gesucht, was die Leute heute nutzen', 'Die riskanteste Annahme wird gesucht', 'Dein 7-Tage-Test wird geschrieben'] as [string, string, string, string],
   progressNote: 'Das dauert etwa 20 bis 40 Sekunden.',
+  progressMany: '{n} Ideen werden nebeneinander geprüft. Das dauert etwa 30 bis 60 Sekunden.',
   result: {
     heading: 'Ideen-Check',
     checked: 'Geprüft am {date}',
@@ -69,6 +74,9 @@ export default {
       button: 'Erste Version bauen',
       note: 'Kostenlos starten. Nichts geht online oder kostet Geld ohne dein OK.',
     },
+    ideas: 'Deine Ideen',
+    concepts: { title: 'Schärfere Versionen zum Testen', sub: 'Eine grobe Idee wird klarer mit einem Kunden und einem Startpunkt.', forWhom: 'Für', start: 'Starte mit' },
+    lab: { title: 'Teste diese Ideen mit echten Menschen', titleOne: 'Teste diese Idee mit echten Menschen', text: 'equipe recherchiert jede Idee genauer, stellt für jede eine ehrliche „Bald verfügbar“-Seite online, vergleicht sie anhand echter Anmeldungen und baut die beste.', textOne: 'equipe recherchiert die Idee genauer, stellt eine ehrliche „Bald verfügbar“-Seite online, zählt echte Anmeldungen und baut sie, wenn Leute sie wollen.', button: 'Mit echten Menschen testen', note: 'Die ersten 3 Ideen-Checks in der App sind kostenlos. Ohne dein OK wird nichts ausgegeben oder verschickt.' },
     share: { label: 'Diesen Check teilen', copy: 'Link kopieren', copied: 'Kopiert', again: 'Andere Idee prüfen' },
     notFound: 'Dieser Check wurde nicht gefunden. Vielleicht ist er älter als 60 Tage.',
     loading: 'Check wird geladen…',
@@ -76,7 +84,7 @@ export default {
   how: {
     title: 'So funktioniert der Check',
     items: [
-      { title: 'Du beschreibst die Idee', text: 'Ein oder zwei Sätze reichen: für wen sie ist und was sie macht. Je konkreter, desto nützlicher der Check.' },
+      { title: 'Du beschreibst die Idee', text: 'Ein oder zwei Sätze reichen: für wen sie ist und was sie macht. Je konkreter, desto nützlicher der Check. Mehrere Ideen? Schreib bis zu 3 in eigene Zeilen und vergleiche sie nebeneinander.' },
       { title: 'Die KI liest sie wie ein Produktmanager', text: 'Ein kleines KI-Modell schreibt in einem Durchgang dieselbe Art Briefing, die unser PM für ein neues Team schreibt: Kunde, Problem, riskanteste Annahme, erste Version.' },
       { title: 'Wettbewerber kommen aus einer echten Websuche', text: 'Bis zu drei Suchen finden heraus, was die Leute heute nutzen. Ein Wettbewerber wird nur angezeigt, wenn seine eigene Website in der Suche auftauchte, also ist nichts in der Liste erfunden.' },
       { title: 'Du bekommst einen Test für diese Woche', text: 'Ein 7-Tage-Plan, der den riskanten Teil günstig testet (mit Leuten sprechen, eine einseitige Website, Vorbestellungen), und ein klares Signal zum Weitermachen.' },

@@ -94,7 +94,7 @@ const LOCS = available.map((l) => l.slug).filter(Boolean);
         if (/pricing/.test(loc)) fn('pricing');
       }
       if (a && a.hasAttribute('data-lang-choice')) ev('lang_switch', (d.documentElement.lang || '') + '>' + (a.getAttribute('hreflang') || ''));
-      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup|import)/.test(a.href)) { fn('signup_start'); w.eqFeat('signup'); }
+      if (a && /^https:\/\/app\.equipe\.im\/(start|login|new|signup|import|lab\/start)/.test(a.href)) { fn('signup_start'); w.eqFeat('signup'); }
       if (a && /\/pricing\/?(#|$)/.test(a.pathname || '') && a.host === location.host) fn('pricing');
     }, true);
     // Time on the page, once, when it is hidden or left.
