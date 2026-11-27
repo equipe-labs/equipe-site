@@ -286,6 +286,7 @@ export const en: IndustryLocale = {
         { title: 'Facebook and Instagram', text: 'Parents share sign-up links in local groups. Post term dates and link to the registration page.' },
         { title: 'Team apps', text: 'If you use TeamSnap or a similar app for rosters, link it from the site for current families.' },
       ],
+      example: 'A real equipe customer: a San Francisco Bay Area soccer academy for ages 5 through adult. Its site shows personal, group and team sessions with prices, session packages, match video review plans, camps, booking and an email list, built and run by its equipe team.',
       schema: 'Use **SportsActivityLocation** (or **SportsOrganization** for a club) with `sport`, address of your main field and `areaServed`. Camps can each get an **Event** block with dates and price.',
       prompt: 'Build a website for my youth soccer academy, [name], in [city]. Show programs by age group ([U6–U14], recreational and competitive, holiday camps, private sessions) with days, field and price per term. Add a schedule with a map for each field and a place to post weather cancellations, parent registration with the player’s age and level, an online waiver, photo consent and emergency contact, coach profiles with licenses, a free trial session booking, and sibling discounts. Keep children’s data to the minimum.',
       faq: [
