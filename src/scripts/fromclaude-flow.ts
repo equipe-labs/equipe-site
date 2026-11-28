@@ -220,7 +220,9 @@ export function startFromClaude() {
       const f = document.createElement('form'); f.method = 'post'; f.action = 'https://sandbox.equipe.im/preview'; f.target = 'fcx-pv'; f.hidden = true;
       const a = document.createElement('textarea'); a.name = 'code'; a.value = code; f.appendChild(a);
       const b = document.createElement('input'); b.name = 'filename'; b.value = fname; f.appendChild(b);
-      document.body.appendChild(f); f.submit(); f.remove();
+      // Posted once the frame is laid out at its real size (a frame loaded while hidden keeps a tiny surface in some browsers).
+      document.body.appendChild(f);
+      requestAnimationFrame(() => requestAnimationFrame(() => { f.submit(); f.remove(); }));
       addEventListener('message', (e) => { const x = e.data as Json; if (x && x.eq === 'preview' && x.t === 'ready') fr.classList.add('ok'); });
     }
     loadIdeas(!!d.spec);

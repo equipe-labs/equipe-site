@@ -119,7 +119,7 @@
 .fcx-url a { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: 17px; color: var(--text); text-decoration: none; }
 .fcx-url a:hover { color: var(--accent-text); }
 .fcx-acts { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-3); }
-.fcx-acts .btn { gap: 8px; min-height: 48px; cursor: pointer; font: 600 16px var(--sans); text-decoration: none; }
+.fcx-acts .btn { flex: 1 1 auto; justify-content: center; padding: 0 16px; gap: 8px; min-height: 48px; cursor: pointer; font: 600 16px var(--sans); text-decoration: none; }
 .fcx-exp { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 15px; color: var(--muted); }
 .fcx-frame { position: relative; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--bg); box-shadow: 0 24px 50px -30px rgb(10 10 12 / 0.4); }
 .fcx-fbar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
@@ -128,7 +128,7 @@
 .fcx-fscr { position: relative; aspect-ratio: 16 / 11; overflow: hidden; }
 .fcx-fscr::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--text) 5%, transparent), transparent) 0 0 / 200% 100%; animation: fcx-sheen 1.4s linear infinite; }
 .fcx-frame.ok .fcx-fscr::before { display: none; }
-.fcx-fscr iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; border: 0; transform: scale(0.5); transform-origin: 0 0; pointer-events: none; opacity: 0; transition: opacity 400ms var(--e); }
+.fcx-fscr iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; max-width: none; max-height: none; border: 0; transform: scale(0.5); transform-origin: 0 0; pointer-events: none; opacity: 0; transition: opacity 400ms var(--e); }
 .fcx-frame.ok iframe { opacity: 1; }
 
 /* ---- ideas ---- */
