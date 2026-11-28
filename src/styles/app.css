@@ -81,7 +81,7 @@
 .ap .tc .l3 span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ap .tc .warn { width: 16px; height: 16px; border-radius: 3px; background: var(--wait); color: var(--surface); font: 700 12px/16px var(--sans); text-align: center; }
 .ap .tc .ok { width: 14px; height: 14px; border-radius: 3px; background: var(--muted); color: var(--surface); font: 700 12px/14px var(--sans); text-align: center; flex: none; }
-.ap .c-web { background: var(--accent); } .ap .c-srv { background: #1B8A8F; } .ap .c-ios { background: #8B5CF6; }
+.ap .c-web { background: var(--accent); } .ap .c-srv { background: #1B8A8F; } .ap .c-ios { background: #4F5159; }
 
 /* decision + permission cards */
 .ap .side-panel { padding: 16px; display: grid; gap: 12px; align-content: start; }
@@ -148,7 +148,7 @@
 }
 
 /* a scene that stays dark in a light page */
-.ap.dark { --bg: #0A0A0C; --surface: #16171A; --code-bg: #111114; --ap-sunken: #111114; --text: #EFEDE7; --muted: #A3A5AB; --accent: #2F5BEA; --accent-text: #97ADF4; --on-accent: #FFFFFF; --line: #E9E6DF24; --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --strong: #7C7E85; --action: #2F5BEA; --on-action: #FFFFFF; }
+.ap.dark { --bg: #0A0A0C; --surface: #16171A; --code-bg: #111114; --ap-sunken: #111114; --text: #EFEDE7; --muted: #A3A5AB; --accent: #2F5BEA; --accent-text: #7099FE; --on-accent: #FFFFFF; --line: #E9E6DF24; --ok: #7FCB8E; --work: #E2B865; --wait: #EC9A62; --hover: #EFEDE712; --strong: #7C7E85; --action: #2F5BEA; --on-action: #FFFFFF; }
 .win .ap .side { border-right: 0; }
 
 /* the composer scene: the site frame is the card, so the app card draws no border of its own */

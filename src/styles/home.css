@@ -315,7 +315,7 @@ main.home :is(.sub, .hero .lead) { text-wrap: balance; }
 main.home .early .price h3 { font-size: 15px; font-weight: 600; color: #EFEDE7; letter-spacing: 0; }
 .early .price ul { display: grid; gap: var(--s-3); margin-top: var(--s-4); }
 .early .price li { display: flex; gap: var(--s-3); align-items: flex-start; font-size: 16px; line-height: 1.5; color: #D6D4CE; }
-.early .price li svg { flex: none; width: 18px; height: 18px; margin-top: 3px; fill: none; stroke: #97ADF4; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.early .price li svg { flex: none; width: 18px; height: 18px; margin-top: 3px; fill: none; stroke: #7099FE; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .early .ecard .idea-box { box-shadow: none; background: var(--bg); }
 .early .signin { margin: var(--s-4) 0 0; font-size: 14px; color: var(--muted); }
 .hero .ask .more .si { display: none; }

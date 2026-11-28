@@ -20,7 +20,7 @@ export const SANS = "-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro T
 // (link previews have no dark mode); dark is for surfaces that do, and for previews (THEME=dark).
 export const THEMES = {
   light: { bg: '#FFFFFF', glow: '#2F5BEA12', ink: '#0D0D0D', text2: '#363636', mute: '#5D5D5D', line: '#0000001A', sunken: '#F4F4F4', chip: '#2F5BEA14', chipInk: '#2550D6', chipLine: '#2F5BEA33', winEdge: '#0000001A', shadow: '#15161A26' },
-  dark: { bg: '#17181C', glow: '#2F5BEA2E', ink: '#ECEAE4', text2: '#CBC9C4', mute: '#A6A8AE', line: '#FFFFFF1F', sunken: '#27282E', chip: '#2F5BEA3D', chipInk: '#97ADF4', chipLine: '#97ADF44D', winEdge: '#FFFFFF24', shadow: '#00000080' },
+  dark: { bg: '#17181C', glow: '#2F5BEA2E', ink: '#ECEAE4', text2: '#CBC9C4', mute: '#A6A8AE', line: '#FFFFFF1F', sunken: '#27282E', chip: '#2F5BEA3D', chipInk: '#7099FE', chipLine: '#7099FE4D', winEdge: '#FFFFFF24', shadow: '#00000080' },
 };
 export const theme = (name = process.env.THEME) => THEMES[name === 'dark' ? 'dark' : 'light'];
 const WM = { light: await readFile('public/brand/wordmark.svg', 'utf8'), dark: await readFile('public/brand/wordmark-dark.svg', 'utf8') };

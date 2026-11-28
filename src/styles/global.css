@@ -6,7 +6,7 @@
   --bg: #F6F5F1; --surface: #FFFFFF; --code-bg: #EAE7E0; --text: #15161A; --muted: #4F5159;
   /* equipe blue, the one brand colour (same family as app.equipe.im, theme.js BRAND): --accent fills buttons, badges and
      dots in both themes with a white label (5.5:1); --accent-text is for text, links, icons and focus rings (#2F5BEA is
-     5:1 on this page and 5.5:1 on cards; on dark it is the light tint #97ADF4 of the same hue). */
+     5:1 on this page and 5.5:1 on cards; on dark it is #7099FE, the brand hue lightened only as far as 4.5:1 needs). */
   --accent: #2F5BEA; --accent-hover: #2550D6; --accent-press: #1E44C4; --on-accent: #FFFFFF; --accent-text: #2F5BEA;
   --accent-bg: #2F5BEA14; --accent-bg-strong: #2F5BEA24;
   --line: #0A0A0C24; --dot: #2F5BEA;
@@ -29,11 +29,11 @@
 :root[data-theme='dark'] {
   /* Dark: lifted off black (page #17181C, cards a step lighter), visible lines, text short of pure white. */
   --bg: #17181C; --surface: #222329; --code-bg: #1C1D22; --text: #E8E6E1; --muted: #A6A8AF;
-  --accent-text: #97ADF4; --accent-bg: #2F5BEA3D; --accent-bg-strong: #2F5BEA5C; --line: #FFFFFF17; color-scheme: dark;
+  --accent-text: #7099FE; --accent-bg: #2F5BEA3D; --accent-bg-strong: #2F5BEA5C; --line: #FFFFFF17; color-scheme: dark;
 }
 /* Without JavaScript there is no data-theme: the device setting still applies. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) { --bg: #17181C; --surface: #222329; --code-bg: #1C1D22; --text: #E8E6E1; --muted: #A6A8AF; --accent-text: #97ADF4; --accent-bg: #2F5BEA3D; --accent-bg-strong: #2F5BEA5C; --line: #FFFFFF17; color-scheme: dark; }
+  :root:not([data-theme]) { --bg: #17181C; --surface: #222329; --code-bg: #1C1D22; --text: #E8E6E1; --muted: #A6A8AF; --accent-text: #7099FE; --accent-bg: #2F5BEA3D; --accent-bg-strong: #2F5BEA5C; --line: #FFFFFF17; color-scheme: dark; }
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
