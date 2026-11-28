@@ -86,7 +86,7 @@ Your other costs do not go away: a domain (usually $10 to $20 a year), card proc
 
 ## A real example
 
-Golden Boot Academy, a youth soccer training academy in the San Francisco Bay Area, came to equipe with a site it had already made with an AI tool. Its AI team rebuilt it as a site it could keep changing, then added player sign-up and accounts, booking requests saved to an admin page, real FAQ answers and its own domain. By 27 November 2026, a few days after going live, the site had 125 human visitors, 10 account sign-ups and 11 booking requests from 5 people. It was not all smooth, and [the case study](/blog/golden-boot-academy-case-study/) says what went wrong too.
+Golden Boot Academy, a youth soccer training academy in the San Francisco Bay Area, came to equipe with a site it had already made with an AI tool. Its AI team rebuilt it as a site it could keep changing, then added player sign-up and accounts, booking requests saved to an admin page, real FAQ answers and its own domain. Within its first week live, real visitors were signing up and sending real booking requests. It was not all smooth, and [the case study](/blog/golden-boot-academy-case-study/) says what went wrong too.
 
 ## Doing it alone, with a team
 

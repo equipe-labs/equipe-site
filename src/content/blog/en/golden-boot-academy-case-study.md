@@ -14,7 +14,7 @@ faqs:
   - q: "Did the academy need to code or manage hosting?"
     a: "No. The academy's team described what it wanted in plain words and answered questions only it could answer, such as its refund policy and the minimum age it coaches. The AI team handled hosting, the database, the domain and sign-in."
   - q: "What went wrong?"
-    a: "The free starting credits ran out in the middle of the first build, before the academy could see a preview, and later the AI team restyled the site without being asked. We changed equipe because of both: the first version is now on us, and restyles nobody asked for are checked and stopped."
+    a: "The free starting credits ran out in the middle of the first build, before the academy could see a preview, and later the AI team restyled the site without being asked. We changed equipe because of both: the first version is now on us, and a live release of an imported site is refused when its look moves away from the original design without a customer request."
 sources:
   - title: "Golden Boot Academy (live site)"
     url: "https://goldenbootacademy.app"
@@ -55,15 +55,15 @@ Within three days the site was live on its own domain, goldenbootacademy.app, wi
 
 <figure><img src="/blog/cases/golden-boot-admin.webp" width="1200" height="250" loading="lazy" alt="The Golden Boot Academy admin home: counts of bookings, applications and members for the last 7 days" /><figcaption>The academy's admin page, built by its team: bookings, applications and members at a glance.</figcaption></figure>
 
-By 27 November 2026, a few days after going live, the site had **125 human visitors, 10 account sign-ups and 11 booking requests from 5 people**. Small numbers, but real ones, and the academy can now see them.
+Within the first week live, real visitors were signing up and sending real booking requests, and the academy can now see every one of them in its admin page.
 
 ## What went wrong, and what we changed
 
-**The starting credits ran out mid-build.** The PM estimated the first sprint at about $2 of work; it used about $8, and the free credits ran out about 20 minutes in, just before the academy would have seen a preview. A first-time customer should never stop right before the moment that makes it real. We changed it: the first version is now on us, and getting a preview in front of the customer comes before other work.
+**The starting credits ran out mid-build.** The PM estimated the first sprint at about $2 of work; it used about $8, and the free credits ran out about 20 minutes in, just before the academy would have seen a preview. A first-time customer should never stop right before the moment that makes it real. We changed the first part: the first version is now on us. Making sure a new customer's first session always reaches a preview before any other work starts is something we are still working on.
 
-**The team restyled the site without being asked.** A self-started "design system" pass changed buttons, type and the hero layout across every page. The academy's team then spent its own messages adjusting it. The academy kept the new look in the end, but that is not the point: a team should not change a brand it was not asked to change. equipe now checks changes against the existing design and stops restyles nobody requested.
+**The team restyled the site without being asked.** A self-started "design system" pass changed buttons, type and the hero layout across every page. The academy's team then spent its own messages adjusting it. The academy kept the new look in the end, but that is not the point: a team should not change a brand it was not asked to change. equipe now checks every live release of an imported site against its original design, at desktop and phone width, and refuses one whose look moves away from it, unless the change answers something the customer asked for.
 
-**"Done" did not always mean live.** A finished change once waited for hours before going live while the PM called it done. We now treat "live" and "done" as different words, and the PM reports the first only when the site has it.
+**"Done" did not always mean live.** A finished change once waited for hours before going live while the PM called it done. One part of this has shipped: a live release can now only come from the team's finished main line of work, never from a half-done branch. Making the PM's "done" always mean "live on your site" is something we are still working on.
 
 None of these were about the AI's ability to build. They were about the parts around it: money, order of work and plain communication. That matches what I see across projects, and it is why I think the team around the model matters more than the model.
 
