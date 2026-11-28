@@ -72,6 +72,15 @@ const ptBR: LegalCopy = {
         ] },
         'Perante seus visitantes, você é responsável pelo seu produto. A política de privacidade que o equipe escreve para o seu produto ganha uma seção sobre IA, em 8 idiomas, assim que a IA é ativada.',
       ] },
+      { id: 'product-google', h: 'Login e calendários do Google e da Microsoft nos produtos', body: [
+        'Os produtos criados com o equipe podem deixar os visitantes entrarem com Google ou Microsoft e conectarem a agenda do Google ou do Outlook pelo aplicativo do próprio equipe nesses provedores. Por isso a tela do Google ou da Microsoft mostra o nome equipe.',
+        { ul: [
+          '**Login.** Recebemos o nome, o e-mail, a foto de perfil e o identificador da conta do visitante e os repassamos ao produto em que ele entrou. Não guardamos nenhum token do Google ou da Microsoft para o login.',
+          '**Calendários.** Somente quando o visitante conecta a agenda em um produto. O acesso ao Google Agenda se limita aos horários livres ou ocupados e aos eventos das agendas que pertencem a ele; no Outlook, abrange a agenda dele. O produto usa isso apenas para mostrar quando ele está ocupado e para adicionar uma reunião que ele escolheu, com os convites enviados da agenda dele. Não guardamos o conteúdo da agenda.',
+          '**Guardado com segurança.** O token é criptografado, vinculado a esse produto e a essa conta, e nunca é entregue ao produto. Quando o visitante desconecta, exclui a conta no produto ou o produto é excluído, apagamos o token e pedimos ao Google que revogue o acesso, a menos que outro produto que ele usa ainda precise dele. Ele também pode remover o acesso a qualquer momento nas configurações da conta Google ou Microsoft.',
+          '**Nunca para outra coisa.** Não vendemos esses dados nem os usamos para publicidade ou para treinar modelos de IA, e ninguém no equipe os lê, a menos que o visitante peça, seja necessário para a segurança ou a lei exija. Vale o parágrafo acima sobre dados de usuário do Google, incluindo os requisitos de Uso Limitado.',
+        ] },
+      ] },
       { id: 'products', h: 'Os produtos que você constrói', body: [
         'Para as pessoas que usam os produtos que seu time constrói (seus visitantes e clientes), você decide o que o produto coleta, e nós processamos esses dados em seu nome para hospedá-lo e operá-lo: o banco de dados, o login, os emails, os arquivos e o analytics integrado, que não usa cookies. Não usamos os dados do seu produto para nossos próprios fins. Seu produto recebe sua própria política de privacidade e seus próprios termos, escritos com base no que ele realmente faz; você é responsável por eles e por responder às solicitações dos seus usuários.',
       ] },

@@ -72,6 +72,15 @@ const es: LegalCopy = {
         ] },
         'Frente a tus visitantes, tú eres responsable de tu producto. La política de privacidad que equipe redacta para tu producto incorpora una sección sobre IA, en 8 idiomas, en cuanto se activa la IA.',
       ] },
+      { id: 'product-google', h: 'Inicio de sesión y calendarios de Google y Microsoft en los productos', body: [
+        'Los productos creados con equipe pueden permitir que sus visitantes inicien sesión con Google o Microsoft y conecten su calendario de Google u Outlook a través de la aplicación propia de equipe en esos proveedores. Por eso la pantalla de Google o Microsoft muestra el nombre equipe.',
+        { ul: [
+          '**Inicio de sesión.** Recibimos el nombre, el correo, la foto de perfil y el identificador de cuenta del visitante y los pasamos al producto en el que inició sesión. No guardamos ningún token de Google ni de Microsoft para iniciar sesión.',
+          '**Calendarios.** Solo cuando un visitante conecta su calendario en un producto. El acceso a Google Calendar se limita a sus horas libres u ocupadas y a los eventos de los calendarios que le pertenecen; en Outlook abarca su calendario. El producto lo usa solo para mostrar cuándo está ocupado y para añadir una reunión que eligió, con las invitaciones enviadas desde su calendario. No guardamos el contenido del calendario.',
+          '**Guardado con seguridad.** El token está cifrado, vinculado a ese producto y a esa cuenta, y nunca se entrega al producto. Cuando el visitante desconecta, elimina su cuenta en el producto o el producto se elimina, lo borramos y pedimos a Google que revoque el acceso, salvo que otro producto que use aún lo necesite. También puede quitar el acceso en cualquier momento desde la configuración de su cuenta de Google o Microsoft.',
+          '**Nunca para otra cosa.** No vendemos estos datos ni los usamos para publicidad o para entrenar modelos de IA, y nadie en equipe los lee salvo que el visitante lo pida, sea necesario por seguridad o lo exija la ley. Se aplica el apartado anterior sobre datos de usuario de Google, incluidos los requisitos de uso limitado.',
+        ] },
+      ] },
       { id: 'products', h: 'Los productos que construyes', body: [
         'Para las personas que usan los productos que construye tu equipo (tus visitantes y clientes), tú decides qué recopila el producto, y nosotros procesamos esos datos en tu nombre para alojarlo y hacerlo funcionar: su base de datos, el inicio de sesión, los correos, los archivos y la analítica integrada, que no usa cookies. No usamos los datos de tu producto para nuestros propios fines. Tu producto recibe su propia política de privacidad y sus propios términos, redactados a partir de lo que realmente hace; tú eres responsable de ellos y de responder a las solicitudes de tus usuarios.',
       ] },

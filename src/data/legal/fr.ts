@@ -72,6 +72,15 @@ const fr: LegalCopy = {
         ] },
         'Vis-à-vis de vos visiteurs, vous êtes responsable de votre produit. La politique de confidentialité qu’equipe rédige pour votre produit reçoit une section sur l’IA, en 8 langues, dès que l’IA est activée.',
       ] },
+      { id: 'product-google', h: 'Connexion et agendas Google et Microsoft dans les produits', body: [
+        'Les produits créés avec equipe peuvent permettre à leurs visiteurs de se connecter avec Google ou Microsoft et de relier leur agenda Google ou Outlook, via l’application d’equipe chez ces fournisseurs. C’est pourquoi l’écran de Google ou de Microsoft affiche le nom equipe.',
+        { ul: [
+          '**Connexion.** Nous recevons le nom, l’adresse e-mail, la photo de profil et l’identifiant de compte du visiteur et les transmettons au produit auquel il s’est connecté. Nous ne conservons aucun jeton Google ou Microsoft pour la connexion.',
+          '**Agendas.** Seulement quand un visiteur relie son agenda dans un produit. L’accès à Google Agenda se limite à ses créneaux libres ou occupés et aux événements des agendas qui lui appartiennent ; pour Outlook, il couvre son agenda. Le produit s’en sert uniquement pour montrer quand il est occupé et pour ajouter une réunion qu’il a choisie, les invitations partant de son agenda. Nous ne conservons pas le contenu de l’agenda.',
+          '**Conservé en sécurité.** Le jeton est chiffré, lié à ce seul produit et à ce compte, et jamais remis au produit. Quand le visiteur se déconnecte, supprime son compte dans le produit ou que le produit est supprimé, nous le supprimons et demandons à Google de révoquer l’accès, sauf si un autre produit qu’il utilise en a encore besoin. Il peut aussi retirer l’accès à tout moment dans les paramètres de son compte Google ou Microsoft.',
+          '**Jamais pour autre chose.** Nous ne vendons pas ces données, ne les utilisons ni pour la publicité ni pour entraîner des modèles d’IA, et personne chez equipe ne les lit, sauf à la demande du visiteur, pour la sécurité ou si la loi l’exige. Le paragraphe ci-dessus sur les données des utilisateurs Google, y compris les exigences d’utilisation limitée, s’applique.',
+        ] },
+      ] },
       { id: 'products', h: 'Les produits que vous construisez', body: [
         'Pour les personnes qui utilisent les produits que construit votre équipe (vos visiteurs et clients), c’est vous qui décidez de ce que le produit collecte, et nous traitons ces données pour votre compte afin de l’héberger et de le faire fonctionner : sa base de données, la connexion, les e-mails, les fichiers et les statistiques intégrées, qui n’utilisent pas de cookies. Nous n’utilisons pas les données de votre produit à nos propres fins. Votre produit reçoit sa propre politique de confidentialité et ses propres conditions, rédigées à partir de ce qu’il fait réellement ; vous en êtes responsable, ainsi que de la réponse aux demandes de vos utilisateurs.',
       ] },

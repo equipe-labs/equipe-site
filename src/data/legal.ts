@@ -24,7 +24,7 @@ export interface LegalDoc { title: string; desc: string; h1: string; summaryTitl
 export interface LegalUi { updated: string; toc: string; prevails: string; notAdvice: string; privacy: string; terms: string; appPolicy: string }
 export interface LegalCopy { ui: LegalUi; privacy: LegalDoc; terms: LegalDoc }
 
-export const LEGAL_UPDATED = '2026-11-26';
+export const LEGAL_UPDATED = '2026-11-28';
 export const LEGAL_OPERATOR = 'Umbriles Inc.';
 export const LEGAL_CONTACT = 'support@equipe.im';
 
@@ -99,6 +99,15 @@ const en: LegalCopy = {
             'Each product’s key stays on its server, and calls from a browser are refused.',
           ] },
           'For your visitors, you are responsible for your product. The privacy policy equipe writes for your product gains a section about AI, in 8 languages, as soon as AI is on.',
+        ] },
+        { id: 'product-google', h: 'Google and Microsoft sign-in and calendars in products', body: [
+          'Products built on equipe can let their visitors sign in with Google or Microsoft and connect their Google or Outlook calendar through equipe’s own app at those providers. That is why Google’s or Microsoft’s screen names equipe.',
+          { ul: [
+            '**Sign-in.** We receive the visitor’s name, email address, profile picture and account identifier and pass them to the product they signed in to. We keep no Google or Microsoft token for sign-in.',
+            '**Calendars.** Only when a visitor connects their calendar in a product. Google Calendar access is limited to their free/busy times and to events on calendars they own; Outlook access covers their calendar. The product uses it only to show when they are busy and to add a meeting they chose, with the invitations sent from their calendar. We do not store calendar contents.',
+            '**Stored safely.** The token is encrypted, bound to that one product and that account, and never given to the product. When the visitor disconnects, deletes their account in the product, or the product is deleted, we delete it and ask Google to revoke the access unless another product they use still needs it. They can also remove access in their Google or Microsoft account settings at any time.',
+            '**Never for anything else.** We do not sell this data, use it for advertising or to train AI models, and people at equipe do not read it unless the visitor asks, it is needed for security, or the law requires it. The Google user data paragraph above, including the Limited Use requirements, applies.',
+          ] },
         ] },
         { id: 'products', h: 'The products you build', body: [
           'For the people who use the products your team builds (your visitors and customers), you decide what the product collects, and we process that data on your behalf to host and run it: its database, sign-in, emails, files and the built-in analytics, which uses no cookies. We do not use your product’s data for our own purposes. Your product gets its own privacy policy and terms, written from what it really does; you are responsible for them and for answering your users’ requests.',

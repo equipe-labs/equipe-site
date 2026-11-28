@@ -72,6 +72,15 @@ const de: LegalCopy = {
         ] },
         'Gegenüber deinen Besuchern bist du für dein Produkt verantwortlich. Die Datenschutzerklärung, die equipe für dein Produkt schreibt, erhält einen Abschnitt über KI, in 8 Sprachen, sobald KI eingeschaltet ist.',
       ] },
+      { id: 'product-google', h: 'Anmeldung und Kalender mit Google und Microsoft in Produkten', body: [
+        'Mit equipe gebaute Produkte können ihre Besucher mit Google oder Microsoft anmelden und ihren Google- oder Outlook-Kalender verbinden lassen, über equipes eigene App bei diesen Anbietern. Deshalb nennt der Bildschirm von Google oder Microsoft equipe.',
+        { ul: [
+          '**Anmeldung.** Wir erhalten Name, E-Mail-Adresse, Profilbild und Kontokennung des Besuchers und geben sie an das Produkt weiter, bei dem er sich angemeldet hat. Für die Anmeldung behalten wir kein Google- oder Microsoft-Token.',
+          '**Kalender.** Nur wenn ein Besucher in einem Produkt seinen Kalender verbindet. Der Zugriff auf Google Kalender ist auf seine Frei/Gebucht-Zeiten und auf Termine in Kalendern beschränkt, die ihm gehören; bei Outlook umfasst er seinen Kalender. Das Produkt nutzt ihn nur, um zu zeigen, wann er beschäftigt ist, und um ein Treffen einzutragen, das er gewählt hat; die Einladungen gehen von seinem Kalender aus. Kalenderinhalte speichern wir nicht.',
+          '**Sicher aufbewahrt.** Das Token ist verschlüsselt, an genau dieses Produkt und dieses Konto gebunden und wird nie an das Produkt gegeben. Trennt der Besucher die Verbindung, löscht er sein Konto im Produkt oder wird das Produkt gelöscht, löschen wir es und bitten Google, den Zugriff zu widerrufen, sofern ihn kein anderes Produkt, das er nutzt, noch braucht. Er kann den Zugriff auch jederzeit in seinen Google- oder Microsoft-Kontoeinstellungen entfernen.',
+          '**Nie für etwas anderes.** Wir verkaufen diese Daten nicht, nutzen sie nicht für Werbung oder zum Trainieren von KI-Modellen, und Menschen bei equipe lesen sie nur, wenn der Besucher darum bittet, es für die Sicherheit nötig ist oder das Gesetz es verlangt. Der Absatz zu Google-Nutzerdaten oben, einschließlich der Anforderungen zur eingeschränkten Nutzung, gilt.',
+        ] },
+      ] },
       { id: 'products', h: 'Die Produkte, die du baust', body: [
         'Für die Menschen, die die Produkte deines Teams nutzen (deine Besucher und Kunden), entscheidest du, was das Produkt erhebt, und wir verarbeiten diese Daten in deinem Auftrag, um es zu hosten und zu betreiben: seine Datenbank, Anmeldung, E-Mails, Dateien und die eingebaute Analyse, die keine Cookies nutzt. Wir nutzen die Daten deines Produkts nicht für eigene Zwecke. Dein Produkt bekommt eine eigene Datenschutzerklärung und eigene Nutzungsbedingungen, geschrieben auf Grundlage dessen, was es wirklich tut; du bist für sie verantwortlich und dafür, Anfragen deiner Nutzer zu beantworten.',
       ] },
