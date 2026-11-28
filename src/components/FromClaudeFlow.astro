@@ -1,0 +1,245 @@
+---
+// /from-claude/: drop or paste a Claude artifact, it is live at a link in about 20 seconds with no sign-up, three ideas
+// for it, and sign-in only when one is tapped (copy: src/data/fromclaude-flow.ts; API: app.equipe.im/api/fc/*, cloud
+// web/src/from-claude.js). The input is the hero; the 2-step Download guide sits under it and comes forward when a
+// claude.ai link can't be read. The connector is one small line near the end.
+//
+// Safety: nothing pasted runs on equipe.im. The preview posts the code into an <iframe> at sandbox.equipe.im (an opaque
+// origin, cloud platform/src/artifact/sandbox.js); the live site runs on its own address.
+import PageShell from './PageShell.astro';
+import FaqJsonLd from './FaqJsonLd.astro';
+import JsonLd from './JsonLd.astro';
+import { SITE } from '../data/site';
+import { FC_FLOW } from '../data/fromclaude-flow';
+import { TURNSTILE_SITE_KEY } from '../data/aivis';
+import { getLocale, subPath, type LocaleCode } from '../i18n';
+import '../styles/fromclaude-flow.css';
+
+interface Props { code: LocaleCode }
+const { code } = Astro.props;
+const info = getLocale(code);
+const C = FC_FLOW[code] ?? FC_FLOW.en;
+const url = new URL(subPath(info, 'from-claude'), Astro.site).href;
+const loc = (info.slug || 'en').toLowerCase();
+const utm = `utm_source=equipe.im&utm_medium=from_claude&utm_campaign=fc_${loc}`;
+const APP = 'https://app.equipe.im';
+const data = {
+  api: APP, ts: TURNSTILE_SITE_KEY, lang: code, loc, utm,
+  w: { drop: C.drop, run: C.run, live: C.live, ideas: C.ideas, sheet: C.sheet, err: C.err, guide: { linkFail: C.guide.linkFail }, connector: { copy: C.connector.copy, copied: C.connector.copied } },
+};
+const sv = (d: string, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const I = {
+  up: sv('<path d="M12 16V4M6.5 9.5 12 4l5.5 5.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>'),
+  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  doc: sv('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>'),
+  x: sv('<path d="M18 6 6 18M6 6l12 12"/>'),
+  copy: sv('<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>'),
+  open: sv('<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/>'),
+  share: sv('<path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>'),
+  globe: sv('<circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
+  spark: sv('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/>'),
+  check: sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
+  lock: sv('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+  mail: sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/>'),
+};
+const G = '<svg viewBox="0 0 24 24" aria-hidden="true" class="brandi"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>';
+const A = '<svg viewBox="0 0 24 24" aria-hidden="true" class="brandi"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.8-1.1-2.8-4.2zM13.9 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z"/></svg>';
+const next = encodeURIComponent('/fc/go');
+const signin = { google: `${APP}/auth/google?next=${next}&${utm}`, apple: `${APP}/auth/apple?next=${next}&${utm}`, email: `${APP}/login?next=${next}&lang=${code}&${utm}` };
+// The two guide pictures: Claude's artifact menu (generic, no branding) with Download picked, and a file going into the box.
+const pic1 = `<svg class="fcx-pic" viewBox="0 0 220 140" aria-hidden="true">
+  <rect x="1" y="1" width="218" height="138" rx="14" class="p-bg"/>
+  <rect x="14" y="14" width="192" height="26" rx="8" class="p-card"/><rect x="24" y="24" width="70" height="6" rx="3" class="p-ink"/>
+  <rect x="172" y="19" width="26" height="16" rx="6" class="p-hi"/><circle cx="179" cy="27" r="1.7" class="p-hi-ink"/><circle cx="185" cy="27" r="1.7" class="p-hi-ink"/><circle cx="191" cy="27" r="1.7" class="p-hi-ink"/>
+  <rect x="98" y="44" width="108" height="82" rx="10" class="p-card p-shadow"/>
+  <rect x="110" y="56" width="58" height="5" rx="2.5" class="p-mut"/><rect x="104" y="69" width="96" height="20" rx="6" class="p-pick"/><rect x="112" y="76" width="52" height="6" rx="3" class="p-pick-ink"/>
+  <rect x="110" y="98" width="46" height="5" rx="2.5" class="p-mut"/><rect x="110" y="111" width="66" height="5" rx="2.5" class="p-mut"/>
+  <rect x="14" y="50" width="74" height="76" rx="8" class="p-card"/><rect x="24" y="62" width="40" height="5" rx="2.5" class="p-mut"/><rect x="24" y="74" width="54" height="30" rx="5" class="p-soft"/><rect x="24" y="111" width="30" height="7" rx="3.5" class="p-ink"/>
+</svg>`;
+const pic2 = `<svg class="fcx-pic" viewBox="0 0 220 140" aria-hidden="true">
+  <rect x="1" y="1" width="218" height="138" rx="14" class="p-bg"/>
+  <rect x="22" y="54" width="176" height="72" rx="12" class="p-drop"/>
+  <g class="p-file"><rect x="88" y="14" width="44" height="54" rx="7" class="p-card p-shadow"/><path d="M118 14v12h14" class="p-fold"/><rect x="96" y="40" width="28" height="4" rx="2" class="p-mut"/><rect x="96" y="49" width="20" height="4" rx="2" class="p-mut"/></g>
+  <path d="M110 84v22M102 98l8 8 8-8" class="p-arrow"/>
+</svg>`;
+---
+<PageShell code={code} page="from-claude" title={C.title} description={C.desc} image={`/og/tools/from-claude-${loc}.png`} imageAlt={C.ogTitle}>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://app.equipe.im" crossorigin />
+    <link rel="preconnect" href="https://sandbox.equipe.im" crossorigin />
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('mo');
+        setTimeout(function () { if (!window.__fcrv) document.documentElement.classList.remove('mo'); }, 3000);
+      }
+    </script>
+    <JsonLd data={{
+      '@type': 'WebApplication', '@id': `${url}#app`, name: C.ogTitle, url, description: C.desc, applicationCategory: 'DeveloperApplication', operatingSystem: 'Any', inLanguage: info.lang,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#organization` },
+    }} />
+    <JsonLd data={{ '@type': 'HowTo', name: C.h1, step: C.how.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s[0], text: s[1] })) }} />
+    <FaqJsonLd lang={info.lang} faqs={C.faq} />
+  </Fragment>
+
+  <section class="fcx-hero"><div class="wrap">
+    <div class="fcx-head">
+      <h1>{C.h1}</h1>
+      <p class="fcx-lead">{C.lead}</p>
+    </div>
+
+    <div class="fcx-stage" id="fcx" data-state="in" data-fc={JSON.stringify(data)}>
+      <!-- 1. the input: drop, paste code or a link -->
+      <div class="fcx-in" id="fcx-in">
+        <div class="fcx-drop" id="fcx-drop">
+          <label class="fcx-sr" for="fcx-ta">{C.drop.label}</label>
+          <div class="fcx-empty" id="fcx-empty" aria-hidden="true">
+            <span class="fcx-ico"><Fragment set:html={I.up} /></span>
+            <b>{C.drop.ph}</b>
+            <small>{C.drop.types}</small>
+          </div>
+          <textarea id="fcx-ta" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="fcx-types"></textarea>
+          <div class="fcx-chip" id="fcx-chip" hidden><Fragment set:html={I.doc} /><b id="fcx-fname"></b><small id="fcx-fsize"></small><button type="button" id="fcx-unfile" aria-label={C.drop.remove}><Fragment set:html={I.x} /></button></div>
+          <div class="fcx-over" aria-hidden="true"><span><Fragment set:html={I.up} />{C.drop.release}</span></div>
+          <div class="fcx-bar">
+            <button type="button" class="fcx-pick" id="fcx-pick"><Fragment set:html={I.doc} />{C.drop.choose}</button>
+            <input type="file" id="fcx-file" class="fcx-fin" accept=".html,.htm,.jsx,.tsx,.js,.ts,.svg,.md,.markdown,.mmd,.txt,.zip,text/*,application/zip" tabindex="-1" aria-hidden="true" />
+            <span class="fcx-types" id="fcx-types">{C.drop.types}</span>
+            <button type="button" class="btn primary lg fcx-go" id="fcx-go">{C.drop.go}<Fragment set:html={I.arrow} /></button>
+          </div>
+        </div>
+        <div class="fcx-ts" id="fcx-ts"></div>
+        <p class="fcx-err" id="fcx-err" role="alert" hidden></p>
+
+        <div class="fcx-guide" id="fcx-guide">
+          <p class="fcx-gnote" id="fcx-gnote" hidden></p>
+          <h2 class="fcx-gt">{C.guide.title}</h2>
+          <ol class="fcx-steps2">
+            <li><Fragment set:html={pic1} /><div><b><span class="n">1</span>{C.guide.s1}</b><span>{C.guide.s1b}</span></div></li>
+            <li><Fragment set:html={pic2} /><div><b><span class="n">2</span>{C.guide.s2}</b><span>{C.guide.s2b}</span></div></li>
+          </ol>
+          <p class="fcx-gcopy">{C.guide.copy}</p>
+        </div>
+      </div>
+
+      <!-- 2. while it goes online -->
+      <div class="fcx-run" id="fcx-run" hidden aria-live="polite">
+        <h2>{C.run.title}</h2>
+        <ol class="fcx-prog" id="fcx-prog">{C.run.steps.map((s) => <li><i aria-hidden="true"></i><span>{s}</span></li>)}</ol>
+        <span class="fcx-timer" id="fcx-timer">0.0 s</span>
+        <p class="fcx-slow" id="fcx-slow" hidden>{C.run.slow}</p>
+      </div>
+
+      <!-- 3. live, with the ideas -->
+      <div class="fcx-live" id="fcx-live" hidden>
+        <div class="fcx-lv">
+          <div class="fcx-lv-t">
+            <span class="fcx-badge"><b aria-hidden="true"></b>{C.live.badge}</span>
+            <h2 id="fcx-ltitle">{C.live.title}</h2>
+            <div class="fcx-url"><Fragment set:html={I.globe} /><a id="fcx-link" target="_blank" rel="noopener"></a></div>
+            <div class="fcx-acts">
+              <button type="button" class="btn primary fcx-copy" id="fcx-copy"><Fragment set:html={I.copy} /><span>{C.live.copy}</span></button>
+              <a class="btn ghost" id="fcx-open" target="_blank" rel="noopener"><Fragment set:html={I.open} />{C.live.open}</a>
+              <button type="button" class="btn ghost" id="fcx-share" hidden><Fragment set:html={I.share} />{C.live.share}</button>
+            </div>
+            <p class="fcx-exp"><Fragment set:html={I.lock} />{C.live.expires}</p>
+          </div>
+          <div class="fcx-frame" id="fcx-frame" hidden><div class="fcx-fbar"><span></span><span></span><span></span><em id="fcx-fhost"></em></div><div class="fcx-fscr"><iframe name="fcx-pv" title={C.live.preview} sandbox="allow-scripts allow-forms allow-modals" referrerpolicy="no-referrer" tabindex="-1"></iframe></div></div>
+        </div>
+
+        <div class="fcx-ideas" id="fcx-ideas">
+          <h3><Fragment set:html={I.spark} />{C.ideas.title}</h3>
+          <p class="fcx-isub" id="fcx-isub">{C.ideas.sub}</p>
+          <ul class="fcx-il" id="fcx-il" aria-busy="true">
+            {[0, 1, 2].map((i) => <li><button type="button" class="fcx-idea sk" data-i={i} disabled><b></b><span></span><i aria-hidden="true"><Fragment set:html={I.arrow} /></i></button></li>)}
+          </ul>
+          <form class="fcx-own" id="fcx-own">
+            <input id="fcx-owntx" maxlength="500" autocomplete="off" placeholder={C.ideas.custom} aria-label={C.ideas.custom} />
+            <button type="submit" class="btn primary">{C.ideas.customGo}</button>
+          </form>
+          <button type="button" class="fcx-keep" id="fcx-keep"><b>{C.ideas.keep}</b><span>{C.ideas.keepSub}</span></button>
+        </div>
+        <button type="button" class="fcx-again" id="fcx-again">{C.live.again}</button>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="fcx-sec fcx-proof"><div class="wrap">
+    <h2 class="fc-rv">{C.proof.title}</h2>
+    <ul>{C.proof.items.map((p, i) => <li class="fc-rv" style={`transition-delay:${i * 70}ms`}><b>{p[0]}</b><span>{p[1]}</span></li>)}</ul>
+  </div></section>
+
+  <section class="fcx-sec"><div class="wrap">
+    <h2 class="fc-rv">{C.example.title}</h2>
+    <p class="fcx-sub fc-rv">{C.example.sub}</p>
+    <div class="fcx-ba fc-rv">
+      <figure class="fcx-b">
+        <figcaption>{C.example.before}</figcaption>
+        <div class="fcx-mock fcx-chat">
+          <div class="fcx-msg"></div><div class="fcx-msg short"></div>
+          <div class="fcx-art"><div class="fcx-art-h">Spelling Bee</div><div class="fcx-word">b · e · e</div><div class="fcx-score">Score 7</div></div>
+        </div>
+        <p>{C.example.beforeNote}</p>
+      </figure>
+      <span class="fcx-ba-arrow" aria-hidden="true"><Fragment set:html={I.arrow} /></span>
+      <figure class="fcx-a">
+        <figcaption>{C.example.after}</figcaption>
+        <div class="fcx-mock fcx-web">
+          <div class="fcx-fbar"><span></span><span></span><span></span><em>{C.example.afterNote}</em></div>
+          <div class="fcx-webb">
+            <div class="fcx-art-h">Spelling Bee</div>
+            <ol class="fcx-board"><li><b>Mia</b><span>42</span></li><li><b>Leo</b><span>37</span></li><li><b>Ava</b><span>29</span></li></ol>
+          </div>
+        </div>
+        <ul class="fcx-gains">{C.example.afterItems.map((t) => <li><Fragment set:html={I.check} />{t}</li>)}</ul>
+      </figure>
+    </div>
+  </div></section>
+
+  <section class="fcx-sec"><div class="wrap">
+    <h2 class="fc-rv">{C.how.title}</h2>
+    <ol class="fcx-how">{C.how.steps.map((s, i) => <li class="fc-rv" style={`transition-delay:${i * 80}ms`}><span class="n" aria-hidden="true">{i + 1}</span><h3>{s[0]}</h3><p>{s[1]}</p></li>)}</ol>
+    <p class="fcx-works fc-rv">{C.works}</p>
+  </div></section>
+
+  <section class="fcx-sec" id="faq"><div class="wrap">
+    <h2 class="fc-rv">{C.faqTitle}</h2>
+    <div class="fcx-faq fc-rv">{C.faq.map((f, i) => <details open={i === 0}><summary><h3>{f.question}</h3></summary><p>{f.answer}</p></details>)}</div>
+  </div></section>
+
+  <section class="fcx-sec fcx-conn"><div class="wrap">
+    <details class="fcx-cn" id="fcx-cn">
+      <summary><b>{C.connector.q}</b><span>{C.connector.a}</span></summary>
+      <ol>
+        <li>{C.connector.steps[0]}</li>
+        <li>{C.connector.steps[1]} <span class="fcx-mcp"><code>https://app.equipe.im/mcp</code><button type="button" id="fcx-mcpcopy">{C.connector.copy}</button></span></li>
+        <li>{C.connector.steps[2]}</li>
+      </ol>
+    </details>
+  </div></section>
+
+  <aside class="fc-legal"><div class="wrap"><p>{C.disclaimer}</p></div></aside>
+
+  <dialog class="fcx-sheet" id="fcx-sheet" aria-labelledby="fcx-sh-t">
+    <form method="dialog" class="fcx-sh-x"><button aria-label={C.sheet.close}><Fragment set:html={I.x} /></button></form>
+    <div class="fcx-sh-site"><Fragment set:html={I.globe} /><span id="fcx-sh-host"></span></div>
+    <h2 id="fcx-sh-t">{C.sheet.title}</h2>
+    <p id="fcx-sh-sub"></p>
+    <div class="fcx-sh-b">
+      <a class="fcx-sh-btn" id="fcx-g" href={signin.google} data-way="google"><Fragment set:html={G} />{C.sheet.google}</a>
+      <a class="fcx-sh-btn" id="fcx-a" href={signin.apple} data-way="apple"><Fragment set:html={A} />{C.sheet.apple}</a>
+      <a class="fcx-sh-btn" id="fcx-e" href={signin.email} data-way="email"><Fragment set:html={I.mail} />{C.sheet.email}</a>
+    </div>
+    <p class="fcx-sh-fine">{C.sheet.fine}</p>
+  </dialog>
+
+  <script>
+    import { startFromClaude } from '../scripts/fromclaude-flow';
+    startFromClaude();
+    const root = document.documentElement;
+    if (root.classList.contains('mo')) {
+      (window as unknown as { __fcrv: boolean }).__fcrv = true;
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.fc-rv').forEach((el) => io.observe(el));
+    }
+  </script>
+</PageShell>

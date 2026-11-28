@@ -1,12 +1,11 @@
 ---
-// /from-claude/: paste a Claude artifact, see it working right here (sandbox.equipe.im), then one button puts it live at
-// <name>.equipe.page. Since 2026-11-28 it is the same tool page as /from-chatgpt/ and the rest (src/components/ToolPage.astro,
-// copy in src/data/aitool/<locale>.ts `pages['from-claude']`), so it has the live preview before sign-up.
+// /from-claude/: drop or paste a Claude artifact; it is live at a link in about 20 seconds with no sign-up, then three
+// ideas, and sign-in only when one is tapped (src/components/FromClaudeFlow.astro, copy in src/data/fromclaude-flow.ts).
 // "Claude artifact" is descriptive only: no Claude/Anthropic logo or branding, and the disclaimer closes the page.
-import ToolPage from '../../components/ToolPage.astro';
+import FromClaudeFlow from '../../components/FromClaudeFlow.astro';
 import { available, type LocaleCode } from '../../i18n';
 
 export function getStaticPaths() { return available.map((l) => ({ params: { locale: l.slug || undefined }, props: { code: l.code } })); }
 const { code } = Astro.props as { code: LocaleCode };
 ---
-<ToolPage code={code} tool="from-claude" />
+<FromClaudeFlow code={code} />
