@@ -106,7 +106,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: 'The grader is very busy today. Please try again tomorrow.',
       errFailed: 'Something went wrong on our side. Please try again.',
     },
-    progress: ['Opening your page like a visitor', 'Measuring speed on a phone', 'Checking the search basics', 'Seeing what ChatGPT, Claude and Perplexity can read', 'Adding up your score'],
+    progress: ['Opening your page like a visitor', 'Checking the search basics', 'Seeing what ChatGPT, Claude and Perplexity can read', 'Measuring speed on a phone', 'Adding up your score'],
     progressNote: 'This takes about 30 seconds. Keep this tab open.',
     result: {
       heading: 'Report for {host}',
@@ -230,7 +230,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: '오늘은 검사 요청이 너무 많아요. 내일 다시 시도해 주세요.',
       errFailed: '저희 쪽에서 문제가 생겼어요. 다시 시도해 주세요.',
     },
-    progress: ['방문자처럼 페이지를 여는 중', '휴대폰에서 속도를 재는 중', '검색 기본기를 확인하는 중', 'ChatGPT, Claude, Perplexity가 읽을 수 있는지 보는 중', '점수를 합산하는 중'],
+    progress: ['방문자처럼 페이지를 여는 중', '검색 기본기를 확인하는 중', 'ChatGPT, Claude, Perplexity가 읽을 수 있는지 보는 중', '휴대폰에서 속도를 재는 중', '점수를 합산하는 중'],
     progressNote: '30초 정도 걸려요. 이 탭을 열어 두세요.',
     result: {
       heading: '{host} 리포트',
@@ -354,7 +354,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: '本日は採点ツールが大変混み合っています。明日またお試しください。',
       errFailed: 'こちらで問題が発生しました。もう一度お試しください。',
     },
-    progress: ['訪問者としてページを開いています', 'スマホでの速度を測っています', '検索の基本をチェックしています', 'ChatGPT・Claude・Perplexity が読めるか確認しています', 'スコアを集計しています'],
+    progress: ['訪問者としてページを開いています', '検索の基本をチェックしています', 'ChatGPT・Claude・Perplexity が読めるか確認しています', 'スマホでの速度を測っています', 'スコアを集計しています'],
     progressNote: '30秒ほどかかります。このタブは開いたままにしてください。',
     result: {
       heading: '{host} のレポート',
@@ -478,7 +478,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: '今天评分的人太多了，请明天再试。',
       errFailed: '我们这边出了点问题，请再试一次。',
     },
-    progress: ['像访客一样打开你的页面', '测量手机上的速度', '检查搜索基础', '看看 ChatGPT、Claude 和 Perplexity 能读到什么', '计算总分'],
+    progress: ['像访客一样打开你的页面', '检查搜索基础', '看看 ChatGPT、Claude 和 Perplexity 能读到什么', '测量手机上的速度', '计算总分'],
     progressNote: '大约需要 30 秒，请不要关闭此页面。',
     result: {
       heading: '{host} 的报告',
@@ -602,7 +602,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: 'Hoy el evaluador está muy ocupado. Vuelve a intentarlo mañana.',
       errFailed: 'Algo falló de nuestro lado. Inténtalo de nuevo.',
     },
-    progress: ['Abriendo tu página como un visitante', 'Midiendo la velocidad en un móvil', 'Revisando lo básico para buscadores', 'Viendo qué pueden leer ChatGPT, Claude y Perplexity', 'Calculando tu nota'],
+    progress: ['Abriendo tu página como un visitante', 'Revisando lo básico para buscadores', 'Viendo qué pueden leer ChatGPT, Claude y Perplexity', 'Midiendo la velocidad en un móvil', 'Calculando tu nota'],
     progressNote: 'Tarda unos 30 segundos. No cierres esta pestaña.',
     result: {
       heading: 'Informe de {host}',
@@ -726,7 +726,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: 'O avaliador está muito movimentado hoje. Tente de novo amanhã.',
       errFailed: 'Algo deu errado do nosso lado. Tente de novo.',
     },
-    progress: ['Abrindo sua página como um visitante', 'Medindo a velocidade no celular', 'Conferindo o básico de busca', 'Vendo o que ChatGPT, Claude e Perplexity conseguem ler', 'Somando sua nota'],
+    progress: ['Abrindo sua página como um visitante', 'Conferindo o básico de busca', 'Vendo o que ChatGPT, Claude e Perplexity conseguem ler', 'Medindo a velocidade no celular', 'Somando sua nota'],
     progressNote: 'Leva cerca de 30 segundos. Deixe esta aba aberta.',
     result: {
       heading: 'Relatório de {host}',
@@ -850,7 +850,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: 'Heute ist sehr viel los. Versuch es bitte morgen noch mal.',
       errFailed: 'Bei uns ist etwas schiefgelaufen. Bitte versuch es noch mal.',
     },
-    progress: ['Öffne deine Seite wie ein Besucher', 'Messe das Tempo auf dem Handy', 'Prüfe die Grundlagen für die Suche', 'Schaue, was ChatGPT, Claude und Perplexity lesen können', 'Rechne deine Punkte zusammen'],
+    progress: ['Öffne deine Seite wie ein Besucher', 'Prüfe die Grundlagen für die Suche', 'Schaue, was ChatGPT, Claude und Perplexity lesen können', 'Messe das Tempo auf dem Handy', 'Rechne deine Punkte zusammen'],
     progressNote: 'Das dauert etwa 30 Sekunden. Lass diesen Tab offen.',
     result: {
       heading: 'Bericht für {host}',
@@ -974,7 +974,7 @@ export const GRADER: Partial<Record<LocaleCode, GraderCopy>> & { en: GraderCopy 
       errBusy: 'L’outil est très sollicité aujourd’hui. Merci de réessayer demain.',
       errFailed: 'Un problème est survenu de notre côté. Merci de réessayer.',
     },
-    progress: ['Ouverture de votre page comme un visiteur', 'Mesure de la vitesse sur mobile', 'Vérification des bases de la recherche', 'Ce que ChatGPT, Claude et Perplexity peuvent lire', 'Calcul de votre note'],
+    progress: ['Ouverture de votre page comme un visiteur', 'Vérification des bases de la recherche', 'Ce que ChatGPT, Claude et Perplexity peuvent lire', 'Mesure de la vitesse sur mobile', 'Calcul de votre note'],
     progressNote: 'Cela prend environ 30 secondes. Gardez cet onglet ouvert.',
     result: {
       heading: 'Rapport pour {host}',

@@ -55,7 +55,7 @@ const step = (s: string) => s;
     <div class="tl-stepper">
       <ol class="tl-steps" data-a-steps>
         <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{c.progress.write}</span></li>
-        {DEFAULT_ASSISTANTS.map((a) => <li data-step-ask><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{step(c.progress.ask.replace('{assistant}', a.label))}</span></li>)}
+        {DEFAULT_ASSISTANTS.map((a) => <li data-step-ask={a.key}><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{step(c.progress.ask.replace('{assistant}', a.label))}</span></li>)}
         <li><span class="d" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>{c.progress.read}</span></li>
       </ol>
       <p class="tl-eta"><span>{c.progressNote}</span><span class="tl-eta-t" data-eta-t aria-hidden="true"></span></p>
@@ -70,6 +70,7 @@ const step = (s: string) => s;
 <script>
   import { internalRun } from '../lib/internal-run';
   import '../scripts/tl-stepper';
+  import { postStages } from '../lib/stages';
   type Json = Record<string, any>;
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; turnstile?: Json; onEqTs?: () => void };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
@@ -105,7 +106,6 @@ const step = (s: string) => s;
     const tsBox = form.querySelector<HTMLElement>('[data-a-ts]')!;
     const stepsEl = run.querySelector<HTMLElement>('[data-a-steps]')!;
     let assistants: Json[] = D.assistants;
-    let timer = 0;
 
     // Which assistants the platform asks today: the "We ask" row and one loading step each.
     const setAssistants = (list: Json[]) => {
@@ -116,7 +116,7 @@ const step = (s: string) => s;
       stepsEl.querySelectorAll('[data-step-ask]').forEach((x) => x.remove());
       const last = stepsEl.lastElementChild!;
       for (const a of list) {
-        const li = document.createElement('li'); li.setAttribute('data-step-ask', '');
+        const li = document.createElement('li'); li.setAttribute('data-step-ask', String(a.key || ''));
         li.innerHTML = `<span class="d" aria-hidden="true">${ic.check}</span><span>${esc(fill(P.ask, { assistant: a.label }))}</span>`;
         stepsEl.insertBefore(li, last);
       }
@@ -156,13 +156,18 @@ const step = (s: string) => s;
     const urlish = (v: string) => /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(:\d+)?(\/\S*)?$/i.test(v.trim());
     const steps = () => [...stepsEl.querySelectorAll<HTMLLIElement>('li')];
     const stepTo = (i: number) => steps().forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
-    // The assistants answer together; the steps walk through them at about the pace they answer (roughly 20 seconds).
-    const startSteps = () => {
-      run.hidden = false; stepTo(0); let i = 0; const n = steps().length;
-      const next = () => { if (i >= n - 1) return; i++; stepTo(i); timer = window.setTimeout(next, i === 1 ? 6000 : 5500); };
-      timer = window.setTimeout(next, 1800);
+    // The steps follow the platform's real stages (NDJSON): 'write', then 'ask' (every assistant is asked together, so all
+    // their rows turn at once), 'asked' {provider} as each one's answers are in (in whatever order they come), then 'read'.
+    const markStep = (li: HTMLLIElement, st: 'now' | 'done' | '') => { li.classList.toggle('is-now', st === 'now'); li.classList.toggle('is-done', st === 'done'); if (st === 'now') li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); };
+    const asks = () => steps().filter((li) => li.hasAttribute('data-step-ask'));
+    const onStage = (o: Json) => {
+      const all = steps(), first = all[0], last = all[all.length - 1];
+      if (o.stage === 'ask') { markStep(first, 'done'); asks().forEach((li) => { if (!li.classList.contains('is-done')) markStep(li, 'now'); }); }
+      else if (o.stage === 'asked') { markStep(first, 'done'); asks().forEach((li) => { if (li.dataset.stepAsk === o.provider) markStep(li, 'done'); }); }
+      else if (o.stage === 'read') { all.forEach((li) => markStep(li, li === last ? 'now' : 'done')); }
     };
-    const stopSteps = () => { clearTimeout(timer); stepTo(steps().length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    const startSteps = () => { run.hidden = false; stepTo(0); };
+    const stopSteps = () => { stepTo(steps().length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
     const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
     const shortDate = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { month: 'short', day: 'numeric' });
     const band = (s: number) => (s >= 80 ? R.bands.great : s >= 50 ? R.bands.good : s >= 20 ? R.bands.fair : R.bands.poor);
@@ -288,11 +293,8 @@ const step = (s: string) => s;
       const tok = await token();
       rep.hidden = true; startSteps();
       run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
-      let res: Response | null = null, g: Json | null = null;
-      try {
-        res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, place, category, url, lang: D.code, token: tok }), signal: AbortSignal.timeout(150000) });
-        g = await res.json().catch(() => null);
-      } catch { /* below */ }
+      const r = await postStages(D.api, { name, place, category, url, lang: D.code, token: tok }, onStage);
+      const res = r.status ? { ok: r.status >= 200 && r.status < 300, status: r.status } : null, g: Json | null = r.body;
       stopSteps();
       btn.disabled = false; btn.removeAttribute('aria-busy');
       try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';

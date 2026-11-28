@@ -74,6 +74,7 @@ const data = {
 <script>
   import { internalRun } from '../lib/internal-run';
   import '../scripts/tl-stepper';
+  import { postStages } from '../lib/stages';
   type Json = Record<string, any>;
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; __eqaEnc?: () => string; turnstile?: Json; onEqTs?: () => void };
   const track = (n: string, p?: Json) => w.eqTrack?.(n, p);
@@ -99,10 +100,14 @@ const data = {
   if (D && rep && out && run) {
     const R = D.c.result, FM = D.c.form;
     const steps = [...run.querySelectorAll<HTMLLIElement>('.tl-steps li')];
-    let timer = 0;
-    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
-    const startSteps = () => { run.hidden = false; stepTo(0); let i = 0; const at = [2500, 12000, 9000]; const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 9000); }; timer = window.setTimeout(next, at[0]); };
-    const stopSteps = () => { clearTimeout(timer); stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
+    // The steps follow the platform's real stages (NDJSON: read, search, risk, plan). Several ideas run together: the steps
+    // show the one that is furthest behind.
+    const STAGES = ['read', 'search', 'risk', 'plan'];
+    let at: number[] = [], shown = 0;
+    const stepTo = (i: number) => { shown = i; steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); }); };
+    const stageOf = (k: number) => (o: Json) => { const i = STAGES.indexOf(o.stage); if (i > (at[k] ?? 0)) at[k] = i; const m = Math.min(...at); if (m > shown) stepTo(m); };
+    const startSteps = (n: number) => { at = Array(n).fill(0); run.hidden = false; stepTo(0); };
+    const stopSteps = () => { stepTo(steps.length); setTimeout(() => { run.hidden = true; }, reduce ? 0 : 350); };
     const dateOf = (t: number) => new Date(t * 1000).toLocaleDateString(D.lang, { year: 'numeric', month: 'long', day: 'numeric' });
     const hostOf = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
     const safeUrl = (u: string) => (/^https?:\/\//i.test(u) ? u : '');
@@ -322,17 +327,13 @@ const data = {
 
       // One idea per line, up to 3; a rough one-liner ("AI dating") is enough.
       const linesOf = (v: string) => [...new Set(v.split(/\n+/).map((x) => x.trim()).filter(Boolean))];
-      const errOf = (x: { res: Response | null; g: Json | null }) => {
+      const errOf = (x: { status: number; g: Json | null }) => {
         const e = x.g?.error;
-        return { code: e || (x.res ? `http_${x.res.status}` : 'network'), text: e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed };
+        return { code: e || (x.status ? `http_${x.status}` : 'network'), text: e === 'short' ? FM.errShort : e === 'turnstile' ? FM.errTurnstile : e === 'rate' ? FM.errRate : e === 'budget' ? FM.errBudget : e === 'off' ? FM.errOff : FM.errFailed };
       };
-      const ask = async (idea: string, tok: string) => {
-        let res: Response | null = null, g: Json | null = null;
-        try {
-          res = await fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ idea, lang: D.code, token: tok }), signal: AbortSignal.timeout(120000) });
-          g = await res.json().catch(() => null);
-        } catch { /* below */ }
-        return { res, g };
+      const ask = async (idea: string, tok: string, k: number) => {
+        const r = await postStages(D.api, { idea, lang: D.code, token: tok }, stageOf(k), 120000);
+        return { ok: r.status >= 200 && r.status < 300, status: r.status, g: r.body };
       };
       async function check() {
         say('');
@@ -344,11 +345,11 @@ const data = {
         track('idea_check_run', { length: ta.value.trim().length, ideas: ideas.length });
         if (eta) eta.textContent = ideas.length > 1 ? fill(D.c.progressMany, { n: ideas.length }) : D.c.progressNote;
         // A Turnstile token works once: take one, start that check, reset the widget for the next. The checks run together.
-        const calls: Promise<{ res: Response | null; g: Json | null }>[] = [];
+        const calls: Promise<{ ok: boolean; status: number; g: Json | null }>[] = [];
         for (let i = 0; i < ideas.length; i++) {
           const tok = await token();
-          if (i === 0) { rep!.hidden = true; startSteps(); run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
-          calls.push(ask(ideas[i], tok));
+          if (i === 0) { rep!.hidden = true; startSteps(ideas.length); run!.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+          calls.push(ask(ideas[i], tok, i));
           tsTok = '';
           if (i < ideas.length - 1) { try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* the server says so */ } }
         }
@@ -356,8 +357,8 @@ const data = {
         stopSteps();
         btn.disabled = false; btn.removeAttribute('aria-busy');
         try { if (tsId !== null) w.turnstile?.reset(tsId); } catch { /* fine */ } tsTok = '';
-        const ok = got.filter((x) => x.res?.ok && x.g?.id).map((x) => x.g!);
-        const bad = got.find((x) => !(x.res?.ok && x.g?.id));
+        const ok = got.filter((x) => x.ok && x.g?.id).map((x) => x.g!);
+        const bad = got.find((x) => !(x.ok && x.g?.id));
         const why = bad ? errOf(bad) : null;
         if (!ok.length) {
           ft('error'); track('idea_check_error', { error: why!.code, ideas: ideas.length });

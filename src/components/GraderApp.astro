@@ -81,6 +81,7 @@ const data = {
 
 <script>
   import '../scripts/tl-stepper';
+  import { postStages } from '../lib/stages';
   type Json = Record<string, any>;
   const w = window as unknown as { eqTrack?: (n: string, p?: Json) => void; eqOwn?: (k: string, t: string, f?: string) => void; eqFeat?: (s: string) => void };
   const track = (n: string, p?: Json) => { try { w.eqTrack?.(n, p); } catch { /* counting never breaks the page */ } };
@@ -126,7 +127,7 @@ const data = {
     const runWho = run.querySelector<HTMLElement>('[data-g-runwho]')!;
     const runNote = run.querySelector<HTMLElement>('[data-g-runnote]')!;
     const noteText = runNote.textContent || '';
-    let timer = 0, tick = 0, t0 = 0;
+    let tick = 0, t0 = 0;
     let cur: Json | null = null, them: Json | null = null;
 
     const say = (m: string) => { err.textContent = m; err.hidden = !m; if (m) { form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); } };
@@ -140,14 +141,13 @@ const data = {
     const shareUrl = (id: string, vs?: string) => new URL(`${D.base}r/${id}/${vs ? `?vs=${vs}` : ''}`, location.origin).href;
     const impactOf = (n: number) => (n >= 60 ? 'high' : n >= 40 ? 'medium' : 'low');
 
-    // ---- running: steps that tick with their time, an elapsed clock and a bar that never claims 100 % early ----
-    const stepTo = (i: number) => steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
+    // ---- running: steps that follow the platform's real stages, an elapsed clock and a bar that never claims 100 % early ----
+    const STAGES = ['open', 'basics', 'ai', 'speed', 'score'];
+    let at = 0;
+    const stepTo = (i: number) => { at = i; steps.forEach((s, j) => { s.classList.toggle('is-done', j < i); s.classList.toggle('is-now', j === i); if (j === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); }); };
+    const onStage = (o: Json) => { const i = STAGES.indexOf(o.stage); if (i > at) stepTo(i); };
     const startSteps = (who: string) => {
       run.hidden = false; t0 = performance.now(); runWho.textContent = who; runNote.textContent = noteText; stepTo(0);
-      let i = 0;
-      const at = [2500, 9000, 6000, 7000];
-      const next = () => { if (i >= steps.length - 1) return; i++; stepTo(i); timer = window.setTimeout(next, at[i] || 6000); };
-      timer = window.setTimeout(next, at[0]);
       const upd = () => {
         const s = (performance.now() - t0) / 1000;
         prog.style.width = `${Math.min(94, 100 * (1 - Math.exp(-s / 22)))}%`;
@@ -155,7 +155,7 @@ const data = {
       };
       upd(); clearInterval(tick); tick = window.setInterval(upd, 1000);
     };
-    const stopSteps = () => { clearTimeout(timer); clearInterval(tick); stepTo(steps.length); prog.style.width = '100%'; setTimeout(() => { run.hidden = true; prog.style.width = '0%'; }, reduce ? 0 : 420); };
+    const stopSteps = () => { clearInterval(tick); stepTo(steps.length); prog.style.width = '100%'; setTimeout(() => { run.hidden = true; prog.style.width = '0%'; }, reduce ? 0 : 420); };
 
     // ---- pieces of the report ----
     function fixText(f: Json) {
@@ -362,9 +362,8 @@ const data = {
       });
     }
 
-    const post = (url: string, fresh = false) => fetch(D.api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(fresh ? { url, fresh: true } : { url }), signal: AbortSignal.timeout(150000) })
-      .then(async (r) => ({ ok: r.ok, status: r.status, g: (await r.json().catch(() => null)) as Json | null }))
-      .catch(() => ({ ok: false, status: 0, g: null as Json | null }));
+    const post = (url: string, fresh = false, stage: (o: Json) => void = () => {}) => postStages(D.api, fresh ? { url, fresh: true } : { url }, stage)
+      .then((r) => ({ ok: r.status >= 200 && r.status < 300, status: r.status, g: r.body }));
     const errMsg = (e: string | undefined) => (e === 'bad_url' ? C.form.errUrl : e === 'unreachable' ? C.form.errUnreachable : e === 'rate' ? C.form.errRate : e === 'busy' ? C.form.errBusy : C.form.errFailed);
     const sizeOf = (g: Json) => (g.score == null ? 'none' : g.score >= 90 ? '90-100' : g.score >= 70 ? '70-89' : g.score >= 50 ? '50-69' : '0-49');
 
@@ -381,7 +380,7 @@ const data = {
       if (vs) ft('compare');
       startSteps(vs ? fill(V.run.both, { a: hostish(raw), b: hostish(vs) }) : fill(V.run.one, { host: hostish(raw) }));
       run.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      const [a, b] = await Promise.all([post(raw.trim()), vs ? post(vs) : Promise.resolve(null)]);
+      const [a, b] = await Promise.all([post(raw.trim(), false, onStage), vs ? post(vs) : Promise.resolve(null)]);
       stopSteps();
       btn.disabled = false; btn.removeAttribute('aria-busy');
       if (!a.ok || !a.g || !a.g.id) {
